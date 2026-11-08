@@ -17,3 +17,4 @@ A static, browser-based portfolio look-through analyzer hosted on GitHub Pages f
 * **Liquidity & Hedging Segregation:** Maintains 100% portfolio base denominator integrity while isolating cash reserves and FX hedging contracts.
 * **Subcategory Visualizations:** Interactive horizontal stacked bar charts (Sectors by Country, Countries by Sector) and a virtualized company look-through table.
 * **Zero Backend:** Runs entirely client-side on GitHub Pages with local browser storage and JSON/CSV export/import.
+
