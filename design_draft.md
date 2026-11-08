@@ -379,3 +379,60 @@ When the user enters their fund balances, the calculation engine computes the po
 * **Global Header Badge:** Displays the consolidated portfolio as-of range (e.g., *"Holdings As Of: 30 Sep 2026 – 31 Oct 2026"*).
 * **Fund Allocation Table:** Includes an "As Of" date column adjacent to each fund input, with a visual stale indicator if an individual fund's data exceeds 90 days.
 * **Company Look-Through Breakdown:** In the expanded row showing contributing funds for a specific company, each fund line item displays its respective constituent reporting date so the user can verify data alignment.
+
+
+---
+
+## Alternatives Considered
+
+### Alternative A: In-Browser Raw CSV Parsing (No Build Pipeline)
+
+* **Mechanism**: Users upload raw provider CSV files directly in the browser. JavaScript parses them client-side on each page load.
+* **Pros**: No build infrastructure required; users always use the most current disclosure file they have.
+* **Cons**: Vanguard `VT` alone contains 9,800+ rows. Parsing multiple large CSVs simultaneously in browser memory causes UI freezing and crashes on mobile devices. Requires users to source, download, and manage raw disclosure files themselves — a significant usability burden. Each provider uses a different CSV schema, pushing format-handling complexity into the browser bundle.
+* **Reason for Rejection**: Rejected by author — browser memory and performance constraints make this unworkable at the constituency scale of broad global index funds, and placing data sourcing on end-users creates an unreliable dependency.
+
+---
+
+### Alternative B: Google Sheets / Excel Shared Workbook
+
+* **Mechanism**: A shared collaborative spreadsheet performs look-through aggregation via formulas and manual data entry. Users copy their balances into designated cells.
+* **Pros**: No software deployment; familiar to non-technical users; easy to share.
+* **Cons**: Multi-tier recursive feeder fund unwrapping across thousands of constituents exceeds practical spreadsheet formula limits. Cross-fund ISIN deduplication and taxonomy normalization require VBA macros or App Script that are fragile and unversioned. Cannot handle the ~10,000-row Vanguard `VT` constituent table without major performance degradation.
+* **Reason for Rejection**: Rejected by author — cannot handle multi-tier recursive look-through across thousands of constituents from multiple fund managers without reaching formula and performance limits.
+
+---
+
+### Alternative C: Commercial Financial API Integration (Morningstar / Refinitiv)
+
+* **Mechanism**: The build pipeline queries a licensed financial data API (e.g., Morningstar Direct or Refinitiv Eikon) to retrieve fund constituent data, company metadata, ISINs, and GICS sectors in a normalized, pre-enriched format, eliminating the need for Tier 2 security master compilation.
+* **Pros**: High data quality; ISINs, sectors, and country metadata supplied directly; no fuzzy matching or alias dictionaries needed; covers unlisted funds.
+* **Cons**: Enterprise API licensing costs range from \$15,000 to \$50,000 per year. Data redistribution (publishing pre-compiled outputs to a public GitHub Pages static site) is typically prohibited under commercial API terms of service, requiring legal review for each provider. Introduces a hard cost dependency that eliminates the zero-cost hosting model.
+* **Reason for Rejection**: Rejected by author — licensing cost and redistribution restrictions are incompatible with a zero-cost, open-source static hosting model.
+
+---
+
+### Alternative D: StockAnalysis.com or Similar Retail Aggregator Scraping
+
+* **Mechanism**: The GitHub Actions build pipeline scrapes a retail financial aggregator site (e.g., StockAnalysis.com) to extract company country and sector metadata for the security master.
+* **Pros**: Free access; broad global coverage including small-cap and emerging market companies; covers country and sector metadata not always present in official exchange directories.
+* **Cons**: Retail financial sites do not grant automated crawling or redistribution rights in their terms of service. IP blocking, rate limiting, and HTML structure changes can silently corrupt the security master without build-time detection. Data quality and accuracy cannot be verified against an authoritative primary source.
+* **Reason for Rejection**: Rejected by author — unauthorized scraping creates IP and licensing risk for a public open-source project, and silent failure modes in CI data extraction are unacceptable for a tool where data accuracy is the primary value proposition.
+
+---
+
+### Alternative E: Standalone Local Python Application (No GitHub Pages)
+
+* **Mechanism**: A Python application installed locally (e.g., a Streamlit or Dash app) runs the ingestion pipeline and look-through calculations on the user's machine, reading local CSV files.
+* **Pros**: No GitHub Pages hosting constraints; easier to run ad-hoc data updates; Python ecosystem provides mature data wrangling libraries (pandas, rapidfuzz).
+* **Cons**: Requires users to install Python and dependencies — a significant barrier for non-technical NZ retail investors. No URL to share; no cross-device access without additional setup. Loss of zero-infrastructure deployment to GitHub Pages.
+* **Reason for Rejection**: Rejected by author — installation friction is incompatible with the target audience of retail investors expecting a browser-accessible tool with no setup. The Python ecosystem is retained for the CI pipeline and administrator tooling only.
+
+---
+
+### Alternative F: Single Monolithic JavaScript Parser (No Modular Adapters)
+
+* **Mechanism**: A single hardcoded ingestion script handles all provider CSVs with conditional branching by filename or provider name, rather than a modular adapter per provider schema.
+* **Pros**: Simpler initial implementation; fewer files to maintain.
+* **Cons**: Adding a new fund provider or master ETF issuer (e.g., a future Smartshares fund wrapping a new iShares ETF variant) requires modifying and retesting the entire monolithic parser. Schema drift in one provider's CSV silently corrupts outputs for all other providers if error boundaries are not rigidly enforced.
+* **Reason for Rejection**: Rejected by author — the modular adapter pattern with a declarative `feeder_registry.json` isolates provider schema changes to a single adapter file and allows new feeders to be registered without code modification.
