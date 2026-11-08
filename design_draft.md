@@ -1,0 +1,381 @@
+# NZ Portfolio Look-Through Analyzer
+
+* **Author:** SusanJaneNZ
+* **Status:** Draft
+* **Date:** 2026-11-08
+
+---
+
+## Overview
+
+The NZ Portfolio Look-Through Analyzer is a static, browser-based web application hosted on GitHub Pages. It enables New Zealand retail investors to evaluate their combined portfolio across multiple funds according to their personal dollar allocations, providing a single consolidated look-through of their true underlying company, sector, and country exposures.
+
+Fund providers in New Zealand do not provide look-through aggregation even within their own platforms. For example, an investor holding 40% in a Kernel NZ equity fund and 60% in a Kernel Australian equity fund sees their balance divided by fund, but the platform does not combine these holdings to show consolidated company exposures. If aggregated, the investor would discover that dual-listed equities (such as Chorus or major banks) appear in both funds, resulting in a significantly higher true concentration than expected. This visibility gap exists whether an investor holds funds through a single manager or diversifies across multiple platforms (such as NZX-listed Smartshares ETFs and Kernel unlisted index funds).
+
+Evaluating all holdings weighted by the investor's actual capital allocation provides foundational visibility across the entire portfolio. Where funds wrap overseas master funds (such as Smartshares feeder wrappers holding Vanguard US ETFs) or share common equities across regional borders, the tool unpacks the feeder structures and reconciles overlapping company positions. Reconciling overlapping holdings and unwrapping multi-tier feeders is a critical capability, but the primary function is enabling investors to see their complete consolidated asset allocation across all combined funds at their personal investment amounts.
+
+This tool resolves multi-fund portfolios by unpacking feeder funds to their constituent holdings, normalizing taxonomies and ticker identifiers to a canonical primary key (ISIN), scaling positions by the user's specific fund balances, and aggregating any shared equities. The calculation engine runs entirely client-side in the browser against build-time pre-compiled static datasets, preserving user privacy with no backend database or account requirements.
+
+---
+
+## The Problem
+
+1. **Intra-Provider Aggregation Blind Spots:** Fund managers and investment platforms do not combine underlying constituents across their own funds for a single investor. An investor holding both an NZ index fund and an Australian index fund with the same provider receives per-fund reporting, obscuring aggregated company exposures. Dual-listed companies (such as Chorus or dual-listed banks appearing in both NZ and Australian indices) are duplicated without total visibility, creating hidden single-company concentrations even when investing entirely within a single provider's product line.
+2. **Feeder Fund Opacity:** Smartshares global equity funds (such as Total World `TWF` or US 500 `USF`) operate as feeder wrappers around overseas master ETFs (such as Vanguard `VT` and `VOO`). In statutory New Zealand reporting, fund managers list only the wrapper asset as a single line item, obscuring the thousands of underlying company equities.
+3. **Fragmented and Disconnected Data Sources:** Fund constituent data is published in inconsistent, non-standardized formats across multiple sources:
+   - New Zealand Disclose Register statutory XML/CSV filings.
+   - Smartshares direct NZ/AU equity holding CSV exports.
+   - Kernel Wealth monthly constituent portfolio tables.
+   - Vanguard US master fund holdings CSV files.
+4. **Identifier Collisions and Inconsistencies:** Ticker symbols collide across global and local exchanges (e.g., identical tickers on NZX, ASX, and US markets), and dual-listed companies (e.g., Fisher & Paykel Healthcare on NZX and ASX) appear under disparate identifiers without a unified identifier.
+5. **Taxonomy Incompatibilities:** Providers classify holdings under conflicting industry sector models (e.g., FTSE ICB versus S&P Dow Jones GICS), making sector aggregation inaccurate without systematic mapping.
+6. **Denominator Distortion from Cash and Hedging:** Index funds routinely hold between 0.2% and 2.5% in cash reserves, and currency-hedged funds hold forward foreign exchange derivative contracts. Naively dropping these assets distorts the 100% portfolio base denominator and misrepresents equity weights.
+7. **Browser Performance Bottlenecks:** A single broad global index fund like Vanguard `VT` contains over 9,800 individual stock holdings. Parsing multiple large CSV exports client-side in the browser exhausts device memory and leads to mobile browser crashes.
+
+---
+
+## Goals
+
+* **Recursive Feeder Fund Unwrapping:** Recursively resolve feeder fund wrappers to their underlying master fund constituents, scaling individual equity weights proportionally to the parent fund's allocation.
+* **Unified Canonical Identification (ISIN):** Use ISO 6166 International Securities Identification Numbers (ISIN) as the primary key for all company holdings, backed by a static build-time alias dictionary to map local exchange tickers and provider-specific names.
+* **Standardized Sector Taxonomy:** Normalize all constituent industry sectors to the 11 standard GICS Level 1 sectors (*Energy, Materials, Industrials, Consumer Discretionary, Consumer Staples, Health Care, Financials, Information Technology, Communication Services, Utilities, Real Estate*).
+* **Denominator Integrity and Asset Segregation:** Preserve total invested New Zealand Dollars (NZD) as the 100% calculation baseline. Segregate liquidity buffers, currency hedging contracts, and cash reserves into a dedicated asset view.
+* **Post-Aggregation Micro-Holding Consolidation:** Filter individual positions smaller than $0.01\%$ across the total portfolio into an `"Other Micro-Holdings"` category only after cross-fund aggregation, retaining exact country and sector totals for macro reporting.
+* **Subcategory Stacked Visualizations:** Render horizontal stacked bar charts showing sector exposures sub-categorized by country, and country exposures sub-categorized by sector, with hover inspection tooltips.
+* **Static Client-Side Execution:** Run all aggregation and look-through calculations in-browser via static files generated by a build-time GitHub Actions ingestion pipeline.
+* **Direct Equity Holding Integration:** Allow users to enter direct NZX and ASX company shareholdings in NZD, seamlessly combining them with fund look-through holdings in the consolidated company table, sector charts, and country charts.
+* **Local Persistence & Data Portability:** Persist portfolio inputs in browser `LocalStorage` with explicit JSON and CSV export/import for manual backup and transfer.
+
+---
+
+## Non-Goals
+
+* **No Server Infrastructure or Cloud Database:** The application will not use server-side runtimes, APIs, user authentication systems, or remote database storage.
+* **No Direct-Indexing or Automated Trade Execution:** The tool will not generate trade orders, compute rebalancing purchase sizing, or connect to brokerage APIs.
+* **No Tax Calculations:** The tool will not calculate Foreign Investment Fund (FIF) fair dividend rate (FDR), comparative value (CV), or dividend imputation credits.
+* **No Real-Time or Intraday Pricing:** Portfolio calculations rely on fund disclosure reporting periods and static holdings datasets, not real-time streaming market prices.
+
+---
+
+## Open Questions
+
+* **Upstream CSV Schema & Source Drift:** What automated schema validation or alerts should trigger in the GitHub Actions build pipeline when upstream provider CSV files change column headers, URL paths, or reporting structures without notice?
+* **Security Master Refresh & Symbology Rate Limits:** What build-time fallback or caching strategy should be implemented when querying the OpenFIGI API for newly discovered international tickers during security master compilation to prevent rate-limiting or CI timeouts?
+
+---
+
+## Critical User Journeys (CUJs)
+
+### CUJ 1: Portfolio Input and Look-Through Generation
+
+* **Given**: A user holding Smartshares Total World (`TWF`), Smartshares NZ Top 50 (`FNZ`), and Kernel Global 100.
+* **When**: The user enters their NZD investment balances for each fund into the portfolio allocation table.
+* **Then**: The system unpacks the underlying holdings with correct fund weighting, aggregates any shared company stocks across funds, updates the horizontal stacked sector/country charts, and populates the searchable company holdings table.
+
+### CUJ 2: Duplicate Exposure and Overlap Inspection
+
+* **Given**: A user holds both Smartshares US 500 (`USF`) and Smartshares Total World (`TWF`), both wrapping Vanguard US funds (`VOO` and `VT`).
+* **When**: The user searches for a specific company (e.g., Microsoft or Apple) in the consolidated holdings table.
+* **Then**: The table displays the consolidated percentage and NZD exposure for that company, with an expandable breakdown showing the exact contribution originating from `USF` versus `TWF`.
+
+### CUJ 3: Data Export and Restoration
+
+* **Given**: A user has configured their fund allocations on a desktop browser.
+* **When**: The user clicks "Export Portfolio", transfers the generated JSON file to a mobile device, and clicks "Import Portfolio".
+* **Then**: The mobile browser loads the exact portfolio balances without requiring a user account or network synchronization.
+
+### CUJ 4: Combined Fund and Direct Equity Analysis
+
+* **Given**: A user holds \$20,000 in Smartshares NZ Top 50 (`FNZ`) and also holds \$10,000 in Mercury NZ (`NZX:MCY`) shares directly via a broker.
+* **When**: The user inputs their `FNZ` balance and uses the direct equity search to add their Mercury holding at \$10,000 NZD.
+* **Then**: The system incorporates Mercury at 100% equity weight for the direct allocation, includes the \$10,000 in the total portfolio denominator, aggregates it with Mercury's constituent portion inside `FNZ`, updates the Utilities sector and New Zealand country allocations, and displays an expandable row showing the exposure breakdown between "Direct Holding" and "Smartshares FNZ".
+
+---
+
+## Technical Plan (Architecture)
+
+The system consists of two decoupled subsystems: an upstream build-time ingestion pipeline running in GitHub Actions and a static client-side single-page application hosted on GitHub Pages.
+
+```mermaid
+flowchart TD
+    subgraph Upstream ["Upstream Build Pipeline (GitHub Actions)"]
+        subgraph Tier1 ["Tier 1: Weight Extraction Adapters"]
+            A1["Vanguard Adapter (VT, VOO, VGK, VPL, VWO)"]
+            A2["iShares Adapter (IWLD, IVV)"]
+            A3["Smartshares NZ/AU Direct Adapter (FNZ, OZY, etc.)"]
+            A4["Kernel Monthly Holdings Adapter"]
+            A5["Disclose Register Feeder Adapter"]
+            FR["feeder_registry.json (Feeder-to-Master Mapping)"]
+        end
+
+        subgraph Tier2 ["Tier 2: Security Master Enrichment"]
+            NZX["NZX Official Listed Directory"]
+            ASX["ASX Official Listed Directory"]
+            VDIR["Vanguard VT Global Directory"]
+            FIGI["OpenFIGI API (Staged Builds)"]
+            SEC["security_master.json"]
+            NZX & ASX & VDIR & FIGI --> SEC
+
+            ALIAS["provider_alias_map.json (Manual Overrides)"]
+            FUZZY["Fuzzy Name / Ticker Matcher"]
+            SEC & ALIAS --> FUZZY
+        end
+
+        A1 & A2 & A3 & A4 & A5 --> FUZZY
+        FR --> A5
+
+        OUT1["funds_registry.json"]
+        OUT2["constituents.json (ISIN, Name, Country, GICS, Weight)"]
+        OUT3["unresolved_entries.json"]
+
+        FUZZY --> OUT1 & OUT2 & OUT3
+    end
+
+    subgraph Client ["Client-Side Web Application (GitHub Pages)"]
+        FUNDS["User Fund NZD Balances"]
+        DIRECT["User Direct Equity NZD Holdings (NZX/ASX)"]
+        STORE["LocalStorage Adapter"]
+        ENGINE["Look-Through Calculation Engine"]
+        MICRO["Post-Aggregation Micro-Holding Bucketing (<0.01%)"]
+
+        OUT1 & OUT2 --> ENGINE
+        FUNDS & DIRECT --> STORE --> ENGINE
+        ENGINE --> MICRO
+
+        V1["Subcategory Stacked Bar: Sectors by Country"]
+        V2["Subcategory Stacked Bar: Countries by Sector"]
+        V3["Consolidated Company Holdings Table (Fund + Direct Source Breakdown)"]
+        V4["Bonds, Cash & Hedging Liquidity Card"]
+        V5["Unresolved Disclosures Review Modal"]
+
+        MICRO --> V1 & V2 & V3 & V4
+        OUT3 --> V5
+    end
+```
+
+### 1. Upstream Build-Time Ingestion Pipeline
+
+The upstream pipeline runs in GitHub Actions on a monthly cron schedule and on commits touching data extraction scripts or mapping dictionaries. It downloads raw disclosures, extracts underlying holdings, normalizes taxonomy and security identifiers, unwraps feeder structures, and outputs static, minified JSON assets committed to the repository's public distribution folder.
+
+#### A. Two-Tier Ingestion and Enrichment Architecture
+Fund disclosures rarely provide complete metadata; providers like Kernel and Smartshares typically report only company names, local ticker symbols, and weights, omitting canonical ISINs, country classifications, and GICS sectors. Furthermore, commercial financial APIs that provide comprehensive look-through data (e.g., Morningstar Direct, Refinitiv) require prohibitive licensing fees (\$15,000–\$50,000/yr), while free financial APIs do not index unlisted New Zealand funds or provide redistributable constituent datasets.
+
+To resolve this limitation without relying on unauthorized scraping of third-party retail sites (e.g., StockAnalysis.com), the pipeline decouples raw weight extraction from security metadata enrichment:
+
+```mermaid
+flowchart TD
+    subgraph Tier1 ["Tier 1: Weight Extraction (Fund Adapters)"]
+        F1["Smartshares CSVs"]
+        F2["Disclose Register Filings"]
+        F3["Kernel Holdings"]
+        F4["Vanguard Master CSVs"]
+
+        P1["Extract (Raw Company Name / Ticker, Weight)"]
+        F1 & F2 & F3 & F4 --> P1
+    end
+
+    subgraph Tier2 ["Tier 2: Security Master & Enrichment"]
+        SEC["security_master.json (Canonical Directory)"]
+        NZX["NZX Official Listed Directory CSV"]
+        ASX["ASX Official Listed Directory CSV"]
+        VANG["Vanguard Global Equities Directory (VT constituents)"]
+        FIGI["OpenFIGI Symbology API (Free Resolution)"]
+
+        NZX & ASX & VANG & FIGI --> SEC
+
+        FUZZY["Normalized String & Ticker Matcher"]
+        ALIAS["provider_alias_map.json (Manual Overrides)"]
+
+        P1 --> FUZZY
+        SEC --> FUZZY
+        ALIAS --> FUZZY
+
+        RESOLVED["Enriched Holding: ISIN, Name, Ticker, Exchange, Country, GICS Sector, Weight"]
+        UNRESOLVED["unresolved_entries.json (Actionable Review)"]
+
+        FUZZY -->|Match >= Threshold| RESOLVED
+        FUZZY -->|Unresolved| UNRESOLVED
+    end
+
+    RESOLVED --> OUT["Pre-calculated funds_registry.json & constituents.json"]
+```
+
+#### B. Tier 1: Source Data Weight Extraction Adapters
+We do not require a bespoke parser for every fund. Fund managers and master ETF issuers publish constituent holdings using standardized platform schemas. The pipeline implements five modular extraction adapters that cover the complete catalog of Smartshares and Kernel funds:
+
+1. **Vanguard US Constituent CSV Adapter:** Parses Vanguard's standard institutional/retail ETF CSV schema (`Holdings_details_*.csv`). A single generic adapter processes all wrapped Vanguard ETFs, including:
+   - `VT` (Total World)
+   - `VOO` (S&P 500)
+   - `VGK` (FTSE Europe)
+   - `VPL` (FTSE Pacific)
+   - `VWO` (FTSE Emerging Markets)
+2. **iShares (BlackRock) Constituent CSV Adapter:** Parses BlackRock's standard ETF portfolio export schema (`*_holdings.csv`). Handles master funds wrapped by Smartshares ESG or regional funds, including:
+   - `IWLD` (iShares Core MSCI World Ex Australia ESG ETF)
+   - `IVV` (iShares Core S&P 500 ETF)
+3. **Smartshares NZ/AU Direct Funds Adapter:** Ingests monthly statutory holdings CSV exports covering direct NZX and ASX equity funds (`FNZ` NZ Top 50, `MDZ` NZ Mid Cap, `NZG` NZ Dividend, `OZY` Australian Top 20, `ASD` Australian Dividend).
+4. **Kernel Wealth Monthly Portfolio Adapter:** Ingests monthly portfolio holding exports for unlisted index funds (`Kernel NZ 50`, `Kernel S&P Australian Leaders`, `Kernel S&P Global 100`, `Kernel High Dividend`).
+5. **Smartshares Feeder Wrappers (Disclose Register):** Parses statutory scheme disclosures from the NZ Companies Office Disclose Register to extract parent wrapper asset weights, cash buffer ratios, and currency hedging contract allocations.
+
+#### C. Declarative Feeder Configuration (`feeder_registry.json`)
+To avoid writing code whenever a new feeder fund is tracked, feeder relationships are declared in a static configuration registry that pairs the local fund code with the master ETF parser:
+```json
+{
+  "TWF": { "name": "Smartshares Total World ETF", "master_provider": "vanguard", "master_ticker": "VT" },
+  "USF": { "name": "Smartshares US 500 ETF", "master_provider": "vanguard", "master_ticker": "VOO" },
+  "EUF": { "name": "Smartshares Europe ETF", "master_provider": "vanguard", "master_ticker": "VGK" },
+  "APA": { "name": "Smartshares Asia Pacific ETF", "master_provider": "vanguard", "master_ticker": "VPL" },
+  "EMF": { "name": "Smartshares Emerging Markets ETF", "master_provider": "vanguard", "master_ticker": "VWO" },
+  "ESG": { "name": "Smartshares Global Equities ESG ETF", "master_provider": "ishares", "master_ticker": "IWLD" }
+}
+```
+Adding support for additional feeder funds requires only adding a declarative line to `feeder_registry.json` pointing to an existing adapter.
+
+#### D. Tier 2: Security Master Enrichment & Canonical Resolution
+Security metadata (ISIN, Country, GICS Sector) is resolved through a multi-tiered lookup engine:
+1. **Security Master Reference Dataset (`security_master.json`):**
+   Compiled from official, legally permissible open sources:
+   - **NZX Official Listed Directory:** Public listings export providing canonical ISIN, company name, NZX ticker, and GICS sector for all NZ-listed equities.
+   - **ASX Official Listed Directory:** Public listings export providing ISIN, company name, ASX ticker, and GICS sector for all Australian-listed equities.
+   - **Vanguard Global Directory:** Vanguard's global master constituent exports (`VT`) provide verified ISINs, country of origin, and ICB/GICS mappings for ~10,000 global companies.
+   - **OpenFIGI API:** Free symbology lookup service (Bloomberg Open Symbology) used during staging builds to resolve ambiguous international tickers to canonical ISINs.
+2. **Normalization & Fuzzy Matching Engine:**
+   - **String Normalization:** Cleans corporate legal suffixes (`Limited`, `Ltd`, `Inc`, `Corp`, `PLC`), strips punctuation and non-alphanumeric characters, and converts to uppercase tokens.
+   - **Heuristic Matching:** Performs exact ticker match with exchange qualification (e.g., `NZX:FPH` vs `ASX:FPH`). If tickers are absent, runs token-sort Levenshtein distance matching against `security_master.json`.
+   - **Confidence Threshold:** High-confidence matches ($\ge 90\%$) are accepted automatically. Borderline matches or unmatched rows are diverted to `unresolved_entries.json`.
+3. **Manual Override Mapping (`provider_alias_map.json`):**
+   Provides an explicit, human-editable override table for idiosyncratic names or unlisted instruments:
+   ```json
+   {
+     "Kernel:NZ_50": {
+       "Chorus": "NZCNUE0001S2"
+     }
+   }
+   ```
+
+#### E. Sector Taxonomy Normalization
+Fund disclosures using alternative classification frameworks (e.g., FTSE ICB in Vanguard disclosures) are mapped to the 11 standard GICS Level 1 sectors:
+1. Energy
+2. Materials
+3. Industrials
+4. Consumer Discretionary
+5. Consumer Staples
+6. Health Care
+7. Financials
+8. Information Technology
+9. Communication Services
+10. Utilities
+11. Real Estate
+
+#### F. Feeder Unwrapping and Output Generation
+* For feeder funds, the pipeline recursively scales master fund constituents by the wrapper fund's equity proportion:
+  $$\text{Constituent Weight in Feeder} = \text{Constituent Weight in Master} \times (1 - \text{Cash Buffer} - \text{Hedging Ratio})$$
+* Pre-calculated holdings are written to two static JSON structures:
+  * `funds_registry.json`: Metadata for each supported fund (ID, name, provider, asset class, reporting date, cash ratio, hedging ratio).
+  * `constituents.json`: Key-value map indexing each fund ID to its normalized constituent array (`[{ isin, name, ticker, country, gics_sector, weight }]`).
+
+---
+
+### 2. Client-Side Look-Through Calculation Engine
+
+The web application executes all calculations in memory in the client browser using pure mathematical functions without external network calls.
+
+#### A. Calculation Mechanics & Denominator Baseline
+Let the user's entered balance for fund $f$ be $B_f$ in NZD, and the user's entered market value balance for direct company holding $k$ be $H_k$ in NZD (where $k$ is an individual stock selected from `security_master.json`).
+
+1. **Total Invested Denominator ($D$):**
+   $$D = \sum_{f} B_f + \sum_{k} H_k$$
+   All calculations maintain $D$ as the fixed denominator to prevent equity weight inflation from cash or derivative reserves.
+
+2. **Consolidated Company Exposure ($E_i$):**
+   For each unique security $i$ (identified by ISIN):
+   $$E_i = \sum_{f} \left( B_f \times w_{f, i} \right) + \begin{cases} H_i & \text{if security } i \text{ is held directly} \\ 0 & \text{otherwise} \end{cases}$$
+   Where $w_{f, i}$ is the proportional weight of company $i$ in fund $f$.
+
+3. **Consolidated Portfolio Weight ($P_i$):**
+   $$P_i = \frac{E_i}{D}$$
+
+4. **Liquidity and Currency Hedging Segregation:**
+   $$\text{Cash NZD} = \sum_{f} \left( B_f \times c_f \right), \quad \text{Hedging Contracts NZD} = \sum_{f} \left( B_f \times h_f \right)$$
+   Where $c_f$ and $h_f$ are the cash and currency-hedging ratios of fund $f$. Direct equity holdings carry $0\%$ cash/hedging ratios ($100\%$ equity).
+
+#### B. Post-Aggregation Micro-Holding Consolidation
+* A broad global index fund introduces thousands of fractional equity holdings. To prevent browser rendering lag while preserving mathematical accuracy, filtering is applied **strictly after** cross-fund aggregation:
+  * If $P_i < 0.0001$ ($0.01\%$ of total portfolio), the position is grouped into an `"Other Micro-Holdings"` row in the company look-through table. Direct equity holdings with meaningful allocations ($>0.01\%$) naturally appear above this threshold.
+  * For macro country and sector calculations, the exact exposure $E_i$ is credited to company $i$'s designated country $C_i$ and sector $S_i$. Macro allocation charts reflect 100% of the underlying equities without loss of precision.
+
+---
+
+### 3. User Interface & Visualization Architecture
+
+The user interface is structured around three primary visual components:
+
+#### A. Portfolio Input Table
+* **Fund Allocations Section:** Clean numeric inputs for each fund in NZD, displaying individual fund percentages of total entered capital.
+* **Direct Equities Section:** Autocomplete search input backed by `security_master.json` enabling users to search NZX and ASX tickers or company names (e.g., `MCY.NZ`, `FPH.NZ`, `BHP.AX`) and enter their current total NZD holding value.
+* Quick preset actions: Clear all, Load example portfolio, Export JSON/CSV, Import JSON/CSV.
+
+#### B. Horizontal Stacked Subcategory Bar Charts
+Matching prototype layout and density requirements:
+1. **Sector Allocation Broken Down by Country:** Each horizontal bar represents one of the 11 GICS sectors. The bar length represents total sector percentage, divided internally into colored sub-segments for each contributing country. Both fund constituents and direct shares feed into their respective GICS sector.
+2. **Country Allocation Broken Down by Sector:** Each horizontal bar represents a country exposure, divided internally into colored sub-segments for each contributing sector.
+3. **Interactive Hover Tooltips:** Hovering over any sub-segment displays an inspection popover showing:
+   * Category name and subcategory name.
+   * Total dollar exposure in NZD.
+   * Percentage of total portfolio and percentage within that parent category.
+
+#### C. Virtualized Company Look-Through Table
+* Searchable by company name, ticker, or ISIN.
+* Sortable by total NZD value or portfolio percentage.
+* Expandable rows: Clicking a row reveals which funds contribute to that company holding, the dollar amount from each fund, the fund-level percentage, and displays a dedicated **"Direct Holding"** source row if the user also holds shares directly.
+* Toggle: View allocations as **"% of Total Portfolio"** (inclusive of cash/bonds) or **"% of Equities"**.
+
+---
+
+### 4. Persistence and Data Portability
+
+* **Browser LocalStorage Adapter:** Saves entered fund allocations under a versioned storage key (`nz_unwrapper_portfolio_v1`). State is reloaded automatically on subsequent page visits.
+* **JSON Export/Import:** Generates and parses a standard JSON schema containing timestamp, schema version, and fund balance key-value pairs.
+* **CSV Export:** Exports a spreadsheet-compatible breakdown of consolidated holdings, sectors, and fund allocations for external analysis.
+
+---
+
+### 5. Administrator Verification & Mapping Tooling (GitHub Actions CI)
+
+To ensure that new or modified provider CSV disclosures can be audited before being committed to production, the architecture implements an automated CI verification workflow running on GitHub Actions (**Architectural Decision: Automated GitHub Actions CI / Workflow Dispatch**).
+
+When an administrator introduces a new fund disclosure or updates an existing one:
+1. **Staging & Trigger**:
+   - The administrator commits candidate CSV files (either individually or in small batches) to `data/staging/` or triggers the workflow manually via `workflow_dispatch`.
+   - The validation workflow runs without touching production distribution files.
+2. **Validation & Diagnostics**:
+   - **Header Schema Check:** Verifies expected column names against known provider disclosure formats.
+   - **Weight Sum Integrity:** Validates that constituent weights sum to $100\% \pm 0.5\%$, identifying cash or derivative discrepancies.
+   - **ISIN Resolution Audit:** Flags any company row where the local ticker or name fails to resolve against `provider_alias_map.json`.
+   - **Taxonomy Validation:** Flags unmapped industry sectors that do not conform to the 11 GICS Level 1 sectors.
+3. **Actionable Summary & Guidance**:
+   - The workflow writes a structured Markdown validation report to the GitHub Actions Job Summary and PR comments.
+   - Outlines why rejected rows fell short with instructions on expected fields and primary source registries (e.g., NZX announcements, ASX issuer lists, Disclose Register).
+   - Automatically generates ready-to-paste JSON snippet blocks to append to `provider_alias_map.json`. Once committed, the staging file is promoted to production data.
+
+---
+
+### 6. Date & Freshness Management
+
+Because fund managers publish holdings on divergent schedules (e.g., monthly for Vanguard US and Smartshares direct funds, quarterly or semi-annually for statutory Disclose Register filings), constituents across an investor's portfolio will inherently reflect different effective dates. The system tracks and exposes this multi-cadence freshness explicitly at three levels:
+
+#### A. Per-Fund Metadata Schema
+Each fund entry in `funds_registry.json` tracks temporal metadata:
+* `effective_date`: The official "as of" date of the underlying constituent disclosure (e.g., `2026-10-31`).
+* `ingestion_timestamp`: The UTC timestamp when the GitHub Actions pipeline compiled the static dataset.
+* `cadence`: Expected reporting cadence (`monthly`, `quarterly`, `semi-annual`).
+* `is_stale`: Boolean flag asserted if current date exceeds the expected cadence by more than 45 days.
+
+#### B. Portfolio-Level Freshness Envelope
+When the user enters their fund balances, the calculation engine computes the portfolio's freshness envelope across all held funds:
+* **As-Of Date Range:** Defined by the oldest constituent reporting date ($\min_{f \in \text{Held}} \text{effective\_date}_f$) and newest constituent reporting date ($\max_{f \in \text{Held}} \text{effective\_date}_f$).
+* **Freshness Spread:** The delta in days between the newest and oldest held fund disclosures.
+
+#### C. User Interface Freshness Indicators
+* **Global Header Badge:** Displays the consolidated portfolio as-of range (e.g., *"Holdings As Of: 30 Sep 2026 – 31 Oct 2026"*).
+* **Fund Allocation Table:** Includes an "As Of" date column adjacent to each fund input, with a visual stale indicator if an individual fund's data exceeds 90 days.
+* **Company Look-Through Breakdown:** In the expanded row showing contributing funds for a specific company, each fund line item displays its respective constituent reporting date so the user can verify data alignment.
