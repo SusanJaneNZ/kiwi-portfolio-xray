@@ -1,11 +1,11 @@
-# NZ Portfolio Look-Through Analyzer
+# Kiwi Portfolio X-Ray
 
 * **Author:** SusanJaneNZ
 * **Date:** 2026-11-08
 
 ## Overview
 
-A static, browser-based portfolio look-through analyzer hosted on GitHub Pages for New Zealand retail investors holding portfolios across NZX Smartshares ETFs and Kernel unlisted index funds.
+A static, browser-based portfolio look-through analyzer hosted on GitHub Pages for New Zealand retail investors holding portfolios across NZX Smartshares ETFs, Kernel unlisted index funds, and direct NZX/ASX shares.
 
 Users enter their portfolio allocations in New Zealand Dollars, which are saved in local browser storage. The application unpacks wrapper funds, aggregates overlapping equity holdings, reconciles duplicate company exposures across funds, segregates non-equity assets (cash buffers and currency hedging contracts), and visualizes the portfolio's underlying company holdings, sector allocations by country, and country allocations by sector.
 

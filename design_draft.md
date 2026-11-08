@@ -1,14 +1,14 @@
-# NZ Portfolio Look-Through Analyzer
+# Kiwi Portfolio X-Ray
 
 * **Author:** SusanJaneNZ
-* **Status:** Draft
+* **Status:** Proposed
 * **Date:** 2026-11-08
 
 ---
 
 ## Overview
 
-The NZ Portfolio Look-Through Analyzer is a static, browser-based web application hosted on GitHub Pages. It enables New Zealand retail investors to evaluate their combined portfolio across multiple funds according to their personal dollar allocations, providing a single consolidated look-through of their true underlying company, sector, and country exposures.
+The Kiwi Portfolio X-Ray is a static, browser-based web application hosted on GitHub Pages. It enables New Zealand retail investors to evaluate their combined portfolio across multiple funds according to their personal dollar allocations, providing a single consolidated look-through of their true underlying company, sector, and country exposures.
 
 Fund providers in New Zealand do not provide look-through aggregation even within their own platforms. For example, an investor holding 40% in a Kernel NZ equity fund and 60% in a Kernel Australian equity fund sees their balance divided by fund, but the platform does not combine these holdings to show consolidated company exposures. If aggregated, the investor would discover that dual-listed equities (such as Chorus or major banks) appear in both funds, resulting in a significantly higher true concentration than expected. This visibility gap exists whether an investor holds funds through a single manager or diversifies across multiple platforms (such as NZX-listed Smartshares ETFs and Kernel unlisted index funds).
 
@@ -333,7 +333,7 @@ Matching prototype layout and density requirements:
 
 ### 4. Persistence and Data Portability
 
-* **Browser LocalStorage Adapter:** Saves entered fund allocations under a versioned storage key (`nz_unwrapper_portfolio_v1`). State is reloaded automatically on subsequent page visits.
+* **Browser LocalStorage Adapter:** Saves entered fund allocations under a versioned storage key (`kiwi_portfolio_xray_v1`). State is reloaded automatically on subsequent page visits.
 * **JSON Export/Import:** Generates and parses a standard JSON schema containing timestamp, schema version, and fund balance key-value pairs.
 * **CSV Export:** Exports a spreadsheet-compatible breakdown of consolidated holdings, sectors, and fund allocations for external analysis.
 
@@ -596,7 +596,7 @@ When the user enters their fund balances, the calculation engine computes the po
 #### 22. `src/storage/localStorage.ts` (Create)
 
 * **Type / Scope**: TypeScript module — browser persistence adapter
-* **Proposed Changes**: Reads and writes portfolio state (fund NZD balances and direct equity holdings) under versioned `LocalStorage` key `nz_unwrapper_portfolio_v1`. Implements schema version migration logic for future schema changes. Provides `exportJSON()`, `importJSON()`, and `exportCSV()` functions for the data portability feature.
+* **Proposed Changes**: Reads and writes portfolio state (fund NZD balances and direct equity holdings) under versioned `LocalStorage` key `kiwi_portfolio_xray_v1`. Implements schema version migration logic for future schema changes. Provides `exportJSON()`, `importJSON()`, and `exportCSV()` functions for the data portability feature.
 
 ---
 
