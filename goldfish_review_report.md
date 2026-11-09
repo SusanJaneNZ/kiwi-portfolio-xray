@@ -152,12 +152,12 @@
 ### M5 [Comprehension, Critic, Intermediate Zoom Out] - Severity: Major
 * **Affected Scope:** Goals Line 46, CUJ 4, Section 3.A, Item 23
 * **Discrepancy Description:** ASX direct shares trade in AUD, but application requires NZD without defining FX conversion mechanism.
-* **Rationale:** Expecting retail users to perform manual FX calculations leads to user error.
+* **Rationale:** Expecting retail users to perform manual external conversions for each holding leads to user error, while a static build-time benchmark rate is immediately obsolete.
 * **AI Suggestion:** **PROPOSE FIX**
-* **Justification:** Embed static build-time AUD/NZD benchmark exchange rate in `funds_registry.json`. UI provides AUD/NZD toggle for ASX shares.
+* **Justification:** User can enter their actual AUD exchange rate (e.g. 1 AUD = X.XX NZD) directly in the UI when ASX holdings are added. The rate is persisted in LocalStorage alongside the portfolio inputs.
 * **Proposed Edit:**
-  * Location: Goals Line 46, CUJ 4, Section 3.A, Item 23
-  * Change: Add static `aud_nzd_rate` to `funds_registry.json`. Update CUJ 4 and `PortfolioInputTable.tsx` with an AUD/NZD currency toggle for ASX holdings.
+  * Location: Goals Line 46, CUJ 4, Section 3.A, Item 22, Item 23
+  * Change: Update Direct Equities specification to show an editable AUD/NZD exchange rate input field dynamically when/if any ASX individual holdings are added. Users enter ASX share values in AUD, and the client engine scales them to NZD using the user-specified rate. Persist the user's AUD/NZD rate in `LocalStorageV1Payload`.
 
 ---
 
