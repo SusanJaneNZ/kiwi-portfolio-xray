@@ -1,0 +1,68 @@
+[
+  {
+    "code": "TWF",
+    "name": "Smartshares Total World ETF",
+    "provider": "Smartshares",
+    "effective_date": "2026-10-31",
+    "cash_ratio": 0.015,
+    "hedging_ratio": 0.01,
+    "constituent_count": 13,
+    "cadence": "monthly",
+    "is_stale": false
+  },
+  {
+    "code": "USF",
+    "name": "Smartshares US 500 ETF",
+    "provider": "Smartshares",
+    "effective_date": "2026-10-31",
+    "cash_ratio": 0.015,
+    "hedging_ratio": 0.0,
+    "constituent_count": 7,
+    "cadence": "monthly",
+    "is_stale": false
+  },
+  {
+    "code": "FNZ",
+    "name": "Smartshares NZ Top 50 ETF",
+    "provider": "Smartshares",
+    "effective_date": "2026-10-31",
+    "cash_ratio": 0.015,
+    "hedging_ratio": 0.0,
+    "constituent_count": 6,
+    "cadence": "monthly",
+    "is_stale": false
+  },
+  {
+    "code": "OZY",
+    "name": "Smartshares Australian Top 20 ETF",
+    "provider": "Smartshares",
+    "effective_date": "2026-10-31",
+    "cash_ratio": 0.011,
+    "hedging_ratio": 0.0,
+    "constituent_count": 6,
+    "cadence": "monthly",
+    "is_stale": false
+  },
+  {
+    "code": "KERNEL_CLEAN_ENERGY",
+    "name": "Kernel Global Clean Energy Fund",
+    "provider": "Kernel",
+    "effective_date": "2026-10-31",
+    "cash_ratio": 0.012,
+    "hedging_ratio": 0.0,
+    "constituent_count": 5,
+    "cadence": "monthly",
+    "is_stale": false
+  },
+  {
+    "code": "KERNEL_NZ_50",
+    "name": "Kernel NZ 50 ESG Tilted Fund",
+    "provider": "Kernel",
+    "effective_date": "2026-10-31",
+    "cash_ratio": 0.01,
+    "hedging_ratio": 0.0,
+    "constituent_count": 5,
+    "cadence": "monthly",
+    "is_stale": false
+  }
+]

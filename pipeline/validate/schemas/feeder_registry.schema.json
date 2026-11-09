@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FeederRegistry",
+  "type": "object",
+  "additionalProperties": {
+    "type": "object",
+    "required": ["name", "master_provider", "master_ticker"],
+    "properties": {
+      "name": { "type": "string" },
+      "master_provider": { "type": "string" },
+      "master_ticker": { "type": "string" }
+    }
+  }
+}
+

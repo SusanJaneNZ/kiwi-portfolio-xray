@@ -1,0 +1,48 @@
+name: Upstream Ingestion & Data Compilation
+
+on:
+  schedule:
+    - cron: '0 6 1 * *' # 6:00 UTC on the 1st of each month
+  push:
+    branches: [ main ]
+    paths:
+      - 'pipeline/**'
+      - 'data/staging/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-compile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f pipeline/requirements.txt ]; then pip install -r pipeline/requirements.txt; fi
+          if [ -f pipeline/requirements-dev.txt ]; then pip install -r pipeline/requirements-dev.txt; fi
+
+      - name: Run Test Suite
+        run: |
+          python -m unittest discover -s pipeline/tests -v
+
+      - name: Run Ingestion Pipeline
+        run: |
+          python -m pipeline.ingest --staging-dir data/staging --output-dir public/data
+
+      - name: Commit and Push Updated Datasets
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action [CI/CD]"
+          git add public/data/ pipeline/security_master/security_master.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "data: compile static portfolio look-through assets [skip ci]" && git push)
+

@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnresolvedEntriesList",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["provider", "fund_code", "raw_name", "weight", "reason"],
+    "properties": {
+      "provider": { "type": "string" },
+      "fund_code": { "type": "string" },
+      "raw_name": { "type": "string" },
+      "raw_ticker": { "type": "string" },
+      "weight": { "type": "number" },
+      "reason": { "type": "string" },
+      "suggested_snippet": { "type": "object" }
+    }
+  }
+}
+

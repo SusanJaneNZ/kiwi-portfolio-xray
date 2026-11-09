@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DirectEquitiesList",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["isin", "name", "ticker", "exchange", "country", "sector"],
+    "properties": {
+      "isin": { "type": "string" },
+      "name": { "type": "string" },
+      "ticker": { "type": "string" },
+      "exchange": { "type": "string", "enum": ["NZX", "ASX"] },
+      "country": { "type": "string" },
+      "sector": { "type": "string" }
+    }
+  }
+}
+

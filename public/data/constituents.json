@@ -1,0 +1,350 @@
+{
+  "TWF": [
+    {
+      "isin": "US5949181045",
+      "name": "Microsoft Corp",
+      "ticker": "MSFT",
+      "country": "United States",
+      "sector": "Information Technology",
+      "weight": 0.0414375
+    },
+    {
+      "isin": "US0378331005",
+      "name": "Apple Inc",
+      "ticker": "AAPL",
+      "country": "United States",
+      "sector": "Information Technology",
+      "weight": 0.0385125
+    },
+    {
+      "isin": "US67066G1040",
+      "name": "NVIDIA Corp",
+      "ticker": "NVDA",
+      "country": "United States",
+      "sector": "Information Technology",
+      "weight": 0.030225
+    },
+    {
+      "isin": "US0231351067",
+      "name": "Amazon.com Inc",
+      "ticker": "AMZN",
+      "country": "United States",
+      "sector": "Consumer Discretionary",
+      "weight": 0.0234
+    },
+    {
+      "isin": "US02079K3059",
+      "name": "Alphabet Inc Class A",
+      "ticker": "GOOGL",
+      "country": "United States",
+      "sector": "Communication Services",
+      "weight": 0.0156
+    },
+    {
+      "isin": "TW0002330008",
+      "name": "Taiwan Semiconductor Manufacturing Co Ltd",
+      "ticker": "2330",
+      "country": "Taiwan",
+      "sector": "Information Technology",
+      "weight": 0.01755
+    },
+    {
+      "isin": "NL0010273215",
+      "name": "ASML Holding NV",
+      "ticker": "ASML",
+      "country": "Netherlands",
+      "sector": "Information Technology",
+      "weight": 0.010725
+    },
+    {
+      "isin": "CH0038863350",
+      "name": "Nestle SA",
+      "ticker": "NESN",
+      "country": "Switzerland",
+      "sector": "Consumer Staples",
+      "weight": 0.0117
+    },
+    {
+      "isin": "DK0061539921",
+      "name": "Vestas Wind Systems A/S",
+      "ticker": "VWS",
+      "country": "Denmark",
+      "sector": "Utilities",
+      "weight": 0.0039
+    },
+    {
+      "isin": "DK0060094928",
+      "name": "Orsted A/S",
+      "ticker": "ORSTED",
+      "country": "Denmark",
+      "sector": "Utilities",
+      "weight": 0.00195
+    },
+    {
+      "isin": "AU000000BHP4",
+      "name": "BHP Group Ltd",
+      "ticker": "BHP",
+      "country": "Australia",
+      "sector": "Materials",
+      "weight": 0.004875
+    },
+    {
+      "isin": "NZFPHE0001S2",
+      "name": "Fisher & Paykel Healthcare Corp",
+      "ticker": "FPH",
+      "country": "New Zealand",
+      "sector": "Health Care",
+      "weight": 0.0014625
+    },
+    {
+      "isin": "US9999999999",
+      "name": "Other Global Equities",
+      "ticker": "MISC",
+      "country": "Global",
+      "sector": "Unclassified",
+      "weight": 0.7736625
+    }
+  ],
+  "USF": [
+    {
+      "isin": "US5949181045",
+      "name": "Microsoft Corp",
+      "ticker": "MSFT",
+      "country": "United States",
+      "sector": "Information Technology",
+      "weight": 0.07092
+    },
+    {
+      "isin": "US0378331005",
+      "name": "Apple Inc",
+      "ticker": "AAPL",
+      "country": "United States",
+      "sector": "Information Technology",
+      "weight": 0.06698
+    },
+    {
+      "isin": "US67066G1040",
+      "name": "NVIDIA Corp",
+      "ticker": "NVDA",
+      "country": "United States",
+      "sector": "Information Technology",
+      "weight": 0.060085
+    },
+    {
+      "isin": "US0231351067",
+      "name": "Amazon.com Inc",
+      "ticker": "AMZN",
+      "country": "United States",
+      "sector": "Consumer Discretionary",
+      "weight": 0.03743
+    },
+    {
+      "isin": "US02079K3059",
+      "name": "Alphabet Inc Class A",
+      "ticker": "GOOGL",
+      "country": "United States",
+      "sector": "Communication Services",
+      "weight": 0.02364
+    },
+    {
+      "isin": "US30303M1027",
+      "name": "Meta Platforms Inc Class A",
+      "ticker": "META",
+      "country": "United States",
+      "sector": "Communication Services",
+      "weight": 0.024625
+    },
+    {
+      "isin": "US8888888888",
+      "name": "Other S&P 500 Equities",
+      "ticker": "SPX",
+      "country": "United States",
+      "sector": "Unclassified",
+      "weight": 0.70132
+    }
+  ],
+  "FNZ": [
+    {
+      "isin": "NZFPHE0001S2",
+      "name": "Fisher & Paykel Healthcare Corporation Limited",
+      "ticker": "FPH.NZ",
+      "country": "NZ",
+      "sector": "Health Care",
+      "weight": 0.1227
+    },
+    {
+      "isin": "NZMCYE0001S8",
+      "name": "Mercury NZ Limited",
+      "ticker": "MCY.NZ",
+      "country": "NZ",
+      "sector": "Utilities",
+      "weight": 0.085
+    },
+    {
+      "isin": "NZAIAE0002S6",
+      "name": "Auckland International Airport Limited",
+      "ticker": "AIA.NZ",
+      "country": "NZ",
+      "sector": "Industrials",
+      "weight": 0.078
+    },
+    {
+      "isin": "NZCENE0001S6",
+      "name": "Contact Energy Limited",
+      "ticker": "CEN.NZ",
+      "country": "NZ",
+      "sector": "Utilities",
+      "weight": 0.062
+    },
+    {
+      "isin": "NZSPKE0001S2",
+      "name": "Spark New Zealand Limited",
+      "ticker": "SPK.NZ",
+      "country": "NZ",
+      "sector": "Communication Services",
+      "weight": 0.041
+    },
+    {
+      "isin": "UNRESOLVED_OTHER",
+      "name": "Other NZX Top 50 Equities",
+      "ticker": "OTHER",
+      "country": "Unknown",
+      "sector": "Unclassified",
+      "weight": 0.5963
+    }
+  ],
+  "OZY": [
+    {
+      "isin": "AU000000BHP4",
+      "name": "BHP Group Ltd",
+      "ticker": "BHP",
+      "country": "Australia",
+      "sector": "Materials",
+      "weight": 0.145
+    },
+    {
+      "isin": "AU000000CSL",
+      "name": "CSL Limited",
+      "ticker": "CSL.AX",
+      "country": "AU",
+      "sector": "Health Care",
+      "weight": 0.092
+    },
+    {
+      "isin": "AU000000CBA",
+      "name": "Commonwealth Bank of Australia",
+      "ticker": "CBA.AX",
+      "country": "AU",
+      "sector": "Financials",
+      "weight": 0.113
+    },
+    {
+      "isin": "AU000000WES",
+      "name": "Wesfarmers Limited",
+      "ticker": "WES.AX",
+      "country": "AU",
+      "sector": "Consumer Discretionary",
+      "weight": 0.051
+    },
+    {
+      "isin": "AU000000MQG",
+      "name": "Macquarie Group Limited",
+      "ticker": "MQG.AX",
+      "country": "AU",
+      "sector": "Financials",
+      "weight": 0.048
+    },
+    {
+      "isin": "UNRESOLVED_OTHER",
+      "name": "Other ASX Top 20 Equities",
+      "ticker": "OTHER",
+      "country": "Unknown",
+      "sector": "Unclassified",
+      "weight": 0.54
+    }
+  ],
+  "KERNEL_CLEAN_ENERGY": [
+    {
+      "isin": "DK0061539921",
+      "name": "Vestas Wind Systems A/S",
+      "ticker": "VWS",
+      "country": "Denmark",
+      "sector": "Utilities",
+      "weight": 0.125
+    },
+    {
+      "isin": "DK0060094928",
+      "name": "Orsted A/S",
+      "ticker": "ORSTED",
+      "country": "Denmark",
+      "sector": "Utilities",
+      "weight": 0.102
+    },
+    {
+      "isin": "UNRESOLVED_2",
+      "name": "First Solar Inc",
+      "ticker": "",
+      "country": "Unknown",
+      "sector": "Unclassified",
+      "weight": 0.098
+    },
+    {
+      "isin": "UNRESOLVED_3",
+      "name": "Enphase Energy Inc",
+      "ticker": "",
+      "country": "Unknown",
+      "sector": "Unclassified",
+      "weight": 0.085
+    },
+    {
+      "isin": "UNRESOLVED_4",
+      "name": "Other Clean Energy Equities",
+      "ticker": "",
+      "country": "Unknown",
+      "sector": "Unclassified",
+      "weight": 0.578
+    }
+  ],
+  "KERNEL_NZ_50": [
+    {
+      "isin": "NZFPHE0001S2",
+      "name": "Fisher & Paykel Healthcare Corporation Limited",
+      "ticker": "FPH.NZ",
+      "country": "NZ",
+      "sector": "Health Care",
+      "weight": 0.115
+    },
+    {
+      "isin": "NZMCYE0001S8",
+      "name": "Mercury NZ Limited",
+      "ticker": "MCY.NZ",
+      "country": "NZ",
+      "sector": "Utilities",
+      "weight": 0.08
+    },
+    {
+      "isin": "NZAIAE0002S6",
+      "name": "Auckland International Airport Limited",
+      "ticker": "AIA.NZ",
+      "country": "NZ",
+      "sector": "Industrials",
+      "weight": 0.075
+    },
+    {
+      "isin": "NZCNUE0001S2",
+      "name": "Chorus Limited",
+      "ticker": "CNU.NZ",
+      "country": "NZ",
+      "sector": "Communication Services",
+      "weight": 0.04
+    },
+    {
+      "isin": "UNRESOLVED_4",
+      "name": "Other NZ 50 Companies",
+      "ticker": "",
+      "country": "Unknown",
+      "sector": "Unclassified",
+      "weight": 0.68
+    }
+  ]
+}

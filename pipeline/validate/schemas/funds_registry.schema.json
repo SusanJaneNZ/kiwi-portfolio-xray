@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FundsRegistry",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["code", "name", "provider", "effective_date", "cash_ratio", "hedging_ratio", "constituent_count"],
+    "properties": {
+      "code": { "type": "string" },
+      "name": { "type": "string" },
+      "provider": { "type": "string" },
+      "effective_date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+      "cash_ratio": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+      "hedging_ratio": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+      "constituent_count": { "type": "integer", "minimum": 0 },
+      "cadence": { "type": "string" },
+      "is_stale": { "type": "boolean" }
+    }
+  }
+}
+

@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ConstituentsMap",
+  "type": "object",
+  "additionalProperties": {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "required": ["isin", "name", "country", "sector", "weight"],
+      "properties": {
+        "isin": { "type": "string" },
+        "name": { "type": "string" },
+        "ticker": { "type": "string" },
+        "country": { "type": "string" },
+        "sector": { "type": "string" },
+        "weight": { "type": "number", "minimum": 0.0, "maximum": 1.0 }
+      }
+    }
+  }
+}
+

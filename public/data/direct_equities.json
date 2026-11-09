@@ -1,0 +1,90 @@
+[
+  {
+    "isin": "NZFPHE0001S2",
+    "name": "Fisher & Paykel Healthcare Corporation Limited",
+    "ticker": "FPH.NZ",
+    "exchange": "NZX",
+    "country": "NZ",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "NZMCYE0001S8",
+    "name": "Mercury NZ Limited",
+    "ticker": "MCY.NZ",
+    "exchange": "NZX",
+    "country": "NZ",
+    "sector": "Utilities"
+  },
+  {
+    "isin": "NZAIAE0002S6",
+    "name": "Auckland International Airport Limited",
+    "ticker": "AIA.NZ",
+    "exchange": "NZX",
+    "country": "NZ",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "NZCENE0001S6",
+    "name": "Contact Energy Limited",
+    "ticker": "CEN.NZ",
+    "exchange": "NZX",
+    "country": "NZ",
+    "sector": "Utilities"
+  },
+  {
+    "isin": "NZSPKE0001S2",
+    "name": "Spark New Zealand Limited",
+    "ticker": "SPK.NZ",
+    "exchange": "NZX",
+    "country": "NZ",
+    "sector": "Communication Services"
+  },
+  {
+    "isin": "NZCNUE0001S2",
+    "name": "Chorus Limited",
+    "ticker": "CNU.NZ",
+    "exchange": "NZX",
+    "country": "NZ",
+    "sector": "Communication Services"
+  },
+  {
+    "isin": "AU000000BHP",
+    "name": "BHP Group Limited",
+    "ticker": "BHP.AX",
+    "exchange": "ASX",
+    "country": "AU",
+    "sector": "Materials"
+  },
+  {
+    "isin": "AU000000CSL",
+    "name": "CSL Limited",
+    "ticker": "CSL.AX",
+    "exchange": "ASX",
+    "country": "AU",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "AU000000CBA",
+    "name": "Commonwealth Bank of Australia",
+    "ticker": "CBA.AX",
+    "exchange": "ASX",
+    "country": "AU",
+    "sector": "Financials"
+  },
+  {
+    "isin": "AU000000WES",
+    "name": "Wesfarmers Limited",
+    "ticker": "WES.AX",
+    "exchange": "ASX",
+    "country": "AU",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "AU000000MQG",
+    "name": "Macquarie Group Limited",
+    "ticker": "MQG.AX",
+    "exchange": "ASX",
+    "country": "AU",
+    "sector": "Financials"
+  }
+]

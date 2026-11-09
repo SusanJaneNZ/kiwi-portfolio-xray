@@ -1,0 +1,33 @@
+{
+  "TWF": {
+    "name": "Smartshares Total World ETF",
+    "master_provider": "vanguard",
+    "master_ticker": "VT"
+  },
+  "USF": {
+    "name": "Smartshares US 500 ETF",
+    "master_provider": "vanguard",
+    "master_ticker": "VOO"
+  },
+  "EUF": {
+    "name": "Smartshares Europe ETF",
+    "master_provider": "vanguard",
+    "master_ticker": "VGK"
+  },
+  "APA": {
+    "name": "Smartshares Asia Pacific ETF",
+    "master_provider": "vanguard",
+    "master_ticker": "VPL"
+  },
+  "EMF": {
+    "name": "Smartshares Emerging Markets ETF",
+    "master_provider": "vanguard",
+    "master_ticker": "VWO"
+  },
+  "ESG": {
+    "name": "Smartshares Global Equities ESG ETF",
+    "master_provider": "ishares",
+    "master_ticker": "IWLD"
+  }
+}
+
