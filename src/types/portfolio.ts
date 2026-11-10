@@ -23,13 +23,16 @@ export interface FundMetadata {
   is_stale?: boolean;
 }
 
-export interface DirectHolding {
+export interface DirectEquityCatalogItem {
   isin: string;
   name: string;
   ticker: string;
   exchange: "NZX" | "ASX";
   country: string;
   sector: string;
+}
+
+export interface DirectHolding extends DirectEquityCatalogItem {
   currency: "NZD" | "AUD";
   value: number; // Value in local currency
 }

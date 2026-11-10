@@ -8,13 +8,13 @@ import { UnresolvedItem, UnresolvedModal } from './components/UnresolvedModal';
 import { computeFreshnessEnvelope } from './engine/freshness';
 import { calculatePortfolioLookthrough } from './engine/lookthrough';
 import { loadPortfolioState, savePortfolioState } from './storage/localStorage';
-import { Constituent, DirectHolding, FundMetadata, UserPortfolioState } from './types/portfolio';
+import { Constituent, DirectEquityCatalogItem, FundMetadata, UserPortfolioState } from './types/portfolio';
 
 export const App: React.FC = () => {
   const [portfolioState, setPortfolioState] = useState<UserPortfolioState>(() => loadPortfolioState());
   const [fundsRegistry, setFundsRegistry] = useState<FundMetadata[]>([]);
   const [constituentsMap, setConstituentsMap] = useState<Record<string, Constituent[]>>({});
-  const [directCatalog, setDirectCatalog] = useState<DirectHolding[]>([]);
+  const [directCatalog, setDirectCatalog] = useState<DirectEquityCatalogItem[]>([]);
   const [unresolvedEntries, setUnresolvedEntries] = useState<UnresolvedItem[]>([]);
   const [isUnresolvedModalOpen, setIsUnresolvedModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -63,9 +63,9 @@ export const App: React.FC = () => {
 
   // Compute portfolio-level freshness envelope
   const freshnessEnvelope = useMemo(() => {
-    const heldCodes = Object.entries(portfolioState.fundBalances)
-      .filter(([_, bal]) => bal > 0)
-      .map(([code]) => code);
+    const heldCodes = Object.keys(portfolioState.fundBalances).filter(
+      (code) => portfolioState.fundBalances[code] > 0
+    );
     return computeFreshnessEnvelope(heldCodes, fundsRegistry);
   }, [portfolioState.fundBalances, fundsRegistry]);
 

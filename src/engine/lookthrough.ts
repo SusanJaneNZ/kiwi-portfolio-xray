@@ -38,7 +38,7 @@ export function calculatePortfolioLookthrough(input: CalculationInput): Calculat
 
   // 1. Calculate Denominator D and direct holdings in NZD
   let sumBf = 0;
-  for (const [code, balance] of Object.entries(fundBalances)) {
+  for (const balance of Object.values(fundBalances)) {
     if (balance > 0) {
       sumBf += balance;
     }

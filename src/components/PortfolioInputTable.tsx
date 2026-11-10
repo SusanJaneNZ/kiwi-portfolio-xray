@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { DirectHolding, FundMetadata, UserPortfolioState } from '../types/portfolio';
+import { DirectEquityCatalogItem, FundMetadata, UserPortfolioState } from '../types/portfolio';
 
 interface PortfolioInputTableProps {
   portfolioState: UserPortfolioState;
   fundsRegistry: FundMetadata[];
-  directEquitiesCatalog: DirectHolding[];
+  directEquitiesCatalog: DirectEquityCatalogItem[];
   onUpdateState: (state: UserPortfolioState) => void;
   totalPortfolioNZD: number;
 }
@@ -17,7 +17,7 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
   totalPortfolioNZD,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedEquity, setSelectedEquity] = useState<DirectHolding | null>(null);
+  const [selectedEquity, setSelectedEquity] = useState<DirectEquityCatalogItem | null>(null);
   const [newShareValue, setNewShareValue] = useState<string>('1000');
 
   // Check if any ASX holdings are present
@@ -57,9 +57,13 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
     const existingIndex = portfolioState.directHoldings.findIndex((h) => h.isin === selectedEquity.isin);
     let updated = [...portfolioState.directHoldings];
     if (existingIndex >= 0) {
-      updated[existingIndex].value += val;
+      updated[existingIndex] = { ...updated[existingIndex], value: updated[existingIndex].value + val };
     } else {
-      updated.push({ ...selectedEquity, value: val });
+      updated.push({
+        ...selectedEquity,
+        currency: selectedEquity.exchange === 'ASX' ? 'AUD' : 'NZD',
+        value: val,
+      });
     }
     onUpdateState({ ...portfolioState, directHoldings: updated });
     setSelectedEquity(null);
@@ -239,12 +243,14 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
               />
               {selectedEquity && (
                 <div className="w-24 relative">
-                  <span className="absolute left-2 top-1/2 -translate-y-1/2 text-slate-500 text-xs">$</span>
+                  <span className="absolute left-2 top-1/2 -translate-y-1/2 text-slate-500 text-xs">
+                    {selectedEquity.exchange === 'ASX' ? 'A$' : '$'}
+                  </span>
                   <input
                     type="number"
                     value={newShareValue}
                     onChange={(e) => setNewShareValue(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-5 pr-2 py-1.5 text-xs text-white"
+                    className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-6 pr-2 py-1.5 text-xs text-white"
                   />
                 </div>
               )}
