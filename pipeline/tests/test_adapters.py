@@ -18,24 +18,43 @@ class TestAdapters(unittest.TestCase):
     """Test suite for provider-specific constituent adapters."""
 
     def test_vanguard_adapter(self):
-        vt_file = STAGING_DIR / "vanguard" / "Holdings_details_VT.csv"
+        csv_text = (
+            "Holdings details\n\n"
+            "Total World Stock ETF (VT)\n\n\n"
+            "Equity,as of 09/30/2026\n\n"
+            ",SEDOL,HOLDINGS,TICKER,% OF FUNDS*,SUB-INDUSTRY,COUNTRY,SECURITYDEPOSITORYRECEIPTTYPE,MARKET VALUE*,SHARES\n"
+            ',2379504,NVIDIA Corp,NVDA,4.52%,Semiconductors,US,---,"$4,620,328,602.78","20,230,881"\n'
+            ',2046251,Apple Inc,AAPL,4.08%,"Technology Hardware, Storage & Peripherals",US,---,"$4,175,554,285.98","12,538,449"\n'
+            ',---,Other Equity,MISC,91.40%,Application Software,US,---,"$100.00","1"\n'
+            "Fixed income,as of 09/30/2026\n"
+            "Short-term reserves,as of 09/30/2026\n"
+            ",SEDOL,HOLDINGS,TICKER,% OF FUNDS*,MARKET VALUE*\n"
+            ',---,US Dollar,USD,0.05%,"$1,000.00"\n'
+        )
         adapter = VanguardAdapter()
-        self.assertTrue(adapter.can_handle(vt_file))
+        with tempfile.TemporaryDirectory() as tmp:
+            vanguard_dir = Path(tmp) / "vanguard"
+            vanguard_dir.mkdir()
+            vt_file = vanguard_dir / "Holdings_details_Total_World_Stock_ETF.csv"
+            vt_file.write_text(csv_text, encoding="utf-8")
 
-        res = adapter.parse(vt_file)
-        self.assertEqual(res.fund_code, "VT")
-        self.assertEqual(res.provider, "Vanguard")
-        self.assertTrue(res.is_master)
-        self.assertGreater(len(res.holdings), 5)
+            self.assertTrue(adapter.can_handle(vt_file))
+            res = adapter.parse(vt_file)
 
-        # Check master equity weights sum to 1.0 (normalized)
-        total_weight = sum(h.weight for h in res.holdings)
-        self.assertAlmostEqual(total_weight, 1.0, places=3)
+            self.assertEqual(res.fund_code, "VT")
+            self.assertEqual(res.provider, "Vanguard")
+            self.assertEqual(res.effective_date, "2026-09-30")
+            self.assertTrue(res.is_master)
+            # Only the 3 Equity rows ingested; Fixed income / Short-term reserves / USD cash stopped cleanly
+            self.assertEqual(len(res.holdings), 3)
 
-        # Check ISIN extraction
-        msft = next(h for h in res.holdings if "Microsoft" in h.name)
-        self.assertEqual(msft.isin, "US5949181045")
-        self.assertEqual(msft.ticker, "MSFT")
+            total_weight = sum(h.weight for h in res.holdings)
+            self.assertAlmostEqual(total_weight, 1.0, places=3)
+
+            nvda = next(h for h in res.holdings if h.ticker == "NVDA")
+            self.assertEqual(nvda.isin, "SEDOL:2379504")
+            self.assertEqual(nvda.sector, "Semiconductors")
+            self.assertEqual(nvda.country, "US")
 
     def test_vanguard_real_world_export_edge_cases(self):
         csv_text = (

@@ -1,6 +1,6 @@
 [
   {
-    "isin": "NZX:WBC",
+    "isin": "SEDOL:6076146",
     "name": "Westpac Banking Corporation",
     "ticker": "WBC.NZ",
     "exchange": "NZX",
@@ -8,7 +8,7 @@
     "sector": "Financials"
   },
   {
-    "isin": "NZX:ANZ",
+    "isin": "SEDOL:6065586",
     "name": "ANZ Group Holdings Limited",
     "ticker": "ANZ.NZ",
     "exchange": "NZX",
@@ -16,7 +16,7 @@
     "sector": "Financials"
   },
   {
-    "isin": "NZFPHE0001S2",
+    "isin": "SEDOL:6340250",
     "name": "Fisher & Paykel Healthcare Corporation Limited",
     "ticker": "FPH.NZ",
     "exchange": "NZX",
@@ -24,7 +24,7 @@
     "sector": "Health Care"
   },
   {
-    "isin": "NZX:MEL",
+    "isin": "SEDOL:BWFD052",
     "name": "Meridian Energy Limited",
     "ticker": "MEL.NZ",
     "exchange": "NZX",
@@ -32,7 +32,7 @@
     "sector": "Utilities"
   },
   {
-    "isin": "NZX:AIA",
+    "isin": "SEDOL:BKX3XG2",
     "name": "Auckland International Airport Limited",
     "ticker": "AIA.NZ",
     "exchange": "NZX",
@@ -48,7 +48,7 @@
     "sector": "Consumer Staples"
   },
   {
-    "isin": "NZX:IFT",
+    "isin": "SEDOL:6459286",
     "name": "Infratil Limited",
     "ticker": "IFT.NZ",
     "exchange": "NZX",
@@ -64,7 +64,7 @@
     "sector": "Financials"
   },
   {
-    "isin": "NZX:MCY",
+    "isin": "SEDOL:B8W6K56",
     "name": "Mercury NZ Limited",
     "ticker": "MCY.NZ",
     "exchange": "NZX",
@@ -72,7 +72,7 @@
     "sector": "Utilities"
   },
   {
-    "isin": "NZX:CEN",
+    "isin": "SEDOL:6152529",
     "name": "Contact Energy Limited",
     "ticker": "CEN.NZ",
     "exchange": "NZX",
@@ -80,7 +80,7 @@
     "sector": "Utilities"
   },
   {
-    "isin": "NZX:MFT",
+    "isin": "SEDOL:6603038",
     "name": "Mainfreight Limited",
     "ticker": "MFT.NZ",
     "exchange": "NZX",
@@ -96,7 +96,7 @@
     "sector": "Consumer Staples"
   },
   {
-    "isin": "NZX:VNT",
+    "isin": "SEDOL:BNV08F0",
     "name": "Ventia Services Group Limited",
     "ticker": "VNT.NZ",
     "exchange": "NZX",
@@ -112,7 +112,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "NZX:VCT",
+    "isin": "SEDOL:B0H0BC1",
     "name": "Vector Limited",
     "ticker": "VCT.NZ",
     "exchange": "NZX",
@@ -120,7 +120,7 @@
     "sector": "Utilities"
   },
   {
-    "isin": "NZX:EBO",
+    "isin": "SEDOL:6160038",
     "name": "EBOS Group Limited",
     "ticker": "EBO.NZ",
     "exchange": "NZX",
@@ -128,7 +128,7 @@
     "sector": "Health Care"
   },
   {
-    "isin": "NZX:SPK",
+    "isin": "SEDOL:6881436",
     "name": "Spark New Zealand Limited",
     "ticker": "SPK.NZ",
     "exchange": "NZX",
@@ -136,7 +136,7 @@
     "sector": "Communication Services"
   },
   {
-    "isin": "NZX:CNU",
+    "isin": "SEDOL:B54F6S5",
     "name": "Chorus Limited",
     "ticker": "CNU.NZ",
     "exchange": "NZX",
@@ -144,7 +144,7 @@
     "sector": "Communication Services"
   },
   {
-    "isin": "NZX:FBU",
+    "isin": "SEDOL:6341606",
     "name": "Fletcher Building Limited",
     "ticker": "FBU.NZ",
     "exchange": "NZX",
@@ -152,7 +152,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "NZX:GNE",
+    "isin": "SEDOL:BL10N28",
     "name": "Genesis Energy Limited",
     "ticker": "GNE.NZ",
     "exchange": "NZX",
@@ -168,7 +168,7 @@
     "sector": "Unclassified"
   },
   {
-    "isin": "NZX:FRW",
+    "isin": "SEDOL:6687980",
     "name": "Freightways Group Limited",
     "ticker": "FRW.NZ",
     "exchange": "NZX",
@@ -176,7 +176,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "NZX:RYM",
+    "isin": "SEDOL:6161525",
     "name": "Ryman Healthcare Limited",
     "ticker": "RYM.NZ",
     "exchange": "NZX",
@@ -192,7 +192,7 @@
     "sector": "Real Estate"
   },
   {
-    "isin": "NZX:SUM",
+    "isin": "SEDOL:B6R3JL7",
     "name": "Summerset Group Holdings Limited",
     "ticker": "SUM.NZ",
     "exchange": "NZX",
@@ -200,7 +200,7 @@
     "sector": "Health Care"
   },
   {
-    "isin": "NZX:KPG",
+    "isin": "SEDOL:BTDY2M7",
     "name": "Kiwi Property Group Limited",
     "ticker": "KPG.NZ",
     "exchange": "NZX",
@@ -216,7 +216,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "NZX:VHP",
+    "isin": "SEDOL:6173843",
     "name": "Vital Healthcare Property Trust",
     "ticker": "VHP.NZ",
     "exchange": "NZX",
@@ -224,7 +224,7 @@
     "sector": "Real Estate"
   },
   {
-    "isin": "NZX:CHI",
+    "isin": "SEDOL:6634522",
     "name": "Channel Infrastructure NZ Limited",
     "ticker": "CHI.NZ",
     "exchange": "NZX",
@@ -232,7 +232,7 @@
     "sector": "Energy"
   },
   {
-    "isin": "NZX:AIR",
+    "isin": "SEDOL:6426484",
     "name": "Air New Zealand Limited",
     "ticker": "AIR.NZ",
     "exchange": "NZX",
@@ -240,7 +240,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "NZX:HGH",
+    "isin": "SEDOL:BFXC201",
     "name": "Heartland Group Holdings Limited",
     "ticker": "HGH.NZ",
     "exchange": "NZX",
@@ -256,7 +256,7 @@
     "sector": "Real Estate"
   },
   {
-    "isin": "NZX:VSL",
+    "isin": "SEDOL:BMG3PV2",
     "name": "Vulcan Steel Limited",
     "ticker": "VSL.NZ",
     "exchange": "NZX",
@@ -272,7 +272,7 @@
     "sector": "Consumer Discretionary"
   },
   {
-    "isin": "NZX:SCL",
+    "isin": "SEDOL:BNGY4V5",
     "name": "Scales Corporation Limited",
     "ticker": "SCL.NZ",
     "exchange": "NZX",
@@ -288,7 +288,7 @@
     "sector": "Consumer Discretionary"
   },
   {
-    "isin": "NZX:ARG",
+    "isin": "SEDOL:B6ZFBN1",
     "name": "Argosy Property Limited",
     "ticker": "ARG.NZ",
     "exchange": "NZX",
@@ -296,7 +296,7 @@
     "sector": "Real Estate"
   },
   {
-    "isin": "NZX:SKC",
+    "isin": "SEDOL:6823193",
     "name": "SkyCity Entertainment Group Limited",
     "ticker": "SKC.NZ",
     "exchange": "NZX",
@@ -344,7 +344,7 @@
     "sector": "Consumer Discretionary"
   },
   {
-    "isin": "NZX:SPG",
+    "isin": "SEDOL:BD6K242",
     "name": "Stride Property Group",
     "ticker": "SPG.NZ",
     "exchange": "NZX",
@@ -368,7 +368,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "NZX:SKT",
+    "isin": "SEDOL:B0C5VF4",
     "name": "SKY Network Television Limited",
     "ticker": "SKT.NZ",
     "exchange": "NZX",
@@ -376,7 +376,7 @@
     "sector": "Communication Services"
   },
   {
-    "isin": "NZX:OCA",
+    "isin": "SEDOL:BD6DH46",
     "name": "Oceania Healthcare Limited",
     "ticker": "OCA.NZ",
     "exchange": "NZX",
@@ -400,7 +400,7 @@
     "sector": "Health Care"
   },
   {
-    "isin": "NZX:GTK",
+    "isin": "SEDOL:BNJZLK3",
     "name": "Gentrack Group Limited",
     "ticker": "GTK.NZ",
     "exchange": "NZX",
@@ -1000,7 +1000,7 @@
     "sector": "Information Technology"
   },
   {
-    "isin": "ASX:29M",
+    "isin": "SEDOL:BNNVRL0",
     "name": "29METALS LIMITED",
     "ticker": "29M.AX",
     "exchange": "ASX",
@@ -1008,7 +1008,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:360",
+    "isin": "SEDOL:BSLSTH8",
     "name": "LIFE360 INC.",
     "ticker": "360.AX",
     "exchange": "ASX",
@@ -1056,7 +1056,7 @@
     "sector": "Information Technology"
   },
   {
-    "isin": "ASX:4DX",
+    "isin": "SEDOL:BMX3786",
     "name": "4DMEDICAL LIMITED",
     "ticker": "4DX.AX",
     "exchange": "ASX",
@@ -1152,7 +1152,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:A4N",
+    "isin": "SEDOL:BH0K666",
     "name": "ALPHA HPA LIMITED",
     "ticker": "A4N.AX",
     "exchange": "ASX",
@@ -1176,7 +1176,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:AAC",
+    "isin": "SEDOL:6382285",
     "name": "AUSTRALIAN AGRICULTURAL COMPANY LIMITED.",
     "ticker": "AAC.AX",
     "exchange": "ASX",
@@ -1184,7 +1184,7 @@
     "sector": "Consumer Staples"
   },
   {
-    "isin": "ASX:AAI",
+    "isin": "SEDOL:BYNF418",
     "name": "ALCOA CORPORATION",
     "ticker": "AAI.AX",
     "exchange": "ASX",
@@ -1240,7 +1240,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:ABB",
+    "isin": "SEDOL:BM8HZC3",
     "name": "AUSSIE BROADBAND LIMITED",
     "ticker": "ABB.AX",
     "exchange": "ASX",
@@ -1256,7 +1256,7 @@
     "sector": "Financials"
   },
   {
-    "isin": "ASX:ABG",
+    "isin": "SEDOL:BQV4PB8",
     "name": "ABACUS GROUP",
     "ticker": "ABG.AX",
     "exchange": "ASX",
@@ -1312,7 +1312,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:ACL",
+    "isin": "SEDOL:BMWLLJ0",
     "name": "AUSTRALIAN CLINICAL LABS LIMITED",
     "ticker": "ACL.AX",
     "exchange": "ASX",
@@ -1384,7 +1384,7 @@
     "sector": "Communication Services"
   },
   {
-    "isin": "ASX:AD8",
+    "isin": "SEDOL:BZ9N3B6",
     "name": "AUDINATE GROUP LIMITED",
     "ticker": "AD8.AX",
     "exchange": "ASX",
@@ -1472,7 +1472,7 @@
     "sector": "Energy"
   },
   {
-    "isin": "ASX:AEF",
+    "isin": "SEDOL:6568212",
     "name": "AUSTRALIAN ETHICAL INVESTMENT LIMITED",
     "ticker": "AEF.AX",
     "exchange": "ASX",
@@ -1496,7 +1496,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:AEL",
+    "isin": "SEDOL:BLGTZK2",
     "name": "AMPLITUDE ENERGY LIMITED",
     "ticker": "AEL.AX",
     "exchange": "ASX",
@@ -1544,7 +1544,7 @@
     "sector": "Financials"
   },
   {
-    "isin": "ASX:AFG",
+    "isin": "SEDOL:BY4K6K5",
     "name": "AUSTRALIAN FINANCE GROUP LTD",
     "ticker": "AFG.AX",
     "exchange": "ASX",
@@ -1608,7 +1608,7 @@
     "sector": "Consumer Discretionary"
   },
   {
-    "isin": "ASX:AGL",
+    "isin": "SEDOL:BSS7GP5",
     "name": "AGL ENERGY LIMITED.",
     "ticker": "AGL.AX",
     "exchange": "ASX",
@@ -1704,7 +1704,7 @@
     "sector": "Information Technology"
   },
   {
-    "isin": "ASX:AIA",
+    "isin": "SEDOL:BKX3XG2",
     "name": "AUCKLAND INTERNATIONAL AIRPORT LIMITED",
     "ticker": "AIA.AX",
     "exchange": "ASX",
@@ -1760,7 +1760,7 @@
     "sector": "Unclassified"
   },
   {
-    "isin": "ASX:AIZ",
+    "isin": "SEDOL:6426484",
     "name": "AIR NEW ZEALAND LIMITED",
     "ticker": "AIZ.AX",
     "exchange": "ASX",
@@ -1856,7 +1856,7 @@
     "sector": "Health Care"
   },
   {
-    "isin": "ASX:ALD",
+    "isin": "SEDOL:BM91201",
     "name": "AMPOL LIMITED",
     "ticker": "ALD.AX",
     "exchange": "ASX",
@@ -1872,7 +1872,7 @@
     "sector": "Unclassified"
   },
   {
-    "isin": "ASX:ALK",
+    "isin": "SEDOL:6014027",
     "name": "ALKANE RESOURCES LIMITED",
     "ticker": "ALK.AX",
     "exchange": "ASX",
@@ -1880,7 +1880,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:ALL",
+    "isin": "SEDOL:6253983",
     "name": "ARISTOCRAT LEISURE LIMITED",
     "ticker": "ALL.AX",
     "exchange": "ASX",
@@ -1896,7 +1896,7 @@
     "sector": "Energy"
   },
   {
-    "isin": "ASX:ALQ",
+    "isin": "SEDOL:B86SZR5",
     "name": "ALS LIMITED",
     "ticker": "ALQ.AX",
     "exchange": "ASX",
@@ -1928,7 +1928,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:ALX",
+    "isin": "SEDOL:BZ03TZ1",
     "name": "ATLAS ARTERIA",
     "ticker": "ALX.AX",
     "exchange": "ASX",
@@ -1976,7 +1976,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:AMC",
+    "isin": "SEDOL:BV7DQ55",
     "name": "AMCOR PLC",
     "ticker": "AMC.AX",
     "exchange": "ASX",
@@ -2000,7 +2000,7 @@
     "sector": "Unclassified"
   },
   {
-    "isin": "ASX:AMI",
+    "isin": "SEDOL:BN790Y4",
     "name": "AURELIA METALS LIMITED",
     "ticker": "AMI.AX",
     "exchange": "ASX",
@@ -2032,7 +2032,7 @@
     "sector": "Information Technology"
   },
   {
-    "isin": "ASX:AMP",
+    "isin": "SEDOL:6709958",
     "name": "AMP LIMITED",
     "ticker": "AMP.AX",
     "exchange": "ASX",
@@ -2080,7 +2080,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:ANN",
+    "isin": "SEDOL:6286611",
     "name": "ANSELL LIMITED",
     "ticker": "ANN.AX",
     "exchange": "ASX",
@@ -2120,7 +2120,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:ANZ",
+    "isin": "SEDOL:6065586",
     "name": "ANZ GROUP HOLDINGS LIMITED",
     "ticker": "ANZ.AX",
     "exchange": "ASX",
@@ -2152,7 +2152,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:AOV",
+    "isin": "SEDOL:BQH8HH4",
     "name": "AMOTIV LIMITED",
     "ticker": "AOV.AX",
     "exchange": "ASX",
@@ -2160,7 +2160,7 @@
     "sector": "Consumer Discretionary"
   },
   {
-    "isin": "ASX:APA",
+    "isin": "SEDOL:BNNF1C1",
     "name": "APA GROUP",
     "ticker": "APA.AX",
     "exchange": "ASX",
@@ -2176,7 +2176,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:APE",
+    "isin": "SEDOL:6296201",
     "name": "EAGERS AUTOMOTIVE LIMITED",
     "ticker": "APE.AX",
     "exchange": "ASX",
@@ -2296,7 +2296,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:ARB",
+    "isin": "SEDOL:BWV03W5",
     "name": "ARB CORPORATION LIMITED.",
     "ticker": "ARB.AX",
     "exchange": "ASX",
@@ -2320,7 +2320,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:ARF",
+    "isin": "SEDOL:B99K263",
     "name": "ARENA REIT.",
     "ticker": "ARF.AX",
     "exchange": "ASX",
@@ -2384,7 +2384,7 @@
     "sector": "Communication Services"
   },
   {
-    "isin": "ASX:ARU",
+    "isin": "SEDOL:6711726",
     "name": "ARAFURA RARE EARTHS LTD",
     "ticker": "ARU.AX",
     "exchange": "ASX",
@@ -2416,7 +2416,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:ASB",
+    "isin": "SEDOL:6137162",
     "name": "AUSTAL LIMITED",
     "ticker": "ASB.AX",
     "exchange": "ASX",
@@ -2480,7 +2480,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:ASX",
+    "isin": "SEDOL:6129222",
     "name": "ASX LIMITED",
     "ticker": "ASX.AX",
     "exchange": "ASX",
@@ -2608,7 +2608,7 @@
     "sector": "Consumer Discretionary"
   },
   {
-    "isin": "ASX:AUB",
+    "isin": "SEDOL:B0MBNC3",
     "name": "AUB GROUP LIMITED",
     "ticker": "AUB.AX",
     "exchange": "ASX",
@@ -2776,7 +2776,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:AX1",
+    "isin": "SEDOL:BD20RS5",
     "name": "ACCENT GROUP LIMITED",
     "ticker": "AX1.AX",
     "exchange": "ASX",
@@ -2848,7 +2848,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:AYA",
+    "isin": "SEDOL:BMX5M10",
     "name": "ARTRYA LIMITED",
     "ticker": "AYA.AX",
     "exchange": "ASX",
@@ -2888,7 +2888,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:AZJ",
+    "isin": "SEDOL:B87CVM3",
     "name": "AURIZON HOLDINGS LIMITED",
     "ticker": "AZJ.AX",
     "exchange": "ASX",
@@ -2920,7 +2920,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:BAP",
+    "isin": "SEDOL:BLD2CY7",
     "name": "BAPCOR LIMITED",
     "ticker": "BAP.AX",
     "exchange": "ASX",
@@ -2960,7 +2960,7 @@
     "sector": "Communication Services"
   },
   {
-    "isin": "ASX:BBN",
+    "isin": "SEDOL:BYRJS58",
     "name": "BABY BUNTING GROUP LIMITED",
     "ticker": "BBN.AX",
     "exchange": "ASX",
@@ -3104,7 +3104,7 @@
     "sector": "Financials"
   },
   {
-    "isin": "ASX:BGA",
+    "isin": "SEDOL:B56CQJ5",
     "name": "BEGA CHEESE LIMITED",
     "ticker": "BGA.AX",
     "exchange": "ASX",
@@ -3128,7 +3128,7 @@
     "sector": "Information Technology"
   },
   {
-    "isin": "ASX:BGL",
+    "isin": "SEDOL:BFZ31P0",
     "name": "BELLEVUE GOLD LIMITED",
     "ticker": "BGL.AX",
     "exchange": "ASX",
@@ -3184,7 +3184,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "AU000000BHP4",
+    "isin": "SEDOL:6144690",
     "name": "BHP GROUP LIMITED",
     "ticker": "BHP.AX",
     "exchange": "ASX",
@@ -3416,7 +3416,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:BOE",
+    "isin": "SEDOL:B1XLCQ6",
     "name": "BOSS ENERGY LTD",
     "ticker": "BOE.AX",
     "exchange": "ASX",
@@ -3432,7 +3432,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:BOQ",
+    "isin": "SEDOL:6076243",
     "name": "BANK OF QUEENSLAND LIMITED.",
     "ticker": "BOQ.AX",
     "exchange": "ASX",
@@ -3480,7 +3480,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:BPT",
+    "isin": "SEDOL:6088204",
     "name": "BEACH ENERGY LIMITED",
     "ticker": "BPT.AX",
     "exchange": "ASX",
@@ -3496,7 +3496,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:BRG",
+    "isin": "SEDOL:6158709",
     "name": "BREVILLE GROUP LIMITED",
     "ticker": "BRG.AX",
     "exchange": "ASX",
@@ -3528,7 +3528,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:BRN",
+    "isin": "SEDOL:BYMJYD3",
     "name": "BRAINCHIP HOLDINGS LTD",
     "ticker": "BRN.AX",
     "exchange": "ASX",
@@ -3560,7 +3560,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:BSL",
+    "isin": "SEDOL:6533232",
     "name": "BLUESCOPE STEEL LIMITED",
     "ticker": "BSL.AX",
     "exchange": "ASX",
@@ -3704,7 +3704,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:BVS",
+    "isin": "SEDOL:BZBHBM3",
     "name": "BRAVURA SOLUTIONS LIMITED.",
     "ticker": "BVS.AX",
     "exchange": "ASX",
@@ -3736,7 +3736,7 @@
     "sector": "Real Estate"
   },
   {
-    "isin": "ASX:BXB",
+    "isin": "SEDOL:B1FJ0C0",
     "name": "BRAMBLES LIMITED",
     "ticker": "BXB.AX",
     "exchange": "ASX",
@@ -3816,7 +3816,7 @@
     "sector": "Real Estate"
   },
   {
-    "isin": "ASX:CAR",
+    "isin": "SEDOL:BW0BGZ3",
     "name": "CAR GROUP LIMITED",
     "ticker": "CAR.AX",
     "exchange": "ASX",
@@ -3824,7 +3824,7 @@
     "sector": "Communication Services"
   },
   {
-    "isin": "ASX:CAT",
+    "isin": "SEDOL:BTL0Y76",
     "name": "CATAPULT SPORTS LTD",
     "ticker": "CAT.AX",
     "exchange": "ASX",
@@ -3856,7 +3856,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:CBA",
+    "isin": "SEDOL:6215035",
     "name": "COMMONWEALTH BANK OF AUSTRALIA.",
     "ticker": "CBA.AX",
     "exchange": "ASX",
@@ -3880,7 +3880,7 @@
     "sector": "Health Care"
   },
   {
-    "isin": "ASX:CBO",
+    "isin": "SEDOL:BKVC4C4",
     "name": "COBRAM ESTATE OLIVES LIMITED",
     "ticker": "CBO.AX",
     "exchange": "ASX",
@@ -3936,7 +3936,7 @@
     "sector": "Communication Services"
   },
   {
-    "isin": "ASX:CCL",
+    "isin": "SEDOL:BSKNPH6",
     "name": "CUSCAL LIMITED",
     "ticker": "CCL.AX",
     "exchange": "ASX",
@@ -3960,7 +3960,7 @@
     "sector": "Consumer Staples"
   },
   {
-    "isin": "ASX:CCP",
+    "isin": "SEDOL:6287658",
     "name": "CREDIT CORP GROUP LIMITED",
     "ticker": "CCP.AX",
     "exchange": "ASX",
@@ -4016,7 +4016,7 @@
     "sector": "Unclassified"
   },
   {
-    "isin": "ASX:CDA",
+    "isin": "SEDOL:6712611",
     "name": "CODAN LIMITED",
     "ticker": "CDA.AX",
     "exchange": "ASX",
@@ -4080,7 +4080,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:CEN",
+    "isin": "SEDOL:6152529",
     "name": "CONTACT ENERGY LIMITED",
     "ticker": "CEN.AX",
     "exchange": "ASX",
@@ -4104,7 +4104,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:CGF",
+    "isin": "SEDOL:6726300",
     "name": "CHALLENGER LIMITED",
     "ticker": "CGF.AX",
     "exchange": "ASX",
@@ -4136,7 +4136,7 @@
     "sector": "Health Care"
   },
   {
-    "isin": "ASX:CHC",
+    "isin": "SEDOL:B15F6S6",
     "name": "CHARTER HALL GROUP",
     "ticker": "CHC.AX",
     "exchange": "ASX",
@@ -4144,7 +4144,7 @@
     "sector": "Real Estate"
   },
   {
-    "isin": "ASX:CHI",
+    "isin": "SEDOL:6634522",
     "name": "CHANNEL INFRASTRUCTURE NZ LIMITED",
     "ticker": "CHI.AX",
     "exchange": "ASX",
@@ -4168,7 +4168,7 @@
     "sector": "Health Care"
   },
   {
-    "isin": "ASX:CHN",
+    "isin": "SEDOL:B0ZGW28",
     "name": "CHALICE MINING LIMITED",
     "ticker": "CHN.AX",
     "exchange": "ASX",
@@ -4200,7 +4200,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:CIA",
+    "isin": "SEDOL:BLD1SB3",
     "name": "CHAMPION IRON LIMITED",
     "ticker": "CIA.AX",
     "exchange": "ASX",
@@ -4216,7 +4216,7 @@
     "sector": "Unclassified"
   },
   {
-    "isin": "ASX:CIP",
+    "isin": "SEDOL:BD31FD8",
     "name": "CENTURIA INDUSTRIAL REIT",
     "ticker": "CIP.AX",
     "exchange": "ASX",
@@ -4240,7 +4240,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:CKF",
+    "isin": "SEDOL:B6QCFP1",
     "name": "COLLINS FOODS LIMITED",
     "ticker": "CKF.AX",
     "exchange": "ASX",
@@ -4272,7 +4272,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:CLW",
+    "isin": "SEDOL:BDB46J2",
     "name": "CHARTER HALL LONG WALE REIT",
     "ticker": "CLW.AX",
     "exchange": "ASX",
@@ -4328,7 +4328,7 @@
     "sector": "Information Technology"
   },
   {
-    "isin": "ASX:CMM",
+    "isin": "SEDOL:BDD98W2",
     "name": "CAPRICORN METALS LTD",
     "ticker": "CMM.AX",
     "exchange": "ASX",
@@ -4352,7 +4352,7 @@
     "sector": "Health Care"
   },
   {
-    "isin": "ASX:CMW",
+    "isin": "SEDOL:6225476",
     "name": "CROMWELL PROPERTY GROUP",
     "ticker": "CMW.AX",
     "exchange": "ASX",
@@ -4384,7 +4384,7 @@
     "sector": "Energy"
   },
   {
-    "isin": "ASX:CNI",
+    "isin": "SEDOL:6518745",
     "name": "CENTURIA CAPITAL GROUP",
     "ticker": "CNI.AX",
     "exchange": "ASX",
@@ -4408,7 +4408,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:CNU",
+    "isin": "SEDOL:B54F6S5",
     "name": "CHORUS LIMITED",
     "ticker": "CNU.AX",
     "exchange": "ASX",
@@ -4432,7 +4432,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:COF",
+    "isin": "SEDOL:BKTW448",
     "name": "CENTURIA OFFICE REIT",
     "ticker": "COF.AX",
     "exchange": "ASX",
@@ -4448,7 +4448,7 @@
     "sector": "Financials"
   },
   {
-    "isin": "ASX:COH",
+    "isin": "SEDOL:6211798",
     "name": "COCHLEAR LIMITED",
     "ticker": "COH.AX",
     "exchange": "ASX",
@@ -4464,7 +4464,7 @@
     "sector": "Energy"
   },
   {
-    "isin": "ASX:COL",
+    "isin": "SEDOL:BYWR0T5",
     "name": "COLES GROUP LIMITED.",
     "ticker": "COL.AX",
     "exchange": "ASX",
@@ -4528,7 +4528,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:CPU",
+    "isin": "SEDOL:6180412",
     "name": "COMPUTERSHARE LIMITED.",
     "ticker": "CPU.AX",
     "exchange": "ASX",
@@ -4544,7 +4544,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:CQE",
+    "isin": "SEDOL:BHJVMY0",
     "name": "CHARTER HALL SOCIAL INFRASTRUCTURE REIT",
     "ticker": "CQE.AX",
     "exchange": "ASX",
@@ -4552,7 +4552,7 @@
     "sector": "Real Estate"
   },
   {
-    "isin": "ASX:CQR",
+    "isin": "SEDOL:6225595",
     "name": "CHARTER HALL RETAIL REIT",
     "ticker": "CQR.AX",
     "exchange": "ASX",
@@ -4632,7 +4632,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:CSC",
+    "isin": "SEDOL:BMY5XY9",
     "name": "CAPSTONE COPPER CORP.",
     "ticker": "CSC.AX",
     "exchange": "ASX",
@@ -4640,7 +4640,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:CSL",
+    "isin": "SEDOL:6185495",
     "name": "CSL LIMITED",
     "ticker": "CSL.AX",
     "exchange": "ASX",
@@ -4744,7 +4744,7 @@
     "sector": "Consumer Discretionary"
   },
   {
-    "isin": "ASX:CU6",
+    "isin": "SEDOL:BMCHJF0",
     "name": "CLARITY PHARMACEUTICALS LTD",
     "ticker": "CU6.AX",
     "exchange": "ASX",
@@ -4784,7 +4784,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:CUV",
+    "isin": "SEDOL:6328405",
     "name": "CLINUVEL PHARMACEUTICALS LIMITED",
     "ticker": "CUV.AX",
     "exchange": "ASX",
@@ -4840,7 +4840,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:CWP",
+    "isin": "SEDOL:6182281",
     "name": "CEDAR WOODS PROPERTIES LIMITED",
     "ticker": "CWP.AX",
     "exchange": "ASX",
@@ -4848,7 +4848,7 @@
     "sector": "Real Estate"
   },
   {
-    "isin": "ASX:CWY",
+    "isin": "SEDOL:BYQ8KW7",
     "name": "CLEANAWAY WASTE MANAGEMENT LIMITED",
     "ticker": "CWY.AX",
     "exchange": "ASX",
@@ -4856,7 +4856,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:CXL",
+    "isin": "SEDOL:B3S4L67",
     "name": "CALIX LIMITED",
     "ticker": "CXL.AX",
     "exchange": "ASX",
@@ -4864,7 +4864,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:CXO",
+    "isin": "SEDOL:B4XFS83",
     "name": "CORE LITHIUM LTD",
     "ticker": "CXO.AX",
     "exchange": "ASX",
@@ -4912,7 +4912,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:CYL",
+    "isin": "SEDOL:B17P5V0",
     "name": "CATALYST METALS LIMITED",
     "ticker": "CYL.AX",
     "exchange": "ASX",
@@ -5032,7 +5032,7 @@
     "sector": "Information Technology"
   },
   {
-    "isin": "ASX:DDR",
+    "isin": "SEDOL:B3YPKQ7",
     "name": "DICKER DATA LIMITED",
     "ticker": "DDR.AX",
     "exchange": "ASX",
@@ -5104,7 +5104,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:DGT",
+    "isin": "SEDOL:BTCHK67",
     "name": "DIGICO INFRASTRUCTURE REIT",
     "ticker": "DGT.AX",
     "exchange": "ASX",
@@ -5160,7 +5160,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:DMP",
+    "isin": "SEDOL:B07SFG7",
     "name": "DOMINO'S PIZZA ENTERPRISES LIMITED",
     "ticker": "DMP.AX",
     "exchange": "ASX",
@@ -5176,7 +5176,7 @@
     "sector": "Unclassified"
   },
   {
-    "isin": "ASX:DNL",
+    "isin": "SEDOL:BVBH523",
     "name": "DYNO NOBEL LIMITED.",
     "ticker": "DNL.AX",
     "exchange": "ASX",
@@ -5192,7 +5192,7 @@
     "sector": "Health Care"
   },
   {
-    "isin": "ASX:DOW",
+    "isin": "SEDOL:6465573",
     "name": "DOWNER EDI LIMITED",
     "ticker": "DOW.AX",
     "exchange": "ASX",
@@ -5200,7 +5200,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:DPM",
+    "isin": "SEDOL:BPCR7W4",
     "name": "DPM METALS INC.",
     "ticker": "DPM.AX",
     "exchange": "ASX",
@@ -5216,7 +5216,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:DRO",
+    "isin": "SEDOL:BYV1JW4",
     "name": "DRONESHIELD LIMITED",
     "ticker": "DRO.AX",
     "exchange": "ASX",
@@ -5224,7 +5224,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:DRR",
+    "isin": "SEDOL:BJP5T05",
     "name": "DETERRA ROYALTIES LIMITED",
     "ticker": "DRR.AX",
     "exchange": "ASX",
@@ -5256,7 +5256,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:DTL",
+    "isin": "SEDOL:6093015",
     "name": "DATA#3 LIMITED",
     "ticker": "DTL.AX",
     "exchange": "ASX",
@@ -5328,7 +5328,7 @@
     "sector": "Health Care"
   },
   {
-    "isin": "ASX:DVP",
+    "isin": "SEDOL:BNVQGB0",
     "name": "DEVELOP GLOBAL LIMITED",
     "ticker": "DVP.AX",
     "exchange": "ASX",
@@ -5360,7 +5360,7 @@
     "sector": "Real Estate"
   },
   {
-    "isin": "ASX:DXI",
+    "isin": "SEDOL:BP2RQ94",
     "name": "DEXUS INDUSTRIA REIT.",
     "ticker": "DXI.AX",
     "exchange": "ASX",
@@ -5376,7 +5376,7 @@
     "sector": "Information Technology"
   },
   {
-    "isin": "ASX:DXS",
+    "isin": "SEDOL:B033YN6",
     "name": "DEXUS",
     "ticker": "DXS.AX",
     "exchange": "ASX",
@@ -5384,7 +5384,7 @@
     "sector": "Real Estate"
   },
   {
-    "isin": "ASX:DYL",
+    "isin": "SEDOL:6480275",
     "name": "DEEP YELLOW LIMITED",
     "ticker": "DYL.AX",
     "exchange": "ASX",
@@ -5432,7 +5432,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:EBO",
+    "isin": "SEDOL:6160038",
     "name": "EBOS GROUP LIMITED",
     "ticker": "EBO.AX",
     "exchange": "ASX",
@@ -5600,7 +5600,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:EHL",
+    "isin": "SEDOL:B1978V5",
     "name": "EMECO HOLDINGS LIMITED",
     "ticker": "EHL.AX",
     "exchange": "ASX",
@@ -5624,7 +5624,7 @@
     "sector": "Energy"
   },
   {
-    "isin": "ASX:ELD",
+    "isin": "SEDOL:6357852",
     "name": "ELDERS LIMITED",
     "ticker": "ELD.AX",
     "exchange": "ASX",
@@ -5640,7 +5640,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:ELS",
+    "isin": "SEDOL:BD36ZB1",
     "name": "ELSIGHT LIMITED",
     "ticker": "ELS.AX",
     "exchange": "ASX",
@@ -5656,7 +5656,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:ELV",
+    "isin": "SEDOL:BVBM1M0",
     "name": "ELEVRA LITHIUM LIMITED",
     "ticker": "ELV.AX",
     "exchange": "ASX",
@@ -5752,7 +5752,7 @@
     "sector": "Energy"
   },
   {
-    "isin": "ASX:EMR",
+    "isin": "SEDOL:6107381",
     "name": "EMERALD RESOURCES NL",
     "ticker": "EMR.AX",
     "exchange": "ASX",
@@ -5840,7 +5840,7 @@
     "sector": "Information Technology"
   },
   {
-    "isin": "ASX:EOS",
+    "isin": "SEDOL:6293990",
     "name": "ELECTRO OPTIC SYSTEMS HOLDINGS LIMITED",
     "ticker": "EOS.AX",
     "exchange": "ASX",
@@ -5888,7 +5888,7 @@
     "sector": "Financials"
   },
   {
-    "isin": "ASX:EQR",
+    "isin": "SEDOL:BN7FK31",
     "name": "EQ RESOURCES LIMITED",
     "ticker": "EQR.AX",
     "exchange": "ASX",
@@ -5896,7 +5896,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:EQT",
+    "isin": "SEDOL:2319414",
     "name": "EQT HOLDINGS LIMITED",
     "ticker": "EQT.AX",
     "exchange": "ASX",
@@ -6024,7 +6024,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:EVN",
+    "isin": "SEDOL:B3X0F91",
     "name": "EVOLUTION MINING LIMITED",
     "ticker": "EVN.AX",
     "exchange": "ASX",
@@ -6032,7 +6032,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:EVNN",
+    "isin": "SEDOL:B3X0F91",
     "name": "EVOLUTION MINING LIMITED",
     "ticker": "EVNN.AX",
     "exchange": "ASX",
@@ -6048,7 +6048,7 @@
     "sector": "Consumer Discretionary"
   },
   {
-    "isin": "ASX:EVT",
+    "isin": "SEDOL:BDG0N49",
     "name": "EVT LIMITED",
     "ticker": "EVT.AX",
     "exchange": "ASX",
@@ -6160,7 +6160,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:FBU",
+    "isin": "SEDOL:6341606",
     "name": "FLETCHER BUILDING LIMITED",
     "ticker": "FBU.AX",
     "exchange": "ASX",
@@ -6256,7 +6256,7 @@
     "sector": "Consumer Staples"
   },
   {
-    "isin": "ASX:FFM",
+    "isin": "SEDOL:BPDXXB2",
     "name": "FIREFLY METALS LTD",
     "ticker": "FFM.AX",
     "exchange": "ASX",
@@ -6368,7 +6368,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:FLT",
+    "isin": "SEDOL:6352147",
     "name": "FLIGHT CENTRE TRAVEL GROUP LIMITED",
     "ticker": "FLT.AX",
     "exchange": "ASX",
@@ -6392,7 +6392,7 @@
     "sector": "Energy"
   },
   {
-    "isin": "ASX:FMG",
+    "isin": "SEDOL:6086253",
     "name": "FORTESCUE LTD",
     "ticker": "FMG.AX",
     "exchange": "ASX",
@@ -6464,7 +6464,7 @@
     "sector": "Unclassified"
   },
   {
-    "isin": "NZFPHE0001S2",
+    "isin": "SEDOL:6340250",
     "name": "FISHER & PAYKEL HEALTHCARE CORPORATION LIMITED",
     "ticker": "FPH.AX",
     "exchange": "ASX",
@@ -6472,7 +6472,7 @@
     "sector": "Health Care"
   },
   {
-    "isin": "ASX:FPR",
+    "isin": "SEDOL:BN7HDZ0",
     "name": "FLEETPARTNERS GROUP LIMITED",
     "ticker": "FPR.AX",
     "exchange": "ASX",
@@ -6520,7 +6520,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:FRW",
+    "isin": "SEDOL:6687980",
     "name": "FREIGHTWAYS GROUP LIMITED",
     "ticker": "FRW.AX",
     "exchange": "ASX",
@@ -6744,7 +6744,7 @@
     "sector": "Real Estate"
   },
   {
-    "isin": "ASX:GDG",
+    "isin": "SEDOL:BF42CQ6",
     "name": "GENERATION DEVELOPMENT GROUP LIMITED",
     "ticker": "GDG.AX",
     "exchange": "ASX",
@@ -6848,7 +6848,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:GGP",
+    "isin": "SEDOL:BTXLW40",
     "name": "GREATLAND RESOURCES LIMITED",
     "ticker": "GGP.AX",
     "exchange": "ASX",
@@ -6904,7 +6904,7 @@
     "sector": "Consumer Discretionary"
   },
   {
-    "isin": "ASX:GLC",
+    "isin": "SEDOL:B4T3BW6",
     "name": "GLENCORE PLC",
     "ticker": "GLC.AX",
     "exchange": "ASX",
@@ -6920,7 +6920,7 @@
     "sector": "Consumer Discretionary"
   },
   {
-    "isin": "ASX:GLF",
+    "isin": "SEDOL:BQYL129",
     "name": "GEMLIFE COMMUNITIES GROUP",
     "ticker": "GLF.AX",
     "exchange": "ASX",
@@ -6952,7 +6952,7 @@
     "sector": "Unclassified"
   },
   {
-    "isin": "ASX:GMD",
+    "isin": "SEDOL:B23G0X1",
     "name": "GENESIS MINERALS LIMITED",
     "ticker": "GMD.AX",
     "exchange": "ASX",
@@ -6960,7 +6960,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:GMG",
+    "isin": "SEDOL:B03FYZ4",
     "name": "GOODMAN GROUP",
     "ticker": "GMG.AX",
     "exchange": "ASX",
@@ -6984,7 +6984,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:GNC",
+    "isin": "SEDOL:6102331",
     "name": "GRAINCORP LIMITED",
     "ticker": "GNC.AX",
     "exchange": "ASX",
@@ -6992,7 +6992,7 @@
     "sector": "Consumer Staples"
   },
   {
-    "isin": "ASX:GNE",
+    "isin": "SEDOL:BL10N28",
     "name": "GENESIS ENERGY LIMITED",
     "ticker": "GNE.AX",
     "exchange": "ASX",
@@ -7016,7 +7016,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:GNP",
+    "isin": "SEDOL:BMCQZF9",
     "name": "GENUSPLUS GROUP LTD",
     "ticker": "GNP.AX",
     "exchange": "ASX",
@@ -7032,7 +7032,7 @@
     "sector": "Financials"
   },
   {
-    "isin": "ASX:GOZ",
+    "isin": "SEDOL:B1Y9BC8",
     "name": "GROWTHPOINT PROPERTIES AUSTRALIA",
     "ticker": "GOZ.AX",
     "exchange": "ASX",
@@ -7176,7 +7176,7 @@
     "sector": "Information Technology"
   },
   {
-    "isin": "ASX:GTK",
+    "isin": "SEDOL:BNJZLK3",
     "name": "GENTRACK GROUP LIMITED",
     "ticker": "GTK.AX",
     "exchange": "ASX",
@@ -7224,7 +7224,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:GWA",
+    "isin": "SEDOL:6392949",
     "name": "GWA GROUP LIMITED.",
     "ticker": "GWA.AX",
     "exchange": "ASX",
@@ -7240,7 +7240,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:GYG",
+    "isin": "SEDOL:BSLTT82",
     "name": "GUZMAN Y GOMEZ LIMITED",
     "ticker": "GYG.AX",
     "exchange": "ASX",
@@ -7344,7 +7344,7 @@
     "sector": "Real Estate"
   },
   {
-    "isin": "ASX:HDN",
+    "isin": "SEDOL:BNC0NF4",
     "name": "HOMECO DAILY NEEDS REIT",
     "ticker": "HDN.AX",
     "exchange": "ASX",
@@ -7376,7 +7376,7 @@
     "sector": "Communication Services"
   },
   {
-    "isin": "ASX:HGH",
+    "isin": "SEDOL:BFXC201",
     "name": "HEARTLAND GROUP HOLDINGS LIMITED",
     "ticker": "HGH.AX",
     "exchange": "ASX",
@@ -7408,7 +7408,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:HLI",
+    "isin": "SEDOL:BP5HL07",
     "name": "HELIA GROUP LIMITED",
     "ticker": "HLI.AX",
     "exchange": "ASX",
@@ -7432,7 +7432,7 @@
     "sector": "Consumer Discretionary"
   },
   {
-    "isin": "ASX:HLS",
+    "isin": "SEDOL:BFZYRL1",
     "name": "HEALIUS LIMITED",
     "ticker": "HLS.AX",
     "exchange": "ASX",
@@ -7456,7 +7456,7 @@
     "sector": "Unclassified"
   },
   {
-    "isin": "ASX:HMC",
+    "isin": "SEDOL:BJRBL61",
     "name": "HMC CAPITAL LIMITED",
     "ticker": "HMC.AX",
     "exchange": "ASX",
@@ -7544,7 +7544,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:HSN",
+    "isin": "SEDOL:6243252",
     "name": "HANSEN TECHNOLOGIES LIMITED",
     "ticker": "HSN.AX",
     "exchange": "ASX",
@@ -7568,7 +7568,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:HUB",
+    "isin": "SEDOL:BD4T5X1",
     "name": "HUB24 LIMITED",
     "ticker": "HUB.AX",
     "exchange": "ASX",
@@ -7584,7 +7584,7 @@
     "sector": "Financials"
   },
   {
-    "isin": "ASX:HVN",
+    "isin": "SEDOL:6173508",
     "name": "HARVEY NORMAN HOLDINGS LIMITED",
     "ticker": "HVN.AX",
     "exchange": "ASX",
@@ -7648,7 +7648,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:IAG",
+    "isin": "SEDOL:6271026",
     "name": "INSURANCE AUSTRALIA GROUP LIMITED",
     "ticker": "IAG.AX",
     "exchange": "ASX",
@@ -7752,7 +7752,7 @@
     "sector": "Health Care"
   },
   {
-    "isin": "ASX:IDX",
+    "isin": "SEDOL:BYV2ZK7",
     "name": "INTEGRAL DIAGNOSTICS LIMITED",
     "ticker": "IDX.AX",
     "exchange": "ASX",
@@ -7760,7 +7760,7 @@
     "sector": "Health Care"
   },
   {
-    "isin": "ASX:IEL",
+    "isin": "SEDOL:BDB6DD1",
     "name": "IDP EDUCATION LIMITED",
     "ticker": "IEL.AX",
     "exchange": "ASX",
@@ -7792,7 +7792,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:IFT",
+    "isin": "SEDOL:6459286",
     "name": "INFRATIL LIMITED.",
     "ticker": "IFT.AX",
     "exchange": "ASX",
@@ -7824,7 +7824,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:IGO",
+    "isin": "SEDOL:6439567",
     "name": "IGO LIMITED",
     "ticker": "IGO.AX",
     "exchange": "ASX",
@@ -7864,7 +7864,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:ILU",
+    "isin": "SEDOL:6957575",
     "name": "ILUKA RESOURCES LIMITED",
     "ticker": "ILU.AX",
     "exchange": "ASX",
@@ -7896,7 +7896,7 @@
     "sector": "Health Care"
   },
   {
-    "isin": "ASX:IMD",
+    "isin": "SEDOL:6462154",
     "name": "IMDEX LIMITED",
     "ticker": "IMD.AX",
     "exchange": "ASX",
@@ -7944,7 +7944,7 @@
     "sector": "Health Care"
   },
   {
-    "isin": "ASX:INA",
+    "isin": "SEDOL:B84GSC7",
     "name": "INGENIA COMMUNITIES GROUP",
     "ticker": "INA.AX",
     "exchange": "ASX",
@@ -7968,7 +7968,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:ING",
+    "isin": "SEDOL:BZCNHW2",
     "name": "INGHAMS GROUP LIMITED",
     "ticker": "ING.AX",
     "exchange": "ASX",
@@ -7984,7 +7984,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:INR",
+    "isin": "SEDOL:BGYBHZ4",
     "name": "IONEER LTD",
     "ticker": "INR.AX",
     "exchange": "ASX",
@@ -8048,7 +8048,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:IPH",
+    "isin": "SEDOL:BS7K5S1",
     "name": "IPH LIMITED",
     "ticker": "IPH.AX",
     "exchange": "ASX",
@@ -8064,7 +8064,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:IPX",
+    "isin": "SEDOL:BMCB2H5",
     "name": "IPERIONX LIMITED",
     "ticker": "IPX.AX",
     "exchange": "ASX",
@@ -8080,7 +8080,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:IRE",
+    "isin": "SEDOL:6297497",
     "name": "IRESS LIMITED",
     "ticker": "IRE.AX",
     "exchange": "ASX",
@@ -8200,7 +8200,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:JBH",
+    "isin": "SEDOL:6702623",
     "name": "JB HI-FI LIMITED",
     "ticker": "JBH.AX",
     "exchange": "ASX",
@@ -8216,7 +8216,7 @@
     "sector": "Information Technology"
   },
   {
-    "isin": "ASX:JDO",
+    "isin": "SEDOL:BMW7F41",
     "name": "JUDO CAPITAL HOLDINGS LIMITED",
     "ticker": "JDO.AX",
     "exchange": "ASX",
@@ -8240,7 +8240,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:JIN",
+    "isin": "SEDOL:6524474",
     "name": "JUMBO INTERACTIVE LIMITED",
     "ticker": "JIN.AX",
     "exchange": "ASX",
@@ -8336,7 +8336,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:KAR",
+    "isin": "SEDOL:B00SV00",
     "name": "KAROON ENERGY LTD",
     "ticker": "KAR.AX",
     "exchange": "ASX",
@@ -8368,7 +8368,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:KCN",
+    "isin": "SEDOL:6492731",
     "name": "KINGSGATE CONSOLIDATED LIMITED.",
     "ticker": "KCN.AX",
     "exchange": "ASX",
@@ -8400,7 +8400,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:KGN",
+    "isin": "SEDOL:BYYY339",
     "name": "KOGAN.COM LTD",
     "ticker": "KGN.AX",
     "exchange": "ASX",
@@ -8448,7 +8448,7 @@
     "sector": "Energy"
   },
   {
-    "isin": "ASX:KLS",
+    "isin": "SEDOL:BPBKR80",
     "name": "KELSIAN GROUP LIMITED",
     "ticker": "KLS.AX",
     "exchange": "ASX",
@@ -8584,7 +8584,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:KSC",
+    "isin": "SEDOL:B54C017",
     "name": "K & S CORPORATION LIMITED",
     "ticker": "KSC.AX",
     "exchange": "ASX",
@@ -8648,7 +8648,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:L1G",
+    "isin": "SEDOL:BSPVFM0",
     "name": "L1 GROUP LIMITED",
     "ticker": "L1G.AX",
     "exchange": "ASX",
@@ -8840,7 +8840,7 @@
     "sector": "Health Care"
   },
   {
-    "isin": "ASX:LIC",
+    "isin": "SEDOL:6137195",
     "name": "LIFESTYLE COMMUNITIES LIMITED",
     "ticker": "LIC.AX",
     "exchange": "ASX",
@@ -8848,7 +8848,7 @@
     "sector": "Real Estate"
   },
   {
-    "isin": "ASX:LIN",
+    "isin": "SEDOL:6214816",
     "name": "LINDIAN RESOURCES LIMITED",
     "ticker": "LIN.AX",
     "exchange": "ASX",
@@ -8904,7 +8904,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:LLC",
+    "isin": "SEDOL:6512004",
     "name": "LENDLEASE GROUP",
     "ticker": "LLC.AX",
     "exchange": "ASX",
@@ -8976,7 +8976,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:LOV",
+    "isin": "SEDOL:BT9PVP0",
     "name": "LOVISA HOLDINGS LIMITED",
     "ticker": "LOV.AX",
     "exchange": "ASX",
@@ -9080,7 +9080,7 @@
     "sector": "Health Care"
   },
   {
-    "isin": "ASX:LTR",
+    "isin": "SEDOL:B1J89V5",
     "name": "LIONTOWN LIMITED",
     "ticker": "LTR.AX",
     "exchange": "ASX",
@@ -9112,7 +9112,7 @@
     "sector": "Information Technology"
   },
   {
-    "isin": "ASX:LYC",
+    "isin": "SEDOL:6121176",
     "name": "LYNAS RARE EARTHS LIMITED",
     "ticker": "LYC.AX",
     "exchange": "ASX",
@@ -9208,7 +9208,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:MAF",
+    "isin": "SEDOL:BMYZBN4",
     "name": "MA FINANCIAL GROUP LIMITED",
     "ticker": "MAF.AX",
     "exchange": "ASX",
@@ -9224,7 +9224,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:MAH",
+    "isin": "SEDOL:6551160",
     "name": "MACMAHON HOLDINGS LIMITED",
     "ticker": "MAH.AX",
     "exchange": "ASX",
@@ -9256,7 +9256,7 @@
     "sector": "Health Care"
   },
   {
-    "isin": "ASX:MAQ",
+    "isin": "SEDOL:6175054",
     "name": "MACQUARIE TECHNOLOGY GROUP LIMITED",
     "ticker": "MAQ.AX",
     "exchange": "ASX",
@@ -9344,7 +9344,7 @@
     "sector": "Consumer Staples"
   },
   {
-    "isin": "ASX:MCY",
+    "isin": "SEDOL:B8W6K56",
     "name": "MERCURY NZ LIMITED",
     "ticker": "MCY.AX",
     "exchange": "ASX",
@@ -9432,7 +9432,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:MEZ",
+    "isin": "SEDOL:BWFD052",
     "name": "MERIDIAN ENERGY LIMITED",
     "ticker": "MEZ.AX",
     "exchange": "ASX",
@@ -9464,7 +9464,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:MGH",
+    "isin": "SEDOL:BLD4919",
     "name": "MAAS GROUP HOLDINGS LIMITED",
     "ticker": "MGH.AX",
     "exchange": "ASX",
@@ -9480,7 +9480,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:MGR",
+    "isin": "SEDOL:6161978",
     "name": "MIRVAC GROUP",
     "ticker": "MGR.AX",
     "exchange": "ASX",
@@ -9544,7 +9544,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:MI6",
+    "isin": "SEDOL:BMT8S71",
     "name": "MINERALS 260 LIMITED",
     "ticker": "MI6.AX",
     "exchange": "ASX",
@@ -9552,7 +9552,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:MIN",
+    "isin": "SEDOL:B17ZL56",
     "name": "MINERAL RESOURCES LIMITED",
     "ticker": "MIN.AX",
     "exchange": "ASX",
@@ -9608,7 +9608,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:MLX",
+    "isin": "SEDOL:B02HJ56",
     "name": "METALS X LIMITED",
     "ticker": "MLX.AX",
     "exchange": "ASX",
@@ -9672,7 +9672,7 @@
     "sector": "Energy"
   },
   {
-    "isin": "ASX:MMS",
+    "isin": "SEDOL:B00G1Q0",
     "name": "MCMILLAN SHAKESPEARE LIMITED",
     "ticker": "MMS.AX",
     "exchange": "ASX",
@@ -9696,7 +9696,7 @@
     "sector": "Consumer Discretionary"
   },
   {
-    "isin": "ASX:MND",
+    "isin": "SEDOL:6600471",
     "name": "MONADELPHOUS GROUP LIMITED",
     "ticker": "MND.AX",
     "exchange": "ASX",
@@ -9752,7 +9752,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:MP1",
+    "isin": "SEDOL:BZ5ZWZ3",
     "name": "MEGAPORT LIMITED",
     "ticker": "MP1.AX",
     "exchange": "ASX",
@@ -9808,7 +9808,7 @@
     "sector": "Real Estate"
   },
   {
-    "isin": "ASX:MQG",
+    "isin": "SEDOL:B28YTC2",
     "name": "MACQUARIE GROUP LIMITED",
     "ticker": "MQG.AX",
     "exchange": "ASX",
@@ -9864,7 +9864,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:MSB",
+    "isin": "SEDOL:B04SF48",
     "name": "MESOBLAST LIMITED",
     "ticker": "MSB.AX",
     "exchange": "ASX",
@@ -9936,7 +9936,7 @@
     "sector": "Consumer Discretionary"
   },
   {
-    "isin": "ASX:MTS",
+    "isin": "SEDOL:B0744W4",
     "name": "METCASH LIMITED",
     "ticker": "MTS.AX",
     "exchange": "ASX",
@@ -10016,7 +10016,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:MYR",
+    "isin": "SEDOL:B50YPZ6",
     "name": "MYER HOLDINGS LIMITED",
     "ticker": "MYR.AX",
     "exchange": "ASX",
@@ -10024,7 +10024,7 @@
     "sector": "Consumer Discretionary"
   },
   {
-    "isin": "ASX:MYS",
+    "isin": "SEDOL:B41XHK4",
     "name": "MYSTATE LIMITED",
     "ticker": "MYS.AX",
     "exchange": "ASX",
@@ -10032,7 +10032,7 @@
     "sector": "Financials"
   },
   {
-    "isin": "ASX:MYX",
+    "isin": "SEDOL:B1BHXL8",
     "name": "MAYNE PHARMA GROUP LIMITED",
     "ticker": "MYX.AX",
     "exchange": "ASX",
@@ -10048,7 +10048,7 @@
     "sector": "Financials"
   },
   {
-    "isin": "ASX:NAB",
+    "isin": "SEDOL:6624608",
     "name": "NATIONAL AUSTRALIA BANK LIMITED",
     "ticker": "NAB.AX",
     "exchange": "ASX",
@@ -10080,7 +10080,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:NAN",
+    "isin": "SEDOL:B1WF979",
     "name": "NANOSONICS LIMITED",
     "ticker": "NAN.AX",
     "exchange": "ASX",
@@ -10112,7 +10112,7 @@
     "sector": "Unclassified"
   },
   {
-    "isin": "ASX:NCK",
+    "isin": "SEDOL:B00VZV8",
     "name": "NICK SCALI LIMITED",
     "ticker": "NCK.AX",
     "exchange": "ASX",
@@ -10128,7 +10128,7 @@
     "sector": "Consumer Discretionary"
   },
   {
-    "isin": "ASX:NEC",
+    "isin": "SEDOL:BGQV183",
     "name": "NINE ENTERTAINMENT CO. HOLDINGS LIMITED",
     "ticker": "NEC.AX",
     "exchange": "ASX",
@@ -10136,7 +10136,7 @@
     "sector": "Communication Services"
   },
   {
-    "isin": "ASX:NEM",
+    "isin": "SEDOL:2636607",
     "name": "NEWMONT CORPORATION",
     "ticker": "NEM.AX",
     "exchange": "ASX",
@@ -10152,7 +10152,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:NEU",
+    "isin": "SEDOL:B04LVF0",
     "name": "NEUREN PHARMACEUTICALS LIMITED",
     "ticker": "NEU.AX",
     "exchange": "ASX",
@@ -10184,7 +10184,7 @@
     "sector": "Unclassified"
   },
   {
-    "isin": "ASX:NGI",
+    "isin": "SEDOL:BFN1D38",
     "name": "NAVIGATOR GLOBAL INVESTMENTS LIMITED",
     "ticker": "NGI.AX",
     "exchange": "ASX",
@@ -10224,7 +10224,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:NHC",
+    "isin": "SEDOL:6681960",
     "name": "NEW HOPE CORPORATION LIMITED",
     "ticker": "NHC.AX",
     "exchange": "ASX",
@@ -10256,7 +10256,7 @@
     "sector": "Energy"
   },
   {
-    "isin": "ASX:NIC",
+    "isin": "SEDOL:BZ7NDP2",
     "name": "NICKEL INDUSTRIES LIMITED",
     "ticker": "NIC.AX",
     "exchange": "ASX",
@@ -10416,7 +10416,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:NST",
+    "isin": "SEDOL:6717456",
     "name": "NORTHERN STAR RESOURCES LTD",
     "ticker": "NST.AX",
     "exchange": "ASX",
@@ -10464,7 +10464,7 @@
     "sector": "Consumer Staples"
   },
   {
-    "isin": "ASX:NUF",
+    "isin": "SEDOL:6335331",
     "name": "NUFARM LIMITED",
     "ticker": "NUF.AX",
     "exchange": "ASX",
@@ -10520,7 +10520,7 @@
     "sector": "Information Technology"
   },
   {
-    "isin": "ASX:NWH",
+    "isin": "SEDOL:B23XW70",
     "name": "NRW HOLDINGS LIMITED",
     "ticker": "NWH.AX",
     "exchange": "ASX",
@@ -10528,7 +10528,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:NWL",
+    "isin": "SEDOL:BF52PL1",
     "name": "NETWEALTH GROUP LIMITED",
     "ticker": "NWL.AX",
     "exchange": "ASX",
@@ -10544,7 +10544,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:NWS",
+    "isin": "SEDOL:BBGVT40",
     "name": "NEWS CORPORATION..",
     "ticker": "NWS.AX",
     "exchange": "ASX",
@@ -10552,7 +10552,7 @@
     "sector": "Communication Services"
   },
   {
-    "isin": "ASX:NWSLV",
+    "isin": "SEDOL:BBGVT40",
     "name": "NEWS CORPORATION..",
     "ticker": "NWSLV.AX",
     "exchange": "ASX",
@@ -10576,7 +10576,7 @@
     "sector": "Consumer Discretionary"
   },
   {
-    "isin": "ASX:NXG",
+    "isin": "SEDOL:B987K72",
     "name": "NEXGEN ENERGY (CANADA) LTD",
     "ticker": "NXG.AX",
     "exchange": "ASX",
@@ -10584,7 +10584,7 @@
     "sector": "Energy"
   },
   {
-    "isin": "ASX:NXL",
+    "isin": "SEDOL:BMW7P63",
     "name": "NUIX LIMITED",
     "ticker": "NXL.AX",
     "exchange": "ASX",
@@ -10608,7 +10608,7 @@
     "sector": "Health Care"
   },
   {
-    "isin": "ASX:NXT",
+    "isin": "SEDOL:B5LMKP4",
     "name": "NEXTDC LIMITED",
     "ticker": "NXT.AX",
     "exchange": "ASX",
@@ -10672,7 +10672,7 @@
     "sector": "Financials"
   },
   {
-    "isin": "ASX:OBM",
+    "isin": "SEDOL:BKDX544",
     "name": "ORA BANDA MINING LTD",
     "ticker": "OBM.AX",
     "exchange": "ASX",
@@ -10688,7 +10688,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:OCA",
+    "isin": "SEDOL:BD6DH46",
     "name": "OCEANIA HEALTHCARE LIMITED",
     "ticker": "OCA.AX",
     "exchange": "ASX",
@@ -10864,7 +10864,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:OML",
+    "isin": "SEDOL:BSXN8D0",
     "name": "OOH!MEDIA LIMITED",
     "ticker": "OML.AX",
     "exchange": "ASX",
@@ -10904,7 +10904,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:ORA",
+    "isin": "SEDOL:BH4TCW7",
     "name": "ORORA LIMITED",
     "ticker": "ORA.AX",
     "exchange": "ASX",
@@ -10928,7 +10928,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:ORG",
+    "isin": "SEDOL:6214861",
     "name": "ORIGIN ENERGY LIMITED",
     "ticker": "ORG.AX",
     "exchange": "ASX",
@@ -10936,7 +10936,7 @@
     "sector": "Utilities"
   },
   {
-    "isin": "ASX:ORI",
+    "isin": "SEDOL:6458001",
     "name": "ORICA LIMITED",
     "ticker": "ORI.AX",
     "exchange": "ASX",
@@ -11048,7 +11048,7 @@
     "sector": "Financials"
   },
   {
-    "isin": "ASX:PAF",
+    "isin": "SEDOL:0430049",
     "name": "PAN AFRICAN RESOURCES PLC",
     "ticker": "PAF.AX",
     "exchange": "ASX",
@@ -11136,7 +11136,7 @@
     "sector": "Unclassified"
   },
   {
-    "isin": "ASX:PDI",
+    "isin": "SEDOL:B3N05H9",
     "name": "PDI GOLD LIMITED",
     "ticker": "PDI.AX",
     "exchange": "ASX",
@@ -11144,7 +11144,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:PDN",
+    "isin": "SEDOL:6668468",
     "name": "PALADIN ENERGY LTD",
     "ticker": "PDN.AX",
     "exchange": "ASX",
@@ -11424,7 +11424,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:PLS",
+    "isin": "SEDOL:B2368L5",
     "name": "PLS GROUP LIMITED",
     "ticker": "PLS.AX",
     "exchange": "ASX",
@@ -11456,7 +11456,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:PME",
+    "isin": "SEDOL:6292782",
     "name": "PRO MEDICUS LIMITED",
     "ticker": "PME.AX",
     "exchange": "ASX",
@@ -11480,7 +11480,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:PMV",
+    "isin": "SEDOL:6699781",
     "name": "PREMIER INVESTMENTS LIMITED",
     "ticker": "PMV.AX",
     "exchange": "ASX",
@@ -11496,7 +11496,7 @@
     "sector": "Financials"
   },
   {
-    "isin": "ASX:PNI",
+    "isin": "SEDOL:BD0F7H1",
     "name": "PINNACLE INVESTMENT MANAGEMENT GROUP LIMITED",
     "ticker": "PNI.AX",
     "exchange": "ASX",
@@ -11512,7 +11512,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:PNR",
+    "isin": "SEDOL:6210289",
     "name": "PANTORO GOLD LIMITED",
     "ticker": "PNR.AX",
     "exchange": "ASX",
@@ -11528,7 +11528,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:PNV",
+    "isin": "SEDOL:BSJBZM6",
     "name": "POLYNOVO LIMITED",
     "ticker": "PNV.AX",
     "exchange": "ASX",
@@ -11600,7 +11600,7 @@
     "sector": "Financials"
   },
   {
-    "isin": "ASX:PPS",
+    "isin": "SEDOL:B13YTQ4",
     "name": "PRAEMIUM LIMITED",
     "ticker": "PPS.AX",
     "exchange": "ASX",
@@ -11608,7 +11608,7 @@
     "sector": "Information Technology"
   },
   {
-    "isin": "ASX:PPT",
+    "isin": "SEDOL:6682394",
     "name": "PERPETUAL LIMITED",
     "ticker": "PPT.AX",
     "exchange": "ASX",
@@ -11664,7 +11664,7 @@
     "sector": "Energy"
   },
   {
-    "isin": "ASX:PRN",
+    "isin": "SEDOL:BKRKNV4",
     "name": "PERENTI LIMITED",
     "ticker": "PRN.AX",
     "exchange": "ASX",
@@ -11680,7 +11680,7 @@
     "sector": "Information Technology"
   },
   {
-    "isin": "ASX:PRU",
+    "isin": "SEDOL:B02FBC1",
     "name": "PERSEUS MINING LIMITED",
     "ticker": "PRU.AX",
     "exchange": "ASX",
@@ -11784,7 +11784,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:PWH",
+    "isin": "SEDOL:BZ168Z2",
     "name": "PWR HOLDINGS LIMITED",
     "ticker": "PWH.AX",
     "exchange": "ASX",
@@ -11808,7 +11808,7 @@
     "sector": "Consumer Discretionary"
   },
   {
-    "isin": "ASX:PXA",
+    "isin": "SEDOL:BMD0WJ3",
     "name": "PEXA GROUP LIMITED",
     "ticker": "PXA.AX",
     "exchange": "ASX",
@@ -11832,7 +11832,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:PYC",
+    "isin": "SEDOL:B06NPT6",
     "name": "PYC THERAPEUTICS LIMITED",
     "ticker": "PYC.AX",
     "exchange": "ASX",
@@ -11848,7 +11848,7 @@
     "sector": "Real Estate"
   },
   {
-    "isin": "ASX:QAN",
+    "isin": "SEDOL:6710347",
     "name": "QANTAS AIRWAYS LIMITED",
     "ticker": "QAN.AX",
     "exchange": "ASX",
@@ -11856,7 +11856,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:QBE",
+    "isin": "SEDOL:6715740",
     "name": "QBE INSURANCE GROUP LIMITED",
     "ticker": "QBE.AX",
     "exchange": "ASX",
@@ -12104,7 +12104,7 @@
     "sector": "Information Technology"
   },
   {
-    "isin": "ASX:REA",
+    "isin": "SEDOL:6198578",
     "name": "REA GROUP LTD",
     "ticker": "REA.AX",
     "exchange": "ASX",
@@ -12128,7 +12128,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:REG",
+    "isin": "SEDOL:BQV68F9",
     "name": "REGIS HEALTHCARE LIMITED",
     "ticker": "REG.AX",
     "exchange": "ASX",
@@ -12136,7 +12136,7 @@
     "sector": "Health Care"
   },
   {
-    "isin": "ASX:REH",
+    "isin": "SEDOL:6728801",
     "name": "REECE LIMITED",
     "ticker": "REH.AX",
     "exchange": "ASX",
@@ -12232,7 +12232,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:RGN",
+    "isin": "SEDOL:BPBMY63",
     "name": "REGION GROUP",
     "ticker": "RGN.AX",
     "exchange": "ASX",
@@ -12248,7 +12248,7 @@
     "sector": "Health Care"
   },
   {
-    "isin": "ASX:RHC",
+    "isin": "SEDOL:6041995",
     "name": "RAMSAY HEALTH CARE LIMITED",
     "ticker": "RHC.AX",
     "exchange": "ASX",
@@ -12280,7 +12280,7 @@
     "sector": "Health Care"
   },
   {
-    "isin": "ASX:RIC",
+    "isin": "SEDOL:6738929",
     "name": "RIDLEY CORPORATION LIMITED",
     "ticker": "RIC.AX",
     "exchange": "ASX",
@@ -12304,7 +12304,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:RIO",
+    "isin": "SEDOL:0718875",
     "name": "RIO TINTO LIMITED",
     "ticker": "RIO.AX",
     "exchange": "ASX",
@@ -12376,7 +12376,7 @@
     "sector": "Financials"
   },
   {
-    "isin": "ASX:RMD",
+    "isin": "SEDOL:2732903",
     "name": "RESMED INC",
     "ticker": "RMD.AX",
     "exchange": "ASX",
@@ -12400,7 +12400,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:RMS",
+    "isin": "SEDOL:6586872",
     "name": "RAMELIUS RESOURCES LIMITED",
     "ticker": "RMS.AX",
     "exchange": "ASX",
@@ -12488,7 +12488,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:RPL",
+    "isin": "SEDOL:BMFX892",
     "name": "REGAL PARTNERS LIMITED",
     "ticker": "RPL.AX",
     "exchange": "ASX",
@@ -12520,7 +12520,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:RRL",
+    "isin": "SEDOL:6476542",
     "name": "REGIS RESOURCES LIMITED",
     "ticker": "RRL.AX",
     "exchange": "ASX",
@@ -12536,7 +12536,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:RSG",
+    "isin": "SEDOL:6410636",
     "name": "RESOLUTE MINING LIMITED",
     "ticker": "RSG.AX",
     "exchange": "ASX",
@@ -12576,7 +12576,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:RWC",
+    "isin": "SEDOL:BD1DM79",
     "name": "RELIANCE WORLDWIDE CORPORATION LIMITED",
     "ticker": "RWC.AX",
     "exchange": "ASX",
@@ -12616,7 +12616,7 @@
     "sector": "Unclassified"
   },
   {
-    "isin": "ASX:RYM",
+    "isin": "SEDOL:6161525",
     "name": "RYMAN HEALTHCARE LIMITED",
     "ticker": "RYM.AX",
     "exchange": "ASX",
@@ -12640,7 +12640,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:S32",
+    "isin": "SEDOL:BWSW5D9",
     "name": "SOUTH32 LIMITED",
     "ticker": "S32.AX",
     "exchange": "ASX",
@@ -12680,7 +12680,7 @@
     "sector": "Unclassified"
   },
   {
-    "isin": "ASX:SBM",
+    "isin": "SEDOL:6317072",
     "name": "ST BARBARA LIMITED",
     "ticker": "SBM.AX",
     "exchange": "ASX",
@@ -12704,7 +12704,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:SCG",
+    "isin": "SEDOL:BLZH0Z7",
     "name": "SCENTRE GROUP",
     "ticker": "SCG.AX",
     "exchange": "ASX",
@@ -12736,7 +12736,7 @@
     "sector": "Information Technology"
   },
   {
-    "isin": "ASX:SDF",
+    "isin": "SEDOL:BCT5FD7",
     "name": "STEADFAST GROUP LIMITED",
     "ticker": "SDF.AX",
     "exchange": "ASX",
@@ -12744,7 +12744,7 @@
     "sector": "Financials"
   },
   {
-    "isin": "ASX:SDR",
+    "isin": "SEDOL:BLH35X6",
     "name": "SITEMINDER LIMITED",
     "ticker": "SDR.AX",
     "exchange": "ASX",
@@ -12784,7 +12784,7 @@
     "sector": "Communication Services"
   },
   {
-    "isin": "ASX:SEK",
+    "isin": "SEDOL:B0767Y3",
     "name": "SEEK LIMITED",
     "ticker": "SEK.AX",
     "exchange": "ASX",
@@ -12848,7 +12848,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:SFR",
+    "isin": "SEDOL:6739739",
     "name": "SANDFIRE RESOURCES LIMITED",
     "ticker": "SFR.AX",
     "exchange": "ASX",
@@ -12880,7 +12880,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:SGH",
+    "isin": "SEDOL:BR858V2",
     "name": "SGH LIMITED",
     "ticker": "SGH.AX",
     "exchange": "ASX",
@@ -12904,7 +12904,7 @@
     "sector": "Consumer Staples"
   },
   {
-    "isin": "ASX:SGM",
+    "isin": "SEDOL:B0LCW75",
     "name": "SIMS LIMITED",
     "ticker": "SGM.AX",
     "exchange": "ASX",
@@ -12912,7 +12912,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:SGP",
+    "isin": "SEDOL:6850856",
     "name": "STOCKLAND",
     "ticker": "SGP.AX",
     "exchange": "ASX",
@@ -12968,7 +12968,7 @@
     "sector": "Consumer Discretionary"
   },
   {
-    "isin": "ASX:SHL",
+    "isin": "SEDOL:6821120",
     "name": "SONIC HEALTHCARE LIMITED",
     "ticker": "SHL.AX",
     "exchange": "ASX",
@@ -13000,7 +13000,7 @@
     "sector": "Communication Services"
   },
   {
-    "isin": "ASX:SHV",
+    "isin": "SEDOL:6260723",
     "name": "SELECT HARVESTS LIMITED",
     "ticker": "SHV.AX",
     "exchange": "ASX",
@@ -13008,7 +13008,7 @@
     "sector": "Consumer Staples"
   },
   {
-    "isin": "ASX:SIG",
+    "isin": "SEDOL:BF13K02",
     "name": "SIGMA HEALTHCARE LIMITED",
     "ticker": "SIG.AX",
     "exchange": "ASX",
@@ -13024,7 +13024,7 @@
     "sector": "Consumer Discretionary"
   },
   {
-    "isin": "ASX:SIQ",
+    "isin": "SEDOL:BNB5WS6",
     "name": "SMARTGROUP CORPORATION LTD",
     "ticker": "SIQ.AX",
     "exchange": "ASX",
@@ -13064,7 +13064,7 @@
     "sector": "Consumer Discretionary"
   },
   {
-    "isin": "ASX:SKC",
+    "isin": "SEDOL:6823193",
     "name": "SKYCITY ENTERTAINMENT GROUP LIMITED",
     "ticker": "SKC.AX",
     "exchange": "ASX",
@@ -13072,7 +13072,7 @@
     "sector": "Consumer Discretionary"
   },
   {
-    "isin": "ASX:SKG",
+    "isin": "SEDOL:BVPFTH6",
     "name": "STORAGE KING GROUP",
     "ticker": "SKG.AX",
     "exchange": "ASX",
@@ -13120,7 +13120,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:SKT",
+    "isin": "SEDOL:B0C5VF4",
     "name": "SKY NETWORK TELEVISION LIMITED.",
     "ticker": "SKT.AX",
     "exchange": "ASX",
@@ -13152,7 +13152,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:SLC",
+    "isin": "SEDOL:BYPC6V1",
     "name": "SUPERLOOP LIMITED",
     "ticker": "SLC.AX",
     "exchange": "ASX",
@@ -13184,7 +13184,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:SLX",
+    "isin": "SEDOL:6111735",
     "name": "SILEX SYSTEMS LIMITED",
     "ticker": "SLX.AX",
     "exchange": "ASX",
@@ -13240,7 +13240,7 @@
     "sector": "Information Technology"
   },
   {
-    "isin": "ASX:SMR",
+    "isin": "SEDOL:B4KDPZ6",
     "name": "STANMORE RESOURCES LIMITED",
     "ticker": "SMR.AX",
     "exchange": "ASX",
@@ -13288,7 +13288,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:SNL",
+    "isin": "SEDOL:6580993",
     "name": "SUPPLY NETWORK LIMITED",
     "ticker": "SNL.AX",
     "exchange": "ASX",
@@ -13328,7 +13328,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:SNZ",
+    "isin": "SEDOL:B6R3JL7",
     "name": "SUMMERSET GROUP HOLDINGS LIMITED",
     "ticker": "SNZ.AX",
     "exchange": "ASX",
@@ -13416,7 +13416,7 @@
     "sector": "Consumer Staples"
   },
   {
-    "isin": "ASX:SPK",
+    "isin": "SEDOL:6881436",
     "name": "SPARK NEW ZEALAND LIMITED",
     "ticker": "SPK.AX",
     "exchange": "ASX",
@@ -13472,7 +13472,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:SRG",
+    "isin": "SEDOL:BFMZB82",
     "name": "SRG GLOBAL LIMITED",
     "ticker": "SRG.AX",
     "exchange": "ASX",
@@ -13504,7 +13504,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:SRL",
+    "isin": "SEDOL:BN4MX14",
     "name": "SUNRISE ENERGY METALS LIMITED",
     "ticker": "SRL.AX",
     "exchange": "ASX",
@@ -13576,7 +13576,7 @@
     "sector": "Real Estate"
   },
   {
-    "isin": "ASX:SSM",
+    "isin": "SEDOL:B04KLG8",
     "name": "SERVICE STREAM LIMITED",
     "ticker": "SSM.AX",
     "exchange": "ASX",
@@ -13624,7 +13624,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:STO",
+    "isin": "SEDOL:6776703",
     "name": "SANTOS LIMITED",
     "ticker": "STO.AX",
     "exchange": "ASX",
@@ -13648,7 +13648,7 @@
     "sector": "Communication Services"
   },
   {
-    "isin": "ASX:STX",
+    "isin": "SEDOL:B01NQF4",
     "name": "STRIKE ENERGY LIMITED",
     "ticker": "STX.AX",
     "exchange": "ASX",
@@ -13664,7 +13664,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:SUL",
+    "isin": "SEDOL:B01C7R0",
     "name": "SUPER RETAIL GROUP LIMITED",
     "ticker": "SUL.AX",
     "exchange": "ASX",
@@ -13672,7 +13672,7 @@
     "sector": "Consumer Discretionary"
   },
   {
-    "isin": "ASX:SUN",
+    "isin": "SEDOL:6585084",
     "name": "SUNCORP GROUP LIMITED",
     "ticker": "SUN.AX",
     "exchange": "ASX",
@@ -13704,7 +13704,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:SVR",
+    "isin": "SEDOL:BNSMR30",
     "name": "SOLVAR LIMITED",
     "ticker": "SVR.AX",
     "exchange": "ASX",
@@ -13728,7 +13728,7 @@
     "sector": "Communication Services"
   },
   {
-    "isin": "ASX:SX2",
+    "isin": "SEDOL:BTFK8C5",
     "name": "SOUTHERN CROSS GOLD CONSOLIDATED LTD.",
     "ticker": "SX2.AX",
     "exchange": "ASX",
@@ -13736,7 +13736,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:SXE",
+    "isin": "SEDOL:B296336",
     "name": "SOUTHERN CROSS ELECTRICAL ENGINEERING LTD",
     "ticker": "SXE.AX",
     "exchange": "ASX",
@@ -13752,7 +13752,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "ASX:SYR",
+    "isin": "SEDOL:B23HV20",
     "name": "SYRAH RESOURCES LIMITED",
     "ticker": "SYR.AX",
     "exchange": "ASX",
@@ -13784,7 +13784,7 @@
     "sector": "Energy"
   },
   {
-    "isin": "ASX:TAH",
+    "isin": "SEDOL:6873262",
     "name": "TABCORP HOLDINGS LIMITED",
     "ticker": "TAH.AX",
     "exchange": "ASX",
@@ -13864,7 +13864,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:TCL",
+    "isin": "SEDOL:6200882",
     "name": "TRANSURBAN GROUP",
     "ticker": "TCL.AX",
     "exchange": "ASX",
@@ -13896,7 +13896,7 @@
     "sector": "Energy"
   },
   {
-    "isin": "ASX:TEA",
+    "isin": "SEDOL:BRSCC77",
     "name": "TASMEA LIMITED",
     "ticker": "TEA.AX",
     "exchange": "ASX",
@@ -14072,7 +14072,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:TLS",
+    "isin": "SEDOL:6087289",
     "name": "TELSTRA GROUP LIMITED",
     "ticker": "TLS.AX",
     "exchange": "ASX",
@@ -14080,7 +14080,7 @@
     "sector": "Communication Services"
   },
   {
-    "isin": "ASX:TLX",
+    "isin": "SEDOL:BF7M092",
     "name": "TELIX PHARMACEUTICALS LIMITED",
     "ticker": "TLX.AX",
     "exchange": "ASX",
@@ -14144,7 +14144,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:TNE",
+    "isin": "SEDOL:6302410",
     "name": "TECHNOLOGY ONE LIMITED",
     "ticker": "TNE.AX",
     "exchange": "ASX",
@@ -14224,7 +14224,7 @@
     "sector": "Utilities"
   },
   {
-    "isin": "ASX:TPG",
+    "isin": "SEDOL:BMB2257",
     "name": "TPG TELECOM LIMITED.",
     "ticker": "TPG.AX",
     "exchange": "ASX",
@@ -14232,7 +14232,7 @@
     "sector": "Communication Services"
   },
   {
-    "isin": "ASX:TPW",
+    "isin": "SEDOL:BZ1MWM5",
     "name": "TEMPLE & WEBSTER GROUP LTD",
     "ticker": "TPW.AX",
     "exchange": "ASX",
@@ -14368,7 +14368,7 @@
     "sector": "Health Care"
   },
   {
-    "isin": "ASX:TUA",
+    "isin": "SEDOL:BM94P78",
     "name": "TUAS LIMITED",
     "ticker": "TUA.AX",
     "exchange": "ASX",
@@ -14400,7 +14400,7 @@
     "sector": "Consumer Discretionary"
   },
   {
-    "isin": "ASX:TWE",
+    "isin": "SEDOL:B61JC67",
     "name": "TREASURY WINE ESTATES LIMITED",
     "ticker": "TWE.AX",
     "exchange": "ASX",
@@ -14432,7 +14432,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:TYR",
+    "isin": "SEDOL:BL0KWK0",
     "name": "TYRO PAYMENTS LIMITED",
     "ticker": "TYR.AX",
     "exchange": "ASX",
@@ -14568,7 +14568,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:VAU",
+    "isin": "SEDOL:BSML1B4",
     "name": "VAULT MINERALS LIMITED",
     "ticker": "VAU.AX",
     "exchange": "ASX",
@@ -14608,7 +14608,7 @@
     "sector": "Real Estate"
   },
   {
-    "isin": "ASX:VEA",
+    "isin": "SEDOL:BYQM3N1",
     "name": "VIVA ENERGY GROUP LIMITED",
     "ticker": "VEA.AX",
     "exchange": "ASX",
@@ -14656,7 +14656,7 @@
     "sector": "Information Technology"
   },
   {
-    "isin": "ASX:VGN",
+    "isin": "SEDOL:BT1BC31",
     "name": "VIRGIN AUSTRALIA HOLDINGS LIMITED.",
     "ticker": "VGN.AX",
     "exchange": "ASX",
@@ -14760,7 +14760,7 @@
     "sector": "Information Technology"
   },
   {
-    "isin": "ASX:VNT",
+    "isin": "SEDOL:BNV08F0",
     "name": "VENTIA SERVICES GROUP LIMITED",
     "ticker": "VNT.AX",
     "exchange": "ASX",
@@ -14824,7 +14824,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:VSL",
+    "isin": "SEDOL:BMG3PV2",
     "name": "VULCAN STEEL LIMITED",
     "ticker": "VSL.AX",
     "exchange": "ASX",
@@ -14864,7 +14864,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:VUL",
+    "isin": "SEDOL:BKYBH63",
     "name": "VULCAN ENERGY RESOURCES LIMITED",
     "ticker": "VUL.AX",
     "exchange": "ASX",
@@ -14896,7 +14896,7 @@
     "sector": "Information Technology"
   },
   {
-    "isin": "ASX:WA1",
+    "isin": "SEDOL:BN10LP1",
     "name": "WA1 RESOURCES LTD",
     "ticker": "WA1.AX",
     "exchange": "ASX",
@@ -14968,7 +14968,7 @@
     "sector": "Unclassified"
   },
   {
-    "isin": "ASX:WBC",
+    "isin": "SEDOL:6076146",
     "name": "WESTPAC BANKING CORPORATION",
     "ticker": "WBC.AX",
     "exchange": "ASX",
@@ -14976,7 +14976,7 @@
     "sector": "Financials"
   },
   {
-    "isin": "ASX:WBT",
+    "isin": "SEDOL:BD82NL0",
     "name": "WEEBIT NANO LTD",
     "ticker": "WBT.AX",
     "exchange": "ASX",
@@ -14992,7 +14992,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:WC8",
+    "isin": "SEDOL:BMXRJN7",
     "name": "WILDCAT RESOURCES LIMITED",
     "ticker": "WC8.AX",
     "exchange": "ASX",
@@ -15016,7 +15016,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:WDS",
+    "isin": "SEDOL:BMGT167",
     "name": "WOODSIDE ENERGY GROUP LTD",
     "ticker": "WDS.AX",
     "exchange": "ASX",
@@ -15024,7 +15024,7 @@
     "sector": "Energy"
   },
   {
-    "isin": "ASX:WEB",
+    "isin": "SEDOL:6015815",
     "name": "WEBBEDS GROUP LIMITED",
     "ticker": "WEB.AX",
     "exchange": "ASX",
@@ -15048,7 +15048,7 @@
     "sector": "Energy"
   },
   {
-    "isin": "ASX:WES",
+    "isin": "SEDOL:6948836",
     "name": "WESFARMERS LIMITED",
     "ticker": "WES.AX",
     "exchange": "ASX",
@@ -15080,7 +15080,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:WGX",
+    "isin": "SEDOL:BYVQ673",
     "name": "WESTGOLD RESOURCES LIMITED.",
     "ticker": "WGX.AX",
     "exchange": "ASX",
@@ -15088,7 +15088,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:WHC",
+    "isin": "SEDOL:B1XQXC4",
     "name": "WHITEHAVEN COAL LIMITED",
     "ticker": "WHC.AX",
     "exchange": "ASX",
@@ -15224,7 +15224,7 @@
     "sector": "Consumer Staples"
   },
   {
-    "isin": "ASX:WOR",
+    "isin": "SEDOL:6562474",
     "name": "WORLEY LIMITED",
     "ticker": "WOR.AX",
     "exchange": "ASX",
@@ -15240,7 +15240,7 @@
     "sector": "Real Estate"
   },
   {
-    "isin": "ASX:WOW",
+    "isin": "SEDOL:6981239",
     "name": "WOOLWORTHS GROUP LIMITED",
     "ticker": "WOW.AX",
     "exchange": "ASX",
@@ -15248,7 +15248,7 @@
     "sector": "Consumer Staples"
   },
   {
-    "isin": "ASX:WPR",
+    "isin": "SEDOL:BLBQ285",
     "name": "WAYPOINT REIT",
     "ticker": "WPR.AX",
     "exchange": "ASX",
@@ -15296,7 +15296,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:WTC",
+    "isin": "SEDOL:BZ8GX83",
     "name": "WISETECH GLOBAL LIMITED",
     "ticker": "WTC.AX",
     "exchange": "ASX",
@@ -15432,7 +15432,7 @@
     "sector": "Consumer Discretionary"
   },
   {
-    "isin": "ASX:XRO",
+    "isin": "SEDOL:B8P4LP4",
     "name": "XERO LIMITED",
     "ticker": "XRO.AX",
     "exchange": "ASX",
@@ -15448,7 +15448,7 @@
     "sector": "Energy"
   },
   {
-    "isin": "ASX:XYZ",
+    "isin": "SEDOL:BYNZGK1",
     "name": "BLOCK, INC.",
     "ticker": "XYZ.AX",
     "exchange": "ASX",
@@ -15456,7 +15456,7 @@
     "sector": "Financials"
   },
   {
-    "isin": "ASX:YAL",
+    "isin": "SEDOL:B84LB45",
     "name": "YANCOAL AUSTRALIA LIMITED",
     "ticker": "YAL.AX",
     "exchange": "ASX",
@@ -15544,7 +15544,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:ZIP",
+    "isin": "SEDOL:BPP1Y77",
     "name": "ZIP CO LIMITED..",
     "ticker": "ZIP.AX",
     "exchange": "ASX",

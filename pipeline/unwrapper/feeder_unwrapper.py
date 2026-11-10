@@ -9,6 +9,7 @@ from typing import Optional
 
 from pipeline.adapters.base import FundExtractionResult, RawHolding
 from pipeline.adapters.disclose_register_adapter import FeederWrapperDisclosure
+from pipeline.security_master.build_security_master import normalize_country
 
 
 @dataclass
@@ -28,11 +29,12 @@ class UnwrappedFund:
 class FeederUnwrapper:
     """Unwraps feeder funds into their underlying master ETF constituents."""
 
-    def __init__(self, feeder_registry_path: Path):
+    def __init__(self, feeder_registry_path: Path, gics_mapping: Optional[dict[str, str]] = None):
         self.feeder_registry: dict[str, dict] = {}
         if feeder_registry_path.exists():
             with open(feeder_registry_path, "r", encoding="utf-8") as f:
                 self.feeder_registry = json.load(f)
+        self.gics_lower = {k.lower(): v for k, v in (gics_mapping or {}).items()}
 
     def unwrap(
         self,
@@ -55,12 +57,15 @@ class FeederUnwrapper:
         unwrapped_constituents: list[dict] = []
         for h in master_fund.holdings:
             scaled_weight = h.weight * equity_scale
+            raw_sector = (h.sector or "").strip()
+            norm_sector = self.gics_lower.get(raw_sector.lower(), raw_sector or "Unclassified")
+            norm_country = normalize_country(h.country or "", default="Global")
             unwrapped_constituents.append({
                 "isin": h.isin or f"SYNTH_{h.ticker or h.name}",
                 "name": h.name,
                 "ticker": h.ticker or "",
-                "country": h.country or "Global",
-                "sector": h.sector or "Unclassified",
+                "country": norm_country,
+                "sector": norm_sector,
                 "weight": round(scaled_weight, 8),
             })
 

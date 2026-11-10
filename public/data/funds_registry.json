@@ -6,7 +6,7 @@
     "effective_date": "2026-10-31",
     "cash_ratio": 0.015,
     "hedging_ratio": 0.01,
-    "constituent_count": 13,
+    "constituent_count": 10186,
     "cadence": "monthly",
     "is_stale": false
   },
@@ -17,7 +17,7 @@
     "effective_date": "2026-10-31",
     "cash_ratio": 0.015,
     "hedging_ratio": 0.0,
-    "constituent_count": 7,
+    "constituent_count": 505,
     "cadence": "monthly",
     "is_stale": false
   },

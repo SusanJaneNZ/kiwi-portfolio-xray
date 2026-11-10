@@ -90,7 +90,7 @@ class PipelineCompiler:
         feeder_disc_map = {d.feeder_code: d for d in feeder_disclosures}
 
         # 4. Unwrap Feeders using FeederUnwrapper
-        unwrapper = FeederUnwrapper(self.feeder_registry_path)
+        unwrapper = FeederUnwrapper(self.feeder_registry_path, gics_mapping=gics_mapping)
         all_unwrapped_funds: list[UnwrappedFund] = []
 
         with open(self.feeder_registry_path, "r", encoding="utf-8") as f:

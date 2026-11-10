@@ -104,7 +104,7 @@ class ISharesAdapter(BaseAdapter):
                     continue
 
         # M3 requirement: normalize master ETF equity constituents to sum to 1.0
-        if raw_total_equity_weight > 0 and abs(raw_total_equity_weight - 1.0) > 0.001:
+        if raw_total_equity_weight > 0 and abs(raw_total_equity_weight - 1.0) > 1e-6:
             for h in holdings:
                 h.weight = h.weight / raw_total_equity_weight
 

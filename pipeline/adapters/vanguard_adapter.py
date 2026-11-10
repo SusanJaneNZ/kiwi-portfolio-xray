@@ -32,12 +32,22 @@ FUND_NAME_HINTS = {
 }
 
 NAME_HEADER_CANDIDATES = {"company name", "holding name", "holdings", "security name", "name", "holding"}
+EMPTY_MARKERS = {"", "-", "--", "---", "N/A", "n/a"}
+
+
+def _clean_cell(val: str) -> Optional[str]:
+    v = val.strip()
+    return None if v in EMPTY_MARKERS else v
 
 
 class VanguardAdapter(BaseAdapter):
     """Parses Vanguard US constituent CSV exports."""
 
     def can_handle(self, file_path: Path) -> bool:
+        if file_path.suffix.lower() != ".csv":
+            return False
+        if file_path.parent.name.lower() == "vanguard":
+            return True
         name = file_path.name.upper()
         if any(ticker in name for ticker in MASTER_TICKERS):
             return True
@@ -65,6 +75,10 @@ class VanguardAdapter(BaseAdapter):
                     continue
 
                 normalized_row = [c.strip().lower() for c in row]
+
+                # Stop ingesting once Fixed Income or Short-Term Reserves section begins after Equity table
+                if header and normalized_row[0] in {"fixed income", "short-term reserves", "short term reserves"}:
+                    break
 
                 # Detect header row when a name column and a weight/ticker column co-occur
                 if not header:
@@ -96,10 +110,11 @@ class VanguardAdapter(BaseAdapter):
                     name_lower = name.lower()
                     if (
                         not name
+                        or name in EMPTY_MARKERS
                         or name_lower.startswith("total")
-                        or "cash" in name_lower
+                        or name_lower.startswith("**")
                         or "short-term reserves" in name_lower
-                        or "currency" in name_lower
+                        or name_lower == "cash"
                     ):
                         continue
 
@@ -110,22 +125,16 @@ class VanguardAdapter(BaseAdapter):
                         continue
 
                     ticker_col = next((idx for k, idx in col_map.items() if "ticker" in k or "symbol" in k), -1)
-                    ticker = row[ticker_col].strip() if ticker_col != -1 and len(row) > ticker_col else None
+                    ticker = _clean_cell(row[ticker_col]) if ticker_col != -1 and len(row) > ticker_col else None
 
                     cusip_col = col_map.get("cusip", -1)
-                    cusip = row[cusip_col].strip() if cusip_col != -1 and len(row) > cusip_col else None
-                    if cusip in {"", "-", "—"}:
-                        cusip = None
+                    cusip = _clean_cell(row[cusip_col]) if cusip_col != -1 and len(row) > cusip_col else None
 
                     sedol_col = col_map.get("sedol", -1)
-                    sedol = row[sedol_col].strip() if sedol_col != -1 and len(row) > sedol_col else None
-                    if sedol in {"", "-", "—"}:
-                        sedol = None
+                    sedol = _clean_cell(row[sedol_col]) if sedol_col != -1 and len(row) > sedol_col else None
 
                     isin_col = col_map.get("isin", -1)
-                    isin = row[isin_col].strip() if isin_col != -1 and len(row) > isin_col else None
-                    if isin in {"", "-", "—"}:
-                        isin = None
+                    isin = _clean_cell(row[isin_col]) if isin_col != -1 and len(row) > isin_col else None
 
                     if not isin:
                         if cusip and len(cusip) == 9:
@@ -133,7 +142,6 @@ class VanguardAdapter(BaseAdapter):
                         elif sedol:
                             isin = f"SEDOL:{sedol}"
                         else:
-                            # Deterministic unique ID when vendor export omits ISIN/CUSIP/SEDOL
                             digest = hashlib.sha1(f"{ticker or ''}:{name}".encode("utf-8")).hexdigest()[:10].upper()
                             isin = f"VANG:{ticker or digest}"
 
@@ -141,10 +149,13 @@ class VanguardAdapter(BaseAdapter):
                         (idx for k, idx in col_map.items() if k in {"country", "market", "location"}),
                         -1,
                     )
-                    country = row[country_col].strip() if country_col != -1 and len(row) > country_col else None
+                    country = _clean_cell(row[country_col]) if country_col != -1 and len(row) > country_col else None
 
-                    sector_col = next((idx for k, idx in col_map.items() if "sector" in k), -1)
-                    sector = row[sector_col].strip() if sector_col != -1 and len(row) > sector_col else None
+                    sector_col = next(
+                        (idx for k, idx in col_map.items() if "sector" in k or "sub-industry" in k or "industry" in k),
+                        -1,
+                    )
+                    sector = _clean_cell(row[sector_col]) if sector_col != -1 and len(row) > sector_col else None
 
                     holdings.append(
                         RawHolding(
@@ -165,7 +176,7 @@ class VanguardAdapter(BaseAdapter):
                     continue
 
         # Normalize master ETF equity constituents to sum to 1.0 of the equity basket
-        if raw_total_equity_weight > 0 and abs(raw_total_equity_weight - 1.0) > 0.001:
+        if raw_total_equity_weight > 0 and abs(raw_total_equity_weight - 1.0) > 1e-6:
             for h in holdings:
                 h.weight = h.weight / raw_total_equity_weight
 

@@ -11,40 +11,70 @@ from pipeline.adapters.vanguard_adapter import VanguardAdapter
 from pipeline.enrichment.fuzzy_matcher import normalize_company_name
 
 COUNTRY_CODE_TO_NAME = {
-    "NZ": "New Zealand",
+    "AE": "United Arab Emirates",
+    "AT": "Austria",
     "AU": "Australia",
+    "BE": "Belgium",
+    "BM": "Bermuda",
+    "BR": "Brazil",
+    "CA": "Canada",
+    "CH": "Switzerland",
+    "CL": "Chile",
+    "CN": "China",
+    "CO": "Colombia",
+    "CZ": "Czechia",
+    "DE": "Germany",
+    "DK": "Denmark",
+    "EG": "Egypt",
+    "ES": "Spain",
+    "FI": "Finland",
+    "FR": "France",
+    "GB": "United Kingdom",
+    "GR": "Greece",
+    "HK": "Hong Kong",
+    "HU": "Hungary",
+    "ID": "Indonesia",
+    "IE": "Ireland",
+    "IL": "Israel",
+    "IN": "India",
+    "IS": "Iceland",
+    "IT": "Italy",
+    "JP": "Japan",
+    "KR": "South Korea",
+    "KW": "Kuwait",
+    "MX": "Mexico",
+    "MY": "Malaysia",
+    "NL": "Netherlands",
+    "NO": "Norway",
+    "NZ": "New Zealand",
+    "PH": "Philippines",
+    "PL": "Poland",
+    "PT": "Portugal",
+    "QA": "Qatar",
+    "RO": "Romania",
+    "SA": "Saudi Arabia",
+    "SE": "Sweden",
+    "SG": "Singapore",
+    "TH": "Thailand",
+    "TR": "Turkey",
+    "TW": "Taiwan",
+    "UK": "United Kingdom",
     "US": "United States",
     "USA": "United States",
-    "CA": "Canada",
-    "GB": "United Kingdom",
-    "UK": "United Kingdom",
-    "DK": "Denmark",
-    "TW": "Taiwan",
-    "NL": "Netherlands",
-    "CH": "Switzerland",
-    "JP": "Japan",
-    "DE": "Germany",
-    "FR": "France",
-    "KR": "South Korea",
-    "CN": "China",
-    "HK": "Hong Kong",
-    "SG": "Singapore",
-    "SE": "Sweden",
-    "NO": "Norway",
-    "FI": "Finland",
-    "IE": "Ireland",
-    "ES": "Spain",
-    "IT": "Italy",
-    "IN": "India",
-    "BR": "Brazil",
+    "VN": "Vietnam",
+    "ZA": "South Africa",
 }
 
 
-def _normalize_country(country_raw: str, default: str = "Global") -> str:
+def normalize_country(country_raw: str, default: str = "Global") -> str:
     cleaned = (country_raw or "").strip()
-    if not cleaned:
+    if not cleaned or cleaned in {"-", "--", "---"}:
         return default
     return COUNTRY_CODE_TO_NAME.get(cleaned.upper(), cleaned)
+
+
+def _normalize_country(country_raw: str, default: str = "Global") -> str:
+    return normalize_country(country_raw, default)
 
 
 def _normalize_sector(sector_raw: str, gics_lower_map: dict[str, str]) -> str:
