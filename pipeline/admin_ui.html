@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kiwi Portfolio X-Ray — Local Admin Console</title>
+  <style>
+    :root {
+      --bg: #090d16;
+      --card: #131c2e;
+      --card-alt: #0f172a;
+      --border: #23314d;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --primary: #4f46e5;
+      --primary-hover: #6366f1;
+      --ok: #10b981;
+      --warn: #f59e0b;
+      --err: #f43f5e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 20px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .container { max-width: 1280px; margin: 0 auto; display: grid; gap: 18px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+    }
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    h1 { margin: 0; font-size: 20px; display: flex; align-items: center; gap: 8px; }
+    h2 { margin: 0 0 10px 0; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+    .subtitle { margin: 4px 0 0 0; color: var(--muted); font-size: 12px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    @media (max-width: 960px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    .btn {
+      border: 1px solid var(--border);
+      background: var(--card-alt);
+      color: var(--text);
+      padding: 7px 13px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      transition: background 0.15s;
+    }
+    .btn:hover { background: #1e293b; }
+    .btn-primary { background: var(--primary); border-color: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-ok { background: #059669; border-color: #059669; color: #fff; }
+    .btn-ok:hover { background: var(--ok); }
+    .btn-danger { color: #fda4af; }
+    .btn-danger:hover { background: #4c0519; border-color: var(--err); }
+    .btn-sm { padding: 4px 8px; font-size: 11px; }
+
+    select, input[type="text"], input[type="file"] {
+      background: var(--card-alt);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 7px 10px;
+      font-size: 12px;
+    }
+    input[type="text"]:focus, select:focus { outline: 1px solid var(--primary); }
+
+    .dropzone {
+      border: 2px dashed var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+      background: var(--card-alt);
+      margin-top: 10px;
+      transition: border-color 0.15s;
+    }
+    .dropzone.dragover { border-color: var(--primary); background: #172038; }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: monospace;
+    }
+    .badge-ok { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-warn { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-err { background: rgba(244, 63, 94, 0.15); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.3); }
+    .badge-info { background: rgba(99, 102, 241, 0.15); color: #a5b4fc; border: 1px solid rgba(99, 102, 241, 0.3); }
+
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+    th { color: var(--muted); font-size: 11px; text-transform: uppercase; background: var(--card-alt); }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    pre {
+      background: #060910;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px;
+      overflow-x: auto;
+      font-size: 11px;
+      color: #cbd5e1;
+      max-height: 220px;
+    }
+    .provider-group { margin-bottom: 12px; }
+    .provider-title { font-weight: 700; color: #a5b4fc; margin-bottom: 4px; font-family: monospace; }
+    .file-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      background: var(--card-alt);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 4px;
+    }
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #1e293b;
+      border: 1px solid var(--primary);
+      padding: 10px 16px;
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 100;
+    }
+    .row-actions { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- HEADER -->
+    <div class="card header">
+      <div>
+        <h1>🥝 Kiwi Portfolio X-Ray — Local Admin Console</h1>
+        <p class="subtitle">Local-only tool (`127.0.0.1`) to stage provider CSVs, verify adapter parsing, map aliases, and build `public/data/`.</p>
+      </div>
+      <div class="row-actions">
+        <button class="btn btn-primary" onclick="runPipeline(true)">▶ Run Dry-Run (--dry-run)</button>
+        <button class="btn btn-ok" onclick="runPipeline(false)">⚡ Build Production (public/data/)</button>
+      </div>
+    </div>
+
+    <!-- STAGING & PREVIEW -->
+    <div class="grid-2">
+      <!-- Upload & Staged Inventory -->
+      <div class="card">
+        <h2>1. Stage &amp; Inspect Provider CSVs</h2>
+        <div class="row-actions" style="margin-bottom: 10px;">
+          <label for="provider-select" style="color: var(--muted);">Target directory:</label>
+          <select id="provider-select">
+            <option value="smartshares">data/staging/smartshares/</option>
+            <option value="kernel">data/staging/kernel/</option>
+            <option value="vanguard">data/staging/vanguard/</option>
+            <option value="ishares">data/staging/ishares/</option>
+            <option value="disclose">data/staging/disclose/</option>
+            <option value="directories">data/staging/directories/</option>
+          </select>
+        </div>
+
+        <div id="dropzone" class="dropzone">
+          <p style="margin: 0 0 8px 0; color: var(--muted);">Drag &amp; drop CSV file(s) here, or pick from disk:</p>
+          <input type="file" id="csv-file-input" accept=".csv" multiple onchange="handleFileUpload(this.files)">
+        </div>
+
+        <div id="staged-files-list" style="margin-top: 14px;">Loading staged files...</div>
+      </div>
+
+      <!-- Adapter Parse Preview -->
+      <div class="card">
+        <h2>2. Adapter Parse Preview</h2>
+        <p class="subtitle" style="margin-bottom: 10px;">Click <strong>Preview</strong> on any staged CSV to inspect headers and verify Tier 1 parsing before running the pipeline.</p>
+        <div id="preview-pane" style="color: var(--muted);">Select a staged CSV file to preview its parsed rows.</div>
+      </div>
+    </div>
+
+    <!-- PIPELINE DIAGNOSTICS REPORT -->
+    <div class="card">
+      <h2>3. Pipeline Dry-Run / Build Diagnostics</h2>
+      <div id="pipeline-report" style="color: var(--muted);">Click <strong>Run Dry-Run</strong> above to validate all staged CSVs, weights, and Global Security Master matching.</div>
+    </div>
+
+    <!-- UNRESOLVED MAPPER & SAVED ALIASES -->
+    <div class="grid-2">
+      <div class="card">
+        <h2>4. Unresolved Holdings Mapper</h2>
+        <p class="subtitle" style="margin-bottom: 10px;">Unmatched or ambiguous names from the latest dry-run. Search the Global Security Master or paste a 12-char ISIN to save into <code>provider_alias_map.json</code>.</p>
+        <div class="row-actions" style="margin-bottom: 10px;">
+          <input type="text" id="sm-search-input" placeholder="Search Security Master (company, ticker, ISIN)..." style="flex: 1;" oninput="searchSecurityMaster(this.value)">
+        </div>
+        <div id="sm-search-results" style="margin-bottom: 12px;"></div>
+        <div id="unresolved-list" style="color: var(--muted);">Run Dry-Run to check for unresolved holdings.</div>
+      </div>
+
+      <div class="card">
+        <h2>5. Saved Aliases (provider_alias_map.json)</h2>
+        <div class="row-actions" style="margin-bottom: 10px;">
+          <input type="text" id="manual-scope" placeholder="Provider:Fund (e.g. Kernel:KERNEL_NZ_50)" style="flex: 1;">
+          <input type="text" id="manual-name" placeholder="Raw Name" style="flex: 1;">
+          <input type="text" id="manual-isin" placeholder="Canonical ISIN" style="width: 135px;">
+          <button class="btn btn-primary btn-sm" onclick="addManualAlias()">Save</button>
+        </div>
+        <div id="saved-aliases-list">Loading aliases...</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    let unresolvedItemsState = [];
+    let savedAliasPairsState = [];
+    let stagedFilePairsState = [];
+    let focusedMapInputId = 'manual-isin';
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.style.display = 'block';
+      setTimeout(() => { t.style.display = 'none'; }, 3200);
+    }
+
+    function escapeHtml(str) {
+      return String(str ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    async function api(url, options = {}) {
+      const res = await fetch(url, {
+        headers: { 'Content-Type': 'application/json' },
+        ...options,
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Request failed');
+      return data;
+    }
+
+    // Drag & Drop setup
+    const dropzone = document.getElementById('dropzone');
+    dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('dragover'); });
+    dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+    dropzone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropzone.classList.remove('dragover');
+      handleFileUpload(e.dataTransfer.files);
+    });
+
+    async function handleFileUpload(fileList) {
+      const provider = document.getElementById('provider-select').value;
+      for (const file of fileList) {
+        const content = await file.text();
+        await api('/api/staging/upload', {
+          method: 'POST',
+          body: JSON.stringify({ provider, filename: file.name, content }),
+        });
+        showToast(`Uploaded ${file.name} -> data/staging/${provider}/`);
+      }
+      document.getElementById('csv-file-input').value = '';
+      await loadStagedFiles();
+    }
+
+    async function loadStagedFiles() {
+      const data = await api('/api/staging');
+      const container = document.getElementById('staged-files-list');
+      stagedFilePairsState = [];
+      let html = '';
+      for (const [provider, files] of Object.entries(data.files)) {
+        html += `<div class="provider-group"><div class="provider-title">${escapeHtml(provider)}/ (${files.length})</div>`;
+        if (files.length === 0) {
+          html += `<div style="color: var(--muted); font-size: 11px; padding-left: 8px;">No CSV files staged</div>`;
+        } else {
+          for (const f of files) {
+            const idx = stagedFilePairsState.push({ provider, filename: f.filename }) - 1;
+            const kb = (f.size_bytes / 1024).toFixed(1);
+            html += `
+              <div class="file-row">
+                <div>
+                  <span class="mono" style="font-weight: 600;">${escapeHtml(f.filename)}</span>
+                  <span style="color: var(--muted); font-size: 11px;"> (${kb} KB · ${escapeHtml(f.modified)})</span>
+                </div>
+                <div class="row-actions">
+                  <button class="btn btn-sm" onclick="previewFileByIdx(${idx})">Preview</button>
+                  <button class="btn btn-sm btn-danger" onclick="deleteFileByIdx(${idx})">Delete</button>
+                </div>
+              </div>
+            `;
+          }
+        }
+        html += `</div>`;
+      }
+      container.innerHTML = html;
+    }
+
+    function previewFileByIdx(idx) {
+      const pair = stagedFilePairsState[idx];
+      if (pair) previewFile(pair.provider, pair.filename);
+    }
+
+    function deleteFileByIdx(idx) {
+      const pair = stagedFilePairsState[idx];
+      if (pair) deleteFile(pair.provider, pair.filename);
+    }
+
+    async function deleteFile(provider, filename) {
+      if (!confirm(`Delete data/staging/${provider}/${filename}?`)) return;
+      await api('/api/staging/delete', {
+        method: 'POST',
+        body: JSON.stringify({ provider, filename }),
+      });
+      showToast(`Deleted ${provider}/${filename}`);
+      await loadStagedFiles();
+    }
+
+    async function previewFile(provider, filename) {
+      const pane = document.getElementById('preview-pane');
+      pane.innerHTML = 'Parsing...';
+      try {
+        const data = await api(`/api/staging/preview?provider=${encodeURIComponent(provider)}&filename=${encodeURIComponent(filename)}`);
+        const s = data.parse_summary || {};
+        const badgeClass = s.status === 'ok' ? 'badge-ok' : 'badge-warn';
+        let html = `
+          <div style="margin-bottom: 10px;">
+            <span class="mono" style="font-weight: 700;">${escapeHtml(provider)}/${escapeHtml(filename)}</span>
+            <span class="badge ${badgeClass}" style="margin-left: 6px;">${escapeHtml(s.adapter || 'Unknown')} : ${escapeHtml(s.status)}</span>
+          </div>
+        `;
+        if (s.fund_code) {
+          html += `<div style="margin-bottom: 8px; font-size: 12px;">
+            Fund: <strong class="mono">${escapeHtml(s.fund_code)}</strong> |
+            As Of: <strong>${escapeHtml(s.effective_date)}</strong> |
+            Cash: <strong>${((s.cash_ratio || 0) * 100).toFixed(2)}%</strong> |
+            Parsed Rows: <strong>${s.parsed_count}</strong> |
+            Equity Sum: <strong>${((s.total_equity_weight || 0) * 100).toFixed(2)}%</strong>
+          </div>`;
+        } else if (s.parsed_count !== undefined) {
+          html += `<div style="margin-bottom: 8px; font-size: 12px;">Parsed Rows: <strong>${s.parsed_count}</strong></div>`;
+        }
+        if (s.hint) {
+          html += `<div class="badge badge-warn" style="margin-bottom: 8px;">${escapeHtml(s.hint)}</div>`;
+        }
+        if (s.sample_rows && s.sample_rows.length > 0) {
+          const cols = Object.keys(s.sample_rows[0]);
+          html += `<table><thead><tr>${cols.map(c => `<th>${escapeHtml(c)}</th>`).join('')}</tr></thead><tbody>`;
+          for (const row of s.sample_rows) {
+            html += `<tr>${cols.map(c => `<td class="mono">${escapeHtml(row[c])}</td>`).join('')}</tr>`;
+          }
+          html += `</tbody></table>`;
+        }
+        html += `<h2 style="margin-top: 12px;">Raw CSV (First 10 Lines)</h2><pre>${escapeHtml((data.raw_lines || []).join('\n'))}</pre>`;
+        pane.innerHTML = html;
+      } catch (err) {
+        pane.innerHTML = `<span class="badge badge-err">${escapeHtml(err.message)}</span>`;
+      }
+    }
+
+    async function runPipeline(dryRun) {
+      const container = document.getElementById('pipeline-report');
+      container.innerHTML = dryRun ? 'Running dry-run validation...' : 'Compiling production JSON assets...';
+      try {
+        const res = await api('/api/pipeline/run', {
+          method: 'POST',
+          body: JSON.stringify({ dry_run: dryRun }),
+        });
+
+        const sm = res.sec_master_summary || {};
+        const statusBadge = res.is_valid
+          ? `<span class="badge badge-ok">${dryRun ? 'DRY-RUN PASSED' : 'PRODUCTION BUILD SUCCESS'}</span>`
+          : `<span class="badge badge-err">VALIDATION FAILED</span>`;
+
+        let html = `
+          <div style="margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+            ${statusBadge}
+            <span>Security Master: <strong>${sm.total_security_master_count || 0}</strong> (NZX: ${sm.nzx_count || 0}, ASX: ${sm.asx_count || 0}, Global: ${sm.vanguard_global_count || 0})</span>
+            <span>Direct Equities: <strong>${sm.direct_equities_count || 0}</strong></span>
+            <span>Unresolved: <strong>${res.total_unresolved_entries || 0}</strong></span>
+          </div>
+        `;
+
+        if (res.errors && res.errors.length > 0) {
+          html += `<div style="margin-bottom: 10px;">${res.errors.map(e => `<div class="badge badge-err" style="display:block; margin-bottom:4px;">${escapeHtml(e)}</div>`).join('')}</div>`;
+        }
+
+        if (res.fund_summaries && res.fund_summaries.length > 0) {
+          html += `<table><thead><tr><th>Fund</th><th>Total Weight</th><th>Equities</th><th>Cash</th><th>Hedging</th><th>Constituents</th><th>Status</th></tr></thead><tbody>`;
+          for (const fs of res.fund_summaries) {
+            const ok = Math.abs(fs.total_weight - 1.0) <= 0.005;
+            html += `
+              <tr>
+                <td class="mono"><strong>${escapeHtml(fs.code)}</strong></td>
+                <td class="mono">${(fs.total_weight * 100).toFixed(2)}%</td>
+                <td class="mono">${(fs.equity_weight * 100).toFixed(2)}%</td>
+                <td class="mono">${(fs.cash_ratio * 100).toFixed(2)}%</td>
+                <td class="mono">${(fs.hedging_ratio * 100).toFixed(2)}%</td>
+                <td class="mono">${fs.constituent_count}</td>
+                <td><span class="badge ${ok ? 'badge-ok' : 'badge-err'}">${ok ? 'PASS' : 'FAIL'}</span></td>
+              </tr>
+            `;
+          }
+          html += `</tbody></table>`;
+        }
+
+        container.innerHTML = html;
+        renderUnresolved(res.unresolved_entries || []);
+        showToast(dryRun ? 'Dry-run complete' : 'Production files written to public/data/');
+      } catch (err) {
+        container.innerHTML = `<span class="badge badge-err">${escapeHtml(err.message)}</span>`;
+      }
+    }
+
+    function renderUnresolved(items) {
+      const container = document.getElementById('unresolved-list');
+      unresolvedItemsState = items || [];
+      if (!unresolvedItemsState.length) {
+        container.innerHTML = `<span class="badge badge-ok">0 unresolved items — all holdings mapped cleanly.</span>`;
+        return;
+      }
+      let html = '';
+      unresolvedItemsState.forEach((item, idx) => {
+        const scope = `${item.provider}:${item.fund_code}`;
+        html += `
+          <div class="file-row" style="flex-direction: column; align-items: stretch;">
+            <div style="display: flex; justify-content: space-between;">
+              <div>
+                <span class="badge badge-info">${escapeHtml(scope)}</span>
+                <strong>${escapeHtml(item.raw_name)}</strong>
+                ${item.raw_ticker ? `<span class="mono" style="color: var(--muted);">(${escapeHtml(item.raw_ticker)})</span>` : ''}
+              </div>
+              <span class="mono" style="color: var(--warn);">${(item.weight * 100).toFixed(2)}%</span>
+            </div>
+            <div style="font-size: 11px; color: var(--muted);">Reason: <span class="mono">${escapeHtml(item.reason)}</span></div>
+            <div class="row-actions">
+              <input type="text" id="map-isin-${idx}" onfocus="focusedMapInputId = 'map-isin-${idx}'" placeholder="Focus here &amp; click 'Use ISIN' above, or paste ISIN" style="flex: 1;">
+              <button class="btn btn-primary btn-sm" onclick="saveAliasForUnresolved(${idx})">Map &amp; Save</button>
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+      focusedMapInputId = 'map-isin-0';
+    }
+
+    async function searchSecurityMaster(query) {
+      const container = document.getElementById('sm-search-results');
+      if (!query.trim()) {
+        container.innerHTML = '';
+        return;
+      }
+      const data = await api(`/api/security-master?q=${encodeURIComponent(query)}`);
+      if (!data.results.length) {
+        container.innerHTML = `<div style="font-size: 11px; color: var(--muted);">No matches in security_master.json.</div>`;
+        return;
+      }
+      let html = `<table><thead><tr><th>ISIN</th><th>Ticker</th><th>Name</th><th>Country</th><th></th></tr></thead><tbody>`;
+      for (const r of data.results) {
+        html += `
+          <tr>
+            <td class="mono">${escapeHtml(r.isin)}</td>
+            <td class="mono">${escapeHtml(r.ticker)}</td>
+            <td>${escapeHtml(r.name)}</td>
+            <td>${escapeHtml(r.country)}</td>
+            <td><button class="btn btn-sm" onclick="copyIsin('${escapeHtml(r.isin)}')">Use ISIN</button></td>
+          </tr>
+        `;
+      }
+      html += `</tbody></table>`;
+      container.innerHTML = html;
+    }
+
+    function copyIsin(isin) {
+      const target = document.getElementById(focusedMapInputId) || document.getElementById('manual-isin');
+      if (target) target.value = isin;
+      navigator.clipboard?.writeText(isin);
+      showToast(`Filled ISIN ${isin}`);
+    }
+
+    async function saveAliasForUnresolved(idx) {
+      const item = unresolvedItemsState[idx];
+      if (!item) return;
+      const scope = `${item.provider}:${item.fund_code}`;
+      const isin = document.getElementById(`map-isin-${idx}`).value.trim();
+      if (!isin) {
+        alert('Enter an ISIN first (you can search above and click "Use ISIN").');
+        return;
+      }
+      await api('/api/aliases/set', {
+        method: 'POST',
+        body: JSON.stringify({ scope_key: scope, raw_name: item.raw_name, isin }),
+      });
+      showToast(`Mapped "${item.raw_name}" -> ${isin}`);
+      await loadAliases();
+      await runPipeline(true);
+    }
+
+    async function addManualAlias() {
+      const scope_key = document.getElementById('manual-scope').value.trim();
+      const raw_name = document.getElementById('manual-name').value.trim();
+      const isin = document.getElementById('manual-isin').value.trim();
+      await api('/api/aliases/set', {
+        method: 'POST',
+        body: JSON.stringify({ scope_key, raw_name, isin }),
+      });
+      document.getElementById('manual-name').value = '';
+      document.getElementById('manual-isin').value = '';
+      showToast(`Saved alias ${raw_name} -> ${isin}`);
+      await loadAliases();
+    }
+
+    async function deleteAliasByIdx(idx) {
+      const pair = savedAliasPairsState[idx];
+      if (!pair) return;
+      await api('/api/aliases/delete', {
+        method: 'POST',
+        body: JSON.stringify({ scope_key: pair.scope, raw_name: pair.name }),
+      });
+      showToast(`Removed alias "${pair.name}"`);
+      await loadAliases();
+    }
+
+    async function loadAliases() {
+      const data = await api('/api/aliases');
+      const container = document.getElementById('saved-aliases-list');
+      savedAliasPairsState = [];
+      const entries = Object.entries(data.aliases || {});
+      if (!entries.length) {
+        container.innerHTML = `<div style="color: var(--muted);">No custom aliases saved yet.</div>`;
+        return;
+      }
+      let html = '';
+      for (const [scope, map] of entries) {
+        html += `<div class="provider-group"><div class="provider-title">${escapeHtml(scope)}</div>`;
+        for (const [name, isin] of Object.entries(map)) {
+          const idx = savedAliasPairsState.push({ scope, name }) - 1;
+          html += `
+            <div class="file-row">
+              <div><strong>${escapeHtml(name)}</strong> → <span class="mono" style="color: var(--ok);">${escapeHtml(isin)}</span></div>
+              <button class="btn btn-sm btn-danger" onclick="deleteAliasByIdx(${idx})">Remove</button>
+            </div>
+          `;
+        }
+        html += `</div>`;
+      }
+      container.innerHTML = html;
+    }
+
+    // Initial load
+    loadStagedFiles();
+    loadAliases();
+  </script>
+</body>
+</html>

@@ -2,6 +2,11 @@
 
 This guide details the periodic operational procedures for sourcing fund disclosures, staging constituent CSVs, resolving mapping anomalies, and publishing static look-through datasets for the Kiwi Portfolio X-Ray.
 
+Run locally using npm run build && npm run preview
+Or run the local Admin Console using:
+python3 -m pipeline.admin_ui
+and then open http://127.0.0.1:8787 in a browser
+
 ---
 
 ## 1. Upstream Data Sources & Cadence Matrix
@@ -16,7 +21,7 @@ The application relies on 5 primary source streams and 2 reference directories. 
 | **iShares (BlackRock) Master ETFs** (`IWLD`, `IVV`) | [BlackRock Australia / US](https://www.blackrock.com) (Product Holdings CSV) | `data/staging/ishares/` | CSV (`<TICKER>_holdings.csv`): Ticker, ISIN, Name, Country, Sector, Weight % | Monthly / Quarterly | Underlying global equities for Smartshares ESG wrappers |
 | **Kernel Wealth Index Funds** (Domestic & Global: `Kernel NZ 50`, `Aus Leaders`, `Global 100`, `World Ex-US`, `Clean Energy`) | [Kernel Wealth Website](https://kernelwealth.co.nz) (Fund disclosures / monthly exports) | `data/staging/kernel/` | CSV (`kernel_<fund>_YYYYMM.csv`): Company Name, Exchange/Ticker (optional), Weight % | Monthly | Constituent holdings for unlisted NZ, AU, and global index funds |
 | **NZX Official Directory** | [NZX Markets Directory](https://www.nzx.com/markets/NZSX) | `data/staging/directories/` | CSV (`nzx_directory.csv`): NZX Ticker, Issuer Name, ISIN, GICS Sector | Quarterly / As needed | Canonical security master for all NZX-listed equities |
-| **ASX Official Directory** | [ASX Listed Companies Directory](https://www.asx.com.au/markets/trade-our-cash-market/directory) | `data/staging/directories/` | CSV (`asx_directory.csv`): ASX Ticker, Company Name, GICS Industry Group | Quarterly / As needed | Canonical security master for all ASX-listed equities |
+| **ASX Official Directory** | [ASX Listed Companies Directory](https://www.asx.com.au/markets/trade-our-cash-market/directory) (*"All ASX Listed Companies .csv"*) | `data/staging/directories/` | CSV (`ASXListedCompanies.csv`): Company name, ASX code, GICS industry group | Quarterly / As needed | Canonical security master for all ASX-listed equities |
 
 ---
 
@@ -29,7 +34,7 @@ data/
 └── staging/
     ├── directories/
     │   ├── nzx_directory.csv
-    │   └── asx_directory.csv
+    │   └── ASXListedCompanies.csv
     ├── disclose/
     │   └── smartshares_feeder_disclosures_202610.csv
     ├── ishares/
@@ -67,10 +72,21 @@ A key design strength of the ingestion pipeline is that the upstream reference d
 
 ## 4. The Dry-Run Workflow (First-Time & Routine Runs)
 
-Before committing files or triggering production builds, always run the pipeline locally in **dry-run mode**:
+Before committing files or triggering production builds, always run the pipeline locally in **dry-run mode**—either via the Local Admin Web Console or the CLI:
 
+### Option A: Local Admin Web Console (Recommended for CSV Upload & Mapping)
 ```bash
-python -m pipeline.ingest --dry-run --staging-dir data/staging/
+python3 -m pipeline.admin_ui
+```
+Open `http://127.0.0.1:8787` in your browser to:
+* Drag-and-drop CSV files directly into `data/staging/<provider>/`
+* Preview raw CSV headers and test-parse rows with each Tier 1 adapter
+* Run `--dry-run` diagnostics and production builds (`public/data/`) with one click
+* Search the Global Security Master (`security_master.json`) and save unresolved holdings into `provider_alias_map.json`
+
+### Option B: CLI Dry-Run
+```bash
+python3 -m pipeline.ingest --dry-run --staging-dir data/staging/
 ```
 
 ### What the Dry-Run Performs:

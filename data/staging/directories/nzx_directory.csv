@@ -1,8 +1,117 @@
-NZX Code,Company Name,ISIN,GICS Sector
-FPH,Fisher & Paykel Healthcare Corporation Limited,NZFPHE0001S2,Health Care
-MCY,Mercury NZ Limited,NZMCYE0001S8,Utilities
-AIA,Auckland International Airport Limited,NZAIAE0002S6,Industrials
-CEN,Contact Energy Limited,NZCENE0001S6,Utilities
-SPK,Spark New Zealand Limited,NZSPKE0001S2,Communication Services
-CNU,Chorus Limited,NZCNUE0001S2,Communication Services
-
+1,WBC,Westpac Banking Corporation,Australia,Financials
+2,ANZ,ANZ Group Holdings Limited,Australia,Financials
+3,FPH,Fisher & Paykel Healthcare Corporation Limited,New Zealand,Healthcare
+4,MEL,Meridian Energy Limited,New Zealand,Utilities
+5,AIA,Auckland International Airport Limited,New Zealand,Industrials
+6,FCG,Fonterra Co-operative Group Limited,New Zealand,Consumer Staples
+7,IFT,Infratil Limited,New Zealand,Industrials
+8,AFI,Australian Foundation Investment Company Limited,Australia,Financials
+9,MCY,Mercury NZ Limited,New Zealand,Utilities
+10,CEN,Contact Energy Limited,New Zealand,Utilities
+11,MFT,Mainfreight Limited,New Zealand,Industrials
+12,ATM,The a2 Milk Company Limited,New Zealand,Consumer Staples
+13,VNT,Ventia Services Group Limited,Australia,Industrials
+14,POT,Port of Tauranga Limited,New Zealand,Industrials
+15,VCT,Vector Limited,New Zealand,Utilities
+16,EBO,EBOS Group Limited,New Zealand,Healthcare
+17,SPK,Spark New Zealand Limited,New Zealand,Communication Services
+18,CNU,Chorus Limited,New Zealand,Communication Services
+19,FBU,Fletcher Building Limited,New Zealand,Materials
+20,GNE,Genesis Energy Limited,New Zealand,Utilities
+21,GNZ,Goodman Property Trust,New Zealand,-
+22,FRW,Freightways Group Limited,New Zealand,Industrials
+23,RYM,Ryman Healthcare Limited,New Zealand,Healthcare
+24,PCT,"Precinct Properties New Zealand Limited, Precinct Properties Investments Limited",New Zealand,Real Estate
+25,SUM,Summerset Group Holdings Limited,New Zealand,Healthcare
+26,KPG,Kiwi Property Group Limited,New Zealand,Real Estate
+27,SKL,Skellerup Holdings Limited,New Zealand,Industrials
+28,VHP,Vital Healthcare Property Trust,New Zealand,Real Estate
+29,CHI,Channel Infrastructure NZ Limited,New Zealand,Energy
+30,AIR,Air New Zealand Limited,New Zealand,Industrials
+31,HGH,Heartland Group Holdings Limited,New Zealand,Financials
+32,PFI,Property For Industry Limited,New Zealand,Real Estate
+33,VSL,Vulcan Steel Limited,New Zealand,Materials
+34,BGP,Briscoe Group Limited,New Zealand,Consumer Discretionary
+35,SCL,Scales Corporation Limited,New Zealand,Consumer Staples
+36,HLG,Hallenstein Glasson Holdings Limited,New Zealand,Consumer Discretionary
+37,ARG,Argosy Property Limited,New Zealand,Real Estate
+38,SKC,SkyCity Entertainment Group Limited,New Zealand,Consumer Discretionary
+39,NPH,Napier Port Holdings Limited,New Zealand,Industrials
+40,TWR,Tower Limited,New Zealand,Financials
+41,TRA,Turners Automotive Group Limited,New Zealand,Consumer Discretionary
+42,VGL,Vista Group International Limited,New Zealand,Technology
+43,THL,Tourism Holdings Limited,New Zealand,Consumer Discretionary
+44,SPG,Stride Property Group,New Zealand,Real Estate
+45,SAN,Sanford Limited,New Zealand,Consumer Staples
+46,SMI,Santana Minerals Limited,Australia,Materials
+47,SKT,SKY Network Television Limited,New Zealand,Communication Services
+48,OCA,Oceania Healthcare Limited,New Zealand,Healthcare
+49,NZX,NZX Limited,New Zealand,Financials
+50,AFT,AFT Pharmaceuticals Limited,New Zealand,Healthcare
+51,GTK,Gentrack Group Limited,New Zealand,Technology
+52,DGL,Delegat Group Limited,New Zealand,Consumer Staples
+53,MCK,Millennium & Copthorne Hotels New Zealand Limited,New Zealand,Consumer Discretionary
+54,IPL,Investore Property Limited,New Zealand,Real Estate
+55,WIN,Winton Land Limited,New Zealand,Real Estate
+56,PEB,Pacific Edge Limited,New Zealand,Healthcare
+57,GXH,Green Cross Health Limited,New Zealand,Healthcare
+58,SML,Synlait Milk Limited,New Zealand,Consumer Staples
+59,TGG,T&G Global Limited,New Zealand,Consumer Staples
+60,CMO,The Colonial Motor Company Limited,New Zealand,Consumer Discretionary
+61,WHS,The Warehouse Group Limited,New Zealand,Consumer Discretionary
+62,SCT,Scott Technology Limited,New Zealand,Industrials
+63,SEK,Seeka Limited,New Zealand,Consumer Staples
+64,SPN,South Port New Zealand Limited,New Zealand,Industrials
+65,IKE,ikeGPS Group Limited,New Zealand,Technology
+66,ERD,EROAD Limited,New Zealand,Technology
+67,NZM,NZME Limited,New Zealand,Communication Services
+68,RGI,Rua Gold Inc.,Canada,Materials
+69,CDI,CDL Investments New Zealand Limited,New Zealand,Real Estate
+70,PGW,PGG Wrightson Limited,New Zealand,Industrials
+71,MLN,Marlin Global Limited,New Zealand,Financials
+72,LIC,Livestock Improvement Corporation Limited,New Zealand,Consumer Staples
+73,MHJ,Michael Hill International Limited,Australia,Consumer Discretionary
+74,KMD,KMD Brands Limited,New Zealand,Consumer Discretionary
+75,SKO,Serko Limited,New Zealand,Technology
+76,NZL,New Zealand Rural Land Company Limited,New Zealand,Real Estate
+77,NZK,New Zealand King Salmon Investments Limited,New Zealand,Consumer Staples
+78,RAD,Radius Residential Care Limited,New Zealand,Healthcare
+79,MKR,Manuka Resources Limited,Australia,Materials
+80,CVT,Comvita Limited,New Zealand,Consumer Staples
+81,TCM,Taiko Critical Minerals Limited,New Zealand,-
+82,MFB,My Food Bag Group Limited,New Zealand,Consumer Discretionary
+83,STU,Steel & Tube Holdings Limited,New Zealand,Materials
+84,APL,Asset Plus Limited,New Zealand,Real Estate
+85,TAH,Third Age Health Services Limited,New Zealand,Healthcare
+86,BRW,Bremworth Limited,New Zealand,Industrials
+87,FWL,Foley Wines Limited,New Zealand,Consumer Staples
+88,2CC,2 Cheap Cars Group Limited,New Zealand,-
+89,PHL,Promisia Healthcare Limited,New Zealand,Healthcare
+90,BLT,BLIS Technologies Limited,New Zealand,Healthcare
+91,ARB,ArborGen Holdings Limited,New Zealand,Materials
+92,PYS,PaySauce Limited,New Zealand,Technology
+93,AOF,AoFrio Limited,New Zealand,Industrials
+94,GEN,General Capital Limited,New Zealand,Financials
+95,MOV,MOVE Logistics Group Limited,New Zealand,Industrials
+96,BPG,Black Pearl Group Limited,New Zealand,Technology
+97,TWL,Trade Window Holdings Limited,New Zealand,Technology
+98,MPG,Metro Performance Glass Limited,New Zealand,Materials
+99,ALF,Allied Farmers Limited,New Zealand,Consumer Staples
+100,SVR,Savor Limited,New Zealand,Consumer Discretionary
+101,LOC,Locate Technologies Limited,Australia,Technology
+102,BFG,Burger Fuel Group Limited,New Zealand,Consumer Discretionary
+103,AGL,Accordant Group Limited,New Zealand,Industrials
+104,MEX,Minerals Exploration Limited,Australia,Materials
+105,RUA,Rua Bioscience Limited,New Zealand,Healthcare
+106,TRU,TruScreen Group Limited,New Zealand,Healthcare
+107,ENS,Enprise Group Limited,New Zealand,Technology
+108,SDL,Solution Dynamics Limited,New Zealand,Technology
+109,CCC,Cooks Coffee Company Limited,New Zealand,Consumer Discretionary
+110,MEE,Me Today Limited,New Zealand,Consumer Staples
+111,WCO,WasteCo Group Limited,New Zealand,Industrials
+112,NTL,New Talisman Gold Mines Limited,New Zealand,Materials
+113,CRP,Chatham Rock Phosphate Limited,Canada,Materials
+114,AFC,AFC Group Holdings Limited,New Zealand,Consumer Staples
+115,IPR,IPERION Limited,New Zealand,Materials
+116,RTO,RTO Limited,New Zealand,Financials
+117,BAI,Being AI Limited,New Zealand,Industrials

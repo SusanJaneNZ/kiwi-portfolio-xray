@@ -173,34 +173,34 @@
       "weight": 0.1227
     },
     {
-      "isin": "NZMCYE0001S8",
-      "name": "Mercury NZ Limited",
-      "ticker": "MCY.NZ",
-      "country": "NZ",
+      "isin": "ASX:MCY",
+      "name": "MERCURY NZ LIMITED",
+      "ticker": "MCY.AX",
+      "country": "AU",
       "sector": "Utilities",
       "weight": 0.085
     },
     {
-      "isin": "NZAIAE0002S6",
-      "name": "Auckland International Airport Limited",
-      "ticker": "AIA.NZ",
-      "country": "NZ",
+      "isin": "ASX:AIA",
+      "name": "AUCKLAND INTERNATIONAL AIRPORT LIMITED",
+      "ticker": "AIA.AX",
+      "country": "AU",
       "sector": "Industrials",
       "weight": 0.078
     },
     {
-      "isin": "NZCENE0001S6",
-      "name": "Contact Energy Limited",
-      "ticker": "CEN.NZ",
-      "country": "NZ",
+      "isin": "ASX:CEN",
+      "name": "CONTACT ENERGY LIMITED",
+      "ticker": "CEN.AX",
+      "country": "AU",
       "sector": "Utilities",
       "weight": 0.062
     },
     {
-      "isin": "NZSPKE0001S2",
-      "name": "Spark New Zealand Limited",
-      "ticker": "SPK.NZ",
-      "country": "NZ",
+      "isin": "ASX:SPK",
+      "name": "SPARK NEW ZEALAND LIMITED",
+      "ticker": "SPK.AX",
+      "country": "AU",
       "sector": "Communication Services",
       "weight": 0.041
     },
@@ -216,39 +216,39 @@
   "OZY": [
     {
       "isin": "AU000000BHP4",
-      "name": "BHP Group Ltd",
-      "ticker": "BHP",
-      "country": "Australia",
+      "name": "BHP GROUP LIMITED",
+      "ticker": "BHP.AX",
+      "country": "AU",
       "sector": "Materials",
       "weight": 0.145
     },
     {
-      "isin": "AU000000CSL",
-      "name": "CSL Limited",
+      "isin": "ASX:CSL",
+      "name": "CSL LIMITED",
       "ticker": "CSL.AX",
       "country": "AU",
       "sector": "Health Care",
       "weight": 0.092
     },
     {
-      "isin": "AU000000CBA",
-      "name": "Commonwealth Bank of Australia",
+      "isin": "ASX:CBA",
+      "name": "COMMONWEALTH BANK OF AUSTRALIA.",
       "ticker": "CBA.AX",
       "country": "AU",
       "sector": "Financials",
       "weight": 0.113
     },
     {
-      "isin": "AU000000WES",
-      "name": "Wesfarmers Limited",
+      "isin": "ASX:WES",
+      "name": "WESFARMERS LIMITED",
       "ticker": "WES.AX",
       "country": "AU",
       "sector": "Consumer Discretionary",
       "weight": 0.051
     },
     {
-      "isin": "AU000000MQG",
-      "name": "Macquarie Group Limited",
+      "isin": "ASX:MQG",
+      "name": "MACQUARIE GROUP LIMITED",
       "ticker": "MQG.AX",
       "country": "AU",
       "sector": "Financials",
@@ -315,18 +315,18 @@
       "weight": 0.115
     },
     {
-      "isin": "NZMCYE0001S8",
-      "name": "Mercury NZ Limited",
-      "ticker": "MCY.NZ",
-      "country": "NZ",
+      "isin": "ASX:MCY",
+      "name": "MERCURY NZ LIMITED",
+      "ticker": "MCY.AX",
+      "country": "AU",
       "sector": "Utilities",
       "weight": 0.08
     },
     {
-      "isin": "NZAIAE0002S6",
-      "name": "Auckland International Airport Limited",
-      "ticker": "AIA.NZ",
-      "country": "NZ",
+      "isin": "ASX:AIA",
+      "name": "AUCKLAND INTERNATIONAL AIRPORT LIMITED",
+      "ticker": "AIA.AX",
+      "country": "AU",
       "sector": "Industrials",
       "weight": 0.075
     },

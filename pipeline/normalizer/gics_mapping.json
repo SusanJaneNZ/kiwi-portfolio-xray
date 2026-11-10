@@ -1,47 +1,82 @@
 {
   "Communication Services": "Communication Services",
+  "Telecommunication Services": "Communication Services",
   "Telecommunications": "Communication Services",
   "Telecom": "Communication Services",
   "Media & Entertainment": "Communication Services",
+  "Media": "Communication Services",
+
   "Consumer Discretionary": "Consumer Discretionary",
+  "Automobiles & Components": "Consumer Discretionary",
+  "Consumer Durables & Apparel": "Consumer Discretionary",
+  "Consumer Services": "Consumer Discretionary",
+  "Consumer Discretionary Distribution & Retail": "Consumer Discretionary",
+  "Retailing": "Consumer Discretionary",
   "Consumer Cyclical": "Consumer Discretionary",
   "Consumer Goods": "Consumer Discretionary",
+
   "Consumer Staples": "Consumer Staples",
-  "Consumer Non-Cyclical": "Consumer Staples",
+  "Consumer Staples Distribution & Retail": "Consumer Staples",
+  "Food & Staples Retailing": "Consumer Staples",
+  "Food, Beverage & Tobacco": "Consumer Staples",
   "Food & Beverage": "Consumer Staples",
+  "Household & Personal Products": "Consumer Staples",
+  "Consumer Non-Cyclical": "Consumer Staples",
+
   "Energy": "Energy",
   "Oil & Gas": "Energy",
+
   "Financials": "Financials",
-  "Financial Services": "Financials",
-  "Financial": "Financials",
   "Banks": "Financials",
+  "Financial Services": "Financials",
+  "Diversified Financials": "Financials",
+  "Financial": "Financials",
   "Insurance": "Financials",
+
   "Health Care": "Health Care",
   "Healthcare": "Health Care",
+  "Health Care Equipment & Services": "Health Care",
+  "Pharmaceuticals, Biotechnology & Life Sciences": "Health Care",
   "Pharmaceuticals": "Health Care",
   "Biotechnology": "Health Care",
+
   "Industrials": "Industrials",
   "Industrial": "Industrials",
   "Capital Goods": "Industrials",
+  "Commercial & Professional Services": "Industrials",
   "Transportation": "Industrials",
+
   "Information Technology": "Information Technology",
   "Technology": "Information Technology",
   "Tech": "Information Technology",
+  "Software & Services": "Information Technology",
   "Software": "Information Technology",
+  "Technology Hardware & Equipment": "Information Technology",
+  "Semiconductors & Semiconductor Equipment": "Information Technology",
   "Semiconductors": "Information Technology",
+
   "Materials": "Materials",
   "Basic Materials": "Materials",
   "Chemicals": "Materials",
   "Mining": "Materials",
+
   "Real Estate": "Real Estate",
+  "Equity Real Estate Investment Trusts (REITs)": "Real Estate",
+  "Real Estate Management & Development": "Real Estate",
   "RealEstate": "Real Estate",
   "Property": "Real Estate",
   "REITs": "Real Estate",
+
   "Utilities": "Utilities",
   "Utility": "Utilities",
   "Clean Energy": "Utilities",
   "Renewables": "Utilities",
-  "Other": "Unclassified",
-  "Unclassified": "Unclassified"
-}
 
+  "Not Applic": "Unclassified",
+  "Not Applicable": "Unclassified",
+  "Class Pend": "Unclassified",
+  "Other": "Unclassified",
+  "Unclassified": "Unclassified",
+  "-": "Unclassified",
+  "": "Unclassified"
+}
