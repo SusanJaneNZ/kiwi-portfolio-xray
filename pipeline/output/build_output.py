@@ -6,13 +6,17 @@ import json
 from pathlib import Path
 from typing import Any, Optional
 
-from pipeline.adapters.disclose_register_adapter import DiscloseRegisterAdapter
+from pipeline.adapters.disclose_register_adapter import DiscloseRegisterAdapter, FeederWrapperDisclosure
 from pipeline.adapters.ishares_adapter import ISharesAdapter
 from pipeline.adapters.kernel_adapter import KernelAdapter
 from pipeline.adapters.smartshares_direct_adapter import SmartsharesDirectAdapter
 from pipeline.adapters.vanguard_adapter import VanguardAdapter
 from pipeline.enrichment.fuzzy_matcher import SecurityMatcher
-from pipeline.security_master.build_security_master import compile_security_master
+from pipeline.security_master.build_security_master import (
+    _atomic_write_json,
+    compile_security_master,
+    normalize_country,
+)
 from pipeline.unwrapper.feeder_unwrapper import FeederUnwrapper, UnwrappedFund
 from pipeline.validate.schema_validator import SchemaValidator, ValidationReport
 
@@ -38,10 +42,11 @@ class PipelineCompiler:
             output_master_path=self.security_master_path,
             output_direct_path=direct_equities_output_path,
             gics_mapping_path=self.gics_mapping_path,
+            write_files=not dry_run,
         )
 
-        with open(self.security_master_path, "r", encoding="utf-8") as f:
-            security_master_data = json.load(f)
+        security_master_data = sec_master_summary.pop("_security_master_data", [])
+        direct_equities_data = sec_master_summary.pop("_direct_equities_data", [])
 
         alias_map = {}
         if self.alias_map_path.exists():
@@ -89,39 +94,57 @@ class PipelineCompiler:
 
         feeder_disc_map = {d.feeder_code: d for d in feeder_disclosures}
 
-        # 4. Unwrap Feeders using FeederUnwrapper
-        unwrapper = FeederUnwrapper(self.feeder_registry_path, gics_mapping=gics_mapping)
-        all_unwrapped_funds: list[UnwrappedFund] = []
-
         with open(self.feeder_registry_path, "r", encoding="utf-8") as f:
             feeder_registry = json.load(f)
+
+        # 4. Ingest Smartshares staged files (both Direct Funds and Sorted/Disclose Feeder wrappers)
+        smartshares_adapter = SmartsharesDirectAdapter()
+        smartshares_dir = self.staging_dir / "smartshares"
+        all_unwrapped_funds: list[UnwrappedFund] = []
+        all_unresolved_entries: list[dict] = []
+        extra_warnings: list[str] = []
+
+        if smartshares_dir.exists():
+            for f in sorted(p for p in smartshares_dir.iterdir() if p.is_file() and p.suffix.lower() in {".csv", ".xlsx"}):
+                if smartshares_adapter.can_handle(f):
+                    res = smartshares_adapter.parse(f)
+                    if res.fund_code in feeder_registry:
+                        feeder_disc_map[res.fund_code] = FeederWrapperDisclosure(
+                            feeder_code=res.fund_code,
+                            feeder_name=res.fund_name,
+                            master_ticker=feeder_registry[res.fund_code].get("master_ticker", ""),
+                            master_allocation=sum(h.weight for h in res.holdings),
+                            cash_ratio=res.cash_ratio,
+                            hedging_ratio=res.hedging_ratio,
+                            effective_date=res.effective_date,
+                        )
+                    else:
+                        unwrapped = self._enrich_domestic_fund(res, matcher, all_unresolved_entries)
+                        all_unwrapped_funds.append(unwrapped)
+
+        # 5. Unwrap Feeders using FeederUnwrapper
+        unwrapper = FeederUnwrapper(self.feeder_registry_path, gics_mapping=gics_mapping, matcher=matcher)
 
         for feeder_code, info in feeder_registry.items():
             master_ticker = info.get("master_ticker")
             master_fund = master_funds.get(master_ticker)
-            if not master_fund:
-                continue
             disc = feeder_disc_map.get(feeder_code)
+            if not master_fund:
+                if disc:
+                    provider_folder = info.get("master_provider", "ishares")
+                    extra_warnings.append(
+                        f"Feeder '{feeder_code}' disclosure staged (as of {disc.effective_date}), "
+                        f"awaiting master ETF '{master_ticker}' in data/staging/{provider_folder}/."
+                    )
+                continue
             unwrapped = unwrapper.unwrap(feeder_code, master_fund, disc)
             all_unwrapped_funds.append(unwrapped)
-
-        # 5. Ingest Direct Funds (Smartshares) and Enrich
-        smartshares_adapter = SmartsharesDirectAdapter()
-        smartshares_dir = self.staging_dir / "smartshares"
-        all_unresolved_entries: list[dict] = []
-
-        if smartshares_dir.exists():
-            for f in sorted(smartshares_dir.glob("*.csv")):
-                if smartshares_adapter.can_handle(f):
-                    res = smartshares_adapter.parse(f)
-                    unwrapped = self._enrich_domestic_fund(res, matcher, all_unresolved_entries)
-                    all_unwrapped_funds.append(unwrapped)
 
         # 6. Ingest Kernel Funds and Enrich
         kernel_adapter = KernelAdapter()
         kernel_dir = self.staging_dir / "kernel"
         if kernel_dir.exists():
-            for f in sorted(kernel_dir.glob("*.csv")):
+            for f in sorted(p for p in kernel_dir.iterdir() if p.is_file() and p.suffix.lower() in {".csv", ".xlsx"}):
                 if kernel_adapter.can_handle(f):
                     res = kernel_adapter.parse(f)
                     unwrapped = self._enrich_domestic_fund(res, matcher, all_unresolved_entries)
@@ -145,11 +168,7 @@ class PipelineCompiler:
             })
             constituents_map[uf.fund_code] = uf.constituents
 
-        # 8. Load direct equities
-        with open(direct_equities_output_path, "r", encoding="utf-8") as f:
-            direct_equities_data = json.load(f)
-
-        # 9. Validate with SchemaValidator
+        # 8. Validate with SchemaValidator
         validator = SchemaValidator()
         validation_report = validator.validate_all(
             funds_registry=funds_registry,
@@ -157,18 +176,13 @@ class PipelineCompiler:
             direct_equities=direct_equities_data,
             unresolved_entries=all_unresolved_entries,
         )
+        validation_report.warnings = extra_warnings + validation_report.warnings
 
-        # 10. If not dry_run, write production files
+        # 9. If not dry_run, write production files atomically
         if not dry_run:
-            self.output_dir.mkdir(parents=True, exist_ok=True)
-            with open(self.output_dir / "funds_registry.json", "w", encoding="utf-8") as f:
-                json.dump(funds_registry, f, indent=2)
-
-            with open(self.output_dir / "constituents.json", "w", encoding="utf-8") as f:
-                json.dump(constituents_map, f, indent=2)
-
-            with open(self.output_dir / "unresolved_entries.json", "w", encoding="utf-8") as f:
-                json.dump(all_unresolved_entries, f, indent=2)
+            _atomic_write_json(self.output_dir / "funds_registry.json", funds_registry)
+            _atomic_write_json(self.output_dir / "constituents.json", constituents_map)
+            _atomic_write_json(self.output_dir / "unresolved_entries.json", all_unresolved_entries)
 
         summary_data = {
             "sec_master_summary": sec_master_summary,
@@ -190,8 +204,9 @@ class PipelineCompiler:
         resolved_constituents: list[dict] = []
         raw_equity_sum = sum(h.weight for h in fund_res.holdings)
 
-        # Normalize equity weights if cash exists to ensure exact integrity
-        scale = 1.0 - fund_res.cash_ratio
+        # Normalize equity weights after segregating cash & hedging to ensure exact integrity
+        hedging_ratio = max(0.0, getattr(fund_res, "hedging_ratio", 0.0))
+        scale = max(0.0, 1.0 - fund_res.cash_ratio - hedging_ratio)
         weight_norm_factor = (scale / raw_equity_sum) if raw_equity_sum > 0 else 1.0
 
         for idx, h in enumerate(fund_res.holdings):
@@ -209,7 +224,7 @@ class PipelineCompiler:
                     "isin": match.isin,
                     "name": match.name or h.name,
                     "ticker": match.ticker or h.ticker or "",
-                    "country": match.country or "Global",
+                    "country": normalize_country(match.country or h.country or "", default="Global"),
                     "sector": match.sector or "Unclassified",
                     "weight": round(normalized_weight, 8),
                 })
@@ -220,7 +235,7 @@ class PipelineCompiler:
                     "isin": synth_isin,
                     "name": h.name,
                     "ticker": h.ticker or "",
-                    "country": "Unknown",
+                    "country": normalize_country(h.country or "", default="Unknown"),
                     "sector": "Unclassified",
                     "weight": round(normalized_weight, 8),
                 })
@@ -245,7 +260,7 @@ class PipelineCompiler:
             provider=fund_res.provider,
             effective_date=fund_res.effective_date,
             cash_ratio=round(fund_res.cash_ratio, 6),
-            hedging_ratio=0.0,
+            hedging_ratio=round(hedging_ratio, 6),
             constituents=resolved_constituents,
             unresolved_holdings=[],
         )

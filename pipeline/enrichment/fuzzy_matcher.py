@@ -15,25 +15,37 @@ try:
 except ImportError:
     HAS_RAPIDFUZZ = False
 
-# Corporate legal and classification stop-words
+# Corporate legal and share-class classification stop-words
 LEGAL_SUFFIXES = {
     "LIMITED", "LTD", "INCORPORATED", "INC", "CORPORATION", "CORP",
-    "PLC", "PUBLIC", "AG", "AS", "NV", "SA", "OYJ", "HOLDINGS", "HLDGS",
-    "GROUP", "GRP", "COMPANY", "CO", "SPA", "SE", "GMBH", "KGA", "BERHAD", "BHD"
+    "PLC", "PUBLIC", "AG", "AS", "NV", "SA", "OYJ", "HOLDINGS", "HOLDING", "HLDGS",
+    "GROUP", "GRP", "COMPANY", "CO", "SPA", "SE", "GMBH", "KGA", "KGAA", "BERHAD", "BHD",
+    "AB", "ASA", "SCA", "SP", "KK", "TBK", "PTE", "PTY", "LP", "LLC",
+    "ORD", "ORDINARY", "COMMON", "SHARES", "SHS", "REG", "REGISTERED", "STAPLED",
+    "PROMESSES", "ADR", "GDR", "BDR", "SPONSORED", "SV", "NA", "ON", "NPV",
+}
+
+TOKEN_EXPANSIONS = {
+    "INTL": "INTERNATIONAL",
+    "CIE": "COMPAGNIE",
 }
 
 
 def normalize_company_name(name: str) -> str:
-    """Normalizes a company name by stripping legal suffixes, punctuation, and extra whitespace."""
+    """Normalizes a company name by stripping legal/share suffixes, punctuation, and extra whitespace."""
     if not name:
         return ""
-    # Strip compound abbreviations like A/S, N.V., S.A., etc.
-    cleaned = re.sub(r"\b(A/S|N\.V\.|S\.A\.|A\.G\.|O\.Y\.|P\.L\.C\.)\b", " ", name, flags=re.IGNORECASE)
-    # Strip parentheses and contents if e.g. (NZ) or (AU) or (US)
-    cleaned = re.sub(r"\([A-Za-z0-9\s.]+\)", " ", cleaned)
+    # Strip compound abbreviations like A/S, N.V., S.A., K.K., etc.
+    cleaned = re.sub(r"\b(A/S|N\.V\.|S\.A\.|A\.G\.|O\.Y\.|P\.L\.C\.|K\.K\.|O\.N\.)\b", " ", name, flags=re.IGNORECASE)
+    # Strip parentheses and contents if e.g. (NZ), (AU), (UK Register), (SEK)
+    cleaned = re.sub(r"\([^)]+\)", " ", cleaned)
     # Replace punctuation with space
     cleaned = re.sub(r"[^A-Za-z0-9\s]", " ", cleaned).upper()
-    tokens = [tok for tok in cleaned.split() if tok and tok not in LEGAL_SUFFIXES]
+    tokens = []
+    for tok in cleaned.split():
+        if not tok or tok in LEGAL_SUFFIXES:
+            continue
+        tokens.append(TOKEN_EXPANSIONS.get(tok, tok))
     return " ".join(tokens)
 
 
@@ -201,7 +213,12 @@ class SecurityMatcher:
 
         candidates_scored.sort(key=lambda x: x[0], reverse=True)
         top1_score, top1_sec = candidates_scored[0]
-        top2_score = candidates_scored[1][0] if len(candidates_scored) > 1 else 0.0
+        top1_norm = normalize_company_name(top1_sec.get("name", ""))
+        # Measure spread against the strongest candidate representing a DIFFERENT normalized company
+        top2_score = next(
+            (s for s, sec in candidates_scored[1:] if normalize_company_name(sec.get("name", "")) != top1_norm),
+            0.0,
+        )
         spread = top1_score - top2_score
 
         # Guardrails: >= 0.90 score, >= 0.15 spread, and shared stem tokens

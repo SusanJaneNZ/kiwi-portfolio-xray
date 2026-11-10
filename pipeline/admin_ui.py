@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import base64
 import json
 import sys
 from datetime import datetime, timezone
@@ -16,6 +17,7 @@ from pipeline.adapters.disclose_register_adapter import DiscloseRegisterAdapter
 from pipeline.adapters.ishares_adapter import ISharesAdapter
 from pipeline.adapters.kernel_adapter import KernelAdapter
 from pipeline.adapters.smartshares_direct_adapter import SmartsharesDirectAdapter
+from pipeline.adapters.tabular_reader import read_tabular_rows
 from pipeline.adapters.vanguard_adapter import VanguardAdapter
 from pipeline.output.build_output import PipelineCompiler
 from pipeline.security_master.build_security_master import (
@@ -45,13 +47,13 @@ class AdminService:
         self.gics_mapping_path = repo_root / "pipeline" / "normalizer" / "gics_mapping.json"
 
     def list_staged_files(self) -> dict[str, list[dict[str, Any]]]:
-        """Lists all CSV files currently staged under each provider folder."""
+        """Lists all CSV and XLSX files currently staged under each provider folder."""
         result: dict[str, list[dict[str, Any]]] = {}
         for provider in sorted(ALLOWED_PROVIDERS):
             p_dir = self.staging_dir / provider
             files: list[dict[str, Any]] = []
             if p_dir.exists():
-                for f in sorted(p_dir.glob("*.csv")):
+                for f in sorted(p for p in p_dir.iterdir() if p.is_file() and p.suffix.lower() in {".csv", ".xlsx"}):
                     stat = f.stat()
                     files.append({
                         "filename": f.name,
@@ -61,19 +63,29 @@ class AdminService:
             result[provider] = files
         return result
 
-    def save_staged_file(self, provider: str, filename: str, content: str) -> dict[str, Any]:
-        """Saves an uploaded CSV file to data/staging/<provider>/<filename>."""
+    def save_staged_file(
+        self,
+        provider: str,
+        filename: str,
+        content: str = "",
+        content_base64: str = "",
+    ) -> dict[str, Any]:
+        """Saves an uploaded CSV or XLSX file to data/staging/<provider>/<filename>."""
         if provider not in ALLOWED_PROVIDERS:
             raise ValueError(f"Invalid provider directory '{provider}'. Must be one of {sorted(ALLOWED_PROVIDERS)}.")
 
         safe_name = Path(filename).name.strip()
-        if not safe_name or not safe_name.lower().endswith(".csv"):
-            raise ValueError("Filename must end with .csv")
+        if not safe_name or Path(safe_name).suffix.lower() not in {".csv", ".xlsx"}:
+            raise ValueError("Filename must end with .csv or .xlsx")
 
         target_dir = self.staging_dir / provider
         target_dir.mkdir(parents=True, exist_ok=True)
         target_path = target_dir / safe_name
-        target_path.write_text(content, encoding="utf-8")
+
+        if content_base64:
+            target_path.write_bytes(base64.b64decode(content_base64))
+        else:
+            target_path.write_text(content, encoding="utf-8")
 
         return {
             "provider": provider,
@@ -82,7 +94,7 @@ class AdminService:
         }
 
     def delete_staged_file(self, provider: str, filename: str) -> bool:
-        """Deletes a CSV file from data/staging/<provider>/<filename>."""
+        """Deletes a CSV/XLSX file from data/staging/<provider>/<filename>."""
         if provider not in ALLOWED_PROVIDERS:
             raise ValueError(f"Invalid provider directory '{provider}'.")
 
@@ -94,7 +106,7 @@ class AdminService:
         return False
 
     def preview_staged_file(self, provider: str, filename: str) -> dict[str, Any]:
-        """Previews raw CSV lines and tests parsing with the matching Tier 1 adapter."""
+        """Previews raw file lines (CSV or XLSX) and tests parsing with the matching Tier 1 adapter."""
         if provider not in ALLOWED_PROVIDERS:
             raise ValueError(f"Invalid provider directory '{provider}'.")
 
@@ -104,12 +116,16 @@ class AdminService:
             raise FileNotFoundError(f"File not found: {provider}/{safe_name}")
 
         raw_lines: list[str] = []
-        with open(target_path, "r", encoding="utf-8-sig", errors="replace") as f:
-            for _ in range(10):
-                line = f.readline()
-                if not line:
-                    break
-                raw_lines.append(line.rstrip("\r\n"))
+        if target_path.suffix.lower() == ".xlsx":
+            rows = read_tabular_rows(target_path)
+            raw_lines = [" | ".join(r) for r in rows[:10]]
+        else:
+            with open(target_path, "r", encoding="utf-8-sig", errors="replace") as f:
+                for _ in range(10):
+                    line = f.readline()
+                    if not line:
+                        break
+                    raw_lines.append(line.rstrip("\r\n"))
 
         parse_summary: dict[str, Any] = {"adapter": None, "status": "no_matching_adapter", "rows": []}
 
@@ -332,6 +348,7 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                         provider=data.get("provider", ""),
                         filename=data.get("filename", ""),
                         content=data.get("content", ""),
+                        content_base64=data.get("content_base64", ""),
                     )
                     self._send_json(res)
                 elif path == "/api/staging/delete":

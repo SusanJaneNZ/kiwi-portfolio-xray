@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional
 
 from pipeline.adapters.base import FundExtractionResult, RawHolding
 from pipeline.adapters.disclose_register_adapter import FeederWrapperDisclosure
@@ -29,12 +29,18 @@ class UnwrappedFund:
 class FeederUnwrapper:
     """Unwraps feeder funds into their underlying master ETF constituents."""
 
-    def __init__(self, feeder_registry_path: Path, gics_mapping: Optional[dict[str, str]] = None):
+    def __init__(
+        self,
+        feeder_registry_path: Path,
+        gics_mapping: Optional[dict[str, str]] = None,
+        matcher: Optional[Any] = None,
+    ):
         self.feeder_registry: dict[str, dict] = {}
         if feeder_registry_path.exists():
             with open(feeder_registry_path, "r", encoding="utf-8") as f:
                 self.feeder_registry = json.load(f)
         self.gics_lower = {k.lower(): v for k, v in (gics_mapping or {}).items()}
+        self.matcher = matcher
 
     def unwrap(
         self,
@@ -60,8 +66,15 @@ class FeederUnwrapper:
             raw_sector = (h.sector or "").strip()
             norm_sector = self.gics_lower.get(raw_sector.lower(), raw_sector or "Unclassified")
             norm_country = normalize_country(h.country or "", default="Global")
+
+            resolved_isin = h.isin
+            if not resolved_isin and self.matcher is not None:
+                m = self.matcher.match(name=h.name, ticker=h.ticker)
+                if m.matched and m.isin:
+                    resolved_isin = m.isin
+
             unwrapped_constituents.append({
-                "isin": h.isin or f"SYNTH_{h.ticker or h.name}",
+                "isin": resolved_isin or f"SYNTH_{h.ticker or h.name}",
                 "name": h.name,
                 "ticker": h.ticker or "",
                 "country": norm_country,

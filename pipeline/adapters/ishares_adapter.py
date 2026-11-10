@@ -3,11 +3,16 @@
 from __future__ import annotations
 
 import csv
-import re
 from pathlib import Path
 from typing import Optional
 
-from pipeline.adapters.base import BaseAdapter, FundExtractionResult, RawHolding, parse_percentage
+from pipeline.adapters.base import (
+    BaseAdapter,
+    FundExtractionResult,
+    RawHolding,
+    parse_effective_date,
+    parse_percentage,
+)
 
 ISHARES_MASTER_TICKERS = {"IWLD", "IVV"}
 
@@ -16,6 +21,10 @@ class ISharesAdapter(BaseAdapter):
     """Parses iShares product constituent CSV exports."""
 
     def can_handle(self, file_path: Path) -> bool:
+        if file_path.suffix.lower() != ".csv":
+            return False
+        if file_path.parent.name.lower() == "ishares":
+            return True
         name = file_path.name.upper()
         if "ISHARES" in name or "HOLDINGS" in name or "BLACKROCK" in name:
             return any(ticker in name for ticker in ISHARES_MASTER_TICKERS)
@@ -33,6 +42,8 @@ class ISharesAdapter(BaseAdapter):
             reader = csv.reader(f)
             header: Optional[list[str]] = None
             col_map: dict[str, int] = {}
+            weight_col = -1
+            weight_header_is_percent = False
 
             for row in reader:
                 if not row or not any(row):
@@ -40,19 +51,26 @@ class ISharesAdapter(BaseAdapter):
 
                 normalized_row = [c.strip().lower() for c in row]
 
-                # Look for header row (contains "name" or "ticker" and "isin" or "weight")
-                if ("name" in normalized_row or "holding name" in normalized_row) and (
-                    "isin" in normalized_row or "weight (%)" in normalized_row or "weight" in normalized_row
-                ):
-                    header = normalized_row
-                    col_map = {name_k: idx for idx, name_k in enumerate(header)}
-                    continue
-
                 if not header:
+                    if ("name" in normalized_row or "holding name" in normalized_row) and (
+                        "isin" in normalized_row
+                        or "weight (%)" in normalized_row
+                        or "weight" in normalized_row
+                        or "ticker" in normalized_row
+                    ):
+                        header = normalized_row
+                        col_map = {name_k: idx for idx, name_k in enumerate(header)}
+                        for idx, col in enumerate(header):
+                            if "weight" in col or "%" in col or "percent" in col:
+                                weight_col = idx
+                                weight_header_is_percent = "%" in col or "percent" in col
+                                break
+                        continue
+
                     row_str = " ".join(row)
-                    date_match = re.search(r"\b(202\d[-/]\d{1,2}[-/]\d{1,2})\b", row_str)
-                    if date_match:
-                        effective_date = date_match.group(1).replace("/", "-")
+                    parsed_date = parse_effective_date(row_str)
+                    if parsed_date:
+                        effective_date = parsed_date
                     continue
 
                 try:
@@ -61,17 +79,15 @@ class ISharesAdapter(BaseAdapter):
                     if not name or name.lower().startswith("cash") or name.lower().startswith("total"):
                         continue
 
-                    # Filter non-equity rows if asset class column exists
                     asset_col = next((idx for k, idx in col_map.items() if "asset" in k or "class" in k), -1)
                     if asset_col != -1 and len(row) > asset_col:
                         asset_val = row[asset_col].strip().lower()
                         if "cash" in asset_val or "futures" in asset_val or "derivative" in asset_val:
                             continue
 
-                    weight_col = next((idx for k, idx in col_map.items() if "weight" in k or "%" in k), -1)
                     if weight_col == -1 or len(row) <= weight_col:
                         continue
-                    weight = parse_percentage(row[weight_col])
+                    weight = parse_percentage(row[weight_col], column_is_percent=weight_header_is_percent)
                     if weight <= 0.0:
                         continue
 
@@ -80,6 +96,8 @@ class ISharesAdapter(BaseAdapter):
 
                     isin_col = col_map.get("isin", -1)
                     isin = row[isin_col].strip() if isin_col != -1 and len(row) > isin_col else None
+                    if isin in {"", "-", "--", "---"}:
+                        isin = None
 
                     country_col = next((idx for k, idx in col_map.items() if "location" in k or "country" in k), -1)
                     country = row[country_col].strip() if country_col != -1 and len(row) > country_col else None
@@ -103,7 +121,7 @@ class ISharesAdapter(BaseAdapter):
                 except (ValueError, IndexError):
                     continue
 
-        # M3 requirement: normalize master ETF equity constituents to sum to 1.0
+        # Normalize master ETF equity constituents to sum to 1.0 of the equity basket
         if raw_total_equity_weight > 0 and abs(raw_total_equity_weight - 1.0) > 1e-6:
             for h in holdings:
                 h.weight = h.weight / raw_total_equity_weight

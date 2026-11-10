@@ -55,14 +55,26 @@ def parse_effective_date(text: str) -> Optional[str]:
         y, m, d = iso_match.groups()
         return f"{int(y):04d}-{int(m):02d}-{int(d):02d}"
 
-    # 2. MM/DD/YYYY (common in US Vanguard/BlackRock exports)
-    us_match = re.search(r"\b(\d{1,2})/(\d{1,2})/(202\d)\b", text)
-    if us_match:
-        m, d, y = us_match.groups()
-        if int(m) <= 12 and int(d) <= 31:
-            return f"{int(y):04d}-{int(m):02d}-{int(d):02d}"
+    # 2. DD/MM/YYYY or MM/DD/YYYY
+    slash_match = re.search(r"\b(\d{1,2})/(\d{1,2})/(202\d)\b", text)
+    if slash_match:
+        a, b, y = (int(x) for x in slash_match.groups())
+        if a > 12 and b <= 12:
+            return f"{y:04d}-{b:02d}-{a:02d}"
+        if a <= 12 and b <= 31:
+            return f"{y:04d}-{a:02d}-{b:02d}"
 
-    # 3. Month DD, YYYY (e.g. October 31, 2026 or Oct 31, 2026)
+    # 3. DD Month YYYY or DD-Mon-YYYY (e.g. 30 September 2026, 06-Nov-2026)
+    nz_month_match = re.search(r"\b(\d{1,2}[\s-][A-Za-z]{3,9}[\s-]202\d)\b", text)
+    if nz_month_match:
+        date_str = nz_month_match.group(1).replace("-", " ")
+        for fmt in ("%d %B %Y", "%d %b %Y"):
+            try:
+                return datetime.strptime(date_str, fmt).strftime("%Y-%m-%d")
+            except ValueError:
+                continue
+
+    # 4. Month DD, YYYY (US format, e.g. October 31, 2026 or Oct 31, 2026)
     month_match = re.search(r"\b([A-Za-z]{3,9}\s+\d{1,2},\s+202\d)\b", text)
     if month_match:
         date_str = month_match.group(1)

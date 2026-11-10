@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import csv
 import json
+import os
+import tempfile
 from pathlib import Path
 from typing import Optional
 
@@ -267,11 +269,27 @@ def _enrich_local_isins_from_global(local_records: list[dict], global_records: l
                 rec["isin"] = by_norm_name[norm]
 
 
+def _atomic_write_json(target_path: Path, data: object) -> None:
+    target_path.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.NamedTemporaryFile(
+        mode="w",
+        encoding="utf-8",
+        dir=target_path.parent,
+        prefix=f".{target_path.name}.",
+        suffix=".tmp",
+        delete=False,
+    ) as tmp:
+        json.dump(data, tmp, indent=2)
+        tmp_path = Path(tmp.name)
+    os.replace(tmp_path, target_path)
+
+
 def compile_security_master(
     staging_dir: Path,
     output_master_path: Path,
     output_direct_path: Path,
     gics_mapping_path: Path,
+    write_files: bool = True,
 ) -> dict:
     """Compiles the global security master and writes client direct_equities.json."""
     gics_mapping: dict[str, str] = {}
@@ -316,11 +334,6 @@ def compile_security_master(
             seen_isins.add(isin)
         global_master.append(rec)
 
-    # Write global master to destination
-    output_master_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(output_master_path, "w", encoding="utf-8") as f:
-        json.dump(global_master, f, indent=2)
-
     # Extract direct equities (NZX and ASX) deduplicated by (exchange, ticker) so dual-listed stocks remain selectable on both exchanges
     seen_exchange_tickers: set[tuple[str, str]] = set()
     direct_equities: list[dict] = []
@@ -330,9 +343,9 @@ def compile_security_master(
             seen_exchange_tickers.add(key)
             direct_equities.append(rec)
 
-    output_direct_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(output_direct_path, "w", encoding="utf-8") as f:
-        json.dump(direct_equities, f, indent=2)
+    if write_files:
+        _atomic_write_json(output_master_path, global_master)
+        _atomic_write_json(output_direct_path, direct_equities)
 
     return {
         "total_security_master_count": len(global_master),
@@ -340,4 +353,6 @@ def compile_security_master(
         "nzx_count": len(nzx_records),
         "asx_count": len(asx_records),
         "vanguard_global_count": len(vanguard_records),
+        "_security_master_data": global_master,
+        "_direct_equities_data": direct_equities,
     }

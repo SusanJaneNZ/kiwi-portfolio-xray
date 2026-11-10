@@ -28,11 +28,16 @@ class TestAdminUI(unittest.TestCase):
             staging_dir=self.staging_dir,
             output_dir=self.output_dir,
         )
-        # Isolate alias map to temp dir so repo file is untouched
+        # Isolate alias map and security master to temp dir so repo files stay untouched
         self.service.alias_map_path = self.tmp_dir / "provider_alias_map.json"
         shutil.copy(
             REPO_ROOT / "pipeline" / "enrichment" / "provider_alias_map.json",
             self.service.alias_map_path,
+        )
+        self.service.security_master_path = self.tmp_dir / "security_master.json"
+        self.service.security_master_path.write_text(
+            json.dumps([{"isin": "NZMCYE0001S8", "name": "Mercury NZ Limited", "ticker": "MCY.NZ"}]),
+            encoding="utf-8",
         )
 
     def tearDown(self):

@@ -3,11 +3,6 @@ name: Upstream Ingestion & Data Compilation
 on:
   schedule:
     - cron: '0 6 1 * *' # 6:00 UTC on the 1st of each month
-  push:
-    branches: [ main ]
-    paths:
-      - 'pipeline/**'
-      - 'data/staging/**'
   workflow_dispatch:
 
 permissions:

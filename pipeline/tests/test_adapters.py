@@ -88,43 +88,78 @@ class TestAdapters(unittest.TestCase):
             self.assertEqual(by_ticker["FPH"].isin, "VANG:FPH")
 
     def test_smartshares_direct_adapter(self):
-        fnz_file = STAGING_DIR / "smartshares" / "smartshares_FNZ_202610.csv"
+        csv_text = (
+            "Security Code,Security Description,Weighting (%)\n"
+            "FPH,Fisher & Paykel Healthcare Corporation Limited,12.27%\n"
+            "MCY,Mercury NZ Limited,8.50%\n"
+            "AIA,Auckland International Airport Limited,7.80%\n"
+            "NZD CASH,Cash and cash equivalents,1.50%\n"
+            "OTHER,Other NZX Top 50 Equities,69.93%\n"
+        )
         adapter = SmartsharesDirectAdapter()
-        self.assertTrue(adapter.can_handle(fnz_file))
+        with tempfile.TemporaryDirectory() as tmp:
+            sm_dir = Path(tmp) / "smartshares"
+            sm_dir.mkdir()
+            fnz_file = sm_dir / "smartshares_FNZ_202610.csv"
+            fnz_file.write_text(csv_text, encoding="utf-8")
 
-        res = adapter.parse(fnz_file)
-        self.assertEqual(res.fund_code, "FNZ")
-        self.assertFalse(res.is_master)
-        self.assertAlmostEqual(res.cash_ratio, 0.015, places=3)
-        self.assertGreater(len(res.holdings), 3)
+            self.assertTrue(adapter.can_handle(fnz_file))
+            res = adapter.parse(fnz_file)
+            self.assertEqual(res.fund_code, "FNZ")
+            self.assertFalse(res.is_master)
+            self.assertAlmostEqual(res.cash_ratio, 0.015, places=3)
+            self.assertGreater(len(res.holdings), 3)
 
-        fph = next(h for h in res.holdings if h.ticker == "FPH")
-        self.assertAlmostEqual(fph.weight, 0.1227, places=4)
+            fph = next(h for h in res.holdings if h.ticker == "FPH")
+            self.assertAlmostEqual(fph.weight, 0.1227, places=4)
 
     def test_kernel_adapter(self):
-        clean_file = STAGING_DIR / "kernel" / "kernel_clean_energy_202610.csv"
+        csv_text = (
+            "Company Name,Weighting (%)\n"
+            "Vestas Wind Systems A/S,12.50%\n"
+            "Orsted A/S,10.20%\n"
+            "Cash and Cash Equivalents,1.20%\n"
+            "Other Clean Energy Equities,76.10%\n"
+        )
         adapter = KernelAdapter()
-        self.assertTrue(adapter.can_handle(clean_file))
+        with tempfile.TemporaryDirectory() as tmp:
+            k_dir = Path(tmp) / "kernel"
+            k_dir.mkdir()
+            clean_file = k_dir / "kernel_clean_energy_202610.csv"
+            clean_file.write_text(csv_text, encoding="utf-8")
 
-        res = adapter.parse(clean_file)
-        self.assertEqual(res.fund_code, "KERNEL_CLEAN_ENERGY")
-        self.assertAlmostEqual(res.cash_ratio, 0.012, places=3)
+            self.assertTrue(adapter.can_handle(clean_file))
+            res = adapter.parse(clean_file)
+            self.assertEqual(res.fund_code, "KERNEL_CLEAN_ENERGY")
+            self.assertAlmostEqual(res.cash_ratio, 0.012, places=3)
 
-        vestas = next(h for h in res.holdings if "Vestas" in h.name)
-        self.assertAlmostEqual(vestas.weight, 0.125, places=3)
+            vestas = next(h for h in res.holdings if "Vestas" in h.name)
+            self.assertAlmostEqual(vestas.weight, 0.125, places=3)
 
     def test_disclose_register_adapter(self):
-        disclose_file = STAGING_DIR / "disclose" / "smartshares_feeder_disclosures_202610.csv"
+        csv_text = (
+            "Fund Scheme,Holding / Asset Description,Weighting (%)\n"
+            "Smartshares Total World ETF (TWF),Vanguard Total World Stock ETF,97.5%\n"
+            "Smartshares Total World ETF (TWF),Cash and cash equivalents,1.5%\n"
+            "Smartshares Total World ETF (TWF),Foreign currency hedging contracts,1.0%\n"
+            "Smartshares US 500 ETF (USF),Vanguard S&P 500 ETF,98.5%\n"
+            "Smartshares US 500 ETF (USF),Cash and cash equivalents,1.5%\n"
+        )
         adapter = DiscloseRegisterAdapter()
-        self.assertTrue(adapter.can_handle(disclose_file))
+        with tempfile.TemporaryDirectory() as tmp:
+            d_dir = Path(tmp) / "disclose"
+            d_dir.mkdir()
+            disclose_file = d_dir / "smartshares_feeder_disclosures_202610.csv"
+            disclose_file.write_text(csv_text, encoding="utf-8")
 
-        feeders = adapter.parse_all_feeders(disclose_file)
-        self.assertEqual(len(feeders), 2)
+            self.assertTrue(adapter.can_handle(disclose_file))
+            feeders = adapter.parse_all_feeders(disclose_file)
+            self.assertEqual(len(feeders), 2)
 
-        twf = next(f for f in feeders if f.feeder_code == "TWF")
-        self.assertAlmostEqual(twf.cash_ratio, 0.015, places=3)
-        self.assertAlmostEqual(twf.hedging_ratio, 0.010, places=3)
-        self.assertAlmostEqual(twf.master_allocation, 0.975, places=3)
+            twf = next(f for f in feeders if f.feeder_code == "TWF")
+            self.assertAlmostEqual(twf.cash_ratio, 0.015, places=3)
+            self.assertAlmostEqual(twf.hedging_ratio, 0.010, places=3)
+            self.assertAlmostEqual(twf.master_allocation, 0.975, places=3)
 
 
 if __name__ == "__main__":
