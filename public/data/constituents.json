@@ -166,9 +166,9 @@
   "FNZ": [
     {
       "isin": "NZFPHE0001S2",
-      "name": "Fisher & Paykel Healthcare Corporation Limited",
-      "ticker": "FPH.NZ",
-      "country": "NZ",
+      "name": "FISHER & PAYKEL HEALTHCARE CORPORATION LIMITED",
+      "ticker": "FPH.AX",
+      "country": "AU",
       "sector": "Health Care",
       "weight": 0.1227
     },
@@ -308,9 +308,9 @@
   "KERNEL_NZ_50": [
     {
       "isin": "NZFPHE0001S2",
-      "name": "Fisher & Paykel Healthcare Corporation Limited",
-      "ticker": "FPH.NZ",
-      "country": "NZ",
+      "name": "FISHER & PAYKEL HEALTHCARE CORPORATION LIMITED",
+      "ticker": "FPH.AX",
+      "country": "AU",
       "sector": "Health Care",
       "weight": 0.115
     },
@@ -332,10 +332,10 @@
     },
     {
       "isin": "NZCNUE0001S2",
-      "name": "Chorus Limited",
-      "ticker": "CNU.NZ",
-      "country": "NZ",
-      "sector": "Communication Services",
+      "name": "Chorus Ltd",
+      "ticker": "",
+      "country": "Unknown",
+      "sector": "Unclassified",
       "weight": 0.04
     },
     {

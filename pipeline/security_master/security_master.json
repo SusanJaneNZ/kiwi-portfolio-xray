@@ -1,53 +1,5 @@
 [
   {
-    "isin": "NZFPHE0001S2",
-    "name": "Fisher & Paykel Healthcare Corporation Limited",
-    "ticker": "FPH.NZ",
-    "exchange": "NZX",
-    "country": "NZ",
-    "sector": "Health Care"
-  },
-  {
-    "isin": "NZMCYE0001S8",
-    "name": "Mercury NZ Limited",
-    "ticker": "MCY.NZ",
-    "exchange": "NZX",
-    "country": "NZ",
-    "sector": "Utilities"
-  },
-  {
-    "isin": "NZAIAE0002S6",
-    "name": "Auckland International Airport Limited",
-    "ticker": "AIA.NZ",
-    "exchange": "NZX",
-    "country": "NZ",
-    "sector": "Industrials"
-  },
-  {
-    "isin": "NZCENE0001S6",
-    "name": "Contact Energy Limited",
-    "ticker": "CEN.NZ",
-    "exchange": "NZX",
-    "country": "NZ",
-    "sector": "Utilities"
-  },
-  {
-    "isin": "NZSPKE0001S2",
-    "name": "Spark New Zealand Limited",
-    "ticker": "SPK.NZ",
-    "exchange": "NZX",
-    "country": "NZ",
-    "sector": "Communication Services"
-  },
-  {
-    "isin": "NZCNUE0001S2",
-    "name": "Chorus Limited",
-    "ticker": "CNU.NZ",
-    "exchange": "NZX",
-    "country": "NZ",
-    "sector": "Communication Services"
-  },
-  {
     "isin": "ASX:10X",
     "name": "EXULTANT MINING LIMITED",
     "ticker": "10X.AX",
@@ -5574,6 +5526,14 @@
     "exchange": "ASX",
     "country": "AU",
     "sector": "Unclassified"
+  },
+  {
+    "isin": "NZFPHE0001S2",
+    "name": "FISHER & PAYKEL HEALTHCARE CORPORATION LIMITED",
+    "ticker": "FPH.AX",
+    "exchange": "ASX",
+    "country": "AU",
+    "sector": "Health Care"
   },
   {
     "isin": "ASX:FPR",
