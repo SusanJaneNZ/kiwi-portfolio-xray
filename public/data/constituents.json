@@ -168,7 +168,7 @@
       "isin": "NZFPHE0001S2",
       "name": "Fisher & Paykel Healthcare Corporation Limited",
       "ticker": "FPH.NZ",
-      "country": "NZ",
+      "country": "New Zealand",
       "sector": "Health Care",
       "weight": 0.1227
     },
@@ -176,7 +176,7 @@
       "isin": "ASX:MCY",
       "name": "MERCURY NZ LIMITED",
       "ticker": "MCY.AX",
-      "country": "AU",
+      "country": "Australia",
       "sector": "Utilities",
       "weight": 0.085
     },
@@ -184,7 +184,7 @@
       "isin": "ASX:AIA",
       "name": "AUCKLAND INTERNATIONAL AIRPORT LIMITED",
       "ticker": "AIA.AX",
-      "country": "AU",
+      "country": "Australia",
       "sector": "Industrials",
       "weight": 0.078
     },
@@ -192,7 +192,7 @@
       "isin": "ASX:CEN",
       "name": "CONTACT ENERGY LIMITED",
       "ticker": "CEN.AX",
-      "country": "AU",
+      "country": "Australia",
       "sector": "Utilities",
       "weight": 0.062
     },
@@ -200,7 +200,7 @@
       "isin": "ASX:SPK",
       "name": "SPARK NEW ZEALAND LIMITED",
       "ticker": "SPK.AX",
-      "country": "AU",
+      "country": "Australia",
       "sector": "Communication Services",
       "weight": 0.041
     },
@@ -218,7 +218,7 @@
       "isin": "AU000000BHP4",
       "name": "BHP GROUP LIMITED",
       "ticker": "BHP.AX",
-      "country": "AU",
+      "country": "Australia",
       "sector": "Materials",
       "weight": 0.145
     },
@@ -226,7 +226,7 @@
       "isin": "ASX:CSL",
       "name": "CSL LIMITED",
       "ticker": "CSL.AX",
-      "country": "AU",
+      "country": "Australia",
       "sector": "Health Care",
       "weight": 0.092
     },
@@ -234,7 +234,7 @@
       "isin": "ASX:CBA",
       "name": "COMMONWEALTH BANK OF AUSTRALIA.",
       "ticker": "CBA.AX",
-      "country": "AU",
+      "country": "Australia",
       "sector": "Financials",
       "weight": 0.113
     },
@@ -242,7 +242,7 @@
       "isin": "ASX:WES",
       "name": "WESFARMERS LIMITED",
       "ticker": "WES.AX",
-      "country": "AU",
+      "country": "Australia",
       "sector": "Consumer Discretionary",
       "weight": 0.051
     },
@@ -250,7 +250,7 @@
       "isin": "ASX:MQG",
       "name": "MACQUARIE GROUP LIMITED",
       "ticker": "MQG.AX",
-      "country": "AU",
+      "country": "Australia",
       "sector": "Financials",
       "weight": 0.048
     },
@@ -310,7 +310,7 @@
       "isin": "NZFPHE0001S2",
       "name": "Fisher & Paykel Healthcare Corporation Limited",
       "ticker": "FPH.NZ",
-      "country": "NZ",
+      "country": "New Zealand",
       "sector": "Health Care",
       "weight": 0.115
     },
@@ -318,7 +318,7 @@
       "isin": "ASX:MCY",
       "name": "MERCURY NZ LIMITED",
       "ticker": "MCY.AX",
-      "country": "AU",
+      "country": "Australia",
       "sector": "Utilities",
       "weight": 0.08
     },
@@ -326,16 +326,16 @@
       "isin": "ASX:AIA",
       "name": "AUCKLAND INTERNATIONAL AIRPORT LIMITED",
       "ticker": "AIA.AX",
-      "country": "AU",
+      "country": "Australia",
       "sector": "Industrials",
       "weight": 0.075
     },
     {
       "isin": "NZCNUE0001S2",
-      "name": "Chorus Limited",
-      "ticker": "CNU.NZ",
-      "country": "NZ",
-      "sector": "Communication Services",
+      "name": "Chorus Ltd",
+      "ticker": "",
+      "country": "Unknown",
+      "sector": "Unclassified",
       "weight": 0.04
     },
     {

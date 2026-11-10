@@ -1,5 +1,6 @@
 """Unit tests for Tier 1 holding extraction adapters."""
 
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -35,6 +36,37 @@ class TestAdapters(unittest.TestCase):
         msft = next(h for h in res.holdings if "Microsoft" in h.name)
         self.assertEqual(msft.isin, "US5949181045")
         self.assertEqual(msft.ticker, "MSFT")
+
+    def test_vanguard_real_world_export_edge_cases(self):
+        csv_text = (
+            "Fund Name: Vanguard Total World Stock ETF\n"
+            "As of 10/31/2026\n"
+            "\n"
+            "Ticker,Holdings,% of funds,Sector,Country,SEDOL\n"
+            "MSFT,Microsoft Corp,4.00,Information Technology,United States,2588173\n"
+            "FPH,Fisher & Paykel Healthcare Corp,0.50,Health Care,New Zealand,\n"
+            "TINY,Small Cap Co,<0.01%,Industrials,Japan,\n"
+            ",Short-term reserves,0.20,,,\n"
+            "Total,,100.00,,,\n"
+        )
+        adapter = VanguardAdapter()
+        with tempfile.TemporaryDirectory() as tmp:
+            p = Path(tmp) / "Holdings_details_Total_World_Stock_ETF.csv"
+            p.write_text(csv_text, encoding="utf-8")
+            self.assertTrue(adapter.can_handle(p))
+
+            res = adapter.parse(p)
+            self.assertEqual(res.fund_code, "VT")
+            self.assertEqual(res.effective_date, "2026-10-31")
+            # Reserves & Total skipped -> 3 equity holdings
+            self.assertEqual(len(res.holdings), 3)
+
+            by_ticker = {h.ticker: h for h in res.holdings}
+            # Critical check: 0.50% is 1/8th of 4.00% (NOT 50%!)
+            ratio = by_ticker["MSFT"].weight / by_ticker["FPH"].weight
+            self.assertAlmostEqual(ratio, 8.0, places=2)
+            self.assertEqual(by_ticker["MSFT"].isin, "SEDOL:2588173")
+            self.assertEqual(by_ticker["FPH"].isin, "VANG:FPH")
 
     def test_smartshares_direct_adapter(self):
         fnz_file = STAGING_DIR / "smartshares" / "smartshares_FNZ_202610.csv"

@@ -94,10 +94,11 @@ class SecurityMatcher:
         self.alias_map = alias_map or {}
         self.gics_mapping = gics_mapping or {}
 
-        # Build indexes for O(1) exact lookups
+        # Build indexes for O(1) exact lookups & inverted token pool
         self.by_isin: dict[str, dict] = {}
         self.by_ticker: dict[str, list[dict]] = {}
         self.by_clean_name: dict[str, dict] = {}
+        self.by_token: dict[str, list[dict]] = {}
 
         for sec in security_master:
             isin = sec.get("isin", "").strip()
@@ -107,14 +108,16 @@ class SecurityMatcher:
             ticker = sec.get("ticker", "").strip().upper()
             if ticker:
                 self.by_ticker.setdefault(ticker, []).append(sec)
-                # Also strip exchange prefix if present e.g. "NZX:FPH" -> "FPH"
                 if ":" in ticker:
-                    plain_ticker = ticker.split(":")[-1]
-                    self.by_ticker.setdefault(plain_ticker, []).append(sec)
+                    self.by_ticker.setdefault(ticker.split(":")[-1], []).append(sec)
+                if "." in ticker:
+                    self.by_ticker.setdefault(ticker.split(".")[0], []).append(sec)
 
             clean_name = normalize_company_name(sec.get("name", ""))
             if clean_name:
                 self.by_clean_name[clean_name] = sec
+                for tok in get_stem_tokens(clean_name):
+                    self.by_token.setdefault(tok, []).append(sec)
 
     def match(
         self,
@@ -170,20 +173,22 @@ class SecurityMatcher:
                     if in_stems and (in_stems & cand_stems):
                         return self._build_result(cand, 0.95, "exact_ticker_stem_disambiguated")
 
-        # 5. Guardrailed fuzzy match
+        # 5. Guardrailed fuzzy match via inverted stem-token pool
         in_stems = get_stem_tokens(name)
-        candidates_scored: list[tuple[float, dict]] = []
+        candidate_pool: list[dict] = []
+        seen_pool_ids: set[int] = set()
+        for tok in in_stems:
+            for sec in self.by_token.get(tok, []):
+                obj_id = id(sec)
+                if obj_id not in seen_pool_ids:
+                    seen_pool_ids.add(obj_id)
+                    candidate_pool.append(sec)
 
-        for sec in self.security_master:
+        candidates_scored: list[tuple[float, dict]] = []
+        for sec in candidate_pool:
             cand_name = sec.get("name", "")
-            cand_stems = get_stem_tokens(cand_name)
-            if in_stems and (in_stems & cand_stems):
-                score = token_sort_similarity(name, cand_name)
-                candidates_scored.append((score, sec))
-            else:
-                score = token_sort_similarity(name, cand_name)
-                if score >= 0.65:
-                    candidates_scored.append((score, sec))
+            score = token_sort_similarity(name, cand_name)
+            candidates_scored.append((score, sec))
 
         if not candidates_scored:
             return MatchResult(

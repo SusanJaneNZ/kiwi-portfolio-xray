@@ -5,7 +5,7 @@
     "raw_name": "Other NZX Top 50 Equities",
     "raw_ticker": "OTHER",
     "weight": 0.5963,
-    "reason": "ambiguous_collision_spread_0.01",
+    "reason": "score_below_90",
     "suggested_snippet": {
       "Smartshares:FNZ": {
         "Other NZX Top 50 Equities": "INSERT_CANONICAL_ISIN"
@@ -18,7 +18,7 @@
     "raw_name": "Other ASX Top 20 Equities",
     "raw_ticker": "OTHER",
     "weight": 0.54,
-    "reason": "ambiguous_collision_spread_0.01",
+    "reason": "score_below_90",
     "suggested_snippet": {
       "Smartshares:OZY": {
         "Other ASX Top 20 Equities": "INSERT_CANONICAL_ISIN"
@@ -31,7 +31,7 @@
     "raw_name": "First Solar Inc",
     "raw_ticker": "",
     "weight": 0.098,
-    "reason": "ambiguous_collision_spread_0.03",
+    "reason": "ambiguous_collision_spread_0.02",
     "suggested_snippet": {
       "Kernel:KERNEL_CLEAN_ENERGY": {
         "First Solar Inc": "INSERT_CANONICAL_ISIN"
@@ -57,7 +57,7 @@
     "raw_name": "Other Clean Energy Equities",
     "raw_ticker": "",
     "weight": 0.578,
-    "reason": "ambiguous_collision_spread_0.06",
+    "reason": "ambiguous_collision_spread_0.04",
     "suggested_snippet": {
       "Kernel:KERNEL_CLEAN_ENERGY": {
         "Other Clean Energy Equities": "INSERT_CANONICAL_ISIN"
@@ -70,7 +70,7 @@
     "raw_name": "Other NZ 50 Companies",
     "raw_ticker": "",
     "weight": 0.68,
-    "reason": "ambiguous_collision_spread_0.09",
+    "reason": "ambiguous_collision_spread_0.08",
     "suggested_snippet": {
       "Kernel:KERNEL_NZ_50": {
         "Other NZ 50 Companies": "INSERT_CANONICAL_ISIN"

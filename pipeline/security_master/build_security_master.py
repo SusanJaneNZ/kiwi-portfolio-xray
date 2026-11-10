@@ -10,6 +10,42 @@ from typing import Optional
 from pipeline.adapters.vanguard_adapter import VanguardAdapter
 from pipeline.enrichment.fuzzy_matcher import normalize_company_name
 
+COUNTRY_CODE_TO_NAME = {
+    "NZ": "New Zealand",
+    "AU": "Australia",
+    "US": "United States",
+    "USA": "United States",
+    "CA": "Canada",
+    "GB": "United Kingdom",
+    "UK": "United Kingdom",
+    "DK": "Denmark",
+    "TW": "Taiwan",
+    "NL": "Netherlands",
+    "CH": "Switzerland",
+    "JP": "Japan",
+    "DE": "Germany",
+    "FR": "France",
+    "KR": "South Korea",
+    "CN": "China",
+    "HK": "Hong Kong",
+    "SG": "Singapore",
+    "SE": "Sweden",
+    "NO": "Norway",
+    "FI": "Finland",
+    "IE": "Ireland",
+    "ES": "Spain",
+    "IT": "Italy",
+    "IN": "India",
+    "BR": "Brazil",
+}
+
+
+def _normalize_country(country_raw: str, default: str = "Global") -> str:
+    cleaned = (country_raw or "").strip()
+    if not cleaned:
+        return default
+    return COUNTRY_CODE_TO_NAME.get(cleaned.upper(), cleaned)
+
 
 def _normalize_sector(sector_raw: str, gics_lower_map: dict[str, str]) -> str:
     cleaned = (sector_raw or "").strip()
@@ -32,7 +68,7 @@ def _find_directory_file(directories_dir: Path, keyword: str, fallback_name: str
 
 
 def parse_nzx_directory(file_path: Path, gics_mapping: dict[str, str]) -> list[dict]:
-    """Parses NZX listed company directory CSV."""
+    """Parses NZX listed company directory CSV (both headered and headerless 5-column Rank/Ticker/Name/Country/Sector)."""
     records: list[dict] = []
     if not file_path.exists():
         return records
@@ -48,10 +84,15 @@ def parse_nzx_directory(file_path: Path, gics_mapping: dict[str, str]) -> list[d
             if not row or not any(row):
                 continue
             normalized_row = [c.strip().lower() for c in row]
-            if "isin" in normalized_row or "ticker" in normalized_row or "code" in normalized_row:
+            if "isin" in normalized_row or "ticker" in normalized_row or "code" in normalized_row or "nzx code" in normalized_row:
                 header = normalized_row
                 col_map = {c: idx for idx, c in enumerate(header)}
                 continue
+
+            # Auto-detect headerless 5-column format: Rank (int), Ticker, Company Name, Country, Sector
+            if not header and len(row) == 5 and row[0].strip().isdigit():
+                col_map = {"ticker": 1, "name": 2, "country": 3, "sector": 4}
+                header = ["rank", "ticker", "company name", "country", "sector"]
 
             if not header:
                 continue
@@ -60,29 +101,32 @@ def parse_nzx_directory(file_path: Path, gics_mapping: dict[str, str]) -> list[d
                 isin_col = next((idx for k, idx in col_map.items() if "isin" in k), -1)
                 ticker_col = next((idx for k, idx in col_map.items() if "ticker" in k or "code" in k), -1)
                 name_col = next((idx for k, idx in col_map.items() if "name" in k or "issuer" in k), -1)
+                country_col = next((idx for k, idx in col_map.items() if "country" in k), -1)
                 sector_col = next((idx for k, idx in col_map.items() if "sector" in k or "industry" in k), -1)
 
                 isin = row[isin_col].strip() if isin_col != -1 and len(row) > isin_col else ""
-                ticker = row[ticker_col].strip() if ticker_col != -1 and len(row) > ticker_col else ""
+                ticker = row[ticker_col].strip().upper() if ticker_col != -1 and len(row) > ticker_col else ""
                 name = row[name_col].strip() if name_col != -1 and len(row) > name_col else ""
+                country_raw = row[country_col].strip() if country_col != -1 and len(row) > country_col else "New Zealand"
                 sector_raw = row[sector_col].strip() if sector_col != -1 and len(row) > sector_col else "Unclassified"
 
                 if not isin and not ticker:
                     continue
 
-                if not isin and ticker:
-                    isin = f"NZX:{ticker.upper()}"
+                plain_ticker = ticker[:-3] if ticker.endswith(".NZ") else ticker
+                if not isin and plain_ticker:
+                    isin = f"NZX:{plain_ticker}"
 
-                # Ensure ticker has .NZ suffix for direct autocomplete disambiguation
-                clean_ticker = ticker if ".NZ" in ticker else f"{ticker}.NZ"
+                clean_ticker = f"{plain_ticker}.NZ"
                 sector = _normalize_sector(sector_raw, gics_lower)
+                country = _normalize_country(country_raw, default="New Zealand")
 
                 records.append({
                     "isin": isin,
                     "name": name,
                     "ticker": clean_ticker,
                     "exchange": "NZX",
-                    "country": "NZ",
+                    "country": country,
                     "sector": sector,
                 })
             except (ValueError, IndexError):
@@ -138,7 +182,7 @@ def parse_asx_directory(file_path: Path, gics_mapping: dict[str, str]) -> list[d
                     "name": name,
                     "ticker": clean_ticker,
                     "exchange": "ASX",
-                    "country": "AU",
+                    "country": "Australia",
                     "sector": sector,
                 })
             except (ValueError, IndexError):
@@ -161,12 +205,13 @@ def parse_vanguard_global_directory(file_path: Path, gics_mapping: dict[str, str
         if not h.isin and not h.name:
             continue
         sector = _normalize_sector(h.sector or "", gics_lower)
+        country = _normalize_country(h.country or "", default="Global")
         records.append({
-            "isin": h.isin or f"US{h.cusip or 'GLOBAL'}0",
+            "isin": h.isin,
             "name": h.name,
             "ticker": h.ticker or "",
             "exchange": "GLOBAL",
-            "country": h.country or "Global",
+            "country": country,
             "sector": sector,
         })
 
@@ -174,11 +219,11 @@ def parse_vanguard_global_directory(file_path: Path, gics_mapping: dict[str, str
 
 
 def _enrich_local_isins_from_global(local_records: list[dict], global_records: list[dict]) -> None:
-    """Replaces synthetic exchange IDs (e.g. ASX:BHP) with canonical ISINs from Vanguard VT when matched."""
+    """Replaces synthetic exchange IDs (e.g. ASX:BHP, NZX:FPH) with canonical ISINs from Vanguard VT when matched."""
     by_norm_name: dict[str, str] = {}
     for g in global_records:
         isin = g.get("isin", "").strip()
-        if not isin or isin.startswith("ASX:") or isin.startswith("NZX:"):
+        if not isin or isin.startswith("ASX:") or isin.startswith("NZX:") or isin.startswith("VANG:"):
             continue
         norm = normalize_company_name(g.get("name", ""))
         if norm and norm not in by_norm_name:
@@ -214,19 +259,25 @@ def compile_security_master(
     asx_file = _find_directory_file(directories_dir, "asx", "asx_directory.csv")
     asx_records = parse_asx_directory(asx_file, gics_mapping) if asx_file else []
 
-    # 3. Parse Vanguard VT (Global Equities)
-    vt_file = staging_dir / "vanguard" / "Holdings_details_VT.csv"
-    vanguard_records = parse_vanguard_global_directory(vt_file, gics_mapping)
+    # 3. Parse all Vanguard Global CSVs (preferring VT first)
+    vanguard_dir = staging_dir / "vanguard"
+    vanguard_records: list[dict] = []
+    if vanguard_dir.exists():
+        vanguard_files = sorted(
+            vanguard_dir.glob("*.csv"),
+            key=lambda p: (0 if "vt" in p.name.lower() or "total_world" in p.name.lower() else 1, p.name),
+        )
+        for vf in vanguard_files:
+            vanguard_records.extend(parse_vanguard_global_directory(vf, gics_mapping))
 
     # Enrich ASX/NZX records with canonical ISINs from Vanguard VT before deduplicating
     _enrich_local_isins_from_global(nzx_records, vanguard_records)
     _enrich_local_isins_from_global(asx_records, vanguard_records)
 
-    # Merge and deduplicate by ISIN
+    # Merge into Global Security Master, deduplicated by ISIN (Priority: NZX > ASX > Vanguard Global)
     seen_isins: set[str] = set()
     global_master: list[dict] = []
 
-    # Priority: NZX > ASX > Vanguard Global
     for rec in nzx_records + asx_records + vanguard_records:
         isin = rec.get("isin", "").strip()
         if isin and isin in seen_isins:
@@ -240,8 +291,15 @@ def compile_security_master(
     with open(output_master_path, "w", encoding="utf-8") as f:
         json.dump(global_master, f, indent=2)
 
-    # Extract direct equities (NZX and ASX only) for client-side search autocomplete
-    direct_equities = [r for r in global_master if r.get("exchange") in {"NZX", "ASX"}]
+    # Extract direct equities (NZX and ASX) deduplicated by (exchange, ticker) so dual-listed stocks remain selectable on both exchanges
+    seen_exchange_tickers: set[tuple[str, str]] = set()
+    direct_equities: list[dict] = []
+    for rec in nzx_records + asx_records:
+        key = (rec.get("exchange", ""), rec.get("ticker", ""))
+        if key not in seen_exchange_tickers:
+            seen_exchange_tickers.add(key)
+            direct_equities.append(rec)
+
     output_direct_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_direct_path, "w", encoding="utf-8") as f:
         json.dump(direct_equities, f, indent=2)
