@@ -88,7 +88,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "NZX:ATM",
+    "isin": "SEDOL:BWSRTS7",
     "name": "The a2 Milk Company Limited",
     "ticker": "ATM.NZ",
     "exchange": "NZX",
@@ -1136,7 +1136,7 @@
     "sector": "Communication Services"
   },
   {
-    "isin": "ASX:A2M",
+    "isin": "SEDOL:BWSRTS7",
     "name": "THE A2 MILK COMPANY LIMITED",
     "ticker": "A2M.AX",
     "exchange": "ASX",
@@ -5520,7 +5520,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:EF2",
+    "isin": "SEDOL:BFV4XV7",
     "name": "ENERGY FUELS INC.",
     "ticker": "EF2.AX",
     "exchange": "ASX",
@@ -7048,7 +7048,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:GPT",
+    "isin": "SEDOL:6365866",
     "name": "GPT GROUP",
     "ticker": "GPT.AX",
     "exchange": "ASX",
@@ -12928,7 +12928,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:SGR",
+    "isin": "SEDOL:BD5ZR98",
     "name": "THE STAR ENTERTAINMENT GROUP LIMITED",
     "ticker": "SGR.AX",
     "exchange": "ASX",
@@ -14048,7 +14048,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:TLC",
+    "isin": "SEDOL:BNRQW72",
     "name": "THE LOTTERY CORPORATION LIMITED",
     "ticker": "TLC.AX",
     "exchange": "ASX",

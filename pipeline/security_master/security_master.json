@@ -88,7 +88,7 @@
     "sector": "Industrials"
   },
   {
-    "isin": "NZX:ATM",
+    "isin": "SEDOL:BWSRTS7",
     "name": "The a2 Milk Company Limited",
     "ticker": "ATM.NZ",
     "exchange": "NZX",
@@ -1134,14 +1134,6 @@
     "exchange": "ASX",
     "country": "Australia",
     "sector": "Communication Services"
-  },
-  {
-    "isin": "ASX:A2M",
-    "name": "THE A2 MILK COMPANY LIMITED",
-    "ticker": "A2M.AX",
-    "exchange": "ASX",
-    "country": "Australia",
-    "sector": "Consumer Staples"
   },
   {
     "isin": "ASX:A3D",
@@ -5464,7 +5456,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:EF2",
+    "isin": "SEDOL:BFV4XV7",
     "name": "ENERGY FUELS INC.",
     "ticker": "EF2.AX",
     "exchange": "ASX",
@@ -6952,7 +6944,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:GPT",
+    "isin": "SEDOL:6365866",
     "name": "GPT GROUP",
     "ticker": "GPT.AX",
     "exchange": "ASX",
@@ -12768,7 +12760,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:SGR",
+    "isin": "SEDOL:BD5ZR98",
     "name": "THE STAR ENTERTAINMENT GROUP LIMITED",
     "ticker": "SGR.AX",
     "exchange": "ASX",
@@ -13856,7 +13848,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:TLC",
+    "isin": "SEDOL:BNRQW72",
     "name": "THE LOTTERY CORPORATION LIMITED",
     "ticker": "TLC.AX",
     "exchange": "ASX",
@@ -28912,14 +28904,6 @@
     "sector": "Information Technology"
   },
   {
-    "isin": "SEDOL:BNRQW72",
-    "name": "Lottery Corp Ltd/The",
-    "ticker": "TLC",
-    "exchange": "GLOBAL",
-    "country": "Australia",
-    "sector": "Consumer Discretionary"
-  },
-  {
     "isin": "SEDOL:BYZFYS3",
     "name": "SPIE SA",
     "ticker": "SPIE",
@@ -29646,14 +29630,6 @@
     "exchange": "GLOBAL",
     "country": "India",
     "sector": "Industrials"
-  },
-  {
-    "isin": "SEDOL:6365866",
-    "name": "GPT Group/The",
-    "ticker": "GPT",
-    "exchange": "GLOBAL",
-    "country": "Australia",
-    "sector": "Real Estate"
   },
   {
     "isin": "SEDOL:BYP20B9",
@@ -38760,14 +38736,6 @@
     "sector": "Materials"
   },
   {
-    "isin": "SEDOL:BWSRTS7",
-    "name": "a2 Milk Co Ltd/The",
-    "ticker": "A2M",
-    "exchange": "GLOBAL",
-    "country": "Australia",
-    "sector": "Consumer Staples"
-  },
-  {
     "isin": "SEDOL:BBGB5W0",
     "name": "Growthpoint Properties Ltd",
     "ticker": "GRT",
@@ -40142,14 +40110,6 @@
     "exchange": "GLOBAL",
     "country": "United Kingdom",
     "sector": "Communication Services"
-  },
-  {
-    "isin": "SEDOL:BFV4XV7",
-    "name": "Energy Fuels Inc/Canada",
-    "ticker": "EFR",
-    "exchange": "GLOBAL",
-    "country": "Canada",
-    "sector": "Energy"
   },
   {
     "isin": "SEDOL:B3D6J19",
@@ -85270,14 +85230,6 @@
     "exchange": "GLOBAL",
     "country": "China",
     "sector": "Industrials"
-  },
-  {
-    "isin": "SEDOL:BD5ZR98",
-    "name": "Star Entertainment Grp Ltd/The",
-    "ticker": "SGR",
-    "exchange": "GLOBAL",
-    "country": "Australia",
-    "sector": "Consumer Discretionary"
   },
   {
     "isin": "SEDOL:6894809",

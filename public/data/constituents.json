@@ -88893,7 +88893,7 @@
       "weight": 0.00030069
     },
     {
-      "isin": "SEDOL:5076705",
+      "isin": "SEDOL:5002465",
       "name": "HENKEL & KGAA PREF AG",
       "ticker": "HEN3",
       "country": "Germany",
@@ -89469,7 +89469,7 @@
       "weight": 0.00020046
     },
     {
-      "isin": "SEDOL:B1VVGZ5",
+      "isin": "SEDOL:B1VVGV1",
       "name": "SVENSKA CELLULOSA B",
       "ticker": "SCA B",
       "country": "Sweden",
@@ -89581,7 +89581,7 @@
       "weight": 0.00020046
     },
     {
-      "isin": "SYNTH_SKA B",
+      "isin": "SEDOL:7142091",
       "name": "SKANSKA B",
       "ticker": "SKA B",
       "country": "Sweden",
@@ -89709,7 +89709,7 @@
       "weight": 0.00020046
     },
     {
-      "isin": "SYNTH_TEL2 B",
+      "isin": "SEDOL:B97C733",
       "name": "TELE2 B",
       "ticker": "TEL2 B",
       "country": "Sweden",
@@ -89885,7 +89885,7 @@
       "weight": 0.00020046
     },
     {
-      "isin": "SEDOL:6867748",
+      "isin": "SEDOL:6867760",
       "name": "SWIRE PACIFIC LTD A",
       "ticker": "19",
       "country": "Hong Kong",
@@ -90863,11 +90863,11 @@
       "weight": 0.00302001
     },
     {
-      "isin": "UNRESOLVED_77",
-      "name": "Investor AB B (SEK)",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BMV7PN1",
+      "name": "Investor AB",
+      "ticker": "INVEA",
+      "country": "Sweden",
+      "sector": "Financials",
       "weight": 0.00302001
     },
     {
@@ -90999,11 +90999,11 @@
       "weight": 0.00251668
     },
     {
-      "isin": "UNRESOLVED_94",
-      "name": "DEUTSCHE BOERSE NA O.N.",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:7021963",
+      "name": "Deutsche Boerse AG",
+      "ticker": "DB1",
+      "country": "Germany",
+      "sector": "Financials",
       "weight": 0.00251668
     },
     {
@@ -91159,9 +91159,9 @@
       "weight": 0.00221467
     },
     {
-      "isin": "SEDOL:BLDBN41",
+      "isin": "SEDOL:BLDBN52",
       "name": "Atlas Copco AB",
-      "ticker": "ATCOA",
+      "ticker": "ATCOB",
       "country": "Sweden",
       "sector": "Industrials",
       "weight": 0.00211401
@@ -91175,11 +91175,11 @@
       "weight": 0.00211401
     },
     {
-      "isin": "UNRESOLVED_116",
-      "name": "Volvo AB B",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B1QH7Y4",
+      "name": "Volvo AB",
+      "ticker": "VOLVA",
+      "country": "Sweden",
+      "sector": "Industrials",
       "weight": 0.00211401
     },
     {
@@ -91399,11 +91399,11 @@
       "weight": 0.00181201
     },
     {
-      "isin": "UNRESOLVED_144",
-      "name": "Constellation Software Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B15C4L6",
+      "name": "Constellation Software Inc/Canada",
+      "ticker": "CSU",
+      "country": "Canada",
+      "sector": "Information Technology",
       "weight": 0.00181201
     },
     {
@@ -91839,11 +91839,11 @@
       "weight": 0.00130867
     },
     {
-      "isin": "UNRESOLVED_199",
-      "name": "Ahold Delhaize NV",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BD0Q398",
+      "name": "Koninklijke Ahold Delhaize NV",
+      "ticker": "AD",
+      "country": "Netherlands",
+      "sector": "Consumer Staples",
       "weight": 0.00130867
     },
     {
@@ -91943,11 +91943,11 @@
       "weight": 0.001208
     },
     {
-      "isin": "UNRESOLVED_212",
-      "name": "ABN Amro Bank NV",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BYQP136",
+      "name": "ABN AMRO BANK NV-CVA",
+      "ticker": "ABN",
+      "country": "Netherlands",
+      "sector": "Financials",
       "weight": 0.001208
     },
     {
@@ -91975,11 +91975,11 @@
       "weight": 0.001208
     },
     {
-      "isin": "UNRESOLVED_216",
-      "name": "Experian PLC Ord USD",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B19NLV4",
+      "name": "Experian PLC",
+      "ticker": "EXPN",
+      "country": "United Kingdom",
+      "sector": "Industrials",
       "weight": 0.001208
     },
     {
@@ -92039,9 +92039,9 @@
       "weight": 0.00110734
     },
     {
-      "isin": "SEDOL:BLDBN41",
+      "isin": "SEDOL:BLDBN52",
       "name": "Atlas Copco AB",
-      "ticker": "ATCOA",
+      "ticker": "ATCOB",
       "country": "Sweden",
       "sector": "Industrials",
       "weight": 0.00110734
@@ -92063,11 +92063,11 @@
       "weight": 0.00110734
     },
     {
-      "isin": "UNRESOLVED_227",
-      "name": "Fortis Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2347200",
+      "name": "Fortis Inc/Canada",
+      "ticker": "FTS",
+      "country": "Canada",
+      "sector": "Utilities",
       "weight": 0.00110734
     },
     {
@@ -92247,11 +92247,11 @@
       "weight": 0.00100667
     },
     {
-      "isin": "UNRESOLVED_250",
-      "name": "Sampo Oyj A",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6771924",
+      "name": "Sampo Corp",
+      "ticker": "1604",
+      "country": "Taiwan",
+      "sector": "Consumer Discretionary",
       "weight": 0.00100667
     },
     {
@@ -92303,11 +92303,11 @@
       "weight": 0.00100667
     },
     {
-      "isin": "UNRESOLVED_257",
-      "name": "Loblaw Companies Ltd",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2521800",
+      "name": "Loblaw Cos Ltd",
+      "ticker": "L",
+      "country": "Canada",
+      "sector": "Consumer Staples",
       "weight": 0.00100667
     },
     {
@@ -92367,11 +92367,11 @@
       "weight": 0.000906
     },
     {
-      "isin": "UNRESOLVED_265",
-      "name": "Kone Corp B",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B09M9D2",
+      "name": "Kone Oyj",
+      "ticker": "KNEBV",
+      "country": "Finland",
+      "sector": "Industrials",
       "weight": 0.000906
     },
     {
@@ -92383,9 +92383,9 @@
       "weight": 0.000906
     },
     {
-      "isin": "SEDOL:BXDZ9Q1",
+      "isin": "SEDOL:BXDZ9V6",
       "name": "Svenska Handelsbanken AB",
-      "ticker": "SHBA",
+      "ticker": "SHBB",
       "country": "Sweden",
       "sector": "Financials",
       "weight": 0.000906
@@ -92471,11 +92471,11 @@
       "weight": 0.000906
     },
     {
-      "isin": "UNRESOLVED_278",
-      "name": "Heineken N.V.",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B0CCH46",
+      "name": "Heineken Holding NV",
+      "ticker": "HEIO",
+      "country": "Netherlands",
+      "sector": "Consumer Staples",
       "weight": 0.000906
     },
     {
@@ -92647,11 +92647,11 @@
       "weight": 0.00080534
     },
     {
-      "isin": "UNRESOLVED_300",
-      "name": "Sumitomo Realty & Dev Co",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6858902",
+      "name": "Sumitomo Realty & Development Co Ltd",
+      "ticker": "8830",
+      "country": "Japan",
+      "sector": "Real Estate",
       "weight": 0.00080534
     },
     {
@@ -92727,11 +92727,11 @@
       "weight": 0.00070467
     },
     {
-      "isin": "UNRESOLVED_310",
-      "name": "Kansai Electric Power Co Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6483489",
+      "name": "Kansai Electric Power Co Inc/The",
+      "ticker": "9503",
+      "country": "Japan",
+      "sector": "Utilities",
       "weight": 0.00070467
     },
     {
@@ -92887,19 +92887,19 @@
       "weight": 0.00070467
     },
     {
-      "isin": "UNRESOLVED_330",
-      "name": "Epiroc AB - A shares",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BMD58R8",
+      "name": "Epiroc AB",
+      "ticker": "EPIA",
+      "country": "Sweden",
+      "sector": "Industrials",
       "weight": 0.00070467
     },
     {
-      "isin": "UNRESOLVED_331",
-      "name": "Volkswagen AG Preference",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:5497102",
+      "name": "Volkswagen AG",
+      "ticker": "VOW",
+      "country": "Germany",
+      "sector": "Consumer Discretionary",
       "weight": 0.00070467
     },
     {
@@ -93047,11 +93047,11 @@
       "weight": 0.000604
     },
     {
-      "isin": "UNRESOLVED_350",
-      "name": "Partners Group Hldg",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B119QG0",
+      "name": "Partners Group Holding AG",
+      "ticker": "PGHN",
+      "country": "Switzerland",
+      "sector": "Financials",
       "weight": 0.000604
     },
     {
@@ -93079,11 +93079,11 @@
       "weight": 0.000604
     },
     {
-      "isin": "UNRESOLVED_354",
-      "name": "Kerry Group A",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:4519579",
+      "name": "Kerry Group PLC",
+      "ticker": "KYGA",
+      "country": "Ireland",
+      "sector": "Consumer Staples",
       "weight": 0.000604
     },
     {
@@ -93167,11 +93167,11 @@
       "weight": 0.000604
     },
     {
-      "isin": "UNRESOLVED_365",
-      "name": "Essity AB - B shares",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BF1K7P7",
+      "name": "Essity AB",
+      "ticker": "ESSITYB",
+      "country": "Sweden",
+      "sector": "Consumer Staples",
       "weight": 0.000604
     },
     {
@@ -93447,11 +93447,11 @@
       "weight": 0.000604
     },
     {
-      "isin": "UNRESOLVED_400",
-      "name": "The Phoenix Holdings Ltd",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BQ759B3",
+      "name": "Phoenix Group PLC",
+      "ticker": "PHX",
+      "country": "United Arab Emirates",
+      "sector": "Information Technology",
       "weight": 0.00050334
     },
     {
@@ -93487,11 +93487,11 @@
       "weight": 0.00050334
     },
     {
-      "isin": "UNRESOLVED_405",
-      "name": "Metro Inc.",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2583952",
+      "name": "Metro Inc/CN",
+      "ticker": "MRU",
+      "country": "Canada",
+      "sector": "Consumer Staples",
       "weight": 0.00050334
     },
     {
@@ -93607,19 +93607,19 @@
       "weight": 0.00050334
     },
     {
-      "isin": "UNRESOLVED_420",
-      "name": "Chiba Bank",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6190563",
+      "name": "Chiba Bank Ltd/The",
+      "ticker": "8331",
+      "country": "Japan",
+      "sector": "Financials",
       "weight": 0.00050334
     },
     {
-      "isin": "UNRESOLVED_421",
-      "name": "Henkel AG & Co. KGaA Nvtg - Pref",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:5002465",
+      "name": "Henkel AG & Co KGaA",
+      "ticker": "HEN",
+      "country": "Germany",
+      "sector": "Consumer Staples",
       "weight": 0.00050334
     },
     {
@@ -93639,11 +93639,11 @@
       "weight": 0.00050334
     },
     {
-      "isin": "UNRESOLVED_424",
-      "name": "Schindler-Hldg AG Ptg",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B11WWH2",
+      "name": "Schindler Holding AG",
+      "ticker": "SCHN",
+      "country": "Switzerland",
+      "sector": "Industrials",
       "weight": 0.00050334
     },
     {
@@ -93791,11 +93791,11 @@
       "weight": 0.00050334
     },
     {
-      "isin": "UNRESOLVED_443",
-      "name": "Sage Group",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B8C3BL0",
+      "name": "Sage Group PLC/The",
+      "ticker": "SGE",
+      "country": "United Kingdom",
+      "sector": "Information Technology",
       "weight": 0.00050334
     },
     {
@@ -93807,9 +93807,9 @@
       "weight": 0.00050334
     },
     {
-      "isin": "SEDOL:4253048",
+      "isin": "SEDOL:4253059",
       "name": "AP Moller - Maersk A/S",
-      "ticker": "MAERSKB",
+      "ticker": "MAERSKA",
       "country": "Denmark",
       "sector": "Industrials",
       "weight": 0.00050334
@@ -94127,11 +94127,11 @@
       "weight": 0.00040267
     },
     {
-      "isin": "UNRESOLVED_485",
-      "name": "SKANSKA AB-B (SEK)",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:7142091",
+      "name": "Skanska AB",
+      "ticker": "SKAB",
+      "country": "Sweden",
+      "sector": "Industrials",
       "weight": 0.00040267
     },
     {
@@ -94295,11 +94295,11 @@
       "weight": 0.00040267
     },
     {
-      "isin": "UNRESOLVED_506",
-      "name": "Addtech AB B (SEK)",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BLN8T44",
+      "name": "AddTech AB",
+      "ticker": "ADDTB",
+      "country": "Sweden",
+      "sector": "Industrials",
       "weight": 0.00040267
     },
     {
@@ -94335,27 +94335,27 @@
       "weight": 0.00040267
     },
     {
-      "isin": "UNRESOLVED_511",
-      "name": "Tele2 AB B (SEK)",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B97C733",
+      "name": "Tele2 AB",
+      "ticker": "TEL2B",
+      "country": "Sweden",
+      "sector": "Communication Services",
       "weight": 0.00040267
     },
     {
-      "isin": "SEDOL:B1VSK54",
+      "isin": "SEDOL:B1VSK10",
       "name": "Industrivarden AB",
-      "ticker": "INDUC",
+      "ticker": "INDUA",
       "country": "Sweden",
       "sector": "Financials",
       "weight": 0.00040267
     },
     {
-      "isin": "UNRESOLVED_513",
-      "name": "Epiroc AB - B shares",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BMD58R8",
+      "name": "Epiroc AB",
+      "ticker": "EPIA",
+      "country": "Sweden",
+      "sector": "Industrials",
       "weight": 0.00040267
     },
     {
@@ -94375,9 +94375,9 @@
       "weight": 0.00040267
     },
     {
-      "isin": "SEDOL:4253048",
+      "isin": "SEDOL:4253059",
       "name": "AP Moller - Maersk A/S",
-      "ticker": "MAERSKB",
+      "ticker": "MAERSKA",
       "country": "Denmark",
       "sector": "Industrials",
       "weight": 0.00040267
@@ -94575,10 +94575,10 @@
       "weight": 0.000302
     },
     {
-      "isin": "SEDOL:2254645",
+      "isin": "SEDOL:2257763",
       "name": "Gildan Activewear Inc",
       "ticker": "GIL",
-      "country": "Canada",
+      "country": "United States",
       "sector": "Consumer Discretionary",
       "weight": 0.000302
     },
@@ -94695,15 +94695,15 @@
       "weight": 0.000302
     },
     {
-      "isin": "UNRESOLVED_556",
-      "name": "Food & Life Companies Ltd",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BF1HPT8",
+      "name": "Food & Life Cos Ltd",
+      "ticker": "3563",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
       "weight": 0.000302
     },
     {
-      "isin": "ASX:TLC",
+      "isin": "SEDOL:BNRQW72",
       "name": "THE LOTTERY CORPORATION LIMITED",
       "ticker": "TLC.AX",
       "country": "Australia",
@@ -95087,11 +95087,11 @@
       "weight": 0.000302
     },
     {
-      "isin": "UNRESOLVED_605",
-      "name": "EMS-Chemie Hldg AG",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:7635610",
+      "name": "EMS-Chemie Holding AG",
+      "ticker": "EMSN",
+      "country": "Switzerland",
+      "sector": "Materials",
       "weight": 0.000302
     },
     {
@@ -95167,9 +95167,9 @@
       "weight": 0.000302
     },
     {
-      "isin": "SEDOL:B1VVGZ5",
+      "isin": "SEDOL:B1VVGV1",
       "name": "Svenska Cellulosa AB SCA",
-      "ticker": "SCAB",
+      "ticker": "SCAA",
       "country": "Sweden",
       "sector": "Materials",
       "weight": 0.000302
@@ -95215,11 +95215,11 @@
       "weight": 0.000302
     },
     {
-      "isin": "UNRESOLVED_621",
-      "name": "Yokohama Rubber Co",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6986461",
+      "name": "Yokohama Rubber Co Ltd/The",
+      "ticker": "5101",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
       "weight": 0.000302
     },
     {
@@ -95255,11 +95255,11 @@
       "weight": 0.000302
     },
     {
-      "isin": "UNRESOLVED_626",
-      "name": "Quebecor Inc B SV",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2715777",
+      "name": "Quebecor Inc",
+      "ticker": "QBR/B",
+      "country": "Canada",
+      "sector": "Communication Services",
       "weight": 0.000302
     },
     {
@@ -95287,11 +95287,11 @@
       "weight": 0.000302
     },
     {
-      "isin": "UNRESOLVED_630",
-      "name": "SSAB AB - B Shares",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B17H0S8",
+      "name": "SSAB AB",
+      "ticker": "SSABA",
+      "country": "Sweden",
+      "sector": "Materials",
       "weight": 0.000302
     },
     {
@@ -95335,9 +95335,9 @@
       "weight": 0.000302
     },
     {
-      "isin": "SEDOL:B1VSK54",
+      "isin": "SEDOL:B1VSK10",
       "name": "Industrivarden AB",
-      "ticker": "INDUC",
+      "ticker": "INDUA",
       "country": "Sweden",
       "sector": "Financials",
       "weight": 0.000302
@@ -95367,11 +95367,11 @@
       "weight": 0.000302
     },
     {
-      "isin": "UNRESOLVED_640",
-      "name": "Schindler-Hldg AG Reg",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B11WWH2",
+      "name": "Schindler Holding AG",
+      "ticker": "SCHN",
+      "country": "Switzerland",
+      "sector": "Industrials",
       "weight": 0.000302
     },
     {
@@ -95383,7 +95383,7 @@
       "weight": 0.00020133
     },
     {
-      "isin": "ASX:GPT",
+      "isin": "SEDOL:6365866",
       "name": "GPT GROUP",
       "ticker": "GPT.AX",
       "country": "Australia",
@@ -95871,9 +95871,9 @@
       "weight": 0.00020133
     },
     {
-      "isin": "SEDOL:6867748",
+      "isin": "SEDOL:6867760",
       "name": "Swire Pacific Ltd",
-      "ticker": "19",
+      "ticker": "87",
       "country": "Hong Kong",
       "sector": "Industrials",
       "weight": 0.00020133
@@ -96287,11 +96287,11 @@
       "weight": 0.00010067
     },
     {
-      "isin": "UNRESOLVED_755",
-      "name": "Sagax AB B Shares",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BDQZF59",
+      "name": "Sagax AB",
+      "ticker": "SAGAD",
+      "country": "Sweden",
+      "sector": "Real Estate",
       "weight": 0.00010067
     },
     {
@@ -96343,19 +96343,19 @@
       "weight": 0.00010067
     },
     {
-      "isin": "ASX:A2M",
-      "name": "THE A2 MILK COMPANY LIMITED",
-      "ticker": "A2M.AX",
-      "country": "Australia",
+      "isin": "SEDOL:BWSRTS7",
+      "name": "The a2 Milk Company Limited",
+      "ticker": "ATM.NZ",
+      "country": "New Zealand",
       "sector": "Consumer Staples",
       "weight": 0.00010067
     },
     {
-      "isin": "UNRESOLVED_763",
-      "name": "Aker ASA A",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B02R4D9",
+      "name": "Aker ASA",
+      "ticker": "AKER",
+      "country": "Norway",
+      "sector": "Industrials",
       "weight": 0.00010067
     },
     {
@@ -96679,11 +96679,11 @@
       "weight": 0.00010067
     },
     {
-      "isin": "UNRESOLVED_804",
-      "name": "Wharf (Holdings) Ltd.",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6435576",
+      "name": "Wharf Holdings Ltd/The",
+      "ticker": "4",
+      "country": "Hong Kong",
+      "sector": "Real Estate",
       "weight": 0.00010067
     },
     {
@@ -96751,11 +96751,11 @@
       "weight": 0.00010067
     },
     {
-      "isin": "UNRESOLVED_813",
-      "name": "SSAB AB - A Shares",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B17H0S8",
+      "name": "SSAB AB",
+      "ticker": "SSABA",
+      "country": "Sweden",
+      "sector": "Materials",
       "weight": 0.00010067
     },
     {
@@ -96983,9 +96983,9 @@
       "weight": 0.00010067
     },
     {
-      "isin": "SEDOL:6867748",
+      "isin": "SEDOL:6867760",
       "name": "Swire Pacific Ltd",
-      "ticker": "19",
+      "ticker": "87",
       "country": "Hong Kong",
       "sector": "Industrials",
       "weight": 0.00010067

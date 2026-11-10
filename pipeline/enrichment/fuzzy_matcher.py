@@ -22,12 +22,18 @@ LEGAL_SUFFIXES = {
     "GROUP", "GRP", "COMPANY", "CO", "SPA", "SE", "GMBH", "KGA", "KGAA", "BERHAD", "BHD",
     "AB", "ASA", "SCA", "SP", "KK", "TBK", "PTE", "PTY", "LP", "LLC",
     "ORD", "ORDINARY", "COMMON", "SHARES", "SHS", "REG", "REGISTERED", "STAPLED",
-    "PROMESSES", "ADR", "GDR", "BDR", "SPONSORED", "SV", "NA", "ON", "NPV",
+    "PROMESSES", "ADR", "GDR", "BDR", "SPONSORED", "SV", "NA", "ON", "NPV", "CVA",
+    "PTG", "NVTG", "PREF", "PREFERENCE",
+    # Trailing country/article/currency tags appended by Vanguard VT or Kernel
+    "THE", "CANADA", "CN", "USD", "EUR", "SEK", "GBP", "AUD", "NZD", "CHF", "JPY", "KONINKLIJKE",
 }
 
 TOKEN_EXPANSIONS = {
     "INTL": "INTERNATIONAL",
     "CIE": "COMPAGNIE",
+    "COS": "COMPANIES",
+    "HLDG": "HOLDING",
+    "DEV": "DEVELOPMENT",
 }
 
 
@@ -35,17 +41,25 @@ def normalize_company_name(name: str) -> str:
     """Normalizes a company name by stripping legal/share suffixes, punctuation, and extra whitespace."""
     if not name:
         return ""
-    # Strip compound abbreviations like A/S, N.V., S.A., K.K., etc.
-    cleaned = re.sub(r"\b(A/S|N\.V\.|S\.A\.|A\.G\.|O\.Y\.|P\.L\.C\.|K\.K\.|O\.N\.)\b", " ", name, flags=re.IGNORECASE)
+    # Strip compound abbreviations like A/S, N.V., S.A., O.N., K.K. (using lookaround so trailing dots match cleanly)
+    cleaned = re.sub(
+        r"(?<!\w)(?:A/S|N\.V\.|S\.A\.|A\.G\.|O\.Y\.|P\.L\.C\.|K\.K\.|O\.N\.)(?!\w)",
+        " ",
+        name,
+        flags=re.IGNORECASE,
+    )
     # Strip parentheses and contents if e.g. (NZ), (AU), (UK Register), (SEK)
     cleaned = re.sub(r"\([^)]+\)", " ", cleaned)
     # Replace punctuation with space
     cleaned = re.sub(r"[^A-Za-z0-9\s]", " ", cleaned).upper()
     tokens = []
     for tok in cleaned.split():
-        if not tok or tok in LEGAL_SUFFIXES:
+        if not tok:
             continue
-        tokens.append(TOKEN_EXPANSIONS.get(tok, tok))
+        expanded = TOKEN_EXPANSIONS.get(tok, tok)
+        if expanded in LEGAL_SUFFIXES:
+            continue
+        tokens.append(expanded)
     return " ".join(tokens)
 
 
@@ -165,11 +179,17 @@ class SecurityMatcher:
             sec = self.by_isin[isin]
             return self._build_result(sec, 1.0, "exact_isin")
 
-        # 3. Exact clean name match
+        # 3. Exact clean name match (plus safe trailing Nordic/EU single-letter share class fallback e.g. "Investor AB B")
         clean_in = normalize_company_name(name)
         if clean_in and clean_in in self.by_clean_name:
             sec = self.by_clean_name[clean_in]
             return self._build_result(sec, 1.0, "exact_normalized_name")
+        if clean_in and "CLASS" not in clean_in:
+            parts = clean_in.split()
+            if len(parts) >= 2 and parts[-1] in {"A", "B", "C"}:
+                base_clean = " ".join(parts[:-1])
+                if base_clean in self.by_clean_name:
+                    return self._build_result(self.by_clean_name[base_clean], 0.99, "exact_normalized_name_share_class")
 
         # 4. Exact ticker match (if single candidate or matches provider exchange)
         if ticker:

@@ -168,6 +168,8 @@ class PipelineCompiler:
             })
             constituents_map[uf.fund_code] = uf.constituents
 
+        all_unresolved_entries.sort(key=lambda item: item.get("weight", 0.0), reverse=True)
+
         # 8. Validate with SchemaValidator
         validator = SchemaValidator()
         validation_report = validator.validate_all(
