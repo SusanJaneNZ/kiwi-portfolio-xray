@@ -44,7 +44,7 @@
     "raw_name": "Other NZ 50 Companies",
     "raw_ticker": "",
     "weight": 0.68,
-    "reason": "ambiguous_collision_spread_0.09",
+    "reason": "ambiguous_collision_spread_0.06",
     "suggested_snippet": {
       "Kernel:KERNEL_NZ_50": {
         "Other NZ 50 Companies": "INSERT_CANONICAL_ISIN"
