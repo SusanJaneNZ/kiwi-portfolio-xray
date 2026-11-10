@@ -1,53 +1,1457 @@
 [
   {
-    "provider": "Smartshares",
-    "fund_code": "FNZ",
-    "raw_name": "Other NZX Top 50 Equities",
-    "raw_ticker": "OTHER",
-    "weight": 0.5963,
-    "reason": "ambiguous_collision_spread_0.09",
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "LVMH-Moet Vuitton",
+    "raw_ticker": "",
+    "weight": 0.004631,
+    "reason": "score_below_90",
     "suggested_snippet": {
-      "Smartshares:FNZ": {
-        "Other NZX Top 50 Equities": "INSERT_CANONICAL_ISIN"
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "LVMH-Moet Vuitton": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
-    "provider": "Smartshares",
-    "fund_code": "OZY",
-    "raw_name": "Other ASX Top 20 Equities",
-    "raw_ticker": "OTHER",
-    "weight": 0.54,
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Bank of Nova Scotia Halifax",
+    "raw_ticker": "",
+    "weight": 0.00453,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Bank of Nova Scotia Halifax": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "ANZ Bank (AU Register)",
+    "raw_ticker": "",
+    "weight": 0.003322,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "ANZ Bank (AU Register)": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Canadian Pacific Railway Ltd",
+    "raw_ticker": "",
+    "weight": 0.003121,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Canadian Pacific Railway Ltd": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Investor AB B (SEK)",
+    "raw_ticker": "",
+    "weight": 0.00302,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Investor AB B (SEK)": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Munich Re AG",
+    "raw_ticker": "",
+    "weight": 0.00302,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Munich Re AG": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Inditex SA",
+    "raw_ticker": "",
+    "weight": 0.002819,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Inditex SA": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Barrick Gold Corp Ord",
+    "raw_ticker": "",
+    "weight": 0.002718,
+    "reason": "ambiguous_collision_spread_0.00",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Barrick Gold Corp Ord": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "DEUTSCHE BOERSE NA O.N.",
+    "raw_ticker": "",
+    "weight": 0.002517,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "DEUTSCHE BOERSE NA O.N.": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Volvo AB B",
+    "raw_ticker": "",
+    "weight": 0.002114,
+    "reason": "ambiguous_collision_spread_0.08",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Volvo AB B": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Assicurazioni Generali SpA",
+    "raw_ticker": "",
+    "weight": 0.002013,
+    "reason": "ambiguous_collision_spread_0.10",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Assicurazioni Generali SpA": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Constellation Software Inc",
+    "raw_ticker": "",
+    "weight": 0.001812,
     "reason": "ambiguous_collision_spread_0.02",
     "suggested_snippet": {
-      "Smartshares:OZY": {
-        "Other ASX Top 20 Equities": "INSERT_CANONICAL_ISIN"
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Constellation Software Inc": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
     "provider": "Kernel",
-    "fund_code": "KERNEL_CLEAN_ENERGY",
-    "raw_name": "Other Clean Energy Equities",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Arm Holdings plc ADR",
     "raw_ticker": "",
-    "weight": 0.578,
-    "reason": "ambiguous_collision_spread_0.03",
+    "weight": 0.001611,
+    "reason": "no_candidates_above_70",
     "suggested_snippet": {
-      "Kernel:KERNEL_CLEAN_ENERGY": {
-        "Other Clean Energy Equities": "INSERT_CANONICAL_ISIN"
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Arm Holdings plc ADR": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
     "provider": "Kernel",
-    "fund_code": "KERNEL_NZ_50",
-    "raw_name": "Other NZ 50 Companies",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Sea Ltd. (Singapore)-A",
     "raw_ticker": "",
-    "weight": 0.68,
+    "weight": 0.001611,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Sea Ltd. (Singapore)-A": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "SEB-Skand Enskilda Banken A",
+    "raw_ticker": "",
+    "weight": 0.001409,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "SEB-Skand Enskilda Banken A": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Nippon Tel & Tel Corp",
+    "raw_ticker": "",
+    "weight": 0.001309,
+    "reason": "ambiguous_collision_spread_0.14",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Nippon Tel & Tel Corp": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Ahold Delhaize NV",
+    "raw_ticker": "",
+    "weight": 0.001309,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Ahold Delhaize NV": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Teck Resources Limited Class B SV",
+    "raw_ticker": "",
+    "weight": 0.001309,
+    "reason": "ambiguous_collision_spread_0.06",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Teck Resources Limited Class B SV": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Sumitomo Mitsui Ord",
+    "raw_ticker": "",
+    "weight": 0.001309,
+    "reason": "ambiguous_collision_spread_0.06",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Sumitomo Mitsui Ord": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "ABN Amro Bank NV",
+    "raw_ticker": "",
+    "weight": 0.001208,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "ABN Amro Bank NV": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Experian PLC Ord USD",
+    "raw_ticker": "",
+    "weight": 0.001208,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Experian PLC Ord USD": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Fortis Inc",
+    "raw_ticker": "",
+    "weight": 0.001107,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Fortis Inc": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Michelin CGDE B Brown",
+    "raw_ticker": "",
+    "weight": 0.001107,
+    "reason": "ambiguous_collision_spread_0.05",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Michelin CGDE B Brown": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Ericsson L.M. Telefonaktie B",
+    "raw_ticker": "",
+    "weight": 0.001107,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Ericsson L.M. Telefonaktie B": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Sampo Oyj A",
+    "raw_ticker": "",
+    "weight": 0.001007,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Sampo Oyj A": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Loblaw Companies Ltd",
+    "raw_ticker": "",
+    "weight": 0.001007,
+    "reason": "ambiguous_collision_spread_0.10",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Loblaw Companies Ltd": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Oriental Land Co",
+    "raw_ticker": "",
+    "weight": 0.000906,
+    "reason": "ambiguous_collision_spread_0.07",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Oriental Land Co": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Kone Corp B",
+    "raw_ticker": "",
+    "weight": 0.000906,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Kone Corp B": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Novozymes B A/S",
+    "raw_ticker": "",
+    "weight": 0.000906,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Novozymes B A/S": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Heineken N.V.",
+    "raw_ticker": "",
+    "weight": 0.000906,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Heineken N.V.": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "BMW Ord",
+    "raw_ticker": "",
+    "weight": 0.000805,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "BMW Ord": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Koninklijke Philips Electronics NV (Royal Philips Electronics)",
+    "raw_ticker": "",
+    "weight": 0.000805,
     "reason": "ambiguous_collision_spread_0.09",
     "suggested_snippet": {
-      "Kernel:KERNEL_NZ_50": {
-        "Other NZ 50 Companies": "INSERT_CANONICAL_ISIN"
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Koninklijke Philips Electronics NV (Royal Philips Electronics)": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "SGS Soc Gen Surveillance Holdings",
+    "raw_ticker": "",
+    "weight": 0.000805,
+    "reason": "ambiguous_collision_spread_0.01",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "SGS Soc Gen Surveillance Holdings": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Bombardier Inc CL B",
+    "raw_ticker": "",
+    "weight": 0.000805,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Bombardier Inc CL B": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Sumitomo Realty & Dev Co",
+    "raw_ticker": "",
+    "weight": 0.000805,
+    "reason": "ambiguous_collision_spread_0.10",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Sumitomo Realty & Dev Co": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Fortescue Metals Group LTD",
+    "raw_ticker": "",
+    "weight": 0.000805,
+    "reason": "ambiguous_collision_spread_0.05",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Fortescue Metals Group LTD": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Kansai Electric Power Co Inc",
+    "raw_ticker": "",
+    "weight": 0.000705,
+    "reason": "ambiguous_collision_spread_0.08",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Kansai Electric Power Co Inc": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Kering SA - KER (EUR)",
+    "raw_ticker": "",
+    "weight": 0.000705,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Kering SA - KER (EUR)": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Epiroc AB - A shares",
+    "raw_ticker": "",
+    "weight": 0.000705,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Epiroc AB - A shares": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Volkswagen AG Preference",
+    "raw_ticker": "",
+    "weight": 0.000705,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Volkswagen AG Preference": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Energias de Portugal SA",
+    "raw_ticker": "",
+    "weight": 0.000705,
+    "reason": "ambiguous_collision_spread_0.05",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Energias de Portugal SA": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Partners Group Hldg",
+    "raw_ticker": "",
+    "weight": 0.000604,
+    "reason": "ambiguous_collision_spread_0.04",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Partners Group Hldg": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "FinecoBank Spa",
+    "raw_ticker": "",
+    "weight": 0.000604,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "FinecoBank Spa": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Kerry Group A",
+    "raw_ticker": "",
+    "weight": 0.000604,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Kerry Group A": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Essity AB - B shares",
+    "raw_ticker": "",
+    "weight": 0.000604,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Essity AB - B shares": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Terna SpA",
+    "raw_ticker": "",
+    "weight": 0.000604,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Terna SpA": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Concordia Financial Group",
+    "raw_ticker": "",
+    "weight": 0.000604,
+    "reason": "ambiguous_collision_spread_0.04",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Concordia Financial Group": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "The Phoenix Holdings Ltd",
+    "raw_ticker": "",
+    "weight": 0.000503,
+    "reason": "ambiguous_collision_spread_0.01",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "The Phoenix Holdings Ltd": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Metro Inc.",
+    "raw_ticker": "",
+    "weight": 0.000503,
+    "reason": "ambiguous_collision_spread_0.14",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Metro Inc.": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Chiba Bank",
+    "raw_ticker": "",
+    "weight": 0.000503,
+    "reason": "ambiguous_collision_spread_0.05",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Chiba Bank": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Henkel AG & Co. KGaA Nvtg - Pref",
+    "raw_ticker": "",
+    "weight": 0.000503,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Henkel AG & Co. KGaA Nvtg - Pref": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Schindler-Hldg AG Ptg",
+    "raw_ticker": "",
+    "weight": 0.000503,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Schindler-Hldg AG Ptg": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "CGI Inc. Class A SV",
+    "raw_ticker": "",
+    "weight": 0.000503,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "CGI Inc. Class A SV": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Roche Hldgs AG Br",
+    "raw_ticker": "",
+    "weight": 0.000503,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Roche Hldgs AG Br": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Rogers Communications Inc B",
+    "raw_ticker": "",
+    "weight": 0.000503,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Rogers Communications Inc B": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Sage Group",
+    "raw_ticker": "",
+    "weight": 0.000503,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Sage Group": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "BionTech SE",
+    "raw_ticker": "",
+    "weight": 0.000403,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "BionTech SE": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Check Point Software (US)",
+    "raw_ticker": "",
+    "weight": 0.000403,
+    "reason": "ambiguous_collision_spread_0.04",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Check Point Software (US)": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "SKANSKA AB-B (SEK)",
+    "raw_ticker": "",
+    "weight": 0.000403,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "SKANSKA AB-B (SEK)": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "CCL Industries Inc. Class B NV",
+    "raw_ticker": "",
+    "weight": 0.000403,
+    "reason": "ambiguous_collision_spread_0.00",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "CCL Industries Inc. Class B NV": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "NGK Insulators",
+    "raw_ticker": "",
+    "weight": 0.000403,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "NGK Insulators": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Addtech AB B (SEK)",
+    "raw_ticker": "",
+    "weight": 0.000403,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Addtech AB B (SEK)": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Tele2 AB B (SEK)",
+    "raw_ticker": "",
+    "weight": 0.000403,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Tele2 AB B (SEK)": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Epiroc AB - B shares",
+    "raw_ticker": "",
+    "weight": 0.000403,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Epiroc AB - B shares": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Grab Holdings Limited Class A",
+    "raw_ticker": "",
+    "weight": 0.000403,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Grab Holdings Limited Class A": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Hachijuni Bank",
+    "raw_ticker": "",
+    "weight": 0.000302,
+    "reason": "ambiguous_collision_spread_0.07",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Hachijuni Bank": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "NGK Spark Plug",
+    "raw_ticker": "",
+    "weight": 0.000302,
+    "reason": "ambiguous_collision_spread_0.13",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "NGK Spark Plug": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Harel Insurance Inv Ltd 1",
+    "raw_ticker": "",
+    "weight": 0.000302,
+    "reason": "ambiguous_collision_spread_0.00",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Harel Insurance Inv Ltd 1": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Food & Life Companies Ltd",
+    "raw_ticker": "",
+    "weight": 0.000302,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Food & Life Companies Ltd": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Uni Charm Corp",
+    "raw_ticker": "",
+    "weight": 0.000302,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Uni Charm Corp": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Sartorius AG Nvtg - Pref",
+    "raw_ticker": "",
+    "weight": 0.000302,
+    "reason": "ambiguous_collision_spread_0.03",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Sartorius AG Nvtg - Pref": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Sandfire Resources NL",
+    "raw_ticker": "",
+    "weight": 0.000302,
+    "reason": "ambiguous_collision_spread_0.07",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Sandfire Resources NL": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Unsettled Trades",
+    "raw_ticker": "",
+    "weight": 0.000302,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Unsettled Trades": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Hennes & Mauritz AB B",
+    "raw_ticker": "",
+    "weight": 0.000302,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Hennes & Mauritz AB B": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Futu Holdings Ltd ADR",
+    "raw_ticker": "",
+    "weight": 0.000302,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Futu Holdings Ltd ADR": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Nippon Building Fund Inc JREIT",
+    "raw_ticker": "",
+    "weight": 0.000302,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Nippon Building Fund Inc JREIT": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "EMS-Chemie Hldg AG",
+    "raw_ticker": "",
+    "weight": 0.000302,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "EMS-Chemie Hldg AG": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Bezeq Israeli Telecom Corp",
+    "raw_ticker": "",
+    "weight": 0.000302,
+    "reason": "ambiguous_collision_spread_0.10",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Bezeq Israeli Telecom Corp": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Yokohama Rubber Co",
+    "raw_ticker": "",
+    "weight": 0.000302,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Yokohama Rubber Co": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Quebecor Inc B SV",
+    "raw_ticker": "",
+    "weight": 0.000302,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Quebecor Inc B SV": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "SSAB AB - B Shares",
+    "raw_ticker": "",
+    "weight": 0.000302,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "SSAB AB - B Shares": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Schindler-Hldg AG Reg",
+    "raw_ticker": "",
+    "weight": 0.000302,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Schindler-Hldg AG Reg": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Technoprobe S.p.A.",
+    "raw_ticker": "",
+    "weight": 0.000201,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Technoprobe S.p.A.": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Porsche AG Vz",
+    "raw_ticker": "",
+    "weight": 0.000201,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Porsche AG Vz": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "TIS Inc",
+    "raw_ticker": "",
+    "weight": 0.000201,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "TIS Inc": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "HKT Trust / HKT Ltd",
+    "raw_ticker": "",
+    "weight": 0.000201,
+    "reason": "ambiguous_collision_spread_0.03",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "HKT Trust / HKT Ltd": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Trend Micro Inc",
+    "raw_ticker": "",
+    "weight": 0.000201,
+    "reason": "ambiguous_collision_spread_0.12",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Trend Micro Inc": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Japan Real Estate Invest Corp JREIT",
+    "raw_ticker": "",
+    "weight": 0.000201,
+    "reason": "ambiguous_collision_spread_0.09",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Japan Real Estate Invest Corp JREIT": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Capitaland Investment Ord",
+    "raw_ticker": "",
+    "weight": 0.000201,
+    "reason": "ambiguous_collision_spread_0.01",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Capitaland Investment Ord": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Sapporo Holdings Ltd.",
+    "raw_ticker": "",
+    "weight": 0.000201,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Sapporo Holdings Ltd.": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Camtek Ltd.",
+    "raw_ticker": "",
+    "weight": 0.000201,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Camtek Ltd.": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Nordnet AB",
+    "raw_ticker": "",
+    "weight": 0.000201,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Nordnet AB": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "EDP Renovaveis SA",
+    "raw_ticker": "",
+    "weight": 0.000201,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "EDP Renovaveis SA": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Migdal Insurance Hdlgs",
+    "raw_ticker": "",
+    "weight": 0.000201,
+    "reason": "ambiguous_collision_spread_0.05",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Migdal Insurance Hdlgs": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Sagax AB B Shares",
+    "raw_ticker": "",
+    "weight": 0.000101,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Sagax AB B Shares": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Aker ASA A",
+    "raw_ticker": "",
+    "weight": 0.000101,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Aker ASA A": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Cyber Agent Ltd",
+    "raw_ticker": "",
+    "weight": 0.000101,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Cyber Agent Ltd": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "MARUWA Co Ltd",
+    "raw_ticker": "",
+    "weight": 0.000101,
+    "reason": "ambiguous_collision_spread_0.04",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "MARUWA Co Ltd": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Vienna Insurance Group",
+    "raw_ticker": "",
+    "weight": 0.000101,
+    "reason": "ambiguous_collision_spread_0.01",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Vienna Insurance Group": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Lundbergs AB-B Shs",
+    "raw_ticker": "",
+    "weight": 0.000101,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Lundbergs AB-B Shs": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Wharf (Holdings) Ltd.",
+    "raw_ticker": "",
+    "weight": 0.000101,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Wharf (Holdings) Ltd.": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "SSAB AB - A Shares",
+    "raw_ticker": "",
+    "weight": 0.000101,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "SSAB AB - A Shares": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Shapir Civil and Marine Engineering Ltd",
+    "raw_ticker": "",
+    "weight": 0.000101,
+    "reason": "ambiguous_collision_spread_0.13",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Shapir Civil and Marine Engineering Ltd": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Christian Dior SE",
+    "raw_ticker": "",
+    "weight": 0.000101,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Christian Dior SE": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Matrix",
+    "raw_ticker": "",
+    "weight": 0.000101,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Matrix": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Fattal Holdings (1998) Ltd",
+    "raw_ticker": "",
+    "weight": 0.000101,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Fattal Holdings (1998) Ltd": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Electra (Israel)",
+    "raw_ticker": "",
+    "weight": 0.000101,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Electra (Israel)": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Aloni Hetz Properties",
+    "raw_ticker": "",
+    "weight": 0.000101,
+    "reason": "ambiguous_collision_spread_0.00",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Aloni Hetz Properties": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Cellebrite DI Ltd.",
+    "raw_ticker": "",
+    "weight": 0.000101,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Cellebrite DI Ltd.": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "eToro Group Ltd",
+    "raw_ticker": "",
+    "weight": 0.000101,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "eToro Group Ltd": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Y.H. Dimri Building & Development Ltd.",
+    "raw_ticker": "",
+    "weight": 0.000101,
+    "reason": "ambiguous_collision_spread_0.08",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Y.H. Dimri Building & Development Ltd.": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "raw_name": "Tokyo Broadcasting System Holdings Inc",
+    "raw_ticker": "",
+    "weight": 0.000101,
+    "reason": "ambiguous_collision_spread_0.08",
+    "suggested_snippet": {
+      "Kernel:KERNEL_WORLD_EX_US": {
+        "Tokyo Broadcasting System Holdings Inc": "INSERT_CANONICAL_ISIN"
       }
     }
   }
