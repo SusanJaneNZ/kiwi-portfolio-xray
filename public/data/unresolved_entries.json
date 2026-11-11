@@ -1,92 +1,300 @@
 [
   {
-    "provider": "Smartshares",
-    "fund_code": "SMART_US_SMALL_CAP_ETF_FND1110_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
-    "raw_name": "VANGUARD SMALL-CAP ETF",
+    "provider": "Kernel",
+    "fund_code": "KERNEL_CLEAN_ENERGY",
+    "raw_name": "Nextracker Inc Class A",
     "raw_ticker": "",
-    "weight": 0.9983,
-    "reason": "ambiguous_collision_spread_0.02",
-    "suggested_snippet": {
-      "Smartshares:SMART_US_SMALL_CAP_ETF_FND1110_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026": {
-        "VANGUARD SMALL-CAP ETF": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Smartshares",
-    "fund_code": "SMART_US_MID_CAP_ETF_FND1109_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
-    "raw_name": "VANGUARD MID-CAP ETF",
-    "raw_ticker": "",
-    "weight": 0.9982,
+    "weight": 0.064494,
     "reason": "score_below_90",
     "suggested_snippet": {
-      "Smartshares:SMART_US_MID_CAP_ETF_FND1109_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026": {
-        "VANGUARD MID-CAP ETF": "INSERT_CANONICAL_ISIN"
+      "Kernel:KERNEL_CLEAN_ENERGY": {
+        "Nextracker Inc Class A": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_CLEAN_ENERGY",
+    "raw_name": "Energias de Portugal SA",
+    "raw_ticker": "",
+    "weight": 0.036556,
+    "reason": "ambiguous_collision_spread_0.05",
+    "suggested_snippet": {
+      "Kernel:KERNEL_CLEAN_ENERGY": {
+        "Energias de Portugal SA": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
     "provider": "Smartshares",
-    "fund_code": "OZY",
+    "fund_code": "AUS",
     "raw_name": "ISHARES CORE S&P/ASX 200 ETF",
     "raw_ticker": "",
     "weight": 0.029274,
     "reason": "ambiguous_collision_spread_0.02",
     "suggested_snippet": {
-      "Smartshares:OZY": {
+      "Smartshares:AUS": {
         "ISHARES CORE S&P/ASX 200 ETF": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Alphabet Inc Class A",
+    "raw_ticker": "",
+    "weight": 0.024138,
+    "reason": "ambiguous_collision_spread_0.00",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Alphabet Inc Class A": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
     "provider": "Smartshares",
-    "fund_code": "SMART_AUSTRALIAN_MID_CAP_ETF_FND1097_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
+    "fund_code": "MZY",
     "raw_name": "SGH LIMITED ORDINARY FULLY PAID",
     "raw_ticker": "",
     "weight": 0.023093,
     "reason": "score_below_90",
     "suggested_snippet": {
-      "Smartshares:SMART_AUSTRALIAN_MID_CAP_ETF_FND1097_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026": {
+      "Smartshares:MZY": {
         "SGH LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_CLEAN_ENERGY",
+    "raw_name": "Clearway Energy Inc Class C",
+    "raw_ticker": "",
+    "weight": 0.02239,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_CLEAN_ENERGY": {
+        "Clearway Energy Inc Class C": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Mastercard Inc Class A Ord",
+    "raw_ticker": "",
+    "weight": 0.020296,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Mastercard Inc Class A Ord": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
     "provider": "Smartshares",
-    "fund_code": "SMART_AUSTRALIAN_MID_CAP_ETF_FND1097_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
+    "fund_code": "MZY",
     "raw_name": "DYNO NOBEL LIMITED ORDINARY FULLY PAID",
     "raw_ticker": "",
     "weight": 0.020194,
     "reason": "score_below_90",
     "suggested_snippet": {
-      "Smartshares:SMART_AUSTRALIAN_MID_CAP_ETF_FND1097_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026": {
+      "Smartshares:MZY": {
         "DYNO NOBEL LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
-    "provider": "Smartshares",
-    "fund_code": "SMART_AUSTRALIAN_MID_CAP_ETF_FND1097_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
-    "raw_name": "GREATLAND RES LTD",
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Alphabet Inc Class C",
     "raw_ticker": "",
-    "weight": 0.017695,
-    "reason": "score_below_90",
+    "weight": 0.01931,
+    "reason": "ambiguous_collision_spread_0.07",
     "suggested_snippet": {
-      "Smartshares:SMART_AUSTRALIAN_MID_CAP_ETF_FND1097_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026": {
-        "GREATLAND RES LTD": "INSERT_CANONICAL_ISIN"
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Alphabet Inc Class C": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
     "provider": "Smartshares",
-    "fund_code": "SMART_AUSTRALIAN_MID_CAP_ETF_FND1097_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
+    "fund_code": "MZY",
+    "raw_name": "GREATLAND RES LTD",
+    "raw_ticker": "",
+    "weight": 0.017695,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Smartshares:MZY": {
+        "GREATLAND RES LTD": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_DIVIDEND",
+    "raw_name": "Franklin Resources Inc",
+    "raw_ticker": "",
+    "weight": 0.015875,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_DIVIDEND": {
+        "Franklin Resources Inc": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_DIVIDEND",
+    "raw_name": "Deluxe Corp",
+    "raw_ticker": "",
+    "weight": 0.014876,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_DIVIDEND": {
+        "Deluxe Corp": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_DIVIDEND",
+    "raw_name": "Safety Insurance Group Inc",
+    "raw_ticker": "",
+    "weight": 0.014677,
+    "reason": "ambiguous_collision_spread_0.03",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_DIVIDEND": {
+        "Safety Insurance Group Inc": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_DIVIDEND",
+    "raw_name": "Universal Corp",
+    "raw_ticker": "",
+    "weight": 0.013978,
+    "reason": "ambiguous_collision_spread_0.00",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_DIVIDEND": {
+        "Universal Corp": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_DIVIDEND",
+    "raw_name": "Peoples Bancorp Inc",
+    "raw_ticker": "",
+    "weight": 0.013778,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_DIVIDEND": {
+        "Peoples Bancorp Inc": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_CLEAN_ENERGY",
+    "raw_name": "SolarEdge Technologies Inc",
+    "raw_ticker": "",
+    "weight": 0.013572,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Kernel:KERNEL_CLEAN_ENERGY": {
+        "SolarEdge Technologies Inc": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_DIVIDEND",
+    "raw_name": "Energias de Portugal SA",
+    "raw_ticker": "",
+    "weight": 0.013379,
+    "reason": "ambiguous_collision_spread_0.05",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_DIVIDEND": {
+        "Energias de Portugal SA": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "MZY",
     "raw_name": "BLOCK INC. CDI 1 1 FOREIGN EXEMPT NYSE",
     "raw_ticker": "",
     "weight": 0.012196,
     "reason": "ambiguous_collision_spread_0.02",
     "suggested_snippet": {
-      "Smartshares:SMART_AUSTRALIAN_MID_CAP_ETF_FND1097_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026": {
+      "Smartshares:MZY": {
         "BLOCK INC. CDI 1 1 FOREIGN EXEMPT NYSE": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_CLEAN_ENERGY",
+    "raw_name": "Solaria Energia y Medioambiente SA",
+    "raw_ticker": "",
+    "weight": 0.012185,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_CLEAN_ENERGY": {
+        "Solaria Energia y Medioambiente SA": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_DIVIDEND",
+    "raw_name": "Canadian Utilities Ltd A NV",
+    "raw_ticker": "",
+    "weight": 0.011282,
+    "reason": "ambiguous_collision_spread_0.03",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_DIVIDEND": {
+        "Canadian Utilities Ltd A NV": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Monster Beverage Corp New",
+    "raw_ticker": "",
+    "weight": 0.010936,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Monster Beverage Corp New": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_DIVIDEND",
+    "raw_name": "Virtus Investment Partners Inc",
+    "raw_ticker": "",
+    "weight": 0.010583,
+    "reason": "ambiguous_collision_spread_0.08",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_DIVIDEND": {
+        "Virtus Investment Partners Inc": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_CLEAN_ENERGY",
+    "raw_name": "EDP Renovaveis SA",
+    "raw_ticker": "",
+    "weight": 0.009907,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_CLEAN_ENERGY": {
+        "EDP Renovaveis SA": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -104,14 +312,131 @@
     }
   },
   {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_CLEAN_ENERGY",
+    "raw_name": "Shoals Technologies Group Inc. Class A",
+    "raw_ticker": "",
+    "weight": 0.009511,
+    "reason": "ambiguous_collision_spread_0.05",
+    "suggested_snippet": {
+      "Kernel:KERNEL_CLEAN_ENERGY": {
+        "Shoals Technologies Group Inc. Class A": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_DIVIDEND",
+    "raw_name": "Bank of Nova Scotia Halifax",
+    "raw_ticker": "",
+    "weight": 0.009085,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_DIVIDEND": {
+        "Bank of Nova Scotia Halifax": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_DIVIDEND",
+    "raw_name": "Banque Cant Vaudoise Reg",
+    "raw_ticker": "",
+    "weight": 0.008886,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_DIVIDEND": {
+        "Banque Cant Vaudoise Reg": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_DIVIDEND",
+    "raw_name": "OceanFirst Financial Corp",
+    "raw_ticker": "",
+    "weight": 0.008786,
+    "reason": "ambiguous_collision_spread_0.10",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_DIVIDEND": {
+        "OceanFirst Financial Corp": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Palo Alto Networks Inc. Common Stock",
+    "raw_ticker": "",
+    "weight": 0.00867,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Palo Alto Networks Inc. Common Stock": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Deere & Company Common Stock",
+    "raw_ticker": "",
+    "weight": 0.008177,
+    "reason": "ambiguous_collision_spread_0.03",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Deere & Company Common Stock": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_CLEAN_ENERGY",
+    "raw_name": "Green Plains Inc.",
+    "raw_ticker": "",
+    "weight": 0.00743,
+    "reason": "ambiguous_collision_spread_0.03",
+    "suggested_snippet": {
+      "Kernel:KERNEL_CLEAN_ENERGY": {
+        "Green Plains Inc.": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_CLEAN_ENERGY",
+    "raw_name": "Central New Energy Holding Group Ltd",
+    "raw_ticker": "",
+    "weight": 0.007232,
+    "reason": "ambiguous_collision_spread_0.09",
+    "suggested_snippet": {
+      "Kernel:KERNEL_CLEAN_ENERGY": {
+        "Central New Energy Holding Group Ltd": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_DIVIDEND",
+    "raw_name": "Terna SpA",
+    "raw_ticker": "",
+    "weight": 0.007188,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_DIVIDEND": {
+        "Terna SpA": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
     "provider": "Smartshares",
-    "fund_code": "SMART_AUSTRALIAN_MID_CAP_ETF_FND1097_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
+    "fund_code": "MZY",
     "raw_name": "LIONTOWN RESOURCES LTD",
     "raw_ticker": "",
     "weight": 0.006798,
     "reason": "ambiguous_collision_spread_0.01",
     "suggested_snippet": {
-      "Smartshares:SMART_AUSTRALIAN_MID_CAP_ETF_FND1097_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026": {
+      "Smartshares:MZY": {
         "LIONTOWN RESOURCES LTD": "INSERT_CANONICAL_ISIN"
       }
     }
@@ -130,14 +455,66 @@
     }
   },
   {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_CLEAN_ENERGY",
+    "raw_name": "T1 Energy Inc",
+    "raw_ticker": "",
+    "weight": 0.005647,
+    "reason": "ambiguous_collision_spread_0.05",
+    "suggested_snippet": {
+      "Kernel:KERNEL_CLEAN_ENERGY": {
+        "T1 Energy Inc": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_CLEAN_ENERGY",
+    "raw_name": "Conch Venture ORD",
+    "raw_ticker": "",
+    "weight": 0.005548,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Kernel:KERNEL_CLEAN_ENERGY": {
+        "Conch Venture ORD": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Bank of Nova Scotia Halifax",
+    "raw_ticker": "",
+    "weight": 0.00532,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Bank of Nova Scotia Halifax": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Salesforce.com Inc",
+    "raw_ticker": "",
+    "weight": 0.005123,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Salesforce.com Inc": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
     "provider": "Smartshares",
-    "fund_code": "FNZ",
+    "fund_code": "FNZ_FUND",
     "raw_name": "SANFORD LTD/NZ",
     "raw_ticker": "",
     "weight": 0.005,
     "reason": "score_below_90",
     "suggested_snippet": {
-      "Smartshares:FNZ": {
+      "Smartshares:FNZ_FUND": {
         "SANFORD LTD/NZ": "INSERT_CANONICAL_ISIN"
       }
     }
@@ -156,28 +533,145 @@
     }
   },
   {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_CLEAN_ENERGY",
+    "raw_name": "Ceres Power Holdings PLC",
+    "raw_ticker": "",
+    "weight": 0.004656,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Kernel:KERNEL_CLEAN_ENERGY": {
+        "Ceres Power Holdings PLC": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_CLEAN_ENERGY",
+    "raw_name": "Rex American Resources ORD",
+    "raw_ticker": "",
+    "weight": 0.004557,
+    "reason": "ambiguous_collision_spread_0.03",
+    "suggested_snippet": {
+      "Kernel:KERNEL_CLEAN_ENERGY": {
+        "Rex American Resources ORD": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_CLEAN_ENERGY",
+    "raw_name": "Fuelcell Energy Inc",
+    "raw_ticker": "",
+    "weight": 0.004557,
+    "reason": "ambiguous_collision_spread_0.05",
+    "suggested_snippet": {
+      "Kernel:KERNEL_CLEAN_ENERGY": {
+        "Fuelcell Energy Inc": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
     "provider": "Smartshares",
-    "fund_code": "OZY",
+    "fund_code": "AUS",
     "raw_name": "PILBARA MINERALS LTD",
     "raw_ticker": "",
     "weight": 0.004496,
     "reason": "ambiguous_collision_spread_0.03",
     "suggested_snippet": {
-      "Smartshares:OZY": {
+      "Smartshares:AUS": {
         "PILBARA MINERALS LTD": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
     "provider": "Smartshares",
-    "fund_code": "SMART_AUSTRALIAN_FINANCIALS_ETF_FND1096_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
+    "fund_code": "ASF",
     "raw_name": "BLOCK INC. CDI 1 1 FOREIGN EXEMPT NYSE",
     "raw_ticker": "",
     "weight": 0.004478,
     "reason": "ambiguous_collision_spread_0.02",
     "suggested_snippet": {
-      "Smartshares:SMART_AUSTRALIAN_FINANCIALS_ETF_FND1096_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026": {
+      "Smartshares:ASF": {
         "BLOCK INC. CDI 1 1 FOREIGN EXEMPT NYSE": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_CLEAN_ENERGY",
+    "raw_name": "Array Technologies Inc",
+    "raw_ticker": "",
+    "weight": 0.004359,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Kernel:KERNEL_CLEAN_ENERGY": {
+        "Array Technologies Inc": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_CLEAN_ENERGY",
+    "raw_name": "Corporacion Acciona Energias Renovables SA",
+    "raw_ticker": "",
+    "weight": 0.004161,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_CLEAN_ENERGY": {
+        "Corporacion Acciona Energias Renovables SA": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_CLEAN_ENERGY",
+    "raw_name": "Canadian Solar Inc",
+    "raw_ticker": "",
+    "weight": 0.003765,
+    "reason": "ambiguous_collision_spread_0.05",
+    "suggested_snippet": {
+      "Kernel:KERNEL_CLEAN_ENERGY": {
+        "Canadian Solar Inc": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "DoorDash Inc. Class A",
+    "raw_ticker": "",
+    "weight": 0.003448,
+    "reason": "ambiguous_collision_spread_0.04",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "DoorDash Inc. Class A": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_CLEAN_ENERGY",
+    "raw_name": "Renew Energy Global CL A ORD",
+    "raw_ticker": "",
+    "weight": 0.003269,
+    "reason": "ambiguous_collision_spread_0.01",
+    "suggested_snippet": {
+      "Kernel:KERNEL_CLEAN_ENERGY": {
+        "Renew Energy Global CL A ORD": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Canadian Pacific Railway Ltd",
+    "raw_ticker": "",
+    "weight": 0.002956,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Canadian Pacific Railway Ltd": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -196,65 +690,91 @@
   },
   {
     "provider": "Smartshares",
-    "fund_code": "OZY",
+    "fund_code": "AUS",
     "raw_name": "SGH LIMITED ORDINARY FULLY PAID",
     "raw_ticker": "",
     "weight": 0.002698,
     "reason": "score_below_90",
     "suggested_snippet": {
-      "Smartshares:OZY": {
+      "Smartshares:AUS": {
         "SGH LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
     "provider": "Smartshares",
-    "fund_code": "OZY",
+    "fund_code": "AUS",
     "raw_name": "DYNO NOBEL LIMITED ORDINARY FULLY PAID",
     "raw_ticker": "",
     "weight": 0.002398,
     "reason": "score_below_90",
     "suggested_snippet": {
-      "Smartshares:OZY": {
+      "Smartshares:AUS": {
         "DYNO NOBEL LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Airbnb Inc. Class A",
+    "raw_ticker": "",
+    "weight": 0.002365,
+    "reason": "ambiguous_collision_spread_0.04",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Airbnb Inc. Class A": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
     "provider": "Smartshares",
-    "fund_code": "OZY",
+    "fund_code": "AUS",
     "raw_name": "GREATLAND RES LTD",
     "raw_ticker": "",
     "weight": 0.002098,
     "reason": "score_below_90",
     "suggested_snippet": {
-      "Smartshares:OZY": {
+      "Smartshares:AUS": {
         "GREATLAND RES LTD": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
     "provider": "Smartshares",
-    "fund_code": "SMART_AUSTRALIAN_FINANCIALS_ETF_FND1096_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
+    "fund_code": "ASF",
     "raw_name": "INFRATIL LIMITED ORDINARY FULLY PAID FOREIGN EXEMPT NZX",
     "raw_ticker": "",
     "weight": 0.001791,
     "reason": "ambiguous_collision_spread_0.01",
     "suggested_snippet": {
-      "Smartshares:SMART_AUSTRALIAN_FINANCIALS_ETF_FND1096_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026": {
+      "Smartshares:ASF": {
         "INFRATIL LIMITED ORDINARY FULLY PAID FOREIGN EXEMPT NZX": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Equinix REIT Ord",
+    "raw_ticker": "",
+    "weight": 0.001675,
+    "reason": "ambiguous_collision_spread_0.07",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Equinix REIT Ord": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
     "provider": "Smartshares",
-    "fund_code": "FNZ",
+    "fund_code": "FNZ_FUND",
     "raw_name": "KMD BRANDS LTD NPV POST SPLIT",
     "raw_ticker": "",
     "weight": 0.0014,
     "reason": "ambiguous_collision_spread_0.06",
     "suggested_snippet": {
-      "Smartshares:FNZ": {
+      "Smartshares:FNZ_FUND": {
         "KMD BRANDS LTD NPV POST SPLIT": "INSERT_CANONICAL_ISIN"
       }
     }
@@ -274,170 +794,300 @@
   },
   {
     "provider": "Smartshares",
-    "fund_code": "OZY",
+    "fund_code": "AUS",
     "raw_name": "BLOCK INC. CDI 1 1 FOREIGN EXEMPT NYSE",
     "raw_ticker": "",
     "weight": 0.001399,
     "reason": "ambiguous_collision_spread_0.02",
     "suggested_snippet": {
-      "Smartshares:OZY": {
+      "Smartshares:AUS": {
         "BLOCK INC. CDI 1 1 FOREIGN EXEMPT NYSE": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Nike INC - CL B",
+    "raw_ticker": "",
+    "weight": 0.001379,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Nike INC - CL B": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "NXP Semiconductor NV",
+    "raw_ticker": "",
+    "weight": 0.001281,
+    "reason": "ambiguous_collision_spread_0.08",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "NXP Semiconductor NV": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Marriott International Inc",
+    "raw_ticker": "",
+    "weight": 0.001182,
+    "reason": "ambiguous_collision_spread_0.12",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Marriott International Inc": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
     "provider": "Smartshares",
-    "fund_code": "OZY",
+    "fund_code": "AUS",
     "raw_name": "CAPSTONE COPPER CORP CDI",
     "raw_ticker": "",
     "weight": 0.001099,
     "reason": "score_below_90",
     "suggested_snippet": {
-      "Smartshares:OZY": {
+      "Smartshares:AUS": {
         "CAPSTONE COPPER CORP CDI": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
     "provider": "Smartshares",
-    "fund_code": "SMART_AUSTRALIAN_FINANCIALS_ETF_FND1096_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
+    "fund_code": "ASF",
     "raw_name": "GENERATION DEVELOPMENT GROUP LIMITED ORDINARY FULLY PAID",
     "raw_ticker": "",
     "weight": 0.001095,
     "reason": "ambiguous_collision_spread_0.09",
     "suggested_snippet": {
-      "Smartshares:SMART_AUSTRALIAN_FINANCIALS_ETF_FND1096_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026": {
+      "Smartshares:ASF": {
         "GENERATION DEVELOPMENT GROUP LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
-    "provider": "Smartshares",
-    "fund_code": "OZY",
-    "raw_name": "DALRYMPLE BAY INFRASTRUCTURE LIMITED ORD STAPLED SECURITIES",
+    "provider": "Kernel",
+    "fund_code": "KERNEL_CLEAN_ENERGY",
+    "raw_name": "Pounds Sterling",
     "raw_ticker": "",
-    "weight": 0.000999,
-    "reason": "ambiguous_collision_spread_0.12",
+    "weight": 0.00109,
+    "reason": "ambiguous_collision_spread_0.03",
     "suggested_snippet": {
-      "Smartshares:OZY": {
-        "DALRYMPLE BAY INFRASTRUCTURE LIMITED ORD STAPLED SECURITIES": "INSERT_CANONICAL_ISIN"
+      "Kernel:KERNEL_CLEAN_ENERGY": {
+        "Pounds Sterling": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "D.R. Horton Inc.",
+    "raw_ticker": "",
+    "weight": 0.001084,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "D.R. Horton Inc.": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Hershey Foods Corp",
+    "raw_ticker": "",
+    "weight": 0.001084,
+    "reason": "ambiguous_collision_spread_0.05",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Hershey Foods Corp": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
     "provider": "Smartshares",
-    "fund_code": "SMART_NZ_TOP_10_ETF_FND1114_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
+    "fund_code": "AUS",
+    "raw_name": "DALRYMPLE BAY INFRASTRUCTURE LIMITED ORD STAPLED SECURITIES",
+    "raw_ticker": "",
+    "weight": 0.000999,
+    "reason": "ambiguous_collision_spread_0.12",
+    "suggested_snippet": {
+      "Smartshares:AUS": {
+        "DALRYMPLE BAY INFRASTRUCTURE LIMITED ORD STAPLED SECURITIES": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Workday Inc-Class A",
+    "raw_ticker": "",
+    "weight": 0.000985,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Workday Inc-Class A": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "ANZ Bank (AU Register)",
+    "raw_ticker": "",
+    "weight": 0.000985,
+    "reason": "ambiguous_collision_spread_0.09",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "ANZ Bank (AU Register)": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "TNZ",
     "raw_name": "FUTURES MARGIN - NZD",
     "raw_ticker": "",
     "weight": 0.0009,
     "reason": "no_candidates_above_70",
     "suggested_snippet": {
-      "Smartshares:SMART_NZ_TOP_10_ETF_FND1114_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026": {
+      "Smartshares:TNZ": {
         "FUTURES MARGIN - NZD": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
     "provider": "Smartshares",
-    "fund_code": "OZY",
+    "fund_code": "AUS",
     "raw_name": "REGION RE LTD",
     "raw_ticker": "",
     "weight": 0.000899,
     "reason": "score_below_90",
     "suggested_snippet": {
-      "Smartshares:OZY": {
+      "Smartshares:AUS": {
         "REGION RE LTD": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
     "provider": "Smartshares",
-    "fund_code": "OZY",
+    "fund_code": "AUS",
     "raw_name": "SRG GLOBAL LIMITED ORDINARY FULLY PAID",
     "raw_ticker": "",
     "weight": 0.000899,
     "reason": "ambiguous_collision_spread_0.00",
     "suggested_snippet": {
-      "Smartshares:OZY": {
+      "Smartshares:AUS": {
         "SRG GLOBAL LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
     "provider": "Smartshares",
-    "fund_code": "OZY",
+    "fund_code": "AUS",
     "raw_name": "YANCOAL AUSTRALIA LIMITED ORDINARY FULLY PAID",
     "raw_ticker": "",
     "weight": 0.000899,
     "reason": "score_below_90",
     "suggested_snippet": {
-      "Smartshares:OZY": {
+      "Smartshares:AUS": {
         "YANCOAL AUSTRALIA LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
     "provider": "Smartshares",
-    "fund_code": "OZY",
+    "fund_code": "AUS",
     "raw_name": "SUNRISE ENERGY METALS LIMITED ORDINARY FULLY PAID",
     "raw_ticker": "",
     "weight": 0.000899,
     "reason": "ambiguous_collision_spread_0.14",
     "suggested_snippet": {
-      "Smartshares:OZY": {
+      "Smartshares:AUS": {
         "SUNRISE ENERGY METALS LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
     "provider": "Smartshares",
-    "fund_code": "OZY",
+    "fund_code": "AUS",
     "raw_name": "4DMEDICAL LIMITED ORDINARY FULLY PAID",
     "raw_ticker": "",
     "weight": 0.000799,
     "reason": "score_below_90",
     "suggested_snippet": {
-      "Smartshares:OZY": {
+      "Smartshares:AUS": {
         "4DMEDICAL LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
     "provider": "Smartshares",
-    "fund_code": "OZY",
+    "fund_code": "AUS",
     "raw_name": "LIONTOWN RESOURCES LTD",
     "raw_ticker": "",
     "weight": 0.000799,
     "reason": "ambiguous_collision_spread_0.01",
     "suggested_snippet": {
-      "Smartshares:OZY": {
+      "Smartshares:AUS": {
         "LIONTOWN RESOURCES LTD": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
     "provider": "Smartshares",
-    "fund_code": "OZY",
+    "fund_code": "AUS",
     "raw_name": "BWP TRUST",
     "raw_ticker": "",
     "weight": 0.000799,
     "reason": "ambiguous_collision_spread_0.08",
     "suggested_snippet": {
-      "Smartshares:OZY": {
+      "Smartshares:AUS": {
         "BWP TRUST": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
     "provider": "Smartshares",
-    "fund_code": "OZY",
+    "fund_code": "AUS",
     "raw_name": "MINERALS 260 LIMITED ORDINARY FULLY PAID",
     "raw_ticker": "",
     "weight": 0.000699,
     "reason": "ambiguous_collision_spread_0.04",
     "suggested_snippet": {
-      "Smartshares:OZY": {
+      "Smartshares:AUS": {
         "MINERALS 260 LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Sea Ltd. (Singapore)-A",
+    "raw_ticker": "",
+    "weight": 0.00069,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Sea Ltd. (Singapore)-A": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Nippon Tel & Tel Corp",
+    "raw_ticker": "",
+    "weight": 0.00069,
+    "reason": "ambiguous_collision_spread_0.14",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Nippon Tel & Tel Corp": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -456,14 +1106,66 @@
   },
   {
     "provider": "Smartshares",
-    "fund_code": "OZY",
+    "fund_code": "AUS",
     "raw_name": "INFRATIL LIMITED ORDINARY FULLY PAID FOREIGN EXEMPT NZX",
     "raw_ticker": "",
     "weight": 0.000599,
     "reason": "ambiguous_collision_spread_0.01",
     "suggested_snippet": {
-      "Smartshares:OZY": {
+      "Smartshares:AUS": {
         "INFRATIL LIMITED ORDINARY FULLY PAID FOREIGN EXEMPT NZX": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Assicurazioni Generali SpA",
+    "raw_ticker": "",
+    "weight": 0.000591,
+    "reason": "ambiguous_collision_spread_0.10",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Assicurazioni Generali SpA": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "SEB-Skand Enskilda Banken A (EUR)",
+    "raw_ticker": "",
+    "weight": 0.000591,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "SEB-Skand Enskilda Banken A (EUR)": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Barrick Gold Corp Ord",
+    "raw_ticker": "",
+    "weight": 0.000591,
+    "reason": "ambiguous_collision_spread_0.00",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Barrick Gold Corp Ord": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Iron Mountain Common Stock",
+    "raw_ticker": "",
+    "weight": 0.000591,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Iron Mountain Common Stock": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -482,52 +1184,52 @@
   },
   {
     "provider": "Smartshares",
-    "fund_code": "FNZ",
+    "fund_code": "FNZ_FUND",
     "raw_name": "FUTURES MARGIN - NZD",
     "raw_ticker": "",
     "weight": 0.0005,
     "reason": "no_candidates_above_70",
     "suggested_snippet": {
-      "Smartshares:FNZ": {
+      "Smartshares:FNZ_FUND": {
         "FUTURES MARGIN - NZD": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
     "provider": "Smartshares",
-    "fund_code": "OZY",
+    "fund_code": "AUS",
     "raw_name": "SUPERLOOP LIMITED ORDINARY FULLY PAID",
     "raw_ticker": "",
     "weight": 0.0005,
     "reason": "score_below_90",
     "suggested_snippet": {
-      "Smartshares:OZY": {
+      "Smartshares:AUS": {
         "SUPERLOOP LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
     "provider": "Smartshares",
-    "fund_code": "OZY",
+    "fund_code": "AUS",
     "raw_name": "KINGSGATE CONSOLIDATED NL FPO 25C",
     "raw_ticker": "",
     "weight": 0.0005,
     "reason": "score_below_90",
     "suggested_snippet": {
-      "Smartshares:OZY": {
+      "Smartshares:AUS": {
         "KINGSGATE CONSOLIDATED NL FPO 25C": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
     "provider": "Smartshares",
-    "fund_code": "OZY",
+    "fund_code": "AUS",
     "raw_name": "FIREFLY METALS LTD ORDINARY FULLY PAID",
     "raw_ticker": "",
     "weight": 0.0005,
     "reason": "ambiguous_collision_spread_0.14",
     "suggested_snippet": {
-      "Smartshares:OZY": {
+      "Smartshares:AUS": {
         "FIREFLY METALS LTD ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
       }
     }
@@ -542,6 +1244,32 @@
     "suggested_snippet": {
       "Smartshares:FNZ": {
         "FUTURES MARGIN - NZD": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Terna SpA",
+    "raw_ticker": "",
+    "weight": 0.000493,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Terna SpA": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Martin Merietta Materials Inc Common Stock",
+    "raw_ticker": "",
+    "weight": 0.000493,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Martin Merietta Materials Inc Common Stock": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -573,40 +1301,66 @@
   },
   {
     "provider": "Smartshares",
-    "fund_code": "OZY",
+    "fund_code": "AUS",
     "raw_name": "ELSIGHT LIMITED ORDINARY FULLY PAID",
     "raw_ticker": "",
     "weight": 0.0004,
     "reason": "score_below_90",
     "suggested_snippet": {
-      "Smartshares:OZY": {
+      "Smartshares:AUS": {
         "ELSIGHT LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
     "provider": "Smartshares",
-    "fund_code": "OZY",
+    "fund_code": "AUS",
     "raw_name": "ELEVRA LITHIUM LIMITED ORDINARY FULLY PAID",
     "raw_ticker": "",
     "weight": 0.0004,
     "reason": "ambiguous_collision_spread_0.11",
     "suggested_snippet": {
-      "Smartshares:OZY": {
+      "Smartshares:AUS": {
         "ELEVRA LITHIUM LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
     "provider": "Smartshares",
-    "fund_code": "OZY",
+    "fund_code": "AUS",
     "raw_name": "GENERATION DEVELOPMENT GROUP LIMITED ORDINARY FULLY PAID",
     "raw_ticker": "",
     "weight": 0.0004,
     "reason": "ambiguous_collision_spread_0.09",
     "suggested_snippet": {
-      "Smartshares:OZY": {
+      "Smartshares:AUS": {
         "GENERATION DEVELOPMENT GROUP LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Oriental Land Co",
+    "raw_ticker": "",
+    "weight": 0.000394,
+    "reason": "ambiguous_collision_spread_0.07",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Oriental Land Co": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Crown Castle Intl Corp",
+    "raw_ticker": "",
+    "weight": 0.000394,
+    "reason": "ambiguous_collision_spread_0.03",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Crown Castle Intl Corp": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -638,13 +1392,13 @@
   },
   {
     "provider": "Smartshares",
-    "fund_code": "OZY",
+    "fund_code": "AUS",
     "raw_name": "VULCAN ENERGY RESOURCES LIMITED ORDINARY FULLY PAID",
     "raw_ticker": "",
     "weight": 0.0003,
     "reason": "score_below_90",
     "suggested_snippet": {
-      "Smartshares:OZY": {
+      "Smartshares:AUS": {
         "VULCAN ENERGY RESOURCES LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
       }
     }
@@ -685,6 +1439,97 @@
     "suggested_snippet": {
       "Kernel:KERNEL_WORLD_EX_US": {
         "HKT Trust / HKT Ltd": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_CLEAN_ENERGY",
+    "raw_name": "Israeli Sheqel",
+    "raw_ticker": "",
+    "weight": 0.000198,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_CLEAN_ENERGY": {
+        "Israeli Sheqel": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Roche Hldgs AG Br",
+    "raw_ticker": "",
+    "weight": 0.000197,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Roche Hldgs AG Br": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "BMW Ord",
+    "raw_ticker": "",
+    "weight": 0.000197,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "BMW Ord": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "CCL Industries Inc. Class B NV",
+    "raw_ticker": "",
+    "weight": 0.000197,
+    "reason": "ambiguous_collision_spread_0.00",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "CCL Industries Inc. Class B NV": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Rogers Communications Inc B",
+    "raw_ticker": "",
+    "weight": 0.000197,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Rogers Communications Inc B": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Energias de Portugal SA",
+    "raw_ticker": "",
+    "weight": 0.000197,
+    "reason": "ambiguous_collision_spread_0.05",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Energias de Portugal SA": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Grab Holdings Limited Class A",
+    "raw_ticker": "",
+    "weight": 0.000197,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Grab Holdings Limited Class A": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -737,6 +1582,97 @@
     "suggested_snippet": {
       "Kernel:KERNEL_WORLD_EX_US": {
         "eToro Group Ltd": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "NGK Spark Plug",
+    "raw_ticker": "",
+    "weight": 9.9e-05,
+    "reason": "ambiguous_collision_spread_0.13",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "NGK Spark Plug": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Porsche AG Vz",
+    "raw_ticker": "",
+    "weight": 9.9e-05,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Porsche AG Vz": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "NGK Insulators",
+    "raw_ticker": "",
+    "weight": 9.9e-05,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "NGK Insulators": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Hennes & Mauritz AB B",
+    "raw_ticker": "",
+    "weight": 9.9e-05,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Hennes & Mauritz AB B": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Nordnet AB",
+    "raw_ticker": "",
+    "weight": 9.9e-05,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Nordnet AB": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "EDP Renovaveis SA",
+    "raw_ticker": "",
+    "weight": 9.9e-05,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "EDP Renovaveis SA": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Kernel",
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "raw_name": "Pounds Sterling",
+    "raw_ticker": "",
+    "weight": 9.9e-05,
+    "reason": "ambiguous_collision_spread_0.03",
+    "suggested_snippet": {
+      "Kernel:KERNEL_GLOBAL_ESG": {
+        "Pounds Sterling": "INSERT_CANONICAL_ISIN"
       }
     }
   }

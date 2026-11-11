@@ -28,5 +28,10 @@
     "name": "Smartshares Global Equities ESG ETF",
     "master_provider": "ishares",
     "master_ticker": "IWLD"
+  },
+  "USS": {
+    "name": "SMART US SMALL CAP ETF",
+    "master_provider": "vanguard",
+    "master_ticker": "VB"
   }
 }

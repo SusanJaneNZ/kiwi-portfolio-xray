@@ -141,11 +141,26 @@ class TestAssetClassifierAndBondPipeline(unittest.TestCase):
                 ],
             )
 
+            # 4. Unconfigured Feeder Wrapper (e.g. USS holding Vanguard Small-Cap ETF 99.8%)
+            create_test_xlsx(
+                staging / "smartshares" / "SMART-US-SMALL-CAP-ETF-FND1110.xlsx",
+                [
+                    ["Smart US Small Cap ETF"],
+                    ["As at 31 October 2026"],
+                    ["Asset name", "% of fund net assets"],
+                    ["VANGUARD SMALL-CAP ETF", 99.8],
+                    ["Cash", 0.2],
+                ],
+            )
+
             compiler = PipelineCompiler(staging_dir=staging, output_dir=out_dir, repo_root=repo_copy)
             report, summary = compiler.compile(dry_run=False)
 
             self.assertTrue(report.is_valid, f"Unexpected validation errors: {report.errors}")
             self.assertEqual(summary["total_unresolved_entries"], 0)
+            self.assertEqual(len(summary["unconfigured_feeders"]), 1)
+            self.assertEqual(summary["unconfigured_feeders"][0]["fund_code"], "USS")
+            self.assertEqual(summary["unconfigured_feeders"][0]["suggested_provider"], "vanguard")
 
             funds_by_code = {f["code"]: f for f in json.loads((out_dir / "funds_registry.json").read_text())}
             self.assertEqual(funds_by_code["NZB"]["asset_class"], "fixed_interest")

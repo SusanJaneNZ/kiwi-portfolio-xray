@@ -235,6 +235,7 @@ class AdminService:
             "total_funds_compiled": summary.get("total_funds_compiled", 0),
             "total_unresolved_entries": summary.get("total_unresolved_entries", 0),
             "unresolved_entries": unresolved,
+            "unconfigured_feeders": summary.get("unconfigured_feeders", []),
         }
 
     def get_alias_map(self) -> dict[str, dict[str, str]]:

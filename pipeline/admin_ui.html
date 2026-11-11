@@ -245,6 +245,7 @@
           <input type="text" id="feeder-master-ticker" placeholder="Master Ticker (e.g. VT)" style="width: 145px;">
           <button class="btn btn-primary btn-sm" onclick="saveFeederPairing()">Save Pairing</button>
         </div>
+        <div id="unconfigured-feeders-list" style="margin-bottom: 10px;"></div>
         <div id="feeder-pairings-list">Loading feeder pairings...</div>
       </div>
     </div>
@@ -258,6 +259,7 @@
     let stagedFilePairsState = [];
     let feederCodesState = [];
     let feederEntriesMapState = {};
+    let unconfiguredFeedersState = [];
     let lastPreviewFeederState = null;
     let focusedMapInputId = 'manual-isin';
 
@@ -476,6 +478,7 @@
 
         container.innerHTML = html;
         renderUnresolved(res.unresolved_entries || []);
+        renderUnconfiguredFeeders(res.unconfigured_feeders || []);
         showToast(dryRun ? 'Dry-run complete' : 'Production files written to public/data/');
       } catch (err) {
         container.innerHTML = `<span class="badge badge-err">${escapeHtml(err.message)}</span>`;
@@ -716,6 +719,41 @@
         html += `</div>`;
       }
       container.innerHTML = html;
+    }
+
+    function renderUnconfiguredFeeders(feeders) {
+      const container = document.getElementById('unconfigured-feeders-list');
+      unconfiguredFeedersState = feeders || [];
+      if (!unconfiguredFeedersState.length) {
+        container.innerHTML = '';
+        return;
+      }
+      let html = `<div style="padding: 8px; border: 1px dashed var(--warn); border-radius: 6px; margin-bottom: 8px;">
+        <div style="font-size: 11px; color: var(--warn); font-weight: 600; margin-bottom: 6px;">Detected Unconfigured Feeder Funds (${unconfiguredFeedersState.length}) — not sent to Equity Unresolved Mapper:</div>`;
+      unconfiguredFeedersState.forEach((uf, idx) => {
+        html += `
+          <div class="file-row" style="font-size: 11px;">
+            <div>
+              <strong class="mono">${escapeHtml(uf.fund_code)}</strong>
+              <span style="color: var(--muted);">(${escapeHtml(uf.fund_name)})</span>
+              → holds <strong>${escapeHtml(uf.master_holding_name)}</strong> (${(uf.master_weight * 100).toFixed(1)}%)
+            </div>
+            <button class="btn btn-sm btn-primary" onclick="prefillUnconfiguredFeeder(${idx})">Configure Pairing</button>
+          </div>
+        `;
+      });
+      html += `</div>`;
+      container.innerHTML = html;
+    }
+
+    function prefillUnconfiguredFeeder(idx) {
+      const uf = unconfiguredFeedersState[idx];
+      if (!uf) return;
+      document.getElementById('feeder-code').value = uf.fund_code || '';
+      document.getElementById('feeder-name').value = uf.fund_name || '';
+      document.getElementById('feeder-master-provider').value = uf.suggested_provider || 'vanguard';
+      document.getElementById('feeder-master-ticker').focus();
+      showToast(`Prefilled ${uf.fund_code} — enter Master Ticker (e.g. VB / VO) & click Save Pairing`);
     }
 
     function prefillFeederFromPreview() {

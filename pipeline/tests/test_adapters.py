@@ -138,9 +138,17 @@ class TestAdapters(unittest.TestCase):
     def test_generalized_master_ticker_extraction(self):
         vanguard = VanguardAdapter()
         ishares = ISharesAdapter()
+        smartshares = SmartsharesDirectAdapter()
         self.assertEqual(vanguard._extract_ticker_from_text("Vanguard Mid-Cap ETF (VO)"), "VO")
         self.assertEqual(ishares._extract_ticker_from_filename("BOTZ_holdings.csv"), "BOTZ")
         self.assertEqual(ishares._extract_ticker_from_filename("IVV_holdings.csv"), "IVV")
+        # Multi-word Smartshares hints must beat short word substrings (ESG vs EUROPE ESG / US ESG)
+        self.assertEqual(smartshares._extract_code_from_filename("SMART-EUROPE-ESG-ETF-FND14631-Full.xlsx"), "EUG")
+        self.assertEqual(smartshares._extract_code_from_filename("SMART-US-ESG-ETF-FND14636-Full.xlsx"), "USA")
+        self.assertEqual(smartshares._extract_code_from_filename("SMART-GLOBAL-ESG-ETF-FND14633-Full.xlsx"), "ESG")
+        self.assertEqual(smartshares._extract_code_from_filename("SMART-US-SMALL-CAP-ETF-FND1110-Full.xlsx"), "USS")
+        self.assertEqual(smartshares._extract_code_from_filename("SMART-US-MID-CAP-ETF-FND1109-Full.xlsx"), "USM")
+        self.assertEqual(smartshares._extract_code_from_filename("SMART-AUSTRALIAN-TOP-200-ETF-FND19355-Full.xlsx"), "AUS")
 
 
 if __name__ == "__main__":

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 from typing import Any, Optional
 
@@ -97,6 +98,7 @@ class PipelineCompiler:
         smartshares_dir = self.staging_dir / "smartshares"
         all_unwrapped_funds: list[UnwrappedFund] = []
         all_unresolved_entries: list[dict] = []
+        unconfigured_feeders: list[dict] = []
         extra_warnings: list[str] = []
 
         if smartshares_dir.exists():
@@ -114,8 +116,16 @@ class PipelineCompiler:
                             effective_date=res.effective_date,
                         )
                     else:
-                        unwrapped = self._enrich_domestic_fund(res, matcher, classifier, all_unresolved_entries)
-                        all_unwrapped_funds.append(unwrapped)
+                        detected_feeder = self._detect_unconfigured_feeder(res, classifier)
+                        if detected_feeder:
+                            unconfigured_feeders.append(detected_feeder)
+                            extra_warnings.append(
+                                f"Feeder fund '{res.fund_code}' holds '{detected_feeder['master_holding_name']}' "
+                                f"({detected_feeder['master_weight'] * 100:.1f}%) — add a Feeder Pairing in Panel 6 and stage its master ETF CSV to unwrap."
+                            )
+                        else:
+                            unwrapped = self._enrich_domestic_fund(res, matcher, classifier, all_unresolved_entries)
+                            all_unwrapped_funds.append(unwrapped)
 
         # 5. Unwrap Feeders using FeederUnwrapper
         unwrapper = FeederUnwrapper(self.feeder_registry_path, gics_mapping=gics_mapping, matcher=matcher)
@@ -190,10 +200,39 @@ class PipelineCompiler:
             "total_funds_compiled": len(funds_registry),
             "total_unresolved_entries": len(all_unresolved_entries),
             "unresolved_entries": all_unresolved_entries,
+            "unconfigured_feeders": unconfigured_feeders,
             "validation_report": validation_report,
         }
 
         return validation_report, summary_data
+
+    def _detect_unconfigured_feeder(self, fund_res: Any, classifier: AssetClassifier) -> Optional[dict[str, Any]]:
+        """Detects a feeder ETF holding >=75% of its non-cash assets in a single underlying equity ETF."""
+        if not fund_res.holdings:
+            return None
+        total_w = sum(h.weight for h in fund_res.holdings)
+        if total_w <= 0:
+            return None
+        top = max(fund_res.holdings, key=lambda h: h.weight)
+        if (top.weight / total_w) < 0.75:
+            return None
+        hint = getattr(top, "raw_metadata", {}).get("asset_class", "")
+        if classifier.classify_holding(top.name, fund_code=fund_res.fund_code, asset_class_hint=hint) != "equity":
+            return None
+        if not re.search(r"\b(?:etf|ucits|index\s+fund|vanguard|ishares|spdr)\b", top.name, re.IGNORECASE):
+            return None
+
+        lower = top.name.lower()
+        suggested_provider = "vanguard" if "vanguard" in lower else ("ishares" if "ishares" in lower or "blackrock" in lower else "vanguard")
+        return {
+            "fund_code": fund_res.fund_code,
+            "fund_name": fund_res.fund_name,
+            "provider": fund_res.provider,
+            "effective_date": fund_res.effective_date,
+            "master_holding_name": top.name,
+            "master_weight": round(top.weight, 4),
+            "suggested_provider": suggested_provider,
+        }
 
     def _stamp_issuer(self, record: dict[str, Any], classifier: AssetClassifier) -> None:
         """Stamps canonical issuer_key and issuer_name onto an equity record when mapped."""

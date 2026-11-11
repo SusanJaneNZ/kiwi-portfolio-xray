@@ -1,6 +1,6 @@
 [
   {
-    "code": "FNZ",
+    "code": "FNZ_FUND",
     "name": "Nz Top 50 Fund",
     "provider": "Smartshares",
     "effective_date": "2026-09-30",
@@ -24,7 +24,7 @@
     "is_stale": false
   },
   {
-    "code": "SMART_AUSTRALIAN_FINANCIALS_ETF_FND1096_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
+    "code": "ASF",
     "name": "Smart Australian Financials Etf",
     "provider": "Smartshares",
     "effective_date": "2026-09-30",
@@ -36,7 +36,7 @@
     "is_stale": false
   },
   {
-    "code": "SMART_AUSTRALIAN_MID_CAP_ETF_FND1097_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
+    "code": "MZY",
     "name": "Smart Australian Mid Cap Etf",
     "provider": "Smartshares",
     "effective_date": "2026-09-30",
@@ -48,7 +48,7 @@
     "is_stale": false
   },
   {
-    "code": "OZY",
+    "code": "AUS",
     "name": "Smart Australian Top 200 Etf",
     "provider": "Smartshares",
     "effective_date": "2026-09-30",
@@ -120,7 +120,7 @@
     "is_stale": false
   },
   {
-    "code": "SMART_NZ_PROPERTY_ETF_FND1116_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
+    "code": "NPF",
     "name": "Smart Nz Property Etf",
     "provider": "Smartshares",
     "effective_date": "2026-09-30",
@@ -132,7 +132,7 @@
     "is_stale": false
   },
   {
-    "code": "SMART_NZ_TOP_10_ETF_FND1114_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
+    "code": "TNZ",
     "name": "Smart Nz Top 10 Etf",
     "provider": "Smartshares",
     "effective_date": "2026-09-30",
@@ -151,30 +151,6 @@
     "cash_ratio": 0.0069,
     "hedging_ratio": 0.0,
     "constituent_count": 51,
-    "asset_class": "equity",
-    "cadence": "monthly",
-    "is_stale": false
-  },
-  {
-    "code": "SMART_US_MID_CAP_ETF_FND1109_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
-    "name": "Smart Us Mid Cap Etf",
-    "provider": "Smartshares",
-    "effective_date": "2026-09-30",
-    "cash_ratio": 0.0018,
-    "hedging_ratio": 0.0,
-    "constituent_count": 1,
-    "asset_class": "equity",
-    "cadence": "monthly",
-    "is_stale": false
-  },
-  {
-    "code": "SMART_US_SMALL_CAP_ETF_FND1110_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
-    "name": "Smart Us Small Cap Etf",
-    "provider": "Smartshares",
-    "effective_date": "2026-09-30",
-    "cash_ratio": 0.0017,
-    "hedging_ratio": 0.0,
-    "constituent_count": 1,
     "asset_class": "equity",
     "cadence": "monthly",
     "is_stale": false
@@ -205,7 +181,7 @@
   },
   {
     "code": "EUF",
-    "name": "Smartshares Europe ETF",
+    "name": "SMART EUROPE ETF",
     "provider": "Smartshares",
     "effective_date": "2026-09-30",
     "cash_ratio": 0.0008,
@@ -217,7 +193,7 @@
   },
   {
     "code": "APA",
-    "name": "Smartshares Asia Pacific ETF",
+    "name": "SMART ASIA PACIFIC ETF",
     "provider": "Smartshares",
     "effective_date": "2026-09-30",
     "cash_ratio": 0.0008,
@@ -229,7 +205,7 @@
   },
   {
     "code": "EMF",
-    "name": "Smartshares Emerging Markets ETF",
+    "name": "SMART EMERGING MARKETS ETF",
     "provider": "Smartshares",
     "effective_date": "2026-09-30",
     "cash_ratio": 0.0008,
@@ -244,9 +220,45 @@
     "name": "Smartshares Global Equities ESG ETF",
     "provider": "Smartshares",
     "effective_date": "2026-09-30",
-    "cash_ratio": 0.0004,
+    "cash_ratio": 0.0003,
     "hedging_ratio": 0.0,
     "constituent_count": 589,
+    "asset_class": "equity",
+    "cadence": "monthly",
+    "is_stale": false
+  },
+  {
+    "code": "KERNEL_GLOBAL_ESG",
+    "name": "Kernel Global Esg Fund",
+    "provider": "Kernel",
+    "effective_date": "2026-09-30",
+    "cash_ratio": 0.0,
+    "hedging_ratio": 0.0,
+    "constituent_count": 445,
+    "asset_class": "equity",
+    "cadence": "monthly",
+    "is_stale": false
+  },
+  {
+    "code": "KERNEL_CLEAN_ENERGY",
+    "name": "Kernel S&P Global Clean Energy Fund",
+    "provider": "Kernel",
+    "effective_date": "2026-09-30",
+    "cash_ratio": 0.0,
+    "hedging_ratio": 0.0,
+    "constituent_count": 56,
+    "asset_class": "equity",
+    "cadence": "monthly",
+    "is_stale": false
+  },
+  {
+    "code": "KERNEL_GLOBAL_DIVIDEND",
+    "name": "Kernel S&P Global Dividend Aristocrats Fund",
+    "provider": "Kernel",
+    "effective_date": "2026-09-30",
+    "cash_ratio": 0.0,
+    "hedging_ratio": 0.0,
+    "constituent_count": 78,
     "asset_class": "equity",
     "cadence": "monthly",
     "is_stale": false

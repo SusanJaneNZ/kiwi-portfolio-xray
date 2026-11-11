@@ -1,4 +1,4 @@
-"""Adapter for Smartshares Direct Equity Funds (CSV and Sorted Smart Investor XLSX)."""
+"""Adapter for Smartshares Direct Equity, Bond, and Feeder Wrapper Funds (CSV and Sorted XLSX)."""
 
 from __future__ import annotations
 
@@ -10,46 +10,79 @@ from pipeline.adapters.sorted_parser import parse_nz_fund_file
 
 SMARTSHARES_DIRECT_FUNDS = {
     "FNZ": "Smartshares NZ Top 50 ETF",
+    "FNZ_FUND": "Smart NZ Top 50 Fund",
+    "TNZ": "Smartshares NZ Top 10 ETF",
     "MDZ": "Smartshares NZ Mid Cap ETF",
     "NZG": "Smartshares S&P/NZX 50 ETF",
     "DIV": "Smartshares NZ Dividend ETF",
+    "NPF": "Smartshares NZ Property ETF",
     "NZB": "Smartshares NZ Bond ETF",
     "GBF": "Smartshares Global Bond ETF",
     "AGG": "Smartshares Global Aggregate Bond ETF",
     "OZY": "Smartshares Australian Top 20 ETF",
+    "AUS": "Smartshares Australian Top 200 ETF",
     "ASD": "Smartshares Australian Dividend ETF",
+    "ASF": "Smartshares Australian Financials ETF",
+    "MZY": "Smartshares Australian Mid Cap ETF",
     "TWF": "Smartshares Total World ETF",
     "USF": "Smartshares US 500 ETF",
+    "USM": "Smartshares US Mid Cap ETF",
+    "USS": "Smartshares US Small Cap ETF",
     "EUF": "Smartshares Europe ETF",
     "APA": "Smartshares Asia Pacific ETF",
     "EMF": "Smartshares Emerging Markets ETF",
     "ESG": "Smartshares Global Equities ESG ETF",
+    "EUG": "Smartshares Europe ESG ETF",
+    "USA": "Smartshares US ESG ETF",
 }
 
 SMARTSHARES_NAME_HINTS = {
-    "NZ TOP 50": "FNZ",
+    "GLOBAL AGGREGATE BOND": "AGG",
+    "AUSTRALIAN FINANCIALS": "ASF",
+    "AUSTRALIAN DIVIDEND": "ASD",
+    "AUSTRALIAN TOP 200": "AUS",
+    "AUSTRALIAN TOP 20": "OZY",
+    "AUSTRALIAN MID CAP": "MZY",
+    "EMERGING MARKETS": "EMF",
+    "NZ TOP 50 FUND": "FNZ_FUND",
+    "EUROPE ESG": "EUG",
+    "GLOBAL ESG": "ESG",
+    "US SMALL CAP": "USS",
+    "US MID CAP": "USM",
+    "TOTAL WORLD": "TWF",
+    "ASIA PACIFIC": "APA",
+    "NZ PROPERTY": "NPF",
+    "NZ DIVIDEND": "DIV",
+    "GLOBAL BOND": "GBF",
     "NZ MID CAP": "MDZ",
+    "NZ TOP 50": "FNZ",
+    "NZ TOP 10": "TNZ",
     "NZX 50": "NZG",
     "NZ CORE": "NZG",
-    "NZ DIVIDEND": "DIV",
     "NZ BOND": "NZB",
-    "GLOBAL BOND": "GBF",
-    "GLOBAL AGGREGATE BOND": "AGG",
-    "FND14632": "AGG",
-    "AUSTRALIAN TOP 20": "OZY",
-    "AUSTRALIAN DIVIDEND": "ASD",
-    "TOTAL WORLD": "TWF",
+    "US ESG": "USA",
     "US 500": "USF",
     "EUROPE": "EUF",
-    "ASIA PACIFIC": "APA",
-    "EMERGING MARKETS": "EMF",
-    "GLOBAL ESG": "ESG",
+    "FND14631": "EUG",
+    "FND14632": "AGG",
     "FND14633": "ESG",
+    "FND14636": "USA",
+    "FND19355": "AUS",
+    "FND1096": "ASF",
+    "FND1097": "MZY",
+    "FND1109": "USM",
+    "FND1110": "USS",
+    "FND1114": "TNZ",
+    "FND1116": "NPF",
+    "FND2471": "FNZ_FUND",
 }
+
+# Pre-sort hints longest-first so "EUROPE ESG" / "AUSTRALIAN TOP 200" win over substrings
+_SORTED_HINTS = sorted(SMARTSHARES_NAME_HINTS.items(), key=lambda kv: len(kv[0]), reverse=True)
 
 
 class SmartsharesDirectAdapter(BaseAdapter):
-    """Parses Smartshares direct equity portfolio holding CSV or Sorted XLSX files."""
+    """Parses Smartshares portfolio holding CSV or Sorted XLSX files."""
 
     def can_handle(self, file_path: Path) -> bool:
         if file_path.suffix.lower() not in {".csv", ".xlsx"}:
@@ -73,11 +106,12 @@ class SmartsharesDirectAdapter(BaseAdapter):
 
     def _extract_code_from_filename(self, filename: str) -> str:
         upper = filename.upper().replace("_", " ").replace("-", " ")
+        # Check multi-word name & FND register hints longest-first before raw ticker tokens (prevents ESG matching EUROPE ESG)
+        for hint, code in _SORTED_HINTS:
+            if hint in upper:
+                return code
         for code in SMARTSHARES_DIRECT_FUNDS:
             if re.search(rf"\b{code}\b", upper):
-                return code
-        for hint, code in SMARTSHARES_NAME_HINTS.items():
-            if hint in upper:
                 return code
         stem = re.sub(r"[^A-Z0-9]+", "_", Path(filename).stem.upper()).strip("_")
         return stem or "SMARTSHARES_FUND"
