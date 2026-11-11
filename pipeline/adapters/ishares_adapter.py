@@ -83,8 +83,13 @@ class ISharesAdapter(BaseAdapter):
                     asset_col = next((idx for k, idx in col_map.items() if "asset" in k or "class" in k), -1)
                     if asset_col != -1 and len(row) > asset_col:
                         asset_val = row[asset_col].strip().lower()
-                        if "cash" in asset_val or "futures" in asset_val or "derivative" in asset_val:
+                        if any(tok in asset_val for tok in ("cash", "futures", "derivative", "money market")) or asset_val == "fx":
                             continue
+
+                    sector_col = next((idx for k, idx in col_map.items() if "sector" in k), -1)
+                    sector = row[sector_col].strip() if sector_col != -1 and len(row) > sector_col else None
+                    if sector and any(tok in sector.lower() for tok in ("cash", "derivative")):
+                        continue
 
                     if weight_col == -1 or len(row) <= weight_col:
                         continue
@@ -102,9 +107,6 @@ class ISharesAdapter(BaseAdapter):
 
                     country_col = next((idx for k, idx in col_map.items() if "location" in k or "country" in k), -1)
                     country = row[country_col].strip() if country_col != -1 and len(row) > country_col else None
-
-                    sector_col = next((idx for k, idx in col_map.items() if "sector" in k), -1)
-                    sector = row[sector_col].strip() if sector_col != -1 and len(row) > sector_col else None
 
                     holdings.append(
                         RawHolding(

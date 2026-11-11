@@ -142,6 +142,21 @@
       z-index: 100;
     }
     .row-actions { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+    details.card > summary.panel-summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      user-select: none;
+    }
+    details.card > summary.panel-summary::-webkit-details-marker { display: none; }
+    details.card[open] > summary.panel-summary { margin-bottom: 10px; }
+    .panel-title-wrap { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .panel-title-wrap h2 { margin-bottom: 0; }
+    .panel-chevron { color: var(--muted); font-size: 11px; transition: transform 0.15s; display: inline-block; }
+    details.card:not([open]) .panel-chevron { transform: rotate(-90deg); }
   </style>
 </head>
 <body>
@@ -153,6 +168,8 @@
         <p class="subtitle">Local-only tool (`127.0.0.1`) to stage provider CSVs, verify adapter parsing, map aliases, and build `public/data/`.</p>
       </div>
       <div class="row-actions">
+        <button class="btn btn-sm" onclick="setAllPanelsOpen(true)">Expand All</button>
+        <button class="btn btn-sm" onclick="setAllPanelsOpen(false)">Collapse All</button>
         <button class="btn btn-primary" onclick="runPipeline(true)">▶ Run Dry-Run (--dry-run)</button>
         <button class="btn btn-ok" onclick="runPipeline(false)">⚡ Build Production (public/data/)</button>
       </div>
@@ -161,8 +178,13 @@
     <!-- STAGING & PREVIEW -->
     <div class="grid-2">
       <!-- Upload & Staged Inventory -->
-      <div class="card">
-        <h2>1. Stage &amp; Inspect Provider CSVs</h2>
+      <details open class="card" id="panel-staging" data-panel="panel-staging">
+        <summary class="panel-summary">
+          <div class="panel-title-wrap">
+            <span class="panel-chevron">▼</span>
+            <h2>1. Stage &amp; Inspect Provider CSVs</h2>
+          </div>
+        </summary>
         <div class="row-actions" style="margin-bottom: 10px;">
           <label for="provider-select" style="color: var(--muted);">Target directory:</label>
           <select id="provider-select">
@@ -180,25 +202,40 @@
         </div>
 
         <div id="staged-files-list" style="margin-top: 14px;">Loading staged files...</div>
-      </div>
+      </details>
 
       <!-- Adapter Parse Preview -->
-      <div class="card">
-        <h2>2. Adapter Parse Preview</h2>
+      <details open class="card" id="panel-preview" data-panel="panel-preview">
+        <summary class="panel-summary">
+          <div class="panel-title-wrap">
+            <span class="panel-chevron">▼</span>
+            <h2>2. Adapter Parse Preview</h2>
+          </div>
+        </summary>
         <p class="subtitle" style="margin-bottom: 10px;">Click <strong>Preview</strong> on any staged CSV to inspect headers and verify Tier 1 parsing before running the pipeline.</p>
         <div id="preview-pane" style="color: var(--muted);">Select a staged CSV file to preview its parsed rows.</div>
-      </div>
+      </details>
     </div>
 
     <!-- PIPELINE DIAGNOSTICS REPORT -->
-    <div class="card">
-      <h2>3. Pipeline Dry-Run / Build Diagnostics</h2>
+    <details open class="card" id="panel-diagnostics" data-panel="panel-diagnostics">
+      <summary class="panel-summary">
+        <div class="panel-title-wrap">
+          <span class="panel-chevron">▼</span>
+          <h2>3. Pipeline Dry-Run / Build Diagnostics</h2>
+        </div>
+      </summary>
       <div id="pipeline-report" style="color: var(--muted);">Click <strong>Run Dry-Run</strong> above to validate all staged CSVs, weights, and Global Security Master matching.</div>
-    </div>
+    </details>
 
     <!-- FEEDER PAIRINGS -->
-    <div class="card">
-      <h2>4. Feeder Pairings (feeder_registry.json)</h2>
+    <details open class="card" id="panel-feeders" data-panel="panel-feeders">
+      <summary class="panel-summary">
+        <div class="panel-title-wrap">
+          <span class="panel-chevron">▼</span>
+          <h2>4. Feeder Pairings (feeder_registry.json)</h2>
+        </div>
+      </summary>
       <div class="row-actions" style="margin-bottom: 10px; flex-wrap: wrap;">
         <input type="text" id="feeder-code" placeholder="Feeder Code (e.g. TWH)" style="width: 150px;">
         <input type="text" id="feeder-name" placeholder="Fund Name (e.g. Smart Total World Hedged ETF)" style="flex: 1; min-width: 180px;">
@@ -211,18 +248,22 @@
       </div>
       <div id="unconfigured-feeders-list" style="margin-bottom: 10px;"></div>
       <div id="feeder-pairings-list">Loading feeder pairings...</div>
-    </div>
+    </details>
 
     <!-- UNRESOLVED MAPPER & SAVED ALIASES -->
     <div class="grid-2">
-      <div class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 6px;">
-          <h2 style="margin-bottom: 0;">5. Unresolved Holdings Mapper</h2>
-          <div class="row-actions">
-            <button class="btn btn-sm" onclick="copyUnresolvedCsv()">Copy CSV</button>
-            <button class="btn btn-sm" onclick="toggleBulkImport()">Bulk Import CSV</button>
+      <details open class="card" id="panel-unresolved" data-panel="panel-unresolved">
+        <summary class="panel-summary">
+          <div class="panel-title-wrap">
+            <span class="panel-chevron">▼</span>
+            <h2>5. Unresolved Holdings Mapper</h2>
+            <span id="unresolved-count-badge" class="badge badge-info" style="display: none;"></span>
           </div>
-        </div>
+          <div class="row-actions" onclick="event.stopPropagation();">
+            <button class="btn btn-sm" onclick="event.preventDefault(); copyUnresolvedCsv();">Copy CSV</button>
+            <button class="btn btn-sm" onclick="event.preventDefault(); openPanel('panel-unresolved'); toggleBulkImport();">Bulk Import CSV</button>
+          </div>
+        </summary>
         <p class="subtitle" style="margin-bottom: 10px;">Unmatched or ambiguous names from the latest dry-run. Click a suggested close match, search the Security Master, or bulk-import CSV mappings into <code>provider_alias_map.json</code>.</p>
         <div id="bulk-import-box" style="display: none; margin-bottom: 12px; padding: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px;">
           <div style="font-size: 11px; color: var(--muted); margin-bottom: 6px;">Paste <code>scope,companyName,isin</code> rows (header optional):</div>
@@ -237,10 +278,15 @@
         </div>
         <div id="sm-search-results" style="margin-bottom: 12px;"></div>
         <div id="unresolved-list" style="color: var(--muted);">Run Dry-Run to check for unresolved holdings.</div>
-      </div>
+      </details>
 
-      <div class="card">
-        <h2>6. Saved Aliases (provider_alias_map.json)</h2>
+      <details open class="card" id="panel-aliases" data-panel="panel-aliases">
+        <summary class="panel-summary">
+          <div class="panel-title-wrap">
+            <span class="panel-chevron">▼</span>
+            <h2>6. Saved Aliases (provider_alias_map.json)</h2>
+          </div>
+        </summary>
         <div class="row-actions" style="margin-bottom: 10px;">
           <input type="text" id="manual-scope" placeholder="Provider:Fund (e.g. Kernel:KERNEL_NZ_50)" style="flex: 1;">
           <input type="text" id="manual-name" placeholder="Raw Name" style="flex: 1;">
@@ -248,7 +294,7 @@
           <button class="btn btn-primary btn-sm" onclick="addManualAlias()">Save</button>
         </div>
         <div id="saved-aliases-list">Loading aliases...</div>
-      </div>
+      </details>
     </div>
   </div>
 
@@ -359,6 +405,7 @@
     }
 
     function previewFileByIdx(idx) {
+      openPanel('panel-preview');
       const pair = stagedFilePairsState[idx];
       if (pair) previewFile(pair.provider, pair.filename);
     }
@@ -488,7 +535,13 @@
 
     function renderUnresolved(items) {
       const container = document.getElementById('unresolved-list');
+      const badge = document.getElementById('unresolved-count-badge');
       unresolvedItemsState = items || [];
+      if (badge) {
+        badge.style.display = 'inline-block';
+        badge.className = `badge ${unresolvedItemsState.length === 0 ? 'badge-ok' : 'badge-warn'}`;
+        badge.textContent = `${unresolvedItemsState.length} remaining`;
+      }
       if (!unresolvedItemsState.length) {
         container.innerHTML = `<span class="badge badge-ok">0 unresolved items — all holdings mapped cleanly.</span>`;
         return;
@@ -841,7 +894,38 @@
       container.innerHTML = html;
     }
 
+    // Panel collapse/expand state (persisted in localStorage)
+    const PANEL_STATE_KEY = 'admin_ui_panel_state_v1';
+
+    function openPanel(panelId) {
+      const el = document.getElementById(panelId);
+      if (el && !el.open) el.open = true;
+    }
+
+    function setAllPanelsOpen(shouldOpen) {
+      const state = {};
+      document.querySelectorAll('details.card[data-panel]').forEach((el) => {
+        el.open = shouldOpen;
+        state[el.dataset.panel] = shouldOpen;
+      });
+      try { localStorage.setItem(PANEL_STATE_KEY, JSON.stringify(state)); } catch (_) {}
+    }
+
+    function initCollapsiblePanels() {
+      let saved = {};
+      try { saved = JSON.parse(localStorage.getItem(PANEL_STATE_KEY) || '{}') || {}; } catch (_) {}
+      document.querySelectorAll('details.card[data-panel]').forEach((el) => {
+        const key = el.dataset.panel;
+        if (typeof saved[key] === 'boolean') el.open = saved[key];
+        el.addEventListener('toggle', () => {
+          saved[key] = el.open;
+          try { localStorage.setItem(PANEL_STATE_KEY, JSON.stringify(saved)); } catch (_) {}
+        });
+      });
+    }
+
     // Initial load
+    initCollapsiblePanels();
     loadStagedFiles();
     loadAliases();
     loadFeeders();

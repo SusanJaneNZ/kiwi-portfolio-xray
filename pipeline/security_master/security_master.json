@@ -8104,7 +8104,7 @@
     "sector": "Materials"
   },
   {
-    "isin": "ASX:JHX",
+    "isin": "SEDOL:BT18HQ0",
     "name": "JAMES HARDIE INDUSTRIES PLC",
     "ticker": "JHX.AX",
     "exchange": "ASX",
@@ -110048,9 +110048,81 @@
     "sector": "Consumer Staples"
   },
   {
+    "isin": "SEDOL:BYVG1F6",
+    "name": "Waste Connections Inc",
+    "ticker": "WCN",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BQ732F2",
+    "name": "Cerebras Systems Inc",
+    "ticker": "CBRS",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:BSZBFJ7",
+    "name": "Venture Global Inc",
+    "ticker": "VG",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Energy"
+  },
+  {
+    "isin": "SEDOL:BPG82M8",
+    "name": "Symbotic Inc",
+    "ticker": "SYM",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BD8DJ71",
+    "name": "Snap Inc",
+    "ticker": "SNAP",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Communication Services"
+  },
+  {
     "isin": "SEDOL:2311711",
     "name": "Erie Indemnity Co",
     "ticker": "ERIE",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:BV99FG5",
+    "name": "Hinge Health Inc",
+    "ticker": "HNGE",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:BT5HH41",
+    "name": "Pershing Square Inc",
+    "ticker": "PS",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:BSWW195",
+    "name": "Concentra Group Holdings Parent Inc",
+    "ticker": "CON",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:2246288",
+    "name": "Federated Hermes Inc",
+    "ticker": "FHI",
     "exchange": "GLOBAL",
     "country": "United States",
     "sector": "Financials"
@@ -110062,6 +110134,1814 @@
     "exchange": "GLOBAL",
     "country": "United States",
     "sector": "Communication Services"
+  },
+  {
+    "isin": "SEDOL:BV6KV30",
+    "name": "HeartFlow Inc",
+    "ticker": "HTFL",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:BLGJ610",
+    "name": "Warner Music Group Corp",
+    "ticker": "WMG",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Communication Services"
+  },
+  {
+    "isin": "SEDOL:2814210",
+    "name": "SkyWest Inc",
+    "ticker": "SKYW",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BJN4MY9",
+    "name": "Fastly Inc",
+    "ticker": "FSLY",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:BNR4QY1",
+    "name": "Crescent Energy Co",
+    "ticker": "CRGY",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Energy"
+  },
+  {
+    "isin": "SEDOL:BNRR1B2",
+    "name": "Atmus Filtration Technologies Inc",
+    "ticker": "ATMU",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:2117726",
+    "name": "Brady Corp",
+    "ticker": "BRC",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BRXB0C0",
+    "name": "Kiniksa Pharmaceuticals International Plc",
+    "ticker": "KNSA",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:BT3CTW0",
+    "name": "Beta Technologies Inc",
+    "ticker": "BETA",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BF0DMK7",
+    "name": "Iovance Biotherapeutics Inc",
+    "ticker": "IOVA",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:2938422",
+    "name": "Veeco Instruments Inc",
+    "ticker": "VECO",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:BQT3J26",
+    "name": "Netskope Inc",
+    "ticker": "NTSK",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:BTPF3S1",
+    "name": "Ionic Digital Inc",
+    "ticker": "IOND",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:BLPNQJ1",
+    "name": "Kinetik Holdings Inc",
+    "ticker": "KNTK",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Energy"
+  },
+  {
+    "isin": "SEDOL:BLGZN51",
+    "name": "Warby Parker Inc",
+    "ticker": "WRBY",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:BRT7Y75",
+    "name": "Miami International Holdings Inc",
+    "ticker": "MIAX",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:2630085",
+    "name": "Neogen Corp",
+    "ticker": "NEOG",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:2139731",
+    "name": "National HealthCare Corp",
+    "ticker": "NHC",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:BYX60M4",
+    "name": "International Seaways Inc",
+    "ticker": "INSW",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Energy"
+  },
+  {
+    "isin": "SEDOL:B3KKGR9",
+    "name": "Central BanCo Inc",
+    "ticker": "CBC",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:B0PZN33",
+    "name": "Brookdale Senior Living Inc",
+    "ticker": "BKD",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:2895163",
+    "name": "United Natural Foods Inc",
+    "ticker": "UNFI",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Staples"
+  },
+  {
+    "isin": "SEDOL:2247979",
+    "name": "AXT Inc",
+    "ticker": "AXTI",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:BP2Q7W1",
+    "name": "AvePoint Inc",
+    "ticker": "AVPT",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:2598246",
+    "name": "NeoGenomics Inc",
+    "ticker": "NEO",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:BKP4ZK1",
+    "name": "InvenTrust Properties Corp",
+    "ticker": "IVT",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  {
+    "isin": "SEDOL:BVDGYR6",
+    "name": "Lionsgate Studios Corp",
+    "ticker": "LION",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Communication Services"
+  },
+  {
+    "isin": "SEDOL:B6T6J81",
+    "name": "Proto Labs Inc",
+    "ticker": "PRLB",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BVMZK21",
+    "name": "EquipmentShare.com Inc",
+    "ticker": "EQPT",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BK8MDM0",
+    "name": "Helios Technologies Inc",
+    "ticker": "HLIO",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BN6R7F9",
+    "name": "Rush Street Interactive Inc",
+    "ticker": "RSI",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:BJ5FZ74",
+    "name": "Adaptive Biotechnologies Corp",
+    "ticker": "ADPT",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:BKTPCS7",
+    "name": "Baldwin Insurance Group Inc/The",
+    "ticker": "BWIN",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:2690506",
+    "name": "Pitney Bowes Inc",
+    "ticker": "PBI",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:2274922",
+    "name": "Andersons Inc/The",
+    "ticker": "ANDE",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Staples"
+  },
+  {
+    "isin": "SEDOL:B87LKR8",
+    "name": "OFG Bancorp",
+    "ticker": "OFG",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:BMD2S79",
+    "name": "Ondas Inc",
+    "ticker": "ONDS",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:2677640",
+    "name": "Pediatrix Medical Group Inc",
+    "ticker": "MD",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:BVH8P08",
+    "name": "Arxis Inc",
+    "ticker": "ARXS",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BSNMCG8",
+    "name": "Uniti Group Inc",
+    "ticker": "UNIT",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Communication Services"
+  },
+  {
+    "isin": "SEDOL:BVH8NY8",
+    "name": "Madison Air Solutions Corp",
+    "ticker": "MAIR",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BDT5KT5",
+    "name": "Inspire Medical Systems Inc",
+    "ticker": "INSP",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:2496113",
+    "name": "Kohl's Corp",
+    "ticker": "KSS",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:BHRWS81",
+    "name": "Levi Strauss & Co",
+    "ticker": "LEVI",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:BL96T19",
+    "name": "Opendoor Technologies Inc",
+    "ticker": "OPEN",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  {
+    "isin": "SEDOL:BPK4SR9",
+    "name": "Firefly Aerospace Inc",
+    "ticker": "FLY",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BKV28S8",
+    "name": "Schrodinger Inc/United States",
+    "ticker": "SDGR",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:BWFJDH3",
+    "name": "Keel Infrastructure Corp",
+    "ticker": "KEEL",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:2443078",
+    "name": "Encore Capital Group Inc",
+    "ticker": "ECPG",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:BN4JNC6",
+    "name": "Klaviyo Inc",
+    "ticker": "KVYO",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:2458878",
+    "name": "Blackbaud Inc",
+    "ticker": "BLKB",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:B15M2C3",
+    "name": "Allegiant Travel Co",
+    "ticker": "ALGT",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BMBP1P9",
+    "name": "Paymentus Holdings Inc",
+    "ticker": "PAY",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:BT3F5M1",
+    "name": "Infleqtion Inc",
+    "ticker": "INFQ",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:BJDQXG4",
+    "name": "Novavax Inc",
+    "ticker": "NVAX",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:BMDPVF7",
+    "name": "Centuri Holdings Inc",
+    "ticker": "CTRI",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BK4PZ38",
+    "name": "Vir Biotechnology Inc",
+    "ticker": "VIR",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:BYZM6C2",
+    "name": "Intellia Therapeutics Inc",
+    "ticker": "NTLA",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:BNKGY06",
+    "name": "First Advantage Corp",
+    "ticker": "FA",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BMFPJK6",
+    "name": "ACV Auctions Inc",
+    "ticker": "ACVA",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:B888DV3",
+    "name": "National Bank Holdings Corp",
+    "ticker": "NBHC",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:BK95GR4",
+    "name": "Happen Inc",
+    "ticker": "HAPN",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:BTCL6X8",
+    "name": "Expro Ltd",
+    "ticker": "XPRO",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Energy"
+  },
+  {
+    "isin": "SEDOL:BQMJ1G9",
+    "name": "Voyager Technologies Inc",
+    "ticker": "VOYG",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BX3SQS1",
+    "name": "Astrana Health Inc",
+    "ticker": "ASTH",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:BSBGKF7",
+    "name": "USA Rare Earth Inc",
+    "ticker": "USAR",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Materials"
+  },
+  {
+    "isin": "SEDOL:2379281",
+    "name": "Gorman-Rupp Co/The",
+    "ticker": "GRC",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:2977500",
+    "name": "Wolverine World Wide Inc",
+    "ticker": "WWW",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:BS5YN47",
+    "name": "Ingram Micro Holding Corp",
+    "ticker": "INGM",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:B1GZ005",
+    "name": "Sally Beauty Holdings Inc",
+    "ticker": "SBH",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:2958538",
+    "name": "Safety Insurance Group Inc",
+    "ticker": "SAFT",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:B3PY1N7",
+    "name": "RLJ Lodging Trust",
+    "ticker": "RLJ",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  {
+    "isin": "SEDOL:BMGNBJ2",
+    "name": "C3.ai Inc",
+    "ticker": "AI",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:BT6BF59",
+    "name": "Alliance Laundry Holdings Inc",
+    "ticker": "ALH",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BT18HJ3",
+    "name": "Slide Insurance Holdings Inc",
+    "ticker": "SLDE",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:BSPRSL8",
+    "name": "Innovex International Inc",
+    "ticker": "INVX",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Energy"
+  },
+  {
+    "isin": "SEDOL:2216010",
+    "name": "CONMED Corp",
+    "ticker": "CNMD",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:BFV4XW8",
+    "name": "Energy Fuels Inc/Canada",
+    "ticker": "UUUU",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Energy"
+  },
+  {
+    "isin": "SEDOL:2145460",
+    "name": "Azenta Inc",
+    "ticker": "AZTA",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:BMGMH68",
+    "name": "Navitas Semiconductor Corp",
+    "ticker": "NVTS",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:BNT8W21",
+    "name": "Hillman Solutions Corp",
+    "ticker": "HLMN",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BN15WD1",
+    "name": "Dyne Therapeutics Inc",
+    "ticker": "DYN",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:2845005",
+    "name": "Stepan Co",
+    "ticker": "SCL",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Materials"
+  },
+  {
+    "isin": "SEDOL:BW9NLS8",
+    "name": "Quantinuum Inc",
+    "ticker": "QNT",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:2594222",
+    "name": "MillerKnoll Inc",
+    "ticker": "MLKN",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BN4G703",
+    "name": "AMC Entertainment Holdings Inc",
+    "ticker": "AMC",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Communication Services"
+  },
+  {
+    "isin": "SEDOL:2417619",
+    "name": "Healthcare Services Group Inc",
+    "ticker": "HCSG",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BMVFC23",
+    "name": "Stubhub Holdings Inc",
+    "ticker": "STUB",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Communication Services"
+  },
+  {
+    "isin": "SEDOL:BNKVVY4",
+    "name": "Concentrix Corp",
+    "ticker": "CNXC",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:BVZNXR8",
+    "name": "Via Transportation Inc",
+    "ticker": "VIA",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:BFY8W20",
+    "name": "Everforth Inc",
+    "ticker": "EFOR",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:2950374",
+    "name": "Westamerica BanCorp",
+    "ticker": "WABC",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:BMV1Z44",
+    "name": "Amplitude Inc",
+    "ticker": "AMPL",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:BTMJ438",
+    "name": "NIQ Global Intelligence Plc",
+    "ticker": "NIQ",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Communication Services"
+  },
+  {
+    "isin": "SEDOL:2888613",
+    "name": "Tompkins Financial Corp",
+    "ticker": "TMP",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:BX8ZSB4",
+    "name": "Edgewell Personal Care Co",
+    "ticker": "EPC",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Staples"
+  },
+  {
+    "isin": "SEDOL:BYP71H7",
+    "name": "National Vision Holdings Inc",
+    "ticker": "EYE",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:2200552",
+    "name": "BJ's Restaurants Inc",
+    "ticker": "BJRI",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:BYPBTB9",
+    "name": "Appian Corp",
+    "ticker": "APPN",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:B0539H3",
+    "name": "Herbalife Ltd",
+    "ticker": "HLF",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Staples"
+  },
+  {
+    "isin": "SEDOL:BMXXBD9",
+    "name": "Figs Inc",
+    "ticker": "FIGS",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:BNSNZL7",
+    "name": "Coursera Inc",
+    "ticker": "COUR",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:BLFGN66",
+    "name": "PROG Holdings Inc",
+    "ticker": "PRG",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:BVPDLS5",
+    "name": "Accelerant Holdings",
+    "ticker": "ARX",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:BRWFZV7",
+    "name": "Neptune Insurance Holdings Inc",
+    "ticker": "NP",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:BDZT9Y9",
+    "name": "Arcus Biosciences Inc",
+    "ticker": "RCUS",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:2516613",
+    "name": "Lindsay Corp",
+    "ticker": "LNN",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BVMHN73",
+    "name": "Parabilis Medicines Inc",
+    "ticker": "PBLS",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:BF3W461",
+    "name": "Tandem Diabetes Care Inc",
+    "ticker": "TNDM",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:2118707",
+    "name": "Del Monte Corp",
+    "ticker": "DMC",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Staples"
+  },
+  {
+    "isin": "SEDOL:2767756",
+    "name": "ScanSource Inc",
+    "ticker": "SCSC",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:B3M3278",
+    "name": "Piedmont Realty Trust Inc",
+    "ticker": "PDM",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  {
+    "isin": "SEDOL:BNHTR54",
+    "name": "Intuitive Machines Inc",
+    "ticker": "LUNR",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:2980939",
+    "name": "Carter's Inc",
+    "ticker": "CRI",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:2248693",
+    "name": "Integra LifeSciences Holdings Corp",
+    "ticker": "IART",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:BM8NHT2",
+    "name": "Ecovyst Inc",
+    "ticker": "ECVT",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Materials"
+  },
+  {
+    "isin": "SEDOL:2469171",
+    "name": "J & J Snack Foods Corp",
+    "ticker": "JJSF",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Staples"
+  },
+  {
+    "isin": "SEDOL:BK1KWF7",
+    "name": "Grocery Outlet Holding Corp",
+    "ticker": "GO",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Staples"
+  },
+  {
+    "isin": "SEDOL:BYQRFY1",
+    "name": "Teladoc Health Inc",
+    "ticker": "TDOC",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:BMGCGK5",
+    "name": "RUM Group Inc",
+    "ticker": "RUM",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Communication Services"
+  },
+  {
+    "isin": "SEDOL:BWTRBN5",
+    "name": "Solv Energy Inc",
+    "ticker": "MWH",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BMYS5T7",
+    "name": "GPGI Inc",
+    "ticker": "GPGI",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:BZ2YT30",
+    "name": "Goosehead Insurance Inc",
+    "ticker": "GSHD",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:BL989M6",
+    "name": "Utz Brands Inc",
+    "ticker": "UTZ",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Staples"
+  },
+  {
+    "isin": "SEDOL:BJLTMX5",
+    "name": "Enovis Corp",
+    "ticker": "ENOV",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:2260363",
+    "name": "Deluxe Corp",
+    "ticker": "DLX",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BMYRFV6",
+    "name": "Procept Biorobotics Corp",
+    "ticker": "PRCT",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:2923804",
+    "name": "Universal Corp/VA",
+    "ticker": "UVV",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Staples"
+  },
+  {
+    "isin": "SEDOL:BM9GT61",
+    "name": "Certara Inc",
+    "ticker": "CERT",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:B3NTLD4",
+    "name": "American Assets Trust Inc",
+    "ticker": "AAT",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  {
+    "isin": "SEDOL:BL6JGD2",
+    "name": "Atlas Energy Solutions Inc",
+    "ticker": "AESI",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Energy"
+  },
+  {
+    "isin": "SEDOL:2369721",
+    "name": "G-III Apparel Group Ltd",
+    "ticker": "GIII",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:B8JFD24",
+    "name": "Gentherm Inc",
+    "ticker": "THRM",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:BGRFWV4",
+    "name": "Upwork Inc",
+    "ticker": "UPWK",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:B7KCD72",
+    "name": "Yelp Inc",
+    "ticker": "YELP",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Communication Services"
+  },
+  {
+    "isin": "SEDOL:BRXYZ57",
+    "name": "Fortrea Holdings Inc",
+    "ticker": "FTRE",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:2786687",
+    "name": "Seaboard Corp",
+    "ticker": "SEB",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Staples"
+  },
+  {
+    "isin": "SEDOL:B86V808",
+    "name": "Interface Inc",
+    "ticker": "TILE",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:2632650",
+    "name": "NCR Voyix Corp",
+    "ticker": "VYX",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:BJ367P1",
+    "name": "Ladder Capital Corp",
+    "ticker": "LADR",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:BMWF095",
+    "name": "ZoomInfo Technologies Inc",
+    "ticker": "GTM",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Communication Services"
+  },
+  {
+    "isin": "SEDOL:BVK0QZ3",
+    "name": "Fervo Energy Co",
+    "ticker": "FRVO",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Utilities"
+  },
+  {
+    "isin": "SEDOL:B3KWJV0",
+    "name": "Capitol Federal Financial Inc",
+    "ticker": "CFFN",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:2060370",
+    "name": "Astec Industries Inc",
+    "ticker": "ASTE",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BG3G1B4",
+    "name": "LGI Homes Inc",
+    "ticker": "LGIH",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:BN47P80",
+    "name": "Centerspace",
+    "ticker": "CSR",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  {
+    "isin": "SEDOL:B82GC49",
+    "name": "Legalzoom.com Inc",
+    "ticker": "LZ",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:B3X26D8",
+    "name": "Pacira BioSciences Inc",
+    "ticker": "PCRX",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:BMX6DM1",
+    "name": "Vertex Inc",
+    "ticker": "VERX",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:BJ1FD74",
+    "name": "Revolve Group Inc",
+    "ticker": "RVLV",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:BLNB073",
+    "name": "PureCycle Technologies Inc",
+    "ticker": "PCT",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Materials"
+  },
+  {
+    "isin": "SEDOL:B3KKGQ8",
+    "name": "Virtus Investment Partners Inc",
+    "ticker": "VRTS",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:BV4MN09",
+    "name": "York Space Systems Inc",
+    "ticker": "YSS",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:2733092",
+    "name": "Upbound Group Inc",
+    "ticker": "UPBD",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:B4JTYX6",
+    "name": "Apollo Commercial Real Estate Finance Inc",
+    "ticker": "ARI",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:BMZM2X1",
+    "name": "MFA Financial Inc",
+    "ticker": "MFA",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:BT5DG97",
+    "name": "Jersey Mike's Subs Inc",
+    "ticker": "JMKE",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:BP3YM85",
+    "name": "Trupanion Inc",
+    "ticker": "TRUP",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:BN13RW9",
+    "name": "Chimera Investment Corp",
+    "ticker": "CIM",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:BF27XF9",
+    "name": "Simply Good Foods Co/The",
+    "ticker": "SMPL",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Staples"
+  },
+  {
+    "isin": "SEDOL:BP5JNQ3",
+    "name": "Vestis Corp",
+    "ticker": "VSTS",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BP2RPZ3",
+    "name": "Hagerty Inc",
+    "ticker": "HGTY",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:BNDQ9Y2",
+    "name": "GCM Grosvenor Inc",
+    "ticker": "GCMG",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:BRJW0G1",
+    "name": "Liberty Capital Corp",
+    "ticker": "GLIBK",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Communication Services"
+  },
+  {
+    "isin": "SEDOL:BLFDQC4",
+    "name": "Asana Inc",
+    "ticker": "ASAN",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:BWNNCN6",
+    "name": "Csquare Inc",
+    "ticker": "CSQR",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:BM9VY27",
+    "name": "QuidelOrtho Corp",
+    "ticker": "QDEL",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:2125246",
+    "name": "Sonic Automotive Inc",
+    "ticker": "SAH",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:BN2QTD2",
+    "name": "Excelerate Energy Inc",
+    "ticker": "EE",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Energy"
+  },
+  {
+    "isin": "SEDOL:BG0ZML1",
+    "name": "BrightView Holdings Inc",
+    "ticker": "BV",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BMDJ085",
+    "name": "Shoals Technologies Group Inc",
+    "ticker": "SHLS",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:2836292",
+    "name": "STAAR Surgical Co",
+    "ticker": "STAA",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:BSHT908",
+    "name": "Flowco Holdings Inc",
+    "ticker": "FLOC",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Energy"
+  },
+  {
+    "isin": "SEDOL:2966865",
+    "name": "Rush Enterprises Inc",
+    "ticker": "RUSHB",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BMXC0N9",
+    "name": "Fluence Energy Inc",
+    "ticker": "FLNC",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BFWGXV2",
+    "name": "Marcus & Millichap Inc",
+    "ticker": "MMI",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  {
+    "isin": "SEDOL:2896809",
+    "name": "Tootsie Roll Industries Inc",
+    "ticker": "TR",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Staples"
+  },
+  {
+    "isin": "SEDOL:BMDBB99",
+    "name": "Safehold Inc",
+    "ticker": "SAFE",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  {
+    "isin": "SEDOL:2719456",
+    "name": "RPC Inc",
+    "ticker": "RES",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Energy"
+  },
+  {
+    "isin": "SEDOL:BFMKYK0",
+    "name": "Frontier Group Holdings Inc",
+    "ticker": "ULCC",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:B00N2S0",
+    "name": "Arbor Realty Trust Inc",
+    "ticker": "ABR",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:2369226",
+    "name": "Gibraltar Industries Inc",
+    "ticker": "ROCK",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BQLSDL6",
+    "name": "Savers Value Village Inc",
+    "ticker": "SVV",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:2014021",
+    "name": "Alexander's Inc",
+    "ticker": "ALX",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  {
+    "isin": "SEDOL:BW0TQY6",
+    "name": "X-Energy Inc",
+    "ticker": "XE",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BRJX4J5",
+    "name": "Sinclair Inc",
+    "ticker": "SBGI",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Communication Services"
+  },
+  {
+    "isin": "SEDOL:2394080",
+    "name": "Greif Inc",
+    "ticker": "GEF/B",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Materials"
+  },
+  {
+    "isin": "SEDOL:2918996",
+    "name": "Array Digital Infrastructure Inc",
+    "ticker": "AD",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Communication Services"
+  },
+  {
+    "isin": "SEDOL:2037062",
+    "name": "Hornbeck Offshore Services Inc",
+    "ticker": "HOS",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Energy"
+  },
+  {
+    "isin": "SEDOL:BNKCPP6",
+    "name": "Sprinklr Inc",
+    "ticker": "CXM",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:BF16ZX9",
+    "name": "Forestar Group Inc",
+    "ticker": "FOR",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  {
+    "isin": "SEDOL:BVJZGX7",
+    "name": "Andersen Group Inc",
+    "ticker": "ANDG",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BNV08M7",
+    "name": "Arhaus Inc",
+    "ticker": "ARHS",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:2115902",
+    "name": "OPKO Health Inc",
+    "ticker": "OPK",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:BLB56T1",
+    "name": "Ridgepost Capital Inc",
+    "ticker": "RPC",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:B2QXCJ9",
+    "name": "Quanex Building Products Corp",
+    "ticker": "NX",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BVH8P19",
+    "name": "Kailera Therapeutics Inc",
+    "ticker": "KLRA",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:BT24ZK7",
+    "name": "Applied Aerospace & Defense Inc",
+    "ticker": "AADX",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:B1Q1RR9",
+    "name": "Employers Holdings Inc",
+    "ticker": "EIG",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:BMYH4Y2",
+    "name": "Pattern Group Inc",
+    "ticker": "PTRN",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:BVPKF40",
+    "name": "Aevex Corp",
+    "ticker": "AVEX",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BMDJ3B9",
+    "name": "UWM Holdings Corp",
+    "ticker": "UWMC",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:BTMJ5B3",
+    "name": "McGraw Hill Inc",
+    "ticker": "MH",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:BM927N2",
+    "name": "ERock Inc",
+    "ticker": "EROC",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:B3V8JL7",
+    "name": "PennyMac Mortgage Investment Trust",
+    "ticker": "PMT",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:B3SWPT2",
+    "name": "Ameresco Inc",
+    "ticker": "AMRC",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:2696117",
+    "name": "Papa John's International Inc",
+    "ticker": "PZZA",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:BLBLMD5",
+    "name": "Array Technologies Inc",
+    "ticker": "ARRY",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:2183868",
+    "name": "Central Garden & Pet Co",
+    "ticker": "CENT",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Staples"
+  },
+  {
+    "isin": "SEDOL:BF321D7",
+    "name": "Empire State Realty Trust Inc",
+    "ticker": "ESRT",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  {
+    "isin": "SEDOL:BD3BX01",
+    "name": "JBG SMITH Properties",
+    "ticker": "JBGS",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  {
+    "isin": "SEDOL:BMFZ3F9",
+    "name": "Dream Finders Homes Inc",
+    "ticker": "DFH",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:BMXDS27",
+    "name": "Cricut Inc",
+    "ticker": "CRCT",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:BLP5GX1",
+    "name": "Navient Corp",
+    "ticker": "NAVI",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  {
+    "isin": "SEDOL:BV9C5G4",
+    "name": "Bob's Discount Furniture Inc",
+    "ticker": "BOBS",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "SEDOL:BNNTCT7",
+    "name": "Enovix Corp",
+    "ticker": "ENVX",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BPSKXZ2",
+    "name": "Liftoff Mobile Inc",
+    "ticker": "LFTO",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Communication Services"
+  },
+  {
+    "isin": "SEDOL:BX566N8",
+    "name": "Hawkeye 360 Inc",
+    "ticker": "HAWK",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:2777777",
+    "name": "Saul Centers Inc",
+    "ticker": "BFS",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  {
+    "isin": "SEDOL:B06RWD1",
+    "name": "Cogent Communications Holdings Inc",
+    "ticker": "CCOI",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Communication Services"
+  },
+  {
+    "isin": "SEDOL:BMTVQT8",
+    "name": "GoodRx Holdings Inc",
+    "ticker": "GDRX",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:BNM5672",
+    "name": "Hertz Global Holdings Inc",
+    "ticker": "HTZ",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BRJW0F0",
+    "name": "Liberty Capital Corp",
+    "ticker": "GLIBA",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Communication Services"
+  },
+  {
+    "isin": "SEDOL:C0HVGM8",
+    "name": "Accelevation Holdings Corp",
+    "ticker": "ACCV",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:9025253",
+    "name": "PFIZER INC - CVR (NOV 25)",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "SEDOL:9026290",
+    "name": "ARCELLX INC CVR (APRIL 2026)",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
   },
   {
     "isin": "SEDOL:BQBG6P5",

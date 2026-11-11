@@ -33,5 +33,20 @@
     "name": "SMART US SMALL CAP ETF",
     "master_provider": "vanguard",
     "master_ticker": "VB"
+  },
+  "USM": {
+    "name": "Smart Us Mid Cap Etf",
+    "master_provider": "vanguard",
+    "master_ticker": "VO"
+  },
+  "USA": {
+    "name": "Smart Us Esg Etf",
+    "master_provider": "ishares",
+    "master_ticker": "SASU"
+  },
+  "EUG": {
+    "name": "Smart Europe Esg Etf",
+    "master_provider": "ishares",
+    "master_ticker": "SAEU"
   }
 }

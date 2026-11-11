@@ -4,7 +4,9 @@
   },
   "Kernel:KERNEL_CLEAN_ENERGY": {
     "Vestas Wind Systems A/S": "SEDOL:BN4MYF5",
-    "Orsted A/S": "SEDOL:BYT16L4"
+    "Orsted A/S": "SEDOL:BYT16L4",
+    "Nextracker Inc Class A": "SEDOL:BR1GTS6",
+    "Energias de Portugal SA": "SEDOL:4103596"
   },
   "Smartshares:FNZ": {
     "FPH NZ": "SEDOL:6340250"

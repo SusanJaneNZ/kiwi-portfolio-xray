@@ -150,6 +150,24 @@ class TestAdapters(unittest.TestCase):
         self.assertEqual(smartshares._extract_code_from_filename("SMART-US-MID-CAP-ETF-FND1109-Full.xlsx"), "USM")
         self.assertEqual(smartshares._extract_code_from_filename("SMART-AUSTRALIAN-TOP-200-ETF-FND19355-Full.xlsx"), "AUS")
 
+    def test_ishares_skips_money_market_and_cash_derivatives(self):
+        csv_text = (
+            'Fund Holdings as of,"09/Nov/2026"\n\n'
+            'Ticker,Name,Sector,Asset Class,Market Value,Weight (%),Location\n'
+            '"AAPL","APPLE","Information Technology","Equity","999.00","99.90","United States"\n'
+            '"ICSUAGD","BLK ICS USD LIQ AGENCY DIS","Cash and/or Derivatives","Money Market","1.00","0.08","Ireland"\n'
+            '"USD","USD CASH","Cash and/or Derivatives","Cash","0.20","0.02","United States"\n'
+        )
+        adapter = ISharesAdapter()
+        with tempfile.TemporaryDirectory() as tmp:
+            p = Path(tmp) / "SASU_holdings.csv"
+            p.write_text(csv_text, encoding="utf-8")
+            res = adapter.parse(p)
+            self.assertEqual(res.fund_code, "SASU")
+            self.assertEqual(len(res.holdings), 1)
+            self.assertEqual(res.holdings[0].ticker, "AAPL")
+            self.assertAlmostEqual(res.holdings[0].weight, 1.0, places=4)
+
 
 if __name__ == "__main__":
     unittest.main()

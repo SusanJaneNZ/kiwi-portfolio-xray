@@ -228,6 +228,54 @@
     "is_stale": false
   },
   {
+    "code": "USS",
+    "name": "SMART US SMALL CAP ETF",
+    "provider": "Smartshares",
+    "effective_date": "2026-09-30",
+    "cash_ratio": 0.0017,
+    "hedging_ratio": 0.0,
+    "constituent_count": 1301,
+    "asset_class": "equity",
+    "cadence": "monthly",
+    "is_stale": false
+  },
+  {
+    "code": "USM",
+    "name": "Smart Us Mid Cap Etf",
+    "provider": "Smartshares",
+    "effective_date": "2026-09-30",
+    "cash_ratio": 0.0018,
+    "hedging_ratio": 0.0,
+    "constituent_count": 271,
+    "asset_class": "equity",
+    "cadence": "monthly",
+    "is_stale": false
+  },
+  {
+    "code": "USA",
+    "name": "Smart Us Esg Etf",
+    "provider": "Smartshares",
+    "effective_date": "2026-09-30",
+    "cash_ratio": 0.0004,
+    "hedging_ratio": 0.0,
+    "constituent_count": 462,
+    "asset_class": "equity",
+    "cadence": "monthly",
+    "is_stale": false
+  },
+  {
+    "code": "EUG",
+    "name": "Smart Europe Esg Etf",
+    "provider": "Smartshares",
+    "effective_date": "2026-09-30",
+    "cash_ratio": 0.0004,
+    "hedging_ratio": 0.0,
+    "constituent_count": 360,
+    "asset_class": "equity",
+    "cadence": "monthly",
+    "is_stale": false
+  },
+  {
     "code": "KERNEL_GLOBAL_ESG",
     "name": "Kernel Global Esg Fund",
     "provider": "Kernel",

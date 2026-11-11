@@ -145,36 +145,10 @@
   {
     "provider": "Kernel",
     "fund_code": "KERNEL_GLOBAL_DIVIDEND",
-    "raw_name": "Deluxe Corp",
-    "raw_ticker": "",
-    "weight": 0.014876,
-    "reason": "no_candidates_above_70",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_DIVIDEND": {
-        "Deluxe Corp": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_DIVIDEND",
-    "raw_name": "Safety Insurance Group Inc",
-    "raw_ticker": "",
-    "weight": 0.014677,
-    "reason": "ambiguous_collision_spread_0.03",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_DIVIDEND": {
-        "Safety Insurance Group Inc": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_DIVIDEND",
     "raw_name": "Universal Corp",
     "raw_ticker": "",
     "weight": 0.013978,
-    "reason": "ambiguous_collision_spread_0.00",
+    "reason": "ambiguous_collision_spread_0.11",
     "suggested_snippet": {
       "Kernel:KERNEL_GLOBAL_DIVIDEND": {
         "Universal Corp": "INSERT_CANONICAL_ISIN"
@@ -269,19 +243,6 @@
     "suggested_snippet": {
       "Kernel:KERNEL_GLOBAL_ESG": {
         "Monster Beverage Corp New": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_DIVIDEND",
-    "raw_name": "Virtus Investment Partners Inc",
-    "raw_ticker": "",
-    "weight": 0.010583,
-    "reason": "ambiguous_collision_spread_0.08",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_DIVIDEND": {
-        "Virtus Investment Partners Inc": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -564,7 +525,7 @@
     "raw_name": "Fuelcell Energy Inc",
     "raw_ticker": "",
     "weight": 0.004557,
-    "reason": "ambiguous_collision_spread_0.05",
+    "reason": "ambiguous_collision_spread_0.01",
     "suggested_snippet": {
       "Kernel:KERNEL_CLEAN_ENERGY": {
         "Fuelcell Energy Inc": "INSERT_CANONICAL_ISIN"
@@ -594,19 +555,6 @@
     "suggested_snippet": {
       "Smartshares:ASF": {
         "BLOCK INC. CDI 1 1 FOREIGN EXEMPT NYSE": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_CLEAN_ENERGY",
-    "raw_name": "Array Technologies Inc",
-    "raw_ticker": "",
-    "weight": 0.004359,
-    "reason": "ambiguous_collision_spread_0.02",
-    "suggested_snippet": {
-      "Kernel:KERNEL_CLEAN_ENERGY": {
-        "Array Technologies Inc": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -837,7 +785,7 @@
     "raw_name": "Marriott International Inc",
     "raw_ticker": "",
     "weight": 0.001182,
-    "reason": "ambiguous_collision_spread_0.12",
+    "reason": "ambiguous_collision_spread_0.11",
     "suggested_snippet": {
       "Kernel:KERNEL_GLOBAL_ESG": {
         "Marriott International Inc": "INSERT_CANONICAL_ISIN"
