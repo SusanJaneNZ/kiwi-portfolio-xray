@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { CollapsiblePanel } from './CollapsiblePanel';
 import { CategoryBreakdown } from '../types/portfolio';
 
@@ -9,14 +9,20 @@ interface StackedBarChartProps {
 
 const COLOR_PALETTE = [
   '#3b82f6', // blue-500
-  '#14b8a6', // teal-500
-  '#f43f5e', // rose-500
-  '#06b6d4', // cyan-500
   '#f59e0b', // amber-500
   '#10b981', // emerald-500
-  '#8b5cf6', // purple-500
+  '#f43f5e', // rose-500
+  '#8b5cf6', // violet-500
+  '#06b6d4', // cyan-500
+  '#f97316', // orange-500
   '#ec4899', // pink-500
+  '#84cc16', // lime-500
   '#6366f1', // indigo-500
+  '#14b8a6', // teal-500
+  '#eab308', // yellow-500
+  '#d946ef', // fuchsia-500
+  '#0ea5e9', // sky-500
+  '#ef4444', // red-500
   '#64748b', // slate-500
 ];
 
@@ -28,6 +34,29 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
   const [hoveredSubcategory, setHoveredSubcategory] = useState<string | null>(null);
 
   const activeData = activeTab === 'sectors' ? sectorBreakdown : countryBreakdown;
+  const legendLabel = activeTab === 'sectors' ? 'Country Key' : 'Sector Key';
+
+  // Assign a consistent color per subcategory name across all rows, ordered by total exposure.
+  const { legendItems, colorBySubcategory } = useMemo(() => {
+    const totals = new Map<string, number>();
+    for (const category of activeData) {
+      for (const sub of category.subcategories) {
+        totals.set(sub.name, (totals.get(sub.name) || 0) + sub.valueNZD);
+      }
+    }
+    const sortedNames = Array.from(totals.entries())
+      .sort((a, b) => b[1] - a[1])
+      .map(([name]) => name);
+
+    const colorMap = new Map<string, string>();
+    const items = sortedNames.map((name, idx) => {
+      const color = COLOR_PALETTE[idx % COLOR_PALETTE.length];
+      colorMap.set(name, color);
+      return { name, color };
+    });
+
+    return { legendItems: items, colorBySubcategory: colorMap };
+  }, [activeData]);
 
   return (
     <CollapsiblePanel
@@ -39,21 +68,19 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
         <div className="flex gap-1.5">
           <button
             onClick={() => setActiveTab('sectors')}
-            className={`text-xs font-semibold px-2.5 py-1 rounded-lg transition-colors ${
-              activeTab === 'sectors'
+            className={`text-xs font-semibold px-2.5 py-1 rounded-lg transition-colors ${activeTab === 'sectors'
                 ? 'bg-indigo-600 text-white'
                 : 'bg-slate-950 text-slate-400 hover:text-white'
-            }`}
+              }`}
           >
             Sectors
           </button>
           <button
             onClick={() => setActiveTab('countries')}
-            className={`text-xs font-semibold px-2.5 py-1 rounded-lg transition-colors ${
-              activeTab === 'countries'
+            className={`text-xs font-semibold px-2.5 py-1 rounded-lg transition-colors ${activeTab === 'countries'
                 ? 'bg-indigo-600 text-white'
                 : 'bg-slate-950 text-slate-400 hover:text-white'
-            }`}
+              }`}
           >
             Countries
           </button>
@@ -83,7 +110,8 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
                   style={{ width: `${Math.min(100, Math.max(0, category.portfolioPercentage))}%` }}
                 >
                   {category.subcategories.map((sub, idx) => {
-                    const color = COLOR_PALETTE[idx % COLOR_PALETTE.length];
+                    const color =
+                      colorBySubcategory.get(sub.name) ?? COLOR_PALETTE[idx % COLOR_PALETTE.length];
                     return (
                       <div
                         key={sub.name}
@@ -109,14 +137,29 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
         )}
       </div>
 
-      {/* Hover Inspection / Legend Footer */}
-      <div className="pt-3 mt-2 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400 min-h-[36px]">
-        {hoveredSubcategory ? (
-          <span className="text-amber-300 font-medium font-mono">{hoveredSubcategory}</span>
-        ) : (
-          <span>Hover over any stacked segment to inspect subcategory dollar exposures and proportions.</span>
-        )}
-      </div>
+      {/* Color Key & Hover Readout Footer */}
+      {legendItems.length > 0 && (
+        <div className="pt-3 mt-2 border-t border-slate-800 space-y-2 text-xs">
+          {hoveredSubcategory && (
+            <div className="text-amber-300 font-medium font-mono">{hoveredSubcategory}</div>
+          )}
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mr-1">
+              {legendLabel}:
+            </span>
+            {legendItems.map((item) => (
+              <span key={item.name} className="inline-flex items-center gap-1.5 text-slate-300">
+                <span
+                  className="w-2.5 h-2.5 rounded-sm shrink-0"
+                  style={{ backgroundColor: item.color }}
+                  aria-hidden="true"
+                />
+                <span className="text-[11px]">{item.name}</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
     </CollapsiblePanel>
   );
 };
