@@ -184,9 +184,9 @@ export const HoldingsTable: React.FC<HoldingsTableProps> = ({
 
         {/* Tab 1: Equities Table */}
         {activeTab === 'equities' && (
-          <div className="border border-slate-800 rounded-xl overflow-x-auto bg-slate-950">
+          <div className="border border-slate-800 rounded-xl overflow-auto max-h-[460px] bg-slate-950">
             <table className="w-full text-left text-xs min-w-[780px]">
-              <thead className="bg-slate-900 border-b border-slate-800 text-slate-400 font-semibold uppercase tracking-wider text-[11px]">
+              <thead className="sticky top-0 z-10 bg-slate-900 border-b border-slate-800 text-slate-400 font-semibold uppercase tracking-wider text-[11px]">
                 <tr>
                   <th className="py-3 px-4 w-12 text-center">#</th>
                   <th className="py-3 px-4">Ticker</th>
@@ -326,9 +326,9 @@ export const HoldingsTable: React.FC<HoldingsTableProps> = ({
 
         {/* Tab 2: Bond Issuers Table */}
         {activeTab === 'bonds' && (
-          <div className="border border-slate-800 rounded-xl overflow-x-auto bg-slate-950">
+          <div className="border border-slate-800 rounded-xl overflow-auto max-h-[460px] bg-slate-950">
             <table className="w-full text-left text-xs min-w-[750px]">
-              <thead className="bg-slate-900 border-b border-slate-800 text-slate-400 font-semibold uppercase tracking-wider text-[11px]">
+              <thead className="sticky top-0 z-10 bg-slate-900 border-b border-slate-800 text-slate-400 font-semibold uppercase tracking-wider text-[11px]">
                 <tr>
                   <th className="py-3 px-4 w-12 text-center">#</th>
                   <th className="py-3 px-4">Bond Issuer / ETF</th>
@@ -402,9 +402,9 @@ export const HoldingsTable: React.FC<HoldingsTableProps> = ({
 
         {/* Tab 3: Cross-Asset Institution Rollup */}
         {activeTab === 'institutions' && (
-          <div className="border border-slate-800 rounded-xl overflow-x-auto bg-slate-950">
+          <div className="border border-slate-800 rounded-xl overflow-auto max-h-[460px] bg-slate-950">
             <table className="w-full text-left text-xs min-w-[750px]">
-              <thead className="bg-slate-900 border-b border-slate-800 text-slate-400 font-semibold uppercase tracking-wider text-[11px]">
+              <thead className="sticky top-0 z-10 bg-slate-900 border-b border-slate-800 text-slate-400 font-semibold uppercase tracking-wider text-[11px]">
                 <tr>
                   <th className="py-3 px-4 w-12 text-center">#</th>
                   <th className="py-3 px-4">Institution / Group</th>
