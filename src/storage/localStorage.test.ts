@@ -4,13 +4,16 @@
 
 import {
   DEFAULT_PORTFOLIO_STATE,
+  LinkedFileHandle,
   STORAGE_KEY_BACKUP_V2,
   STORAGE_KEY_V1,
   STORAGE_KEY_V2,
   importPortfolioJSON,
   loadPortfolioStateWithMeta,
   normalizePortfolioState,
+  resumeLinkedFileSync,
   savePortfolioState,
+  writePortfolioToLinkedFile,
 } from "./localStorage";
 
 function assertEq<T>(actual: T, expected: T, msg: string): void {
@@ -157,6 +160,55 @@ export const storageTestCases: Array<[string, () => void]> = [
       );
       assertEq(importedV1.version, 2, "v1 import upgraded to v2");
       assertEq(importedV1.fundBalances.TWF, 10000, "v1 import preserves fund balance");
+    },
+  ],
+  [
+    "linked backup file writes JSON and restores holdings when local storage is default",
+    async () => {
+      let diskContent = JSON.stringify({
+        version: 2,
+        timestamp: "2026-11-11T08:00:00Z",
+        audNzdRate: 1.11,
+        fundBalances: { ASIA: 33000 },
+        directHoldings: [],
+        cashDeposits: [],
+        buckets: [],
+        bucketAssignments: {},
+      });
+      const mockHandle: LinkedFileHandle = {
+        name: "my_backup.json",
+        async getFile() {
+          return {
+            async text() {
+              return diskContent;
+            },
+          } as File;
+        },
+        async createWritable() {
+          return {
+            async write(data: string) {
+              diskContent = data;
+            },
+            async close() {},
+          };
+        },
+        async requestPermission() {
+          return "granted";
+        },
+      };
+
+      const restored = await resumeLinkedFileSync(mockHandle, DEFAULT_PORTFOLIO_STATE, "default");
+      assertEq(restored.status, "loaded_from_file", "default local state should restore from linked disk file");
+      assertEq(restored.state!.fundBalances.ASIA, 33000, "restored ASIA balance from disk");
+
+      const updated = {
+        ...restored.state!,
+        timestamp: "2026-11-11T09:00:00Z",
+        fundBalances: { ASIA: 44000 },
+      };
+      const ok = await writePortfolioToLinkedFile(mockHandle, updated);
+      assertTrue(ok, "writePortfolioToLinkedFile succeeds");
+      assertTrue(diskContent.includes("44000"), "disk content updated with new balance");
     },
   ],
 ];

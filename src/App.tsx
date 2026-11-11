@@ -9,18 +9,33 @@ import { UnresolvedItem, UnresolvedModal } from './components/UnresolvedModal';
 import { computeFreshnessEnvelope } from './engine/freshness';
 import { calculatePortfolioLookthrough } from './engine/lookthrough';
 import {
+  LinkedFileHandle,
   LoadSource,
   loadFromIndexedDBBackup,
+  loadLinkedFileHandle,
   loadPortfolioStateWithMeta,
+  pickAndLinkBackupFile,
+  pickExistingAndLinkBackupFile,
+  readPortfolioFromLinkedFile,
+  resumeLinkedFileSync,
+  saveLinkedFileHandle,
   savePortfolioState,
+  writePortfolioToLinkedFile,
 } from './storage/localStorage';
 import { Constituent, DirectEquityCatalogItem, FundMetadata, UserPortfolioState } from './types/portfolio';
+
+export interface LinkedFileStatus {
+  name: string;
+  status: 'synced' | 'needs_permission';
+}
 
 export const App: React.FC = () => {
   const initialLoad = useMemo(() => loadPortfolioStateWithMeta(), []);
   const [portfolioState, setPortfolioState] = useState<UserPortfolioState>(() => initialLoad.state);
   const [loadSource, setLoadSource] = useState<LoadSource>(() => initialLoad.source);
   const [recoveredNotice, setRecoveredNotice] = useState<string | null>(() => initialLoad.recoveredNotice);
+  const [linkedFileInfo, setLinkedFileInfo] = useState<LinkedFileStatus | null>(null);
+  const linkedHandleRef = useRef<LinkedFileHandle | null>(null);
   const hasUserEditedRef = useRef(false);
   const latestStateRef = useRef(portfolioState);
   latestStateRef.current = portfolioState;
@@ -43,6 +58,34 @@ export const App: React.FC = () => {
       setLoadSource('indexeddb');
       setRecoveredNotice('Restored saved portfolio from browser backup.');
       savePortfolioState(restored);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [initialLoad.source]);
+
+  // Restore remembered linked backup file handle from IndexedDB
+  useEffect(() => {
+    let cancelled = false;
+    loadLinkedFileHandle().then(async (handle) => {
+      if (cancelled || !handle) return;
+      linkedHandleRef.current = handle;
+      const perm = handle.queryPermission ? await handle.queryPermission({ mode: 'readwrite' }) : 'granted';
+      if (cancelled) return;
+      if (perm === 'granted') {
+        setLinkedFileInfo({ name: handle.name, status: 'synced' });
+        if (initialLoad.source === 'default' && !hasUserEditedRef.current) {
+          const fileState = await readPortfolioFromLinkedFile(handle);
+          if (!cancelled && fileState && !hasUserEditedRef.current) {
+            setPortfolioState(fileState);
+            setLoadSource('v2');
+            setRecoveredNotice(`Loaded from linked file "${handle.name}".`);
+            savePortfolioState(fileState);
+          }
+        }
+      } else {
+        setLinkedFileInfo({ name: handle.name, status: 'needs_permission' });
+      }
     });
     return () => {
       cancelled = true;
@@ -135,7 +178,7 @@ export const App: React.FC = () => {
     loadData();
   }, []);
 
-  // Persist state changes to LocalStorage + IndexedDB mirror
+  // Persist state changes to LocalStorage + IndexedDB mirror + linked backup file
   const handleUpdateState = (newState: UserPortfolioState) => {
     hasUserEditedRef.current = true;
     const stamped: UserPortfolioState = {
@@ -147,6 +190,82 @@ export const App: React.FC = () => {
     setLoadSource('v2');
     setRecoveredNotice(null);
     savePortfolioState(stamped);
+
+    if (linkedHandleRef.current && linkedFileInfo?.status === 'synced') {
+      const handle = linkedHandleRef.current;
+      writePortfolioToLinkedFile(handle, stamped).then((ok) => {
+        if (!ok) {
+          setLinkedFileInfo({ name: handle.name, status: 'needs_permission' });
+        }
+      });
+    }
+  };
+
+  const handleLinkNewBackupFile = async () => {
+    try {
+      const handle = await pickAndLinkBackupFile(latestStateRef.current);
+      if (!handle) return;
+      linkedHandleRef.current = handle;
+      setLinkedFileInfo({ name: handle.name, status: 'synced' });
+      setRecoveredNotice(`Auto-saving to "${handle.name}".`);
+    } catch (err) {
+      if ((err as { name?: string })?.name !== 'AbortError') {
+        alert(`Could not link backup file: ${err instanceof Error ? err.message : String(err)}`);
+      }
+    }
+  };
+
+  const handleOpenAndLinkBackupFile = async () => {
+    try {
+      const result = await pickExistingAndLinkBackupFile();
+      if (!result) return;
+      linkedHandleRef.current = result.handle;
+      setLinkedFileInfo({ name: result.handle.name, status: 'synced' });
+      if (result.loadedState) {
+        hasUserEditedRef.current = true;
+        setPortfolioState(result.loadedState);
+        setLoadSource('v2');
+        savePortfolioState(result.loadedState);
+        setRecoveredNotice(`Loaded & synced with "${result.handle.name}".`);
+      } else {
+        await writePortfolioToLinkedFile(result.handle, latestStateRef.current);
+        setRecoveredNotice(`Linked empty file "${result.handle.name}" and saved current portfolio.`);
+      }
+    } catch (err) {
+      if ((err as { name?: string })?.name !== 'AbortError') {
+        alert(`Could not open & link backup file: ${err instanceof Error ? err.message : String(err)}`);
+      }
+    }
+  };
+
+  const handleResumeLinkedFile = async () => {
+    const handle = linkedHandleRef.current;
+    if (!handle) return;
+    try {
+      const res = await resumeLinkedFileSync(handle, latestStateRef.current, loadSource);
+      if (res.status === 'denied') {
+        alert(`Permission to access "${handle.name}" was declined.`);
+        return;
+      }
+      setLinkedFileInfo({ name: handle.name, status: 'synced' });
+      if (res.status === 'loaded_from_file' && res.state) {
+        hasUserEditedRef.current = true;
+        setPortfolioState(res.state);
+        setLoadSource('v2');
+        savePortfolioState(res.state);
+        setRecoveredNotice(`Restored & synced from "${handle.name}".`);
+      } else {
+        setRecoveredNotice(`Resumed auto-save to "${handle.name}".`);
+      }
+    } catch (err) {
+      alert(`Failed to resume file sync: ${err instanceof Error ? err.message : String(err)}`);
+    }
+  };
+
+  const handleUnlinkBackupFile = async () => {
+    linkedHandleRef.current = null;
+    setLinkedFileInfo(null);
+    await saveLinkedFileHandle(null);
   };
 
   // Perform core look-through calculations
@@ -193,6 +312,11 @@ export const App: React.FC = () => {
           unresolvedCount={unresolvedEntries.length}
           loadSource={loadSource}
           recoveredNotice={recoveredNotice}
+          linkedFileInfo={linkedFileInfo}
+          onLinkNewBackupFile={handleLinkNewBackupFile}
+          onOpenAndLinkBackupFile={handleOpenAndLinkBackupFile}
+          onResumeLinkedFile={handleResumeLinkedFile}
+          onUnlinkBackupFile={handleUnlinkBackupFile}
         />
 
         {dataLoadError && (

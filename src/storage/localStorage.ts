@@ -18,6 +18,18 @@ export const STORAGE_KEY_BACKUP_V2 = "kiwi_portfolio_xray_backup_v2";
 const IDB_DB_NAME = "kiwi_portfolio_xray_db";
 const IDB_STORE_NAME = "portfolio_state";
 const IDB_RECORD_KEY = "current_v2";
+const IDB_FILE_HANDLE_KEY = "linked_file_handle";
+
+export interface LinkedFileHandle {
+  name: string;
+  getFile(): Promise<File>;
+  createWritable(): Promise<{
+    write(data: string): Promise<void>;
+    close(): Promise<void>;
+  }>;
+  queryPermission?(desc: { mode: "read" | "readwrite" }): Promise<"granted" | "denied" | "prompt">;
+  requestPermission?(desc: { mode: "read" | "readwrite" }): Promise<"granted" | "denied" | "prompt">;
+}
 
 export type LoadSource = "v2" | "v2_backup" | "v1_migrated" | "indexeddb" | "default";
 
@@ -344,6 +356,179 @@ export function loadPortfolioStateWithMeta(): LoadedPortfolioMeta {
 
 export function loadPortfolioState(): UserPortfolioState {
   return loadPortfolioStateWithMeta().state;
+}
+
+export function isFileSyncSupported(): boolean {
+  return typeof window !== "undefined" && "showSaveFilePicker" in window;
+}
+
+export async function saveLinkedFileHandle(handle: LinkedFileHandle | null): Promise<void> {
+  const db = await openIndexedDB();
+  if (!db) return;
+  try {
+    await new Promise<void>((resolve) => {
+      const tx = db.transaction(IDB_STORE_NAME, "readwrite");
+      const store = tx.objectStore(IDB_STORE_NAME);
+      if (handle) {
+        store.put(handle, IDB_FILE_HANDLE_KEY);
+      } else {
+        store.delete(IDB_FILE_HANDLE_KEY);
+      }
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => resolve();
+    });
+  } catch {
+    // Ignore IndexedDB errors
+  } finally {
+    db.close();
+  }
+}
+
+export async function loadLinkedFileHandle(): Promise<LinkedFileHandle | null> {
+  const db = await openIndexedDB();
+  if (!db) return null;
+  try {
+    const raw = await new Promise<unknown>((resolve) => {
+      const tx = db.transaction(IDB_STORE_NAME, "readonly");
+      const req = tx.objectStore(IDB_STORE_NAME).get(IDB_FILE_HANDLE_KEY);
+      req.onsuccess = () => resolve(req.result ?? null);
+      req.onerror = () => resolve(null);
+    });
+    if (raw && typeof raw === "object" && "getFile" in raw && "createWritable" in raw) {
+      return raw as LinkedFileHandle;
+    }
+    return null;
+  } catch {
+    return null;
+  } finally {
+    db.close();
+  }
+}
+
+export async function writePortfolioToLinkedFile(
+  handle: LinkedFileHandle,
+  state: UserPortfolioState
+): Promise<boolean> {
+  try {
+    const writable = await handle.createWritable();
+    const payload = JSON.stringify(
+      {
+        version: 2,
+        timestamp: state.timestamp || new Date().toISOString(),
+        audNzdRate: state.audNzdRate,
+        fundBalances: state.fundBalances,
+        directHoldings: state.directHoldings,
+        cashDeposits: state.cashDeposits,
+        buckets: state.buckets,
+        bucketAssignments: state.bucketAssignments,
+      },
+      null,
+      2
+    );
+    await writable.write(payload);
+    await writable.close();
+    return true;
+  } catch (err) {
+    console.warn("Failed writing to linked backup file:", err);
+    return false;
+  }
+}
+
+export async function readPortfolioFromLinkedFile(
+  handle: LinkedFileHandle
+): Promise<UserPortfolioState | null> {
+  try {
+    const file = await handle.getFile();
+    const text = await file.text();
+    if (!text.trim()) return null;
+    const parsed = JSON.parse(text);
+    return normalizePortfolioState(parsed);
+  } catch (err) {
+    console.warn("Failed reading linked backup file:", err);
+    return null;
+  }
+}
+
+export async function pickAndLinkBackupFile(
+  currentState: UserPortfolioState
+): Promise<LinkedFileHandle | null> {
+  if (!isFileSyncSupported()) return null;
+  const picker = (
+    window as unknown as {
+      showSaveFilePicker: (opts: unknown) => Promise<LinkedFileHandle>;
+    }
+  ).showSaveFilePicker;
+
+  const handle = await picker({
+    suggestedName: "kiwi_portfolio_backup.json",
+    types: [
+      {
+        description: "JSON Portfolio Backup",
+        accept: { "application/json": [".json"] },
+      },
+    ],
+  });
+  const ok = await writePortfolioToLinkedFile(handle, currentState);
+  if (!ok) {
+    throw new Error("Could not write to selected backup file.");
+  }
+  await saveLinkedFileHandle(handle);
+  return handle;
+}
+
+export async function pickExistingAndLinkBackupFile(): Promise<{
+  handle: LinkedFileHandle;
+  loadedState: UserPortfolioState | null;
+} | null> {
+  if (typeof window === "undefined" || !("showOpenFilePicker" in window)) return null;
+  const picker = (
+    window as unknown as {
+      showOpenFilePicker: (opts: unknown) => Promise<LinkedFileHandle[]>;
+    }
+  ).showOpenFilePicker;
+  const [handle] = await picker({
+    multiple: false,
+    types: [
+      {
+        description: "JSON Portfolio Backup",
+        accept: { "application/json": [".json"] },
+      },
+    ],
+  });
+  if (!handle) return null;
+  if (handle.requestPermission) {
+    const perm = await handle.requestPermission({ mode: "readwrite" });
+    if (perm !== "granted") {
+      throw new Error("Read/write permission is required to sync this backup file.");
+    }
+  }
+  const loadedState = await readPortfolioFromLinkedFile(handle);
+  await saveLinkedFileHandle(handle);
+  return { handle, loadedState };
+}
+
+export async function resumeLinkedFileSync(
+  handle: LinkedFileHandle,
+  currentState: UserPortfolioState,
+  loadSource: LoadSource
+): Promise<{ status: "loaded_from_file" | "synced_to_file" | "denied"; state?: UserPortfolioState }> {
+  if (handle.requestPermission) {
+    const perm = await handle.requestPermission({ mode: "readwrite" });
+    if (perm !== "granted") {
+      return { status: "denied" };
+    }
+  }
+
+  const fileState = await readPortfolioFromLinkedFile(handle);
+  const fileTime = fileState ? Date.parse(fileState.timestamp) || 0 : 0;
+  const localTime = Date.parse(currentState.timestamp) || 0;
+
+  if (fileState && (loadSource === "default" || fileTime > localTime)) {
+    return { status: "loaded_from_file", state: fileState };
+  }
+
+  const ok = await writePortfolioToLinkedFile(handle, currentState);
+  return { status: ok ? "synced_to_file" : "denied" };
 }
 
 export function exportPortfolioJSON(state: UserPortfolioState): string {

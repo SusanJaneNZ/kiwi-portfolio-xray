@@ -7,8 +7,10 @@ import {
   exportHoldingsCSV,
   exportPortfolioJSON,
   importPortfolioJSON,
+  isFileSyncSupported,
 } from '../storage/localStorage';
 import { ConsolidatedHolding } from '../types/portfolio';
+import type { LinkedFileStatus } from '../App';
 
 interface FreshnessHeaderProps {
   envelope: FreshnessEnvelope;
@@ -19,6 +21,11 @@ interface FreshnessHeaderProps {
   unresolvedCount: number;
   loadSource?: LoadSource;
   recoveredNotice?: string | null;
+  linkedFileInfo?: LinkedFileStatus | null;
+  onLinkNewBackupFile?: () => void;
+  onOpenAndLinkBackupFile?: () => void;
+  onResumeLinkedFile?: () => void;
+  onUnlinkBackupFile?: () => void;
 }
 
 export const FreshnessHeader: React.FC<FreshnessHeaderProps> = ({
@@ -30,6 +37,11 @@ export const FreshnessHeader: React.FC<FreshnessHeaderProps> = ({
   unresolvedCount,
   loadSource = 'v2',
   recoveredNotice = null,
+  linkedFileInfo = null,
+  onLinkNewBackupFile,
+  onOpenAndLinkBackupFile,
+  onResumeLinkedFile,
+  onUnlinkBackupFile,
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -250,6 +262,60 @@ export const FreshnessHeader: React.FC<FreshnessHeaderProps> = ({
         >
           Export CSV
         </button>
+
+        {isFileSyncSupported() && !linkedFileInfo && (
+          <>
+            <button
+              onClick={onLinkNewBackupFile}
+              title="Create a local JSON file and auto-save every portfolio edit to disk"
+              className="text-xs bg-emerald-950/70 hover:bg-emerald-900/70 text-emerald-300 border border-emerald-700/60 px-3 py-1.5 rounded-lg transition-colors font-medium"
+            >
+              Link Backup File
+            </button>
+            <button
+              onClick={onOpenAndLinkBackupFile}
+              title="Open an existing JSON backup file and keep auto-saving edits back to it"
+              className="text-xs bg-slate-950 hover:bg-slate-800 text-emerald-300 border border-emerald-800/60 px-3 py-1.5 rounded-lg transition-colors"
+            >
+              Open &amp; Link
+            </button>
+          </>
+        )}
+
+        {linkedFileInfo && linkedFileInfo.status === 'needs_permission' && (
+          <div className="inline-flex items-center gap-1">
+            <button
+              onClick={onResumeLinkedFile}
+              title="Click to restore holdings from your linked disk file and resume auto-saving"
+              className="text-xs bg-amber-600 hover:bg-amber-500 text-white font-medium px-3 py-1.5 rounded-lg transition-colors shadow-sm"
+            >
+              Reconnect {linkedFileInfo.name}
+            </button>
+            <button
+              onClick={onUnlinkBackupFile}
+              title="Unlink backup file"
+              className="text-xs bg-slate-950 hover:bg-slate-800 text-slate-400 hover:text-rose-400 border border-slate-800 px-2 py-1.5 rounded-lg transition-colors"
+            >
+              ✕
+            </button>
+          </div>
+        )}
+
+        {linkedFileInfo && linkedFileInfo.status === 'synced' && (
+          <div className="inline-flex items-center gap-1 bg-emerald-950/60 border border-emerald-700/50 rounded-lg px-2.5 py-1 text-xs text-emerald-300">
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400" />
+            <span className="font-mono max-w-[160px] truncate" title={`Auto-saving to ${linkedFileInfo.name}`}>
+              {linkedFileInfo.name}
+            </span>
+            <button
+              onClick={onUnlinkBackupFile}
+              title="Unlink backup file"
+              className="ml-1 text-emerald-400/70 hover:text-rose-400 transition-colors"
+            >
+              ✕
+            </button>
+          </div>
+        )}
       </div>
     </header>
   );
