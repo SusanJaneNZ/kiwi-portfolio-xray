@@ -127,7 +127,7 @@ For each row routed to `fixed_interest`:
    }
    ```
 5. **Output Schema Extensions:**
-   * `funds_registry.json`: Adds `"asset_class": "equity" | "fixed_interest" | "mixed"` (defaults to `"equity"`).
+   * `funds_registry.json`: Requires `"asset_class": "equity" | "fixed_interest" | "mixed"` on every fund entry.
    * `constituents.json`: Each item carries `"asset_class": "equity" | "fixed_interest" | "term_deposit"`, optional `"issuer_key": "ISSUER_ANZ"`, and `"tranche_count"` (for bonds).
    * `SchemaValidator`: Enforces the existing $100\% \pm 0.5\%$ weight sum integrity across all fund types (`sum(constituents) + cash_ratio + max(0, hedging_ratio)`), validating `sector` against `{"Sovereign", "Local Government", "Financial", "Bond ETF", "Corporate / Other"}` for `fixed_interest` rows and `"Term Deposit"` for `term_deposit` rows.
 
@@ -135,8 +135,8 @@ For each row routed to `fixed_interest`:
 
 ### C. Client Calculation Engine & Persistence (`src/`)
 
-#### 1. Type Extensions & LocalStorage Backwards Compatibility (`src/types/portfolio.ts`, `src/storage/localStorage.ts`)
-Add `CashDepositHolding`:
+#### 1. Clean Schema & State Persistence (`src/types/portfolio.ts`, `src/storage/localStorage.ts`)
+Because the app has not yet launched publicly, state and pipeline schemas can evolve directly without legacy migration shims. Add `CashDepositHolding`, `PortfolioBucket`, and `BucketAssignmentMap`:
 ```typescript
 export interface CashDepositHolding {
   id: string;           // Internal immutable UI/storage row key
@@ -158,7 +158,7 @@ export interface PortfolioBucket {
 // Key format for bucketAssignments: "fund:<fundCode>" | "direct:<isin>" | "td:<cashDeposit.id>"
 export type BucketAssignmentMap = Record<string, string>; // instrumentKey -> bucket.id
 ```
-* **Backwards-Compatible Load:** Extend `UserPortfolioState` with `cashDeposits?: CashDepositHolding[]`, `buckets?: PortfolioBucket[]`, and `bucketAssignments?: BucketAssignmentMap`. In `loadPortfolioState()` and `importPortfolioJSON()`, normalize `cashDeposits ?? []`, `buckets ?? []`, and `bucketAssignments ?? {}` under `kiwi_portfolio_xray_v1` so existing saved portfolios and exports migrate with zero data loss, and export all three fields in `exportPortfolioJSON()`.
+* **Direct Schema Upgrade (`version: 2`):** Require `cashDeposits: CashDepositHolding[]`, `buckets: PortfolioBucket[]`, and `bucketAssignments: BucketAssignmentMap` directly on `UserPortfolioState` (`version: 2`, key `kiwi_portfolio_xray_v2`) so `loadPortfolioState()`, `exportPortfolioJSON()`, and `importPortfolioJSON()` operate on one uniform shape without defensive fallback shims.
 
 #### 2. Look-Through Math (`src/engine/lookthrough.ts`)
 * **Total Portfolio Denominator $D$:**
@@ -249,7 +249,7 @@ Let $i = 1, \dots, n$ index user-defined buckets with desired weight fractions $
 |---|---|---|
 | **Bank Subsidiary Name Drift** (e.g., BNZ is owned by NAB; ASB by CBA) | Cross-asset rollup misses or misattributes bank concentration | Maintain explicit canonical entries for the ~10 major NZ deposit/bond banks in `issuer_alias_map.json`; never auto-fuzzy-merge dissimilar institutional names without an explicit alias. |
 | **Row Classifier False Positive on Equity Names** (e.g., equity containing `%` or bank name) | Equity row misrouted to `bond_normalizer.py` | Require *both* coupon `%` AND maturity year/date tokens (or explicit sovereign/bond keywords like `NZGS`, `LGFA`, `Bond ETF`) per row, plus optional fund-level `"asset_class": "equity"` override in `bond_registry.json`. |
-| **LocalStorage State Loss on Upgrade** | Returning users lose saved fund balances | Keep storage key `kiwi_portfolio_xray_v1` and default missing `cashDeposits` (`[]`), `buckets` (`[]`), and `bucketAssignments` (`{}`) cleanly inside `loadPortfolioState()` and `importPortfolioJSON()`. |
+| **Malformed Imported JSON** | User imports an incomplete or corrupted JSON backup | Validate `version === 2` and required array/map fields cleanly in `importPortfolioJSON()`, rejecting invalid files with a clear error rather than silent partial state. |
 | **GICS Chart Distortion** | Bond issuers appearing inside Equity GICS sector charts | Keep `sectorBreakdown` and `countryBreakdown` strictly scoped to `equityHoldings`, while showing Fixed Interest in the Asset Split bar and `Bond Issuers` tab. |
 | **Round-Trip Withdrawal & Rebalance Trades** | Naive pro-rata withdrawal forces withdrawing from an underweight bucket only to buy back into it | Use withdrawal-first minimum-turnover math ($E_{\text{total}} = W + S_{\text{total}} \ge W$), so withdrawals only draw from overweight buckets and zero unnecessary round-trip orders are suggested. |
 | **Unassigned Holdings Skewing Rebalance Trades** | Holdings not yet assigned to any bucket distort rebalance buy/sell totals | Compute rebalance actions over assigned bucket totals $T_{\text{curr}}$ while displaying `Unassigned` clearly in the Bucket Split summary and warning banner until assigned. |
@@ -275,7 +275,7 @@ Let $i = 1, \dots, n$ index user-defined buckets with desired weight fractions $
   * `src/engine/rebalance.test.ts`: Unit tests covering zero-withdrawal rebalance, partial withdrawal from multiple overweight buckets, withdrawal-only no-rebalance (`S_total = 0`), underweight-bucket protection (zero round-trip buys/sells), drift tolerance band, and cent-rounding invariance (`sum(withdraw) == W`, `sum(buy) == sum(sell)`).
 * **Files to Modify:**
   * `src/types/portfolio.ts`: Add `CashDepositHolding`, `AssetSplitBreakdown`, `BondIssuerHolding`, `IssuerRollupEntry`, `PortfolioBucket`, `BucketAssignmentMap`, and `BucketRebalanceResult`.
-  * `src/storage/localStorage.ts`: Add `cashDeposits`, `buckets`, and `bucketAssignments` default fallbacks (`[]`, `[]`, `{}`) in load/import and persist them in `exportPortfolioJSON()`.
+  * `src/storage/localStorage.ts`: Update `UserPortfolioState` to clean `version: 2` (`kiwi_portfolio_xray_v2`) with required `cashDeposits`, `buckets`, and `bucketAssignments` in load, save, and JSON import/export.
   * `src/engine/lookthrough.ts`: Extend denominator $D$ with `cashDeposits`, compute `assetSplit`, separate `equityHoldings` vs `bondIssuerHoldings`, and compute `issuerRollup` using `issuer_aliases.json`.
   * `src/engine/lookthrough.test.ts`: Add assertions covering TD denominator dilution, Growth/Defensive split, and ANZ cross-asset rollup (Equity + Bond + TD).
 
