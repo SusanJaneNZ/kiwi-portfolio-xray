@@ -151,27 +151,20 @@ export const App: React.FC = () => {
           bondIssuerCount={calculationResult.bondIssuerHoldings.length}
         />
 
-        {/* Main 2-Column Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
-          {/* Left Column: Portfolio Inputs (5 of 12 cols) */}
-          <div className="lg:col-span-5">
-            <PortfolioInputTable
-              portfolioState={portfolioState}
-              fundsRegistry={fundsRegistry}
-              directEquitiesCatalog={directCatalog}
-              onUpdateState={handleUpdateState}
-              totalPortfolioNZD={calculationResult.denominatorD}
-            />
-          </div>
+        {/* Portfolio Inputs (Full Width) */}
+        <PortfolioInputTable
+          portfolioState={portfolioState}
+          fundsRegistry={fundsRegistry}
+          directEquitiesCatalog={directCatalog}
+          onUpdateState={handleUpdateState}
+          totalPortfolioNZD={calculationResult.denominatorD}
+        />
 
-          {/* Right Column: Visualizations (7 of 12 cols) */}
-          <div className="lg:col-span-7">
-            <StackedBarChart
-              sectorBreakdown={calculationResult.sectorBreakdown}
-              countryBreakdown={calculationResult.countryBreakdown}
-            />
-          </div>
-        </div>
+        {/* Sector & Country Breakdown (Full Width) */}
+        <StackedBarChart
+          sectorBreakdown={calculationResult.sectorBreakdown}
+          countryBreakdown={calculationResult.countryBreakdown}
+        />
 
         {/* User Buckets & Semi-Annual Withdrawal Rebalancer */}
         <BucketRebalancer portfolioState={portfolioState} onUpdateState={handleUpdateState} />
