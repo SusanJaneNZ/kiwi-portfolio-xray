@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import re
 from pathlib import Path
 from typing import Optional
 
@@ -139,8 +140,11 @@ class ISharesAdapter(BaseAdapter):
         )
 
     def _extract_ticker_from_filename(self, filename: str) -> str:
-        upper = filename.upper()
+        upper = Path(filename).stem.upper()
         for ticker in ISHARES_MASTER_TICKERS:
             if ticker in upper:
                 return ticker
+        prefix_match = re.match(r"^([A-Z0-9]{2,6})(?:[_\-\s]|$)", upper)
+        if prefix_match:
+            return prefix_match.group(1)
         return "IWLD"

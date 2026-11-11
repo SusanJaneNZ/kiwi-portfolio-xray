@@ -125,31 +125,66 @@ If the dry-run reports unresolved holdings, the CLI outputs formatted JSON snipp
      }
    }
    ```
-3. Re-run the dry-run command:
+3. Re-run the dry-run command (or click **Run Dry-Run** in the Admin Console):
    ```bash
-   python -m pipeline.ingest --dry-run --staging-dir data/staging/
+   python3 -m pipeline.ingest --dry-run --staging-dir data/staging/
    ```
-4. Confirm `Unresolved holdings: 0 items`.
+4. Confirm unresolved items are cleared or reduced to immaterial tail positions.
 
 ---
 
-## 6. Publishing to Production
+## 6. Configuring a New Feeder Pairing (`feeder_registry.json`)
+
+Feeder funds (such as `TWF`, `USF`, `ESG`) hold a single underlying Vanguard or iShares master ETF plus a small NZD/AUD cash buffer and/or FX hedging contracts. Six Smartshares feeders (`TWF`, `USF`, `EUF`, `APA`, `EMF`, `ESG`) are pre-configured.
+
+To add a new feeder fund pairing (for example, adding a hedged variant like `TWH` → `VT`, or `USM` / `BOT` → its underlying ETF):
+
+1. **Inspect the Sorted `.xlsx` Holdings:**
+   Upload the fund's Sorted `.xlsx` into `data/staging/smartshares/` and click **Preview** in the Admin Console (`http://127.0.0.1:8787`) to confirm the single master ETF it holds (e.g., `Vanguard Total World Stock ETF (VT)` or `iShares Core S&P 500 ETF (IVV)`). You can click **Use as Feeder** in the preview header to prefill the **Feeder Code** in Panel 6.
+2. **Stage the Master ETF CSV:**
+   Download the master ETF's constituent CSV from Vanguard (`data/staging/vanguard/`) or BlackRock/iShares (`data/staging/ishares/`).
+3. **Add the Pairing in the Admin Console (Recommended):**
+   In Panel **6. Feeder Pairings (`feeder_registry.json`)** of the Admin Console (`http://127.0.0.1:8787`), fill in:
+   * **Feeder Code** (e.g., `TWH`)
+   * **Fund Name** (e.g., `Smart Total World (NZD Hedged) ETF`)
+   * **Master Provider** (`Vanguard` or `iShares`)
+   * **Master Ticker** (e.g., `VT` or `IVV`)
+   Then click **Save Pairing** (existing pairings can also be edited or removed directly from the list).
+
+   Alternatively, you can add the JSON entry manually to [`pipeline/feeder_registry.json`](file:///mnt/c/Users/susan/wsl/kiwi-portfolio-xray/pipeline/feeder_registry.json):
+   ```json
+   {
+     "TWH": {
+       "name": "Smart Total World (NZD Hedged) ETF",
+       "master_provider": "vanguard",
+       "master_ticker": "VT"
+     }
+   }
+   ```
+4. **Match the Feeder Code:**
+   Ensure the staged `.xlsx` filename includes the feeder code (e.g., `TWH_Full_portfolio_holdings.xlsx`) or matches an alias in `SMARTSHARES_NAME_HINTS` in [`smartshares_direct_adapter.py`](file:///mnt/c/Users/susan/wsl/kiwi-portfolio-xray/pipeline/adapters/smartshares_direct_adapter.py) so the pipeline pairs the wrapper's cash/hedging ratios with `feeder_registry.json`.
+5. **Verify Unwrapping:**
+   Run **Dry-Run** and confirm `[PASS] TWH` appears with `100.00%` total weight (`Equities + Cash + Hedging`) and the master ETF's constituent count.
+
+---
+
+## 7. Publishing to Production
 
 Once the dry-run passes:
-1. Run the production compiler:
+1. Run the production compiler (or click **Build Production (public/data/)** in the Admin Console):
    ```bash
-   python -m pipeline.ingest --staging-dir data/staging/
+   python3 -m pipeline.ingest --staging-dir data/staging/
    ```
    This generates the optimized static assets in `public/data/`:
    * `funds_registry.json`
    * `constituents.json`
    * `direct_equities.json`
    * `unresolved_entries.json`
-2. Commit the updated `public/data/` static files and `provider_alias_map.json`:
+2. Commit the updated `public/data/` static files, `feeder_registry.json`, and `provider_alias_map.json`:
    ```bash
-   git add public/data/ pipeline/enrichment/provider_alias_map.json
-   git commit -m "data: update fund constituent holdings for Oct 2026"
+   git add public/data/ pipeline/feeder_registry.json pipeline/enrichment/provider_alias_map.json
+   git commit -m "data: update fund constituent holdings"
    git push origin main
    ```
-3. GitHub Actions automatically executes `.github/workflows/deploy.yml` and updates the live GitHub Pages site.
+3. GitHub Actions automatically executes `.github/workflows/deploy.yml` (building the site, and deploying to GitHub Pages once the repository is public).
 

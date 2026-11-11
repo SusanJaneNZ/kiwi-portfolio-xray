@@ -218,6 +218,21 @@
         </div>
         <div id="saved-aliases-list">Loading aliases...</div>
       </div>
+
+      <div class="card">
+        <h2>6. Feeder Pairings (feeder_registry.json)</h2>
+        <div class="row-actions" style="margin-bottom: 10px; flex-wrap: wrap;">
+          <input type="text" id="feeder-code" placeholder="Feeder Code (e.g. TWH)" style="width: 150px;">
+          <input type="text" id="feeder-name" placeholder="Fund Name (e.g. Smart Total World Hedged ETF)" style="flex: 1; min-width: 180px;">
+          <select id="feeder-master-provider">
+            <option value="vanguard">Vanguard</option>
+            <option value="ishares">iShares</option>
+          </select>
+          <input type="text" id="feeder-master-ticker" placeholder="Master Ticker (e.g. VT)" style="width: 145px;">
+          <button class="btn btn-primary btn-sm" onclick="saveFeederPairing()">Save Pairing</button>
+        </div>
+        <div id="feeder-pairings-list">Loading feeder pairings...</div>
+      </div>
     </div>
   </div>
 
@@ -227,6 +242,9 @@
     let unresolvedItemsState = [];
     let savedAliasPairsState = [];
     let stagedFilePairsState = [];
+    let feederCodesState = [];
+    let feederEntriesMapState = {};
+    let lastPreviewFeederState = null;
     let focusedMapInputId = 'manual-isin';
 
     function showToast(msg) {
@@ -357,12 +375,20 @@
           </div>
         `;
         if (s.fund_code) {
+          let useFeederBtn = '';
+          if (provider === 'smartshares') {
+            lastPreviewFeederState = {
+              code: s.fund_code,
+              name: s.fund_name || '',
+            };
+            useFeederBtn = ` <button class="btn btn-sm" style="margin-left: 8px;" onclick="prefillFeederFromPreview()">Use as Feeder</button>`;
+          }
           html += `<div style="margin-bottom: 8px; font-size: 12px;">
             Fund: <strong class="mono">${escapeHtml(s.fund_code)}</strong> |
             As Of: <strong>${escapeHtml(s.effective_date)}</strong> |
             Cash: <strong>${((s.cash_ratio || 0) * 100).toFixed(2)}%</strong> |
             Parsed Rows: <strong>${s.parsed_count}</strong> |
-            Equity Sum: <strong>${((s.total_equity_weight || 0) * 100).toFixed(2)}%</strong>
+            Equity Sum: <strong>${((s.total_equity_weight || 0) * 100).toFixed(2)}%</strong>${useFeederBtn}
           </div>`;
         } else if (s.parsed_count !== undefined) {
           html += `<div style="margin-bottom: 8px; font-size: 12px;">Parsed Rows: <strong>${s.parsed_count}</strong></div>`;
@@ -577,9 +603,94 @@
       container.innerHTML = html;
     }
 
+    function prefillFeederFromPreview() {
+      if (!lastPreviewFeederState) return;
+      document.getElementById('feeder-code').value = lastPreviewFeederState.code || '';
+      if (lastPreviewFeederState.name) {
+        document.getElementById('feeder-name').value = lastPreviewFeederState.name;
+      }
+      const target = document.getElementById(lastPreviewFeederState.name ? 'feeder-master-ticker' : 'feeder-name');
+      target.focus();
+      showToast(`Prefilled feeder code ${lastPreviewFeederState.code}`);
+    }
+
+    function editFeederByIdx(idx) {
+      const code = feederCodesState[idx];
+      const entry = code ? feederEntriesMapState[code] : null;
+      if (!code || !entry) return;
+      document.getElementById('feeder-code').value = code;
+      document.getElementById('feeder-name').value = entry.name || '';
+      document.getElementById('feeder-master-provider').value = entry.master_provider || 'vanguard';
+      document.getElementById('feeder-master-ticker').value = entry.master_ticker || '';
+      document.getElementById('feeder-name').focus();
+    }
+
+    async function saveFeederPairing() {
+      const feeder_code = document.getElementById('feeder-code').value.trim().toUpperCase();
+      const name = document.getElementById('feeder-name').value.trim();
+      const master_provider = document.getElementById('feeder-master-provider').value;
+      const master_ticker = document.getElementById('feeder-master-ticker').value.trim().toUpperCase();
+      if (!feeder_code || !name || !master_ticker) {
+        alert('Feeder Code, Fund Name, and Master Ticker are all required.');
+        return;
+      }
+      await api('/api/feeders/set', {
+        method: 'POST',
+        body: JSON.stringify({ feeder_code, name, master_provider, master_ticker }),
+      });
+      document.getElementById('feeder-code').value = '';
+      document.getElementById('feeder-name').value = '';
+      document.getElementById('feeder-master-ticker').value = '';
+      showToast(`Saved feeder pairing ${feeder_code} -> ${master_provider}:${master_ticker}`);
+      await loadFeeders();
+    }
+
+    async function deleteFeederByIdx(idx) {
+      const code = feederCodesState[idx];
+      if (!code) return;
+      if (!confirm(`Remove feeder pairing ${code}?`)) return;
+      await api('/api/feeders/delete', {
+        method: 'POST',
+        body: JSON.stringify({ feeder_code: code }),
+      });
+      showToast(`Removed feeder pairing ${code}`);
+      await loadFeeders();
+    }
+
+    async function loadFeeders() {
+      const data = await api('/api/feeders');
+      const container = document.getElementById('feeder-pairings-list');
+      const feeders = data.feeders || {};
+      feederCodesState = Object.keys(feeders);
+      feederEntriesMapState = feeders;
+      if (!feederCodesState.length) {
+        container.innerHTML = `<div style="color: var(--muted);">No feeder pairings configured yet.</div>`;
+        return;
+      }
+      let html = '';
+      feederCodesState.forEach((code, idx) => {
+        const entry = feeders[code] || {};
+        html += `
+          <div class="file-row">
+            <div>
+              <strong class="mono">${escapeHtml(code)}</strong>
+              <span style="color: var(--muted); font-size: 11px; margin-left: 6px;">${escapeHtml(entry.name || '')}</span>
+              → <span class="mono" style="color: var(--ok);">${escapeHtml(entry.master_provider || '')}:${escapeHtml(entry.master_ticker || '')}</span>
+            </div>
+            <div class="row-actions">
+              <button class="btn btn-sm" onclick="editFeederByIdx(${idx})">Edit</button>
+              <button class="btn btn-sm btn-danger" onclick="deleteFeederByIdx(${idx})">Remove</button>
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
     // Initial load
     loadStagedFiles();
     loadAliases();
+    loadFeeders();
   </script>
 </body>
 </html>

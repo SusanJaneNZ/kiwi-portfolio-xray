@@ -20,6 +20,7 @@ from pipeline.adapters.tabular_reader import read_tabular_rows
 from pipeline.adapters.vanguard_adapter import VanguardAdapter
 from pipeline.output.build_output import PipelineCompiler
 from pipeline.security_master.build_security_master import (
+    _atomic_write_json,
     parse_asx_directory,
     parse_nzx_directory,
 )
@@ -32,6 +33,8 @@ ALLOWED_PROVIDERS = {
     "kernel",
 }
 
+ALLOWED_MASTER_PROVIDERS = {"vanguard", "ishares"}
+
 
 class AdminService:
     """Backend operations for the local Admin Web UI."""
@@ -43,6 +46,7 @@ class AdminService:
         self.alias_map_path = repo_root / "pipeline" / "enrichment" / "provider_alias_map.json"
         self.security_master_path = repo_root / "pipeline" / "security_master" / "security_master.json"
         self.gics_mapping_path = repo_root / "pipeline" / "normalizer" / "gics_mapping.json"
+        self.feeder_registry_path = repo_root / "pipeline" / "feeder_registry.json"
 
     def list_staged_files(self) -> dict[str, list[dict[str, Any]]]:
         """Lists all CSV and XLSX files currently staged under each provider folder."""
@@ -259,6 +263,47 @@ class AdminService:
         ]
         return matches[:limit]
 
+    def get_feeder_registry(self) -> dict[str, dict[str, str]]:
+        """Loads pipeline/feeder_registry.json."""
+        if not self.feeder_registry_path.exists():
+            return {}
+        return json.loads(self.feeder_registry_path.read_text(encoding="utf-8"))
+
+    def set_feeder_pairing(
+        self,
+        feeder_code: str,
+        name: str,
+        master_provider: str,
+        master_ticker: str,
+    ) -> dict[str, dict[str, str]]:
+        """Adds or updates a feeder pairing in feeder_registry.json."""
+        code = feeder_code.strip().upper()
+        clean_name = name.strip()
+        provider = master_provider.strip().lower()
+        ticker = master_ticker.strip().upper()
+        if not code or not clean_name or not ticker:
+            raise ValueError("feeder_code, name, and master_ticker are all required.")
+        if provider not in ALLOWED_MASTER_PROVIDERS:
+            raise ValueError(f"Unsupported master_provider '{master_provider}'. Must be one of: {sorted(ALLOWED_MASTER_PROVIDERS)}")
+
+        registry = self.get_feeder_registry()
+        registry[code] = {
+            "name": clean_name,
+            "master_provider": provider,
+            "master_ticker": ticker,
+        }
+        _atomic_write_json(self.feeder_registry_path, registry)
+        return registry
+
+    def delete_feeder_pairing(self, feeder_code: str) -> dict[str, dict[str, str]]:
+        """Removes a feeder pairing from feeder_registry.json."""
+        code = feeder_code.strip().upper()
+        registry = self.get_feeder_registry()
+        if code in registry:
+            del registry[code]
+            _atomic_write_json(self.feeder_registry_path, registry)
+        return registry
+
 
 def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
     """Creates a request handler class bound to the provided AdminService."""
@@ -303,6 +348,8 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                     self._send_json(service.preview_staged_file(provider, filename))
                 elif path == "/api/aliases":
                     self._send_json({"aliases": service.get_alias_map()})
+                elif path == "/api/feeders":
+                    self._send_json({"feeders": service.get_feeder_registry()})
                 elif path == "/api/security-master":
                     q = qs.get("q", [""])[0]
                     self._send_json({"results": service.search_security_master(q)})
@@ -349,6 +396,19 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                         raw_name=data.get("raw_name", ""),
                     )
                     self._send_json({"aliases": aliases})
+                elif path == "/api/feeders/set":
+                    feeders = service.set_feeder_pairing(
+                        feeder_code=data.get("feeder_code", ""),
+                        name=data.get("name", ""),
+                        master_provider=data.get("master_provider", ""),
+                        master_ticker=data.get("master_ticker", ""),
+                    )
+                    self._send_json({"feeders": feeders})
+                elif path == "/api/feeders/delete":
+                    feeders = service.delete_feeder_pairing(
+                        feeder_code=data.get("feeder_code", ""),
+                    )
+                    self._send_json({"feeders": feeders})
                 else:
                     self._send_json({"error": "Not found"}, status=HTTPStatus.NOT_FOUND)
             except Exception as exc:

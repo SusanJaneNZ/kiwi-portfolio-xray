@@ -135,6 +135,13 @@ class TestAdapters(unittest.TestCase):
             vestas = next(h for h in res.holdings if "Vestas" in h.name)
             self.assertAlmostEqual(vestas.weight, 0.125, places=3)
 
+    def test_generalized_master_ticker_extraction(self):
+        vanguard = VanguardAdapter()
+        ishares = ISharesAdapter()
+        self.assertEqual(vanguard._extract_ticker_from_text("Vanguard Mid-Cap ETF (VO)"), "VO")
+        self.assertEqual(ishares._extract_ticker_from_filename("BOTZ_holdings.csv"), "BOTZ")
+        self.assertEqual(ishares._extract_ticker_from_filename("IVV_holdings.csv"), "IVV")
+
 
 if __name__ == "__main__":
     unittest.main()

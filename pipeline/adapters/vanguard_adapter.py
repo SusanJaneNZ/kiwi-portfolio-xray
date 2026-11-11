@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import re
 from pathlib import Path
 from typing import Optional
 
@@ -201,8 +202,11 @@ class VanguardAdapter(BaseAdapter):
 
     def _extract_ticker_from_text(self, text: str) -> Optional[str]:
         upper = text.upper()
+        paren_match = re.search(r"\(([A-Z]{2,5})\)", upper)
+        if paren_match:
+            return paren_match.group(1)
         for ticker in MASTER_TICKERS:
-            if ticker in upper:
+            if re.search(rf"(?<![A-Z0-9]){ticker}(?![A-Z0-9])", upper):
                 return ticker
         for hint, ticker in FUND_NAME_HINTS.items():
             if hint in upper:

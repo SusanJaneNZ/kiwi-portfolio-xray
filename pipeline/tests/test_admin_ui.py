@@ -39,6 +39,11 @@ class TestAdminUI(unittest.TestCase):
             json.dumps([{"isin": "NZMCYE0001S8", "name": "Mercury NZ Limited", "ticker": "MCY.NZ"}]),
             encoding="utf-8",
         )
+        self.service.feeder_registry_path = self.tmp_dir / "feeder_registry.json"
+        shutil.copy(
+            REPO_ROOT / "pipeline" / "feeder_registry.json",
+            self.service.feeder_registry_path,
+        )
 
     def tearDown(self):
         shutil.rmtree(self.tmp_dir, ignore_errors=True)
@@ -74,6 +79,34 @@ class TestAdminUI(unittest.TestCase):
         matches = self.service.search_security_master("Mercury")
         self.assertTrue(any("Mercury" in m["name"] for m in matches))
 
+    def test_feeder_registry_crud_and_validation(self):
+        initial = self.service.get_feeder_registry()
+        self.assertIn("TWF", initial)
+
+        updated = self.service.set_feeder_pairing(
+            feeder_code="twh",
+            name="Smart Total World (NZD Hedged) ETF",
+            master_provider="Vanguard",
+            master_ticker="vt",
+        )
+        self.assertEqual(
+            updated["TWH"],
+            {
+                "name": "Smart Total World (NZD Hedged) ETF",
+                "master_provider": "vanguard",
+                "master_ticker": "VT",
+            },
+        )
+
+        with self.assertRaises(ValueError):
+            self.service.set_feeder_pairing("TWH", "Bad Provider", "kernel", "VT")
+
+        with self.assertRaises(ValueError):
+            self.service.set_feeder_pairing("", "Missing Code", "vanguard", "VT")
+
+        after_delete = self.service.delete_feeder_pairing("twh")
+        self.assertNotIn("TWH", after_delete)
+
     def test_http_server_routes(self):
         server = ThreadingHTTPServer(("127.0.0.1", 0), make_handler(self.service))
         port = server.server_address[1]
@@ -90,6 +123,38 @@ class TestAdminUI(unittest.TestCase):
                 self.assertEqual(resp.status, 200)
                 payload = json.loads(resp.read().decode("utf-8"))
                 self.assertIn("smartshares", payload["files"])
+
+            with urllib.request.urlopen(f"http://127.0.0.1:{port}/api/feeders") as resp:
+                self.assertEqual(resp.status, 200)
+                payload = json.loads(resp.read().decode("utf-8"))
+                self.assertIn("TWF", payload["feeders"])
+
+            set_req = urllib.request.Request(
+                f"http://127.0.0.1:{port}/api/feeders/set",
+                data=json.dumps({
+                    "feeder_code": "USM",
+                    "name": "Smart US Mid Cap ETF",
+                    "master_provider": "vanguard",
+                    "master_ticker": "VO",
+                }).encode("utf-8"),
+                headers={"Content-Type": "application/json"},
+                method="POST",
+            )
+            with urllib.request.urlopen(set_req) as resp:
+                self.assertEqual(resp.status, 200)
+                payload = json.loads(resp.read().decode("utf-8"))
+                self.assertEqual(payload["feeders"]["USM"]["master_ticker"], "VO")
+
+            del_req = urllib.request.Request(
+                f"http://127.0.0.1:{port}/api/feeders/delete",
+                data=json.dumps({"feeder_code": "USM"}).encode("utf-8"),
+                headers={"Content-Type": "application/json"},
+                method="POST",
+            )
+            with urllib.request.urlopen(del_req) as resp:
+                self.assertEqual(resp.status, 200)
+                payload = json.loads(resp.read().decode("utf-8"))
+                self.assertNotIn("USM", payload["feeders"])
         finally:
             server.shutdown()
             server.server_close()
