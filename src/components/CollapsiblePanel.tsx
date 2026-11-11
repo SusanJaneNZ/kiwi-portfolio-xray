@@ -115,3 +115,4 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
     </section>
   );
 };
+
