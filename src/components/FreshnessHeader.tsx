@@ -108,6 +108,8 @@ export const FreshnessHeader: React.FC<FreshnessHeaderProps> = ({
               ...portfolioState,
               fundBalances: {},
               directHoldings: [],
+              cashDeposits: [],
+              bucketAssignments: {},
             })
           }
           className="text-xs bg-slate-950 hover:bg-rose-950/40 text-slate-400 hover:text-rose-400 border border-slate-800 px-3 py-1.5 rounded-lg transition-colors"

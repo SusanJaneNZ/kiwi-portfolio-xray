@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { BucketRebalancer } from './components/BucketRebalancer';
 import { FreshnessHeader } from './components/FreshnessHeader';
 import { HoldingsTable } from './components/HoldingsTable';
 import { LiquidityCard } from './components/LiquidityCard';
@@ -55,6 +56,7 @@ export const App: React.FC = () => {
     return calculatePortfolioLookthrough({
       fundBalances: portfolioState.fundBalances,
       directHoldings: portfolioState.directHoldings,
+      cashDeposits: portfolioState.cashDeposits,
       audNzdRate: portfolioState.audNzdRate,
       fundsRegistry,
       constituentsMap,
@@ -93,10 +95,11 @@ export const App: React.FC = () => {
           unresolvedCount={unresolvedEntries.length}
         />
 
-        {/* Liquidity Breakdown Banners */}
+        {/* Liquidity & Asset Split Banners */}
         <LiquidityCard
           liquidity={calculationResult.liquidity}
           constituentCount={calculationResult.holdings.length}
+          bondIssuerCount={calculationResult.bondIssuerHoldings.length}
         />
 
         {/* Main 2-Column Section */}
@@ -121,8 +124,15 @@ export const App: React.FC = () => {
           </div>
         </div>
 
+        {/* User Buckets & Semi-Annual Withdrawal Rebalancer */}
+        <BucketRebalancer portfolioState={portfolioState} onUpdateState={handleUpdateState} />
+
         {/* Consolidated Look-Through Table */}
-        <HoldingsTable holdings={calculationResult.holdings} />
+        <HoldingsTable
+          holdings={calculationResult.holdings}
+          bondIssuerHoldings={calculationResult.bondIssuerHoldings}
+          issuerRollup={calculationResult.issuerRollup}
+        />
       </div>
 
       {/* Unresolved Disclosures Modal */}

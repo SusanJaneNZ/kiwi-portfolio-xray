@@ -72,6 +72,7 @@ export function filterAndGroupHoldings(
       ticker: "MICRO",
       country: "Global",
       sector: "All 11 Sectors",
+      assetClass: "equity",
       valueNZD: microTotalNZD,
       portfolioWeight: microTotalWeight,
       equityWeight: microTotalEquityWeight,

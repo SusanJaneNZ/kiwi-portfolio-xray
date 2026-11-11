@@ -18,7 +18,6 @@
     "Inditex SA": "SEDOL:BP9DL90",
     "Barrick Gold Corp Ord": "SEDOL:BNM23Q1",
     "Assicurazioni Generali SpA": "SEDOL:4056719",
-    "Arm Holdings plc ADR": "US0420682058",
     "Sea Ltd. (Singapore)-A": "SEDOL:5258246",
     "SEB-Skand Enskilda Banken A": "SEDOL:4813345",
     "Nippon Tel & Tel Corp": "SEDOL:6641373",
@@ -64,6 +63,10 @@
     "Fattal Holdings (1998) Ltd": "SEDOL:BG1YKN5",
     "Electra (Israel)": "SEDOL:6298821",
     "Y.H. Dimri Building & Development Ltd.": "SEDOL:B02SX80",
-    "Tokyo Broadcasting System Holdings Inc": "SEDOL:6894166"
+    "Tokyo Broadcasting System Holdings Inc": "SEDOL:6894166",
+    "Arm Holdings plc ADR": "SEDOL:BQPGVF6"
+  },
+  "Smartshares:SMART_GLOBAL_BOND_ETF_FND1101_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026": {
+    "GINNIE MAE II POOL 3.00% 20/03/2052": "SEDOL:2350684"
   }
 }

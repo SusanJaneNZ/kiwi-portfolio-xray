@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { DirectEquityCatalogItem, FundMetadata, UserPortfolioState } from '../types/portfolio';
+import {
+  CashDepositHolding,
+  DirectEquityCatalogItem,
+  FundMetadata,
+  UserPortfolioState,
+} from '../types/portfolio';
 
 interface PortfolioInputTableProps {
   portfolioState: UserPortfolioState;
@@ -8,6 +13,8 @@ interface PortfolioInputTableProps {
   onUpdateState: (state: UserPortfolioState) => void;
   totalPortfolioNZD: number;
 }
+
+const NZ_BANK_PRESETS = ['ANZ', 'ASB', 'BNZ', 'Westpac', 'Kiwibank', 'Heartland', 'Rabobank', 'TSB', 'SBS'];
 
 export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
   portfolioState,
@@ -20,10 +27,49 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
   const [selectedEquity, setSelectedEquity] = useState<DirectEquityCatalogItem | null>(null);
   const [newShareValue, setNewShareValue] = useState<string>('1000');
 
-  // Check if any ASX holdings are present
-  const hasASXHoldings = portfolioState.directHoldings.some((h) => h.exchange === 'ASX');
+  // New Term Deposit / Call Cash form state
+  const [depInstitution, setDepInstitution] = useState('ANZ');
+  const [depCustomBank, setDepCustomBank] = useState('');
+  const [depType, setDepType] = useState<'term_deposit' | 'cash'>('term_deposit');
+  const [depLabel, setDepLabel] = useState('');
+  const [depId, setDepId] = useState('');
+  const [depValue, setDepValue] = useState('10000');
+  const [depMaturity, setDepMaturity] = useState('');
+  const [depRate, setDepRate] = useState('');
 
-  // Handle fund balance change
+  const hasASXHoldings = portfolioState.directHoldings.some((h) => h.exchange === 'ASX');
+  const hasBuckets = portfolioState.buckets.length > 0;
+
+  const setBucketForKey = (instrumentKey: string, bucketId: string) => {
+    const nextAssignments = { ...portfolioState.bucketAssignments };
+    if (!bucketId) {
+      delete nextAssignments[instrumentKey];
+    } else {
+      nextAssignments[instrumentKey] = bucketId;
+    }
+    onUpdateState({ ...portfolioState, bucketAssignments: nextAssignments });
+  };
+
+  const renderBucketSelect = (instrumentKey: string) => {
+    if (!hasBuckets) return null;
+    const current = portfolioState.bucketAssignments[instrumentKey] || '';
+    return (
+      <select
+        value={current}
+        onChange={(e) => setBucketForKey(instrumentKey, e.target.value)}
+        aria-label={`Assign bucket for ${instrumentKey}`}
+        className="bg-slate-900 border border-slate-800 rounded-lg px-2 py-1 text-[11px] text-slate-300 focus:outline-none focus:border-indigo-500 max-w-[120px]"
+      >
+        <option value="">Unassigned</option>
+        {portfolioState.buckets.map((b) => (
+          <option key={b.id} value={b.id}>
+            {b.name}
+          </option>
+        ))}
+      </select>
+    );
+  };
+
   const handleFundChange = (code: string, value: string) => {
     const num = parseFloat(value) || 0;
     const newBalances = { ...portfolioState.fundBalances };
@@ -35,7 +81,6 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
     onUpdateState({ ...portfolioState, fundBalances: newBalances });
   };
 
-  // Handle direct holding value change
   const handleDirectHoldingChange = (isin: string, value: string) => {
     const num = parseFloat(value) || 0;
     const updated = portfolioState.directHoldings
@@ -44,18 +89,18 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
     onUpdateState({ ...portfolioState, directHoldings: updated });
   };
 
-  // Handle removing a direct holding
   const handleRemoveDirect = (isin: string) => {
     const updated = portfolioState.directHoldings.filter((h) => h.isin !== isin);
-    onUpdateState({ ...portfolioState, directHoldings: updated });
+    const nextAssignments = { ...portfolioState.bucketAssignments };
+    delete nextAssignments[`direct:${isin}`];
+    onUpdateState({ ...portfolioState, directHoldings: updated, bucketAssignments: nextAssignments });
   };
 
-  // Handle adding direct holding
   const handleAddDirect = () => {
     if (!selectedEquity) return;
     const val = parseFloat(newShareValue) || 1000;
     const existingIndex = portfolioState.directHoldings.findIndex((h) => h.isin === selectedEquity.isin);
-    let updated = [...portfolioState.directHoldings];
+    const updated = [...portfolioState.directHoldings];
     if (existingIndex >= 0) {
       updated[existingIndex] = { ...updated[existingIndex], value: updated[existingIndex].value + val };
     } else {
@@ -70,7 +115,49 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
     setSearchQuery('');
   };
 
-  // Autocomplete filtering
+  const handleDepositValueChange = (id: string, value: string) => {
+    const num = parseFloat(value);
+    const safeVal = Number.isFinite(num) && num >= 0 ? num : 0;
+    // Retain $0 TD/cash rows so users can track reinvested deposits & keep depositId/bucket assignments
+    const updated = portfolioState.cashDeposits.map((d) => (d.id === id ? { ...d, valueNZD: safeVal } : d));
+    onUpdateState({ ...portfolioState, cashDeposits: updated });
+  };
+
+  const handleRemoveDeposit = (id: string) => {
+    const updated = portfolioState.cashDeposits.filter((d) => d.id !== id);
+    const nextAssignments = { ...portfolioState.bucketAssignments };
+    delete nextAssignments[`td:${id}`];
+    onUpdateState({ ...portfolioState, cashDeposits: updated, bucketAssignments: nextAssignments });
+  };
+
+  const handleAddDeposit = () => {
+    const institution = (depInstitution === '__custom' ? depCustomBank : depInstitution).trim() || 'ANZ';
+    const valueNZD = Math.max(0, parseFloat(depValue) || 0);
+    const label = depLabel.trim() || `${depType === 'term_deposit' ? 'Term Deposit' : 'Call Cash'}`;
+    const id = `td-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+    const rateNum = parseFloat(depRate);
+
+    const newDeposit: CashDepositHolding = {
+      id,
+      depositId: depId.trim() || undefined,
+      institution,
+      label,
+      type: depType,
+      valueNZD,
+      maturityDate: depMaturity.trim() || undefined,
+      interestRate: Number.isFinite(rateNum) && rateNum >= 0 ? rateNum : undefined,
+    };
+
+    onUpdateState({
+      ...portfolioState,
+      cashDeposits: [...portfolioState.cashDeposits, newDeposit],
+    });
+    setDepLabel('');
+    setDepId('');
+    setDepMaturity('');
+    setDepRate('');
+  };
+
   const filteredCatalog = searchQuery.trim()
     ? directEquitiesCatalog
         .filter(
@@ -86,6 +173,7 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
     (acc, h) => acc + (h.currency === 'AUD' ? h.value * portfolioState.audNzdRate : h.value),
     0
   );
+  const depositSumNZD = portfolioState.cashDeposits.reduce((acc, d) => acc + Math.max(0, d.valueNZD), 0);
 
   return (
     <div className="space-y-4">
@@ -116,18 +204,21 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
                     <span className="truncate">{fund.name}</span>
                   </div>
                   <div className="text-[11px] text-slate-500">
-                    {fund.provider} · As Of {fund.effective_date}
+                    {fund.provider} · {fund.asset_class === 'fixed_interest' ? 'Bonds' : fund.asset_class === 'mixed' ? 'Mixed' : 'Equity'} · As Of {fund.effective_date}
                   </div>
                 </div>
-                <div className="w-28 relative">
-                  <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs">$</span>
-                  <input
-                    type="number"
-                    value={balance > 0 ? balance : ''}
-                    placeholder="0"
-                    onChange={(e) => handleFundChange(fund.code, e.target.value)}
-                    className="w-full bg-slate-900 border border-slate-800 rounded-lg pl-6 pr-2 py-1 text-right text-xs text-white focus:outline-none focus:border-indigo-500 font-mono"
-                  />
+                <div className="flex items-center gap-1.5">
+                  {renderBucketSelect(`fund:${fund.code}`)}
+                  <div className="w-24 relative">
+                    <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs">$</span>
+                    <input
+                      type="number"
+                      value={balance > 0 ? balance : ''}
+                      placeholder="0"
+                      onChange={(e) => handleFundChange(fund.code, e.target.value)}
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg pl-6 pr-2 py-1 text-right text-xs text-white focus:outline-none focus:border-indigo-500 font-mono"
+                    />
+                  </div>
                 </div>
               </div>
             );
@@ -146,7 +237,6 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
           </span>
         </div>
 
-        {/* Dynamic AUD/NZD Exchange Rate Banner */}
         {hasASXHoldings && (
           <div className="bg-amber-950/30 border border-amber-600/40 rounded-xl p-2.5 flex items-center justify-between gap-2 text-xs">
             <div className="flex items-center gap-2">
@@ -205,6 +295,7 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
                 </div>
 
                 <div className="flex items-center gap-1.5">
+                  {renderBucketSelect(`direct:${dh.isin}`)}
                   <div className="w-24 relative">
                     <span className="absolute left-2 top-1/2 -translate-y-1/2 text-slate-500 text-xs">
                       {isAud ? 'A$' : '$'}
@@ -228,7 +319,6 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
             );
           })}
 
-          {/* Autocomplete share adder */}
           <div className="pt-2 relative">
             <div className="flex gap-2">
               <input
@@ -263,7 +353,6 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
               </button>
             </div>
 
-            {/* Dropdown suggestions */}
             {filteredCatalog.length > 0 && !selectedEquity && (
               <div className="absolute z-10 left-0 right-0 mt-1 bg-slate-900 border border-slate-700 rounded-lg shadow-xl overflow-hidden divide-y divide-slate-800">
                 {filteredCatalog.map((item) => (
@@ -286,7 +375,157 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
           </div>
         </div>
       </div>
+
+      {/* 3. Term Deposits & Call Cash Section */}
+      <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 shadow-sm space-y-3">
+        <div className="flex items-center justify-between">
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-400">
+            3. Term Deposits &amp; Call Cash (NZD)
+          </h2>
+          <span className="text-xs text-amber-400 font-mono">
+            {totalPortfolioNZD > 0 ? ((depositSumNZD / totalPortfolioNZD) * 100).toFixed(1) : 0}% of portfolio
+          </span>
+        </div>
+
+        <div className="space-y-2 text-xs">
+          {portfolioState.cashDeposits.map((dep) => (
+            <div
+              key={dep.id}
+              className="bg-slate-950/80 border border-slate-800/80 rounded-xl p-2.5 flex items-center justify-between gap-2"
+            >
+              <div className="flex-1 min-w-0">
+                <div className="font-medium text-white flex items-center gap-1.5 flex-wrap">
+                  <span className="bg-amber-950 text-amber-300 px-1.5 py-0.5 rounded text-[11px] font-mono border border-amber-700/50">
+                    {dep.institution}
+                  </span>
+                  <span className="truncate">{dep.label}</span>
+                  {dep.depositId && (
+                    <span className="bg-slate-900 text-slate-300 px-1.5 py-0.5 rounded text-[10px] font-mono border border-slate-700">
+                      #{dep.depositId}
+                    </span>
+                  )}
+                </div>
+                <div className="text-[11px] text-slate-500">
+                  {dep.type === 'term_deposit' ? 'Term Deposit' : 'Call / Notice Cash'}
+                  {dep.maturityDate && ` · Maturing ${dep.maturityDate}`}
+                  {dep.interestRate !== undefined && ` · ${dep.interestRate.toFixed(2)}% p.a.`}
+                </div>
+              </div>
+
+              <div className="flex items-center gap-1.5">
+                {renderBucketSelect(`td:${dep.id}`)}
+                <div className="w-24 relative">
+                  <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs">$</span>
+                  <input
+                    type="number"
+                    min="0"
+                    value={dep.valueNZD}
+                    onChange={(e) => handleDepositValueChange(dep.id, e.target.value)}
+                    className="w-full bg-slate-900 border border-slate-800 rounded-lg pl-6 pr-2 py-1 text-right text-xs text-white focus:outline-none focus:border-amber-500 font-mono"
+                  />
+                </div>
+                <button
+                  onClick={() => handleRemoveDeposit(dep.id)}
+                  className="text-slate-500 hover:text-rose-400 text-xs p-1"
+                  title="Remove deposit"
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+          ))}
+
+          {/* Add Deposit Form */}
+          <div className="pt-2 border-t border-slate-800/70 space-y-2">
+            <div className="grid grid-cols-2 gap-2">
+              <select
+                value={depInstitution}
+                onChange={(e) => setDepInstitution(e.target.value)}
+                className="bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white"
+              >
+                {NZ_BANK_PRESETS.map((bank) => (
+                  <option key={bank} value={bank}>
+                    {bank}
+                  </option>
+                ))}
+                <option value="__custom">Other Institution...</option>
+              </select>
+
+              <select
+                value={depType}
+                onChange={(e) => setDepType(e.target.value as 'term_deposit' | 'cash')}
+                className="bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white"
+              >
+                <option value="term_deposit">Term Deposit</option>
+                <option value="cash">On-Call / Notice Cash</option>
+              </select>
+            </div>
+
+            {depInstitution === '__custom' && (
+              <input
+                type="text"
+                value={depCustomBank}
+                onChange={(e) => setDepCustomBank(e.target.value)}
+                placeholder="Institution name (e.g. Co-operative Bank)"
+                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white placeholder-slate-500"
+              />
+            )}
+
+            <div className="grid grid-cols-2 gap-2">
+              <input
+                type="text"
+                value={depLabel}
+                onChange={(e) => setDepLabel(e.target.value)}
+                placeholder="Label (e.g. 6-Month TD)"
+                className="bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white placeholder-slate-500"
+              />
+              <input
+                type="text"
+                value={depId}
+                onChange={(e) => setDepId(e.target.value)}
+                placeholder="Ref ID (optional, non-sensitive)"
+                title="Use a bank certificate/receipt reference tag rather than full account numbers"
+                className="bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white placeholder-slate-500 font-mono"
+              />
+            </div>
+
+            <div className="flex gap-2 items-center">
+              <div className="relative flex-1">
+                <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs">$</span>
+                <input
+                  type="number"
+                  min="0"
+                  value={depValue}
+                  onChange={(e) => setDepValue(e.target.value)}
+                  placeholder="NZD Amount"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-6 pr-2 py-1.5 text-xs text-white font-mono"
+                />
+              </div>
+              <input
+                type="date"
+                value={depMaturity}
+                onChange={(e) => setDepMaturity(e.target.value)}
+                title="Maturity date (optional)"
+                className="bg-slate-950 border border-slate-800 rounded-lg px-2 py-1.5 text-xs text-slate-300"
+              />
+              <input
+                type="number"
+                step="0.05"
+                value={depRate}
+                onChange={(e) => setDepRate(e.target.value)}
+                placeholder="Rate %"
+                className="w-20 bg-slate-950 border border-slate-800 rounded-lg px-2 py-1.5 text-xs text-white font-mono"
+              />
+              <button
+                onClick={handleAddDeposit}
+                className="bg-amber-600 hover:bg-amber-500 text-white text-xs font-medium px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
+              >
+                + Add
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
-

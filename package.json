@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "rm -rf /tmp/kpx-tests && esbuild src/engine/lookthrough.test.ts src/engine/rebalance.test.ts --bundle --platform=node --format=esm --outdir=/tmp/kpx-tests && node --input-type=module -e \"import test from 'node:test'; import { runLookthroughTests } from '/tmp/kpx-tests/lookthrough.test.js'; import { rebalanceTestCases } from '/tmp/kpx-tests/rebalance.test.js'; test('lookthrough engine', runLookthroughTests); for (const [name, fn] of rebalanceTestCases) test(name, fn);\""
   },
   "dependencies": {
     "clsx": "^2.1.1",
