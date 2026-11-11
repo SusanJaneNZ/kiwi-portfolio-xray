@@ -95,7 +95,7 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
       <div className="py-2 space-y-3.5 flex-1 overflow-y-auto max-h-[460px]">
         {activeData.length === 0 ? (
           <div className="text-center py-12 text-xs text-slate-500">
-            No holdings entered. Add funds or shares above to inspect portfolio look-through.
+            No holdings entered. Add funds or shares in the portfolio inputs below to inspect look-through.
           </div>
         ) : (
           activeData.map((category) => {

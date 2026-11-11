@@ -144,36 +144,36 @@ export const App: React.FC = () => {
           recoveredNotice={recoveredNotice}
         />
 
-        {/* Liquidity & Asset Split Banners */}
+        {/* 1. Asset Class / Liquidity Split */}
         <LiquidityCard
           liquidity={calculationResult.liquidity}
           constituentCount={calculationResult.holdings.length}
           bondIssuerCount={calculationResult.bondIssuerHoldings.length}
         />
 
-        {/* Portfolio Inputs (Full Width) */}
+        {/* 2. Sector & Country Allocation */}
+        <StackedBarChart
+          sectorBreakdown={calculationResult.sectorBreakdown}
+          countryBreakdown={calculationResult.countryBreakdown}
+        />
+
+        {/* 3. Look-Through Exposure */}
+        <HoldingsTable
+          holdings={calculationResult.holdings}
+          bondIssuerHoldings={calculationResult.bondIssuerHoldings}
+          issuerRollup={calculationResult.issuerRollup}
+        />
+
+        {/* 4. Rebalancing */}
+        <BucketRebalancer portfolioState={portfolioState} onUpdateState={handleUpdateState} />
+
+        {/* 5-7. Portfolio Inputs: Fund Allocations, Direct Shares, Term Deposits */}
         <PortfolioInputTable
           portfolioState={portfolioState}
           fundsRegistry={fundsRegistry}
           directEquitiesCatalog={directCatalog}
           onUpdateState={handleUpdateState}
           totalPortfolioNZD={calculationResult.denominatorD}
-        />
-
-        {/* Sector & Country Breakdown (Full Width) */}
-        <StackedBarChart
-          sectorBreakdown={calculationResult.sectorBreakdown}
-          countryBreakdown={calculationResult.countryBreakdown}
-        />
-
-        {/* User Buckets & Semi-Annual Withdrawal Rebalancer */}
-        <BucketRebalancer portfolioState={portfolioState} onUpdateState={handleUpdateState} />
-
-        {/* Consolidated Look-Through Table */}
-        <HoldingsTable
-          holdings={calculationResult.holdings}
-          bondIssuerHoldings={calculationResult.bondIssuerHoldings}
-          issuerRollup={calculationResult.issuerRollup}
         />
       </div>
 
