@@ -10,6 +10,7 @@ from pipeline.adapters.ishares_adapter import ISharesAdapter
 from pipeline.adapters.kernel_adapter import KernelAdapter
 from pipeline.adapters.smartshares_direct_adapter import SmartsharesDirectAdapter
 from pipeline.adapters.vanguard_adapter import VanguardAdapter
+from pipeline.enrichment.bond_normalizer import AssetClassifier
 from pipeline.enrichment.fuzzy_matcher import SecurityMatcher
 from pipeline.security_master.build_security_master import (
     _atomic_write_json,
@@ -30,6 +31,7 @@ class PipelineCompiler:
 
         self.security_master_path = repo_root / "pipeline" / "security_master" / "security_master.json"
         self.alias_map_path = repo_root / "pipeline" / "enrichment" / "provider_alias_map.json"
+        self.issuer_alias_path = repo_root / "pipeline" / "enrichment" / "issuer_alias_map.json"
         self.gics_mapping_path = repo_root / "pipeline" / "normalizer" / "gics_mapping.json"
         self.feeder_registry_path = repo_root / "pipeline" / "feeder_registry.json"
 
@@ -62,6 +64,9 @@ class PipelineCompiler:
             alias_map=alias_map,
             gics_mapping=gics_mapping,
         )
+        classifier = AssetClassifier(self.issuer_alias_path)
+        for item in direct_equities_data:
+            self._stamp_issuer(item, classifier)
 
         # 2. Parse Master ETFs (Vanguard & iShares)
         vanguard_adapter = VanguardAdapter()
@@ -109,7 +114,7 @@ class PipelineCompiler:
                             effective_date=res.effective_date,
                         )
                     else:
-                        unwrapped = self._enrich_domestic_fund(res, matcher, all_unresolved_entries)
+                        unwrapped = self._enrich_domestic_fund(res, matcher, classifier, all_unresolved_entries)
                         all_unwrapped_funds.append(unwrapped)
 
         # 5. Unwrap Feeders using FeederUnwrapper
@@ -128,6 +133,8 @@ class PipelineCompiler:
                     )
                 continue
             unwrapped = unwrapper.unwrap(feeder_code, master_fund, disc)
+            for c in unwrapped.constituents:
+                self._stamp_issuer(c, classifier)
             all_unwrapped_funds.append(unwrapped)
 
         # 6. Ingest Kernel Funds and Enrich
@@ -137,7 +144,7 @@ class PipelineCompiler:
             for f in sorted(p for p in kernel_dir.iterdir() if p.is_file() and p.suffix.lower() in {".csv", ".xlsx"}):
                 if kernel_adapter.can_handle(f):
                     res = kernel_adapter.parse(f)
-                    unwrapped = self._enrich_domestic_fund(res, matcher, all_unresolved_entries)
+                    unwrapped = self._enrich_domestic_fund(res, matcher, classifier, all_unresolved_entries)
                     all_unwrapped_funds.append(unwrapped)
 
         # 7. Construct Funds Registry & Constituents Map
@@ -153,6 +160,7 @@ class PipelineCompiler:
                 "cash_ratio": uf.cash_ratio,
                 "hedging_ratio": uf.hedging_ratio,
                 "constituent_count": len(uf.constituents),
+                "asset_class": classifier.derive_fund_asset_class(uf.constituents),
                 "cadence": "monthly",
                 "is_stale": False,
             })
@@ -172,6 +180,7 @@ class PipelineCompiler:
 
         # 9. If not dry_run, write production files atomically
         if not dry_run:
+            _atomic_write_json(direct_equities_output_path, direct_equities_data)
             _atomic_write_json(self.output_dir / "funds_registry.json", funds_registry)
             _atomic_write_json(self.output_dir / "constituents.json", constituents_map)
             _atomic_write_json(self.output_dir / "unresolved_entries.json", all_unresolved_entries)
@@ -186,23 +195,79 @@ class PipelineCompiler:
 
         return validation_report, summary_data
 
+    def _stamp_issuer(self, record: dict[str, Any], classifier: AssetClassifier) -> None:
+        """Stamps canonical issuer_key and issuer_name onto an equity record when mapped."""
+        issuer_key, issuer_name, _ = classifier.resolve_issuer(record.get("name", ""))
+        if issuer_key:
+            record["issuer_key"] = issuer_key
+            if issuer_name:
+                record["issuer_name"] = issuer_name
+
     def _enrich_domestic_fund(
         self,
         fund_res: Any,
         matcher: SecurityMatcher,
+        classifier: AssetClassifier,
         unresolved_collector: list[dict],
     ) -> UnwrappedFund:
-        """Enriches raw domestic or Kernel holdings using the Global Security Master."""
-        resolved_constituents: list[dict] = []
-        raw_equity_sum = sum(h.weight for h in fund_res.holdings)
+        """Classifies and enriches domestic/Kernel holdings across term deposits, bonds, and equities."""
+        resolved_equities: list[dict] = []
+        consolidated_bonds: dict[str, dict] = {}
+        consolidated_tds: dict[str, dict] = {}
+        raw_non_cash_sum = sum(h.weight for h in fund_res.holdings)
 
-        # Normalize equity weights after segregating cash & hedging to ensure exact integrity
+        # Normalize investable weights after segregating cash & hedging to preserve weight integrity
         hedging_ratio = max(0.0, getattr(fund_res, "hedging_ratio", 0.0))
         scale = max(0.0, 1.0 - fund_res.cash_ratio - hedging_ratio)
-        weight_norm_factor = (scale / raw_equity_sum) if raw_equity_sum > 0 else 1.0
+        weight_norm_factor = (scale / raw_non_cash_sum) if raw_non_cash_sum > 0 else 1.0
 
         for idx, h in enumerate(fund_res.holdings):
             normalized_weight = h.weight * weight_norm_factor
+            hint = getattr(h, "raw_metadata", {}).get("asset_class", "")
+            row_class = classifier.classify_holding(h.name, fund_code=fund_res.fund_code, asset_class_hint=hint)
+
+            if row_class == "term_deposit":
+                td = classifier.normalize_term_deposit(h.name, country_hint=h.country or "")
+                isin_key = td["isin"]
+                if isin_key not in consolidated_tds:
+                    entry = {
+                        "isin": isin_key,
+                        "name": td["name"],
+                        "ticker": "",
+                        "country": td["country"],
+                        "sector": td["sector"],
+                        "weight": 0.0,
+                        "asset_class": "term_deposit",
+                    }
+                    if td["issuer_key"]:
+                        entry["issuer_key"] = td["issuer_key"]
+                        entry["issuer_name"] = td["issuer_name"]
+                    consolidated_tds[isin_key] = entry
+                consolidated_tds[isin_key]["weight"] += normalized_weight
+                continue
+
+            if row_class == "fixed_interest":
+                bond = classifier.normalize_bond_holding(h.name, country_hint=h.country or "")
+                isin_key = bond["isin"]
+                if isin_key not in consolidated_bonds:
+                    entry = {
+                        "isin": isin_key,
+                        "name": bond["name"],
+                        "ticker": "",
+                        "country": bond["country"],
+                        "sector": bond["sector"],
+                        "weight": 0.0,
+                        "asset_class": "fixed_interest",
+                        "tranche_count": 0,
+                    }
+                    if bond["issuer_key"]:
+                        entry["issuer_key"] = bond["issuer_key"]
+                        entry["issuer_name"] = bond["issuer_name"]
+                    consolidated_bonds[isin_key] = entry
+                consolidated_bonds[isin_key]["weight"] += normalized_weight
+                consolidated_bonds[isin_key]["tranche_count"] += 1
+                continue
+
             match = matcher.match(
                 name=h.name,
                 ticker=h.ticker,
@@ -212,24 +277,28 @@ class PipelineCompiler:
             )
 
             if match.matched and match.isin:
-                resolved_constituents.append({
+                entry = {
                     "isin": match.isin,
                     "name": match.name or h.name,
                     "ticker": match.ticker or h.ticker or "",
                     "country": normalize_country(match.country or h.country or "", default="Global"),
                     "sector": match.sector or "Unclassified",
                     "weight": round(normalized_weight, 8),
-                })
+                    "asset_class": "equity",
+                }
+                self._stamp_issuer(entry, classifier)
+                resolved_equities.append(entry)
             else:
                 # Synthetic placeholder record to preserve weight sum integrity
                 synth_isin = f"UNRESOLVED_{h.ticker or idx}"
-                resolved_constituents.append({
+                resolved_equities.append({
                     "isin": synth_isin,
                     "name": h.name,
                     "ticker": h.ticker or "",
                     "country": normalize_country(h.country or "", default="Unknown"),
                     "sector": "Unclassified",
                     "weight": round(normalized_weight, 8),
+                    "asset_class": "equity",
                 })
                 # Add to unresolved collector
                 unresolved_collector.append({
@@ -241,10 +310,16 @@ class PipelineCompiler:
                     "reason": match.reason,
                     "suggested_snippet": {
                         f"{fund_res.provider}:{fund_res.fund_code}": {
-                            h.name: f"INSERT_CANONICAL_ISIN"
+                            h.name: "INSERT_CANONICAL_ISIN"
                         }
                     },
                 })
+
+        for group in (consolidated_bonds, consolidated_tds):
+            for entry in group.values():
+                entry["weight"] = round(entry["weight"], 8)
+
+        resolved_constituents = resolved_equities + list(consolidated_bonds.values()) + list(consolidated_tds.values())
 
         return UnwrappedFund(
             fund_code=fund_res.fund_code,

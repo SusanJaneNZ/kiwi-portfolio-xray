@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 from typing import Optional
 
@@ -24,17 +25,21 @@ CURRENCY_AND_CASH_TOKENS = (
     "new zealand dollar",
     "us dollar",
     "australian dollar",
+    "australian dollars",
     "canadian dollar",
     "hong kong dollar",
     "singapore dollar",
+    "singapore dollars",
     "taiwan dollar",
     "british pound",
     "pound sterling",
     "swiss franc",
+    "swiss francs",
     "japanese yen",
     "chinese yuan",
     "yuan renminbi",
     "danish krone",
+    "danish kroner",
     "swedish krona",
     "norwegian krone",
     "korean won",
@@ -42,17 +47,24 @@ CURRENCY_AND_CASH_TOKENS = (
     "brazilian real",
     "south african rand",
     "mexican peso",
+    "israeli shekel",
+    "thailand baht",
+    "european monetary union euro",
+    "stif fund",
+    "eto margin",
     "net current assets",
     "accounts payable",
     "accounts receivable",
     "redemptions payable",
     "subscriptions receivable",
     "unsettled trades",
+    "outstanding settlements",
     "unsettled",
     "accrued",
-    "term deposit",
     "bank account",
 )
+
+_CASH_TOKEN_RES = tuple(re.compile(rf"\b{re.escape(tok)}\b", re.IGNORECASE) for tok in CURRENCY_AND_CASH_TOKENS)
 
 
 def _clean_float_cell(raw_str: str) -> tuple[float, bool] | None:
@@ -186,13 +198,21 @@ def parse_nz_fund_file(
             "cash" in class_lower
             or "cash" in type_lower
             or name_lower == "euro"
-            or any(tok in name_lower for tok in CURRENCY_AND_CASH_TOKENS)
+            or any(pat.search(name_lower) for pat in _CASH_TOKEN_RES)
             or "receivable" in name_lower
             or "payable" in name_lower
         )
-        is_hedging = (
+        # Note: explicit deposit phrases ("term deposit", "call deposit", "notice saver") are investable rows handled downstream.
+        if "term deposit" in name_lower or "call deposit" in name_lower or "notice saver" in name_lower:
+            is_cash = False
+        is_hedging_name = (
             "forward" in name_lower
             or "hedg" in name_lower
+            or bool(re.search(r"(?:\b|-)ndf\b", name_lower))
+        )
+        is_etf_or_fund_product = bool(re.search(r"\b(?:etf|fund|trust|ucits)\b", name_lower))
+        is_hedging = (
+            (is_hedging_name and not is_etf_or_fund_product)
             or "derivative" in class_lower
             or ("currency" in type_lower and "forward" in name_lower)
         )
@@ -214,6 +234,10 @@ def parse_nz_fund_file(
                 ticker=e["ticker"],
                 country=e["country"],
                 effective_date=effective_date,
+                raw_metadata={
+                    "asset_class": e["asset_class"],
+                    "asset_type": e["asset_type"],
+                },
             )
         )
 

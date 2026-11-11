@@ -16,6 +16,11 @@ KERNEL_FUND_NAMES = {
     "KERNEL_WORLD_EX_US": "Kernel S&P World Ex-U.S. Fund",
     "KERNEL_CLEAN_ENERGY": "Kernel Global Clean Energy Fund",
     "KERNEL_HIGH_DIVIDEND": "Kernel NZ High Dividend Fund",
+    "KERNEL_NZ_BOND": "Kernel NZ Bond Fund",
+    "KERNEL_BALANCED": "Kernel Balanced Fund",
+    "KERNEL_HIGH_GROWTH": "Kernel High Growth Fund",
+    "KERNEL_CONSERVATIVE": "Kernel Conservative Fund",
+    "KERNEL_CASH_PLUS": "Kernel Cash Plus Fund",
 }
 
 KERNEL_NAME_HINTS = {
@@ -28,6 +33,11 @@ KERNEL_NAME_HINTS = {
     "EX US": "KERNEL_WORLD_EX_US",
     "CLEAN ENERGY": "KERNEL_CLEAN_ENERGY",
     "HIGH DIVIDEND": "KERNEL_HIGH_DIVIDEND",
+    "NZ BOND": "KERNEL_NZ_BOND",
+    "HIGH GROWTH": "KERNEL_HIGH_GROWTH",
+    "CONSERVATIVE": "KERNEL_CONSERVATIVE",
+    "BALANCED": "KERNEL_BALANCED",
+    "CASH PLUS": "KERNEL_CASH_PLUS",
 }
 
 

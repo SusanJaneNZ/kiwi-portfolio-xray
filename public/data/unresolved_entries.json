@@ -1,5 +1,447 @@
 [
   {
+    "provider": "Smartshares",
+    "fund_code": "SMART_US_SMALL_CAP_ETF_FND1110_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
+    "raw_name": "VANGUARD SMALL-CAP ETF",
+    "raw_ticker": "",
+    "weight": 0.9983,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Smartshares:SMART_US_SMALL_CAP_ETF_FND1110_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026": {
+        "VANGUARD SMALL-CAP ETF": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "SMART_US_MID_CAP_ETF_FND1109_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
+    "raw_name": "VANGUARD MID-CAP ETF",
+    "raw_ticker": "",
+    "weight": 0.9982,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Smartshares:SMART_US_MID_CAP_ETF_FND1109_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026": {
+        "VANGUARD MID-CAP ETF": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "OZY",
+    "raw_name": "ISHARES CORE S&P/ASX 200 ETF",
+    "raw_ticker": "",
+    "weight": 0.029274,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Smartshares:OZY": {
+        "ISHARES CORE S&P/ASX 200 ETF": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "SMART_AUSTRALIAN_MID_CAP_ETF_FND1097_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
+    "raw_name": "SGH LIMITED ORDINARY FULLY PAID",
+    "raw_ticker": "",
+    "weight": 0.023093,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Smartshares:SMART_AUSTRALIAN_MID_CAP_ETF_FND1097_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026": {
+        "SGH LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "SMART_AUSTRALIAN_MID_CAP_ETF_FND1097_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
+    "raw_name": "DYNO NOBEL LIMITED ORDINARY FULLY PAID",
+    "raw_ticker": "",
+    "weight": 0.020194,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Smartshares:SMART_AUSTRALIAN_MID_CAP_ETF_FND1097_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026": {
+        "DYNO NOBEL LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "SMART_AUSTRALIAN_MID_CAP_ETF_FND1097_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
+    "raw_name": "GREATLAND RES LTD",
+    "raw_ticker": "",
+    "weight": 0.017695,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Smartshares:SMART_AUSTRALIAN_MID_CAP_ETF_FND1097_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026": {
+        "GREATLAND RES LTD": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "SMART_AUSTRALIAN_MID_CAP_ETF_FND1097_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
+    "raw_name": "BLOCK INC. CDI 1 1 FOREIGN EXEMPT NYSE",
+    "raw_ticker": "",
+    "weight": 0.012196,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Smartshares:SMART_AUSTRALIAN_MID_CAP_ETF_FND1097_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026": {
+        "BLOCK INC. CDI 1 1 FOREIGN EXEMPT NYSE": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "MDZ",
+    "raw_name": "SANFORD LTD/NZ",
+    "raw_ticker": "",
+    "weight": 0.0097,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Smartshares:MDZ": {
+        "SANFORD LTD/NZ": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "SMART_AUSTRALIAN_MID_CAP_ETF_FND1097_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
+    "raw_name": "LIONTOWN RESOURCES LTD",
+    "raw_ticker": "",
+    "weight": 0.006798,
+    "reason": "ambiguous_collision_spread_0.01",
+    "suggested_snippet": {
+      "Smartshares:SMART_AUSTRALIAN_MID_CAP_ETF_FND1097_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026": {
+        "LIONTOWN RESOURCES LTD": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "ASD",
+    "raw_name": "DALRYMPLE BAY INFRASTRUCTURE LIMITED ORD STAPLED SECURITIES",
+    "raw_ticker": "",
+    "weight": 0.006001,
+    "reason": "ambiguous_collision_spread_0.12",
+    "suggested_snippet": {
+      "Smartshares:ASD": {
+        "DALRYMPLE BAY INFRASTRUCTURE LIMITED ORD STAPLED SECURITIES": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "FNZ",
+    "raw_name": "SANFORD LTD/NZ",
+    "raw_ticker": "",
+    "weight": 0.005,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Smartshares:FNZ": {
+        "SANFORD LTD/NZ": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "FNZ",
+    "raw_name": "SANFORD LTD/NZ",
+    "raw_ticker": "",
+    "weight": 0.005,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Smartshares:FNZ": {
+        "SANFORD LTD/NZ": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "OZY",
+    "raw_name": "PILBARA MINERALS LTD",
+    "raw_ticker": "",
+    "weight": 0.004496,
+    "reason": "ambiguous_collision_spread_0.03",
+    "suggested_snippet": {
+      "Smartshares:OZY": {
+        "PILBARA MINERALS LTD": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "SMART_AUSTRALIAN_FINANCIALS_ETF_FND1096_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
+    "raw_name": "BLOCK INC. CDI 1 1 FOREIGN EXEMPT NYSE",
+    "raw_ticker": "",
+    "weight": 0.004478,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Smartshares:SMART_AUSTRALIAN_FINANCIALS_ETF_FND1096_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026": {
+        "BLOCK INC. CDI 1 1 FOREIGN EXEMPT NYSE": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "MDZ",
+    "raw_name": "KMD BRANDS LTD NPV POST SPLIT",
+    "raw_ticker": "",
+    "weight": 0.0027,
+    "reason": "ambiguous_collision_spread_0.06",
+    "suggested_snippet": {
+      "Smartshares:MDZ": {
+        "KMD BRANDS LTD NPV POST SPLIT": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "OZY",
+    "raw_name": "SGH LIMITED ORDINARY FULLY PAID",
+    "raw_ticker": "",
+    "weight": 0.002698,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Smartshares:OZY": {
+        "SGH LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "OZY",
+    "raw_name": "DYNO NOBEL LIMITED ORDINARY FULLY PAID",
+    "raw_ticker": "",
+    "weight": 0.002398,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Smartshares:OZY": {
+        "DYNO NOBEL LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "OZY",
+    "raw_name": "GREATLAND RES LTD",
+    "raw_ticker": "",
+    "weight": 0.002098,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Smartshares:OZY": {
+        "GREATLAND RES LTD": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "SMART_AUSTRALIAN_FINANCIALS_ETF_FND1096_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
+    "raw_name": "INFRATIL LIMITED ORDINARY FULLY PAID FOREIGN EXEMPT NZX",
+    "raw_ticker": "",
+    "weight": 0.001791,
+    "reason": "ambiguous_collision_spread_0.01",
+    "suggested_snippet": {
+      "Smartshares:SMART_AUSTRALIAN_FINANCIALS_ETF_FND1096_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026": {
+        "INFRATIL LIMITED ORDINARY FULLY PAID FOREIGN EXEMPT NZX": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "FNZ",
+    "raw_name": "KMD BRANDS LTD NPV POST SPLIT",
+    "raw_ticker": "",
+    "weight": 0.0014,
+    "reason": "ambiguous_collision_spread_0.06",
+    "suggested_snippet": {
+      "Smartshares:FNZ": {
+        "KMD BRANDS LTD NPV POST SPLIT": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "FNZ",
+    "raw_name": "KMD BRANDS LTD NPV POST SPLIT",
+    "raw_ticker": "",
+    "weight": 0.0014,
+    "reason": "ambiguous_collision_spread_0.06",
+    "suggested_snippet": {
+      "Smartshares:FNZ": {
+        "KMD BRANDS LTD NPV POST SPLIT": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "OZY",
+    "raw_name": "BLOCK INC. CDI 1 1 FOREIGN EXEMPT NYSE",
+    "raw_ticker": "",
+    "weight": 0.001399,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Smartshares:OZY": {
+        "BLOCK INC. CDI 1 1 FOREIGN EXEMPT NYSE": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "OZY",
+    "raw_name": "CAPSTONE COPPER CORP CDI",
+    "raw_ticker": "",
+    "weight": 0.001099,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Smartshares:OZY": {
+        "CAPSTONE COPPER CORP CDI": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "SMART_AUSTRALIAN_FINANCIALS_ETF_FND1096_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
+    "raw_name": "GENERATION DEVELOPMENT GROUP LIMITED ORDINARY FULLY PAID",
+    "raw_ticker": "",
+    "weight": 0.001095,
+    "reason": "ambiguous_collision_spread_0.09",
+    "suggested_snippet": {
+      "Smartshares:SMART_AUSTRALIAN_FINANCIALS_ETF_FND1096_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026": {
+        "GENERATION DEVELOPMENT GROUP LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "OZY",
+    "raw_name": "DALRYMPLE BAY INFRASTRUCTURE LIMITED ORD STAPLED SECURITIES",
+    "raw_ticker": "",
+    "weight": 0.000999,
+    "reason": "ambiguous_collision_spread_0.12",
+    "suggested_snippet": {
+      "Smartshares:OZY": {
+        "DALRYMPLE BAY INFRASTRUCTURE LIMITED ORD STAPLED SECURITIES": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "SMART_NZ_TOP_10_ETF_FND1114_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026",
+    "raw_name": "FUTURES MARGIN - NZD",
+    "raw_ticker": "",
+    "weight": 0.0009,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Smartshares:SMART_NZ_TOP_10_ETF_FND1114_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026": {
+        "FUTURES MARGIN - NZD": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "OZY",
+    "raw_name": "REGION RE LTD",
+    "raw_ticker": "",
+    "weight": 0.000899,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Smartshares:OZY": {
+        "REGION RE LTD": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "OZY",
+    "raw_name": "SRG GLOBAL LIMITED ORDINARY FULLY PAID",
+    "raw_ticker": "",
+    "weight": 0.000899,
+    "reason": "ambiguous_collision_spread_0.00",
+    "suggested_snippet": {
+      "Smartshares:OZY": {
+        "SRG GLOBAL LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "OZY",
+    "raw_name": "YANCOAL AUSTRALIA LIMITED ORDINARY FULLY PAID",
+    "raw_ticker": "",
+    "weight": 0.000899,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Smartshares:OZY": {
+        "YANCOAL AUSTRALIA LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "OZY",
+    "raw_name": "SUNRISE ENERGY METALS LIMITED ORDINARY FULLY PAID",
+    "raw_ticker": "",
+    "weight": 0.000899,
+    "reason": "ambiguous_collision_spread_0.14",
+    "suggested_snippet": {
+      "Smartshares:OZY": {
+        "SUNRISE ENERGY METALS LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "OZY",
+    "raw_name": "4DMEDICAL LIMITED ORDINARY FULLY PAID",
+    "raw_ticker": "",
+    "weight": 0.000799,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Smartshares:OZY": {
+        "4DMEDICAL LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "OZY",
+    "raw_name": "LIONTOWN RESOURCES LTD",
+    "raw_ticker": "",
+    "weight": 0.000799,
+    "reason": "ambiguous_collision_spread_0.01",
+    "suggested_snippet": {
+      "Smartshares:OZY": {
+        "LIONTOWN RESOURCES LTD": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "OZY",
+    "raw_name": "BWP TRUST",
+    "raw_ticker": "",
+    "weight": 0.000799,
+    "reason": "ambiguous_collision_spread_0.08",
+    "suggested_snippet": {
+      "Smartshares:OZY": {
+        "BWP TRUST": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "OZY",
+    "raw_name": "MINERALS 260 LIMITED ORDINARY FULLY PAID",
+    "raw_ticker": "",
+    "weight": 0.000699,
+    "reason": "ambiguous_collision_spread_0.04",
+    "suggested_snippet": {
+      "Smartshares:OZY": {
+        "MINERALS 260 LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
     "provider": "Kernel",
     "fund_code": "KERNEL_WORLD_EX_US",
     "raw_name": "Concordia Financial Group",
@@ -13,6 +455,19 @@
     }
   },
   {
+    "provider": "Smartshares",
+    "fund_code": "OZY",
+    "raw_name": "INFRATIL LIMITED ORDINARY FULLY PAID FOREIGN EXEMPT NZX",
+    "raw_ticker": "",
+    "weight": 0.000599,
+    "reason": "ambiguous_collision_spread_0.01",
+    "suggested_snippet": {
+      "Smartshares:OZY": {
+        "INFRATIL LIMITED ORDINARY FULLY PAID FOREIGN EXEMPT NZX": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
     "provider": "Kernel",
     "fund_code": "KERNEL_WORLD_EX_US",
     "raw_name": "Rogers Communications Inc B",
@@ -22,6 +477,71 @@
     "suggested_snippet": {
       "Kernel:KERNEL_WORLD_EX_US": {
         "Rogers Communications Inc B": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "FNZ",
+    "raw_name": "FUTURES MARGIN - NZD",
+    "raw_ticker": "",
+    "weight": 0.0005,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Smartshares:FNZ": {
+        "FUTURES MARGIN - NZD": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "OZY",
+    "raw_name": "SUPERLOOP LIMITED ORDINARY FULLY PAID",
+    "raw_ticker": "",
+    "weight": 0.0005,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Smartshares:OZY": {
+        "SUPERLOOP LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "OZY",
+    "raw_name": "KINGSGATE CONSOLIDATED NL FPO 25C",
+    "raw_ticker": "",
+    "weight": 0.0005,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Smartshares:OZY": {
+        "KINGSGATE CONSOLIDATED NL FPO 25C": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "OZY",
+    "raw_name": "FIREFLY METALS LTD ORDINARY FULLY PAID",
+    "raw_ticker": "",
+    "weight": 0.0005,
+    "reason": "ambiguous_collision_spread_0.14",
+    "suggested_snippet": {
+      "Smartshares:OZY": {
+        "FIREFLY METALS LTD ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "FNZ",
+    "raw_name": "FUTURES MARGIN - NZD",
+    "raw_ticker": "",
+    "weight": 0.0005,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Smartshares:FNZ": {
+        "FUTURES MARGIN - NZD": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -52,6 +572,45 @@
     }
   },
   {
+    "provider": "Smartshares",
+    "fund_code": "OZY",
+    "raw_name": "ELSIGHT LIMITED ORDINARY FULLY PAID",
+    "raw_ticker": "",
+    "weight": 0.0004,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Smartshares:OZY": {
+        "ELSIGHT LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "OZY",
+    "raw_name": "ELEVRA LITHIUM LIMITED ORDINARY FULLY PAID",
+    "raw_ticker": "",
+    "weight": 0.0004,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Smartshares:OZY": {
+        "ELEVRA LITHIUM LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "OZY",
+    "raw_name": "GENERATION DEVELOPMENT GROUP LIMITED ORDINARY FULLY PAID",
+    "raw_ticker": "",
+    "weight": 0.0004,
+    "reason": "ambiguous_collision_spread_0.09",
+    "suggested_snippet": {
+      "Smartshares:OZY": {
+        "GENERATION DEVELOPMENT GROUP LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
     "provider": "Kernel",
     "fund_code": "KERNEL_WORLD_EX_US",
     "raw_name": "Sartorius AG Nvtg - Pref",
@@ -74,6 +633,19 @@
     "suggested_snippet": {
       "Kernel:KERNEL_WORLD_EX_US": {
         "Futu Holdings Ltd ADR": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "OZY",
+    "raw_name": "VULCAN ENERGY RESOURCES LIMITED ORDINARY FULLY PAID",
+    "raw_ticker": "",
+    "weight": 0.0003,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Smartshares:OZY": {
+        "VULCAN ENERGY RESOURCES LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
       }
     }
   },

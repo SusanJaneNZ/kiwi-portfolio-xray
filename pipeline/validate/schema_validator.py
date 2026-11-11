@@ -6,7 +6,12 @@ import json
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any
+from typing import Any, Optional
+
+from pipeline.enrichment.bond_normalizer import CANONICAL_BOND_SECTORS
+
+FUND_ASSET_CLASSES = {"equity", "fixed_interest", "mixed"}
+CONSTITUENT_ASSET_CLASSES = {"equity", "fixed_interest", "term_deposit"}
 
 CANONICAL_GICS_SECTORS = {
     "Communication Services",
@@ -70,9 +75,14 @@ class SchemaValidator:
             return
 
         for idx, f in enumerate(funds):
-            for required in ["code", "name", "provider", "effective_date", "cash_ratio", "hedging_ratio", "constituent_count"]:
+            for required in ["code", "name", "provider", "effective_date", "cash_ratio", "hedging_ratio", "constituent_count", "asset_class"]:
                 if required not in f:
                     report.errors.append(f"Fund #{idx} missing required key: '{required}'.")
+
+            if f.get("asset_class") not in FUND_ASSET_CLASSES:
+                report.errors.append(
+                    f"Fund {f.get('code')} has invalid asset_class '{f.get('asset_class')}'."
+                )
 
             eff_date = f.get("effective_date", "")
             if not re.match(r"^\d{4}-\d{2}-\d{2}$", eff_date):
@@ -97,41 +107,69 @@ class SchemaValidator:
                 continue
 
             equity_weight_sum = 0.0
+            bond_weight_sum = 0.0
+            td_weight_sum = 0.0
             unclassified_count = 0
 
             for c_idx, c in enumerate(fund_constituents):
-                for req in ["isin", "name", "country", "sector", "weight"]:
+                for req in ["isin", "name", "country", "sector", "weight", "asset_class"]:
                     if req not in c:
                         report.errors.append(f"Fund '{code}' constituent #{c_idx} missing key '{req}'.")
 
+                asset_class = c.get("asset_class")
+                if asset_class not in CONSTITUENT_ASSET_CLASSES:
+                    report.errors.append(
+                        f"Fund '{code}' constituent '{c.get('name')}' has invalid asset_class '{asset_class}'."
+                    )
+
                 w = c.get("weight", 0.0)
-                equity_weight_sum += w
+                if asset_class == "fixed_interest":
+                    bond_weight_sum += w
+                elif asset_class == "term_deposit":
+                    td_weight_sum += w
+                else:
+                    equity_weight_sum += w
 
                 sector = c.get("sector", "")
-                if sector not in CANONICAL_GICS_SECTORS:
-                    report.warnings.append(
-                        f"Fund '{code}' constituent '{c.get('name')}' has non-canonical sector '{sector}'."
-                    )
-                if sector == "Unclassified":
-                    unclassified_count += 1
+                if asset_class == "fixed_interest":
+                    if sector not in CANONICAL_BOND_SECTORS:
+                        report.errors.append(
+                            f"Fund '{code}' bond constituent '{c.get('name')}' has invalid bond category '{sector}'."
+                        )
+                elif asset_class == "term_deposit":
+                    if sector != "Term Deposit":
+                        report.errors.append(
+                            f"Fund '{code}' term deposit constituent '{c.get('name')}' must have sector 'Term Deposit', got '{sector}'."
+                        )
+                else:
+                    if sector not in CANONICAL_GICS_SECTORS:
+                        report.warnings.append(
+                            f"Fund '{code}' constituent '{c.get('name')}' has non-canonical sector '{sector}'."
+                        )
+                    if sector == "Unclassified":
+                        unclassified_count += 1
 
-            # Weight sum integrity check: sum(equity) + cash + max(0, hedging) == 1.0 +- 0.5%
+            # Weight sum integrity check: sum(investable constituents) + cash + max(0, hedging) == 1.0 +- 0.5%
+            investable_sum = equity_weight_sum + bond_weight_sum + td_weight_sum
             cash = f_info.get("cash_ratio", 0.0)
             hedging = max(0.0, f_info.get("hedging_ratio", 0.0))
-            total_sum = equity_weight_sum + cash + hedging
+            total_sum = investable_sum + cash + hedging
 
             deviation = abs(total_sum - 1.0)
             if deviation > 0.005:  # Allowed tolerance +- 0.5%
                 report.errors.append(
-                    f"Fund '{code}' weight sum failed integrity: equity={equity_weight_sum:.4f}, "
+                    f"Fund '{code}' weight sum failed integrity: investable={investable_sum:.4f}, "
                     f"cash={cash:.4f}, hedging={hedging:.4f}, total={total_sum:.4f} (deviation {deviation:.4f} > 0.005)."
                 )
 
             report.fund_summaries.append({
                 "code": code,
                 "name": f_info.get("name"),
+                "asset_class": f_info.get("asset_class"),
                 "total_weight": round(total_sum, 4),
                 "equity_weight": round(equity_weight_sum, 4),
+                "bond_weight": round(bond_weight_sum, 4),
+                "term_deposit_weight": round(td_weight_sum, 4),
                 "cash_ratio": cash,
                 "hedging_ratio": hedging,
                 "constituent_count": len(fund_constituents),

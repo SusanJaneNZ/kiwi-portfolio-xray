@@ -10,17 +10,17 @@
     "master_ticker": "VOO"
   },
   "EUF": {
-    "name": "Smartshares Europe ETF",
+    "name": "SMART EUROPE ETF",
     "master_provider": "vanguard",
     "master_ticker": "VGK"
   },
   "APA": {
-    "name": "Smartshares Asia Pacific ETF",
+    "name": "SMART ASIA PACIFIC ETF",
     "master_provider": "vanguard",
     "master_ticker": "VPL"
   },
   "EMF": {
-    "name": "Smartshares Emerging Markets ETF",
+    "name": "SMART EMERGING MARKETS ETF",
     "master_provider": "vanguard",
     "master_ticker": "VWO"
   },
@@ -30,4 +30,3 @@
     "master_ticker": "IWLD"
   }
 }
-

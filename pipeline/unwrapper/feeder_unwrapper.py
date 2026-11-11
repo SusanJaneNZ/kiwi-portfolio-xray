@@ -92,6 +92,7 @@ class FeederUnwrapper:
                 "country": norm_country,
                 "sector": norm_sector,
                 "weight": round(scaled_weight, 8),
+                "asset_class": "equity",
             })
 
         return UnwrappedFund(

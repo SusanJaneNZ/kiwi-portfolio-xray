@@ -1,0 +1,294 @@
+{
+  "ISSUER_ANZ": {
+    "display_name": "ANZ Group",
+    "country": "New Zealand",
+    "category": "Financial",
+    "aliases": [
+      "ANZ Group Holdings Limited",
+      "ANZ Bank New Zealand",
+      "ANZ Bank New Zealand Limited",
+      "Australia and New Zealand Banking Group",
+      "ANZ Bank",
+      "ANZ"
+    ]
+  },
+  "ISSUER_WBC": {
+    "display_name": "Westpac Banking Group",
+    "country": "New Zealand",
+    "category": "Financial",
+    "aliases": [
+      "Westpac Banking Corporation",
+      "Westpac New Zealand",
+      "Westpac New Zealand Limited",
+      "Westpac Securities NZ",
+      "Westpac"
+    ]
+  },
+  "ISSUER_CBA_ASB": {
+    "display_name": "Commonwealth Bank / ASB",
+    "country": "New Zealand",
+    "category": "Financial",
+    "aliases": [
+      "Commonwealth Bank of Australia",
+      "ASB Bank Limited",
+      "ASB Bank",
+      "ASB"
+    ]
+  },
+  "ISSUER_NAB_BNZ": {
+    "display_name": "NAB / Bank of New Zealand",
+    "country": "New Zealand",
+    "category": "Financial",
+    "aliases": [
+      "National Australia Bank",
+      "Bank of New Zealand",
+      "BNZ International Funding",
+      "BNZ"
+    ]
+  },
+  "ISSUER_KIWIBANK": {
+    "display_name": "Kiwibank",
+    "country": "New Zealand",
+    "category": "Financial",
+    "aliases": [
+      "Kiwibank Limited",
+      "Kiwi Bank",
+      "Kiwibank"
+    ]
+  },
+  "ISSUER_HEARTLAND": {
+    "display_name": "Heartland Group",
+    "country": "New Zealand",
+    "category": "Financial",
+    "aliases": [
+      "Heartland Group Holdings Limited",
+      "Heartland Bank Limited",
+      "Heartland Bank",
+      "Heartland"
+    ]
+  },
+  "ISSUER_RABOBANK": {
+    "display_name": "Rabobank",
+    "country": "New Zealand",
+    "category": "Financial",
+    "aliases": [
+      "Rabobank New Zealand",
+      "Rabobank New Zealand Limited",
+      "Cooperatieve Rabobank",
+      "Rabobank Nederland",
+      "Rabobank"
+    ]
+  },
+  "ISSUER_TSB": {
+    "display_name": "TSB Bank",
+    "country": "New Zealand",
+    "category": "Financial",
+    "aliases": [
+      "TSB Bank Limited",
+      "TSB Bank"
+    ]
+  },
+  "ISSUER_SBS": {
+    "display_name": "SBS Bank",
+    "country": "New Zealand",
+    "category": "Financial",
+    "aliases": [
+      "Southland Building Society",
+      "SBS Bank"
+    ]
+  },
+  "ISSUER_NZ_GOVT": {
+    "display_name": "New Zealand Government",
+    "country": "New Zealand",
+    "category": "Sovereign",
+    "aliases": [
+      "New Zealand Government",
+      "New Zealand Government Stock",
+      "New Zealand Government Bond",
+      "New Zealand Treasury",
+      "Government of New Zealand",
+      "NZ Government",
+      "NZGS"
+    ]
+  },
+  "ISSUER_LGFA": {
+    "display_name": "NZ Local Government Funding Agency",
+    "country": "New Zealand",
+    "category": "Local Government",
+    "aliases": [
+      "New Zealand Local Government Funding Agency",
+      "NZ Local Government Funding Agency",
+      "NZ Local Govt Fund Agenc",
+      "Local Government Funding Agency",
+      "NZLGFA",
+      "LGFA"
+    ]
+  },
+  "ISSUER_KAINGA_ORA": {
+    "display_name": "Kainga Ora / Housing NZ",
+    "country": "New Zealand",
+    "category": "Sovereign",
+    "aliases": [
+      "Kainga Ora",
+      "Housing New Zealand",
+      "Housing New Zealand Limited"
+    ]
+  },
+  "ISSUER_AKL_COUNCIL": {
+    "display_name": "Auckland Council",
+    "country": "New Zealand",
+    "category": "Local Government",
+    "aliases": [
+      "Auckland Council"
+    ]
+  },
+  "ISSUER_US_TREASURY": {
+    "display_name": "United States Treasury",
+    "country": "United States",
+    "category": "Sovereign",
+    "aliases": [
+      "United States Treasury",
+      "United States of America",
+      "US Treasury"
+    ]
+  },
+  "ISSUER_UK_GILT": {
+    "display_name": "United Kingdom Government",
+    "country": "United Kingdom",
+    "category": "Sovereign",
+    "aliases": [
+      "United Kingdom Gilt",
+      "UK Treasury",
+      "UK Gilt"
+    ]
+  },
+  "ISSUER_ADB": {
+    "display_name": "Asian Development Bank",
+    "country": "Supranational",
+    "category": "Supranational",
+    "aliases": [
+      "Asian Development Bank"
+    ]
+  },
+  "ISSUER_IBRD": {
+    "display_name": "World Bank (IBRD)",
+    "country": "Supranational",
+    "category": "Supranational",
+    "aliases": [
+      "International Bank for Reconstruction and Development",
+      "International Bank for Reconstruction",
+      "IBRD",
+      "World Bank"
+    ]
+  },
+  "ISSUER_EIB": {
+    "display_name": "European Investment Bank",
+    "country": "Supranational",
+    "category": "Supranational",
+    "aliases": [
+      "European Investment Bank"
+    ]
+  },
+  "ISSUER_AIA": {
+    "display_name": "Auckland International Airport",
+    "country": "New Zealand",
+    "category": "Corporate / Other",
+    "aliases": [
+      "Auckland International Airport Limited",
+      "Auckland International Airport",
+      "Auckland Airport"
+    ]
+  },
+  "ISSUER_CNU": {
+    "display_name": "Chorus",
+    "country": "New Zealand",
+    "category": "Corporate / Other",
+    "aliases": [
+      "Chorus Limited",
+      "Chorus"
+    ]
+  },
+  "ISSUER_MCY": {
+    "display_name": "Mercury NZ",
+    "country": "New Zealand",
+    "category": "Corporate / Other",
+    "aliases": [
+      "Mercury NZ Limited",
+      "Mercury NZ"
+    ]
+  },
+  "ISSUER_MEL": {
+    "display_name": "Meridian Energy",
+    "country": "New Zealand",
+    "category": "Corporate / Other",
+    "aliases": [
+      "Meridian Energy Limited",
+      "Meridian Energy"
+    ]
+  },
+  "ISSUER_GNE": {
+    "display_name": "Genesis Energy",
+    "country": "New Zealand",
+    "category": "Corporate / Other",
+    "aliases": [
+      "Genesis Energy Limited",
+      "Genesis Energy"
+    ]
+  },
+  "ISSUER_SPK": {
+    "display_name": "Spark New Zealand",
+    "country": "New Zealand",
+    "category": "Corporate / Other",
+    "aliases": [
+      "Spark New Zealand Limited",
+      "Spark Finance",
+      "Spark New Zealand"
+    ]
+  },
+  "ISSUER_IFT": {
+    "display_name": "Infratil",
+    "country": "New Zealand",
+    "category": "Corporate / Other",
+    "aliases": [
+      "Infratil Limited",
+      "Infratil"
+    ]
+  },
+  "ISSUER_TPW": {
+    "display_name": "Transpower New Zealand",
+    "country": "New Zealand",
+    "category": "Corporate / Other",
+    "aliases": [
+      "Transpower New Zealand Limited",
+      "Transpower New Zealand",
+      "Transpower"
+    ]
+  },
+  "ISSUER_POT": {
+    "display_name": "Port of Tauranga",
+    "country": "New Zealand",
+    "category": "Corporate / Other",
+    "aliases": [
+      "Port of Tauranga Limited",
+      "Port of Tauranga"
+    ]
+  },
+  "ISSUER_CEN": {
+    "display_name": "Contact Energy",
+    "country": "New Zealand",
+    "category": "Corporate / Other",
+    "aliases": [
+      "Contact Energy Limited",
+      "Contact Energy"
+    ]
+  },
+  "ISSUER_VCT": {
+    "display_name": "Vector",
+    "country": "New Zealand",
+    "category": "Corporate / Other",
+    "aliases": [
+      "Vector Limited",
+      "Vector"
+    ]
+  }
+}
