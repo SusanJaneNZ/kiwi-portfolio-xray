@@ -4,6 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from pipeline.adapters.betashares_adapter import BetasharesAdapter
 from pipeline.adapters.ishares_adapter import ISharesAdapter
 from pipeline.adapters.kernel_adapter import KernelAdapter
 from pipeline.adapters.smartshares_direct_adapter import SmartsharesDirectAdapter
@@ -167,6 +168,31 @@ class TestAdapters(unittest.TestCase):
             self.assertEqual(len(res.holdings), 1)
             self.assertEqual(res.holdings[0].ticker, "AAPL")
             self.assertAlmostEqual(res.holdings[0].weight, 1.0, places=4)
+
+    def test_betashares_asia_adapter(self):
+        csv_text = (
+            "BetaShares Asia Technology Tigers ETF\n"
+            "As at 31 October 2026\n"
+            "Ticker,Name,Sector,Country,Weight (%)\n"
+            "2330 TT,Taiwan Semiconductor Manufacturing Co Ltd,Information Technology,Taiwan,10.50%\n"
+            "0700 HK,Tencent Holdings Ltd,Communication Services,China,9.80%\n"
+            "AUD CASH,AUD Cash,Cash,Australia,0.70%\n"
+            "OTHER,Other Holdings,Information Technology,South Korea,79.00%\n"
+        )
+        adapter = BetasharesAdapter()
+        with tempfile.TemporaryDirectory() as tmp:
+            bs_dir = Path(tmp) / "betashares"
+            bs_dir.mkdir()
+            p = bs_dir / "ASIA_holdings.csv"
+            p.write_text(csv_text, encoding="utf-8")
+            self.assertTrue(adapter.can_handle(p))
+            res = adapter.parse(p)
+            self.assertEqual(res.fund_code, "ASIA")
+            self.assertEqual(res.provider, "BetaShares")
+            self.assertAlmostEqual(res.cash_ratio, 0.007, places=4)
+            self.assertEqual(len(res.holdings), 3)
+            tsmc = next(h for h in res.holdings if "Taiwan Semiconductor" in h.name)
+            self.assertAlmostEqual(tsmc.weight, 0.105, places=4)
 
 
 if __name__ == "__main__":

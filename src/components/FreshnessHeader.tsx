@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { dispatchToggleAllPanels } from './CollapsiblePanel';
 import { FreshnessEnvelope, UserPortfolioState } from '../types/portfolio';
 import { DEFAULT_PORTFOLIO_STATE, exportHoldingsCSV, exportPortfolioJSON, importPortfolioJSON } from '../storage/localStorage';
 import { ConsolidatedHolding } from '../types/portfolio';
@@ -96,6 +97,18 @@ export const FreshnessHeader: React.FC<FreshnessHeaderProps> = ({
           <span className="text-[11px] text-slate-500">(Spread: {envelope.spreadDays}d)</span>
         </div>
 
+        <button
+          onClick={() => dispatchToggleAllPanels(true)}
+          className="text-xs bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800 px-2.5 py-1.5 rounded-lg transition-colors"
+        >
+          Expand All
+        </button>
+        <button
+          onClick={() => dispatchToggleAllPanels(false)}
+          className="text-xs bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800 px-2.5 py-1.5 rounded-lg transition-colors"
+        >
+          Collapse All
+        </button>
         <button
           onClick={() => onUpdateState(DEFAULT_PORTFOLIO_STATE)}
           className="text-xs bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-3 py-1.5 rounded-lg transition-colors shadow-sm"

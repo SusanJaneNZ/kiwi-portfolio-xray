@@ -76,9 +76,18 @@
     "GINNIE MAE II POOL 3.00% 20/03/2052": "SEDOL:2350684"
   },
   "Kernel:KERNEL_GLOBAL_ESG": {
-    "Alphabet Inc Class A": "SEDOL:BYVY8G0"
+    "Alphabet Inc Class A": "SEDOL:BYVY8G0",
+    "Mastercard Inc Class A Ord": "SEDOL:B121557",
+    "Alphabet Inc Class C": "SEDOL:BYY88Y7"
   },
   "Smartshares:MZY": {
-    "SGH LIMITED ORDINARY FULLY PAID": "SEDOL:BR858V2"
+    "SGH LIMITED ORDINARY FULLY PAID": "SEDOL:BR858V2",
+    "DYNO NOBEL LIMITED ORDINARY FULLY PAID": "SEDOL:BVBH523",
+    "GREATLAND RES LTD": "SEDOL:BTXLW40"
+  },
+  "Kernel:KERNEL_GLOBAL_DIVIDEND": {
+    "Franklin Resources Inc": "SEDOL:2350684",
+    "Universal Corp": "SEDOL:2923804",
+    "Peoples Bancorp Inc": "SEDOL:2679419"
   }
 }

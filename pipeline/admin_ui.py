@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qs, urlparse
 
+from pipeline.adapters.betashares_adapter import BetasharesAdapter
 from pipeline.adapters.ishares_adapter import ISharesAdapter
 from pipeline.adapters.kernel_adapter import KernelAdapter
 from pipeline.adapters.smartshares_direct_adapter import SmartsharesDirectAdapter
@@ -34,6 +35,7 @@ ALLOWED_PROVIDERS = {
     "vanguard",
     "ishares",
     "kernel",
+    "betashares",
 }
 
 ALLOWED_MASTER_PROVIDERS = {"vanguard", "ishares"}
@@ -161,6 +163,7 @@ class AdminService:
             "ishares": ISharesAdapter(),
             "smartshares": SmartsharesDirectAdapter(),
             "kernel": KernelAdapter(),
+            "betashares": BetasharesAdapter(),
         }
         adapter = adapter_map.get(provider)
         if adapter:

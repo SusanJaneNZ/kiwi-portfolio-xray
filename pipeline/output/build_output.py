@@ -7,6 +7,7 @@ import re
 from pathlib import Path
 from typing import Any, Optional
 
+from pipeline.adapters.betashares_adapter import BetasharesAdapter
 from pipeline.adapters.ishares_adapter import ISharesAdapter
 from pipeline.adapters.kernel_adapter import KernelAdapter
 from pipeline.adapters.smartshares_direct_adapter import SmartsharesDirectAdapter
@@ -154,6 +155,16 @@ class PipelineCompiler:
             for f in sorted(p for p in kernel_dir.iterdir() if p.is_file() and p.suffix.lower() in {".csv", ".xlsx"}):
                 if kernel_adapter.can_handle(f):
                     res = kernel_adapter.parse(f)
+                    unwrapped = self._enrich_domestic_fund(res, matcher, classifier, all_unresolved_entries)
+                    all_unwrapped_funds.append(unwrapped)
+
+        # 6b. Ingest BetaShares (ASX ETF) disclosures and Enrich
+        betashares_adapter = BetasharesAdapter()
+        betashares_dir = self.staging_dir / "betashares"
+        if betashares_dir.exists():
+            for f in sorted(p for p in betashares_dir.iterdir() if p.is_file() and p.suffix.lower() in {".csv", ".xlsx"}):
+                if betashares_adapter.can_handle(f):
+                    res = betashares_adapter.parse(f)
                     unwrapped = self._enrich_domestic_fund(res, matcher, classifier, all_unresolved_entries)
                     all_unwrapped_funds.append(unwrapped)
 

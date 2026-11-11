@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CollapsiblePanel } from './CollapsiblePanel';
 import { CategoryBreakdown } from '../types/portfolio';
 
 interface StackedBarChartProps {
@@ -29,36 +30,38 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
   const activeData = activeTab === 'sectors' ? sectorBreakdown : countryBreakdown;
 
   return (
-    <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 shadow-sm flex flex-col justify-between">
-      {/* Tab toggle */}
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div className="flex gap-2">
+    <CollapsiblePanel
+      id="macro-charts"
+      title={
+        <span className="uppercase tracking-wider text-xs text-slate-300">Sector &amp; Country Breakdown</span>
+      }
+      headerRight={
+        <div className="flex gap-1.5">
           <button
             onClick={() => setActiveTab('sectors')}
-            className={`text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors ${
+            className={`text-xs font-semibold px-2.5 py-1 rounded-lg transition-colors ${
               activeTab === 'sectors'
                 ? 'bg-indigo-600 text-white'
                 : 'bg-slate-950 text-slate-400 hover:text-white'
             }`}
           >
-            Sectors (by Country)
+            Sectors
           </button>
           <button
             onClick={() => setActiveTab('countries')}
-            className={`text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors ${
+            className={`text-xs font-semibold px-2.5 py-1 rounded-lg transition-colors ${
               activeTab === 'countries'
                 ? 'bg-indigo-600 text-white'
                 : 'bg-slate-950 text-slate-400 hover:text-white'
             }`}
           >
-            Countries (by Sector)
+            Countries
           </button>
         </div>
-        <span className="text-xs text-slate-500">Look-Through Exposure</span>
-      </div>
-
+      }
+    >
       {/* Stacked bar visualization */}
-      <div className="py-4 space-y-3.5 flex-1 overflow-y-auto max-h-[460px]">
+      <div className="py-2 space-y-3.5 flex-1 overflow-y-auto max-h-[460px]">
         {activeData.length === 0 ? (
           <div className="text-center py-12 text-xs text-slate-500">
             No holdings entered. Add funds or shares on the left to inspect portfolio look-through.
@@ -102,14 +105,14 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
       </div>
 
       {/* Hover Inspection / Legend Footer */}
-      <div className="pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400 min-h-[36px]">
+      <div className="pt-3 mt-2 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400 min-h-[36px]">
         {hoveredSubcategory ? (
           <span className="text-amber-300 font-medium font-mono">{hoveredSubcategory}</span>
         ) : (
           <span>Hover over any stacked segment to inspect subcategory dollar exposures and proportions.</span>
         )}
       </div>
-    </div>
+    </CollapsiblePanel>
   );
 };
 

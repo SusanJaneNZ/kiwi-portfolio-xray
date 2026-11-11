@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { CollapsiblePanel } from './CollapsiblePanel';
 import { calculateBucketRebalance } from '../engine/rebalance';
 import { PortfolioBucket, UserPortfolioState } from '../types/portfolio';
 
@@ -126,23 +127,21 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
   );
 
   return (
-    <section className="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 md:p-5 shadow-sm space-y-4">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
-        <div>
-          <h2 className="text-base font-semibold text-white">Buckets &amp; Semi-Annual Withdrawal Rebalancer</h2>
-          <p className="text-xs text-slate-400">
-            Unlike the look-through Asset Split above (which decomposes inside mixed funds), Buckets group your
-            holdings into target sleeves and compute minimum-turnover withdrawals, buys, and sells.
-          </p>
-        </div>
-
+    <CollapsiblePanel
+      id="bucket-rebalancer"
+      title={<span>Buckets &amp; Semi-Annual Withdrawal Rebalancer</span>}
+      subtitle="Unlike the look-through Asset Split above (which decomposes inside mixed funds), Buckets group your holdings into target sleeves and compute minimum-turnover withdrawals, buys, and sells."
+      headerRight={
         <button
           onClick={handleApplyPreset}
           className="text-xs bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
         >
           Load 20 / 20 / 60 Preset
         </button>
-      </div>
+      }
+      className="md:p-5"
+    >
+      <div className="space-y-4">
 
       {/* Bucket Configuration Bar */}
       <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-3 space-y-3">
@@ -408,7 +407,8 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
           )}
         </div>
       )}
-    </section>
+      </div>
+    </CollapsiblePanel>
   );
 };
 

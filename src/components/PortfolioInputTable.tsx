@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
+import { CollapsiblePanel } from './CollapsiblePanel';
 import {
   CashDepositHolding,
   DirectEquityCatalogItem,
@@ -24,6 +25,8 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
   totalPortfolioNZD,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [fundFilter, setFundFilter] = useState('');
+  const [heldOnly, setHeldOnly] = useState(false);
   const [selectedEquity, setSelectedEquity] = useState<DirectEquityCatalogItem | null>(null);
   const [newShareValue, setNewShareValue] = useState<string>('1000');
 
@@ -175,67 +178,118 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
   );
   const depositSumNZD = portfolioState.cashDeposits.reduce((acc, d) => acc + Math.max(0, d.valueNZD), 0);
 
+  const sortedFilteredFunds = useMemo(() => {
+    const q = fundFilter.trim().toLowerCase();
+    return [...fundsRegistry]
+      .sort((a, b) => a.code.localeCompare(b.code))
+      .filter((f) => {
+        if (heldOnly && (portfolioState.fundBalances[f.code] || 0) <= 0) return false;
+        if (!q) return true;
+        return (
+          f.code.toLowerCase().includes(q) ||
+          f.name.toLowerCase().includes(q) ||
+          f.provider.toLowerCase().includes(q)
+        );
+      });
+  }, [fundsRegistry, fundFilter, heldOnly, portfolioState.fundBalances]);
+
+  const sortedDirectHoldings = useMemo(
+    () => [...portfolioState.directHoldings].sort((a, b) => a.ticker.localeCompare(b.ticker)),
+    [portfolioState.directHoldings]
+  );
+
   return (
     <div className="space-y-4">
-      {/* 1. Fund Allocations Section */}
-      <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 shadow-sm space-y-3">
-        <div className="flex items-center justify-between">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-400">
-            1. Fund Allocations (NZD)
-          </h2>
+      {/* 1. Fund Allocations Section (sorted alphabetically by Ticker) */}
+      <CollapsiblePanel
+        id="input-funds"
+        title={
+          <span className="text-xs uppercase tracking-wider text-slate-300">
+            1. Fund Allocations by Ticker (NZD)
+          </span>
+        }
+        headerRight={
           <span className="text-xs text-sky-400 font-mono">
             {totalPortfolioNZD > 0 ? ((fundSumNZD / totalPortfolioNZD) * 100).toFixed(1) : 0}% of portfolio
           </span>
+        }
+      >
+        <div className="flex items-center gap-2 mb-2.5 text-xs">
+          <input
+            type="text"
+            value={fundFilter}
+            onChange={(e) => setFundFilter(e.target.value)}
+            placeholder="Filter fund ticker or name..."
+            className="flex-1 bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+          />
+          <label className="flex items-center gap-1.5 text-[11px] text-slate-400 cursor-pointer select-none whitespace-nowrap">
+            <input
+              type="checkbox"
+              checked={heldOnly}
+              onChange={(e) => setHeldOnly(e.target.checked)}
+              className="rounded border-slate-700 bg-slate-950 text-indigo-600"
+            />
+            <span>Held only</span>
+          </label>
         </div>
 
-        <div className="space-y-2 text-xs">
-          {fundsRegistry.map((fund) => {
-            const balance = portfolioState.fundBalances[fund.code] || 0;
-            return (
-              <div
-                key={fund.code}
-                className="bg-slate-950/80 border border-slate-800/80 rounded-xl p-2.5 flex items-center justify-between gap-2"
-              >
-                <div className="flex-1 min-w-0">
-                  <div className="font-medium text-white flex items-center gap-1.5 truncate">
-                    <span className="bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded text-[11px] font-mono border border-indigo-700/50">
-                      {fund.code}
-                    </span>
-                    <span className="truncate">{fund.name}</span>
+        <div className="space-y-2 text-xs max-h-[380px] overflow-y-auto pr-1">
+          {sortedFilteredFunds.length === 0 ? (
+            <div className="text-center py-4 text-slate-500">No funds match current filter.</div>
+          ) : (
+            sortedFilteredFunds.map((fund) => {
+              const balance = portfolioState.fundBalances[fund.code] || 0;
+              return (
+                <div
+                  key={fund.code}
+                  className="bg-slate-950/80 border border-slate-800/80 rounded-xl p-2.5 flex items-center justify-between gap-2"
+                >
+                  <div className="flex-1 min-w-0">
+                    <div className="font-medium text-white flex items-center gap-1.5 truncate">
+                      <span className="bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded text-[11px] font-mono border border-indigo-700/50">
+                        {fund.code}
+                      </span>
+                      <span className="truncate">{fund.name}</span>
+                    </div>
+                    <div className="text-[11px] text-slate-500">
+                      {fund.provider} · {fund.asset_class === 'fixed_interest' ? 'Bonds' : fund.asset_class === 'mixed' ? 'Mixed' : 'Equity'} · As Of {fund.effective_date}
+                    </div>
                   </div>
-                  <div className="text-[11px] text-slate-500">
-                    {fund.provider} · {fund.asset_class === 'fixed_interest' ? 'Bonds' : fund.asset_class === 'mixed' ? 'Mixed' : 'Equity'} · As Of {fund.effective_date}
+                  <div className="flex items-center gap-1.5">
+                    {renderBucketSelect(`fund:${fund.code}`)}
+                    <div className="w-24 relative">
+                      <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs">$</span>
+                      <input
+                        type="number"
+                        value={balance > 0 ? balance : ''}
+                        placeholder="0"
+                        onChange={(e) => handleFundChange(fund.code, e.target.value)}
+                        className="w-full bg-slate-900 border border-slate-800 rounded-lg pl-6 pr-2 py-1 text-right text-xs text-white focus:outline-none focus:border-indigo-500 font-mono"
+                      />
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  {renderBucketSelect(`fund:${fund.code}`)}
-                  <div className="w-24 relative">
-                    <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs">$</span>
-                    <input
-                      type="number"
-                      value={balance > 0 ? balance : ''}
-                      placeholder="0"
-                      onChange={(e) => handleFundChange(fund.code, e.target.value)}
-                      className="w-full bg-slate-900 border border-slate-800 rounded-lg pl-6 pr-2 py-1 text-right text-xs text-white focus:outline-none focus:border-indigo-500 font-mono"
-                    />
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })
+          )}
         </div>
-      </div>
+      </CollapsiblePanel>
 
       {/* 2. Direct Shares Section */}
-      <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 shadow-sm space-y-3">
-        <div className="flex items-center justify-between">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-400">
-            2. Direct Shares (NZX / ASX)
-          </h2>
+      <CollapsiblePanel
+        id="input-direct"
+        title={
+          <span className="text-xs uppercase tracking-wider text-slate-300">
+            2. Direct Shares by Ticker (NZX / ASX)
+          </span>
+        }
+        headerRight={
           <span className="text-xs text-emerald-400 font-mono">
             {totalPortfolioNZD > 0 ? ((directSumNZD / totalPortfolioNZD) * 100).toFixed(1) : 0}% of portfolio
           </span>
-        </div>
+        }
+      >
+        <div className="space-y-3">
 
         {hasASXHoldings && (
           <div className="bg-amber-950/30 border border-amber-600/40 rounded-xl p-2.5 flex items-center justify-between gap-2 text-xs">
@@ -266,7 +320,7 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
         )}
 
         <div className="space-y-2 text-xs">
-          {portfolioState.directHoldings.map((dh) => {
+          {sortedDirectHoldings.map((dh) => {
             const isAud = dh.currency === 'AUD';
             const convertedNZD = isAud ? dh.value * portfolioState.audNzdRate : dh.value;
 
@@ -374,18 +428,23 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
             )}
           </div>
         </div>
-      </div>
+        </div>
+      </CollapsiblePanel>
 
       {/* 3. Term Deposits & Call Cash Section */}
-      <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 shadow-sm space-y-3">
-        <div className="flex items-center justify-between">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-400">
+      <CollapsiblePanel
+        id="input-deposits"
+        title={
+          <span className="text-xs uppercase tracking-wider text-slate-300">
             3. Term Deposits &amp; Call Cash (NZD)
-          </h2>
+          </span>
+        }
+        headerRight={
           <span className="text-xs text-amber-400 font-mono">
             {totalPortfolioNZD > 0 ? ((depositSumNZD / totalPortfolioNZD) * 100).toFixed(1) : 0}% of portfolio
           </span>
-        </div>
+        }
+      >
 
         <div className="space-y-2 text-xs">
           {portfolioState.cashDeposits.map((dep) => (
@@ -525,7 +584,7 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
             </div>
           </div>
         </div>
-      </div>
+      </CollapsiblePanel>
     </div>
   );
 };
