@@ -77,27 +77,32 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
                 </span>
               </div>
 
-              <div className="h-5 w-full bg-slate-950 rounded-md overflow-hidden flex shadow-inner">
-                {category.subcategories.map((sub, idx) => {
-                  const color = COLOR_PALETTE[idx % COLOR_PALETTE.length];
-                  return (
-                    <div
-                      key={sub.name}
-                      onMouseEnter={() =>
-                        setHoveredSubcategory(
-                          `${category.name} -> ${sub.name}: $${sub.valueNZD.toFixed(0)} NZD (${sub.percentage.toFixed(1)}% of category)`
-                        )
-                      }
-                      onMouseLeave={() => setHoveredSubcategory(null)}
-                      style={{
-                        width: `${sub.percentage}%`,
-                        backgroundColor: color,
-                      }}
-                      className="h-full hover:opacity-90 transition-opacity cursor-pointer"
-                      title={`${sub.name}: $${sub.valueNZD.toFixed(0)} NZD (${sub.percentage.toFixed(1)}%)`}
-                    />
-                  );
-                })}
+              <div className="h-5 w-full bg-slate-950 rounded-md overflow-hidden shadow-inner">
+                <div
+                  className="h-full flex overflow-hidden rounded-md transition-all"
+                  style={{ width: `${Math.min(100, Math.max(0, category.portfolioPercentage))}%` }}
+                >
+                  {category.subcategories.map((sub, idx) => {
+                    const color = COLOR_PALETTE[idx % COLOR_PALETTE.length];
+                    return (
+                      <div
+                        key={sub.name}
+                        onMouseEnter={() =>
+                          setHoveredSubcategory(
+                            `${category.name} -> ${sub.name}: $${sub.valueNZD.toFixed(0)} NZD (${sub.percentage.toFixed(1)}% of category)`
+                          )
+                        }
+                        onMouseLeave={() => setHoveredSubcategory(null)}
+                        style={{
+                          width: `${sub.percentage}%`,
+                          backgroundColor: color,
+                        }}
+                        className="h-full hover:opacity-90 transition-opacity cursor-pointer"
+                        title={`${sub.name}: $${sub.valueNZD.toFixed(0)} NZD (${sub.percentage.toFixed(1)}%)`}
+                      />
+                    );
+                  })}
+                </div>
               </div>
             </div>
           ))
