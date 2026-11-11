@@ -1,7 +1,13 @@
 import React, { useRef } from 'react';
 import { dispatchToggleAllPanels } from './CollapsiblePanel';
 import { FreshnessEnvelope, UserPortfolioState } from '../types/portfolio';
-import { DEFAULT_PORTFOLIO_STATE, exportHoldingsCSV, exportPortfolioJSON, importPortfolioJSON } from '../storage/localStorage';
+import {
+  DEFAULT_PORTFOLIO_STATE,
+  LoadSource,
+  exportHoldingsCSV,
+  exportPortfolioJSON,
+  importPortfolioJSON,
+} from '../storage/localStorage';
 import { ConsolidatedHolding } from '../types/portfolio';
 
 interface FreshnessHeaderProps {
@@ -11,6 +17,8 @@ interface FreshnessHeaderProps {
   onUpdateState: (state: UserPortfolioState) => void;
   onOpenUnresolvedModal: () => void;
   unresolvedCount: number;
+  loadSource?: LoadSource;
+  recoveredNotice?: string | null;
 }
 
 export const FreshnessHeader: React.FC<FreshnessHeaderProps> = ({
@@ -20,8 +28,46 @@ export const FreshnessHeader: React.FC<FreshnessHeaderProps> = ({
   onUpdateState,
   onOpenUnresolvedModal,
   unresolvedCount,
+  loadSource = 'v2',
+  recoveredNotice = null,
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const hasEnteredPortfolio =
+    Object.keys(portfolioState.fundBalances).length > 0 ||
+    portfolioState.directHoldings.length > 0 ||
+    portfolioState.cashDeposits.length > 0 ||
+    portfolioState.buckets.length > 0;
+
+  const handleLoadSample = () => {
+    if (
+      loadSource !== 'default' &&
+      hasEnteredPortfolio &&
+      !window.confirm('Replace your saved portfolio with the sample portfolio?')
+    ) {
+      return;
+    }
+    onUpdateState({
+      ...DEFAULT_PORTFOLIO_STATE,
+      timestamp: new Date().toISOString(),
+    });
+  };
+
+  const handleClearPortfolio = () => {
+    if (
+      hasEnteredPortfolio &&
+      !window.confirm('Clear all entered funds, direct shares, and term deposits?')
+    ) {
+      return;
+    }
+    onUpdateState({
+      ...portfolioState,
+      fundBalances: {},
+      directHoldings: [],
+      cashDeposits: [],
+      bucketAssignments: {},
+    });
+  };
 
   const handleExportJSON = () => {
     const jsonStr = exportPortfolioJSON(portfolioState);
@@ -46,7 +92,8 @@ export const FreshnessHeader: React.FC<FreshnessHeaderProps> = ({
   };
 
   const handleImportFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+    const inputEl = e.target;
+    const file = inputEl.files?.[0];
     if (!file) return;
     const reader = new FileReader();
     reader.onload = (event) => {
@@ -56,15 +103,25 @@ export const FreshnessHeader: React.FC<FreshnessHeaderProps> = ({
         onUpdateState(imported);
       } catch (err) {
         alert('Failed to import JSON portfolio file: ' + err);
+      } finally {
+        inputEl.value = '';
       }
     };
     reader.readAsText(file);
   };
 
+  const originLabel = typeof window !== 'undefined' ? window.location.host || 'local file' : 'browser';
+  const savedTimeLabel = (() => {
+    const d = new Date(portfolioState.timestamp);
+    return Number.isNaN(d.getTime())
+      ? ''
+      : d.toLocaleTimeString('en-NZ', { hour: '2-digit', minute: '2-digit' });
+  })();
+
   return (
     <header className="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 md:p-5 shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-4">
       <div className="space-y-1">
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2.5 flex-wrap">
           <span className="text-2xl">🥝</span>
           <h1 className="text-xl font-bold tracking-tight text-white">Kiwi Portfolio X-Ray</h1>
           <span className="text-xs bg-emerald-500/15 text-emerald-400 font-medium px-2.5 py-0.5 rounded-full border border-emerald-500/30">
@@ -82,6 +139,30 @@ export const FreshnessHeader: React.FC<FreshnessHeaderProps> = ({
         <p className="text-xs text-slate-400">
           Aggregating Smartshares, Kernel, Vanguard, and direct NZX/ASX equities into true underlying company exposures.
         </p>
+        <div className="flex flex-wrap items-center gap-2 text-[11px] text-slate-400 pt-0.5">
+          <span
+            title="Browser LocalStorage + IndexedDB are scoped to this exact host/port. Use Export JSON before switching ports or browsers."
+            className="inline-flex items-center gap-1.5"
+          >
+            <span
+              className={`inline-block w-1.5 h-1.5 rounded-full ${
+                loadSource === 'default' ? 'bg-slate-500' : 'bg-emerald-400'
+              }`}
+            />
+            {loadSource === 'default' ? (
+              <span>Showing sample portfolio (edit any holding to auto-save in {originLabel})</span>
+            ) : (
+              <span>
+                Auto-saved in browser ({originLabel}){savedTimeLabel ? ` · ${savedTimeLabel}` : ''}
+              </span>
+            )}
+          </span>
+          {recoveredNotice && (
+            <span className="text-amber-300 bg-amber-950/50 border border-amber-700/50 px-2 py-0.5 rounded">
+              {recoveredNotice}
+            </span>
+          )}
+        </div>
       </div>
 
       <div className="flex flex-wrap items-center gap-2">
@@ -110,21 +191,13 @@ export const FreshnessHeader: React.FC<FreshnessHeaderProps> = ({
           Collapse All
         </button>
         <button
-          onClick={() => onUpdateState(DEFAULT_PORTFOLIO_STATE)}
+          onClick={handleLoadSample}
           className="text-xs bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-3 py-1.5 rounded-lg transition-colors shadow-sm"
         >
           Load Sample
         </button>
         <button
-          onClick={() =>
-            onUpdateState({
-              ...portfolioState,
-              fundBalances: {},
-              directHoldings: [],
-              cashDeposits: [],
-              bucketAssignments: {},
-            })
-          }
+          onClick={handleClearPortfolio}
           className="text-xs bg-slate-950 hover:bg-rose-950/40 text-slate-400 hover:text-rose-400 border border-slate-800 px-3 py-1.5 rounded-lg transition-colors"
         >
           Clear

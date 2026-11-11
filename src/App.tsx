@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { BucketRebalancer } from './components/BucketRebalancer';
 import { FreshnessHeader } from './components/FreshnessHeader';
 import { HoldingsTable } from './components/HoldingsTable';
@@ -8,17 +8,56 @@ import { StackedBarChart } from './components/StackedBarChart';
 import { UnresolvedItem, UnresolvedModal } from './components/UnresolvedModal';
 import { computeFreshnessEnvelope } from './engine/freshness';
 import { calculatePortfolioLookthrough } from './engine/lookthrough';
-import { loadPortfolioState, savePortfolioState } from './storage/localStorage';
+import {
+  LoadSource,
+  loadFromIndexedDBBackup,
+  loadPortfolioStateWithMeta,
+  savePortfolioState,
+} from './storage/localStorage';
 import { Constituent, DirectEquityCatalogItem, FundMetadata, UserPortfolioState } from './types/portfolio';
 
 export const App: React.FC = () => {
-  const [portfolioState, setPortfolioState] = useState<UserPortfolioState>(() => loadPortfolioState());
+  const initialLoad = useMemo(() => loadPortfolioStateWithMeta(), []);
+  const [portfolioState, setPortfolioState] = useState<UserPortfolioState>(() => initialLoad.state);
+  const [loadSource, setLoadSource] = useState<LoadSource>(() => initialLoad.source);
+  const [recoveredNotice, setRecoveredNotice] = useState<string | null>(() => initialLoad.recoveredNotice);
+  const hasUserEditedRef = useRef(false);
+  const latestStateRef = useRef(portfolioState);
+  latestStateRef.current = portfolioState;
+
   const [fundsRegistry, setFundsRegistry] = useState<FundMetadata[]>([]);
   const [constituentsMap, setConstituentsMap] = useState<Record<string, Constituent[]>>({});
   const [directCatalog, setDirectCatalog] = useState<DirectEquityCatalogItem[]>([]);
   const [unresolvedEntries, setUnresolvedEntries] = useState<UnresolvedItem[]>([]);
   const [isUnresolvedModalOpen, setIsUnresolvedModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
+  // Restore from IndexedDB mirror if localStorage was empty on boot and user hasn't edited yet
+  useEffect(() => {
+    if (initialLoad.source !== 'default') return;
+    let cancelled = false;
+    loadFromIndexedDBBackup().then((restored) => {
+      if (cancelled || !restored || hasUserEditedRef.current) return;
+      setPortfolioState(restored);
+      setLoadSource('indexeddb');
+      setRecoveredNotice('Restored saved portfolio from browser backup.');
+      savePortfolioState(restored);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [initialLoad.source]);
+
+  // Flush latest edited/saved state on tab close or reload
+  useEffect(() => {
+    const flushState = () => {
+      if (hasUserEditedRef.current || loadSource !== 'default') {
+        savePortfolioState(latestStateRef.current);
+      }
+    };
+    window.addEventListener('pagehide', flushState);
+    return () => window.removeEventListener('pagehide', flushState);
+  }, [loadSource]);
 
   // Load static public data assets
   useEffect(() => {
@@ -45,10 +84,18 @@ export const App: React.FC = () => {
     loadData();
   }, []);
 
-  // Persist state changes to LocalStorage
+  // Persist state changes to LocalStorage + IndexedDB mirror
   const handleUpdateState = (newState: UserPortfolioState) => {
-    setPortfolioState(newState);
-    savePortfolioState(newState);
+    hasUserEditedRef.current = true;
+    const stamped: UserPortfolioState = {
+      ...newState,
+      version: 2,
+      timestamp: new Date().toISOString(),
+    };
+    setPortfolioState(stamped);
+    setLoadSource('v2');
+    setRecoveredNotice(null);
+    savePortfolioState(stamped);
   };
 
   // Perform core look-through calculations
@@ -93,6 +140,8 @@ export const App: React.FC = () => {
           onUpdateState={handleUpdateState}
           onOpenUnresolvedModal={() => setIsUnresolvedModalOpen(true)}
           unresolvedCount={unresolvedEntries.length}
+          loadSource={loadSource}
+          recoveredNotice={recoveredNotice}
         />
 
         {/* Liquidity & Asset Split Banners */}

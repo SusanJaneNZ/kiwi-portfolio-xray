@@ -85,10 +85,9 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
   };
 
   const handleDirectHoldingChange = (isin: string, value: string) => {
-    const num = parseFloat(value) || 0;
-    const updated = portfolioState.directHoldings
-      .map((h) => (h.isin === isin ? { ...h, value: num } : h))
-      .filter((h) => h.value > 0);
+    const parsed = parseFloat(value);
+    const num = Number.isFinite(parsed) && parsed >= 0 ? parsed : 0;
+    const updated = portfolioState.directHoldings.map((h) => (h.isin === isin ? { ...h, value: num } : h));
     onUpdateState({ ...portfolioState, directHoldings: updated });
   };
 
@@ -356,7 +355,9 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
                     </span>
                     <input
                       type="number"
-                      value={dh.value}
+                      min="0"
+                      value={dh.value > 0 ? dh.value : ''}
+                      placeholder="0"
                       onChange={(e) => handleDirectHoldingChange(dh.isin, e.target.value)}
                       className="w-full bg-slate-900 border border-slate-800 rounded-lg pl-6 pr-2 py-1 text-right text-xs text-white focus:outline-none font-mono"
                     />
