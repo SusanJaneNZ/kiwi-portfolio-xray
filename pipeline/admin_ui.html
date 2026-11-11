@@ -196,11 +196,28 @@
       <div id="pipeline-report" style="color: var(--muted);">Click <strong>Run Dry-Run</strong> above to validate all staged CSVs, weights, and Global Security Master matching.</div>
     </div>
 
+    <!-- FEEDER PAIRINGS -->
+    <div class="card">
+      <h2>4. Feeder Pairings (feeder_registry.json)</h2>
+      <div class="row-actions" style="margin-bottom: 10px; flex-wrap: wrap;">
+        <input type="text" id="feeder-code" placeholder="Feeder Code (e.g. TWH)" style="width: 150px;">
+        <input type="text" id="feeder-name" placeholder="Fund Name (e.g. Smart Total World Hedged ETF)" style="flex: 1; min-width: 180px;">
+        <select id="feeder-master-provider">
+          <option value="vanguard">Vanguard</option>
+          <option value="ishares">iShares</option>
+        </select>
+        <input type="text" id="feeder-master-ticker" placeholder="Master Ticker (e.g. VT)" style="width: 145px;">
+        <button class="btn btn-primary btn-sm" onclick="saveFeederPairing()">Save Pairing</button>
+      </div>
+      <div id="unconfigured-feeders-list" style="margin-bottom: 10px;"></div>
+      <div id="feeder-pairings-list">Loading feeder pairings...</div>
+    </div>
+
     <!-- UNRESOLVED MAPPER & SAVED ALIASES -->
     <div class="grid-2">
       <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 6px;">
-          <h2 style="margin-bottom: 0;">4. Unresolved Holdings Mapper</h2>
+          <h2 style="margin-bottom: 0;">5. Unresolved Holdings Mapper</h2>
           <div class="row-actions">
             <button class="btn btn-sm" onclick="copyUnresolvedCsv()">Copy CSV</button>
             <button class="btn btn-sm" onclick="toggleBulkImport()">Bulk Import CSV</button>
@@ -223,7 +240,7 @@
       </div>
 
       <div class="card">
-        <h2>5. Saved Aliases (provider_alias_map.json)</h2>
+        <h2>6. Saved Aliases (provider_alias_map.json)</h2>
         <div class="row-actions" style="margin-bottom: 10px;">
           <input type="text" id="manual-scope" placeholder="Provider:Fund (e.g. Kernel:KERNEL_NZ_50)" style="flex: 1;">
           <input type="text" id="manual-name" placeholder="Raw Name" style="flex: 1;">
@@ -231,22 +248,6 @@
           <button class="btn btn-primary btn-sm" onclick="addManualAlias()">Save</button>
         </div>
         <div id="saved-aliases-list">Loading aliases...</div>
-      </div>
-
-      <div class="card">
-        <h2>6. Feeder Pairings (feeder_registry.json)</h2>
-        <div class="row-actions" style="margin-bottom: 10px; flex-wrap: wrap;">
-          <input type="text" id="feeder-code" placeholder="Feeder Code (e.g. TWH)" style="width: 150px;">
-          <input type="text" id="feeder-name" placeholder="Fund Name (e.g. Smart Total World Hedged ETF)" style="flex: 1; min-width: 180px;">
-          <select id="feeder-master-provider">
-            <option value="vanguard">Vanguard</option>
-            <option value="ishares">iShares</option>
-          </select>
-          <input type="text" id="feeder-master-ticker" placeholder="Master Ticker (e.g. VT)" style="width: 145px;">
-          <button class="btn btn-primary btn-sm" onclick="saveFeederPairing()">Save Pairing</button>
-        </div>
-        <div id="unconfigured-feeders-list" style="margin-bottom: 10px;"></div>
-        <div id="feeder-pairings-list">Loading feeder pairings...</div>
       </div>
     </div>
   </div>

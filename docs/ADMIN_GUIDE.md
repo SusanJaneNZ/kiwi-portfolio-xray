@@ -141,11 +141,11 @@ Feeder funds (such as `TWF`, `USF`, `ESG`) hold a single underlying Vanguard or 
 To add a new feeder fund pairing (for example, adding a hedged variant like `TWH` → `VT`, or `USM` / `BOT` → its underlying ETF):
 
 1. **Inspect the Sorted `.xlsx` Holdings:**
-   Upload the fund's Sorted `.xlsx` into `data/staging/smartshares/` and click **Preview** in the Admin Console (`http://127.0.0.1:8787`) to confirm the single master ETF it holds (e.g., `Vanguard Total World Stock ETF (VT)` or `iShares Core S&P 500 ETF (IVV)`). You can click **Use as Feeder** in the preview header to prefill the **Feeder Code** in Panel 6.
+   Upload the fund's Sorted `.xlsx` into `data/staging/smartshares/` and click **Preview** in the Admin Console (`http://127.0.0.1:8787`) to confirm the single master ETF it holds (e.g., `Vanguard Total World Stock ETF (VT)` or `iShares Core S&P 500 ETF (IVV)`). You can click **Use as Feeder** in the preview header to prefill the **Feeder Code** in Panel 4.
 2. **Stage the Master ETF CSV:**
    Download the master ETF's constituent CSV from Vanguard (`data/staging/vanguard/`) or BlackRock/iShares (`data/staging/ishares/`).
 3. **Add the Pairing in the Admin Console (Recommended):**
-   In Panel **6. Feeder Pairings (`feeder_registry.json`)** of the Admin Console (`http://127.0.0.1:8787`), fill in:
+   In Panel **4. Feeder Pairings (`feeder_registry.json`)** of the Admin Console (`http://127.0.0.1:8787`), fill in:
    * **Feeder Code** (e.g., `TWH`)
    * **Fund Name** (e.g., `Smart Total World (NZD Hedged) ETF`)
    * **Master Provider** (`Vanguard` or `iShares`)

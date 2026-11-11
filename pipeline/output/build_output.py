@@ -121,7 +121,7 @@ class PipelineCompiler:
                             unconfigured_feeders.append(detected_feeder)
                             extra_warnings.append(
                                 f"Feeder fund '{res.fund_code}' holds '{detected_feeder['master_holding_name']}' "
-                                f"({detected_feeder['master_weight'] * 100:.1f}%) — add a Feeder Pairing in Panel 6 and stage its master ETF CSV to unwrap."
+                                f"({detected_feeder['master_weight'] * 100:.1f}%) — add a Feeder Pairing in the Feeder Pairings panel and stage its master ETF CSV to unwrap."
                             )
                         else:
                             unwrapped = self._enrich_domestic_fund(res, matcher, classifier, all_unresolved_entries)
