@@ -7,9 +7,21 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Optional
 
-from pipeline.adapters.base import FundExtractionResult, RawHolding
-from pipeline.adapters.disclose_register_adapter import FeederWrapperDisclosure
+from pipeline.adapters.base import FundExtractionResult
 from pipeline.security_master.build_security_master import normalize_country
+
+
+@dataclass
+class FeederWrapperDisclosure:
+    """Sorted Smart Investor wrapper breakdown for a feeder fund."""
+
+    feeder_code: str
+    feeder_name: str
+    master_ticker: str
+    master_allocation: float
+    cash_ratio: float
+    hedging_ratio: float
+    effective_date: str
 
 
 @dataclass
@@ -52,7 +64,7 @@ class FeederUnwrapper:
         feeder_info = self.feeder_registry.get(feeder_code, {})
         feeder_name = feeder_info.get("name", f"Smartshares {feeder_code} ETF")
 
-        # Ratios from Disclose Register or defaults
+        # Ratios from Sorted Smart Investor wrapper disclosure or defaults
         cash_ratio = wrapper_disclosure.cash_ratio if wrapper_disclosure else 0.015
         hedging_ratio = wrapper_disclosure.hedging_ratio if wrapper_disclosure else 0.0
         effective_date = wrapper_disclosure.effective_date if wrapper_disclosure else master_fund.effective_date
@@ -92,4 +104,3 @@ class FeederUnwrapper:
             constituents=unwrapped_constituents,
             unresolved_holdings=[],
         )
-

@@ -11,15 +11,14 @@ and then open http://127.0.0.1:8787 in a browser
 
 ## 1. Upstream Data Sources & Cadence Matrix
 
-The application relies on 5 primary source streams and 2 reference directories. All data is publicly accessible without paid commercial API subscriptions.
+The application relies on 4 primary source streams and 2 reference directories. All data is publicly accessible without paid commercial API subscriptions.
 
 | Dataset / Source | Origin / Provider Portal | Staging Target Directory | Format & File Content | Frequency | Purpose |
 |---|---|---|---|---|---|
-| **Smartshares Direct Funds** (`FNZ`, `MDZ`, `NZG`, `OZY`, `ASD`) | [Sorted Smart Investor](https://smartinvestor.sorted.org.nz) (Search fund → *Download the full portfolio holdings*) | `data/staging/smartshares/` | XLSX / CSV (`*.xlsx` or `*.csv`): Asset, Asset class, Type, Country, % of Fund | Semi-Annual / Quarterly | Direct NZX and ASX constituent equities |
-| **Smartshares Feeder Wrappers** (`TWF`, `USF`, `EUF`, `APA`, `EMF`, `ESG`) | [Sorted Smart Investor](https://smartinvestor.sorted.org.nz) or [NZ Disclose Register](https://disclose-register.companiesoffice.govt.nz) (Search Offer `OFR10865`: *Smart Exchange Traded Funds*) | `data/staging/smartshares/` *(or `data/staging/disclose/`)* | XLSX (`*.xlsx` Disclose Full Portfolio Holdings) or summary CSV: Cash buffer ($c_f$), FX Hedging ($h_f$), Effective date | Semi-Annual / Quarterly | Feeder-to-master cash buffer, hedging ratio, and disclosure date |
-| **Vanguard US Master ETFs** (`VT`, `VOO`, `VGK`, `VPL`, `VWO`) | [Vanguard US Advisor Portal](https://advisors.vanguard.com/investments/products/vt/vanguard-total-world-stock-etf) (*Holdings details* → *Export full holdings*) | `data/staging/vanguard/` | CSV (`Holdings_details_<TICKER_OR_FUND>.csv`): Ticker, Holdings/Name, % of funds, Sector, Country, CUSIP/SEDOL/ISIN | Monthly (around the 15th) | Underlying global equities for Smartshares feeder wrappers & Global Security Master |
-| **iShares (BlackRock) Master ETFs** (`IWLD`, `IVV`) | [BlackRock Australia / US](https://www.blackrock.com/au/products/investment-funds) (Product Holdings CSV) | `data/staging/ishares/` | CSV (`<TICKER>_holdings.csv`): Ticker, ISIN, Name, Country, Sector, Weight % | Monthly / Quarterly | Underlying global equities for Smartshares ESG wrappers |
-| **Kernel Wealth Index Funds** (Domestic & Global: `Kernel NZ 50`, `Aus Leaders`, `Global 100`, `World Ex-US`, `Clean Energy`) | [Sorted Smart Investor](https://smartinvestor.sorted.org.nz) (Search fund → *Download the full portfolio holdings*) | `data/staging/kernel/` | XLSX / CSV (`*.xlsx` or `*.csv`): Asset, Asset class, Type, Country, % of Fund | Semi-Annual / Quarterly | Constituent holdings for unlisted NZ, AU, and global index funds |
+| **Smartshares Direct & Feeder Funds** (`FNZ`, `MDZ`, `NZG`, `OZY`, `ASD`, `TWF`, `USF`, `EUF`, `APA`, `EMF`, `ESG`) | [Sorted Smart Investor](https://smartinvestor.sorted.org.nz) (Search fund → *Download the full portfolio holdings*) | `data/staging/smartshares/` | XLSX (`*.xlsx`): Asset name, % of fund net assets, Cash & payables | Semi-Annual / Quarterly | Direct NZX/ASX holdings and feeder wrapper cash/hedging buffers |
+| **Vanguard US Master ETFs** (`VT`, `VOO`, `VGK`, `VPL`, `VWO`) | [Vanguard US Advisor Portal](https://advisors.vanguard.com/investments/products/vt/vanguard-total-world-stock-etf) (*Holdings details* → *Export full holdings*) | `data/staging/vanguard/` | CSV (`Holdings_details_<TICKER_OR_FUND>.csv`): Ticker, Holdings/Name, % of funds, Sub-Industry, Country, SEDOL/CUSIP/ISIN | Monthly (around the 15th) | Underlying global equities for Smartshares feeder wrappers & Global Security Master |
+| **iShares (BlackRock) Master ETFs** (`IWLD`, `IVV`) | [BlackRock Australia / US](https://www.blackrock.com/au/products/investment-funds) (Product Holdings CSV) | `data/staging/ishares/` | CSV (`<TICKER>_holdings.csv`): Ticker, Name, Sector, Location, Weight (%) | Monthly / Quarterly | Underlying global equities for Smartshares ESG wrappers |
+| **Kernel Wealth Index Funds** (Domestic & Global: `Kernel NZ 50`, `Aus Leaders`, `Global 100`, `World Ex-US`, `Clean Energy`) | [Sorted Smart Investor](https://smartinvestor.sorted.org.nz) (Search fund → *Download the full portfolio holdings*) | `data/staging/kernel/` | XLSX (`*.xlsx`): Asset name, % of fund net assets | Semi-Annual / Quarterly | Constituent holdings for unlisted NZ, AU, and global index funds |
 | **NZX Official Directory** | [NZX Main Board Table](https://www.nzx.com/markets/NZSX) *(maintained CSV — no bulk ISIN download on NZX website)* | `data/staging/directories/` | CSV (`nzx_directory.csv`): Rank, Ticker, Company Name, Country, Sector *(or NZX Code, Company Name, ISIN, GICS Sector)* | Quarterly / As needed | Canonical security master for NZX-listed equities (auto-enriched with Vanguard VT ISINs where available) |
 | **ASX Official Directory** | [ASX Listed Companies Directory](https://www.asx.com.au/markets/trade-our-cash-market/directory) (*"All ASX Listed Companies .csv"*) | `data/staging/directories/` | CSV (`ASXListedCompanies.csv`): Company name, ASX code, GICS industry group | Quarterly / As needed | Canonical security master for all ASX-listed equities |
 
@@ -35,21 +34,16 @@ data/
     ├── directories/
     │   ├── nzx_directory.csv
     │   └── ASXListedCompanies.csv
-    ├── disclose/
-    │   └── smartshares_feeder_disclosures_202610.csv
     ├── ishares/
-    │   └── IWLD_holdings_202610.csv
+    │   └── IWLD_holdings.csv
     ├── kernel/
-    │   ├── kernel_nz_50_202610.csv
-    │   ├── kernel_global_100_202610.csv
-    │   ├── kernel_world_ex_us_202610.csv
-    │   └── kernel_clean_energy_202610.csv
+    │   └── KERNEL-WORLD-EX-US-FUND-FND58860-Full-portfolio-holdings-30-September-2026.xlsx
     ├── smartshares/
-    │   ├── FNZ_holdings_202610.csv
-    │   └── OZY_holdings_202610.csv
+    │   ├── SMART-GLOBAL-ESG-ETF-FND14633-Full-portfolio-holdings-30-September-2026.xlsx
+    │   └── SMART-NZ-TOP-50-ETF-Full-portfolio-holdings.xlsx
     └── vanguard/
-        ├── Holdings_details_VT.csv
-        └── Holdings_details_VOO.csv
+        ├── Holdings_details_Total_World_Stock_ETF.csv
+        └── Holdings_details_S&P_500_ETF.csv
 ```
 
 ---

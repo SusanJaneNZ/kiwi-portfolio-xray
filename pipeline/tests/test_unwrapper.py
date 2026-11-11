@@ -4,8 +4,7 @@ import unittest
 from pathlib import Path
 
 from pipeline.adapters.base import FundExtractionResult, RawHolding
-from pipeline.adapters.disclose_register_adapter import FeederWrapperDisclosure
-from pipeline.unwrapper.feeder_unwrapper import FeederUnwrapper
+from pipeline.unwrapper.feeder_unwrapper import FeederUnwrapper, FeederWrapperDisclosure
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 

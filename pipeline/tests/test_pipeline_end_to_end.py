@@ -18,7 +18,7 @@ class TestPipelineEndToEnd(unittest.TestCase):
             staging_dir = tmp_path / "staging"
             output_dir = tmp_path / "public_data"
 
-            for sub in ["directories", "disclose", "vanguard", "ishares", "smartshares", "kernel"]:
+            for sub in ["directories", "vanguard", "ishares", "smartshares", "kernel"]:
                 (staging_dir / sub).mkdir(parents=True, exist_ok=True)
 
             (staging_dir / "directories" / "nzx_directory.csv").write_text(
@@ -40,11 +40,11 @@ class TestPipelineEndToEnd(unittest.TestCase):
                 ",B0189V6,Vestas Wind Systems A/S,VWS,50.00%,Renewable Electricity,DK\n",
                 encoding="utf-8",
             )
-            (staging_dir / "disclose" / "smartshares_feeder_disclosures_202610.csv").write_text(
-                "Fund Scheme,Holding / Asset Description,Weighting (%)\n"
-                "Smartshares Total World ETF (TWF),Vanguard Total World Stock ETF,97.5%\n"
-                "Smartshares Total World ETF (TWF),Cash and cash equivalents,1.5%\n"
-                "Smartshares Total World ETF (TWF),Foreign currency hedging contracts,1.0%\n",
+            (staging_dir / "smartshares" / "smartshares_TWF_202610.csv").write_text(
+                "Asset name,% of fund net assets\n"
+                "Vanguard Total World Stock ETF,97.5\n"
+                "NZD Cash Account,1.5\n"
+                "Foreign currency hedging contracts,1.0\n",
                 encoding="utf-8",
             )
             (staging_dir / "smartshares" / "smartshares_FNZ_202610.csv").write_text(

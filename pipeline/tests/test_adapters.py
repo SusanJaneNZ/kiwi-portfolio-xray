@@ -4,7 +4,6 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from pipeline.adapters.disclose_register_adapter import DiscloseRegisterAdapter
 from pipeline.adapters.ishares_adapter import ISharesAdapter
 from pipeline.adapters.kernel_adapter import KernelAdapter
 from pipeline.adapters.smartshares_direct_adapter import SmartsharesDirectAdapter
@@ -135,31 +134,6 @@ class TestAdapters(unittest.TestCase):
 
             vestas = next(h for h in res.holdings if "Vestas" in h.name)
             self.assertAlmostEqual(vestas.weight, 0.125, places=3)
-
-    def test_disclose_register_adapter(self):
-        csv_text = (
-            "Fund Scheme,Holding / Asset Description,Weighting (%)\n"
-            "Smartshares Total World ETF (TWF),Vanguard Total World Stock ETF,97.5%\n"
-            "Smartshares Total World ETF (TWF),Cash and cash equivalents,1.5%\n"
-            "Smartshares Total World ETF (TWF),Foreign currency hedging contracts,1.0%\n"
-            "Smartshares US 500 ETF (USF),Vanguard S&P 500 ETF,98.5%\n"
-            "Smartshares US 500 ETF (USF),Cash and cash equivalents,1.5%\n"
-        )
-        adapter = DiscloseRegisterAdapter()
-        with tempfile.TemporaryDirectory() as tmp:
-            d_dir = Path(tmp) / "disclose"
-            d_dir.mkdir()
-            disclose_file = d_dir / "smartshares_feeder_disclosures_202610.csv"
-            disclose_file.write_text(csv_text, encoding="utf-8")
-
-            self.assertTrue(adapter.can_handle(disclose_file))
-            feeders = adapter.parse_all_feeders(disclose_file)
-            self.assertEqual(len(feeders), 2)
-
-            twf = next(f for f in feeders if f.feeder_code == "TWF")
-            self.assertAlmostEqual(twf.cash_ratio, 0.015, places=3)
-            self.assertAlmostEqual(twf.hedging_ratio, 0.010, places=3)
-            self.assertAlmostEqual(twf.master_allocation, 0.975, places=3)
 
 
 if __name__ == "__main__":

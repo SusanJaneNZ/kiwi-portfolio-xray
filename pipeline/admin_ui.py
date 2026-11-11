@@ -13,7 +13,6 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qs, urlparse
 
-from pipeline.adapters.disclose_register_adapter import DiscloseRegisterAdapter
 from pipeline.adapters.ishares_adapter import ISharesAdapter
 from pipeline.adapters.kernel_adapter import KernelAdapter
 from pipeline.adapters.smartshares_direct_adapter import SmartsharesDirectAdapter
@@ -28,7 +27,6 @@ from pipeline.security_master.build_security_master import (
 ALLOWED_PROVIDERS = {
     "directories",
     "smartshares",
-    "disclose",
     "vanguard",
     "ishares",
     "kernel",
@@ -148,28 +146,6 @@ class AdminService:
                     "status": "ok" if recs else "empty",
                     "parsed_count": len(recs),
                     "sample_rows": recs[:5],
-                }
-            return {"raw_lines": raw_lines, "parse_summary": parse_summary}
-
-        if provider == "disclose":
-            adapter = DiscloseRegisterAdapter()
-            if adapter.can_handle(target_path):
-                feeders = adapter.parse_all_feeders(target_path)
-                parse_summary = {
-                    "adapter": "DiscloseRegisterAdapter",
-                    "status": "ok" if feeders else "empty",
-                    "parsed_count": len(feeders),
-                    "sample_rows": [
-                        {
-                            "feeder_code": fd.feeder_code,
-                            "master_ticker": fd.master_ticker,
-                            "master_allocation": fd.master_allocation,
-                            "cash_ratio": fd.cash_ratio,
-                            "hedging_ratio": fd.hedging_ratio,
-                            "effective_date": fd.effective_date,
-                        }
-                        for fd in feeders
-                    ],
                 }
             return {"raw_lines": raw_lines, "parse_summary": parse_summary}
 

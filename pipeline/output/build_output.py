@@ -6,7 +6,6 @@ import json
 from pathlib import Path
 from typing import Any, Optional
 
-from pipeline.adapters.disclose_register_adapter import DiscloseRegisterAdapter, FeederWrapperDisclosure
 from pipeline.adapters.ishares_adapter import ISharesAdapter
 from pipeline.adapters.kernel_adapter import KernelAdapter
 from pipeline.adapters.smartshares_direct_adapter import SmartsharesDirectAdapter
@@ -17,7 +16,7 @@ from pipeline.security_master.build_security_master import (
     compile_security_master,
     normalize_country,
 )
-from pipeline.unwrapper.feeder_unwrapper import FeederUnwrapper, UnwrappedFund
+from pipeline.unwrapper.feeder_unwrapper import FeederUnwrapper, FeederWrapperDisclosure, UnwrappedFund
 from pipeline.validate.schema_validator import SchemaValidator, ValidationReport
 
 
@@ -83,21 +82,12 @@ class PipelineCompiler:
                     res = ishares_adapter.parse(f)
                     master_funds[res.fund_code] = res
 
-        # 3. Parse Disclose Register Feeder Filings
-        disclose_adapter = DiscloseRegisterAdapter()
-        feeder_disclosures = []
-        disclose_dir = self.staging_dir / "disclose"
-        if disclose_dir.exists():
-            for f in sorted(disclose_dir.glob("*.csv")):
-                if disclose_adapter.can_handle(f):
-                    feeder_disclosures.extend(disclose_adapter.parse_all_feeders(f))
-
-        feeder_disc_map = {d.feeder_code: d for d in feeder_disclosures}
+        feeder_disc_map: dict[str, FeederWrapperDisclosure] = {}
 
         with open(self.feeder_registry_path, "r", encoding="utf-8") as f:
             feeder_registry = json.load(f)
 
-        # 4. Ingest Smartshares staged files (both Direct Funds and Sorted/Disclose Feeder wrappers)
+        # 3. Ingest Smartshares staged files (Direct Funds and Sorted Feeder wrappers)
         smartshares_adapter = SmartsharesDirectAdapter()
         smartshares_dir = self.staging_dir / "smartshares"
         all_unwrapped_funds: list[UnwrappedFund] = []
