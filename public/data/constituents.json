@@ -1357,11 +1357,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_15",
-      "name": "SGH LIMITED ORDINARY FULLY PAID",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BR858V2",
+      "name": "SGH LIMITED",
+      "ticker": "SGH.AX",
+      "country": "Australia",
+      "sector": "Industrials",
       "weight": 0.02309307,
       "asset_class": "equity"
     },
@@ -1402,11 +1402,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_20",
-      "name": "DYNO NOBEL LIMITED ORDINARY FULLY PAID",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BVBH523",
+      "name": "DYNO NOBEL LIMITED.",
+      "ticker": "DNL.AX",
+      "country": "Australia",
+      "sector": "Materials",
       "weight": 0.02019394,
       "asset_class": "equity"
     },
@@ -1492,11 +1492,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_30",
-      "name": "GREATLAND RES LTD",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BTXLW40",
+      "name": "GREATLAND RESOURCES LIMITED",
+      "ticker": "GGP.AX",
+      "country": "Australia",
+      "sector": "Materials",
       "weight": 0.01769469,
       "asset_class": "equity"
     },
@@ -1754,7 +1754,7 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_8",
+      "isin": "AU000000IOZ4",
       "name": "ISHARES CORE S&P/ASX 200 ETF",
       "ticker": "",
       "country": "Unknown",
@@ -221122,11 +221122,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_4",
-      "name": "Alphabet Inc Class A",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BYVY8G0",
+      "name": "Alphabet Inc",
+      "ticker": "GOOGL",
+      "country": "United States",
+      "sector": "Communication Services",
       "weight": 0.02413793,
       "asset_class": "equity"
     },
@@ -221140,11 +221140,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_6",
-      "name": "Mastercard Inc Class A Ord",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B121557",
+      "name": "Mastercard Inc",
+      "ticker": "MA",
+      "country": "United States",
+      "sector": "Financials",
       "weight": 0.02029557,
       "asset_class": "equity"
     },
@@ -221167,11 +221167,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_9",
-      "name": "Alphabet Inc Class C",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BYY88Y7",
+      "name": "Alphabet Inc",
+      "ticker": "GOOG",
+      "country": "United States",
+      "sector": "Communication Services",
       "weight": 0.01931034,
       "asset_class": "equity"
     },
@@ -225130,11 +225130,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_3",
-      "name": "Nextracker Inc Class A",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BR1GTS6",
+      "name": "Nextpower Inc",
+      "ticker": "NXT",
+      "country": "United States",
+      "sector": "Industrials",
       "weight": 0.06449376,
       "asset_class": "equity"
     },
@@ -225193,11 +225193,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_10",
-      "name": "Energias de Portugal SA",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:4103596",
+      "name": "EDP SA",
+      "ticker": "EDP",
+      "country": "Portugal",
+      "sector": "Utilities",
       "weight": 0.03655637,
       "asset_class": "equity"
     },
@@ -225238,11 +225238,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_15",
-      "name": "Clearway Energy Inc Class C",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BGJRH57",
+      "name": "Clearway Energy Inc",
+      "ticker": "CWEN",
+      "country": "United States",
+      "sector": "Utilities",
       "weight": 0.02238954,
       "asset_class": "equity"
     },
@@ -225748,11 +225748,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_15",
-      "name": "Franklin Resources Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2350684",
+      "name": "Franklin Templeton Inc",
+      "ticker": "BEN",
+      "country": "United States",
+      "sector": "Financials",
       "weight": 0.0158746,
       "asset_class": "equity"
     },
@@ -225865,16 +225865,16 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_28",
-      "name": "Universal Corp",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2923804",
+      "name": "Universal Corp/VA",
+      "ticker": "UVV",
+      "country": "United States",
+      "sector": "Consumer Staples",
       "weight": 0.01397764,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_29",
+      "isin": "SEDOL:2679419",
       "name": "Peoples Bancorp Inc",
       "ticker": "",
       "country": "Unknown",
@@ -233948,6 +233948,458 @@
       "country": "Hong Kong",
       "sector": "Consumer Staples",
       "weight": 0.00010067,
+      "asset_class": "equity"
+    }
+  ],
+  "ASIA": [
+    {
+      "isin": "SEDOL:BMMV2K8",
+      "name": "Tencent Holdings Ltd",
+      "ticker": "700",
+      "country": "Hong Kong",
+      "sector": "Communication Services",
+      "weight": 0.1188234,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BK6YZP5",
+      "name": "Alibaba Group Holding Ltd",
+      "ticker": "9988",
+      "country": "Hong Kong",
+      "sector": "Consumer Discretionary",
+      "weight": 0.10765001,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2113382",
+      "name": "TAIWAN SEMICONDUCTOR-SP ADR",
+      "ticker": "TSM",
+      "country": "United States",
+      "sector": "Information Technology",
+      "weight": 0.10041024,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6773812",
+      "name": "SAMSUNG ELECTRONICS-PREF",
+      "ticker": "005935",
+      "country": "South Korea",
+      "sector": "Information Technology",
+      "weight": 0.08832794,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6450267",
+      "name": "SK hynix Inc",
+      "ticker": "000660",
+      "country": "South Korea",
+      "sector": "Information Technology",
+      "weight": 0.0838736,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6372480",
+      "name": "MediaTek Inc",
+      "ticker": "2454",
+      "country": "Taiwan",
+      "sector": "Information Technology",
+      "weight": 0.06784162,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6438564",
+      "name": "Hon Hai Precision Industry Co Ltd",
+      "ticker": "2317",
+      "country": "Taiwan",
+      "sector": "Information Technology",
+      "weight": 0.03711407,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6260734",
+      "name": "Delta Electronics Inc",
+      "ticker": "2308",
+      "country": "Taiwan",
+      "sector": "Information Technology",
+      "weight": 0.03455189,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BFXZDY1",
+      "name": "ASE Technology Holding Co Ltd",
+      "ticker": "3711",
+      "country": "Taiwan",
+      "sector": "Information Technology",
+      "weight": 0.0334095,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BG0ZMJ9",
+      "name": "Xiaomi Corp",
+      "ticker": "1810",
+      "country": "Hong Kong",
+      "sector": "Information Technology",
+      "weight": 0.0277529,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BGJW376",
+      "name": "Meituan",
+      "ticker": "3690",
+      "country": "Hong Kong",
+      "sector": "Consumer Discretionary",
+      "weight": 0.0222666,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2398822",
+      "name": "INFOSYS LTD-SP ADR",
+      "ticker": "INFY",
+      "country": "United States",
+      "sector": "Information Technology",
+      "weight": 0.0215239,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BM93SF4",
+      "name": "NetEase Inc",
+      "ticker": "9999",
+      "country": "Hong Kong",
+      "sector": "Communication Services",
+      "weight": 0.01927324,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "UNRESOLVED_SE",
+      "name": "SEA LTD",
+      "ticker": "SE",
+      "country": "Singapore",
+      "sector": "Unclassified",
+      "weight": 0.0183428,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6771689",
+      "name": "Samsung Electro-Mechanics Co Ltd",
+      "ticker": "009150",
+      "country": "South Korea",
+      "sector": "Information Technology",
+      "weight": 0.01518435,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6916628",
+      "name": "United Microelectronics Corp",
+      "ticker": "2303",
+      "country": "Taiwan",
+      "sector": "Information Technology",
+      "weight": 0.0150922,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BKPQZT6",
+      "name": "JD.com Inc",
+      "ticker": "9618",
+      "country": "Hong Kong",
+      "sector": "Consumer Discretionary",
+      "weight": 0.01488668,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6544892",
+      "name": "Asia Vital Components Co Ltd",
+      "ticker": "3017",
+      "country": "Taiwan",
+      "sector": "Information Technology",
+      "weight": 0.012037,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6141011",
+      "name": "Quanta Computer Inc",
+      "ticker": "2382",
+      "country": "Taiwan",
+      "sector": "Information Technology",
+      "weight": 0.01156674,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6283601",
+      "name": "Nanya Technology Corp",
+      "ticker": "2408",
+      "country": "Taiwan",
+      "sector": "Information Technology",
+      "weight": 0.01083757,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6984380",
+      "name": "Yageo Corp",
+      "ticker": "2327",
+      "country": "Taiwan",
+      "sector": "Information Technology",
+      "weight": 0.01016577,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6005214",
+      "name": "Accton Technology Corp",
+      "ticker": "2345",
+      "country": "Taiwan",
+      "sector": "Information Technology",
+      "weight": 0.00999149,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B0J2D41",
+      "name": "Baidu Inc",
+      "ticker": "9888",
+      "country": "Hong Kong",
+      "sector": "Communication Services",
+      "weight": 0.00927424,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2646123",
+      "name": "WIPRO LTD-ADR",
+      "ticker": "WIT",
+      "country": "United States",
+      "sector": "Information Technology",
+      "weight": 0.00905479,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6560393",
+      "name": "NAVER Corp",
+      "ticker": "035420",
+      "country": "South Korea",
+      "sector": "Communication Services",
+      "weight": 0.00836812,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BF4QXG5",
+      "name": "Wiwynn Corp",
+      "ticker": "6669",
+      "country": "Taiwan",
+      "sector": "Information Technology",
+      "weight": 0.00710293,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B056381",
+      "name": "Global Unichip Corp",
+      "ticker": "3443",
+      "country": "Taiwan",
+      "sector": "Information Technology",
+      "weight": 0.00707341,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6519481",
+      "name": "Lite-On Technology Corp",
+      "ticker": "2301",
+      "country": "Taiwan",
+      "sector": "Information Technology",
+      "weight": 0.00637523,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B3FJBY3",
+      "name": "Jentech Precision Industrial Co Ltd",
+      "ticker": "3653",
+      "country": "Taiwan",
+      "sector": "Information Technology",
+      "weight": 0.00556754,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6966515",
+      "name": "Winbond Electronics Corp",
+      "ticker": "2344",
+      "country": "Taiwan",
+      "sector": "Information Technology",
+      "weight": 0.00542943,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B80VKP3",
+      "name": "ASPEED Technology Inc",
+      "ticker": "5274",
+      "country": "Taiwan",
+      "sector": "Information Technology",
+      "weight": 0.00501759,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6051422",
+      "name": "Realtek Semiconductor Corp",
+      "ticker": "2379",
+      "country": "Taiwan",
+      "sector": "Information Technology",
+      "weight": 0.00474212,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6728469",
+      "name": "Phison Electronics Corp",
+      "ticker": "8299",
+      "country": "Taiwan",
+      "sector": "Information Technology",
+      "weight": 0.00396448,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6574457",
+      "name": "MPI Corp",
+      "ticker": "6223",
+      "country": "Taiwan",
+      "sector": "Information Technology",
+      "weight": 0.00385452,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B4TPSL0",
+      "name": "Alchip Technologies Ltd",
+      "ticker": "3661",
+      "country": "Taiwan",
+      "sector": "Information Technology",
+      "weight": 0.00365591,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BMD2L36",
+      "name": "FULL TRUCK ALLIANCE -SPN ADR",
+      "ticker": "YMM",
+      "country": "United States",
+      "sector": "Industrials",
+      "weight": 0.00347264,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6346333",
+      "name": "Novatek Microelectronics Corp",
+      "ticker": "3034",
+      "country": "Taiwan",
+      "sector": "Information Technology",
+      "weight": 0.00340717,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BFZYWR2",
+      "name": "TENCENT MUSIC ENTERTAINM-ADR",
+      "ticker": "TME",
+      "country": "United States",
+      "sector": "Communication Services",
+      "weight": 0.00321634,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6194037",
+      "name": "Kakao Corp",
+      "ticker": "035720",
+      "country": "South Korea",
+      "sector": "Communication Services",
+      "weight": 0.00309934,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BJBXT36",
+      "name": "Powerchip Semiconductor Manufacturing Corp",
+      "ticker": "6770",
+      "country": "Taiwan",
+      "sector": "Information Technology",
+      "weight": 0.00284703,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "UNRESOLVED_SIMO",
+      "name": "SILICON MOTION TECHNOLOGY CORP",
+      "ticker": "SIMO",
+      "country": "Taiwan",
+      "sector": "Unclassified",
+      "weight": 0.00241426,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BRB3857",
+      "name": "Hua Hong Grace Semiconductor Ltd",
+      "ticker": "1347",
+      "country": "Hong Kong",
+      "sector": "Information Technology",
+      "weight": 0.00235988,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B3N0H17",
+      "name": "VIPSHOP HOLDINGS LTD - ADR",
+      "ticker": "VIPS",
+      "country": "United States",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00229395,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6744807",
+      "name": "International Games System Co Ltd",
+      "ticker": "3293",
+      "country": "Taiwan",
+      "sector": "Communication Services",
+      "weight": 0.00223295,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BS5YNY7",
+      "name": "Horizon Robotics",
+      "ticker": "9660",
+      "country": "Hong Kong",
+      "sector": "Information Technology",
+      "weight": 0.00204614,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BPK3C96",
+      "name": "SenseTime Group Inc",
+      "ticker": "20",
+      "country": "Hong Kong",
+      "sector": "Information Technology",
+      "weight": 0.00199166,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6574101",
+      "name": "Macronix International Co Ltd",
+      "ticker": "2337",
+      "country": "Taiwan",
+      "sector": "Information Technology",
+      "weight": 0.00194796,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B7GJP71",
+      "name": "Zhongji Innolight Co Ltd",
+      "ticker": "300308",
+      "country": "China",
+      "sector": "Information Technology",
+      "weight": 0.00189919,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B2PXYH2",
+      "name": "eMemory Technology Inc",
+      "ticker": "3529",
+      "country": "Taiwan",
+      "sector": "Information Technology",
+      "weight": 0.00188506,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BMG40P4",
+      "name": "GDS Holdings Ltd",
+      "ticker": "9698",
+      "country": "Hong Kong",
+      "sector": "Information Technology",
+      "weight": 0.0017581,
       "asset_class": "equity"
     }
   ]

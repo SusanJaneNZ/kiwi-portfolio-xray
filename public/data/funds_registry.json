@@ -322,5 +322,17 @@
     "asset_class": "equity",
     "cadence": "monthly",
     "is_stale": false
+  },
+  {
+    "code": "ASIA",
+    "name": "Betashares Asia Technology Tigers ETF",
+    "provider": "BetaShares",
+    "effective_date": "2026-11-10",
+    "cash_ratio": 0.002725,
+    "hedging_ratio": 0.0,
+    "constituent_count": 50,
+    "asset_class": "equity",
+    "cadence": "monthly",
+    "is_stale": false
   }
 ]

@@ -70,6 +70,14 @@ class BetasharesAdapter(BaseAdapter):
                     weight_col = weight_idx
                     continue
 
+                if len(row) >= 2:
+                    meta_key = row[0].strip().lower()
+                    meta_val = row[1].strip()
+                    if meta_key == "fund asx code" and meta_val:
+                        fund_code = meta_val.upper()
+                    elif meta_key == "fund name" and meta_val:
+                        fund_name = meta_val
+
                 parsed_date = parse_effective_date(" ".join(row))
                 if parsed_date:
                     effective_date = parsed_date
@@ -81,7 +89,8 @@ class BetasharesAdapter(BaseAdapter):
 
             name = row[name_idx].strip()
             ticker_idx = next((i for k, i in col_map.items() if "ticker" in k or k in {"code", "asx code", "security code"}), -1)
-            ticker = row[ticker_idx].strip() if ticker_idx != -1 and len(row) > ticker_idx else ""
+            raw_ticker = row[ticker_idx].strip() if ticker_idx != -1 and len(row) > ticker_idx else ""
+            ticker = raw_ticker.split()[0] if (" " in raw_ticker and raw_ticker.split()[0]) else raw_ticker
             if not name and ticker:
                 name = ticker
             if not name or name.lower().startswith("total"):

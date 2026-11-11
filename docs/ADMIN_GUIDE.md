@@ -11,14 +11,15 @@ and then open http://127.0.0.1:8787 in a browser
 
 ## 1. Upstream Data Sources & Cadence Matrix
 
-The application relies on 4 primary source streams and 2 reference directories. All data is publicly accessible without paid commercial API subscriptions.
+The application relies on 5 primary source streams and 2 reference directories. All data is publicly accessible without paid commercial API subscriptions.
 
 | Dataset / Source | Origin / Provider Portal | Staging Target Directory | Format & File Content | Frequency | Purpose |
 |---|---|---|---|---|---|
-| **Smartshares Direct & Feeder Funds** (`FNZ`, `MDZ`, `NZG`, `OZY`, `ASD`, `TWF`, `USF`, `EUF`, `APA`, `EMF`, `ESG`) | [Sorted Smart Investor](https://smartinvestor.sorted.org.nz) (Search fund → *Download the full portfolio holdings*) | `data/staging/smartshares/` | XLSX (`*.xlsx`): Asset name, % of fund net assets, Cash & payables | Semi-Annual / Quarterly | Direct NZX/ASX holdings and feeder wrapper cash/hedging buffers |
-| **Vanguard US Master ETFs** (`VT`, `VOO`, `VGK`, `VPL`, `VWO`) | [Vanguard US Advisor Portal](https://advisors.vanguard.com/investments/products/vt/vanguard-total-world-stock-etf) (*Holdings details* → *Export full holdings*) | `data/staging/vanguard/` | CSV (`Holdings_details_<TICKER_OR_FUND>.csv`): Ticker, Holdings/Name, % of funds, Sub-Industry, Country, SEDOL/CUSIP/ISIN | Monthly (around the 15th) | Underlying global equities for Smartshares feeder wrappers & Global Security Master |
-| **iShares (BlackRock) Master ETFs** (`IWLD`, `IVV`) | [BlackRock Australia / US](https://www.blackrock.com/au/products/investment-funds) (Product Holdings CSV) | `data/staging/ishares/` | CSV (`<TICKER>_holdings.csv`): Ticker, Name, Sector, Location, Weight (%) | Monthly / Quarterly | Underlying global equities for Smartshares ESG wrappers |
-| **Kernel Wealth Index Funds** (Domestic & Global: `Kernel NZ 50`, `Aus Leaders`, `Global 100`, `World Ex-US`, `Clean Energy`) | [Sorted Smart Investor](https://smartinvestor.sorted.org.nz) (Search fund → *Download the full portfolio holdings*) | `data/staging/kernel/` | XLSX (`*.xlsx`): Asset name, % of fund net assets | Semi-Annual / Quarterly | Constituent holdings for unlisted NZ, AU, and global index funds |
+| **Smartshares Direct & Feeder Funds** (`FNZ`, `MDZ`, `NZG`, `OZY`, `ASD`, `TWF`, `USF`, `EUF`, `APA`, `EMF`, `ESG`, `NZB`, `GBF`, `AGG`, etc.) | [Sorted Smart Investor](https://smartinvestor.sorted.org.nz) (Search fund → *Download the full portfolio holdings*) | `data/staging/smartshares/` | XLSX (`*.xlsx`): Asset name, % of fund net assets, Cash & payables | Semi-Annual / Quarterly | Direct NZX/ASX equities, fixed interest, and feeder wrapper cash/hedging buffers |
+| **Vanguard US Master ETFs** (`VT`, `VOO`, `VGK`, `VPL`, `VWO`, `VO`, `VB`) | [Vanguard US Advisor Portal](https://advisors.vanguard.com/investments/products/vt/vanguard-total-world-stock-etf) (*Holdings details* → *Export full holdings*) | `data/staging/vanguard/` | CSV (`Holdings_details_<TICKER_OR_FUND>.csv`): Ticker, Holdings/Name, % of funds, Sub-Industry, Country, SEDOL/CUSIP/ISIN | Monthly (around the 15th) | Underlying global equities for Smartshares feeder wrappers & Global Security Master |
+| **iShares (BlackRock) Master ETFs** (`IWLD`, `IVV`, `SAEU`, `SASU`) | [BlackRock Australia / US](https://www.blackrock.com/au/products/investment-funds) (Product Holdings CSV) | `data/staging/ishares/` | CSV (`<TICKER>_holdings.csv`): Ticker, Name, Sector, Location, Weight (%) | Monthly / Quarterly | Underlying global equities for Smartshares ESG wrappers |
+| **Kernel Wealth Index Funds** (Domestic, Global, Bond & Multi-Asset: `Kernel NZ 50`, `World Ex-US`, `Clean Energy`, `Global ESG`, `Dividend Aristocrats`, `Balanced`, `Conservative`) | [Sorted Smart Investor](https://smartinvestor.sorted.org.nz) (Search fund → *Download the full portfolio holdings*) | `data/staging/kernel/` | XLSX (`*.xlsx`): Asset name, % of fund net assets | Semi-Annual / Quarterly | Constituent holdings for unlisted NZ, AU, bond, and global index funds |
+| **BetaShares ASX ETFs** (e.g., `ASIA` — [Asia Technology Tigers ETF](https://www.betashares.com.au/fund/asia-technology-tigers-etf/)) | Product page on [betashares.com.au](https://www.betashares.com.au/fund/asia-technology-tigers-etf/) (*Holdings & allocation* → *Download CSV*) | `data/staging/betashares/` | CSV (`ASIA_Portfolio_Holdings.csv`): Fund metadata (`Fund ASX Code`, `Date`), Ticker, Name, Asset Class, Sector, Country, Weight (%) | Monthly / Quarterly | Look-through holdings for ASX-listed BetaShares ETFs (balances entered in NZD) |
 | **NZX Official Directory** | [NZX Main Board Table](https://www.nzx.com/markets/NZSX) *(maintained CSV — no bulk ISIN download on NZX website)* | `data/staging/directories/` | CSV (`nzx_directory.csv`): Rank, Ticker, Company Name, Country, Sector *(or NZX Code, Company Name, ISIN, GICS Sector)* | Quarterly / As needed | Canonical security master for NZX-listed equities (auto-enriched with Vanguard VT ISINs where available) |
 | **ASX Official Directory** | [ASX Listed Companies Directory](https://www.asx.com.au/markets/trade-our-cash-market/directory) (*"All ASX Listed Companies .csv"*) | `data/staging/directories/` | CSV (`ASXListedCompanies.csv`): Company name, ASX code, GICS industry group | Quarterly / As needed | Canonical security master for all ASX-listed equities |
 
@@ -31,6 +32,8 @@ Place downloaded candidate files in the local staging folder matching the table 
 ```text
 data/
 └── staging/
+    ├── betashares/
+    │   └── ASIA_Portfolio_Holdings.csv
     ├── directories/
     │   ├── nzx_directory.csv
     │   └── ASXListedCompanies.csv

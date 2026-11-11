@@ -1,170 +1,14 @@
 [
   {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_CLEAN_ENERGY",
-    "raw_name": "Nextracker Inc Class A",
-    "raw_ticker": "",
-    "weight": 0.064494,
+    "provider": "BetaShares",
+    "fund_code": "ASIA",
+    "raw_name": "SEA LTD",
+    "raw_ticker": "SE",
+    "weight": 0.018343,
     "reason": "score_below_90",
     "suggested_snippet": {
-      "Kernel:KERNEL_CLEAN_ENERGY": {
-        "Nextracker Inc Class A": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_CLEAN_ENERGY",
-    "raw_name": "Energias de Portugal SA",
-    "raw_ticker": "",
-    "weight": 0.036556,
-    "reason": "ambiguous_collision_spread_0.05",
-    "suggested_snippet": {
-      "Kernel:KERNEL_CLEAN_ENERGY": {
-        "Energias de Portugal SA": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Smartshares",
-    "fund_code": "AUS",
-    "raw_name": "ISHARES CORE S&P/ASX 200 ETF",
-    "raw_ticker": "",
-    "weight": 0.029274,
-    "reason": "ambiguous_collision_spread_0.02",
-    "suggested_snippet": {
-      "Smartshares:AUS": {
-        "ISHARES CORE S&P/ASX 200 ETF": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_ESG",
-    "raw_name": "Alphabet Inc Class A",
-    "raw_ticker": "",
-    "weight": 0.024138,
-    "reason": "ambiguous_collision_spread_0.00",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_ESG": {
-        "Alphabet Inc Class A": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Smartshares",
-    "fund_code": "MZY",
-    "raw_name": "SGH LIMITED ORDINARY FULLY PAID",
-    "raw_ticker": "",
-    "weight": 0.023093,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Smartshares:MZY": {
-        "SGH LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_CLEAN_ENERGY",
-    "raw_name": "Clearway Energy Inc Class C",
-    "raw_ticker": "",
-    "weight": 0.02239,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_CLEAN_ENERGY": {
-        "Clearway Energy Inc Class C": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_ESG",
-    "raw_name": "Mastercard Inc Class A Ord",
-    "raw_ticker": "",
-    "weight": 0.020296,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_ESG": {
-        "Mastercard Inc Class A Ord": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Smartshares",
-    "fund_code": "MZY",
-    "raw_name": "DYNO NOBEL LIMITED ORDINARY FULLY PAID",
-    "raw_ticker": "",
-    "weight": 0.020194,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Smartshares:MZY": {
-        "DYNO NOBEL LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_ESG",
-    "raw_name": "Alphabet Inc Class C",
-    "raw_ticker": "",
-    "weight": 0.01931,
-    "reason": "ambiguous_collision_spread_0.07",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_ESG": {
-        "Alphabet Inc Class C": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Smartshares",
-    "fund_code": "MZY",
-    "raw_name": "GREATLAND RES LTD",
-    "raw_ticker": "",
-    "weight": 0.017695,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Smartshares:MZY": {
-        "GREATLAND RES LTD": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_DIVIDEND",
-    "raw_name": "Franklin Resources Inc",
-    "raw_ticker": "",
-    "weight": 0.015875,
-    "reason": "ambiguous_collision_spread_0.02",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_DIVIDEND": {
-        "Franklin Resources Inc": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_DIVIDEND",
-    "raw_name": "Universal Corp",
-    "raw_ticker": "",
-    "weight": 0.013978,
-    "reason": "ambiguous_collision_spread_0.11",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_DIVIDEND": {
-        "Universal Corp": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_DIVIDEND",
-    "raw_name": "Peoples Bancorp Inc",
-    "raw_ticker": "",
-    "weight": 0.013778,
-    "reason": "ambiguous_collision_spread_0.02",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_DIVIDEND": {
-        "Peoples Bancorp Inc": "INSERT_CANONICAL_ISIN"
+      "BetaShares:ASIA": {
+        "SEA LTD": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -646,6 +490,19 @@
     "suggested_snippet": {
       "Smartshares:AUS": {
         "SGH LIMITED ORDINARY FULLY PAID": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "BetaShares",
+    "fund_code": "ASIA",
+    "raw_name": "SILICON MOTION TECHNOLOGY CORP",
+    "raw_ticker": "SIMO",
+    "weight": 0.002414,
+    "reason": "ambiguous_collision_spread_0.01",
+    "suggested_snippet": {
+      "BetaShares:ASIA": {
+        "SILICON MOTION TECHNOLOGY CORP": "INSERT_CANONICAL_ISIN"
       }
     }
   },
