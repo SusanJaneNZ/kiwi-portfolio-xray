@@ -24,8 +24,9 @@ LEGAL_SUFFIXES = {
     "ORD", "ORDINARY", "COMMON", "SHARES", "SHS", "REG", "REGISTERED", "STAPLED",
     "PROMESSES", "ADR", "GDR", "BDR", "SPONSORED", "SV", "NA", "ON", "NPV", "CVA",
     "PTG", "NVTG", "PREF", "PREFERENCE",
-    # Trailing country/article/currency tags appended by Vanguard VT or Kernel
+    # Trailing country/article/currency/REIT tags appended by Vanguard VT or Kernel
     "THE", "CANADA", "CN", "USD", "EUR", "SEK", "GBP", "AUD", "NZD", "CHF", "JPY", "KONINKLIJKE",
+    "JREIT", "J-REIT",
 }
 
 TOKEN_EXPANSIONS = {
@@ -34,6 +35,7 @@ TOKEN_EXPANSIONS = {
     "COS": "COMPANIES",
     "HLDG": "HOLDING",
     "DEV": "DEVELOPMENT",
+    "INVEST": "INVESTMENT",
 }
 
 
@@ -41,11 +43,13 @@ def normalize_company_name(name: str) -> str:
     """Normalizes a company name by stripping legal/share suffixes, punctuation, and extra whitespace."""
     if not name:
         return ""
-    # Strip compound abbreviations like A/S, N.V., S.A., O.N., K.K. (using lookaround so trailing dots match cleanly)
+    # Strip trailing exchange ticker + currency tags like " - KER (EUR)"
+    cleaned = re.sub(r"\s+-\s+[A-Z0-9./]{1,6}\s*\([A-Z]{3}\)\s*$", " ", name, flags=re.IGNORECASE)
+    # Strip compound abbreviations like A/S, N.V., S.A., S.p.A., O.N., K.K. (using lookaround so trailing dots match cleanly)
     cleaned = re.sub(
-        r"(?<!\w)(?:A/S|N\.V\.|S\.A\.|A\.G\.|O\.Y\.|P\.L\.C\.|K\.K\.|O\.N\.)(?!\w)",
+        r"(?<!\w)(?:A/S|N\.V\.|S\.A\.|S\.P\.A\.|A\.G\.|O\.Y\.|P\.L\.C\.|K\.K\.|O\.N\.)(?!\w)",
         " ",
-        name,
+        cleaned,
         flags=re.IGNORECASE,
     )
     # Strip parentheses and contents if e.g. (NZ), (AU), (UK Register), (SEK)
@@ -258,6 +262,48 @@ class SecurityMatcher:
             candidate_spread=spread,
             reason=reason,
         )
+
+    def suggest_candidates(self, name: str, limit: int = 3) -> list[dict]:
+        """Returns top Security Master close-match candidates for an unresolved/unlinked holding name."""
+        in_stems = get_stem_tokens(name)
+        candidate_pool: list[dict] = []
+        seen_pool_ids: set[int] = set()
+        for tok in in_stems:
+            for sec in self.by_token.get(tok, []):
+                obj_id = id(sec)
+                if obj_id not in seen_pool_ids:
+                    seen_pool_ids.add(obj_id)
+                    candidate_pool.append(sec)
+
+        # Also include normalized multi-token substring hits when stems are broad or missing
+        lowered_tokens = [t.lower() for t in normalize_company_name(name).split() if len(t) >= 3]
+        if len(candidate_pool) < limit and lowered_tokens:
+            for sec in self.security_master:
+                obj_id = id(sec)
+                if obj_id in seen_pool_ids:
+                    continue
+                sec_name_l = sec.get("name", "").lower()
+                if any(tok in sec_name_l for tok in lowered_tokens):
+                    seen_pool_ids.add(obj_id)
+                    candidate_pool.append(sec)
+
+        scored: list[tuple[float, dict]] = []
+        for sec in candidate_pool:
+            score = token_sort_similarity(name, sec.get("name", ""))
+            scored.append((score, sec))
+        scored.sort(key=lambda x: x[0], reverse=True)
+
+        results: list[dict] = []
+        for score, sec in scored[:limit]:
+            results.append({
+                "isin": sec.get("isin", ""),
+                "name": sec.get("name", ""),
+                "ticker": sec.get("ticker", ""),
+                "country": sec.get("country", "Global"),
+                "sector": self._normalize_sector(sec.get("sector")),
+                "score": round(score, 3),
+            })
+        return results
 
     def _normalize_sector(self, sector_raw: Optional[str]) -> str:
         if not sector_raw:

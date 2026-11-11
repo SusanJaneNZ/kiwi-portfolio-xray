@@ -1,13 +1,13 @@
 {
   "Kernel:KERNEL_NZ_50": {
-    "Chorus Ltd": "NZCNUE0001S2"
+    "Chorus Ltd": "SEDOL:B54F6S5"
   },
   "Kernel:KERNEL_CLEAN_ENERGY": {
-    "Vestas Wind Systems A/S": "DK0061539921",
-    "Orsted A/S": "DK0060094928"
+    "Vestas Wind Systems A/S": "SEDOL:BN4MYF5",
+    "Orsted A/S": "SEDOL:BYT16L4"
   },
   "Smartshares:FNZ": {
-    "FPH NZ": "NZFPHE0001S2"
+    "FPH NZ": "SEDOL:6340250"
   },
   "Kernel:KERNEL_WORLD_EX_US": {
     "LVMH-Moet Vuitton": "SEDOL:4061412",
@@ -17,19 +17,53 @@
     "Munich Re AG": "SEDOL:5294121",
     "Inditex SA": "SEDOL:BP9DL90",
     "Barrick Gold Corp Ord": "SEDOL:BNM23Q1",
-    "Assicurazioni Generali SpA": "IT0000062072",
+    "Assicurazioni Generali SpA": "SEDOL:4056719",
     "Arm Holdings plc ADR": "US0420682058",
     "Sea Ltd. (Singapore)-A": "US81141R1005",
-    "SEB-Skand Enskilda Banken A": "SE0000148884",
-    "Nippon Tel & Tel Corp": "JP3735400008",
-    "Teck Resources Limited Class B SV": "CA8787422044",
-    "Sumitomo Mitsui Ord": "JP3890350006",
-    "Michelin CGDE B Brown": "FR001400AJ45",
-    "Ericsson L.M. Telefonaktie B": "SE0000108656",
-    "Oriental Land Co": "JP3198900007",
+    "SEB-Skand Enskilda Banken A": "SEDOL:4813345",
+    "Nippon Tel & Tel Corp": "SEDOL:6641373",
+    "Teck Resources Limited Class B SV": "SEDOL:2879327",
+    "Sumitomo Mitsui Ord": "SEDOL:6563024",
+    "Michelin CGDE B Brown": "SEDOL:BPBPJ01",
+    "Ericsson L.M. Telefonaktie B": "SEDOL:5959378",
+    "Oriental Land Co": "SEDOL:6648891",
     "Novozymes B A/S": "SEDOL:B798FW0",
     "BMW Ord": "SEDOL:5756029",
-    "Koninklijke Philips Electronics NV (Royal Philips Electronics)": "NL0000009538",
-    "SGS Soc Gen Surveillance Holdings": "CH1256740924"
+    "Koninklijke Philips Electronics NV (Royal Philips Electronics)": "SEDOL:5986622",
+    "SGS Soc Gen Surveillance Holdings": "SEDOL:BMBQHZ4",
+    "Bombardier Inc CL B": "SEDOL:BN33PL2",
+    "Fortescue Metals Group LTD": "SEDOL:6086253",
+    "Energias de Portugal SA": "SEDOL:4103596",
+    "FinecoBank Spa": "SEDOL:BNGN9Z1",
+    "Terna SpA": "SEDOL:B01BN57",
+    "CGI Inc. Class A SV": "SEDOL:BJ2L575",
+    "Roche Hldgs AG Br": "SEDOL:7108918",
+    "Check Point Software (US)": "SEDOL:2181334",
+    "NGK Insulators": "SEDOL:6619507",
+    "Grab Holdings Limited Class A": "SEDOL:BP6NH40",
+    "Hachijuni Bank": "SEDOL:6400626",
+    "NGK Spark Plug": "SEDOL:6619604",
+    "Harel Insurance Inv Ltd 1": "SEDOL:6410700",
+    "Uni Charm Corp": "SEDOL:6911485",
+    "Sandfire Resources NL": "SEDOL:6739739",
+    "Hennes & Mauritz AB B": "SEDOL:5687431",
+    "Bezeq Israeli Telecom Corp": "SEDOL:6098032",
+    "Trend Micro Inc": "SEDOL:6125286",
+    "Capitaland Investment Ord": "SEDOL:BNHXFJ6",
+    "Sapporo Holdings Ltd.": "SEDOL:6776907",
+    "Camtek Ltd.": "SEDOL:B0WG737",
+    "Nordnet AB": "SEDOL:BNDLH43",
+    "EDP Renovaveis SA": "SEDOL:B39GNW2",
+    "Migdal Insurance Hdlgs": "SEDOL:6509062",
+    "Cyber Agent Ltd": "SEDOL:6220501",
+    "MARUWA Co Ltd": "SEDOL:6570660",
+    "Vienna Insurance Group": "SEDOL:B0BKSS2",
+    "Lundbergs AB-B Shs": "SEDOL:4538002",
+    "Shapir Civil and Marine Engineering Ltd": "SEDOL:BTF8CZ0",
+    "Matrix": "SEDOL:6747754",
+    "Fattal Holdings (1998) Ltd": "SEDOL:BG1YKN5",
+    "Electra (Israel)": "SEDOL:6298821",
+    "Y.H. Dimri Building & Development Ltd.": "SEDOL:B02SX80",
+    "Tokyo Broadcasting System Holdings Inc": "SEDOL:6894166"
   }
 }

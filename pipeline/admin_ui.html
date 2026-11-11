@@ -199,8 +199,22 @@
     <!-- UNRESOLVED MAPPER & SAVED ALIASES -->
     <div class="grid-2">
       <div class="card">
-        <h2>4. Unresolved Holdings Mapper</h2>
-        <p class="subtitle" style="margin-bottom: 10px;">Unmatched or ambiguous names from the latest dry-run. Search the Global Security Master or paste a 12-char ISIN to save into <code>provider_alias_map.json</code>.</p>
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 6px;">
+          <h2 style="margin-bottom: 0;">4. Unresolved Holdings Mapper</h2>
+          <div class="row-actions">
+            <button class="btn btn-sm" onclick="copyUnresolvedCsv()">Copy CSV</button>
+            <button class="btn btn-sm" onclick="toggleBulkImport()">Bulk Import CSV</button>
+          </div>
+        </div>
+        <p class="subtitle" style="margin-bottom: 10px;">Unmatched or ambiguous names from the latest dry-run. Click a suggested close match, search the Security Master, or bulk-import CSV mappings into <code>provider_alias_map.json</code>.</p>
+        <div id="bulk-import-box" style="display: none; margin-bottom: 12px; padding: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px;">
+          <div style="font-size: 11px; color: var(--muted); margin-bottom: 6px;">Paste <code>scope,companyName,isin</code> rows (header optional):</div>
+          <textarea id="bulk-csv-text" rows="5" style="width: 100%; background: var(--card); color: var(--text); border: 1px solid var(--border); border-radius: 6px; padding: 6px; font-family: monospace; font-size: 11px;" placeholder="Kernel:KERNEL_WORLD_EX_US,BionTech SE,US09075V1026"></textarea>
+          <div class="row-actions" style="margin-top: 6px; justify-content: flex-end;">
+            <button class="btn btn-sm" onclick="toggleBulkImport()">Cancel</button>
+            <button class="btn btn-primary btn-sm" onclick="bulkImportAliases()">Import All</button>
+          </div>
+        </div>
         <div class="row-actions" style="margin-bottom: 10px;">
           <input type="text" id="sm-search-input" placeholder="Search Security Master (company, ticker, ISIN)..." style="flex: 1;" oninput="searchSecurityMaster(this.value)">
         </div>
@@ -478,6 +492,27 @@
       let html = '';
       unresolvedItemsState.forEach((item, idx) => {
         const scope = `${item.provider}:${item.fund_code}`;
+        const candidates = item.candidates || [];
+        let candHtml = '';
+        if (candidates.length > 0) {
+          candHtml = `<div style="margin: 6px 0; padding: 6px 8px; background: var(--card); border: 1px dashed var(--border); border-radius: 6px;">
+            <div style="font-size: 11px; color: var(--muted); margin-bottom: 4px;">Close matches in <code>security_master.json</code>:</div>`;
+          candidates.forEach((c, cIdx) => {
+            const pct = Math.round((c.score || 0) * 100);
+            candHtml += `
+              <div style="display: flex; justify-content: space-between; align-items: center; gap: 6px; padding: 3px 0; font-size: 11px;">
+                <div>
+                  <span class="badge badge-info">${pct}%</span>
+                  <strong>${escapeHtml(c.name)}</strong>
+                  <span class="mono" style="color: var(--ok); margin-left: 4px;">${escapeHtml(c.isin)}</span>
+                  <span style="color: var(--muted); margin-left: 4px;">${escapeHtml(c.country || '')}${c.sector ? ' • ' + escapeHtml(c.sector) : ''}</span>
+                </div>
+                <button class="btn btn-ok btn-sm" style="padding: 2px 8px; font-size: 11px;" onclick="mapCandidateForUnresolved(${idx}, ${cIdx})">Map to this</button>
+              </div>
+            `;
+          });
+          candHtml += `</div>`;
+        }
         html += `
           <div class="file-row" style="flex-direction: column; align-items: stretch;">
             <div style="display: flex; justify-content: space-between;">
@@ -489,6 +524,7 @@
               <span class="mono" style="color: var(--warn);">${(item.weight * 100).toFixed(2)}%</span>
             </div>
             <div style="font-size: 11px; color: var(--muted);">Reason: <span class="mono">${escapeHtml(item.reason)}</span></div>
+            ${candHtml}
             <div class="row-actions">
               <input type="text" id="map-isin-${idx}" onfocus="focusedMapInputId = 'map-isin-${idx}'" placeholder="Focus here &amp; click 'Use ISIN' above, or paste ISIN" style="flex: 1;">
               <button class="btn btn-primary btn-sm" onclick="saveAliasForUnresolved(${idx})">Map &amp; Save</button>
@@ -577,10 +613,71 @@
       await loadAliases();
     }
 
+    async function mapCandidateForUnresolved(itemIdx, candIdx) {
+      const item = unresolvedItemsState[itemIdx];
+      const cand = item && item.candidates ? item.candidates[candIdx] : null;
+      if (!item || !cand) return;
+      const scope = `${item.provider}:${item.fund_code}`;
+      await api('/api/aliases/set', {
+        method: 'POST',
+        body: JSON.stringify({ scope_key: scope, raw_name: item.raw_name, isin: cand.isin }),
+      });
+      showToast(`Mapped "${item.raw_name}" -> ${cand.isin}`);
+      await loadAliases();
+      await runPipeline(true);
+    }
+
+    function copyUnresolvedCsv() {
+      if (!unresolvedItemsState.length) {
+        showToast('No unresolved items to copy');
+        return;
+      }
+      const csvEscape = (v) => '"' + String(v || '').replace(/"/g, '""') + '"';
+      const lines = ['scope,companyName'];
+      for (const item of unresolvedItemsState) {
+        lines.push(`${item.provider}:${item.fund_code},${csvEscape(item.raw_name)}`);
+      }
+      const csv = lines.join('\n');
+      navigator.clipboard?.writeText(csv);
+      showToast(`Copied ${unresolvedItemsState.length} unresolved items as CSV`);
+    }
+
+    function toggleBulkImport() {
+      const box = document.getElementById('bulk-import-box');
+      box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    }
+
+    async function bulkImportAliases() {
+      const csv_text = document.getElementById('bulk-csv-text').value;
+      const res = await api('/api/aliases/bulk-set', {
+        method: 'POST',
+        body: JSON.stringify({ csv_text }),
+      });
+      document.getElementById('bulk-csv-text').value = '';
+      document.getElementById('bulk-import-box').style.display = 'none';
+      showToast(`Imported ${res.saved_count} alias mappings`);
+      await loadAliases();
+      await runPipeline(true);
+    }
+
+    async function fixAliasByIdx(pairIdx, candIdx) {
+      const pair = savedAliasPairsState[pairIdx];
+      const cand = pair && pair.candidates ? pair.candidates[candIdx] : null;
+      if (!pair || !cand) return;
+      await api('/api/aliases/set', {
+        method: 'POST',
+        body: JSON.stringify({ scope_key: pair.scope, raw_name: pair.name, isin: cand.isin }),
+      });
+      showToast(`Updated "${pair.name}" -> ${cand.isin}`);
+      await loadAliases();
+      await runPipeline(true);
+    }
+
     async function loadAliases() {
       const data = await api('/api/aliases');
       const container = document.getElementById('saved-aliases-list');
       savedAliasPairsState = [];
+      const auditMap = data.audit || {};
       const entries = Object.entries(data.aliases || {});
       if (!entries.length) {
         container.innerHTML = `<div style="color: var(--muted);">No custom aliases saved yet.</div>`;
@@ -590,10 +687,28 @@
       for (const [scope, map] of entries) {
         html += `<div class="provider-group"><div class="provider-title">${escapeHtml(scope)}</div>`;
         for (const [name, isin] of Object.entries(map)) {
-          const idx = savedAliasPairsState.push({ scope, name }) - 1;
+          const info = (auditMap[scope] && auditMap[scope][name]) || null;
+          const candidates = (info && info.candidates) || [];
+          const idx = savedAliasPairsState.push({ scope, name, candidates }) - 1;
+          let statusHtml = '';
+          if (info && info.in_security_master) {
+            statusHtml = `<div style="font-size: 11px; color: var(--muted);">✓ ${escapeHtml(info.sm_name || '')} • ${escapeHtml(info.country || '')}${info.sector ? ' • ' + escapeHtml(info.sector) : ''}</div>`;
+          } else if (info && info.in_security_master === false) {
+            statusHtml = `<div style="font-size: 11px; color: var(--warn);">⚠ Not in security_master.json (Country/Sector Unknown)</div>`;
+            if (candidates.length > 0) {
+              statusHtml += `<div style="display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px;">`;
+              candidates.forEach((c, cIdx) => {
+                statusHtml += `<button class="btn btn-sm" style="padding: 2px 6px; font-size: 10px;" onclick="fixAliasByIdx(${idx}, ${cIdx})">Switch → ${escapeHtml(c.isin)} (${escapeHtml(c.name)})</button>`;
+              });
+              statusHtml += `</div>`;
+            }
+          }
           html += `
             <div class="file-row">
-              <div><strong>${escapeHtml(name)}</strong> → <span class="mono" style="color: var(--ok);">${escapeHtml(isin)}</span></div>
+              <div style="flex: 1;">
+                <div><strong>${escapeHtml(name)}</strong> → <span class="mono" style="color: ${info && info.in_security_master === false ? 'var(--warn)' : 'var(--ok)'};">${escapeHtml(isin)}</span></div>
+                ${statusHtml}
+              </div>
               <button class="btn btn-sm btn-danger" onclick="deleteAliasByIdx(${idx})">Remove</button>
             </div>
           `;

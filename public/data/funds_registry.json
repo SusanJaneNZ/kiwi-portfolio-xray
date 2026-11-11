@@ -37,9 +37,9 @@
     "name": "Kernel World Ex-Us Fund",
     "provider": "Kernel",
     "effective_date": "2026-09-30",
-    "cash_ratio": 0.0039,
+    "cash_ratio": 0.0042,
     "hedging_ratio": 0.0,
-    "constituent_count": 847,
+    "constituent_count": 846,
     "cadence": "monthly",
     "is_stale": false
   }

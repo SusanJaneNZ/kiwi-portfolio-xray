@@ -123,6 +123,16 @@ class TestFuzzyMatcher(unittest.TestCase):
         self.assertFalse(match.matched)
         self.assertIn("ambiguous_collision", match.reason)
 
+    def test_normalization_and_candidate_suggestions(self):
+        self.assertEqual(normalize_company_name("Technoprobe S.p.A."), "TECHNOPROBE")
+        self.assertEqual(normalize_company_name("Kering SA - KER (EUR)"), "KERING")
+        self.assertEqual(normalize_company_name("Nippon Building Fund Inc JREIT"), "NIPPON BUILDING FUND")
+        self.assertEqual(normalize_company_name("Japan Real Estate Invest Corp JREIT"), "JAPAN REAL ESTATE INVESTMENT")
+
+        suggestions = self.matcher.suggest_candidates("Alphabet Inc", limit=2)
+        self.assertEqual(len(suggestions), 2)
+        self.assertTrue(all("Alphabet" in s["name"] for s in suggestions))
+
 
 if __name__ == "__main__":
     unittest.main()

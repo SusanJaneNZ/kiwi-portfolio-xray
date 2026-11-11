@@ -47,6 +47,8 @@ CURRENCY_AND_CASH_TOKENS = (
     "accounts receivable",
     "redemptions payable",
     "subscriptions receivable",
+    "unsettled trades",
+    "unsettled",
     "accrued",
     "term deposit",
     "bank account",

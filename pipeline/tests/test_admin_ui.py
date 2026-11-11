@@ -76,8 +76,24 @@ class TestAdminUI(unittest.TestCase):
         aliases_after = self.service.delete_alias_mapping("Kernel:KERNEL_NZ_50", "Test Corp")
         self.assertNotIn("Test Corp", aliases_after.get("Kernel:KERNEL_NZ_50", {}))
 
-        matches = self.service.search_security_master("Mercury")
+        matches = self.service.search_security_master("Mercury Limited")
         self.assertTrue(any("Mercury" in m["name"] for m in matches))
+
+        # Verify audit_aliases detects linked vs unlinked IDs and suggests close candidates
+        self.service.set_alias_mapping("Kernel:KERNEL_NZ_50", "Mercury Ltd", "NZWRONG0001")
+        audit = self.service.audit_aliases()
+        self.assertFalse(audit["Kernel:KERNEL_NZ_50"]["Mercury Ltd"]["in_security_master"])
+        self.assertTrue(
+            any(c["isin"] == "NZMCYE0001S8" for c in audit["Kernel:KERNEL_NZ_50"]["Mercury Ltd"]["candidates"])
+        )
+
+        # Verify bulk CSV import skips header and placeholder rows
+        csv_payload = "scope,companyName,isin\nKernel:KERNEL_NZ_50,Mercury Ltd,NZMCYE0001S8\nKernel:KERNEL_NZ_50,Skip Me,INSERT_CANONICAL_ISIN\n"
+        updated_map, saved_count = self.service.bulk_set_alias_mappings(csv_text=csv_payload)
+        self.assertEqual(saved_count, 1)
+        self.assertEqual(updated_map["Kernel:KERNEL_NZ_50"]["Mercury Ltd"], "NZMCYE0001S8")
+        audit_after = self.service.audit_aliases()
+        self.assertTrue(audit_after["Kernel:KERNEL_NZ_50"]["Mercury Ltd"]["in_security_master"])
 
     def test_feeder_registry_crud_and_validation(self):
         initial = self.service.get_feeder_registry()
@@ -128,6 +144,12 @@ class TestAdminUI(unittest.TestCase):
                 self.assertEqual(resp.status, 200)
                 payload = json.loads(resp.read().decode("utf-8"))
                 self.assertIn("TWF", payload["feeders"])
+
+            with urllib.request.urlopen(f"http://127.0.0.1:{port}/api/aliases") as resp:
+                self.assertEqual(resp.status, 200)
+                payload = json.loads(resp.read().decode("utf-8"))
+                self.assertIn("aliases", payload)
+                self.assertIn("audit", payload)
 
             set_req = urllib.request.Request(
                 f"http://127.0.0.1:{port}/api/feeders/set",

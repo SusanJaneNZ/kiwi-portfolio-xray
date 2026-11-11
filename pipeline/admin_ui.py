@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import argparse
 import base64
+import csv
+import io
 import json
 import sys
 from datetime import datetime, timezone
@@ -18,6 +20,7 @@ from pipeline.adapters.kernel_adapter import KernelAdapter
 from pipeline.adapters.smartshares_direct_adapter import SmartsharesDirectAdapter
 from pipeline.adapters.tabular_reader import read_tabular_rows
 from pipeline.adapters.vanguard_adapter import VanguardAdapter
+from pipeline.enrichment.fuzzy_matcher import SecurityMatcher, token_sort_similarity
 from pipeline.output.build_output import PipelineCompiler
 from pipeline.security_master.build_security_master import (
     _atomic_write_json,
@@ -195,6 +198,18 @@ class AdminService:
 
         return {"raw_lines": raw_lines, "parse_summary": parse_summary}
 
+    def _build_security_matcher(self) -> SecurityMatcher | None:
+        """Builds a SecurityMatcher from current security_master.json and gics_mapping.json."""
+        if not self.security_master_path.exists():
+            return None
+        sm_data = json.loads(self.security_master_path.read_text(encoding="utf-8"))
+        gics_data = (
+            json.loads(self.gics_mapping_path.read_text(encoding="utf-8"))
+            if self.gics_mapping_path.exists()
+            else {}
+        )
+        return SecurityMatcher(security_master=sm_data, alias_map=self.get_alias_map(), gics_mapping=gics_data)
+
     def run_pipeline(self, dry_run: bool = True) -> dict[str, Any]:
         """Executes PipelineCompiler in dry-run or production build mode."""
         compiler = PipelineCompiler(
@@ -203,6 +218,13 @@ class AdminService:
             repo_root=self.repo_root,
         )
         report, summary = compiler.compile(dry_run=dry_run)
+        unresolved = summary.get("unresolved_entries", [])
+        if unresolved:
+            matcher = self._build_security_matcher()
+            if matcher:
+                for entry in unresolved:
+                    entry["candidates"] = matcher.suggest_candidates(entry.get("raw_name", ""), limit=3)
+
         return {
             "dry_run": dry_run,
             "is_valid": report.is_valid,
@@ -212,7 +234,7 @@ class AdminService:
             "sec_master_summary": summary.get("sec_master_summary", {}),
             "total_funds_compiled": summary.get("total_funds_compiled", 0),
             "total_unresolved_entries": summary.get("total_unresolved_entries", 0),
-            "unresolved_entries": summary.get("unresolved_entries", []),
+            "unresolved_entries": unresolved,
         }
 
     def get_alias_map(self) -> dict[str, dict[str, str]]:
@@ -220,6 +242,34 @@ class AdminService:
         if not self.alias_map_path.exists():
             return {}
         return json.loads(self.alias_map_path.read_text(encoding="utf-8"))
+
+    def audit_aliases(self) -> dict[str, dict[str, dict[str, Any]]]:
+        """Audits provider_alias_map.json entries against security_master.json and suggests fixes for unlinked IDs."""
+        alias_map = self.get_alias_map()
+        matcher = self._build_security_matcher()
+        audit: dict[str, dict[str, dict[str, Any]]] = {}
+        for scope, mp in alias_map.items():
+            scope_audit: dict[str, dict[str, Any]] = {}
+            for raw_name, isin in mp.items():
+                if matcher and isin in matcher.by_isin:
+                    sec = matcher.by_isin[isin]
+                    scope_audit[raw_name] = {
+                        "isin": isin,
+                        "in_security_master": True,
+                        "sm_name": sec.get("name", ""),
+                        "ticker": sec.get("ticker", ""),
+                        "country": sec.get("country", "Global"),
+                        "sector": matcher._normalize_sector(sec.get("sector")),
+                    }
+                else:
+                    cands = matcher.suggest_candidates(raw_name, limit=2) if matcher else []
+                    scope_audit[raw_name] = {
+                        "isin": isin,
+                        "in_security_master": False,
+                        "candidates": cands,
+                    }
+            audit[scope] = scope_audit
+        return audit
 
     def set_alias_mapping(self, scope_key: str, raw_name: str, isin: str) -> dict[str, dict[str, str]]:
         """Adds or updates a single alias mapping in provider_alias_map.json."""
@@ -231,9 +281,46 @@ class AdminService:
 
         alias_map = self.get_alias_map()
         alias_map.setdefault(scope, {})[name] = clean_isin
-        self.alias_map_path.parent.mkdir(parents=True, exist_ok=True)
-        self.alias_map_path.write_text(json.dumps(alias_map, indent=2) + "\n", encoding="utf-8")
+        _atomic_write_json(self.alias_map_path, alias_map)
         return alias_map
+
+    def bulk_set_alias_mappings(
+        self,
+        mappings: list[dict[str, str]] | None = None,
+        csv_text: str = "",
+    ) -> tuple[dict[str, dict[str, str]], int]:
+        """Adds or updates multiple alias mappings from structured dicts or scope,companyName,isin CSV."""
+        parsed_rows: list[tuple[str, str, str]] = []
+        if mappings:
+            for item in mappings:
+                parsed_rows.append((
+                    str(item.get("scope_key", "")).strip(),
+                    str(item.get("raw_name", "")).strip(),
+                    str(item.get("isin", "")).strip().upper(),
+                ))
+        if csv_text and csv_text.strip():
+            reader = csv.reader(io.StringIO(csv_text.strip()))
+            for row in reader:
+                if len(row) < 3:
+                    continue
+                scope, name, isin = row[0].strip(), row[1].strip(), row[2].strip().upper()
+                if scope.lower() in {"scope", "scope_key"} and name.lower() in {"companyname", "company_name", "raw_name"}:
+                    continue
+                parsed_rows.append((scope, name, isin))
+
+        alias_map = self.get_alias_map()
+        saved_count = 0
+        for scope, name, clean_isin in parsed_rows:
+            if not scope or not name or not clean_isin or clean_isin == "INSERT_CANONICAL_ISIN":
+                continue
+            alias_map.setdefault(scope, {})[name] = clean_isin
+            saved_count += 1
+
+        if saved_count == 0:
+            raise ValueError("No valid (scope, companyName, isin) rows found to import.")
+
+        _atomic_write_json(self.alias_map_path, alias_map)
+        return alias_map, saved_count
 
     def delete_alias_mapping(self, scope_key: str, raw_name: str) -> dict[str, dict[str, str]]:
         """Removes an alias mapping from provider_alias_map.json."""
@@ -242,11 +329,11 @@ class AdminService:
             del alias_map[scope_key][raw_name]
             if not alias_map[scope_key]:
                 del alias_map[scope_key]
-            self.alias_map_path.write_text(json.dumps(alias_map, indent=2) + "\n", encoding="utf-8")
+            _atomic_write_json(self.alias_map_path, alias_map)
         return alias_map
 
     def search_security_master(self, query: str, limit: int = 15) -> list[dict[str, Any]]:
-        """Searches security_master.json by name, ticker, or ISIN."""
+        """Searches security_master.json using multi-token matching and fuzzy close-match ranking."""
         if not self.security_master_path.exists():
             return []
         data = json.loads(self.security_master_path.read_text(encoding="utf-8"))
@@ -254,14 +341,29 @@ class AdminService:
         if not q:
             return data[:limit]
 
-        matches = [
-            item
-            for item in data
-            if q in item.get("name", "").lower()
-            or q in item.get("ticker", "").lower()
-            or q in item.get("isin", "").lower()
-        ]
-        return matches[:limit]
+        q_tokens = q.split()
+        exact_or_token_matches: list[tuple[float, dict[str, Any]]] = []
+        seen_isins: set[str] = set()
+        for item in data:
+            hay = f"{item.get('name', '')} {item.get('ticker', '')} {item.get('isin', '')}".lower()
+            if q in hay or (len(q_tokens) > 1 and all(tok in hay for tok in q_tokens)):
+                score = 1.1 if (q == item.get("ticker", "").lower() or q == item.get("isin", "").lower()) else token_sort_similarity(query, item.get("name", ""))
+                exact_or_token_matches.append((score, item))
+                seen_isins.add(item.get("isin", ""))
+
+        exact_or_token_matches.sort(key=lambda pair: pair[0], reverse=True)
+        results = [item for _, item in exact_or_token_matches[:limit]]
+
+        if len(results) < limit:
+            matcher = self._build_security_matcher()
+            if matcher:
+                for cand in matcher.suggest_candidates(query, limit=limit):
+                    if cand["isin"] not in seen_isins and cand["score"] >= 0.45:
+                        seen_isins.add(cand["isin"])
+                        results.append(cand)
+                        if len(results) >= limit:
+                            break
+        return results
 
     def get_feeder_registry(self) -> dict[str, dict[str, str]]:
         """Loads pipeline/feeder_registry.json."""
@@ -347,7 +449,7 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                     filename = qs.get("filename", [""])[0]
                     self._send_json(service.preview_staged_file(provider, filename))
                 elif path == "/api/aliases":
-                    self._send_json({"aliases": service.get_alias_map()})
+                    self._send_json({"aliases": service.get_alias_map(), "audit": service.audit_aliases()})
                 elif path == "/api/feeders":
                     self._send_json({"feeders": service.get_feeder_registry()})
                 elif path == "/api/security-master":
@@ -389,13 +491,19 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                         raw_name=data.get("raw_name", ""),
                         isin=data.get("isin", ""),
                     )
-                    self._send_json({"aliases": aliases})
+                    self._send_json({"aliases": aliases, "audit": service.audit_aliases()})
+                elif path == "/api/aliases/bulk-set":
+                    aliases, saved_count = service.bulk_set_alias_mappings(
+                        mappings=data.get("mappings"),
+                        csv_text=data.get("csv_text", ""),
+                    )
+                    self._send_json({"aliases": aliases, "audit": service.audit_aliases(), "saved_count": saved_count})
                 elif path == "/api/aliases/delete":
                     aliases = service.delete_alias_mapping(
                         scope_key=data.get("scope_key", ""),
                         raw_name=data.get("raw_name", ""),
                     )
-                    self._send_json({"aliases": aliases})
+                    self._send_json({"aliases": aliases, "audit": service.audit_aliases()})
                 elif path == "/api/feeders/set":
                     feeders = service.set_feeder_pairing(
                         feeder_code=data.get("feeder_code", ""),

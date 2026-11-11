@@ -2,84 +2,6 @@
   {
     "provider": "Kernel",
     "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Bombardier Inc CL B",
-    "raw_ticker": "",
-    "weight": 0.000805,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Bombardier Inc CL B": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Fortescue Metals Group LTD",
-    "raw_ticker": "",
-    "weight": 0.000805,
-    "reason": "ambiguous_collision_spread_0.05",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Fortescue Metals Group LTD": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Kering SA - KER (EUR)",
-    "raw_ticker": "",
-    "weight": 0.000705,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Kering SA - KER (EUR)": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Energias de Portugal SA",
-    "raw_ticker": "",
-    "weight": 0.000705,
-    "reason": "ambiguous_collision_spread_0.05",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Energias de Portugal SA": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "FinecoBank Spa",
-    "raw_ticker": "",
-    "weight": 0.000604,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "FinecoBank Spa": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Terna SpA",
-    "raw_ticker": "",
-    "weight": 0.000604,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Terna SpA": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
     "raw_name": "Concordia Financial Group",
     "raw_ticker": "",
     "weight": 0.000604,
@@ -87,32 +9,6 @@
     "suggested_snippet": {
       "Kernel:KERNEL_WORLD_EX_US": {
         "Concordia Financial Group": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "CGI Inc. Class A SV",
-    "raw_ticker": "",
-    "weight": 0.000503,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "CGI Inc. Class A SV": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Roche Hldgs AG Br",
-    "raw_ticker": "",
-    "weight": 0.000503,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Roche Hldgs AG Br": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -145,19 +41,6 @@
   {
     "provider": "Kernel",
     "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Check Point Software (US)",
-    "raw_ticker": "",
-    "weight": 0.000403,
-    "reason": "ambiguous_collision_spread_0.04",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Check Point Software (US)": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
     "raw_name": "CCL Industries Inc. Class B NV",
     "raw_ticker": "",
     "weight": 0.000403,
@@ -165,84 +48,6 @@
     "suggested_snippet": {
       "Kernel:KERNEL_WORLD_EX_US": {
         "CCL Industries Inc. Class B NV": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "NGK Insulators",
-    "raw_ticker": "",
-    "weight": 0.000403,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "NGK Insulators": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Grab Holdings Limited Class A",
-    "raw_ticker": "",
-    "weight": 0.000403,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Grab Holdings Limited Class A": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Hachijuni Bank",
-    "raw_ticker": "",
-    "weight": 0.000302,
-    "reason": "ambiguous_collision_spread_0.07",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Hachijuni Bank": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "NGK Spark Plug",
-    "raw_ticker": "",
-    "weight": 0.000302,
-    "reason": "ambiguous_collision_spread_0.13",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "NGK Spark Plug": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Harel Insurance Inv Ltd 1",
-    "raw_ticker": "",
-    "weight": 0.000302,
-    "reason": "ambiguous_collision_spread_0.00",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Harel Insurance Inv Ltd 1": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Uni Charm Corp",
-    "raw_ticker": "",
-    "weight": 0.000302,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Uni Charm Corp": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -262,45 +67,6 @@
   {
     "provider": "Kernel",
     "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Sandfire Resources NL",
-    "raw_ticker": "",
-    "weight": 0.000302,
-    "reason": "ambiguous_collision_spread_0.07",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Sandfire Resources NL": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Unsettled Trades",
-    "raw_ticker": "",
-    "weight": 0.000302,
-    "reason": "no_candidates_above_70",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Unsettled Trades": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Hennes & Mauritz AB B",
-    "raw_ticker": "",
-    "weight": 0.000302,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Hennes & Mauritz AB B": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
     "raw_name": "Futu Holdings Ltd ADR",
     "raw_ticker": "",
     "weight": 0.000302,
@@ -308,45 +74,6 @@
     "suggested_snippet": {
       "Kernel:KERNEL_WORLD_EX_US": {
         "Futu Holdings Ltd ADR": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Nippon Building Fund Inc JREIT",
-    "raw_ticker": "",
-    "weight": 0.000302,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Nippon Building Fund Inc JREIT": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Bezeq Israeli Telecom Corp",
-    "raw_ticker": "",
-    "weight": 0.000302,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Bezeq Israeli Telecom Corp": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Technoprobe S.p.A.",
-    "raw_ticker": "",
-    "weight": 0.000201,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Technoprobe S.p.A.": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -392,175 +119,6 @@
   {
     "provider": "Kernel",
     "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Trend Micro Inc",
-    "raw_ticker": "",
-    "weight": 0.000201,
-    "reason": "ambiguous_collision_spread_0.12",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Trend Micro Inc": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Japan Real Estate Invest Corp JREIT",
-    "raw_ticker": "",
-    "weight": 0.000201,
-    "reason": "ambiguous_collision_spread_0.09",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Japan Real Estate Invest Corp JREIT": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Capitaland Investment Ord",
-    "raw_ticker": "",
-    "weight": 0.000201,
-    "reason": "ambiguous_collision_spread_0.01",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Capitaland Investment Ord": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Sapporo Holdings Ltd.",
-    "raw_ticker": "",
-    "weight": 0.000201,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Sapporo Holdings Ltd.": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Camtek Ltd.",
-    "raw_ticker": "",
-    "weight": 0.000201,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Camtek Ltd.": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Nordnet AB",
-    "raw_ticker": "",
-    "weight": 0.000201,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Nordnet AB": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "EDP Renovaveis SA",
-    "raw_ticker": "",
-    "weight": 0.000201,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "EDP Renovaveis SA": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Migdal Insurance Hdlgs",
-    "raw_ticker": "",
-    "weight": 0.000201,
-    "reason": "ambiguous_collision_spread_0.05",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Migdal Insurance Hdlgs": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Cyber Agent Ltd",
-    "raw_ticker": "",
-    "weight": 0.000101,
-    "reason": "no_candidates_above_70",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Cyber Agent Ltd": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "MARUWA Co Ltd",
-    "raw_ticker": "",
-    "weight": 0.000101,
-    "reason": "ambiguous_collision_spread_0.04",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "MARUWA Co Ltd": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Vienna Insurance Group",
-    "raw_ticker": "",
-    "weight": 0.000101,
-    "reason": "ambiguous_collision_spread_0.01",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Vienna Insurance Group": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Lundbergs AB-B Shs",
-    "raw_ticker": "",
-    "weight": 0.000101,
-    "reason": "no_candidates_above_70",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Lundbergs AB-B Shs": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Shapir Civil and Marine Engineering Ltd",
-    "raw_ticker": "",
-    "weight": 0.000101,
-    "reason": "ambiguous_collision_spread_0.13",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Shapir Civil and Marine Engineering Ltd": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
     "raw_name": "Christian Dior SE",
     "raw_ticker": "",
     "weight": 0.000101,
@@ -568,45 +126,6 @@
     "suggested_snippet": {
       "Kernel:KERNEL_WORLD_EX_US": {
         "Christian Dior SE": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Matrix",
-    "raw_ticker": "",
-    "weight": 0.000101,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Matrix": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Fattal Holdings (1998) Ltd",
-    "raw_ticker": "",
-    "weight": 0.000101,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Fattal Holdings (1998) Ltd": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Electra (Israel)",
-    "raw_ticker": "",
-    "weight": 0.000101,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Electra (Israel)": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -646,32 +165,6 @@
     "suggested_snippet": {
       "Kernel:KERNEL_WORLD_EX_US": {
         "eToro Group Ltd": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Y.H. Dimri Building & Development Ltd.",
-    "raw_ticker": "",
-    "weight": 0.000101,
-    "reason": "ambiguous_collision_spread_0.08",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Y.H. Dimri Building & Development Ltd.": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "raw_name": "Tokyo Broadcasting System Holdings Inc",
-    "raw_ticker": "",
-    "weight": 0.000101,
-    "reason": "ambiguous_collision_spread_0.08",
-    "suggested_snippet": {
-      "Kernel:KERNEL_WORLD_EX_US": {
-        "Tokyo Broadcasting System Holdings Inc": "INSERT_CANONICAL_ISIN"
       }
     }
   }

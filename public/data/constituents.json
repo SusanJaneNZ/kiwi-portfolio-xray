@@ -90252,7 +90252,7 @@
       "ticker": "ASML",
       "country": "Netherlands",
       "sector": "Information Technology",
-      "weight": 0.02879076
+      "weight": 0.02879082
     },
     {
       "isin": "SEDOL:0540528",
@@ -90260,7 +90260,7 @@
       "ticker": "HSBA",
       "country": "United Kingdom",
       "sector": "Financials",
-      "weight": 0.01399271
+      "weight": 0.01399274
     },
     {
       "isin": "SEDOL:7108918",
@@ -90268,7 +90268,7 @@
       "ticker": "RO",
       "country": "Switzerland",
       "sector": "Health Care",
-      "weight": 0.01208004
+      "weight": 0.01208006
     },
     {
       "isin": "SEDOL:6335171",
@@ -90276,7 +90276,7 @@
       "ticker": "8306",
       "country": "Japan",
       "sector": "Financials",
-      "weight": 0.01157671
+      "weight": 0.01157673
     },
     {
       "isin": "SEDOL:BP6MXD8",
@@ -90284,7 +90284,7 @@
       "ticker": "SHEL",
       "country": "United Kingdom",
       "sector": "Energy",
-      "weight": 0.0112747
+      "weight": 0.01127473
     },
     {
       "isin": "SEDOL:2754383",
@@ -90292,7 +90292,7 @@
       "ticker": "RY",
       "country": "Canada",
       "sector": "Financials",
-      "weight": 0.01117404
+      "weight": 0.01117406
     },
     {
       "isin": "SEDOL:7103065",
@@ -90300,7 +90300,7 @@
       "ticker": "NOVN",
       "country": "Switzerland",
       "sector": "Health Care",
-      "weight": 0.01077137
+      "weight": 0.01077139
     },
     {
       "isin": "SEDOL:0989529",
@@ -90308,7 +90308,7 @@
       "ticker": "AZN",
       "country": "United Kingdom",
       "sector": "Health Care",
-      "weight": 0.0103687
+      "weight": 0.01036872
     },
     {
       "isin": "SEDOL:7123870",
@@ -90316,7 +90316,7 @@
       "ticker": "NESN",
       "country": "Switzerland",
       "sector": "Consumer Staples",
-      "weight": 0.00966403
+      "weight": 0.00966405
     },
     {
       "isin": "SEDOL:B15T569",
@@ -90324,7 +90324,7 @@
       "ticker": "SIEM",
       "country": "India",
       "sector": "Industrials",
-      "weight": 0.00926136
+      "weight": 0.00926138
     },
     {
       "isin": "SEDOL:6900643",
@@ -90332,7 +90332,7 @@
       "ticker": "7203",
       "country": "Japan",
       "sector": "Consumer Discretionary",
-      "weight": 0.00906003
+      "weight": 0.00906005
     },
     {
       "isin": "SEDOL:4846288",
@@ -90340,7 +90340,7 @@
       "ticker": "SAP",
       "country": "Germany",
       "sector": "Information Technology",
-      "weight": 0.0088587
+      "weight": 0.00885871
     },
     {
       "isin": "SEDOL:6144690",
@@ -90348,7 +90348,7 @@
       "ticker": "BHP.AX",
       "country": "Australia",
       "sector": "Materials",
-      "weight": 0.0088587
+      "weight": 0.00885871
     },
     {
       "isin": "SEDOL:5705946",
@@ -90356,7 +90356,7 @@
       "ticker": "SAN",
       "country": "Spain",
       "sector": "Financials",
-      "weight": 0.00865736
+      "weight": 0.00865738
     },
     {
       "isin": "SEDOL:2897222",
@@ -90364,7 +90364,7 @@
       "ticker": "TD",
       "country": "Canada",
       "sector": "Financials",
-      "weight": 0.00795269
+      "weight": 0.00795271
     },
     {
       "isin": "SEDOL:6895675",
@@ -90372,7 +90372,7 @@
       "ticker": "8035",
       "country": "Japan",
       "sector": "Information Technology",
-      "weight": 0.00744936
+      "weight": 0.00744937
     },
     {
       "isin": "SEDOL:4834108",
@@ -90380,7 +90380,7 @@
       "ticker": "SU",
       "country": "France",
       "sector": "Industrials",
-      "weight": 0.00734869
+      "weight": 0.00734871
     },
     {
       "isin": "SEDOL:5231485",
@@ -90388,7 +90388,7 @@
       "ticker": "ALV",
       "country": "Germany",
       "sector": "Financials",
-      "weight": 0.00734869
+      "weight": 0.00734871
     },
     {
       "isin": "SEDOL:BX865C7",
@@ -90396,7 +90396,7 @@
       "ticker": "SHOP",
       "country": "Canada",
       "sector": "Information Technology",
-      "weight": 0.00734869
+      "weight": 0.00734871
     },
     {
       "isin": "SEDOL:6215035",
@@ -90404,7 +90404,7 @@
       "ticker": "CBA.AX",
       "country": "Australia",
       "sector": "Financials",
-      "weight": 0.00724802
+      "weight": 0.00724804
     },
     {
       "isin": "SEDOL:6563024",
@@ -90412,7 +90412,7 @@
       "ticker": "8316",
       "country": "Japan",
       "sector": "Financials",
-      "weight": 0.00694602
+      "weight": 0.00694604
     },
     {
       "isin": "SEDOL:6870490",
@@ -90420,7 +90420,7 @@
       "ticker": "6857",
       "country": "Japan",
       "sector": "Information Technology",
-      "weight": 0.00664402
+      "weight": 0.00664404
     },
     {
       "isin": "SEDOL:6429104",
@@ -90428,7 +90428,7 @@
       "ticker": "6501",
       "country": "Japan",
       "sector": "Industrials",
-      "weight": 0.00654336
+      "weight": 0.00654337
     },
     {
       "isin": "SEDOL:BF5M0K5",
@@ -90436,7 +90436,7 @@
       "ticker": "9434",
       "country": "Japan",
       "sector": "Communication Services",
-      "weight": 0.00644269
+      "weight": 0.0064427
     },
     {
       "isin": "SEDOL:5501906",
@@ -90444,7 +90444,7 @@
       "ticker": "BBVA",
       "country": "Spain",
       "sector": "Financials",
-      "weight": 0.00644269
+      "weight": 0.0064427
     },
     {
       "isin": "SEDOL:BQRRZ00",
@@ -90452,7 +90452,7 @@
       "ticker": "6098",
       "country": "Japan",
       "sector": "Industrials",
-      "weight": 0.00614069
+      "weight": 0.0061407
     },
     {
       "isin": "SEDOL:BRJL176",
@@ -90460,7 +90460,7 @@
       "ticker": "UBSG",
       "country": "Switzerland",
       "sector": "Financials",
-      "weight": 0.00604002
+      "weight": 0.00604003
     },
     {
       "isin": "SEDOL:7108899",
@@ -90468,7 +90468,7 @@
       "ticker": "ABBN",
       "country": "Switzerland",
       "sector": "Industrials",
-      "weight": 0.00593935
+      "weight": 0.00593937
     },
     {
       "isin": "SEDOL:6821506",
@@ -90476,7 +90476,7 @@
       "ticker": "6758",
       "country": "Japan",
       "sector": "Consumer Discretionary",
-      "weight": 0.00593935
+      "weight": 0.00593937
     },
     {
       "isin": "SEDOL:B288C92",
@@ -90484,7 +90484,7 @@
       "ticker": "IBE",
       "country": "Spain",
       "sector": "Utilities",
-      "weight": 0.00583869
+      "weight": 0.0058387
     },
     {
       "isin": "SEDOL:BYMXPS7",
@@ -90492,7 +90492,7 @@
       "ticker": "UCG",
       "country": "Italy",
       "sector": "Financials",
-      "weight": 0.00583869
+      "weight": 0.0058387
     },
     {
       "isin": "SEDOL:6591014",
@@ -90500,7 +90500,7 @@
       "ticker": "8411",
       "country": "Japan",
       "sector": "Financials",
-      "weight": 0.00573802
+      "weight": 0.00573803
     },
     {
       "isin": "SEDOL:BMGYJ02",
@@ -90508,7 +90508,7 @@
       "ticker": "285A",
       "country": "Japan",
       "sector": "Information Technology",
-      "weight": 0.00543602
+      "weight": 0.00543603
     },
     {
       "isin": "SEDOL:BPGN2S9",
@@ -90516,7 +90516,7 @@
       "ticker": "",
       "country": "France",
       "sector": "Materials",
-      "weight": 0.00543602
+      "weight": 0.00543603
     },
     {
       "isin": "SEDOL:BVZK7T9",
@@ -90524,7 +90524,7 @@
       "ticker": "ULVR",
       "country": "United Kingdom",
       "sector": "Consumer Staples",
-      "weight": 0.00543602
+      "weight": 0.00543603
     },
     {
       "isin": "SEDOL:6175203",
@@ -90532,7 +90532,7 @@
       "ticker": "DBS",
       "country": "Singapore",
       "sector": "Financials",
-      "weight": 0.00513402
+      "weight": 0.00513403
     },
     {
       "isin": "SEDOL:BP6KMJ1",
@@ -90540,7 +90540,7 @@
       "ticker": "NOVOB",
       "country": "Denmark",
       "sector": "Health Care",
-      "weight": 0.00503335
+      "weight": 0.00503336
     },
     {
       "isin": "SEDOL:BMTVQK9",
@@ -90548,7 +90548,7 @@
       "ticker": "ENR",
       "country": "Germany",
       "sector": "Industrials",
-      "weight": 0.00493268
+      "weight": 0.00493269
     },
     {
       "isin": "SEDOL:2076009",
@@ -90556,7 +90556,7 @@
       "ticker": "BMO",
       "country": "Canada",
       "sector": "Financials",
-      "weight": 0.00483202
+      "weight": 0.00483203
     },
     {
       "isin": "SEDOL:4076836",
@@ -90564,7 +90564,7 @@
       "ticker": "ISP",
       "country": "Italy",
       "sector": "Financials",
-      "weight": 0.00473135
+      "weight": 0.00473136
     },
     {
       "isin": "SEDOL:BCRWZ18",
@@ -90572,7 +90572,7 @@
       "ticker": "CFR",
       "country": "Switzerland",
       "sector": "Consumer Discretionary",
-      "weight": 0.00473135
+      "weight": 0.00473136
     },
     {
       "isin": "SEDOL:0798059",
@@ -90580,7 +90580,7 @@
       "ticker": "BP/",
       "country": "United Kingdom",
       "sector": "Energy",
-      "weight": 0.00473135
+      "weight": 0.00473136
     },
     {
       "isin": "SEDOL:6596785",
@@ -90588,7 +90588,7 @@
       "ticker": "8058",
       "country": "Japan",
       "sector": "Industrials",
-      "weight": 0.00463068
+      "weight": 0.00463069
     },
     {
       "isin": "SEDOL:4061412",
@@ -90596,7 +90596,7 @@
       "ticker": "MC",
       "country": "France",
       "sector": "Consumer Discretionary",
-      "weight": 0.00463068
+      "weight": 0.00463069
     },
     {
       "isin": "SEDOL:2076281",
@@ -90612,7 +90612,7 @@
       "ticker": "BNP",
       "country": "France",
       "sector": "Financials",
-      "weight": 0.00442935
+      "weight": 0.00442936
     },
     {
       "isin": "SEDOL:BZ57390",
@@ -90620,7 +90620,7 @@
       "ticker": "INGA",
       "country": "Netherlands",
       "sector": "Financials",
-      "weight": 0.00422801
+      "weight": 0.00422802
     },
     {
       "isin": "SEDOL:5983816",
@@ -90628,7 +90628,7 @@
       "ticker": "ZURN",
       "country": "Switzerland",
       "sector": "Financials",
-      "weight": 0.00422801
+      "weight": 0.00422802
     },
     {
       "isin": "SEDOL:5842359",
@@ -90636,7 +90636,7 @@
       "ticker": "DTE",
       "country": "Germany",
       "sector": "Communication Services",
-      "weight": 0.00422801
+      "weight": 0.00422802
     },
     {
       "isin": "SEDOL:2466149",
@@ -90644,7 +90644,7 @@
       "ticker": "ENB",
       "country": "Canada",
       "sector": "Energy",
-      "weight": 0.00412735
+      "weight": 0.00412736
     },
     {
       "isin": "SEDOL:2170525",
@@ -90652,7 +90652,7 @@
       "ticker": "CM",
       "country": "Canada",
       "sector": "Financials",
-      "weight": 0.00412735
+      "weight": 0.00412736
     },
     {
       "isin": "SEDOL:6220103",
@@ -90660,7 +90660,7 @@
       "ticker": "RIO",
       "country": "Australia",
       "sector": "Materials",
-      "weight": 0.00412735
+      "weight": 0.00412736
     },
     {
       "isin": "SEDOL:6490995",
@@ -90668,7 +90668,7 @@
       "ticker": "6861",
       "country": "Japan",
       "sector": "Information Technology",
-      "weight": 0.00412735
+      "weight": 0.00412736
     },
     {
       "isin": "SEDOL:6513126",
@@ -90676,7 +90676,7 @@
       "ticker": "8766",
       "country": "Japan",
       "sector": "Financials",
-      "weight": 0.00412735
+      "weight": 0.00412736
     },
     {
       "isin": "SEDOL:BPGN2L2",
@@ -90684,7 +90684,7 @@
       "ticker": "",
       "country": "France",
       "sector": "Consumer Staples",
-      "weight": 0.00402668
+      "weight": 0.00402669
     },
     {
       "isin": "SEDOL:6467803",
@@ -90692,7 +90692,7 @@
       "ticker": "8001",
       "country": "Japan",
       "sector": "Industrials",
-      "weight": 0.00402668
+      "weight": 0.00402669
     },
     {
       "isin": "SEDOL:BN7SWP6",
@@ -90700,7 +90700,7 @@
       "ticker": "GSK",
       "country": "United Kingdom",
       "sector": "Health Care",
-      "weight": 0.00402668
+      "weight": 0.00402669
     },
     {
       "isin": "SEDOL:2171573",
@@ -90708,7 +90708,7 @@
       "ticker": "CNQ",
       "country": "Canada",
       "sector": "Energy",
-      "weight": 0.00402668
+      "weight": 0.00402669
     },
     {
       "isin": "SEDOL:B4TX8S1",
@@ -90716,7 +90716,7 @@
       "ticker": "1299",
       "country": "Hong Kong",
       "sector": "Financials",
-      "weight": 0.00402668
+      "weight": 0.00402669
     },
     {
       "isin": "SEDOL:6332439",
@@ -90724,7 +90724,7 @@
       "ticker": "9983",
       "country": "Japan",
       "sector": "Consumer Discretionary",
-      "weight": 0.00392601
+      "weight": 0.00392602
     },
     {
       "isin": "SEDOL:2009823",
@@ -90748,7 +90748,7 @@
       "ticker": "6981",
       "country": "Japan",
       "sector": "Information Technology",
-      "weight": 0.00372468
+      "weight": 0.00372469
     },
     {
       "isin": "SEDOL:6597302",
@@ -90756,7 +90756,7 @@
       "ticker": "8031",
       "country": "Japan",
       "sector": "Industrials",
-      "weight": 0.00372468
+      "weight": 0.00372469
     },
     {
       "isin": "SEDOL:5671735",
@@ -90764,7 +90764,7 @@
       "ticker": "SAN",
       "country": "France",
       "sector": "Health Care",
-      "weight": 0.00362401
+      "weight": 0.00362402
     },
     {
       "isin": "SEDOL:5889505",
@@ -90772,7 +90772,7 @@
       "ticker": "IFX",
       "country": "Germany",
       "sector": "Information Technology",
-      "weight": 0.00362401
+      "weight": 0.00362402
     },
     {
       "isin": "SEDOL:6624608",
@@ -90804,7 +90804,7 @@
       "ticker": "BARC",
       "country": "United Kingdom",
       "sector": "Financials",
-      "weight": 0.00332201
+      "weight": 0.00332202
     },
     {
       "isin": "SEDOL:6065586",
@@ -90812,7 +90812,7 @@
       "ticker": "ANZ.NZ",
       "country": "Australia",
       "sector": "Financials",
-      "weight": 0.00332201
+      "weight": 0.00332202
     },
     {
       "isin": "SEDOL:B3NB1P2",
@@ -90820,7 +90820,7 @@
       "ticker": "SU",
       "country": "Canada",
       "sector": "Energy",
-      "weight": 0.00322134
+      "weight": 0.00322135
     },
     {
       "isin": "SEDOL:7088429",
@@ -90828,7 +90828,7 @@
       "ticker": "CS",
       "country": "France",
       "sector": "Financials",
-      "weight": 0.00322134
+      "weight": 0.00322135
     },
     {
       "isin": "SEDOL:BFZ1K46",
@@ -90860,7 +90860,7 @@
       "ticker": "ENEL",
       "country": "Italy",
       "sector": "Utilities",
-      "weight": 0.00302001
+      "weight": 0.00302002
     },
     {
       "isin": "SEDOL:BMV7PN1",
@@ -90868,7 +90868,7 @@
       "ticker": "INVEA",
       "country": "Sweden",
       "sector": "Financials",
-      "weight": 0.00302001
+      "weight": 0.00302002
     },
     {
       "isin": "SEDOL:BM8PJY7",
@@ -90876,7 +90876,7 @@
       "ticker": "NWG",
       "country": "United Kingdom",
       "sector": "Financials",
-      "weight": 0.00302001
+      "weight": 0.00302002
     },
     {
       "isin": "SEDOL:5294121",
@@ -90884,7 +90884,7 @@
       "ticker": "MUV2",
       "country": "Germany",
       "sector": "Financials",
-      "weight": 0.00302001
+      "weight": 0.00302002
     },
     {
       "isin": "SEDOL:2492519",
@@ -90892,7 +90892,7 @@
       "ticker": "MFC",
       "country": "Canada",
       "sector": "Financials",
-      "weight": 0.00291934
+      "weight": 0.00291935
     },
     {
       "isin": "SEDOL:6804585",
@@ -90900,7 +90900,7 @@
       "ticker": "4063",
       "country": "Japan",
       "sector": "Materials",
-      "weight": 0.00291934
+      "weight": 0.00291935
     },
     {
       "isin": "SEDOL:BYYHL23",
@@ -90908,7 +90908,7 @@
       "ticker": "ABI",
       "country": "Belgium",
       "sector": "Consumer Staples",
-      "weight": 0.00291934
+      "weight": 0.00291935
     },
     {
       "isin": "SEDOL:6572707",
@@ -90916,7 +90916,7 @@
       "ticker": "6752",
       "country": "Japan",
       "sector": "Consumer Discretionary",
-      "weight": 0.00291934
+      "weight": 0.00291935
     },
     {
       "isin": "SEDOL:B4T3BW6",
@@ -90988,7 +90988,7 @@
       "ticker": "AAL",
       "country": "United Kingdom",
       "sector": "Materials",
-      "weight": 0.00261734
+      "weight": 0.00261735
     },
     {
       "isin": "SEDOL:6185495",
@@ -91092,7 +91092,7 @@
       "ticker": "9433",
       "country": "Japan",
       "sector": "Communication Services",
-      "weight": 0.00231534
+      "weight": 0.00231535
     },
     {
       "isin": "SEDOL:B5BSZB3",
@@ -91100,7 +91100,7 @@
       "ticker": "NBIS",
       "country": "United States",
       "sector": "Information Technology",
-      "weight": 0.00231534
+      "weight": 0.00231535
     },
     {
       "isin": "SEDOL:6356707",
@@ -91108,7 +91108,7 @@
       "ticker": "5803",
       "country": "Japan",
       "sector": "Industrials",
-      "weight": 0.00231534
+      "weight": 0.00231535
     },
     {
       "isin": "SEDOL:2077303",
@@ -91116,7 +91116,7 @@
       "ticker": "NA",
       "country": "Canada",
       "sector": "Financials",
-      "weight": 0.00221467
+      "weight": 0.00221468
     },
     {
       "isin": "SEDOL:5902941",
@@ -91124,7 +91124,7 @@
       "ticker": "NOKIA",
       "country": "Finland",
       "sector": "Information Technology",
-      "weight": 0.00221467
+      "weight": 0.00221468
     },
     {
       "isin": "SEDOL:6858946",
@@ -91132,7 +91132,7 @@
       "ticker": "8053",
       "country": "Japan",
       "sector": "Industrials",
-      "weight": 0.00221467
+      "weight": 0.00221468
     },
     {
       "isin": "SEDOL:B283W97",
@@ -91140,7 +91140,7 @@
       "ticker": "CABK",
       "country": "Spain",
       "sector": "Financials",
-      "weight": 0.00221467
+      "weight": 0.00221468
     },
     {
       "isin": "SEDOL:5253973",
@@ -91148,7 +91148,7 @@
       "ticker": "RMS",
       "country": "France",
       "sector": "Consumer Discretionary",
-      "weight": 0.00221467
+      "weight": 0.00221468
     },
     {
       "isin": "SEDOL:0408284",
@@ -91156,7 +91156,7 @@
       "ticker": "STAN",
       "country": "United Kingdom",
       "sector": "Financials",
-      "weight": 0.00221467
+      "weight": 0.00221468
     },
     {
       "isin": "SEDOL:BLDBN52",
@@ -91207,11 +91207,11 @@
       "weight": 0.00211401
     },
     {
-      "isin": "IT0000062072",
-      "name": "Assicurazioni Generali SpA",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:4056719",
+      "name": "Generali",
+      "ticker": "G",
+      "country": "Italy",
+      "sector": "Financials",
       "weight": 0.00201334
     },
     {
@@ -91292,7 +91292,7 @@
       "ticker": "RACE",
       "country": "Italy",
       "sector": "Consumer Discretionary",
-      "weight": 0.00191267
+      "weight": 0.00191268
     },
     {
       "isin": "SEDOL:B0SWJX3",
@@ -91300,7 +91300,7 @@
       "ticker": "LSEG",
       "country": "United Kingdom",
       "sector": "Financials",
-      "weight": 0.00191267
+      "weight": 0.00191268
     },
     {
       "isin": "SEDOL:6858708",
@@ -91308,7 +91308,7 @@
       "ticker": "5802",
       "country": "Japan",
       "sector": "Consumer Discretionary",
-      "weight": 0.00191267
+      "weight": 0.00191268
     },
     {
       "isin": "SEDOL:4768962",
@@ -91316,7 +91316,7 @@
       "ticker": "RWE",
       "country": "Germany",
       "sector": "Utilities",
-      "weight": 0.00191267
+      "weight": 0.00191268
     },
     {
       "isin": "SEDOL:B29NF31",
@@ -91324,7 +91324,7 @@
       "ticker": "FNV",
       "country": "Canada",
       "sector": "Materials",
-      "weight": 0.00191267
+      "weight": 0.00191268
     },
     {
       "isin": "SEDOL:6496584",
@@ -91332,7 +91332,7 @@
       "ticker": "6301",
       "country": "Japan",
       "sector": "Industrials",
-      "weight": 0.00191267
+      "weight": 0.00191268
     },
     {
       "isin": "SEDOL:BSCB6L9",
@@ -91340,7 +91340,7 @@
       "ticker": "CLS",
       "country": "Canada",
       "sector": "Information Technology",
-      "weight": 0.00191267
+      "weight": 0.00191268
     },
     {
       "isin": "SEDOL:BF5M0K5",
@@ -91407,11 +91407,11 @@
       "weight": 0.00181201
     },
     {
-      "isin": "SEDOL:6661144",
-      "name": "ORIX Corp",
-      "ticker": "8591",
+      "isin": "SEDOL:6527774",
+      "name": "Orix JREIT Inc",
+      "ticker": "8954",
       "country": "Japan",
-      "sector": "Financials",
+      "sector": "Real Estate",
       "weight": 0.00171134
     },
     {
@@ -91516,7 +91516,7 @@
       "ticker": "HOLN",
       "country": "Switzerland",
       "sector": "Materials",
-      "weight": 0.00161067
+      "weight": 0.00161068
     },
     {
       "isin": "US0420682058",
@@ -91524,7 +91524,7 @@
       "ticker": "",
       "country": "Unknown",
       "sector": "Unclassified",
-      "weight": 0.00161067
+      "weight": 0.00161068
     },
     {
       "isin": "SEDOL:B1VQ252",
@@ -91532,7 +91532,7 @@
       "ticker": "SAND",
       "country": "Sweden",
       "sector": "Industrials",
-      "weight": 0.00161067
+      "weight": 0.00161068
     },
     {
       "isin": "SEDOL:0790873",
@@ -91540,7 +91540,7 @@
       "ticker": "SSE",
       "country": "United Kingdom",
       "sector": "Utilities",
-      "weight": 0.00161067
+      "weight": 0.00161068
     },
     {
       "isin": "SEDOL:BYT8165",
@@ -91548,7 +91548,7 @@
       "ticker": "7182",
       "country": "Japan",
       "sector": "Financials",
-      "weight": 0.00161067
+      "weight": 0.00161068
     },
     {
       "isin": "SEDOL:6456102",
@@ -91556,7 +91556,7 @@
       "ticker": "4062",
       "country": "Japan",
       "sector": "Information Technology",
-      "weight": 0.00161067
+      "weight": 0.00161068
     },
     {
       "isin": "SEDOL:BLGZ986",
@@ -91564,7 +91564,7 @@
       "ticker": "TSCO",
       "country": "United Kingdom",
       "sector": "Consumer Staples",
-      "weight": 0.00161067
+      "weight": 0.00161068
     },
     {
       "isin": "SEDOL:BYQFRK5",
@@ -91572,7 +91572,7 @@
       "ticker": "WCN",
       "country": "Canada",
       "sector": "Industrials",
-      "weight": 0.00161067
+      "weight": 0.00161068
     },
     {
       "isin": "SEDOL:B03FYZ4",
@@ -91580,7 +91580,7 @@
       "ticker": "GMG.AX",
       "country": "Australia",
       "sector": "Real Estate",
-      "weight": 0.00161067
+      "weight": 0.00161068
     },
     {
       "isin": "US81141R1005",
@@ -91588,7 +91588,7 @@
       "ticker": "",
       "country": "Unknown",
       "sector": "Unclassified",
-      "weight": 0.00161067
+      "weight": 0.00161068
     },
     {
       "isin": "SEDOL:6421553",
@@ -91703,11 +91703,11 @@
       "weight": 0.00140934
     },
     {
-      "isin": "SE0000148884",
-      "name": "SEB-Skand Enskilda Banken A",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:4813345",
+      "name": "Skandinaviska Enskilda Banken AB",
+      "ticker": "SEBA",
+      "country": "Sweden",
+      "sector": "Financials",
       "weight": 0.00140934
     },
     {
@@ -91791,11 +91791,11 @@
       "weight": 0.00130867
     },
     {
-      "isin": "JP3735400008",
-      "name": "Nippon Tel & Tel Corp",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6641373",
+      "name": "NTT Inc",
+      "ticker": "9432",
+      "country": "Japan",
+      "sector": "Communication Services",
       "weight": 0.00130867
     },
     {
@@ -91855,19 +91855,19 @@
       "weight": 0.00130867
     },
     {
-      "isin": "CA8787422044",
-      "name": "Teck Resources Limited Class B SV",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2879327",
+      "name": "Teck Resources Ltd",
+      "ticker": "TECK/B",
+      "country": "Canada",
+      "sector": "Materials",
       "weight": 0.00130867
     },
     {
-      "isin": "JP3890350006",
-      "name": "Sumitomo Mitsui Ord",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6563024",
+      "name": "Sumitomo Mitsui Financial Group Inc",
+      "ticker": "8316",
+      "country": "Japan",
+      "sector": "Financials",
       "weight": 0.00130867
     },
     {
@@ -91892,7 +91892,7 @@
       "ticker": "IFC",
       "country": "Canada",
       "sector": "Financials",
-      "weight": 0.001208
+      "weight": 0.00120801
     },
     {
       "isin": "SEDOL:BN770G0",
@@ -91900,7 +91900,7 @@
       "ticker": "COMP",
       "country": "United States",
       "sector": "Real Estate",
-      "weight": 0.001208
+      "weight": 0.00120801
     },
     {
       "isin": "SEDOL:2566351",
@@ -91908,7 +91908,7 @@
       "ticker": "FFH",
       "country": "Canada",
       "sector": "Financials",
-      "weight": 0.001208
+      "weight": 0.00120801
     },
     {
       "isin": "SEDOL:4031976",
@@ -91916,7 +91916,7 @@
       "ticker": "ADS",
       "country": "Germany",
       "sector": "Consumer Discretionary",
-      "weight": 0.001208
+      "weight": 0.00120801
     },
     {
       "isin": "SEDOL:7437805",
@@ -91924,7 +91924,7 @@
       "ticker": "SLHN",
       "country": "Switzerland",
       "sector": "Financials",
-      "weight": 0.001208
+      "weight": 0.00120801
     },
     {
       "isin": "SEDOL:5176177",
@@ -91932,7 +91932,7 @@
       "ticker": "ORA",
       "country": "France",
       "sector": "Communication Services",
-      "weight": 0.001208
+      "weight": 0.00120801
     },
     {
       "isin": "SEDOL:BN4MYF5",
@@ -91940,7 +91940,7 @@
       "ticker": "VWS",
       "country": "Denmark",
       "sector": "Industrials",
-      "weight": 0.001208
+      "weight": 0.00120801
     },
     {
       "isin": "SEDOL:BYQP136",
@@ -91948,7 +91948,7 @@
       "ticker": "ABN",
       "country": "Netherlands",
       "sector": "Financials",
-      "weight": 0.001208
+      "weight": 0.00120801
     },
     {
       "isin": "SEDOL:6499260",
@@ -91956,7 +91956,7 @@
       "ticker": "6971",
       "country": "Japan",
       "sector": "Information Technology",
-      "weight": 0.001208
+      "weight": 0.00120801
     },
     {
       "isin": "SEDOL:6010906",
@@ -91964,7 +91964,7 @@
       "ticker": "2802",
       "country": "Japan",
       "sector": "Consumer Staples",
-      "weight": 0.001208
+      "weight": 0.00120801
     },
     {
       "isin": "SEDOL:6646237",
@@ -91972,7 +91972,7 @@
       "ticker": "9716",
       "country": "Japan",
       "sector": "Industrials",
-      "weight": 0.001208
+      "weight": 0.00120801
     },
     {
       "isin": "SEDOL:B19NLV4",
@@ -91980,7 +91980,7 @@
       "ticker": "EXPN",
       "country": "United Kingdom",
       "sector": "Industrials",
-      "weight": 0.001208
+      "weight": 0.00120801
     },
     {
       "isin": "SEDOL:B90LKT4",
@@ -91988,7 +91988,7 @@
       "ticker": "CBK",
       "country": "Germany",
       "sector": "Financials",
-      "weight": 0.001208
+      "weight": 0.00120801
     },
     {
       "isin": "SEDOL:6200882",
@@ -91996,7 +91996,7 @@
       "ticker": "TCL.AX",
       "country": "Australia",
       "sector": "Industrials",
-      "weight": 0.001208
+      "weight": 0.00120801
     },
     {
       "isin": "SEDOL:B03Z841",
@@ -92004,7 +92004,7 @@
       "ticker": "K",
       "country": "Canada",
       "sector": "Materials",
-      "weight": 0.001208
+      "weight": 0.00120801
     },
     {
       "isin": "SEDOL:BYPBS67",
@@ -92127,11 +92127,11 @@
       "weight": 0.00110734
     },
     {
-      "isin": "FR001400AJ45",
-      "name": "Michelin CGDE B Brown",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BPBPJ01",
+      "name": "Cie Generale des Etablissements Michelin SCA",
+      "ticker": "ML",
+      "country": "France",
+      "sector": "Consumer Discretionary",
       "weight": 0.00110734
     },
     {
@@ -92143,11 +92143,11 @@
       "weight": 0.00110734
     },
     {
-      "isin": "SE0000108656",
-      "name": "Ericsson L.M. Telefonaktie B",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:5959378",
+      "name": "Telefonaktiebolaget LM Ericsson",
+      "ticker": "ERICB",
+      "country": "Sweden",
+      "sector": "Information Technology",
       "weight": 0.00110734
     },
     {
@@ -92359,11 +92359,11 @@
       "weight": 0.000906
     },
     {
-      "isin": "JP3198900007",
-      "name": "Oriental Land Co",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6648891",
+      "name": "Oriental Land Co Ltd/Japan",
+      "ticker": "4661",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
       "weight": 0.000906
     },
     {
@@ -92607,11 +92607,11 @@
       "weight": 0.00080534
     },
     {
-      "isin": "NL0000009538",
-      "name": "Koninklijke Philips Electronics NV (Royal Philips Electronics)",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:5986622",
+      "name": "Koninklijke Philips NV",
+      "ticker": "PHIA",
+      "country": "Netherlands",
+      "sector": "Health Care",
       "weight": 0.00080534
     },
     {
@@ -92623,19 +92623,19 @@
       "weight": 0.00080534
     },
     {
-      "isin": "CH1256740924",
-      "name": "SGS Soc Gen Surveillance Holdings",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BMBQHZ4",
+      "name": "SGS SA",
+      "ticker": "SGSN",
+      "country": "Switzerland",
+      "sector": "Industrials",
       "weight": 0.00080534
     },
     {
-      "isin": "UNRESOLVED_298",
-      "name": "Bombardier Inc CL B",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BN33PL2",
+      "name": "Bombardier Inc",
+      "ticker": "BBD/B",
+      "country": "Canada",
+      "sector": "Industrials",
       "weight": 0.00080534
     },
     {
@@ -92663,11 +92663,11 @@
       "weight": 0.00080534
     },
     {
-      "isin": "UNRESOLVED_302",
-      "name": "Fortescue Metals Group LTD",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6086253",
+      "name": "FORTESCUE LTD",
+      "ticker": "FMG.AX",
+      "country": "Australia",
+      "sector": "Materials",
       "weight": 0.00080534
     },
     {
@@ -92775,11 +92775,11 @@
       "weight": 0.00070467
     },
     {
-      "isin": "UNRESOLVED_316",
-      "name": "Kering SA - KER (EUR)",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:5505072",
+      "name": "Kering SA",
+      "ticker": "KER",
+      "country": "France",
+      "sector": "Consumer Discretionary",
       "weight": 0.00070467
     },
     {
@@ -92927,11 +92927,11 @@
       "weight": 0.00070467
     },
     {
-      "isin": "UNRESOLVED_335",
-      "name": "Energias de Portugal SA",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:4103596",
+      "name": "EDP SA",
+      "ticker": "EDP",
+      "country": "Portugal",
+      "sector": "Utilities",
       "weight": 0.00070467
     },
     {
@@ -93063,11 +93063,11 @@
       "weight": 0.000604
     },
     {
-      "isin": "UNRESOLVED_352",
-      "name": "FinecoBank Spa",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BNGN9Z1",
+      "name": "FinecoBank Banca Fineco SpA",
+      "ticker": "FBK",
+      "country": "Italy",
+      "sector": "Financials",
       "weight": 0.000604
     },
     {
@@ -93191,11 +93191,11 @@
       "weight": 0.000604
     },
     {
-      "isin": "UNRESOLVED_368",
-      "name": "Terna SpA",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B01BN57",
+      "name": "Terna - Rete Elettrica Nazionale",
+      "ticker": "TRN",
+      "country": "Italy",
+      "sector": "Utilities",
       "weight": 0.000604
     },
     {
@@ -93655,19 +93655,19 @@
       "weight": 0.00050334
     },
     {
-      "isin": "UNRESOLVED_426",
-      "name": "CGI Inc. Class A SV",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BJ2L575",
+      "name": "CGI Inc",
+      "ticker": "GIB/A",
+      "country": "Canada",
+      "sector": "Information Technology",
       "weight": 0.00050334
     },
     {
-      "isin": "UNRESOLVED_427",
-      "name": "Roche Hldgs AG Br",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:7108918",
+      "name": "Roche Holding AG",
+      "ticker": "RO",
+      "country": "Switzerland",
+      "sector": "Health Care",
       "weight": 0.00050334
     },
     {
@@ -94095,11 +94095,11 @@
       "weight": 0.00040267
     },
     {
-      "isin": "UNRESOLVED_481",
-      "name": "Check Point Software (US)",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2181334",
+      "name": "Check Point Software Technologies Ltd",
+      "ticker": "CHKP",
+      "country": "United States",
+      "sector": "Information Technology",
       "weight": 0.00040267
     },
     {
@@ -94279,11 +94279,11 @@
       "weight": 0.00040267
     },
     {
-      "isin": "UNRESOLVED_504",
-      "name": "NGK Insulators",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6619507",
+      "name": "NGK Corp",
+      "ticker": "5333",
+      "country": "Japan",
+      "sector": "Industrials",
       "weight": 0.00040267
     },
     {
@@ -94367,11 +94367,11 @@
       "weight": 0.00040267
     },
     {
-      "isin": "UNRESOLVED_515",
-      "name": "Grab Holdings Limited Class A",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BP6NH40",
+      "name": "Grab Holdings Ltd",
+      "ticker": "GRAB",
+      "country": "United States",
+      "sector": "Industrials",
       "weight": 0.00040267
     },
     {
@@ -94471,11 +94471,11 @@
       "weight": 0.000302
     },
     {
-      "isin": "UNRESOLVED_528",
-      "name": "Hachijuni Bank",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6400626",
+      "name": "Hachijuni Nagano Bank Ltd",
+      "ticker": "8359",
+      "country": "Japan",
+      "sector": "Financials",
       "weight": 0.000302
     },
     {
@@ -94503,11 +94503,11 @@
       "weight": 0.000302
     },
     {
-      "isin": "UNRESOLVED_532",
-      "name": "NGK Spark Plug",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6619604",
+      "name": "Niterra Co Ltd",
+      "ticker": "5334",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
       "weight": 0.000302
     },
     {
@@ -94615,11 +94615,11 @@
       "weight": 0.000302
     },
     {
-      "isin": "UNRESOLVED_546",
-      "name": "Harel Insurance Inv Ltd 1",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6410700",
+      "name": "Harel Insurance Investments & Financial Services Ltd",
+      "ticker": "HARL",
+      "country": "Israel",
+      "sector": "Financials",
       "weight": 0.000302
     },
     {
@@ -94751,11 +94751,11 @@
       "weight": 0.000302
     },
     {
-      "isin": "UNRESOLVED_563",
-      "name": "Uni Charm Corp",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6911485",
+      "name": "Unicharm Corp",
+      "ticker": "8113",
+      "country": "Japan",
+      "sector": "Consumer Staples",
       "weight": 0.000302
     },
     {
@@ -94919,11 +94919,11 @@
       "weight": 0.000302
     },
     {
-      "isin": "UNRESOLVED_584",
-      "name": "Sandfire Resources NL",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6739739",
+      "name": "SANDFIRE RESOURCES LIMITED",
+      "ticker": "SFR.AX",
+      "country": "Australia",
+      "sector": "Materials",
       "weight": 0.000302
     },
     {
@@ -94959,14 +94959,6 @@
       "weight": 0.000302
     },
     {
-      "isin": "UNRESOLVED_589",
-      "name": "Unsettled Trades",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.000302
-    },
-    {
       "isin": "SEDOL:B63QM77",
       "name": "Nexon Co Ltd",
       "ticker": "3659",
@@ -94975,11 +94967,11 @@
       "weight": 0.000302
     },
     {
-      "isin": "UNRESOLVED_591",
-      "name": "Hennes & Mauritz AB B",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:5687431",
+      "name": "H & M Hennes & Mauritz AB",
+      "ticker": "HMB",
+      "country": "Sweden",
+      "sector": "Consumer Discretionary",
       "weight": 0.000302
     },
     {
@@ -95039,7 +95031,7 @@
       "weight": 0.000302
     },
     {
-      "isin": "UNRESOLVED_599",
+      "isin": "UNRESOLVED_598",
       "name": "Futu Holdings Ltd ADR",
       "ticker": "",
       "country": "Unknown",
@@ -95071,11 +95063,11 @@
       "weight": 0.000302
     },
     {
-      "isin": "UNRESOLVED_603",
-      "name": "Nippon Building Fund Inc JREIT",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6396800",
+      "name": "Nippon Building Fund Inc",
+      "ticker": "8951",
+      "country": "Japan",
+      "sector": "Real Estate",
       "weight": 0.000302
     },
     {
@@ -95175,11 +95167,11 @@
       "weight": 0.000302
     },
     {
-      "isin": "UNRESOLVED_616",
-      "name": "Bezeq Israeli Telecom Corp",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6098032",
+      "name": "Bezeq The Israeli Telecommunication Corp Ltd",
+      "ticker": "BEZQ",
+      "country": "Israel",
+      "sector": "Communication Services",
       "weight": 0.000302
     },
     {
@@ -95375,11 +95367,11 @@
       "weight": 0.000302
     },
     {
-      "isin": "UNRESOLVED_641",
-      "name": "Technoprobe S.p.A.",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BN6PV62",
+      "name": "Technoprobe SpA",
+      "ticker": "TPRO",
+      "country": "Italy",
+      "sector": "Information Technology",
       "weight": 0.00020133
     },
     {
@@ -95495,7 +95487,7 @@
       "weight": 0.00020133
     },
     {
-      "isin": "UNRESOLVED_656",
+      "isin": "UNRESOLVED_655",
       "name": "Porsche AG Vz",
       "ticker": "",
       "country": "Unknown",
@@ -95527,7 +95519,7 @@
       "weight": 0.00020133
     },
     {
-      "isin": "UNRESOLVED_660",
+      "isin": "UNRESOLVED_659",
       "name": "TIS Inc",
       "ticker": "",
       "country": "Unknown",
@@ -95575,7 +95567,7 @@
       "weight": 0.00020133
     },
     {
-      "isin": "UNRESOLVED_666",
+      "isin": "UNRESOLVED_665",
       "name": "HKT Trust / HKT Ltd",
       "ticker": "",
       "country": "Unknown",
@@ -95695,11 +95687,11 @@
       "weight": 0.00020133
     },
     {
-      "isin": "UNRESOLVED_681",
-      "name": "Trend Micro Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6125286",
+      "name": "Trend Micro Inc/Japan",
+      "ticker": "4704",
+      "country": "Japan",
+      "sector": "Information Technology",
       "weight": 0.00020133
     },
     {
@@ -95711,11 +95703,11 @@
       "weight": 0.00020133
     },
     {
-      "isin": "UNRESOLVED_683",
-      "name": "Japan Real Estate Invest Corp JREIT",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6397580",
+      "name": "Japan Real Estate Investment Corp",
+      "ticker": "8952",
+      "country": "Japan",
+      "sector": "Real Estate",
       "weight": 0.00020133
     },
     {
@@ -95879,11 +95871,11 @@
       "weight": 0.00020133
     },
     {
-      "isin": "UNRESOLVED_704",
-      "name": "Capitaland Investment Ord",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BNHXFJ6",
+      "name": "CapitaLand Investment Ltd/Singapore",
+      "ticker": "CLI",
+      "country": "Singapore",
+      "sector": "Real Estate",
       "weight": 0.00020133
     },
     {
@@ -95935,11 +95927,11 @@
       "weight": 0.00020133
     },
     {
-      "isin": "UNRESOLVED_711",
-      "name": "Sapporo Holdings Ltd.",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6776907",
+      "name": "Sapporo Breweries Ltd",
+      "ticker": "2501",
+      "country": "Japan",
+      "sector": "Consumer Staples",
       "weight": 0.00020133
     },
     {
@@ -95951,19 +95943,19 @@
       "weight": 0.00020133
     },
     {
-      "isin": "UNRESOLVED_713",
-      "name": "Camtek Ltd.",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B0WG737",
+      "name": "Camtek Ltd/Israel",
+      "ticker": "CAMT",
+      "country": "Israel",
+      "sector": "Information Technology",
       "weight": 0.00020133
     },
     {
-      "isin": "UNRESOLVED_714",
-      "name": "Nordnet AB",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BNDLH43",
+      "name": "Nordnet AB publ",
+      "ticker": "SAVE",
+      "country": "Sweden",
+      "sector": "Financials",
       "weight": 0.00020133
     },
     {
@@ -95999,11 +95991,11 @@
       "weight": 0.00020133
     },
     {
-      "isin": "UNRESOLVED_719",
-      "name": "EDP Renovaveis SA",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B39GNW2",
+      "name": "EDP Renewables SA",
+      "ticker": "EDPR",
+      "country": "Portugal",
+      "sector": "Utilities",
       "weight": 0.00020133
     },
     {
@@ -96159,11 +96151,11 @@
       "weight": 0.00020133
     },
     {
-      "isin": "UNRESOLVED_739",
-      "name": "Migdal Insurance Hdlgs",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6509062",
+      "name": "Migdal Insurance & Financial Holdings Ltd",
+      "ticker": "MGDL",
+      "country": "Israel",
+      "sector": "Financials",
       "weight": 0.00020133
     },
     {
@@ -96359,11 +96351,11 @@
       "weight": 0.00010067
     },
     {
-      "isin": "UNRESOLVED_764",
-      "name": "Cyber Agent Ltd",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6220501",
+      "name": "CyberAgent Inc",
+      "ticker": "4751",
+      "country": "Japan",
+      "sector": "Communication Services",
       "weight": 0.00010067
     },
     {
@@ -96391,11 +96383,11 @@
       "weight": 0.00010067
     },
     {
-      "isin": "UNRESOLVED_768",
-      "name": "MARUWA Co Ltd",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6570660",
+      "name": "Maruwa Co Ltd/Aichi",
+      "ticker": "5344",
+      "country": "Japan",
+      "sector": "Information Technology",
       "weight": 0.00010067
     },
     {
@@ -96599,11 +96591,11 @@
       "weight": 0.00010067
     },
     {
-      "isin": "UNRESOLVED_794",
-      "name": "Vienna Insurance Group",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B0BKSS2",
+      "name": "Vienna Insurance Group AG Wiener Versicherung Gruppe",
+      "ticker": "VIG",
+      "country": "Austria",
+      "sector": "Financials",
       "weight": 0.00010067
     },
     {
@@ -96647,11 +96639,11 @@
       "weight": 0.00010067
     },
     {
-      "isin": "UNRESOLVED_800",
-      "name": "Lundbergs AB-B Shs",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:4538002",
+      "name": "L E Lundbergforetagen AB",
+      "ticker": "LUNDB",
+      "country": "Sweden",
+      "sector": "Financials",
       "weight": 0.00010067
     },
     {
@@ -96767,11 +96759,11 @@
       "weight": 0.00010067
     },
     {
-      "isin": "UNRESOLVED_815",
-      "name": "Shapir Civil and Marine Engineering Ltd",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BTF8CZ0",
+      "name": "Shapir Engineering and Industry Ltd",
+      "ticker": "SPEN",
+      "country": "Israel",
+      "sector": "Industrials",
       "weight": 0.00010067
     },
     {
@@ -96871,7 +96863,7 @@
       "weight": 0.00010067
     },
     {
-      "isin": "UNRESOLVED_828",
+      "isin": "UNRESOLVED_827",
       "name": "Christian Dior SE",
       "ticker": "",
       "country": "Unknown",
@@ -96895,19 +96887,19 @@
       "weight": 0.00010067
     },
     {
-      "isin": "UNRESOLVED_831",
-      "name": "Matrix",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6747754",
+      "name": "Matrix IT Ltd",
+      "ticker": "MTRX",
+      "country": "Israel",
+      "sector": "Information Technology",
       "weight": 0.00010067
     },
     {
-      "isin": "UNRESOLVED_832",
-      "name": "Fattal Holdings (1998) Ltd",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BG1YKN5",
+      "name": "Fattal Holdings 1998 Ltd",
+      "ticker": "FTAL",
+      "country": "Israel",
+      "sector": "Consumer Discretionary",
       "weight": 0.00010067
     },
     {
@@ -96927,15 +96919,15 @@
       "weight": 0.00010067
     },
     {
-      "isin": "UNRESOLVED_835",
-      "name": "Electra (Israel)",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6298821",
+      "name": "Electra Ltd/Israel",
+      "ticker": "ELTR",
+      "country": "Israel",
+      "sector": "Industrials",
       "weight": 0.00010067
     },
     {
-      "isin": "UNRESOLVED_836",
+      "isin": "UNRESOLVED_835",
       "name": "Aloni Hetz Properties",
       "ticker": "",
       "country": "Unknown",
@@ -96951,7 +96943,7 @@
       "weight": 0.00010067
     },
     {
-      "isin": "UNRESOLVED_838",
+      "isin": "UNRESOLVED_837",
       "name": "Cellebrite DI Ltd.",
       "ticker": "",
       "country": "Unknown",
@@ -96959,7 +96951,7 @@
       "weight": 0.00010067
     },
     {
-      "isin": "UNRESOLVED_839",
+      "isin": "UNRESOLVED_838",
       "name": "eToro Group Ltd",
       "ticker": "",
       "country": "Unknown",
@@ -96999,19 +96991,19 @@
       "weight": 0.00010067
     },
     {
-      "isin": "UNRESOLVED_844",
-      "name": "Y.H. Dimri Building & Development Ltd.",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B02SX80",
+      "name": "YH Dimri Construction & Development Ltd",
+      "ticker": "DIMRI",
+      "country": "Israel",
+      "sector": "Real Estate",
       "weight": 0.00010067
     },
     {
-      "isin": "UNRESOLVED_845",
-      "name": "Tokyo Broadcasting System Holdings Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6894166",
+      "name": "TBS Holdings Inc",
+      "ticker": "9401",
+      "country": "Japan",
+      "sector": "Communication Services",
       "weight": 0.00010067
     },
     {
