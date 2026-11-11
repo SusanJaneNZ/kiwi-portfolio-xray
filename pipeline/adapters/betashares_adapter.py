@@ -6,8 +6,14 @@ import re
 from pathlib import Path
 from typing import Optional
 
-from pipeline.adapters.base import BaseAdapter, FundExtractionResult, RawHolding, parse_effective_date
-from pipeline.adapters.sorted_parser import _clean_float_cell
+from pipeline.adapters.base import (
+    BaseAdapter,
+    FundExtractionResult,
+    RawHolding,
+    clean_float_cell,
+    parse_effective_date,
+)
+from pipeline.adapters.sorted_parser import CURRENCY_AND_CASH_TOKENS, _find_weight_col
 from pipeline.adapters.tabular_reader import read_tabular_rows
 
 BETASHARES_FUND_NAMES = {
@@ -28,6 +34,10 @@ BETASHARES_NAME_HINTS = {
 
 _NAME_COL_NAMES = {"name", "company", "company name", "security", "security name", "holding", "holding name", "asset", "asset name"}
 _CASH_TERMS = ("cash", "aud", "usd", "hkd", "twd", "krw", "cny", "payable", "receivable", "margin", "collateral")
+_BETASHARES_CASH_RES = tuple(
+    re.compile(rf"\b{re.escape(tok)}\b", re.IGNORECASE)
+    for tok in (*_CASH_TERMS, *CURRENCY_AND_CASH_TOKENS)
+)
 
 
 class BetasharesAdapter(BaseAdapter):
@@ -59,14 +69,12 @@ class BetasharesAdapter(BaseAdapter):
 
             if header is None:
                 norm = [c.strip().lower() for c in row]
+                candidate_map = {col: idx for idx, col in enumerate(norm)}
                 name_match = any(c in _NAME_COL_NAMES for c in norm)
-                weight_idx = next(
-                    (i for i, c in enumerate(norm) if "weight" in c or c in {"%", "% of fund"}),
-                    -1,
-                )
+                weight_idx = _find_weight_col(candidate_map)
                 if name_match and weight_idx != -1:
                     header = norm
-                    col_map = {col: idx for idx, col in enumerate(header)}
+                    col_map = candidate_map
                     weight_col = weight_idx
                     continue
 
@@ -78,7 +86,7 @@ class BetasharesAdapter(BaseAdapter):
                     elif meta_key == "fund name" and meta_val:
                         fund_name = meta_val
 
-                parsed_date = parse_effective_date(" ".join(row))
+                parsed_date = parse_effective_date(" ".join(row), prefer_day_first=True)
                 if parsed_date:
                     effective_date = parsed_date
                 continue
@@ -96,7 +104,7 @@ class BetasharesAdapter(BaseAdapter):
             if not name or name.lower().startswith("total"):
                 continue
 
-            parsed_val = _clean_float_cell(row[weight_col])
+            parsed_val = clean_float_cell(row[weight_col])
             if not parsed_val:
                 continue
             raw_val, has_pct = parsed_val
@@ -142,21 +150,24 @@ class BetasharesAdapter(BaseAdapter):
             asset_l = r["asset_class"].lower()
             sector_l = (r["sector"] or "").lower()
 
-            is_cash = (
-                "cash" in asset_l
-                or "money market" in asset_l
-                or "cash" in sector_l
-                or any(re.search(rf"\b{tok}\b", name_l) for tok in _CASH_TERMS)
-            )
             is_hedge = (
                 ("forward" in name_l or "futures" in asset_l or "derivative" in asset_l)
                 and not re.search(r"\b(?:etf|fund)\b", name_l)
             )
-            if is_cash:
-                cash_ratio += weight
-                continue
+            is_cash = (
+                not is_hedge
+                and (
+                    "cash" in asset_l
+                    or "money market" in asset_l
+                    or "cash" in sector_l
+                    or any(pat.search(name_l) for pat in _BETASHARES_CASH_RES)
+                )
+            )
             if is_hedge:
                 hedging_ratio += weight
+                continue
+            if is_cash:
+                cash_ratio += weight
                 continue
             if weight < 0:
                 continue
@@ -181,7 +192,7 @@ class BetasharesAdapter(BaseAdapter):
             effective_date=effective_date,
             holdings=holdings,
             cash_ratio=max(0.0, cash_ratio),
-            hedging_ratio=hedging_ratio,
+            hedging_ratio=max(0.0, hedging_ratio),
             is_master=False,
             source_file=file_path.name,
         )

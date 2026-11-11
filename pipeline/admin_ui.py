@@ -8,6 +8,7 @@ import csv
 import io
 import json
 import sys
+import threading
 from datetime import datetime, timezone
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -52,6 +53,7 @@ class AdminService:
         self.security_master_path = repo_root / "pipeline" / "security_master" / "security_master.json"
         self.gics_mapping_path = repo_root / "pipeline" / "normalizer" / "gics_mapping.json"
         self.feeder_registry_path = repo_root / "pipeline" / "feeder_registry.json"
+        self._lock = threading.Lock()
 
     def list_staged_files(self) -> dict[str, list[dict[str, Any]]]:
         """Lists all CSV and XLSX files currently staged under each provider folder."""
@@ -201,11 +203,12 @@ class AdminService:
 
         return {"raw_lines": raw_lines, "parse_summary": parse_summary}
 
-    def _build_security_matcher(self) -> SecurityMatcher | None:
-        """Builds a SecurityMatcher from current security_master.json and gics_mapping.json."""
-        if not self.security_master_path.exists():
-            return None
-        sm_data = json.loads(self.security_master_path.read_text(encoding="utf-8"))
+    def _build_security_matcher(self, sm_data: list[dict[str, Any]] | None = None) -> SecurityMatcher | None:
+        """Builds a SecurityMatcher from provided or persisted security_master.json and gics_mapping.json."""
+        if sm_data is None:
+            if not self.security_master_path.exists():
+                return None
+            sm_data = json.loads(self.security_master_path.read_text(encoding="utf-8"))
         gics_data = (
             json.loads(self.gics_mapping_path.read_text(encoding="utf-8"))
             if self.gics_mapping_path.exists()
@@ -221,9 +224,10 @@ class AdminService:
             repo_root=self.repo_root,
         )
         report, summary = compiler.compile(dry_run=dry_run)
+        sm_data = summary.pop("_security_master_data", None)
         unresolved = summary.get("unresolved_entries", [])
         if unresolved:
-            matcher = self._build_security_matcher()
+            matcher = self._build_security_matcher(sm_data=sm_data)
             if matcher:
                 for entry in unresolved:
                     entry["candidates"] = matcher.suggest_candidates(entry.get("raw_name", ""), limit=3)
@@ -231,6 +235,7 @@ class AdminService:
         return {
             "dry_run": dry_run,
             "is_valid": report.is_valid,
+            "files_written": summary.get("files_written", False),
             "errors": report.errors,
             "warnings": report.warnings,
             "fund_summaries": report.fund_summaries,
@@ -283,10 +288,11 @@ class AdminService:
         if not scope or not name or not clean_isin:
             raise ValueError("scope_key, raw_name, and isin are all required.")
 
-        alias_map = self.get_alias_map()
-        alias_map.setdefault(scope, {})[name] = clean_isin
-        _atomic_write_json(self.alias_map_path, alias_map)
-        return alias_map
+        with self._lock:
+            alias_map = self.get_alias_map()
+            alias_map.setdefault(scope, {})[name] = clean_isin
+            _atomic_write_json(self.alias_map_path, alias_map)
+            return alias_map
 
     def bulk_set_alias_mappings(
         self,
@@ -312,29 +318,31 @@ class AdminService:
                     continue
                 parsed_rows.append((scope, name, isin))
 
-        alias_map = self.get_alias_map()
-        saved_count = 0
-        for scope, name, clean_isin in parsed_rows:
-            if not scope or not name or not clean_isin or clean_isin == "INSERT_CANONICAL_ISIN":
-                continue
-            alias_map.setdefault(scope, {})[name] = clean_isin
-            saved_count += 1
+        with self._lock:
+            alias_map = self.get_alias_map()
+            saved_count = 0
+            for scope, name, clean_isin in parsed_rows:
+                if not scope or not name or not clean_isin or clean_isin == "INSERT_CANONICAL_ISIN":
+                    continue
+                alias_map.setdefault(scope, {})[name] = clean_isin
+                saved_count += 1
 
-        if saved_count == 0:
-            raise ValueError("No valid (scope, companyName, isin) rows found to import.")
+            if saved_count == 0:
+                raise ValueError("No valid (scope, companyName, isin) rows found to import.")
 
-        _atomic_write_json(self.alias_map_path, alias_map)
-        return alias_map, saved_count
+            _atomic_write_json(self.alias_map_path, alias_map)
+            return alias_map, saved_count
 
     def delete_alias_mapping(self, scope_key: str, raw_name: str) -> dict[str, dict[str, str]]:
         """Removes an alias mapping from provider_alias_map.json."""
-        alias_map = self.get_alias_map()
-        if scope_key in alias_map and raw_name in alias_map[scope_key]:
-            del alias_map[scope_key][raw_name]
-            if not alias_map[scope_key]:
-                del alias_map[scope_key]
-            _atomic_write_json(self.alias_map_path, alias_map)
-        return alias_map
+        with self._lock:
+            alias_map = self.get_alias_map()
+            if scope_key in alias_map and raw_name in alias_map[scope_key]:
+                del alias_map[scope_key][raw_name]
+                if not alias_map[scope_key]:
+                    del alias_map[scope_key]
+                _atomic_write_json(self.alias_map_path, alias_map)
+            return alias_map
 
     def search_security_master(self, query: str, limit: int = 15) -> list[dict[str, Any]]:
         """Searches security_master.json using multi-token matching and fuzzy close-match ranking."""
@@ -392,23 +400,25 @@ class AdminService:
         if provider not in ALLOWED_MASTER_PROVIDERS:
             raise ValueError(f"Unsupported master_provider '{master_provider}'. Must be one of: {sorted(ALLOWED_MASTER_PROVIDERS)}")
 
-        registry = self.get_feeder_registry()
-        registry[code] = {
-            "name": clean_name,
-            "master_provider": provider,
-            "master_ticker": ticker,
-        }
-        _atomic_write_json(self.feeder_registry_path, registry)
-        return registry
+        with self._lock:
+            registry = self.get_feeder_registry()
+            registry[code] = {
+                "name": clean_name,
+                "master_provider": provider,
+                "master_ticker": ticker,
+            }
+            _atomic_write_json(self.feeder_registry_path, registry)
+            return registry
 
     def delete_feeder_pairing(self, feeder_code: str) -> dict[str, dict[str, str]]:
         """Removes a feeder pairing from feeder_registry.json."""
         code = feeder_code.strip().upper()
-        registry = self.get_feeder_registry()
-        if code in registry:
-            del registry[code]
-            _atomic_write_json(self.feeder_registry_path, registry)
-        return registry
+        with self._lock:
+            registry = self.get_feeder_registry()
+            if code in registry:
+                del registry[code]
+                _atomic_write_json(self.feeder_registry_path, registry)
+            return registry
 
 
 def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
@@ -429,7 +439,12 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
             self.wfile.write(body)
 
         def _read_json_body(self) -> dict[str, Any]:
-            length = int(self.headers.get("Content-Length", "0"))
+            try:
+                length = int(self.headers.get("Content-Length", "0"))
+            except ValueError:
+                raise ValueError("Invalid Content-Length header.")
+            if length < 0 or length > 50 * 1024 * 1024:
+                raise ValueError("Request body too large.")
             raw = self.rfile.read(length) if length > 0 else b"{}"
             return json.loads(raw.decode("utf-8"))
 

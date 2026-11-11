@@ -123,11 +123,12 @@ class SecurityMatcher:
         self.security_master = security_master
         self.alias_map = alias_map or {}
         self.gics_mapping = gics_mapping or {}
+        self.gics_lower = {k.lower(): v for k, v in self.gics_mapping.items()}
 
         # Build indexes for O(1) exact lookups & inverted token pool
         self.by_isin: dict[str, dict] = {}
         self.by_ticker: dict[str, list[dict]] = {}
-        self.by_clean_name: dict[str, dict] = {}
+        self.by_clean_name: dict[str, list[dict]] = {}
         self.by_token: dict[str, list[dict]] = {}
 
         for sec in security_master:
@@ -145,7 +146,7 @@ class SecurityMatcher:
 
             clean_name = normalize_company_name(sec.get("name", ""))
             if clean_name:
-                self.by_clean_name[clean_name] = sec
+                self.by_clean_name.setdefault(clean_name, []).append(sec)
                 for tok in get_stem_tokens(clean_name):
                     self.by_token.setdefault(tok, []).append(sec)
 
@@ -183,27 +184,33 @@ class SecurityMatcher:
             sec = self.by_isin[isin]
             return self._build_result(sec, 1.0, "exact_isin")
 
-        # 3. Exact clean name match (plus safe trailing Nordic/EU single-letter share class fallback e.g. "Investor AB B")
+        # 3. Exact clean name match (preserving primary/first registered listing on dual-listed collisions)
         clean_in = normalize_company_name(name)
         if clean_in and clean_in in self.by_clean_name:
-            sec = self.by_clean_name[clean_in]
+            sec = self.by_clean_name[clean_in][0]
             return self._build_result(sec, 1.0, "exact_normalized_name")
         if clean_in and "CLASS" not in clean_in:
             parts = clean_in.split()
             if len(parts) >= 2 and parts[-1] in {"A", "B", "C"}:
                 base_clean = " ".join(parts[:-1])
                 if base_clean in self.by_clean_name:
-                    return self._build_result(self.by_clean_name[base_clean], 0.99, "exact_normalized_name_share_class")
+                    return self._build_result(self.by_clean_name[base_clean][0], 0.99, "exact_normalized_name_share_class")
 
-        # 4. Exact ticker match (if single candidate or matches provider exchange)
+        # 4. Exact ticker match (require name/stem check on bare tickers to avoid cross-exchange collisions)
+        in_stems = get_stem_tokens(name)
         if ticker:
             ticker_upper = ticker.strip().upper()
             candidates = self.by_ticker.get(ticker_upper, [])
             if len(candidates) == 1:
-                return self._build_result(candidates[0], 0.98, "exact_ticker_unique")
+                cand = candidates[0]
+                cand_ticker = cand.get("ticker", "").strip().upper()
+                cand_stems = get_stem_tokens(cand.get("name", ""))
+                exact_qualified = ("." in ticker_upper or ":" in ticker_upper) and cand_ticker == ticker_upper
+                stems_align = bool(in_stems & cand_stems) if (in_stems and cand_stems) else False
+                if exact_qualified or stems_align or token_sort_similarity(name, cand.get("name", "")) >= 0.55:
+                    return self._build_result(cand, 0.98, "exact_ticker_unique")
             elif len(candidates) > 1:
                 # Disambiguate by stem match
-                in_stems = get_stem_tokens(name)
                 for cand in candidates:
                     cand_stems = get_stem_tokens(cand.get("name", ""))
                     if in_stems and (in_stems & cand_stems):
@@ -308,7 +315,10 @@ class SecurityMatcher:
     def _normalize_sector(self, sector_raw: Optional[str]) -> str:
         if not sector_raw:
             return "Unclassified"
-        return self.gics_mapping.get(sector_raw, sector_raw)
+        cleaned = sector_raw.strip()
+        if not cleaned:
+            return "Unclassified"
+        return self.gics_lower.get(cleaned.lower(), cleaned)
 
     def _build_result(
         self, sec: dict, score: float, reason: str, spread: float = 1.0

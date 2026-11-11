@@ -38,7 +38,7 @@ export const DEFAULT_PORTFOLIO_STATE: UserPortfolioState = {
   },
   directHoldings: [
     {
-      isin: "NZMCYE0001S8",
+      isin: "SEDOL:B8W6K56",
       name: "Mercury NZ Limited",
       ticker: "MCY.NZ",
       exchange: "NZX",
@@ -50,7 +50,7 @@ export const DEFAULT_PORTFOLIO_STATE: UserPortfolioState = {
       value: 2500,
     },
     {
-      isin: "AU000000BHP4",
+      isin: "SEDOL:6144690",
       name: "BHP Group Limited",
       ticker: "BHP.AX",
       exchange: "ASX",

@@ -40,7 +40,9 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
   const [depMaturity, setDepMaturity] = useState('');
   const [depRate, setDepRate] = useState('');
 
-  const hasASXHoldings = portfolioState.directHoldings.some((h) => h.exchange === 'ASX');
+  const hasASXHoldings = portfolioState.directHoldings.some(
+    (h) => h.exchange === 'ASX' || h.currency === 'AUD'
+  );
   const hasBuckets = portfolioState.buckets.length > 0;
 
   const setBucketForKey = (instrumentKey: string, bucketId: string) => {
@@ -76,12 +78,14 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
   const handleFundChange = (code: string, value: string) => {
     const num = parseFloat(value) || 0;
     const newBalances = { ...portfolioState.fundBalances };
+    const nextAssignments = { ...portfolioState.bucketAssignments };
     if (num <= 0) {
       delete newBalances[code];
+      delete nextAssignments[`fund:${code}`];
     } else {
       newBalances[code] = num;
     }
-    onUpdateState({ ...portfolioState, fundBalances: newBalances });
+    onUpdateState({ ...portfolioState, fundBalances: newBalances, bucketAssignments: nextAssignments });
   };
 
   const handleDirectHoldingChange = (isin: string, value: string) => {
@@ -100,8 +104,15 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
 
   const handleAddDirect = () => {
     if (!selectedEquity) return;
-    const val = parseFloat(newShareValue) || 1000;
-    const existingIndex = portfolioState.directHoldings.findIndex((h) => h.isin === selectedEquity.isin);
+    const parsedVal = parseFloat(newShareValue);
+    const val = Number.isFinite(parsedVal) && parsedVal > 0 ? parsedVal : 0;
+    if (val <= 0) return;
+    const existingIndex = portfolioState.directHoldings.findIndex(
+      (h) =>
+        h.isin === selectedEquity.isin ||
+        (h.exchange === selectedEquity.exchange &&
+          h.ticker.toUpperCase() === selectedEquity.ticker.toUpperCase())
+    );
     const updated = [...portfolioState.directHoldings];
     if (existingIndex >= 0) {
       updated[existingIndex] = { ...updated[existingIndex], value: updated[existingIndex].value + val };
@@ -160,15 +171,25 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
     setDepRate('');
   };
 
-  const filteredCatalog = searchQuery.trim()
-    ? directEquitiesCatalog
-        .filter(
-          (eq) =>
-            eq.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            eq.ticker.toLowerCase().includes(searchQuery.toLowerCase())
-        )
-        .slice(0, 6)
-    : [];
+  const filteredCatalog = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return [];
+    const matches = directEquitiesCatalog.filter(
+      (eq) =>
+        eq.name.toLowerCase().includes(q) ||
+        eq.ticker.toLowerCase().includes(q) ||
+        eq.isin.toLowerCase().includes(q)
+    );
+    const rankMatch = (eq: DirectEquityCatalogItem) => {
+      const t = eq.ticker.toLowerCase();
+      const baseTicker = t.split('.')[0];
+      if (t === q || baseTicker === q || eq.isin.toLowerCase() === q) return 0;
+      if (t.startsWith(q)) return 1;
+      if (eq.name.toLowerCase().startsWith(q)) return 2;
+      return 3;
+    };
+    return matches.sort((a, b) => rankMatch(a) - rankMatch(b) || a.ticker.localeCompare(b.ticker)).slice(0, 6);
+  }, [searchQuery, directEquitiesCatalog]);
 
   const fundSumNZD = Object.values(portfolioState.fundBalances).reduce((acc, v) => acc + v, 0);
   const directSumNZD = portfolioState.directHoldings.reduce(
@@ -303,14 +324,15 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
               <span className="text-xs text-slate-400">1 AUD =</span>
               <input
                 type="number"
+                min="0.01"
                 value={portfolioState.audNzdRate}
                 step="0.005"
-                onChange={(e) =>
-                  onUpdateState({
-                    ...portfolioState,
-                    audNzdRate: parseFloat(e.target.value) || 1.10,
-                  })
-                }
+                onChange={(e) => {
+                  const nextRate = parseFloat(e.target.value);
+                  if (Number.isFinite(nextRate) && nextRate > 0) {
+                    onUpdateState({ ...portfolioState, audNzdRate: nextRate });
+                  }
+                }}
                 className="w-20 bg-slate-950 border border-amber-500/50 rounded px-2 py-1 text-right text-xs text-amber-300 font-mono focus:outline-none focus:border-amber-400"
               />
               <span className="text-xs text-amber-300 font-mono">NZD</span>
@@ -393,6 +415,7 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
                   </span>
                   <input
                     type="number"
+                    min="0"
                     value={newShareValue}
                     onChange={(e) => setNewShareValue(e.target.value)}
                     className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-6 pr-2 py-1.5 text-xs text-white"

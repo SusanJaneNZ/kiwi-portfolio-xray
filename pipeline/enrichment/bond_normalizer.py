@@ -40,11 +40,12 @@ BANK_ISSUER_KEYS = {
 _DATE_MONTHS = r"(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*"
 _COMPACT_DDMMYY_RE = r"\b(?:0[1-9]|[12]\d|3[01])(?:0[1-9]|1[0-2])(?:2[5-9]|[3-6]\d)\b"
 _DATE_RE = re.compile(
-    rf"(?:\b\d{{1,2}}[/-]\d{{1,2}}[/-](?:20|21)?\d{{2}}\b"
-    rf"|\b\d{{1,2}}[-\s]{_DATE_MONTHS}[-\s](?:20|21)?\d{{2}}\b"
-    rf"|\b{_DATE_MONTHS}\s+20\d{{2}}\b"
+    rf"(?:\b\d{{1,2}}[/-]\d{{1,2}}[/-](?:19|20|21)\d{{2}}\b"
+    rf"|\b\d{{1,2}}[/-]\d{{1,2}}[/-]\d{{2}}\b"
+    rf"|\b\d{{1,2}}[-\s]{_DATE_MONTHS}[-\s](?:19|20|21)?\d{{2}}\b"
+    rf"|\b{_DATE_MONTHS}\s+(?:199\d|20\d{{2}})\b"
     rf"|{_COMPACT_DDMMYY_RE}"
-    rf"|\b(?:202[5-9]|20[3-6]\d)\b)",
+    rf"|\b(?:199\d|20\d{{2}})\b)",
     re.IGNORECASE,
 )
 _COUPON_RE = re.compile(
@@ -61,8 +62,8 @@ _BOND_KEYWORD_RE = re.compile(
     r"\b(?:new\s+zealand\s+government|nzgs|lgfa|nzlgfa|local\s+government\s+funding|housing\s+new\s+zealand|"
     r"us\s+treasury|u\.s\.\s+treasury|uk\s+gilt|bundesrepublik|"
     r"treasury\s+(?:bill|note|bond)|frn|floating\s+rate\s+note|fixed\s+rate\s+note|"
-    r"capital\s+notes?|subordinated\s+notes?|senior\s+notes?|perpetual|rcd|ncd|commercial\s+paper|"
-    r"via\s+sb\s+capital)\b",
+    r"capital\s+notes?|subordinated\s+notes?|senior\s+notes?|perpetual(?!\s+(?:limited|ltd|group|plc|corp|inc|holdings)\b)|"
+    r"rcd|ncd|commercial\s+paper|via\s+sb\s+capital)\b",
     re.IGNORECASE,
 )
 _BOND_FUND_RE = re.compile(
@@ -144,12 +145,12 @@ class AssetClassifier:
             if (issuer_key in BANK_ISSUER_KEYS or _DATE_RE.search(name)) and not (_COUPON_RE.search(name) or has_bond_kw):
                 return "term_deposit"
 
-        # Protect explicitly dividend-oriented equity funds from bond heuristics unless row explicitly matched deposit
-        if fund_code in EQUITY_FUND_ALLOWLIST:
-            return "equity"
-
         if "fixed interest" in hint or "bond" in hint:
             return "fixed_interest"
+
+        # Protect explicitly dividend-oriented equity funds from bond heuristics unless row explicitly matched deposit or bond hint
+        if fund_code in EQUITY_FUND_ALLOWLIST:
+            return "equity"
 
         # Rule 2: Fixed Interest / Debt / Bond ETFs / Rate Derivatives
         if _COUPON_RE.search(name) and _DATE_RE.search(name):
@@ -267,10 +268,10 @@ class AssetClassifier:
         sector: str,
         meta: dict[str, Any],
     ) -> str:
-        if country_hint and country_hint.strip():
-            return normalize_country(country_hint, default="Global")
         if meta.get("country"):
             return meta["country"]
+        if country_hint and country_hint.strip():
+            return normalize_country(country_hint, default="Global")
         if sector == "Supranational":
             return "Supranational"
         lower = raw_name.lower()

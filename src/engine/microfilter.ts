@@ -34,7 +34,9 @@ export function filterAndGroupHoldings(
         h.ticker.toLowerCase().includes(query) ||
         h.isin.toLowerCase().includes(query) ||
         h.sector.toLowerCase().includes(query) ||
-        h.country.toLowerCase().includes(query)
+        h.country.toLowerCase().includes(query) ||
+        (h.issuerName || "").toLowerCase().includes(query) ||
+        h.sources.some((s) => (s.fundCode || "").toLowerCase().includes(query))
     );
   }
 

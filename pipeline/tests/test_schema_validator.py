@@ -106,6 +106,40 @@ class TestSchemaValidator(unittest.TestCase):
         self.assertFalse(report.is_valid)
         self.assertTrue(any("must have sector 'Term Deposit'" in e for e in report.errors))
 
+    def test_duplicate_fund_codes_and_negative_weights_rejected(self):
+        funds = [
+            {
+                "code": "FNZ",
+                "name": "Fund 1",
+                "provider": "Smartshares",
+                "effective_date": "2026-10-31",
+                "cash_ratio": 0.0,
+                "hedging_ratio": 0.0,
+                "constituent_count": 2,
+                "asset_class": "equity",
+            },
+            {
+                "code": "FNZ",
+                "name": "Fund 2",
+                "provider": "Smartshares",
+                "effective_date": "2026-10-31",
+                "cash_ratio": 0.0,
+                "hedging_ratio": 0.0,
+                "constituent_count": 1,
+                "asset_class": "equity",
+            },
+        ]
+        constituents = {
+            "FNZ": [
+                {"isin": "NZFPHE0001S2", "name": "FPH", "country": "New Zealand", "sector": "Health Care", "weight": -0.1, "asset_class": "equity"},
+            ]
+        }
+        report = self.validator.validate_all(funds, constituents, [], [])
+        self.assertFalse(report.is_valid)
+        self.assertTrue(any("Duplicate fund code 'FNZ'" in e for e in report.errors))
+        self.assertTrue(any("out-of-range weight" in e for e in report.errors))
+        self.assertTrue(any("constituent_count (2)" in e for e in report.errors))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -100,7 +100,7 @@ class VanguardAdapter(BaseAdapter):
                     if detected:
                         fund_ticker = detected
                         fund_name = f"Vanguard {fund_ticker} ETF"
-                    parsed_date = parse_effective_date(row_str)
+                    parsed_date = parse_effective_date(row_str, prefer_day_first=False)
                     if parsed_date:
                         effective_date = parsed_date
                     continue

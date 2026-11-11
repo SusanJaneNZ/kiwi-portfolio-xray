@@ -10,6 +10,25 @@ from pathlib import Path
 from typing import Any, Optional
 
 
+def clean_float_cell(raw_str: str) -> tuple[float, bool] | None:
+    """Parses a numeric/percentage cell into (numeric_value, has_percent_symbol) or None."""
+    text = (raw_str or "").strip()
+    if not text or text in {"-", "—", "--", "---", "N/A", "n/a"}:
+        return None
+    has_pct = "%" in text
+    is_lt = text.startswith("<")
+    cleaned = text.lstrip("<").replace("%", "").replace(",", "").strip()
+    if not cleaned:
+        return None
+    try:
+        val = float(cleaned)
+    except ValueError:
+        return None
+    if is_lt:
+        val *= 0.5
+    return val, has_pct
+
+
 def parse_percentage(raw_str: str, column_is_percent: bool = False) -> float:
     """Parses a percentage string into a decimal ratio.
 
@@ -20,52 +39,47 @@ def parse_percentage(raw_str: str, column_is_percent: bool = False) -> float:
         '<0.01%' -> 0.00005
         '0.05' with column_is_percent=False -> 0.05
     """
-    if not raw_str:
+    parsed = clean_float_cell(raw_str)
+    if not parsed:
         return 0.0
-    text = raw_str.strip()
-    if text in {"-", "—", "--", "N/A", "n/a", ""}:
-        return 0.0
-
-    is_less_than = text.startswith("<")
-    if is_less_than:
-        text = text.lstrip("<").strip()
-
-    has_percent = "%" in text or column_is_percent
-    cleaned = text.replace("%", "").replace(",", "").strip()
-    if not cleaned:
-        return 0.0
-
-    val = float(cleaned)
-    if is_less_than:
-        val = val * 0.5
-
-    if has_percent or val > 1.0:
+    val, has_percent = parsed
+    if has_percent or column_is_percent or val > 1.0:
         return val / 100.0
     return val
 
 
-def parse_effective_date(text: str) -> Optional[str]:
-    """Extracts a YYYY-MM-DD date from metadata text supporting ISO, US slash, and named month formats."""
+def _format_valid_date(year: int, month: int, day: int) -> Optional[str]:
+    try:
+        return datetime(year, month, day).strftime("%Y-%m-%d")
+    except ValueError:
+        return None
+
+
+def parse_effective_date(text: str, prefer_day_first: bool = True) -> Optional[str]:
+    """Extracts a YYYY-MM-DD date from metadata text supporting ISO, slash, and named month formats."""
     if not text:
         return None
 
     # 1. YYYY-MM-DD or YYYY/MM/DD
-    iso_match = re.search(r"\b(202\d)[-/](\d{1,2})[-/](\d{1,2})\b", text)
+    iso_match = re.search(r"\b(20\d{2})[-/](\d{1,2})[-/](\d{1,2})\b", text)
     if iso_match:
-        y, m, d = iso_match.groups()
-        return f"{int(y):04d}-{int(m):02d}-{int(d):02d}"
+        y, m, d = (int(x) for x in iso_match.groups())
+        formatted = _format_valid_date(y, m, d)
+        if formatted:
+            return formatted
 
-    # 2. DD/MM/YYYY or MM/DD/YYYY
-    slash_match = re.search(r"\b(\d{1,2})/(\d{1,2})/(202\d)\b", text)
+    # 2. DD/MM/YYYY or MM/DD/YYYY (respects prefer_day_first when both <= 12)
+    slash_match = re.search(r"\b(\d{1,2})/(\d{1,2})/(20\d{2})\b", text)
     if slash_match:
         a, b, y = (int(x) for x in slash_match.groups())
-        if a > 12 and b <= 12:
-            return f"{y:04d}-{b:02d}-{a:02d}"
-        if a <= 12 and b <= 31:
-            return f"{y:04d}-{a:02d}-{b:02d}"
+        order = ((y, b, a), (y, a, b)) if prefer_day_first else ((y, a, b), (y, b, a))
+        for yy, mm, dd in order:
+            formatted = _format_valid_date(yy, mm, dd)
+            if formatted:
+                return formatted
 
     # 3. DD Month YYYY or DD-Mon-YYYY (e.g. 30 September 2026, 06-Nov-2026)
-    nz_month_match = re.search(r"\b(\d{1,2}[\s-][A-Za-z]{3,9}[\s-]202\d)\b", text)
+    nz_month_match = re.search(r"\b(\d{1,2}[\s-][A-Za-z]{3,9}[\s-]20\d{2})\b", text)
     if nz_month_match:
         date_str = nz_month_match.group(1).replace("-", " ")
         for fmt in ("%d %B %Y", "%d %b %Y"):
@@ -75,7 +89,7 @@ def parse_effective_date(text: str) -> Optional[str]:
                 continue
 
     # 4. Month DD, YYYY (US format, e.g. October 31, 2026 or Oct 31, 2026)
-    month_match = re.search(r"\b([A-Za-z]{3,9}\s+\d{1,2},\s+202\d)\b", text)
+    month_match = re.search(r"\b([A-Za-z]{3,9}\s+\d{1,2},\s+20\d{2})\b", text)
     if month_match:
         date_str = month_match.group(1)
         for fmt in ("%B %d, %Y", "%b %d, %Y"):

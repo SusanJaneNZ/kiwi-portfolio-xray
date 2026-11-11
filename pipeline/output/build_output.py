@@ -37,15 +37,15 @@ class PipelineCompiler:
         self.gics_mapping_path = repo_root / "pipeline" / "normalizer" / "gics_mapping.json"
         self.feeder_registry_path = repo_root / "pipeline" / "feeder_registry.json"
 
-    def compile(self, dry_run: bool = False) -> tuple[ValidationReport, dict[str, Any]]:
-        # 1. Compile Security Master
+    def compile(self, dry_run: bool = False, force: bool = False) -> tuple[ValidationReport, dict[str, Any]]:
+        # 1. Compile Security Master in-memory first (defer disk writes until validation passes)
         direct_equities_output_path = self.output_dir / "direct_equities.json"
         sec_master_summary = compile_security_master(
             staging_dir=self.staging_dir,
             output_master_path=self.security_master_path,
             output_direct_path=direct_equities_output_path,
             gics_mapping_path=self.gics_mapping_path,
-            write_files=not dry_run,
+            write_files=False,
         )
 
         security_master_data = sec_master_summary.pop("_security_master_data", [])
@@ -168,11 +168,17 @@ class PipelineCompiler:
                     unwrapped = self._enrich_domestic_fund(res, matcher, classifier, all_unresolved_entries)
                     all_unwrapped_funds.append(unwrapped)
 
-        # 7. Construct Funds Registry & Constituents Map
+        # 7. Construct Funds Registry & Constituents Map (reject duplicate fund codes)
         funds_registry: list[dict] = []
         constituents_map: dict[str, list[dict]] = {}
+        duplicate_errors: list[str] = []
 
         for uf in all_unwrapped_funds:
+            if uf.fund_code in constituents_map:
+                duplicate_errors.append(
+                    f"Duplicate staged files resolved to fund code '{uf.fund_code}'. Remove older/duplicate disclosure files before building."
+                )
+                continue
             funds_registry.append({
                 "code": uf.fund_code,
                 "name": uf.fund_name,
@@ -189,7 +195,7 @@ class PipelineCompiler:
 
         all_unresolved_entries.sort(key=lambda item: item.get("weight", 0.0), reverse=True)
 
-        # 8. Validate with SchemaValidator
+        # 8. Validate with SchemaValidator BEFORE writing any production outputs
         validator = SchemaValidator()
         validation_report = validator.validate_all(
             funds_registry=funds_registry,
@@ -197,14 +203,20 @@ class PipelineCompiler:
             direct_equities=direct_equities_data,
             unresolved_entries=all_unresolved_entries,
         )
+        if duplicate_errors:
+            validation_report.errors.extend(duplicate_errors)
+            validation_report.is_valid = False
         validation_report.warnings = extra_warnings + validation_report.warnings
 
-        # 9. If not dry_run, write production files atomically
-        if not dry_run:
+        # 9. Only write production files when validation passes (unless force=True)
+        files_written = False
+        if not dry_run and (validation_report.is_valid or force):
+            _atomic_write_json(self.security_master_path, security_master_data)
             _atomic_write_json(direct_equities_output_path, direct_equities_data)
             _atomic_write_json(self.output_dir / "funds_registry.json", funds_registry)
             _atomic_write_json(self.output_dir / "constituents.json", constituents_map)
             _atomic_write_json(self.output_dir / "unresolved_entries.json", all_unresolved_entries)
+            files_written = True
 
         summary_data = {
             "sec_master_summary": sec_master_summary,
@@ -212,6 +224,8 @@ class PipelineCompiler:
             "total_unresolved_entries": len(all_unresolved_entries),
             "unresolved_entries": all_unresolved_entries,
             "unconfigured_feeders": unconfigured_feeders,
+            "files_written": files_written,
+            "_security_master_data": security_master_data,
             "validation_report": validation_report,
         }
 

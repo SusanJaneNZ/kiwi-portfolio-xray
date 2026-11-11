@@ -84,6 +84,41 @@ class TestPipelineEndToEnd(unittest.TestCase):
             for fs in report.fund_summaries:
                 self.assertAlmostEqual(fs["total_weight"], 1.0, delta=0.005)
 
+    def test_validation_failure_blocks_production_file_writes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            staging_dir = tmp_path / "staging"
+            output_dir = tmp_path / "public_data"
+            for sub in ["directories", "smartshares"]:
+                (staging_dir / sub).mkdir(parents=True, exist_ok=True)
+            (staging_dir / "directories" / "nzx_directory.csv").write_text(
+                "Rank,Ticker,Company Name,Country,Sector\n"
+                "1,FPH,Fisher & Paykel Healthcare Corporation Limited,New Zealand,Healthcare\n",
+                encoding="utf-8",
+            )
+            # Duplicate FNZ files should trigger validation failure and prevent writes
+            (staging_dir / "smartshares" / "smartshares_FNZ_202610.csv").write_text(
+                "Security Code,Security Description,Weighting (%)\n"
+                "FPH,Fisher & Paykel Healthcare Corporation Limited,100.0%\n",
+                encoding="utf-8",
+            )
+            (staging_dir / "smartshares" / "smartshares_FNZ_202611.csv").write_text(
+                "Security Code,Security Description,Weighting (%)\n"
+                "FPH,Fisher & Paykel Healthcare Corporation Limited,100.0%\n",
+                encoding="utf-8",
+            )
+            compiler = PipelineCompiler(
+                staging_dir=staging_dir,
+                output_dir=output_dir,
+                repo_root=REPO_ROOT,
+            )
+            compiler.security_master_path = tmp_path / "security_master.json"
+            report, summary = compiler.compile(dry_run=False)
+            self.assertFalse(report.is_valid)
+            self.assertFalse(summary.get("files_written"))
+            self.assertFalse((output_dir / "funds_registry.json").exists())
+            self.assertFalse(compiler.security_master_path.exists())
+
 
 if __name__ == "__main__":
     unittest.main()

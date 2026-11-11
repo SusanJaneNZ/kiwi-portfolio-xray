@@ -20,7 +20,7 @@ export const HoldingsTable: React.FC<HoldingsTableProps> = ({
   const [viewMode, setViewMode] = useState<'total' | 'equities'>('total');
   const [sortBy, setSortBy] = useState<'value' | 'ticker'>('value');
   const [expandedRows, setExpandedRows] = useState<Record<string, boolean>>({
-    NZMCYE0001S8: true,
+    'SEDOL:B8W6K56': true,
   });
 
   const toggleRow = (key: string) => {

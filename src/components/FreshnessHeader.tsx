@@ -166,16 +166,39 @@ export const FreshnessHeader: React.FC<FreshnessHeaderProps> = ({
       </div>
 
       <div className="flex flex-wrap items-center gap-2">
-        <div className="bg-slate-950/80 border border-slate-800 rounded-lg px-3 py-1.5 flex items-center gap-2 text-xs">
+        <div
+          className={`bg-slate-950/80 border rounded-lg px-3 py-1.5 flex items-center gap-2 text-xs ${
+            envelope.isAnyStale ? 'border-amber-600/60' : 'border-slate-800'
+          }`}
+        >
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+            <span
+              className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
+                envelope.isAnyStale ? 'bg-amber-400' : 'bg-emerald-400'
+              }`}
+            ></span>
+            <span
+              className={`relative inline-flex h-2 w-2 rounded-full ${
+                envelope.isAnyStale ? 'bg-amber-500' : 'bg-emerald-500'
+              }`}
+            ></span>
           </span>
           <span className="text-slate-400">Holdings As Of:</span>
-          <span className="font-medium text-amber-300">
-            {envelope.minEffectiveDate} – {envelope.maxEffectiveDate}
-          </span>
-          <span className="text-[11px] text-slate-500">(Spread: {envelope.spreadDays}d)</span>
+          {envelope.minEffectiveDate === 'N/A' ? (
+            <span className="font-medium text-slate-400">No active fund dates</span>
+          ) : (
+            <>
+              <span className="font-medium text-amber-300">
+                {envelope.minEffectiveDate} – {envelope.maxEffectiveDate}
+              </span>
+              <span className="text-[11px] text-slate-500">(Spread: {envelope.spreadDays}d)</span>
+            </>
+          )}
+          {envelope.isAnyStale && (
+            <span className="text-[11px] bg-amber-500/20 text-amber-300 px-1.5 py-0.5 rounded font-medium">
+              Stale (&gt;90d)
+            </span>
+          )}
         </div>
 
         <button

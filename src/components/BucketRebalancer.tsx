@@ -194,7 +194,7 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
                     value={bucket.targetPercent}
                     onChange={(e) =>
                       handleUpdateBucket(bucket.id, {
-                        targetPercent: Math.max(0, parseFloat(e.target.value) || 0),
+                        targetPercent: Math.min(100, Math.max(0, parseFloat(e.target.value) || 0)),
                       })
                     }
                     className="w-full bg-slate-950 border border-slate-800 rounded pl-2 pr-5 py-1 text-right text-sky-300 font-mono focus:outline-none"

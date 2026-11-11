@@ -32,23 +32,22 @@ export interface CalculationResult {
   countryBreakdown: CategoryBreakdown[];
 }
 
-const NZ_BANK_ALIASES: { key: string; name: string; patterns: string[] }[] = [
-  { key: "ISSUER_ANZ", name: "ANZ Group", patterns: ["anz", "australia and new zealand"] },
-  { key: "ISSUER_WBC", name: "Westpac Banking Group", patterns: ["westpac", "wbc"] },
-  { key: "ISSUER_CBA_ASB", name: "Commonwealth Bank / ASB", patterns: ["asb", "commonwealth bank", "cba"] },
-  { key: "ISSUER_NAB_BNZ", name: "NAB / Bank of New Zealand", patterns: ["bnz", "bank of new zealand", "nab"] },
-  { key: "ISSUER_KIWIBANK", name: "Kiwibank", patterns: ["kiwibank", "kiwi bank"] },
-  { key: "ISSUER_HEARTLAND", name: "Heartland Group", patterns: ["heartland"] },
-  { key: "ISSUER_RABOBANK", name: "Rabobank", patterns: ["rabobank"] },
-  { key: "ISSUER_TSB", name: "TSB Bank", patterns: ["tsb bank", "tsb nz", "tsb"] },
-  { key: "ISSUER_SBS", name: "SBS Bank", patterns: ["sbs bank", "southland building", "sbs"] },
+const NZ_BANK_ALIAS_RES: { key: string; name: string; regexes: RegExp[] }[] = [
+  { key: "ISSUER_ANZ", name: "ANZ Group", regexes: [/\banz\b/i, /\baustralia and new zealand\b/i] },
+  { key: "ISSUER_WBC", name: "Westpac Banking Group", regexes: [/\bwestpac\b/i, /\bwbc\b/i] },
+  { key: "ISSUER_CBA_ASB", name: "Commonwealth Bank / ASB", regexes: [/\basb\b/i, /\bcommonwealth bank\b/i, /\bcba\b/i] },
+  { key: "ISSUER_NAB_BNZ", name: "NAB / Bank of New Zealand", regexes: [/\bbnz\b/i, /\bbank of new zealand\b/i, /\bnab\b/i] },
+  { key: "ISSUER_KIWIBANK", name: "Kiwibank", regexes: [/\bkiwibank\b/i, /\bkiwi bank\b/i] },
+  { key: "ISSUER_HEARTLAND", name: "Heartland Group", regexes: [/\bheartland\b/i] },
+  { key: "ISSUER_RABOBANK", name: "Rabobank", regexes: [/\brabobank\b/i] },
+  { key: "ISSUER_TSB", name: "TSB Bank", regexes: [/\btsb bank\b/i, /\btsb nz\b/i, /\btsb\b/i] },
+  { key: "ISSUER_SBS", name: "SBS Bank", regexes: [/\bsbs bank\b/i, /\bsouthland building\b/i, /\bsbs\b/i] },
 ];
 
 export function resolveDepositIssuer(institution: string): { issuerKey: string; issuerName: string } {
   const clean = institution.trim();
-  const lower = clean.toLowerCase();
-  for (const bank of NZ_BANK_ALIASES) {
-    if (bank.patterns.some((pat) => lower === pat || lower.includes(pat))) {
+  for (const bank of NZ_BANK_ALIAS_RES) {
+    if (bank.regexes.some((rx) => rx.test(clean))) {
       return { issuerKey: bank.key, issuerName: bank.name };
     }
   }
@@ -63,6 +62,7 @@ function isNzOrAuCountry(country: string): boolean {
 
 export function calculatePortfolioLookthrough(input: CalculationInput): CalculationResult {
   const { fundBalances, directHoldings, cashDeposits, audNzdRate, fundsRegistry, constituentsMap } = input;
+  const safeAudNzdRate = Number.isFinite(audNzdRate) && audNzdRate > 0 ? audNzdRate : 1.10;
 
   const fundMetaMap = new Map<string, FundMetadata>();
   for (const fm of fundsRegistry) {
@@ -78,7 +78,7 @@ export function calculatePortfolioLookthrough(input: CalculationInput): Calculat
   let sumDirectNZD = 0;
   const directNZDValues: { holding: DirectHolding; valueNZD: number }[] = [];
   for (const dh of directHoldings) {
-    const valueNZD = dh.currency === "AUD" ? dh.value * audNzdRate : dh.value;
+    const valueNZD = dh.currency === "AUD" ? dh.value * safeAudNzdRate : dh.value;
     if (valueNZD > 0) {
       sumDirectNZD += valueNZD;
       directNZDValues.push({ holding: dh, valueNZD });
@@ -154,9 +154,10 @@ export function calculatePortfolioLookthrough(input: CalculationInput): Calculat
     for (const c of constituents) {
       const assetClass = c.asset_class || "equity";
       const isin = c.isin || `SYNTH_${c.ticker || c.name}`;
+      const holdingKey = `${assetClass}:${isin}`;
       const exposureNZD = balance * c.weight;
 
-      let record = holdingsMap.get(isin);
+      let record = holdingsMap.get(holdingKey);
       if (!record) {
         record = {
           isin,
@@ -173,7 +174,7 @@ export function calculatePortfolioLookthrough(input: CalculationInput): Calculat
           equityWeight: 0,
           sources: [],
         };
-        holdingsMap.set(isin, record);
+        holdingsMap.set(holdingKey, record);
       } else if (c.tranche_count) {
         record.trancheCount = (record.trancheCount || 0) + c.tranche_count;
       }
@@ -193,7 +194,8 @@ export function calculatePortfolioLookthrough(input: CalculationInput): Calculat
 
   for (const { holding, valueNZD } of directNZDValues) {
     const isin = holding.isin || `SYNTH_${holding.ticker}`;
-    let record = holdingsMap.get(isin);
+    const holdingKey = `equity:${isin}`;
+    let record = holdingsMap.get(holdingKey);
     if (!record) {
       record = {
         isin,
@@ -209,7 +211,7 @@ export function calculatePortfolioLookthrough(input: CalculationInput): Calculat
         equityWeight: 0,
         sources: [],
       };
-      holdingsMap.set(isin, record);
+      holdingsMap.set(holdingKey, record);
     }
 
     record.valueNZD += valueNZD;

@@ -528,7 +528,13 @@
         container.innerHTML = html;
         renderUnresolved(res.unresolved_entries || []);
         renderUnconfiguredFeeders(res.unconfigured_feeders || []);
-        showToast(dryRun ? 'Dry-run complete' : 'Production files written to public/data/');
+        if (dryRun) {
+          showToast(res.is_valid ? 'Dry-run validation passed' : 'Dry-run completed with errors');
+        } else if (res.files_written) {
+          showToast('Production files written to public/data/');
+        } else {
+          showToast('Validation failed — production files were NOT written');
+        }
       } catch (err) {
         container.innerHTML = `<span class="badge badge-err">${escapeHtml(err.message)}</span>`;
       }
@@ -613,7 +619,7 @@
             <td class="mono">${escapeHtml(r.ticker)}</td>
             <td>${escapeHtml(r.name)}</td>
             <td>${escapeHtml(r.country)}</td>
-            <td><button class="btn btn-sm" onclick="copyIsin('${escapeHtml(r.isin)}')">Use ISIN</button></td>
+            <td><button class="btn btn-sm" data-isin="${escapeHtml(r.isin)}" onclick="copyIsin(this.dataset.isin)">Use ISIN</button></td>
           </tr>
         `;
       }
@@ -637,27 +643,35 @@
         alert('Enter an ISIN first (you can search above and click "Use ISIN").');
         return;
       }
-      await api('/api/aliases/set', {
-        method: 'POST',
-        body: JSON.stringify({ scope_key: scope, raw_name: item.raw_name, isin }),
-      });
-      showToast(`Mapped "${item.raw_name}" -> ${isin}`);
-      await loadAliases();
-      await runPipeline(true);
+      try {
+        await api('/api/aliases/set', {
+          method: 'POST',
+          body: JSON.stringify({ scope_key: scope, raw_name: item.raw_name, isin }),
+        });
+        showToast(`Mapped "${item.raw_name}" -> ${isin}`);
+        await loadAliases();
+        await runPipeline(true);
+      } catch (err) {
+        alert(`Failed to save alias: ${err.message}`);
+      }
     }
 
     async function addManualAlias() {
       const scope_key = document.getElementById('manual-scope').value.trim();
       const raw_name = document.getElementById('manual-name').value.trim();
       const isin = document.getElementById('manual-isin').value.trim();
-      await api('/api/aliases/set', {
-        method: 'POST',
-        body: JSON.stringify({ scope_key, raw_name, isin }),
-      });
-      document.getElementById('manual-name').value = '';
-      document.getElementById('manual-isin').value = '';
-      showToast(`Saved alias ${raw_name} -> ${isin}`);
-      await loadAliases();
+      try {
+        await api('/api/aliases/set', {
+          method: 'POST',
+          body: JSON.stringify({ scope_key, raw_name, isin }),
+        });
+        document.getElementById('manual-name').value = '';
+        document.getElementById('manual-isin').value = '';
+        showToast(`Saved alias ${raw_name} -> ${isin}`);
+        await loadAliases();
+      } catch (err) {
+        alert(`Failed to save alias: ${err.message}`);
+      }
     }
 
     async function deleteAliasByIdx(idx) {
@@ -707,15 +721,19 @@
 
     async function bulkImportAliases() {
       const csv_text = document.getElementById('bulk-csv-text').value;
-      const res = await api('/api/aliases/bulk-set', {
-        method: 'POST',
-        body: JSON.stringify({ csv_text }),
-      });
-      document.getElementById('bulk-csv-text').value = '';
-      document.getElementById('bulk-import-box').style.display = 'none';
-      showToast(`Imported ${res.saved_count} alias mappings`);
-      await loadAliases();
-      await runPipeline(true);
+      try {
+        const res = await api('/api/aliases/bulk-set', {
+          method: 'POST',
+          body: JSON.stringify({ csv_text }),
+        });
+        document.getElementById('bulk-csv-text').value = '';
+        document.getElementById('bulk-import-box').style.display = 'none';
+        showToast(`Imported ${res.saved_count} alias mappings`);
+        await loadAliases();
+        await runPipeline(true);
+      } catch (err) {
+        alert(`Bulk import failed: ${err.message}`);
+      }
     }
 
     async function fixAliasByIdx(pairIdx, candIdx) {

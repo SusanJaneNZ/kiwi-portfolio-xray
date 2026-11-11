@@ -2,7 +2,7 @@
  * Look-through, Asset Split, and Cross-Asset Institutional Rollup test suite.
  */
 
-import { calculatePortfolioLookthrough, CalculationInput } from "./lookthrough";
+import { calculatePortfolioLookthrough, CalculationInput, resolveDepositIssuer } from "./lookthrough";
 import { CashDepositHolding, Constituent, DirectHolding, FundMetadata } from "../types/portfolio";
 
 function assertTrue(cond: boolean, msg: string): void {
@@ -163,4 +163,14 @@ export function runLookthroughTests(): void {
   assertTrue(Math.abs(anzRollup.depositNZD - 5000) < 0.01, `ANZ deposit mismatch: ${anzRollup.depositNZD}`);
   assertTrue(Math.abs(anzRollup.totalNZD - 11750) < 0.01, `ANZ total mismatch: ${anzRollup.totalNZD}`);
   assertTrue(anzRollup.assetClassCount === 3, `Expected 3 ANZ asset classes, got ${anzRollup.assetClassCount}`);
+
+  // Bank alias word-boundary check: "Allianz" must NOT resolve to ISSUER_ANZ
+  const allianz = resolveDepositIssuer("Allianz");
+  assertTrue(allianz.issuerKey !== "ISSUER_ANZ", `False bank alias match: ${allianz.issuerKey}`);
+  const anz = resolveDepositIssuer("ANZ Bank New Zealand");
+  assertTrue(anz.issuerKey === "ISSUER_ANZ", `Expected ISSUER_ANZ, got ${anz.issuerKey}`);
+
+  // Invalid audNzdRate (<= 0) falls back cleanly instead of dropping ASX direct holdings
+  const badFxRes = calculatePortfolioLookthrough({ ...input, audNzdRate: -1 });
+  assertTrue(badFxRes.denominatorD > 29000, "ASX holding should not be dropped on invalid audNzdRate");
 }

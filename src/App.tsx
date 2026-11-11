@@ -31,6 +31,7 @@ export const App: React.FC = () => {
   const [unresolvedEntries, setUnresolvedEntries] = useState<UnresolvedItem[]>([]);
   const [isUnresolvedModalOpen, setIsUnresolvedModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [dataLoadError, setDataLoadError] = useState<string | null>(null);
 
   // Restore from IndexedDB mirror if localStorage was empty on boot and user hasn't edited yet
   useEffect(() => {
@@ -61,22 +62,72 @@ export const App: React.FC = () => {
 
   // Load static public data assets
   useEffect(() => {
+    async function fetchJson<T>(url: string): Promise<T> {
+      const res = await fetch(url);
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status} loading ${url}`);
+      }
+      return res.json() as Promise<T>;
+    }
+
     async function loadData() {
       try {
         const basePath = import.meta.env.BASE_URL || '/';
         const [fundsRes, constRes, directRes, unresRes] = await Promise.all([
-          fetch(`${basePath}data/funds_registry.json`).then((r) => r.json()),
-          fetch(`${basePath}data/constituents.json`).then((r) => r.json()),
-          fetch(`${basePath}data/direct_equities.json`).then((r) => r.json()),
-          fetch(`${basePath}data/unresolved_entries.json`).then((r) => r.json()),
+          fetchJson<FundMetadata[]>(`${basePath}data/funds_registry.json`),
+          fetchJson<Record<string, Constituent[]>>(`${basePath}data/constituents.json`),
+          fetchJson<DirectEquityCatalogItem[]>(`${basePath}data/direct_equities.json`),
+          fetchJson<UnresolvedItem[]>(`${basePath}data/unresolved_entries.json`),
         ]);
 
         setFundsRegistry(fundsRes);
         setConstituentsMap(constRes);
         setDirectCatalog(directRes);
         setUnresolvedEntries(unresRes);
+        setDataLoadError(null);
+
+        // Reconcile any saved direct holdings whose legacy ISIN differs from compiled canonical ISIN/SEDOL
+        if (directRes.length > 0) {
+          const byTickerKey = new Map<string, DirectEquityCatalogItem>();
+          for (const item of directRes) {
+            byTickerKey.set(`${item.exchange}:${item.ticker.toUpperCase()}`, item);
+          }
+          setPortfolioState((prev) => {
+            let changed = false;
+            const nextAssignments = { ...prev.bucketAssignments };
+            const reconciled = prev.directHoldings.map((dh) => {
+              const match = byTickerKey.get(`${dh.exchange}:${dh.ticker.toUpperCase()}`);
+              if (match && match.isin && match.isin !== dh.isin) {
+                changed = true;
+                const oldBucketKey = `direct:${dh.isin}`;
+                const newBucketKey = `direct:${match.isin}`;
+                if (nextAssignments[oldBucketKey] && !nextAssignments[newBucketKey]) {
+                  nextAssignments[newBucketKey] = nextAssignments[oldBucketKey];
+                  delete nextAssignments[oldBucketKey];
+                }
+                return {
+                  ...dh,
+                  isin: match.isin,
+                  issuer_key: dh.issuer_key || match.issuer_key,
+                  issuer_name: dh.issuer_name || match.issuer_name,
+                };
+              }
+              return dh;
+            });
+            if (!changed) return prev;
+            const nextState = { ...prev, directHoldings: reconciled, bucketAssignments: nextAssignments };
+            if (hasUserEditedRef.current || loadSource !== 'default') {
+              savePortfolioState(nextState);
+            }
+            return nextState;
+          });
+        }
       } catch (err) {
-        console.error('Failed to load static datasets, using built-in fallbacks:', err);
+        const msg = err instanceof Error ? err.message : String(err);
+        console.error('Failed to load static datasets:', err);
+        setDataLoadError(
+          `Failed to load compiled fund datasets (${msg}). Look-through constituents may be incomplete until reloaded.`
+        );
       } finally {
         setIsLoading(false);
       }
@@ -143,6 +194,18 @@ export const App: React.FC = () => {
           loadSource={loadSource}
           recoveredNotice={recoveredNotice}
         />
+
+        {dataLoadError && (
+          <div className="bg-rose-950/50 border border-rose-700/60 text-rose-200 rounded-xl px-4 py-3 text-xs flex items-center justify-between gap-3">
+            <span>⚠ {dataLoadError}</span>
+            <button
+              onClick={() => window.location.reload()}
+              className="bg-rose-800 hover:bg-rose-700 text-white px-2.5 py-1 rounded-lg font-medium whitespace-nowrap"
+            >
+              Reload Page
+            </button>
+          </div>
+        )}
 
         {/* 1. Asset Class / Liquidity Split */}
         <LiquidityCard

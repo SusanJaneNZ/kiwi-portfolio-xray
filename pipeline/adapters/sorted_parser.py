@@ -6,7 +6,12 @@ import re
 from pathlib import Path
 from typing import Optional
 
-from pipeline.adapters.base import FundExtractionResult, RawHolding, parse_effective_date
+from pipeline.adapters.base import (
+    FundExtractionResult,
+    RawHolding,
+    clean_float_cell,
+    parse_effective_date,
+)
 from pipeline.adapters.tabular_reader import read_tabular_rows
 
 NAME_HEADERS = {
@@ -23,16 +28,23 @@ NAME_HEADERS = {
 CURRENCY_AND_CASH_TOKENS = (
     "cash",
     "new zealand dollar",
+    "new zealand dollars",
     "us dollar",
+    "us dollars",
     "australian dollar",
     "australian dollars",
     "canadian dollar",
+    "canadian dollars",
     "hong kong dollar",
+    "hong kong dollars",
     "singapore dollar",
     "singapore dollars",
     "taiwan dollar",
+    "taiwan dollars",
     "british pound",
+    "british pounds",
     "pound sterling",
+    "pounds sterling",
     "swiss franc",
     "swiss francs",
     "japanese yen",
@@ -41,7 +53,9 @@ CURRENCY_AND_CASH_TOKENS = (
     "danish krone",
     "danish kroner",
     "swedish krona",
+    "swedish kronor",
     "norwegian krone",
+    "norwegian kroner",
     "korean won",
     "indian rupee",
     "brazilian real",
@@ -50,8 +64,13 @@ CURRENCY_AND_CASH_TOKENS = (
     "israeli shekel",
     "thailand baht",
     "european monetary union euro",
+    "euro",
+    "euros",
     "stif fund",
     "eto margin",
+    "futures margin",
+    "variation margin",
+    "initial margin",
     "net current assets",
     "accounts payable",
     "accounts receivable",
@@ -67,22 +86,14 @@ CURRENCY_AND_CASH_TOKENS = (
 _CASH_TOKEN_RES = tuple(re.compile(rf"\b{re.escape(tok)}\b", re.IGNORECASE) for tok in CURRENCY_AND_CASH_TOKENS)
 
 
-def _clean_float_cell(raw_str: str) -> tuple[float, bool] | None:
-    text = (raw_str or "").strip()
-    if not text or text in {"-", "--", "---", "N/A", "n/a"}:
-        return None
-    has_pct = "%" in text
-    is_lt = text.startswith("<")
-    cleaned = text.lstrip("<").replace("%", "").replace(",", "").strip()
-    if not cleaned:
-        return None
-    try:
-        val = float(cleaned)
-    except ValueError:
-        return None
-    if is_lt:
-        val *= 0.5
-    return val, has_pct
+def _find_weight_col(col_map: dict[str, int]) -> int:
+    for priority_key in ("% of fund net assets", "% of fund", "weight (%)", "weighting (%)", "weight%", "weight"):
+        if priority_key in col_map:
+            return col_map[priority_key]
+    for k, idx in col_map.items():
+        if "weight" in k or "%" in k or "percent" in k:
+            return idx
+    return -1
 
 
 def parse_nz_fund_file(
@@ -103,24 +114,22 @@ def parse_nz_fund_file(
         normalized_row = [c.strip().lower() for c in row]
 
         if not header:
+            candidate_map = {c: idx for idx, c in enumerate(normalized_row)}
             has_name_or_ticker = any(
                 c in NAME_HEADERS or "security" in c or "company" in c or "asset" in c or "ticker" in c or "code" in c
                 for c in normalized_row
             )
-            has_weight = any(
-                "weight" in c or "percent" in c or "%" in c or "market value" in c or "fund" in c
-                for c in normalized_row
-            )
-            if has_name_or_ticker and has_weight:
+            detected_weight_col = _find_weight_col(candidate_map)
+            if has_name_or_ticker and detected_weight_col != -1:
                 header = normalized_row
-                col_map = {c: idx for idx, c in enumerate(header)}
+                col_map = candidate_map
                 continue
 
             if len(normalized_row) >= 2 and normalized_row[0] == "fund name" and row[1].strip():
                 fund_name = row[1].strip().title()
 
             row_str = " ".join(row)
-            maybe_date = parse_effective_date(row_str)
+            maybe_date = parse_effective_date(row_str, prefer_day_first=True)
             if maybe_date:
                 effective_date = maybe_date
             continue
@@ -140,10 +149,7 @@ def parse_nz_fund_file(
         class_col = next((idx for k, idx in col_map.items() if "asset class" in k or k == "class"), -1)
         type_col = next((idx for k, idx in col_map.items() if k == "type" or "sector" in k), -1)
         country_col = next((idx for k, idx in col_map.items() if "country" in k), -1)
-        weight_col = next(
-            (idx for k, idx in col_map.items() if "weight" in k or "%" in k or "percent" in k),
-            -1,
-        )
+        weight_col = _find_weight_col(col_map)
 
         if weight_col == -1 or len(row) <= weight_col:
             continue
@@ -155,7 +161,7 @@ def parse_nz_fund_file(
         if not name or name.lower().startswith("total"):
             continue
 
-        parsed_num = _clean_float_cell(row[weight_col])
+        parsed_num = clean_float_cell(row[weight_col])
         if not parsed_num:
             continue
         raw_val, has_pct = parsed_num

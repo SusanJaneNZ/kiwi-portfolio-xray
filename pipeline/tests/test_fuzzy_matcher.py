@@ -133,6 +133,15 @@ class TestFuzzyMatcher(unittest.TestCase):
         self.assertEqual(len(suggestions), 2)
         self.assertTrue(all("Alphabet" in s["name"] for s in suggestions))
 
+    def test_bare_ticker_collision_guard_and_case_insensitive_sector(self):
+        # Bare ticker collision with unrelated company name should NOT falsely match MCY.NZ
+        collision = self.matcher.match(name="Macquarie Yield Corp", ticker="MCY")
+        self.assertFalse(collision.matched)
+        # Case-insensitive GICS mapping
+        self.matcher.gics_mapping["systems software"] = "Information Technology"
+        self.matcher.gics_lower = {k.lower(): v for k, v in self.matcher.gics_mapping.items()}
+        self.assertEqual(self.matcher._normalize_sector("SYSTEMS SOFTWARE"), "Information Technology")
+
 
 if __name__ == "__main__":
     unittest.main()

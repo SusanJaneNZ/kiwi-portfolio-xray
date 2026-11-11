@@ -74,10 +74,24 @@ class SchemaValidator:
             report.errors.append("funds_registry.json must be a non-empty array.")
             return
 
+        seen_codes: set[str] = set()
         for idx, f in enumerate(funds):
             for required in ["code", "name", "provider", "effective_date", "cash_ratio", "hedging_ratio", "constituent_count", "asset_class"]:
                 if required not in f:
                     report.errors.append(f"Fund #{idx} missing required key: '{required}'.")
+
+            code = f.get("code", "")
+            if code:
+                if code in seen_codes:
+                    report.errors.append(f"Duplicate fund code '{code}' in funds_registry.json.")
+                seen_codes.add(code)
+
+            cash_ratio = f.get("cash_ratio", 0.0)
+            hedging_ratio = f.get("hedging_ratio", 0.0)
+            if not isinstance(cash_ratio, (int, float)) or cash_ratio < 0.0 or cash_ratio > 1.0:
+                report.errors.append(f"Fund '{code}' has out-of-range cash_ratio {cash_ratio}.")
+            if not isinstance(hedging_ratio, (int, float)) or hedging_ratio < 0.0 or hedging_ratio > 1.0:
+                report.errors.append(f"Fund '{code}' has out-of-range hedging_ratio {hedging_ratio}.")
 
             if f.get("asset_class") not in FUND_ASSET_CLASSES:
                 report.errors.append(
@@ -94,9 +108,10 @@ class SchemaValidator:
         constituents: dict[str, list[dict]],
         report: ValidationReport,
     ) -> None:
-        fund_map = {f.get("code"): f for f in funds if isinstance(f, dict)}
-
-        for code, f_info in fund_map.items():
+        for f_info in funds:
+            if not isinstance(f_info, dict):
+                continue
+            code = f_info.get("code")
             if code not in constituents:
                 report.errors.append(f"Fund '{code}' listed in registry but missing from constituents.json.")
                 continue
@@ -105,6 +120,12 @@ class SchemaValidator:
             if not isinstance(fund_constituents, list):
                 report.errors.append(f"Constituents for fund '{code}' must be a list.")
                 continue
+
+            expected_count = f_info.get("constituent_count")
+            if isinstance(expected_count, int) and expected_count != len(fund_constituents):
+                report.errors.append(
+                    f"Fund '{code}' constituent_count ({expected_count}) does not match constituents length ({len(fund_constituents)})."
+                )
 
             equity_weight_sum = 0.0
             bond_weight_sum = 0.0
@@ -123,6 +144,11 @@ class SchemaValidator:
                     )
 
                 w = c.get("weight", 0.0)
+                if not isinstance(w, (int, float)) or w < 0.0 or w > 1.0:
+                    report.errors.append(
+                        f"Fund '{code}' constituent '{c.get('name')}' has out-of-range weight {w}."
+                    )
+                    continue
                 if asset_class == "fixed_interest":
                     bond_weight_sum += w
                 elif asset_class == "term_deposit":

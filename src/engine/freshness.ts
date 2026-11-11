@@ -34,10 +34,9 @@ export function computeFreshnessEnvelope(
   }
 
   if (effectiveDates.length === 0) {
-    const nowStr = referenceDate.toISOString().split("T")[0];
     return {
-      minEffectiveDate: nowStr,
-      maxEffectiveDate: nowStr,
+      minEffectiveDate: "N/A",
+      maxEffectiveDate: "N/A",
       spreadDays: 0,
       isAnyStale: false,
     };

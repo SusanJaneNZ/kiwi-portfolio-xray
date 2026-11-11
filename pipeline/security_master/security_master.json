@@ -5,7 +5,9 @@
     "ticker": "WBC.NZ",
     "exchange": "NZX",
     "country": "Australia",
-    "sector": "Financials"
+    "sector": "Financials",
+    "issuer_key": "ISSUER_WBC",
+    "issuer_name": "Westpac Banking Group"
   },
   {
     "isin": "SEDOL:6065586",
@@ -13,7 +15,9 @@
     "ticker": "ANZ.NZ",
     "exchange": "NZX",
     "country": "Australia",
-    "sector": "Financials"
+    "sector": "Financials",
+    "issuer_key": "ISSUER_ANZ",
+    "issuer_name": "ANZ Group"
   },
   {
     "isin": "SEDOL:6340250",
@@ -29,7 +33,9 @@
     "ticker": "MEL.NZ",
     "exchange": "NZX",
     "country": "New Zealand",
-    "sector": "Utilities"
+    "sector": "Utilities",
+    "issuer_key": "ISSUER_MEL",
+    "issuer_name": "Meridian Energy"
   },
   {
     "isin": "SEDOL:BKX3XG2",
@@ -37,7 +43,9 @@
     "ticker": "AIA.NZ",
     "exchange": "NZX",
     "country": "New Zealand",
-    "sector": "Industrials"
+    "sector": "Industrials",
+    "issuer_key": "ISSUER_AIA",
+    "issuer_name": "Auckland International Airport"
   },
   {
     "isin": "NZX:FCG",
@@ -53,7 +61,9 @@
     "ticker": "IFT.NZ",
     "exchange": "NZX",
     "country": "New Zealand",
-    "sector": "Industrials"
+    "sector": "Industrials",
+    "issuer_key": "ISSUER_IFT",
+    "issuer_name": "Infratil"
   },
   {
     "isin": "NZX:AFI",
@@ -69,7 +79,9 @@
     "ticker": "MCY.NZ",
     "exchange": "NZX",
     "country": "New Zealand",
-    "sector": "Utilities"
+    "sector": "Utilities",
+    "issuer_key": "ISSUER_MCY",
+    "issuer_name": "Mercury NZ"
   },
   {
     "isin": "SEDOL:6152529",
@@ -77,7 +89,9 @@
     "ticker": "CEN.NZ",
     "exchange": "NZX",
     "country": "New Zealand",
-    "sector": "Utilities"
+    "sector": "Utilities",
+    "issuer_key": "ISSUER_CEN",
+    "issuer_name": "Contact Energy"
   },
   {
     "isin": "SEDOL:6603038",
@@ -109,7 +123,9 @@
     "ticker": "POT.NZ",
     "exchange": "NZX",
     "country": "New Zealand",
-    "sector": "Industrials"
+    "sector": "Industrials",
+    "issuer_key": "ISSUER_POT",
+    "issuer_name": "Port of Tauranga"
   },
   {
     "isin": "SEDOL:B0H0BC1",
@@ -117,7 +133,9 @@
     "ticker": "VCT.NZ",
     "exchange": "NZX",
     "country": "New Zealand",
-    "sector": "Utilities"
+    "sector": "Utilities",
+    "issuer_key": "ISSUER_VCT",
+    "issuer_name": "Vector"
   },
   {
     "isin": "SEDOL:6160038",
@@ -133,7 +151,9 @@
     "ticker": "SPK.NZ",
     "exchange": "NZX",
     "country": "New Zealand",
-    "sector": "Communication Services"
+    "sector": "Communication Services",
+    "issuer_key": "ISSUER_SPK",
+    "issuer_name": "Spark New Zealand"
   },
   {
     "isin": "SEDOL:B54F6S5",
@@ -141,7 +161,9 @@
     "ticker": "CNU.NZ",
     "exchange": "NZX",
     "country": "New Zealand",
-    "sector": "Communication Services"
+    "sector": "Communication Services",
+    "issuer_key": "ISSUER_CNU",
+    "issuer_name": "Chorus"
   },
   {
     "isin": "SEDOL:6341606",
@@ -157,7 +179,9 @@
     "ticker": "GNE.NZ",
     "exchange": "NZX",
     "country": "New Zealand",
-    "sector": "Utilities"
+    "sector": "Utilities",
+    "issuer_key": "ISSUER_GNE",
+    "issuer_name": "Genesis Energy"
   },
   {
     "isin": "NZX:GNZ",
@@ -245,7 +269,9 @@
     "ticker": "HGH.NZ",
     "exchange": "NZX",
     "country": "New Zealand",
-    "sector": "Financials"
+    "sector": "Financials",
+    "issuer_key": "ISSUER_HEARTLAND",
+    "issuer_name": "Heartland Group"
   },
   {
     "isin": "NZX:PFI",
@@ -3829,7 +3855,9 @@
     "ticker": "CBA.AX",
     "exchange": "ASX",
     "country": "Australia",
-    "sector": "Financials"
+    "sector": "Financials",
+    "issuer_key": "ISSUER_CBA_ASB",
+    "issuer_name": "Commonwealth Bank / ASB"
   },
   {
     "isin": "ASX:CBE",
@@ -9909,7 +9937,9 @@
     "ticker": "NAB.AX",
     "exchange": "ASX",
     "country": "Australia",
-    "sector": "Financials"
+    "sector": "Financials",
+    "issuer_key": "ISSUER_NAB_BNZ",
+    "issuer_name": "NAB / Bank of New Zealand"
   },
   {
     "isin": "ASX:NAC",

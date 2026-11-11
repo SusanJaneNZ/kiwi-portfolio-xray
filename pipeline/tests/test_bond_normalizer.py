@@ -23,9 +23,19 @@ class TestAssetClassifierAndBondPipeline(unittest.TestCase):
         self.assertEqual(self.classifier.classify_holding("Chorus Ltd "), "equity")
         self.assertEqual(self.classifier.classify_holding("TD SYNNEX Corp"), "equity")
         self.assertEqual(self.classifier.classify_holding("BHP Group Ltd (AU)"), "equity")
+        self.assertEqual(self.classifier.classify_holding("Perpetual Limited"), "equity")
+        self.assertEqual(self.classifier.classify_holding("Perpetual Group"), "equity")
         self.assertEqual(
             self.classifier.classify_holding("US Treasury Corp Dividend", fund_code="KERNEL_GLOBAL_DIVIDEND"),
             "equity",
+        )
+        self.assertEqual(
+            self.classifier.classify_holding(
+                "Generic Note",
+                fund_code="KERNEL_GLOBAL_DIVIDEND",
+                asset_class_hint="Fixed interest",
+            ),
+            "fixed_interest",
         )
 
         # Explicit deposits -> term_deposit (even when rate % and maturity date are included)
