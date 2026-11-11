@@ -201,6 +201,16 @@ export const storageTestCases: Array<[string, () => void]> = [
       assertEq(restored.status, "loaded_from_file", "default local state should restore from linked disk file");
       assertEq(restored.state!.fundBalances.ASIA, 33000, "restored ASIA balance from disk");
 
+      // Even if local storage contains a newer timestamp holding Sample data (loadSource === 'v2'),
+      // resumeLinkedFileSync must restore the real disk backup instead of overwriting it with Sample!
+      const newerSampleState = {
+        ...DEFAULT_PORTFOLIO_STATE,
+        timestamp: "2099-01-01T00:00:00Z",
+      };
+      const protectedRestore = await resumeLinkedFileSync(mockHandle, newerSampleState, "v2");
+      assertEq(protectedRestore.status, "loaded_from_file", "newer sample state must not overwrite real disk backup");
+      assertEq(protectedRestore.state!.fundBalances.ASIA, 33000, "disk backup remains intact");
+
       const updated = {
         ...restored.state!,
         timestamp: "2026-11-11T09:00:00Z",

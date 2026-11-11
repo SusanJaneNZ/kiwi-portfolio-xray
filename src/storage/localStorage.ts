@@ -507,6 +507,39 @@ export async function pickExistingAndLinkBackupFile(): Promise<{
   return { handle, loadedState };
 }
 
+export function isEmptyPortfolio(state: UserPortfolioState): boolean {
+  return (
+    Object.values(state.fundBalances).every((v) => v <= 0) &&
+    state.directHoldings.every((d) => d.value <= 0) &&
+    state.cashDeposits.every((c) => c.valueNZD <= 0) &&
+    state.buckets.length === 0
+  );
+}
+
+export function isSamplePortfolio(state: UserPortfolioState): boolean {
+  const funds = Object.entries(state.fundBalances).filter(([, v]) => v > 0);
+  if (
+    funds.length !== 3 ||
+    state.fundBalances.TWF !== 20000 ||
+    state.fundBalances.FNZ !== 15000 ||
+    state.fundBalances.USF !== 5000
+  ) {
+    return false;
+  }
+  if (state.directHoldings.length !== 2) return false;
+  const hasMcy = state.directHoldings.some(
+    (d) => d.ticker === "MCY.NZ" && Math.abs(d.value - 2500) < 0.01
+  );
+  const hasBhp = state.directHoldings.some(
+    (d) => d.ticker === "BHP.AX" && Math.abs(d.value - 2272.73) < 0.01
+  );
+  if (!hasMcy || !hasBhp) return false;
+  if (state.cashDeposits.length !== 1 || state.cashDeposits[0].id !== "td-sample-anz") {
+    return false;
+  }
+  return state.buckets.length === 0;
+}
+
 export async function resumeLinkedFileSync(
   handle: LinkedFileHandle,
   currentState: UserPortfolioState,
@@ -522,9 +555,16 @@ export async function resumeLinkedFileSync(
   const fileState = await readPortfolioFromLinkedFile(handle);
   const fileTime = fileState ? Date.parse(fileState.timestamp) || 0 : 0;
   const localTime = Date.parse(currentState.timestamp) || 0;
+  const localIsDefaultOrBlank =
+    loadSource === "default" || isSamplePortfolio(currentState) || isEmptyPortfolio(currentState);
+  const fileHasRealPortfolio =
+    fileState !== null && !isSamplePortfolio(fileState) && !isEmptyPortfolio(fileState);
 
-  if (fileState && (loadSource === "default" || fileTime > localTime)) {
-    return { status: "loaded_from_file", state: fileState };
+  if (fileState && (localIsDefaultOrBlank || fileTime > localTime)) {
+    // Never overwrite a real disk backup with sample or empty state
+    if (fileHasRealPortfolio || loadSource === "default" || fileTime > localTime) {
+      return { status: "loaded_from_file", state: fileState };
+    }
   }
 
   const ok = await writePortfolioToLinkedFile(handle, currentState);

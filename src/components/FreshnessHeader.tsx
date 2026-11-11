@@ -8,6 +8,7 @@ import {
   exportPortfolioJSON,
   importPortfolioJSON,
   isFileSyncSupported,
+  isSamplePortfolio,
 } from '../storage/localStorage';
 import { ConsolidatedHolding } from '../types/portfolio';
 import type { LinkedFileStatus } from '../App';
@@ -51,7 +52,7 @@ export const FreshnessHeader: React.FC<FreshnessHeaderProps> = ({
     portfolioState.cashDeposits.length > 0 ||
     portfolioState.buckets.length > 0;
 
-  const handleLoadSample = () => {
+  const handleLoadSample = async () => {
     if (
       loadSource !== 'default' &&
       hasEnteredPortfolio &&
@@ -59,18 +60,24 @@ export const FreshnessHeader: React.FC<FreshnessHeaderProps> = ({
     ) {
       return;
     }
+    if (linkedFileInfo && onUnlinkBackupFile) {
+      await onUnlinkBackupFile();
+    }
     onUpdateState({
       ...DEFAULT_PORTFOLIO_STATE,
       timestamp: new Date().toISOString(),
     });
   };
 
-  const handleClearPortfolio = () => {
+  const handleClearPortfolio = async () => {
     if (
       hasEnteredPortfolio &&
       !window.confirm('Clear all entered funds, direct shares, and term deposits?')
     ) {
       return;
+    }
+    if (linkedFileInfo && onUnlinkBackupFile) {
+      await onUnlinkBackupFile();
     }
     onUpdateState({
       ...portfolioState,
@@ -158,11 +165,17 @@ export const FreshnessHeader: React.FC<FreshnessHeaderProps> = ({
           >
             <span
               className={`inline-block w-1.5 h-1.5 rounded-full ${
-                loadSource === 'default' ? 'bg-slate-500' : 'bg-emerald-400'
+                loadSource === 'default' || isSamplePortfolio(portfolioState)
+                  ? 'bg-slate-500'
+                  : 'bg-emerald-400'
               }`}
             />
             {loadSource === 'default' ? (
               <span>Showing sample portfolio (edit any holding to auto-save in {originLabel})</span>
+            ) : isSamplePortfolio(portfolioState) ? (
+              <span>
+                Showing sample portfolio (saved in {originLabel}){savedTimeLabel ? ` · ${savedTimeLabel}` : ''}
+              </span>
             ) : (
               <span>
                 Auto-saved in browser ({originLabel}){savedTimeLabel ? ` · ${savedTimeLabel}` : ''}
