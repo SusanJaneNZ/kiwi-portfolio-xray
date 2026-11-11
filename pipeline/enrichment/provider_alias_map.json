@@ -6,10 +6,14 @@
     "Vestas Wind Systems A/S": "SEDOL:BN4MYF5",
     "Orsted A/S": "SEDOL:BYT16L4",
     "Nextracker Inc Class A": "SEDOL:BR1GTS6",
-    "Energias de Portugal SA": "SEDOL:4103596"
+    "Energias de Portugal SA": "SEDOL:4103596",
+    "Clearway Energy Inc Class C": "SEDOL:BGJRH57"
   },
   "Smartshares:FNZ": {
     "FPH NZ": "SEDOL:6340250"
+  },
+  "Smartshares:AUS": {
+    "ISHARES CORE S&P/ASX 200 ETF": "AU000000IOZ4"
   },
   "Kernel:KERNEL_WORLD_EX_US": {
     "LVMH-Moet Vuitton": "SEDOL:4061412",
@@ -70,5 +74,11 @@
   },
   "Smartshares:SMART_GLOBAL_BOND_ETF_FND1101_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026": {
     "GINNIE MAE II POOL 3.00% 20/03/2052": "SEDOL:2350684"
+  },
+  "Kernel:KERNEL_GLOBAL_ESG": {
+    "Alphabet Inc Class A": "SEDOL:BYVY8G0"
+  },
+  "Smartshares:MZY": {
+    "SGH LIMITED ORDINARY FULLY PAID": "SEDOL:BR858V2"
   }
 }
