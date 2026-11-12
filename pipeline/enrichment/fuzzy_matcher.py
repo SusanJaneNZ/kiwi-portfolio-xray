@@ -150,6 +150,17 @@ class SecurityMatcher:
                 for tok in get_stem_tokens(clean_name):
                     self.by_token.setdefault(tok, []).append(sec)
 
+        # Unambiguous cross-fund alias fallback (None marks conflicting multi-fund targets)
+        self.global_alias_by_name: dict[str, Optional[str]] = {}
+        for scope_map in self.alias_map.values():
+            if not isinstance(scope_map, dict):
+                continue
+            for raw_name, target_isin in scope_map.items():
+                if raw_name not in self.global_alias_by_name:
+                    self.global_alias_by_name[raw_name] = target_isin
+                elif self.global_alias_by_name[raw_name] != target_isin:
+                    self.global_alias_by_name[raw_name] = None
+
     def match(
         self,
         name: str,
@@ -159,14 +170,21 @@ class SecurityMatcher:
         fund_code: str = "",
     ) -> MatchResult:
         """Attempts to match an incoming record using alias, ISIN, exact ticker, and fuzzy guardrails."""
-        # 1. Check explicit provider alias map first
+        # 1. Check explicit provider alias map first (per-fund -> provider wildcard -> unambiguous cross-fund)
         alias_key = f"{provider}:{fund_code}"
         fund_aliases = self.alias_map.get(alias_key, {})
-        if name in fund_aliases:
-            alias_isin = fund_aliases[name]
+        alias_isin = fund_aliases.get(name)
+        alias_reason = "provider_alias_map"
+        if not alias_isin:
+            alias_isin = self.alias_map.get(f"{provider}:*", {}).get(name) or self.alias_map.get("*", {}).get(name)
+            if not alias_isin:
+                alias_isin = self.global_alias_by_name.get(name)
+                alias_reason = "cross_fund_alias_map"
+
+        if alias_isin:
             if alias_isin in self.by_isin:
                 sec = self.by_isin[alias_isin]
-                return self._build_result(sec, 1.0, "provider_alias_map")
+                return self._build_result(sec, 1.0, alias_reason)
             # If alias is provided but not in security master, return partial resolution
             return MatchResult(
                 matched=True,
@@ -176,7 +194,7 @@ class SecurityMatcher:
                 country="Unknown",
                 sector=self._normalize_sector("Unclassified"),
                 score=1.0,
-                reason="provider_alias_map_direct",
+                reason=f"{alias_reason}_direct",
             )
 
         # 2. Direct ISIN lookup

@@ -10,5 +10,65 @@
     "ticker": "UCL",
     "country": "New Zealand",
     "sector": "Industrials"
+  },
+  "SEDOL:2679419": {
+    "name": "Peoples Bancorp Inc",
+    "ticker": "PEBO",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  "BWC52Q6": {
+    "name": "SolarEdge Technologies Inc",
+    "ticker": "SEDG",
+    "country": "Isreal",
+    "sector": "Information Technology"
+  },
+  "BYWD7L4": {
+    "name": "SEA LTD",
+    "ticker": "SE",
+    "country": "Singapore",
+    "sector": "Consumer Discretionary"
+  },
+  "2172639": {
+    "name": "Canadian Utilities Ltd A NV",
+    "ticker": "CU",
+    "country": "Canada",
+    "sector": "Utilities"
+  },
+  "AU000000IOZ4": {
+    "name": "ISHARES CORE S&P/ASX 200 ETF",
+    "ticker": "",
+    "country": "Australia",
+    "sector": "Financials"
+  },
+  "2125901": {
+    "name": "OceanFirst Financial Corp",
+    "ticker": "OCFC",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  "B11FJD6": {
+    "name": "Green Plains Inc.",
+    "ticker": "GPRE",
+    "country": "United States",
+    "sector": "Energy"
+  },
+  "B1FBT05": {
+    "name": "LIONTOWN RESOURCES LTD",
+    "ticker": "LTR",
+    "country": "Australia",
+    "sector": "Materials"
+  },
+  "BSKPBK7": {
+    "name": "T1 Energy Inc",
+    "ticker": "TE",
+    "country": "United States",
+    "sector": "Industrials"
+  },
+  "BJN59B8": {
+    "name": "Porsche AG Vz",
+    "ticker": "P911",
+    "country": "Germany",
+    "sector": "Consumer Discretionary"
   }
 }

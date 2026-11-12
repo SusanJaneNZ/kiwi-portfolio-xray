@@ -28,12 +28,13 @@ class TestAdminUI(unittest.TestCase):
             staging_dir=self.staging_dir,
             output_dir=self.output_dir,
         )
-        # Isolate alias map and security master to temp dir so repo files stay untouched
+        # Isolate alias map, manual securities, and security master to temp dir so repo files stay untouched
         self.service.alias_map_path = self.tmp_dir / "provider_alias_map.json"
         shutil.copy(
             REPO_ROOT / "pipeline" / "enrichment" / "provider_alias_map.json",
             self.service.alias_map_path,
         )
+        self.service.manual_securities_path = self.tmp_dir / "manual_securities.json"
         self.service.security_master_path = self.tmp_dir / "security_master.json"
         self.service.security_master_path.write_text(
             json.dumps([{"isin": "NZMCYE0001S8", "name": "Mercury NZ Limited", "ticker": "MCY.NZ"}]),
@@ -207,6 +208,11 @@ class TestAdminUI(unittest.TestCase):
             sector="Industrials",
         )
         self.assertEqual(auto_isin, "MANUAL:UCL")
+
+        noisy = self.service.search_security_master("NYSE Class A Common Stock")
+        self.assertEqual(noisy, [])
+        exact = self.service.search_security_master("MCY")
+        self.assertTrue(any(r["isin"] == "NZMCYE0001S8" for r in exact))
 
 
 if __name__ == "__main__":

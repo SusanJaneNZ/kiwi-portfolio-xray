@@ -19,7 +19,11 @@ from urllib.parse import parse_qs, urlparse
 
 from pipeline.adapters import PROVIDER_ADAPTERS, iter_staged_files
 from pipeline.adapters.tabular_reader import read_tabular_rows
-from pipeline.enrichment.fuzzy_matcher import SecurityMatcher, token_sort_similarity
+from pipeline.enrichment.fuzzy_matcher import (
+    SecurityMatcher,
+    normalize_company_name,
+    token_sort_similarity,
+)
 from pipeline.output.build_output import PipelineCompiler
 from pipeline.security_master.build_security_master import (
     atomic_write_json,
@@ -361,11 +365,20 @@ class AdminService:
             return data[:limit]
 
         q_tokens = q.split()
+        meaningful_query = normalize_company_name(query)
+        meaningful_tokens = [t.lower() for t in meaningful_query.split() if len(t) >= 2 and t.lower() not in {"nyse", "nasdaq", "asx", "nzx", "common", "stock", "class"}]
+
         exact_or_token_matches: list[tuple[float, dict[str, Any]]] = []
         seen_isins: set[str] = set()
         for item in data:
             hay = f"{item.get('name', '')} {item.get('ticker', '')} {item.get('isin', '')}".lower()
-            if q in hay or (len(q_tokens) > 1 and all(tok in hay for tok in q_tokens)):
+            is_direct = q in hay
+            is_multi_token = (
+                len(q_tokens) > 1
+                and bool(meaningful_tokens)
+                and all(re.search(rf"\b{re.escape(tok)}\b", hay) for tok in q_tokens)
+            )
+            if is_direct or is_multi_token:
                 score = 1.1 if (q == item.get("ticker", "").lower() or q == item.get("isin", "").lower()) else token_sort_similarity(query, item.get("name", ""))
                 exact_or_token_matches.append((score, item))
                 seen_isins.add(item.get("isin", ""))
@@ -373,11 +386,11 @@ class AdminService:
         exact_or_token_matches.sort(key=lambda pair: pair[0], reverse=True)
         results = [item for _, item in exact_or_token_matches[:limit]]
 
-        if len(results) < limit:
+        if len(results) < limit and meaningful_tokens:
             matcher = self._build_security_matcher()
             if matcher:
-                for cand in matcher.suggest_candidates(query, limit=limit):
-                    if cand["isin"] not in seen_isins and cand["score"] >= 0.45:
+                for cand in matcher.suggest_candidates(" ".join(meaningful_tokens), limit=limit):
+                    if cand["isin"] not in seen_isins and cand["score"] >= 0.62:
                         seen_isins.add(cand["isin"])
                         results.append(cand)
                         if len(results) >= limit:

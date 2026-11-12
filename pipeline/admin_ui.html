@@ -45,7 +45,7 @@
     h1 { margin: 0; font-size: 20px; display: flex; align-items: center; gap: 8px; }
     h2 { margin: 0 0 10px 0; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
     .subtitle { margin: 4px 0 0 0; color: var(--muted); font-size: 12px; }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
     @media (max-width: 960px) { .grid-2 { grid-template-columns: 1fr; } }
 
     .btn {
@@ -59,11 +59,12 @@
       font-weight: 600;
       transition: background 0.15s;
     }
-    .btn:hover { background: #1e293b; }
+    .btn:hover:not(:disabled) { background: #1e293b; }
+    .btn:disabled { opacity: 0.55; cursor: not-allowed; }
     .btn-primary { background: var(--primary); border-color: var(--primary); color: #fff; }
-    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-primary:hover:not(:disabled) { background: var(--primary-hover); }
     .btn-ok { background: #059669; border-color: #059669; color: #fff; }
-    .btn-ok:hover { background: var(--ok); }
+    .btn-ok:hover:not(:disabled) { background: var(--ok); }
     .btn-danger { color: #fda4af; }
     .btn-danger:hover { background: #4c0519; border-color: var(--err); }
     .btn-sm { padding: 4px 8px; font-size: 11px; }
@@ -170,8 +171,8 @@
       <div class="row-actions">
         <button class="btn btn-sm" onclick="setAllPanelsOpen(true)">Expand All</button>
         <button class="btn btn-sm" onclick="setAllPanelsOpen(false)">Collapse All</button>
-        <button class="btn btn-primary" onclick="runPipeline(true)">▶ Run Dry-Run (--dry-run)</button>
-        <button class="btn btn-ok" onclick="runPipeline(false)">⚡ Build Production (public/data/)</button>
+        <button id="btn-dry-run" class="btn btn-primary" onclick="runPipeline(true)">▶ Run Dry-Run (--dry-run)</button>
+        <button id="btn-prod-build" class="btn btn-ok" onclick="runPipeline(false)">⚡ Build Production (public/data/)</button>
       </div>
     </div>
 
@@ -286,6 +287,7 @@
           <div class="panel-title-wrap">
             <span class="panel-chevron">▼</span>
             <h2>6. Saved Aliases (provider_alias_map.json)</h2>
+            <span id="aliases-count-badge" class="badge badge-info" style="display: none;"></span>
           </div>
         </summary>
         <div class="row-actions" style="margin-bottom: 10px;">
@@ -513,9 +515,28 @@
       }
     }
 
+    let isPipelineRunning = false;
+
     async function runPipeline(dryRun) {
+      if (isPipelineRunning) return;
+      isPipelineRunning = true;
+      const dryBtn = document.getElementById('btn-dry-run');
+      const prodBtn = document.getElementById('btn-prod-build');
+      if (dryBtn) {
+        dryBtn.disabled = true;
+        if (dryRun) dryBtn.textContent = '⏳ Running Dry-Run...';
+      }
+      if (prodBtn) {
+        prodBtn.disabled = true;
+        if (!dryRun) prodBtn.textContent = '⏳ Building Production...';
+      }
+      const reportPanel = document.getElementById('panel-report');
+      if (reportPanel && !reportPanel.open) {
+        reportPanel.open = true;
+      }
+
       const container = document.getElementById('pipeline-report');
-      container.innerHTML = dryRun ? 'Running dry-run validation...' : 'Compiling production JSON assets...';
+      container.innerHTML = dryRun ? '⏳ Running dry-run validation...' : '⏳ Compiling production JSON assets...';
       try {
         const res = await api('/api/pipeline/run', {
           method: 'POST',
@@ -574,6 +595,16 @@
         }
       } catch (err) {
         container.innerHTML = `<span class="badge badge-err">${escapeHtml(err.message)}</span>`;
+      } finally {
+        isPipelineRunning = false;
+        if (dryBtn) {
+          dryBtn.disabled = false;
+          dryBtn.textContent = '▶ Run Dry-Run (--dry-run)';
+        }
+        if (prodBtn) {
+          prodBtn.disabled = false;
+          prodBtn.textContent = '⚡ Build Production (public/data/)';
+        }
       }
     }
 
@@ -651,13 +682,17 @@
       focusedMapInputId = 'map-isin-0';
     }
 
+    let smSearchSeq = 0;
+
     async function searchSecurityMaster(query) {
+      const seq = ++smSearchSeq;
       const container = document.getElementById('sm-search-results');
       if (!query.trim()) {
         container.innerHTML = '';
         return;
       }
       const data = await api(`/api/security-master?q=${encodeURIComponent(query)}`);
+      if (seq !== smSearchSeq) return;
       if (!data.results.length) {
         container.innerHTML = `<div style="font-size: 11px; color: var(--muted);">No matches in security_master.json.</div>`;
         return;
@@ -700,8 +735,8 @@
           body: JSON.stringify({ scope_key: scope, raw_name: item.raw_name, isin }),
         });
         showToast(`Mapped "${item.raw_name}" -> ${isin}`);
-        await loadAliases();
-        await runPipeline(true);
+        const aliases = await loadAliases();
+        pruneResolvedFromUnresolvedList(aliases);
       } catch (err) {
         alert(`Failed to save alias: ${err.message}`);
       }
@@ -741,13 +776,17 @@
       const cand = item && item.candidates ? item.candidates[candIdx] : null;
       if (!item || !cand) return;
       const scope = `${item.provider}:${item.fund_code}`;
-      await api('/api/aliases/set', {
-        method: 'POST',
-        body: JSON.stringify({ scope_key: scope, raw_name: item.raw_name, isin: cand.isin }),
-      });
-      showToast(`Mapped "${item.raw_name}" -> ${cand.isin}`);
-      await loadAliases();
-      await runPipeline(true);
+      try {
+        await api('/api/aliases/set', {
+          method: 'POST',
+          body: JSON.stringify({ scope_key: scope, raw_name: item.raw_name, isin: cand.isin }),
+        });
+        showToast(`Mapped "${item.raw_name}" -> ${cand.isin}`);
+        const aliases = await loadAliases();
+        pruneResolvedFromUnresolvedList(aliases);
+      } catch (err) {
+        alert(`Failed to map candidate: ${err.message}`);
+      }
     }
 
     function copyUnresolvedCsv() {
@@ -780,8 +819,8 @@
         document.getElementById('bulk-csv-text').value = '';
         document.getElementById('bulk-import-box').style.display = 'none';
         showToast(`Imported ${res.saved_count} alias mappings`);
-        await loadAliases();
-        await runPipeline(true);
+        const aliases = await loadAliases();
+        pruneResolvedFromUnresolvedList(aliases);
       } catch (err) {
         alert(`Bulk import failed: ${err.message}`);
       }
@@ -791,13 +830,16 @@
       const pair = savedAliasPairsState[pairIdx];
       const cand = pair && pair.candidates ? pair.candidates[candIdx] : null;
       if (!pair || !cand) return;
-      await api('/api/aliases/set', {
-        method: 'POST',
-        body: JSON.stringify({ scope_key: pair.scope, raw_name: pair.name, isin: cand.isin }),
-      });
-      showToast(`Updated "${pair.name}" -> ${cand.isin}`);
-      await loadAliases();
-      await runPipeline(true);
+      try {
+        await api('/api/aliases/set', {
+          method: 'POST',
+          body: JSON.stringify({ scope_key: pair.scope, raw_name: pair.name, isin: cand.isin }),
+        });
+        showToast(`Updated "${pair.name}" -> ${cand.isin}`);
+        await loadAliases();
+      } catch (err) {
+        alert(`Failed to update alias: ${err.message}`);
+      }
     }
 
     function toggleElement(id) {
@@ -830,8 +872,8 @@
           }),
         });
         showToast(`Saved "${item.raw_name}" -> ${res.isin} (${country} / ${sector})`);
-        await loadAliases();
-        await runPipeline(true);
+        const aliases = await loadAliases();
+        pruneResolvedFromUnresolvedList(aliases);
       } catch (err) {
         alert(`Failed to save manual company metadata: ${err.message}`);
       }
@@ -865,15 +907,40 @@
       }
     }
 
+    function pruneResolvedFromUnresolvedList(aliasesMap) {
+      const aliases = aliasesMap || {};
+      const globalByName = {};
+      for (const scopeMap of Object.values(aliases)) {
+        if (!scopeMap || typeof scopeMap !== 'object') continue;
+        for (const [rawName, targetIsin] of Object.entries(scopeMap)) {
+          if (!(rawName in globalByName)) globalByName[rawName] = targetIsin;
+          else if (globalByName[rawName] !== targetIsin) globalByName[rawName] = null;
+        }
+      }
+      const remaining = unresolvedItemsState.filter((item) => {
+        const scope = `${item.provider}:${item.fund_code}`;
+        const exactMatch = aliases[scope] && aliases[scope][item.raw_name];
+        const sharedMatch = globalByName[item.raw_name];
+        return !(exactMatch || sharedMatch);
+      });
+      renderUnresolved(remaining);
+    }
+
     async function loadAliases() {
       const data = await api('/api/aliases');
       const container = document.getElementById('saved-aliases-list');
+      const countBadge = document.getElementById('aliases-count-badge');
       savedAliasPairsState = [];
       const auditMap = data.audit || {};
       const entries = Object.entries(data.aliases || {});
+      const totalAliases = entries.reduce((acc, [, map]) => acc + Object.keys(map).length, 0);
+      if (countBadge) {
+        countBadge.style.display = 'inline-block';
+        countBadge.textContent = `${totalAliases} saved`;
+      }
       if (!entries.length) {
         container.innerHTML = `<div style="color: var(--muted);">No custom aliases saved yet.</div>`;
-        return;
+        return data.aliases || {};
       }
       let html = '';
       for (const [scope, map] of entries) {
@@ -923,6 +990,7 @@
         html += `</div>`;
       }
       container.innerHTML = html;
+      return data.aliases || {};
     }
 
     function renderUnconfiguredFeeders(feeders) {

@@ -7,10 +7,21 @@
     "Orsted A/S": "SEDOL:BYT16L4",
     "Nextracker Inc Class A": "SEDOL:BR1GTS6",
     "Energias de Portugal SA": "SEDOL:4103596",
-    "Clearway Energy Inc Class C": "SEDOL:BGJRH57"
+    "Clearway Energy Inc Class C": "SEDOL:BGJRH57",
+    "SolarEdge Technologies Inc": "BWC52Q6",
+    "Solaria Energia y Medioambiente SA": "SEDOL:B1YVKJ4",
+    "EDP Renovaveis SA": "SEDOL:B39GNW2",
+    "Shoals Technologies Group Inc. Class A": "SEDOL:BMDJ085",
+    "Green Plains Inc.": "B11FJD6",
+    "Central New Energy Holding Group Ltd": "SEDOL:BQWJ9K9",
+    "T1 Energy Inc": "BSKPBK7",
+    "Conch Venture ORD": "SEDOL:BH7HM06",
+    "Corporacion Acciona Energias Renovables SA": "SEDOL:BP7L895"
   },
   "Smartshares:FNZ": {
-    "FPH NZ": "SEDOL:6340250"
+    "FPH NZ": "SEDOL:6340250",
+    "SANFORD LTD/NZ": "NZX:SAN",
+    "KMD BRANDS LTD NPV POST SPLIT": "NZX:KMD"
   },
   "Kernel:KERNEL_WORLD_EX_US": {
     "LVMH-Moet Vuitton": "SEDOL:4061412",
@@ -67,7 +78,9 @@
     "Electra (Israel)": "SEDOL:6298821",
     "Y.H. Dimri Building & Development Ltd.": "SEDOL:B02SX80",
     "Tokyo Broadcasting System Holdings Inc": "SEDOL:6894166",
-    "Arm Holdings plc ADR": "SEDOL:BQPGVF6"
+    "Arm Holdings plc ADR": "SEDOL:BQPGVF6",
+    "Sartorius AG Nvtg - Pref": "SEDOL:BYZ2QP5",
+    "Porsche AG Vz": "BJN59B8"
   },
   "Smartshares:SMART_GLOBAL_BOND_ETF_FND1101_FULL_PORTFOLIO_HOLDINGS_30_SEPTEMBER_2026": {
     "GINNIE MAE II POOL 3.00% 20/03/2052": "SEDOL:2350684"
@@ -75,16 +88,84 @@
   "Kernel:KERNEL_GLOBAL_ESG": {
     "Alphabet Inc Class A": "SEDOL:BYVY8G0",
     "Mastercard Inc Class A Ord": "SEDOL:B121557",
-    "Alphabet Inc Class C": "SEDOL:BYY88Y7"
+    "Alphabet Inc Class C": "SEDOL:BYY88Y7",
+    "Monster Beverage Corp New": "SEDOL:BZ07BW4",
+    "Palo Alto Networks Inc. Common Stock": "SEDOL:B87ZMX0",
+    "Deere & Company Common Stock": "SEDOL:2261203",
+    "Bank of Nova Scotia Halifax": "SEDOL:2076281",
+    "Salesforce.com Inc": "SEDOL:2310525",
+    "DoorDash Inc. Class A": "SEDOL:BN13P03",
+    "Canadian Pacific Railway Ltd": "SEDOL:2180632",
+    "Airbnb Inc. Class A": "SEDOL:BMGYYH4",
+    "Equinix REIT Ord": "SEDOL:BVLZX12",
+    "Nike INC - CL B": "SEDOL:2640147",
+    "NXP Semiconductor NV": "SEDOL:B505PN7",
+    "Marriott International Inc": "SEDOL:2210614",
+    "D.R. Horton Inc.": "SEDOL:2250687",
+    "Hershey Foods Corp": "SEDOL:2422806",
+    "Workday Inc-Class A": "SEDOL:B8K6ZD1",
+    "Nippon Tel & Tel Corp": "SEDOL:6644060",
+    "Iron Mountain Common Stock": "SEDOL:BVFTF03",
+    "Oriental Land Co": "SEDOL:6648891",
+    "Roche Hldgs AG Br": "SEDOL:BTMJD19",
+    "Hennes & Mauritz AB B": "SEDOL:5687431",
+    "Nordnet AB": "SEDOL:BNDLH43",
+    "EDP Renovaveis SA": "SEDOL:B39GNW2"
   },
   "Smartshares:MZY": {
     "SGH LIMITED ORDINARY FULLY PAID": "SEDOL:BR858V2",
     "DYNO NOBEL LIMITED ORDINARY FULLY PAID": "SEDOL:BVBH523",
-    "GREATLAND RES LTD": "SEDOL:BTXLW40"
+    "GREATLAND RES LTD": "SEDOL:BTXLW40",
+    "BLOCK INC. CDI 1 1 FOREIGN EXEMPT NYSE": "SEDOL:BYNZGK1",
+    "LIONTOWN RESOURCES LTD": "B1FBT05"
   },
   "Kernel:KERNEL_GLOBAL_DIVIDEND": {
     "Franklin Resources Inc": "SEDOL:2350684",
     "Universal Corp": "SEDOL:2923804",
-    "Peoples Bancorp Inc": "SEDOL:2679419"
+    "Peoples Bancorp Inc": "SEDOL:2679419",
+    "Energias de Portugal SA": "SEDOL:4103596",
+    "Canadian Utilities Ltd A NV": "2172639",
+    "Bank of Nova Scotia Halifax": "SEDOL:2076281",
+    "Banque Cant Vaudoise Reg": "SEDOL:BMFY8R3",
+    "OceanFirst Financial Corp": "2125901",
+    "Terna SpA": "SEDOL:B01BN57"
+  },
+  "BetaShares:ASIA": {
+    "SEA LTD": "BYWD7L4"
+  },
+  "Smartshares:AUS": {
+    "ISHARES CORE S&P/ASX 200 ETF": "AU000000IOZ4",
+    "SGH LIMITED ORDINARY FULLY PAID": "SEDOL:BR858V2",
+    "DYNO NOBEL LIMITED ORDINARY FULLY PAID": "SEDOL:BVBH523",
+    "GREATLAND RES LTD": "SEDOL:BTXLW40",
+    "CAPSTONE COPPER CORP CDI": "SEDOL:BMY5XY9",
+    "DALRYMPLE BAY INFRASTRUCTURE LIMITED ORD STAPLED SECURITIES": "ASX:DBI",
+    "SRG GLOBAL LIMITED ORDINARY FULLY PAID": "SEDOL:BFMZB82",
+    "YANCOAL AUSTRALIA LIMITED ORDINARY FULLY PAID": "SEDOL:B84LB45",
+    "SUNRISE ENERGY METALS LIMITED ORDINARY FULLY PAID": "SEDOL:BN4MX14",
+    "4DMEDICAL LIMITED ORDINARY FULLY PAID": "SEDOL:BMX3786",
+    "MINERALS 260 LIMITED ORDINARY FULLY PAID": "SEDOL:BMT8S71",
+    "SUPERLOOP LIMITED ORDINARY FULLY PAID": "SEDOL:BYPC6V1",
+    "KINGSGATE CONSOLIDATED NL FPO 25C": "SEDOL:6492731",
+    "FIREFLY METALS LTD ORDINARY FULLY PAID": "SEDOL:BPDXXB2",
+    "ELSIGHT LIMITED ORDINARY FULLY PAID": "SEDOL:BD36ZB1",
+    "ELEVRA LITHIUM LIMITED ORDINARY FULLY PAID": "SEDOL:BVBM1M0",
+    "GENERATION DEVELOPMENT GROUP LIMITED ORDINARY FULLY PAID": "SEDOL:BF42CQ6",
+    "VULCAN ENERGY RESOURCES LIMITED ORDINARY FULLY PAID": "SEDOL:BKYBH63",
+    "REGION RE LTD": "SEDOL:BPBMY63"
+  },
+  "Smartshares:MDZ": {
+    "SANFORD LTD/NZ": "NZX:SAN",
+    "KMD BRANDS LTD NPV POST SPLIT": "NZX:KMD"
+  },
+  "Smartshares:ASD": {
+    "DALRYMPLE BAY INFRASTRUCTURE LIMITED ORD STAPLED SECURITIES": "ASX:DBI"
+  },
+  "Smartshares:FNZ_FUND": {
+    "SANFORD LTD/NZ": "NZX:SAN",
+    "KMD BRANDS LTD NPV POST SPLIT": "NZX:KMD"
+  },
+  "Smartshares:ASF": {
+    "GENERATION DEVELOPMENT GROUP LIMITED ORDINARY FULLY PAID": "SEDOL:BF42CQ6"
   }
 }

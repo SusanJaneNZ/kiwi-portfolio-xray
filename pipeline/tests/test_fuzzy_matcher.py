@@ -142,6 +142,24 @@ class TestFuzzyMatcher(unittest.TestCase):
         self.matcher.gics_lower = {k.lower(): v for k, v in self.matcher.gics_mapping.items()}
         self.assertEqual(self.matcher._normalize_sector("SYSTEMS SOFTWARE"), "Information Technology")
 
+    def test_cross_fund_alias_fallback_and_conflict_guard(self):
+        # "Chorus Ltd" is mapped under Kernel:KERNEL_NZ_50; another fund with exact same raw name resolves too
+        shared = self.matcher.match(name="Chorus Ltd", provider="Smartshares", fund_code="NZG")
+        self.assertTrue(shared.matched)
+        self.assertEqual(shared.isin, "NZCNUE0001S2")
+        self.assertTrue(shared.reason.startswith("cross_fund_alias_map"))
+
+        # Conflicting targets for same raw name across two funds must NOT auto-resolve a third fund
+        conflicting = SecurityMatcher(
+            security_master=self.matcher.security_master,
+            alias_map={
+                "Fund:A": {"Ambiguous Corp": "NZFPHE0001S2"},
+                "Fund:B": {"Ambiguous Corp": "NZMCYE0001S8"},
+            },
+        )
+        res = conflicting.match(name="Ambiguous Corp", provider="Fund", fund_code="C")
+        self.assertFalse(res.matched)
+
 
 if __name__ == "__main__":
     unittest.main()
