@@ -7,6 +7,7 @@ import base64
 import csv
 import io
 import json
+import re
 import sys
 import threading
 from datetime import datetime, timezone
@@ -46,6 +47,7 @@ class AdminService:
         self.staging_dir = staging_dir or (repo_root / "data" / "staging")
         self.output_dir = output_dir or (repo_root / "public" / "data")
         self.alias_map_path = repo_root / "pipeline" / "enrichment" / "provider_alias_map.json"
+        self.manual_securities_path = repo_root / "pipeline" / "enrichment" / "manual_securities.json"
         self.security_master_path = repo_root / "pipeline" / "security_master" / "security_master.json"
         self.gics_mapping_path = repo_root / "pipeline" / "normalizer" / "gics_mapping.json"
         self.feeder_registry_path = repo_root / "pipeline" / "feeder_registry.json"
@@ -192,11 +194,28 @@ class AdminService:
         return {"raw_lines": raw_lines, "parse_summary": parse_summary}
 
     def _build_security_matcher(self, sm_data: list[dict[str, Any]] | None = None) -> SecurityMatcher | None:
-        """Builds a SecurityMatcher from provided or persisted security_master.json and gics_mapping.json."""
+        """Builds a SecurityMatcher from provided or persisted security_master.json + manual_securities.json."""
         if sm_data is None:
             if not self.security_master_path.exists():
-                return None
-            sm_data = json.loads(self.security_master_path.read_text(encoding="utf-8"))
+                sm_data = []
+            else:
+                sm_data = json.loads(self.security_master_path.read_text(encoding="utf-8"))
+        manual_map = self.get_manual_securities()
+        if manual_map:
+            manual_entries = [
+                {
+                    "isin": isin_key,
+                    "name": entry.get("name", isin_key),
+                    "ticker": entry.get("ticker", ""),
+                    "country": entry.get("country", "Global"),
+                    "sector": entry.get("sector", "Unclassified"),
+                }
+                for isin_key, entry in manual_map.items()
+            ]
+            manual_isins = {e["isin"] for e in manual_entries}
+            sm_data = manual_entries + [s for s in sm_data if s.get("isin") not in manual_isins]
+        if not sm_data:
+            return None
         gics_data = (
             json.loads(self.gics_mapping_path.read_text(encoding="utf-8"))
             if self.gics_mapping_path.exists()
@@ -365,6 +384,52 @@ class AdminService:
                             break
         return results
 
+    def get_manual_securities(self) -> dict[str, dict[str, str]]:
+        """Loads manual_securities.json."""
+        if not self.manual_securities_path.exists():
+            return {}
+        return json.loads(self.manual_securities_path.read_text(encoding="utf-8"))
+
+    def set_manual_security(
+        self,
+        name: str,
+        country: str,
+        sector: str,
+        isin: str = "",
+        ticker: str = "",
+        scope_key: str = "",
+        raw_name: str = "",
+    ) -> tuple[str, dict[str, dict[str, str]]]:
+        """Saves manual Country/Sector metadata for an unmappable company and optionally links its alias."""
+        clean_name = name.strip()
+        clean_country = country.strip()
+        clean_sector = sector.strip()
+        clean_ticker = ticker.strip().upper()
+        if not clean_name or not clean_country or not clean_sector:
+            raise ValueError("name, country, and sector are all required.")
+
+        clean_isin = isin.strip().upper()
+        if not clean_isin:
+            slug_base = clean_ticker or re.sub(r"[^A-Z0-9]+", "_", clean_name.upper()).strip("_")[:32] or "COMPANY"
+            clean_isin = f"MANUAL:{slug_base}"
+
+        with self._lock:
+            manual = self.get_manual_securities()
+            manual[clean_isin] = {
+                "name": clean_name,
+                "ticker": clean_ticker,
+                "country": clean_country,
+                "sector": clean_sector,
+            }
+            atomic_write_json(self.manual_securities_path, manual)
+
+            if scope_key.strip() and raw_name.strip():
+                alias_map = self.get_alias_map()
+                alias_map.setdefault(scope_key.strip(), {})[raw_name.strip()] = clean_isin
+                atomic_write_json(self.alias_map_path, alias_map)
+
+            return clean_isin, manual
+
     def get_feeder_registry(self) -> dict[str, dict[str, str]]:
         """Loads pipeline/feeder_registry.json."""
         if not self.feeder_registry_path.exists():
@@ -457,6 +522,8 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                     self._send_json(service.preview_staged_file(provider, filename))
                 elif path == "/api/aliases":
                     self._send_json({"aliases": service.get_alias_map(), "audit": service.audit_aliases()})
+                elif path == "/api/manual-securities":
+                    self._send_json({"manual_securities": service.get_manual_securities()})
                 elif path == "/api/feeders":
                     self._send_json({"feeders": service.get_feeder_registry()})
                 elif path == "/api/security-master":
@@ -511,6 +578,22 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                         raw_name=data.get("raw_name", ""),
                     )
                     self._send_json({"aliases": aliases, "audit": service.audit_aliases()})
+                elif path == "/api/manual-securities/set":
+                    saved_isin, manual = service.set_manual_security(
+                        name=data.get("name", ""),
+                        country=data.get("country", ""),
+                        sector=data.get("sector", ""),
+                        isin=data.get("isin", ""),
+                        ticker=data.get("ticker", ""),
+                        scope_key=data.get("scope_key", ""),
+                        raw_name=data.get("raw_name", ""),
+                    )
+                    self._send_json({
+                        "isin": saved_isin,
+                        "manual_securities": manual,
+                        "aliases": service.get_alias_map(),
+                        "audit": service.audit_aliases(),
+                    })
                 elif path == "/api/feeders/set":
                     feeders = service.set_feeder_pairing(
                         feeder_code=data.get("feeder_code", ""),

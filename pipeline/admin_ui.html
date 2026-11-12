@@ -300,8 +300,45 @@
   </div>
 
   <div id="toast" class="toast"></div>
+  <datalist id="country-presets">
+    <option value="United States"></option>
+    <option value="United Kingdom"></option>
+    <option value="New Zealand"></option>
+    <option value="Australia"></option>
+    <option value="Japan"></option>
+    <option value="China"></option>
+    <option value="Taiwan"></option>
+    <option value="South Korea"></option>
+    <option value="Germany"></option>
+    <option value="France"></option>
+    <option value="Switzerland"></option>
+    <option value="Netherlands"></option>
+    <option value="Canada"></option>
+    <option value="Singapore"></option>
+    <option value="Ireland"></option>
+    <option value="Denmark"></option>
+    <option value="Sweden"></option>
+    <option value="India"></option>
+    <option value="Brazil"></option>
+  </datalist>
 
   <script>
+    const GICS_SECTORS = [
+      'Communication Services',
+      'Consumer Discretionary',
+      'Consumer Staples',
+      'Energy',
+      'Financials',
+      'Health Care',
+      'Industrials',
+      'Information Technology',
+      'Materials',
+      'Real Estate',
+      'Utilities',
+    ];
+    function renderSectorOptions() {
+      return GICS_SECTORS.map((s) => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('');
+    }
     let unresolvedItemsState = [];
     let savedAliasPairsState = [];
     let stagedFilePairsState = [];
@@ -592,6 +629,20 @@
             <div class="row-actions">
               <input type="text" id="map-isin-${idx}" onfocus="focusedMapInputId = 'map-isin-${idx}'" placeholder="Focus here &amp; click 'Use ISIN' above, or paste ISIN" style="flex: 1;">
               <button class="btn btn-primary btn-sm" onclick="saveAliasForUnresolved(${idx})">Map &amp; Save</button>
+              <button class="btn btn-sm" onclick="toggleElement('manual-unresolved-${idx}')">Manual Country/Sector</button>
+            </div>
+            <div id="manual-unresolved-${idx}" style="display: none; margin-top: 6px; padding: 8px; background: var(--card-alt); border: 1px solid var(--border); border-radius: 6px;">
+              <div style="font-size: 11px; color: var(--muted); margin-bottom: 6px;">Assign Country &amp; GICS Sector manually (adds to manual_securities.json and maps this holding):</div>
+              <div class="row-actions">
+                <input type="text" id="manual-unres-isin-${idx}" value="" placeholder="ISIN/SEDOL (optional)" style="width: 145px;">
+                <input type="text" id="manual-unres-ticker-${idx}" value="${escapeHtml(item.raw_ticker || '')}" placeholder="Ticker" style="width: 90px;">
+                <input type="text" id="manual-unres-country-${idx}" list="country-presets" placeholder="Country (e.g. United Kingdom)" style="flex: 1; min-width: 140px;">
+                <select id="manual-unres-sector-${idx}" style="flex: 1; min-width: 160px;">
+                  <option value="">Select GICS Sector...</option>
+                  ${renderSectorOptions()}
+                </select>
+                <button class="btn btn-ok btn-sm" onclick="saveManualForUnresolved(${idx})">Save Manual &amp; Map</button>
+              </div>
             </div>
           </div>
         `;
@@ -749,6 +800,71 @@
       await runPipeline(true);
     }
 
+    function toggleElement(id) {
+      const el = document.getElementById(id);
+      if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    }
+
+    async function saveManualForUnresolved(idx) {
+      const item = unresolvedItemsState[idx];
+      if (!item) return;
+      const isin = document.getElementById(`manual-unres-isin-${idx}`).value.trim();
+      const ticker = document.getElementById(`manual-unres-ticker-${idx}`).value.trim();
+      const country = document.getElementById(`manual-unres-country-${idx}`).value.trim();
+      const sector = document.getElementById(`manual-unres-sector-${idx}`).value.trim();
+      if (!country || !sector) {
+        alert('Please enter a Country and select a GICS Sector.');
+        return;
+      }
+      try {
+        const res = await api('/api/manual-securities/set', {
+          method: 'POST',
+          body: JSON.stringify({
+            isin,
+            name: item.raw_name,
+            ticker,
+            country,
+            sector,
+            scope_key: `${item.provider}:${item.fund_code}`,
+            raw_name: item.raw_name,
+          }),
+        });
+        showToast(`Saved "${item.raw_name}" -> ${res.isin} (${country} / ${sector})`);
+        await loadAliases();
+        await runPipeline(true);
+      } catch (err) {
+        alert(`Failed to save manual company metadata: ${err.message}`);
+      }
+    }
+
+    async function saveManualForAlias(idx) {
+      const pair = savedAliasPairsState[idx];
+      if (!pair) return;
+      const ticker = document.getElementById(`manual-alias-ticker-${idx}`).value.trim();
+      const country = document.getElementById(`manual-alias-country-${idx}`).value.trim();
+      const sector = document.getElementById(`manual-alias-sector-${idx}`).value.trim();
+      if (!country || !sector) {
+        alert('Please enter a Country and select a GICS Sector.');
+        return;
+      }
+      try {
+        await api('/api/manual-securities/set', {
+          method: 'POST',
+          body: JSON.stringify({
+            isin: pair.isin,
+            name: pair.name,
+            ticker,
+            country,
+            sector,
+          }),
+        });
+        showToast(`Updated "${pair.name}" (${country} / ${sector})`);
+        await loadAliases();
+      } catch (err) {
+        alert(`Failed to save manual company metadata: ${err.message}`);
+      }
+    }
+
     async function loadAliases() {
       const data = await api('/api/aliases');
       const container = document.getElementById('saved-aliases-list');
@@ -765,12 +881,27 @@
         for (const [name, isin] of Object.entries(map)) {
           const info = (auditMap[scope] && auditMap[scope][name]) || null;
           const candidates = (info && info.candidates) || [];
-          const idx = savedAliasPairsState.push({ scope, name, candidates }) - 1;
+          const idx = savedAliasPairsState.push({ scope, name, isin, candidates }) - 1;
           let statusHtml = '';
           if (info && info.in_security_master) {
             statusHtml = `<div style="font-size: 11px; color: var(--muted);">✓ ${escapeHtml(info.sm_name || '')} • ${escapeHtml(info.country || '')}${info.sector ? ' • ' + escapeHtml(info.sector) : ''}</div>`;
           } else if (info && info.in_security_master === false) {
-            statusHtml = `<div style="font-size: 11px; color: var(--warn);">⚠ Not in security_master.json (Country/Sector Unknown)</div>`;
+            statusHtml = `
+              <div style="font-size: 11px; color: var(--warn); display: flex; flex-wrap: wrap; align-items: center; gap: 6px;">
+                <span>⚠ Not in security_master.json (Country/Sector Unknown)</span>
+                <button class="btn btn-sm" style="padding: 2px 7px; font-size: 10px;" onclick="toggleElement('manual-alias-${idx}')">Set Country &amp; Sector</button>
+              </div>
+              <div id="manual-alias-${idx}" style="display: none; margin-top: 6px; padding: 8px; background: var(--card-alt); border: 1px solid var(--border); border-radius: 6px;">
+                <div class="row-actions">
+                  <input type="text" id="manual-alias-ticker-${idx}" placeholder="Ticker (optional)" style="width: 100px;">
+                  <input type="text" id="manual-alias-country-${idx}" list="country-presets" placeholder="Country (e.g. United Kingdom)" style="flex: 1; min-width: 140px;">
+                  <select id="manual-alias-sector-${idx}" style="flex: 1; min-width: 160px;">
+                    <option value="">Select GICS Sector...</option>
+                    ${renderSectorOptions()}
+                  </select>
+                  <button class="btn btn-ok btn-sm" onclick="saveManualForAlias(${idx})">Save</button>
+                </div>
+              </div>`;
             if (candidates.length > 0) {
               statusHtml += `<div style="display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px;">`;
               candidates.forEach((c, cIdx) => {

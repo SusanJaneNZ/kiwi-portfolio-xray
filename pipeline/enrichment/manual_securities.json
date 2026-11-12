@@ -1,0 +1,14 @@
+{
+  "SEDOL:BQPGVF6": {
+    "name": "Arm Holdings plc ADR",
+    "ticker": "ARM",
+    "country": "United Kingdom",
+    "sector": "Information Technology"
+  },
+  "MANUAL:UCL": {
+    "name": "Unlisted Co Ltd",
+    "ticker": "UCL",
+    "country": "New Zealand",
+    "sector": "Industrials"
+  }
+}

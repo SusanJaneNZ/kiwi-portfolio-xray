@@ -29,6 +29,7 @@ class PipelineCompiler:
 
         self.security_master_path = repo_root / "pipeline" / "security_master" / "security_master.json"
         self.alias_map_path = repo_root / "pipeline" / "enrichment" / "provider_alias_map.json"
+        self.manual_securities_path = repo_root / "pipeline" / "enrichment" / "manual_securities.json"
         self.issuer_alias_path = repo_root / "pipeline" / "enrichment" / "issuer_alias_map.json"
         self.gics_mapping_path = repo_root / "pipeline" / "normalizer" / "gics_mapping.json"
         self.feeder_registry_path = repo_root / "pipeline" / "feeder_registry.json"
@@ -42,6 +43,7 @@ class PipelineCompiler:
             output_direct_path=direct_equities_output_path,
             gics_mapping_path=self.gics_mapping_path,
             write_files=False,
+            manual_securities_path=self.manual_securities_path,
         )
 
         security_master_data = sec_master_summary.pop("_security_master_data", [])

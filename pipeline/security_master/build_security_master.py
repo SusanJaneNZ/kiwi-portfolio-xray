@@ -289,12 +289,33 @@ def compile_security_master(
     output_direct_path: Path,
     gics_mapping_path: Path,
     write_files: bool = True,
+    manual_securities_path: Optional[Path] = None,
 ) -> dict:
     """Compiles the global security master and writes client direct_equities.json."""
     gics_mapping: dict[str, str] = {}
     if gics_mapping_path.exists():
         with open(gics_mapping_path, "r", encoding="utf-8") as f:
             gics_mapping = json.load(f)
+    gics_lower = {k.lower(): v for k, v in gics_mapping.items()}
+
+    manual_records: list[dict] = []
+    if manual_securities_path and manual_securities_path.exists():
+        raw_manual = json.loads(manual_securities_path.read_text(encoding="utf-8"))
+        if isinstance(raw_manual, dict):
+            for isin_key, entry in raw_manual.items():
+                if not isinstance(entry, dict):
+                    continue
+                clean_isin = str(isin_key or "").strip().upper()
+                if not clean_isin:
+                    continue
+                manual_records.append({
+                    "isin": clean_isin,
+                    "name": str(entry.get("name") or clean_isin).strip(),
+                    "ticker": str(entry.get("ticker") or "").strip(),
+                    "country": normalize_country(str(entry.get("country") or ""), default="Global"),
+                    "sector": _normalize_sector(str(entry.get("sector") or "Unclassified"), gics_lower),
+                    "exchange": str(entry.get("exchange") or "MANUAL").strip(),
+                })
 
     directories_dir = staging_dir / "directories"
 
@@ -321,11 +342,11 @@ def compile_security_master(
     _enrich_local_isins_from_global(nzx_records, vanguard_records)
     _enrich_local_isins_from_global(asx_records, vanguard_records)
 
-    # Merge into Global Security Master, deduplicated by ISIN (Priority: NZX > ASX > Vanguard Global)
+    # Merge into Global Security Master, deduplicated by ISIN (Priority: Manual Overrides > NZX > ASX > Vanguard Global)
     seen_isins: set[str] = set()
     global_master: list[dict] = []
 
-    for rec in nzx_records + asx_records + vanguard_records:
+    for rec in manual_records + nzx_records + asx_records + vanguard_records:
         isin = rec.get("isin", "").strip()
         if isin and isin in seen_isins:
             continue

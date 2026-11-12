@@ -181,6 +181,33 @@ class TestAdminUI(unittest.TestCase):
             server.shutdown()
             server.server_close()
 
+    def test_manual_security_country_sector_and_alias_link(self):
+        saved_isin, manual = self.service.set_manual_security(
+            isin="SEDOL:BQPGVF6",
+            name="Arm Holdings plc ADR",
+            ticker="ARM",
+            country="United Kingdom",
+            sector="Information Technology",
+            scope_key="Kernel:KERNEL_WORLD_EX_US",
+            raw_name="Arm Holdings plc ADR",
+        )
+        self.assertEqual(saved_isin, "SEDOL:BQPGVF6")
+        self.assertEqual(manual["SEDOL:BQPGVF6"]["sector"], "Information Technology")
+
+        audit = self.service.audit_aliases()
+        arm_audit = audit["Kernel:KERNEL_WORLD_EX_US"]["Arm Holdings plc ADR"]
+        self.assertTrue(arm_audit["in_security_master"])
+        self.assertEqual(arm_audit["country"], "United Kingdom")
+        self.assertEqual(arm_audit["sector"], "Information Technology")
+
+        auto_isin, _ = self.service.set_manual_security(
+            name="Unlisted Co Ltd",
+            ticker="UCL",
+            country="New Zealand",
+            sector="Industrials",
+        )
+        self.assertEqual(auto_isin, "MANUAL:UCL")
+
 
 if __name__ == "__main__":
     unittest.main()
