@@ -11,6 +11,7 @@ import {
   DirectHolding,
   PortfolioBucket,
 } from "../types/portfolio";
+import { directHoldingValueNZD } from "../utils/format";
 
 export interface RebalanceInput {
   buckets: PortfolioBucket[];
@@ -82,7 +83,7 @@ export function calculateBucketRebalance(input: RebalanceInput): BucketRebalance
     }
   }
   for (const dh of directHoldings) {
-    const valNZD = dh.currency === "AUD" ? dh.value * audNzdRate : dh.value;
+    const valNZD = directHoldingValueNZD(dh, audNzdRate);
     if (valNZD > 0) {
       assignItem({ key: `direct:${dh.isin}`, label: `${dh.ticker} (${dh.name})`, valueNZD: valNZD, kind: "direct" });
     }
@@ -117,82 +118,81 @@ export function calculateBucketRebalance(input: RebalanceInput): BucketRebalance
     errorReason = "Planned withdrawal must be between $0 and the total assigned bucket balance.";
   }
 
-  if (errorReason) {
-    const emptyRows: BucketAllocationRow[] = buckets.map((b, i) => {
+  const buildResult = (
+    isValid: boolean,
+    withdrawCentsList: number[],
+    sellCentsList: number[],
+    buyCentsList: number[],
+    postTotalCents: number,
+    err?: string
+  ): BucketRebalanceResult => {
+    const totalSellCents = sellCentsList.reduce((acc, s) => acc + s, 0);
+    const totalBuyCents = buyCentsList.reduce((acc, b) => acc + b, 0);
+
+    const rows: BucketAllocationRow[] = buckets.map((b, i) => {
       const currCents = currentCentsList[i];
       const currAssignedPct = totalAssignedCents > 0 ? (currCents / totalAssignedCents) * 100 : 0;
       const currPortfolioPct = totalPortfolioCents > 0 ? (currCents / totalPortfolioCents) * 100 : 0;
+      const postCents = isValid
+        ? currCents - withdrawCentsList[i] - sellCentsList[i] + buyCentsList[i]
+        : currCents;
+      const postPercent = isValid
+        ? postTotalCents > 0
+          ? (postCents / postTotalCents) * 100
+          : 0
+        : currAssignedPct;
+      const action: "buy" | "sell" | "hold" = !isValid
+        ? "hold"
+        : buyCentsList[i] > 0
+        ? "buy"
+        : sellCentsList[i] > 0
+        ? "sell"
+        : "hold";
+
       return {
         bucket: b,
         currentNZD: currCents / 100,
         currentAssignedPercent: currAssignedPct,
         currentPortfolioPercent: currPortfolioPct,
         driftPercent: currAssignedPct - b.targetPercent,
-        withdrawNZD: 0,
-        sellNZD: 0,
-        buyNZD: 0,
-        postBalanceNZD: currCents / 100,
-        postPercent: currAssignedPct,
-        action: "hold",
+        withdrawNZD: withdrawCentsList[i] / 100,
+        sellNZD: sellCentsList[i] / 100,
+        buyNZD: buyCentsList[i] / 100,
+        postBalanceNZD: postCents / 100,
+        postPercent,
+        action,
         assignedHoldings: bucketHoldingsMap.get(b.id) || [],
         hasTermDeposits: bucketHasTDMap.get(b.id) || false,
       };
     });
+
     return {
-      isValid: false,
-      errorReason,
+      isValid,
+      ...(err ? { errorReason: err } : {}),
       targetSumPercent,
       totalPortfolioNZD: totalPortfolioCents / 100,
       totalAssignedNZD: totalAssignedCents / 100,
       totalUnassignedNZD: unassignedCents / 100,
       unassignedHoldings,
       plannedWithdrawalNZD: withdrawalCents / 100,
-      postWithdrawalTotalNZD: Math.max(0, totalAssignedCents - withdrawalCents) / 100,
-      totalSellNZD: 0,
-      totalBuyNZD: 0,
-      rebalanceRequired: false,
-      rows: emptyRows,
+      postWithdrawalTotalNZD: Math.max(0, postTotalCents) / 100,
+      totalSellNZD: totalSellCents / 100,
+      totalBuyNZD: totalBuyCents / 100,
+      rebalanceRequired: isValid && (totalBuyCents > 0 || totalSellCents > 0),
+      rows,
     };
+  };
+
+  const zeros = buckets.map(() => 0);
+  if (errorReason) {
+    return buildResult(false, zeros, zeros, zeros, totalAssignedCents - withdrawalCents, errorReason);
   }
 
   const postTotalCents = totalAssignedCents - withdrawalCents;
 
   // Guard: full withdrawal (T_post = 0 -> no post-withdrawal rebalancing needed, no 0/0 NaN)
   if (postTotalCents === 0) {
-    const rows: BucketAllocationRow[] = buckets.map((b, i) => {
-      const currCents = currentCentsList[i];
-      const currAssignedPct = (currCents / totalAssignedCents) * 100;
-      const currPortfolioPct = totalPortfolioCents > 0 ? (currCents / totalPortfolioCents) * 100 : 0;
-      return {
-        bucket: b,
-        currentNZD: currCents / 100,
-        currentAssignedPercent: currAssignedPct,
-        currentPortfolioPercent: currPortfolioPct,
-        driftPercent: currAssignedPct - b.targetPercent,
-        withdrawNZD: currCents / 100,
-        sellNZD: 0,
-        buyNZD: 0,
-        postBalanceNZD: 0,
-        postPercent: 0,
-        action: "hold",
-        assignedHoldings: bucketHoldingsMap.get(b.id) || [],
-        hasTermDeposits: bucketHasTDMap.get(b.id) || false,
-      };
-    });
-    return {
-      isValid: true,
-      targetSumPercent,
-      totalPortfolioNZD: totalPortfolioCents / 100,
-      totalAssignedNZD: totalAssignedCents / 100,
-      totalUnassignedNZD: unassignedCents / 100,
-      unassignedHoldings,
-      plannedWithdrawalNZD: withdrawalCents / 100,
-      postWithdrawalTotalNZD: 0,
-      totalSellNZD: 0,
-      totalBuyNZD: 0,
-      rebalanceRequired: false,
-      rows,
-    };
+    return buildResult(true, currentCentsList, zeros, zeros, 0);
   }
 
   // Exact integer-cent targets, excesses, withdrawals, sells, and buys
@@ -205,47 +205,6 @@ export function calculateBucketRebalance(input: RebalanceInput): BucketRebalance
   const sellCentsList = excessCentsList.map((exc, i) => exc - withdrawCentsList[i]);
   const buyCentsList = shortfallCentsList;
 
-  const totalSellCents = sellCentsList.reduce((acc, s) => acc + s, 0);
-  const totalBuyCents = buyCentsList.reduce((acc, b) => acc + b, 0);
-
-  const rows: BucketAllocationRow[] = buckets.map((b, i) => {
-    const currCents = currentCentsList[i];
-    const currAssignedPct = (currCents / totalAssignedCents) * 100;
-    const currPortfolioPct = totalPortfolioCents > 0 ? (currCents / totalPortfolioCents) * 100 : 0;
-    const postCents = currCents - withdrawCentsList[i] - sellCentsList[i] + buyCentsList[i];
-    const action: "buy" | "sell" | "hold" =
-      buyCentsList[i] > 0 ? "buy" : sellCentsList[i] > 0 ? "sell" : "hold";
-
-    return {
-      bucket: b,
-      currentNZD: currCents / 100,
-      currentAssignedPercent: currAssignedPct,
-      currentPortfolioPercent: currPortfolioPct,
-      driftPercent: currAssignedPct - b.targetPercent,
-      withdrawNZD: withdrawCentsList[i] / 100,
-      sellNZD: sellCentsList[i] / 100,
-      buyNZD: buyCentsList[i] / 100,
-      postBalanceNZD: postCents / 100,
-      postPercent: (postCents / postTotalCents) * 100,
-      action,
-      assignedHoldings: bucketHoldingsMap.get(b.id) || [],
-      hasTermDeposits: bucketHasTDMap.get(b.id) || false,
-    };
-  });
-
-  return {
-    isValid: true,
-    targetSumPercent,
-    totalPortfolioNZD: totalPortfolioCents / 100,
-    totalAssignedNZD: totalAssignedCents / 100,
-    totalUnassignedNZD: unassignedCents / 100,
-    unassignedHoldings,
-    plannedWithdrawalNZD: withdrawalCents / 100,
-    postWithdrawalTotalNZD: postTotalCents / 100,
-    totalSellNZD: totalSellCents / 100,
-    totalBuyNZD: totalBuyCents / 100,
-    rebalanceRequired: totalBuyCents > 0 || totalSellCents > 0,
-    rows,
-  };
+  return buildResult(true, withdrawCentsList, sellCentsList, buyCentsList, postTotalCents);
 }
 

@@ -14,16 +14,22 @@ function readPanelState(): Record<string, boolean> {
   }
 }
 
-export function dispatchToggleAllPanels(open: boolean): void {
+function writePanelState(updater: (state: Record<string, boolean>) => void): void {
   try {
     const state = readPanelState();
-    for (const key of Object.keys(state)) {
-      state[key] = open;
-    }
+    updater(state);
     localStorage.setItem(PANEL_STORAGE_KEY, JSON.stringify(state));
   } catch {
     // ignore storage quota errors
   }
+}
+
+export function dispatchToggleAllPanels(open: boolean): void {
+  writePanelState((state) => {
+    for (const key of Object.keys(state)) {
+      state[key] = open;
+    }
+  });
   window.dispatchEvent(new CustomEvent<boolean>(TOGGLE_ALL_EVENT, { detail: open }));
 }
 
@@ -53,16 +59,11 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
 
   useEffect(() => {
     const onToggleAll = (evt: Event) => {
-      const custom = evt as CustomEvent<boolean>;
-      const next = Boolean(custom.detail);
+      const next = Boolean((evt as CustomEvent<boolean>).detail);
       setIsOpen(next);
-      try {
-        const state = readPanelState();
+      writePanelState((state) => {
         state[id] = next;
-        localStorage.setItem(PANEL_STORAGE_KEY, JSON.stringify(state));
-      } catch {
-        // ignore
-      }
+      });
     };
     window.addEventListener(TOGGLE_ALL_EVENT, onToggleAll);
     return () => window.removeEventListener(TOGGLE_ALL_EVENT, onToggleAll);
@@ -71,13 +72,9 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
   const handleToggle = () => {
     const next = !isOpen;
     setIsOpen(next);
-    try {
-      const state = readPanelState();
+    writePanelState((state) => {
       state[id] = next;
-      localStorage.setItem(PANEL_STORAGE_KEY, JSON.stringify(state));
-    } catch {
-      // ignore
-    }
+    });
   };
 
   return (

@@ -1,6 +1,7 @@
 import React from 'react';
 import { CollapsiblePanel } from './CollapsiblePanel';
 import { LiquidityBreakdown } from '../types/portfolio';
+import { formatNZD } from '../utils/format';
 
 interface LiquidityCardProps {
   liquidity: LiquidityBreakdown;
@@ -8,7 +9,7 @@ interface LiquidityCardProps {
   bondIssuerCount: number;
 }
 
-const fmtNZD = (v: number) => v.toLocaleString('en-NZ', { maximumFractionDigits: 0 });
+const fmtNZD = (v: number) => formatNZD(v, 0);
 
 export const LiquidityCard: React.FC<LiquidityCardProps> = ({
   liquidity,

@@ -12,6 +12,7 @@ import {
   IssuerRollupEntry,
   LiquidityBreakdown,
 } from "../types/portfolio";
+import { directHoldingValueNZD } from "../utils/format";
 
 export interface CalculationInput {
   fundBalances: Record<string, number>;
@@ -60,6 +61,117 @@ function isNzOrAuCountry(country: string): boolean {
   return norm === "new zealand" || norm === "australia" || norm === "nz" || norm === "au";
 }
 
+function buildCategoryBreakdown(
+  equityHoldings: ConsolidatedHolding[],
+  primaryField: "sector" | "country",
+  secondaryField: "sector" | "country",
+  totalEquitiesNZD: number
+): CategoryBreakdown[] {
+  const primaryFallback = primaryField === "sector" ? "Unclassified" : "Global";
+  const secondaryFallback = secondaryField === "sector" ? "Unclassified" : "Global";
+  const groupMap = new Map<string, { total: number; subMap: Map<string, number> }>();
+
+  for (const h of equityHoldings) {
+    const primary = h[primaryField] || primaryFallback;
+    const secondary = h[secondaryField] || secondaryFallback;
+    let group = groupMap.get(primary);
+    if (!group) {
+      group = { total: 0, subMap: new Map() };
+      groupMap.set(primary, group);
+    }
+    group.total += h.valueNZD;
+    group.subMap.set(secondary, (group.subMap.get(secondary) || 0) + h.valueNZD);
+  }
+
+  const equityBase = totalEquitiesNZD > 0 ? totalEquitiesNZD : 1;
+  return Array.from(groupMap.entries())
+    .map(([name, data]) => ({
+      name,
+      valueNZD: data.total,
+      portfolioPercentage: totalEquitiesNZD > 0 ? (data.total / equityBase) * 100 : 0,
+      subcategories: Array.from(data.subMap.entries())
+        .map(([subName, val]) => ({
+          name: subName,
+          valueNZD: val,
+          percentage: data.total > 0 ? (val / data.total) * 100 : 0,
+        }))
+        .sort((a, b) => b.valueNZD - a.valueNZD),
+    }))
+    .sort((a, b) => b.valueNZD - a.valueNZD);
+}
+
+function buildCrossAssetIssuerRollup(
+  allHoldings: ConsolidatedHolding[],
+  cashDeposits: CashDepositHolding[],
+  denominatorD: number
+): IssuerRollupEntry[] {
+  const rollupMap = new Map<string, IssuerRollupEntry>();
+  const ensureIssuer = (key: string, name: string): IssuerRollupEntry => {
+    let entry = rollupMap.get(key);
+    if (!entry) {
+      entry = {
+        issuerKey: key,
+        issuerName: name,
+        equityNZD: 0,
+        bondNZD: 0,
+        depositNZD: 0,
+        totalNZD: 0,
+        portfolioWeight: 0,
+        assetClassCount: 0,
+        sources: [],
+      };
+      rollupMap.set(key, entry);
+    }
+    return entry;
+  };
+
+  for (const h of allHoldings) {
+    if (h.assetClass === "equity" && !h.issuerKey) continue;
+    const entry = ensureIssuer(h.issuerKey || h.isin, h.issuerName || h.name);
+
+    if (h.assetClass === "equity") entry.equityNZD += h.valueNZD;
+    else if (h.assetClass === "fixed_interest") entry.bondNZD += h.valueNZD;
+    else if (h.assetClass === "term_deposit") entry.depositNZD += h.valueNZD;
+
+    for (const s of h.sources) {
+      entry.sources.push({ ...s, assetClass: h.assetClass });
+    }
+  }
+
+  for (const dep of cashDeposits) {
+    if (dep.valueNZD <= 0) continue;
+    const { issuerKey, issuerName } = resolveDepositIssuer(dep.institution);
+    const entry = ensureIssuer(issuerKey, issuerName);
+    entry.depositNZD += dep.valueNZD;
+    entry.sources.push({
+      sourceType: "deposit",
+      fundName: `${dep.institution} · ${dep.label}`,
+      depositId: dep.depositId,
+      assetClass: dep.type === "term_deposit" ? "term_deposit" : undefined,
+      valueNZD: dep.valueNZD,
+      effectiveDate: dep.maturityDate,
+    });
+  }
+
+  return Array.from(rollupMap.values())
+    .map((entry) => {
+      entry.totalNZD = entry.equityNZD + entry.bondNZD + entry.depositNZD;
+      entry.portfolioWeight = entry.totalNZD / denominatorD;
+      entry.assetClassCount =
+        (entry.equityNZD > 0 ? 1 : 0) +
+        (entry.bondNZD > 0 ? 1 : 0) +
+        (entry.depositNZD > 0 ? 1 : 0);
+      entry.sources.sort((a, b) => b.valueNZD - a.valueNZD);
+      return entry;
+    })
+    .sort((a, b) => {
+      const aMulti = a.assetClassCount >= 2 ? 1 : 0;
+      const bMulti = b.assetClassCount >= 2 ? 1 : 0;
+      if (bMulti !== aMulti) return bMulti - aMulti;
+      return b.totalNZD - a.totalNZD;
+    });
+}
+
 export function calculatePortfolioLookthrough(input: CalculationInput): CalculationResult {
   const { fundBalances, directHoldings, cashDeposits, audNzdRate, fundsRegistry, constituentsMap } = input;
   const safeAudNzdRate = Number.isFinite(audNzdRate) && audNzdRate > 0 ? audNzdRate : 1.10;
@@ -78,7 +190,7 @@ export function calculatePortfolioLookthrough(input: CalculationInput): Calculat
   let sumDirectNZD = 0;
   const directNZDValues: { holding: DirectHolding; valueNZD: number }[] = [];
   for (const dh of directHoldings) {
-    const valueNZD = dh.currency === "AUD" ? dh.value * safeAudNzdRate : dh.value;
+    const valueNZD = directHoldingValueNZD(dh, safeAudNzdRate);
     if (valueNZD > 0) {
       sumDirectNZD += valueNZD;
       directNZDValues.push({ holding: dh, valueNZD });
@@ -284,125 +396,10 @@ export function calculatePortfolioLookthrough(input: CalculationInput): Calculat
     defensivePercentage: splitBase > 0 ? (defensiveNZD / splitBase) * 100 : 0,
   };
 
-  // 4. Cross-Asset Institution Rollup (Equities with issuerKey + Bonds + Fund TDs + Direct CashDeposits)
-  const rollupMap = new Map<string, IssuerRollupEntry>();
-  const ensureIssuer = (key: string, name: string): IssuerRollupEntry => {
-    let entry = rollupMap.get(key);
-    if (!entry) {
-      entry = {
-        issuerKey: key,
-        issuerName: name,
-        equityNZD: 0,
-        bondNZD: 0,
-        depositNZD: 0,
-        totalNZD: 0,
-        portfolioWeight: 0,
-        assetClassCount: 0,
-        sources: [],
-      };
-      rollupMap.set(key, entry);
-    }
-    return entry;
-  };
-
-  for (const h of allHoldings) {
-    if (h.assetClass === "equity" && !h.issuerKey) continue;
-    const key = h.issuerKey || h.isin;
-    const name = h.issuerName || h.name;
-    const entry = ensureIssuer(key, name);
-
-    if (h.assetClass === "equity") entry.equityNZD += h.valueNZD;
-    else if (h.assetClass === "fixed_interest") entry.bondNZD += h.valueNZD;
-    else if (h.assetClass === "term_deposit") entry.depositNZD += h.valueNZD;
-
-    for (const s of h.sources) {
-      entry.sources.push({ ...s, assetClass: h.assetClass });
-    }
-  }
-
-  for (const dep of cashDeposits) {
-    if (dep.valueNZD <= 0) continue;
-    const { issuerKey, issuerName } = resolveDepositIssuer(dep.institution);
-    const entry = ensureIssuer(issuerKey, issuerName);
-    entry.depositNZD += dep.valueNZD;
-    entry.sources.push({
-      sourceType: "deposit",
-      fundName: `${dep.institution} · ${dep.label}`,
-      depositId: dep.depositId,
-      assetClass: dep.type === "term_deposit" ? "term_deposit" : undefined,
-      valueNZD: dep.valueNZD,
-      effectiveDate: dep.maturityDate,
-    });
-  }
-
-  const issuerRollup = Array.from(rollupMap.values())
-    .map((entry) => {
-      entry.totalNZD = entry.equityNZD + entry.bondNZD + entry.depositNZD;
-      entry.portfolioWeight = entry.totalNZD / denominatorD;
-      entry.assetClassCount =
-        (entry.equityNZD > 0 ? 1 : 0) +
-        (entry.bondNZD > 0 ? 1 : 0) +
-        (entry.depositNZD > 0 ? 1 : 0);
-      entry.sources.sort((a, b) => b.valueNZD - a.valueNZD);
-      return entry;
-    })
-    .sort((a, b) => {
-      const aMulti = a.assetClassCount >= 2 ? 1 : 0;
-      const bMulti = b.assetClassCount >= 2 ? 1 : 0;
-      if (bMulti !== aMulti) return bMulti - aMulti;
-      return b.totalNZD - a.totalNZD;
-    });
-
-  // 5. Equity-Only Macro Sector & Country Breakdowns (reflecting 100% of totalEquitiesNZD)
-  const sectorMap = new Map<string, { total: number; countryMap: Map<string, number> }>();
-  const countryMap = new Map<string, { total: number; sectorMap: Map<string, number> }>();
-
-  for (const h of equityHoldings) {
-    const sector = h.sector || "Unclassified";
-    const country = h.country || "Global";
-
-    if (!sectorMap.has(sector)) sectorMap.set(sector, { total: 0, countryMap: new Map() });
-    const secEntry = sectorMap.get(sector)!;
-    secEntry.total += h.valueNZD;
-    secEntry.countryMap.set(country, (secEntry.countryMap.get(country) || 0) + h.valueNZD);
-
-    if (!countryMap.has(country)) countryMap.set(country, { total: 0, sectorMap: new Map() });
-    const ctryEntry = countryMap.get(country)!;
-    ctryEntry.total += h.valueNZD;
-    ctryEntry.sectorMap.set(sector, (ctryEntry.sectorMap.get(sector) || 0) + h.valueNZD);
-  }
-
-  const equityBase = totalEquitiesNZD > 0 ? totalEquitiesNZD : 1;
-
-  const sectorBreakdown: CategoryBreakdown[] = Array.from(sectorMap.entries())
-    .map(([secName, data]) => ({
-      name: secName,
-      valueNZD: data.total,
-      portfolioPercentage: totalEquitiesNZD > 0 ? (data.total / equityBase) * 100 : 0,
-      subcategories: Array.from(data.countryMap.entries())
-        .map(([ctryName, val]) => ({
-          name: ctryName,
-          valueNZD: val,
-          percentage: data.total > 0 ? (val / data.total) * 100 : 0,
-        }))
-        .sort((a, b) => b.valueNZD - a.valueNZD),
-    }))
-    .sort((a, b) => b.valueNZD - a.valueNZD);
-
-  const countryBreakdown: CategoryBreakdown[] = Array.from(countryMap.entries())
-    .map(([ctryName, data]) => ({
-      name: ctryName,
-      valueNZD: data.total,
-      portfolioPercentage: totalEquitiesNZD > 0 ? (data.total / equityBase) * 100 : 0,
-      subcategories: Array.from(data.sectorMap.entries())
-        .map(([secName, val]) => ({
-          name: secName,
-          valueNZD: val,
-          percentage: data.total > 0 ? (val / data.total) * 100 : 0,
-        }))
-        .sort((a, b) => b.valueNZD - a.valueNZD),
-    }))
-    .sort((a, b) => b.valueNZD - a.valueNZD);
+  // 4. Cross-Asset Institution Rollup & 5. Equity-Only Macro Breakdowns
+  const issuerRollup = buildCrossAssetIssuerRollup(allHoldings, cashDeposits, denominatorD);
+  const sectorBreakdown = buildCategoryBreakdown(equityHoldings, "sector", "country", totalEquitiesNZD);
+  const countryBreakdown = buildCategoryBreakdown(equityHoldings, "country", "sector", totalEquitiesNZD);
 
   return {
     denominatorD,

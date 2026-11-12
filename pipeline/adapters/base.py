@@ -10,10 +10,19 @@ from pathlib import Path
 from typing import Any, Optional
 
 
+EMPTY_MARKERS = {"", "-", "—", "--", "---", "N/A", "n/a"}
+
+
+def clean_cell(raw_str: str) -> str:
+    """Strips whitespace and normalizes placeholder dash/NA markers to empty string."""
+    text = (raw_str or "").strip()
+    return "" if text in EMPTY_MARKERS else text
+
+
 def clean_float_cell(raw_str: str) -> tuple[float, bool] | None:
     """Parses a numeric/percentage cell into (numeric_value, has_percent_symbol) or None."""
-    text = (raw_str or "").strip()
-    if not text or text in {"-", "—", "--", "---", "N/A", "n/a"}:
+    text = clean_cell(raw_str)
+    if not text:
         return None
     has_pct = "%" in text
     is_lt = text.startswith("<")
@@ -27,6 +36,36 @@ def clean_float_cell(raw_str: str) -> tuple[float, bool] | None:
     if is_lt:
         val *= 0.5
     return val, has_pct
+
+
+def should_divide_weights_by_100(parsed_entries: list[dict[str, Any]]) -> bool:
+    """Infers whether numeric entries without '%' are expressed on a 0..100 scale rather than 0..1."""
+    any_pct = any(e.get("has_pct") for e in parsed_entries)
+    total_raw = sum(float(e.get("raw_val", 0.0)) for e in parsed_entries)
+    return any_pct or total_raw > 2.0
+
+
+def extract_code_from_filename(
+    filename: str,
+    sorted_hints: list[tuple[str, str]],
+    known_codes: Any,
+    fallback_prefix: str = "",
+    default_code: str = "FUND",
+) -> str:
+    """Extracts a canonical fund code from filename using longest-first hints, word-boundary codes, or stem fallback."""
+    stem_upper = Path(filename).stem.upper()
+    spaced = re.sub(r"[^A-Z0-9]+", " ", stem_upper).strip()
+    underscored = spaced.replace(" ", "_")
+
+    for hint, code in sorted_hints:
+        if hint in spaced:
+            return code
+    for code in known_codes:
+        if code in underscored or re.search(rf"\b{re.escape(code)}\b", spaced):
+            return code
+    if fallback_prefix and underscored.startswith(fallback_prefix):
+        return underscored
+    return underscored or default_code
 
 
 def parse_percentage(raw_str: str, column_is_percent: bool = False) -> float:

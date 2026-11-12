@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { CollapsiblePanel } from './CollapsiblePanel';
 import { CategoryBreakdown } from '../types/portfolio';
+import { formatNZD } from '../utils/format';
 
 interface StackedBarChartProps {
   sectorBreakdown: CategoryBreakdown[];
@@ -108,7 +109,7 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
                 <div className="flex justify-between text-xs font-medium">
                   <span className="text-white">{category.name}</span>
                   <span className="text-slate-300 font-mono">
-                    ${category.valueNZD.toLocaleString('en-NZ', { maximumFractionDigits: 0 })} (
+                    ${formatNZD(category.valueNZD, 0)} (
                     {category.portfolioPercentage.toFixed(1)}%)
                   </span>
                 </div>

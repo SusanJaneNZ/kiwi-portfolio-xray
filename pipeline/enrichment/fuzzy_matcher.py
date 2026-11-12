@@ -217,15 +217,7 @@ class SecurityMatcher:
                         return self._build_result(cand, 0.95, "exact_ticker_stem_disambiguated")
 
         # 5. Guardrailed fuzzy match via inverted stem-token pool
-        in_stems = get_stem_tokens(name)
-        candidate_pool: list[dict] = []
-        seen_pool_ids: set[int] = set()
-        for tok in in_stems:
-            for sec in self.by_token.get(tok, []):
-                obj_id = id(sec)
-                if obj_id not in seen_pool_ids:
-                    seen_pool_ids.add(obj_id)
-                    candidate_pool.append(sec)
+        candidate_pool, _ = self._collect_stem_candidates(name)
 
         candidates_scored: list[tuple[float, dict]] = []
         for sec in candidate_pool:
@@ -270,8 +262,7 @@ class SecurityMatcher:
             reason=reason,
         )
 
-    def suggest_candidates(self, name: str, limit: int = 3) -> list[dict]:
-        """Returns top Security Master close-match candidates for an unresolved/unlinked holding name."""
+    def _collect_stem_candidates(self, name: str) -> tuple[list[dict], set[int]]:
         in_stems = get_stem_tokens(name)
         candidate_pool: list[dict] = []
         seen_pool_ids: set[int] = set()
@@ -281,6 +272,11 @@ class SecurityMatcher:
                 if obj_id not in seen_pool_ids:
                     seen_pool_ids.add(obj_id)
                     candidate_pool.append(sec)
+        return candidate_pool, seen_pool_ids
+
+    def suggest_candidates(self, name: str, limit: int = 3) -> list[dict]:
+        """Returns top Security Master close-match candidates for an unresolved/unlinked holding name."""
+        candidate_pool, seen_pool_ids = self._collect_stem_candidates(name)
 
         # Also include normalized multi-token substring hits when stems are broad or missing
         lowered_tokens = [t.lower() for t in normalize_company_name(name).split() if len(t) >= 3]
@@ -312,13 +308,15 @@ class SecurityMatcher:
             })
         return results
 
-    def _normalize_sector(self, sector_raw: Optional[str]) -> str:
+    def normalize_sector(self, sector_raw: Optional[str]) -> str:
         if not sector_raw:
             return "Unclassified"
         cleaned = sector_raw.strip()
         if not cleaned:
             return "Unclassified"
         return self.gics_lower.get(cleaned.lower(), cleaned)
+
+    _normalize_sector = normalize_sector
 
     def _build_result(
         self, sec: dict, score: float, reason: str, spread: float = 1.0

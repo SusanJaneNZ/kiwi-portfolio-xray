@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { CollapsiblePanel } from './CollapsiblePanel';
 import { calculateBucketRebalance } from '../engine/rebalance';
 import { PortfolioBucket, UserPortfolioState } from '../types/portfolio';
+import { formatNZD } from '../utils/format';
 
 interface BucketRebalancerProps {
   portfolioState: UserPortfolioState;
@@ -14,8 +15,7 @@ const STARTER_PRESET: PortfolioBucket[] = [
   { id: 'bkt-growth', name: 'Growth', targetPercent: 60 },
 ];
 
-const fmtMoney = (v: number) =>
-  v.toLocaleString('en-NZ', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const fmtMoney = (v: number) => formatNZD(v, 2);
 
 export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
   portfolioState,
@@ -285,8 +285,8 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
               <label htmlFor="planned-withdrawal-input" className="font-semibold text-white">
                 Planned Withdrawal (NZD):
               </label>
-              <div className="w-36 relative">
-                <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400">$</span>
+              <div className="w-44 sm:w-48 relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">$</span>
                 <input
                   id="planned-withdrawal-input"
                   type="number"
@@ -294,7 +294,7 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
                   step="100"
                   value={withdrawalInput}
                   onChange={(e) => setWithdrawalInput(e.target.value)}
-                  className="w-full bg-slate-900 border border-slate-700 rounded-lg pl-6 pr-2 py-1.5 text-right text-amber-300 font-mono font-bold focus:outline-none focus:border-amber-500"
+                  className="w-full bg-slate-900 border border-slate-700 rounded-lg pl-7 pr-3 py-2 text-right text-sm text-amber-300 font-mono font-bold focus:outline-none focus:border-amber-500"
                 />
               </div>
             </div>

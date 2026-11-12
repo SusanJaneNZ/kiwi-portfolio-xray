@@ -75,10 +75,6 @@ def normalize_country(country_raw: str, default: str = "Global") -> str:
     return COUNTRY_CODE_TO_NAME.get(cleaned.upper(), cleaned)
 
 
-def _normalize_country(country_raw: str, default: str = "Global") -> str:
-    return normalize_country(country_raw, default)
-
-
 def _normalize_sector(sector_raw: str, gics_lower_map: dict[str, str]) -> str:
     cleaned = (sector_raw or "").strip()
     if not cleaned:
@@ -151,7 +147,7 @@ def parse_nzx_directory(file_path: Path, gics_mapping: dict[str, str]) -> list[d
 
                 clean_ticker = f"{plain_ticker}.NZ"
                 sector = _normalize_sector(sector_raw, gics_lower)
-                country = _normalize_country(country_raw, default="New Zealand")
+                country = normalize_country(country_raw, default="New Zealand")
 
                 records.append({
                     "isin": isin,
@@ -237,7 +233,7 @@ def parse_vanguard_global_directory(file_path: Path, gics_mapping: dict[str, str
         if not h.isin and not h.name:
             continue
         sector = _normalize_sector(h.sector or "", gics_lower)
-        country = _normalize_country(h.country or "", default="Global")
+        country = normalize_country(h.country or "", default="Global")
         records.append({
             "isin": h.isin,
             "name": h.name,
@@ -269,7 +265,7 @@ def _enrich_local_isins_from_global(local_records: list[dict], global_records: l
                 rec["isin"] = by_norm_name[norm]
 
 
-def _atomic_write_json(target_path: Path, data: object) -> None:
+def atomic_write_json(target_path: Path, data: object) -> None:
     target_path.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.NamedTemporaryFile(
         mode="w",
@@ -282,6 +278,9 @@ def _atomic_write_json(target_path: Path, data: object) -> None:
         json.dump(data, tmp, indent=2)
         tmp_path = Path(tmp.name)
     os.replace(tmp_path, target_path)
+
+
+_atomic_write_json = atomic_write_json
 
 
 def compile_security_master(
@@ -344,8 +343,8 @@ def compile_security_master(
             direct_equities.append(rec)
 
     if write_files:
-        _atomic_write_json(output_master_path, global_master)
-        _atomic_write_json(output_direct_path, direct_equities)
+        atomic_write_json(output_master_path, global_master)
+        atomic_write_json(output_direct_path, direct_equities)
 
     return {
         "total_security_master_count": len(global_master),

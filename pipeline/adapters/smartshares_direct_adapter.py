@@ -5,7 +5,7 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-from pipeline.adapters.base import BaseAdapter, FundExtractionResult
+from pipeline.adapters.base import BaseAdapter, FundExtractionResult, extract_code_from_filename
 from pipeline.adapters.sorted_parser import parse_nz_fund_file
 
 SMARTSHARES_DIRECT_FUNDS = {
@@ -105,13 +105,9 @@ class SmartsharesDirectAdapter(BaseAdapter):
         )
 
     def _extract_code_from_filename(self, filename: str) -> str:
-        upper = filename.upper().replace("_", " ").replace("-", " ")
-        # Check multi-word name & FND register hints longest-first before raw ticker tokens (prevents ESG matching EUROPE ESG)
-        for hint, code in _SORTED_HINTS:
-            if hint in upper:
-                return code
-        for code in SMARTSHARES_DIRECT_FUNDS:
-            if re.search(rf"\b{code}\b", upper):
-                return code
-        stem = re.sub(r"[^A-Z0-9]+", "_", Path(filename).stem.upper()).strip("_")
-        return stem or "SMARTSHARES_FUND"
+        return extract_code_from_filename(
+            filename,
+            sorted_hints=_SORTED_HINTS,
+            known_codes=SMARTSHARES_DIRECT_FUNDS,
+            default_code="SMARTSHARES_FUND",
+        )

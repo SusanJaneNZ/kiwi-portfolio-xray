@@ -10,8 +10,11 @@ from pipeline.adapters.base import (
     BaseAdapter,
     FundExtractionResult,
     RawHolding,
+    clean_cell,
     clean_float_cell,
+    extract_code_from_filename,
     parse_effective_date,
+    should_divide_weights_by_100,
 )
 from pipeline.adapters.sorted_parser import CURRENCY_AND_CASH_TOKENS, _find_weight_col
 from pipeline.adapters.tabular_reader import read_tabular_rows
@@ -38,6 +41,9 @@ _BETASHARES_CASH_RES = tuple(
     re.compile(rf"\b{re.escape(tok)}\b", re.IGNORECASE)
     for tok in (*_CASH_TERMS, *CURRENCY_AND_CASH_TOKENS)
 )
+
+
+_SORTED_BETASHARES_HINTS = sorted(BETASHARES_NAME_HINTS.items(), key=lambda kv: len(kv[0]), reverse=True)
 
 
 class BetasharesAdapter(BaseAdapter):
@@ -110,9 +116,7 @@ class BetasharesAdapter(BaseAdapter):
             raw_val, has_pct = parsed_val
 
             isin_idx = next((i for k, i in col_map.items() if "isin" in k), -1)
-            isin = row[isin_idx].strip() if isin_idx != -1 and len(row) > isin_idx else ""
-            if isin in {"", "-", "--", "---"}:
-                isin = ""
+            isin = clean_cell(row[isin_idx]) if isin_idx != -1 and len(row) > isin_idx else ""
 
             sector_idx = next((i for k, i in col_map.items() if "sector" in k), -1)
             sector = row[sector_idx].strip() if sector_idx != -1 and len(row) > sector_idx else ""
@@ -134,9 +138,7 @@ class BetasharesAdapter(BaseAdapter):
                 "has_pct": has_pct,
             })
 
-        any_pct = any(r["has_pct"] for r in parsed_rows)
-        total_raw = sum(r["raw_val"] for r in parsed_rows)
-        divide_by_100 = any_pct or total_raw > 2.0
+        divide_by_100 = should_divide_weights_by_100(parsed_rows)
 
         holdings: list[RawHolding] = []
         cash_ratio = 0.0
@@ -199,14 +201,15 @@ class BetasharesAdapter(BaseAdapter):
 
     def _extract_code_from_filename(self, filename: str) -> str:
         upper = Path(filename).stem.upper().replace("_", " ").replace("-", " ")
-        for hint, code in BETASHARES_NAME_HINTS.items():
-            if hint in upper:
-                return code
-        for code in BETASHARES_FUND_NAMES:
-            if re.search(rf"\b{code}\b", upper):
-                return code
         prefix = re.match(r"^([A-Z0-9]{2,6})(?:\s|$)", upper)
-        if prefix and prefix.group(1) not in {"BETA", "HOLDINGS"}:
-            return prefix.group(1)
-        return re.sub(r"[^A-Z0-9]+", "_", upper).strip("_") or "BETASHARES_FUND"
+        fallback = prefix.group(1) if (prefix and prefix.group(1) not in {"BETA", "HOLDINGS"}) else None
+        code = extract_code_from_filename(
+            filename,
+            sorted_hints=_SORTED_BETASHARES_HINTS,
+            known_codes=BETASHARES_FUND_NAMES,
+            default_code="BETASHARES_FUND",
+        )
+        if code not in BETASHARES_FUND_NAMES and fallback:
+            return fallback
+        return code
 

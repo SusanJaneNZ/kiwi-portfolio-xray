@@ -7,15 +7,11 @@ import re
 from pathlib import Path
 from typing import Any, Optional
 
-from pipeline.adapters.betashares_adapter import BetasharesAdapter
-from pipeline.adapters.ishares_adapter import ISharesAdapter
-from pipeline.adapters.kernel_adapter import KernelAdapter
-from pipeline.adapters.smartshares_direct_adapter import SmartsharesDirectAdapter
-from pipeline.adapters.vanguard_adapter import VanguardAdapter
+from pipeline.adapters import PROVIDER_ADAPTERS, iter_staged_files
 from pipeline.enrichment.bond_normalizer import AssetClassifier
 from pipeline.enrichment.fuzzy_matcher import SecurityMatcher
 from pipeline.security_master.build_security_master import (
-    _atomic_write_json,
+    atomic_write_json,
     compile_security_master,
     normalize_country,
 )
@@ -71,22 +67,12 @@ class PipelineCompiler:
             self._stamp_issuer(item, classifier)
 
         # 2. Parse Master ETFs (Vanguard & iShares)
-        vanguard_adapter = VanguardAdapter()
-        ishares_adapter = ISharesAdapter()
-
         master_funds: dict[str, Any] = {}
-        vanguard_dir = self.staging_dir / "vanguard"
-        if vanguard_dir.exists():
-            for f in sorted(vanguard_dir.glob("*.csv")):
-                if vanguard_adapter.can_handle(f):
-                    res = vanguard_adapter.parse(f)
-                    master_funds[res.fund_code] = res
-
-        ishares_dir = self.staging_dir / "ishares"
-        if ishares_dir.exists():
-            for f in sorted(ishares_dir.glob("*.csv")):
-                if ishares_adapter.can_handle(f):
-                    res = ishares_adapter.parse(f)
+        for provider in ("vanguard", "ishares"):
+            adapter = PROVIDER_ADAPTERS[provider]()
+            for f in iter_staged_files(self.staging_dir, provider, extensions=(".csv",)):
+                if adapter.can_handle(f):
+                    res = adapter.parse(f)
                     master_funds[res.fund_code] = res
 
         feeder_disc_map: dict[str, FeederWrapperDisclosure] = {}
@@ -95,38 +81,36 @@ class PipelineCompiler:
             feeder_registry = json.load(f)
 
         # 3. Ingest Smartshares staged files (Direct Funds and Sorted Feeder wrappers)
-        smartshares_adapter = SmartsharesDirectAdapter()
-        smartshares_dir = self.staging_dir / "smartshares"
+        smartshares_adapter = PROVIDER_ADAPTERS["smartshares"]()
         all_unwrapped_funds: list[UnwrappedFund] = []
         all_unresolved_entries: list[dict] = []
         unconfigured_feeders: list[dict] = []
         extra_warnings: list[str] = []
 
-        if smartshares_dir.exists():
-            for f in sorted(p for p in smartshares_dir.iterdir() if p.is_file() and p.suffix.lower() in {".csv", ".xlsx"}):
-                if smartshares_adapter.can_handle(f):
-                    res = smartshares_adapter.parse(f)
-                    if res.fund_code in feeder_registry:
-                        feeder_disc_map[res.fund_code] = FeederWrapperDisclosure(
-                            feeder_code=res.fund_code,
-                            feeder_name=res.fund_name,
-                            master_ticker=feeder_registry[res.fund_code].get("master_ticker", ""),
-                            master_allocation=sum(h.weight for h in res.holdings),
-                            cash_ratio=res.cash_ratio,
-                            hedging_ratio=res.hedging_ratio,
-                            effective_date=res.effective_date,
+        for f in iter_staged_files(self.staging_dir, "smartshares"):
+            if smartshares_adapter.can_handle(f):
+                res = smartshares_adapter.parse(f)
+                if res.fund_code in feeder_registry:
+                    feeder_disc_map[res.fund_code] = FeederWrapperDisclosure(
+                        feeder_code=res.fund_code,
+                        feeder_name=res.fund_name,
+                        master_ticker=feeder_registry[res.fund_code].get("master_ticker", ""),
+                        master_allocation=sum(h.weight for h in res.holdings),
+                        cash_ratio=res.cash_ratio,
+                        hedging_ratio=res.hedging_ratio,
+                        effective_date=res.effective_date,
+                    )
+                else:
+                    detected_feeder = self._detect_unconfigured_feeder(res, classifier)
+                    if detected_feeder:
+                        unconfigured_feeders.append(detected_feeder)
+                        extra_warnings.append(
+                            f"Feeder fund '{res.fund_code}' holds '{detected_feeder['master_holding_name']}' "
+                            f"({detected_feeder['master_weight'] * 100:.1f}%) — add a Feeder Pairing in the Feeder Pairings panel and stage its master ETF CSV to unwrap."
                         )
                     else:
-                        detected_feeder = self._detect_unconfigured_feeder(res, classifier)
-                        if detected_feeder:
-                            unconfigured_feeders.append(detected_feeder)
-                            extra_warnings.append(
-                                f"Feeder fund '{res.fund_code}' holds '{detected_feeder['master_holding_name']}' "
-                                f"({detected_feeder['master_weight'] * 100:.1f}%) — add a Feeder Pairing in the Feeder Pairings panel and stage its master ETF CSV to unwrap."
-                            )
-                        else:
-                            unwrapped = self._enrich_domestic_fund(res, matcher, classifier, all_unresolved_entries)
-                            all_unwrapped_funds.append(unwrapped)
+                        unwrapped = self._enrich_domestic_fund(res, matcher, classifier, all_unresolved_entries)
+                        all_unwrapped_funds.append(unwrapped)
 
         # 5. Unwrap Feeders using FeederUnwrapper
         unwrapper = FeederUnwrapper(self.feeder_registry_path, gics_mapping=gics_mapping, matcher=matcher)
@@ -148,23 +132,12 @@ class PipelineCompiler:
                 self._stamp_issuer(c, classifier)
             all_unwrapped_funds.append(unwrapped)
 
-        # 6. Ingest Kernel Funds and Enrich
-        kernel_adapter = KernelAdapter()
-        kernel_dir = self.staging_dir / "kernel"
-        if kernel_dir.exists():
-            for f in sorted(p for p in kernel_dir.iterdir() if p.is_file() and p.suffix.lower() in {".csv", ".xlsx"}):
-                if kernel_adapter.can_handle(f):
-                    res = kernel_adapter.parse(f)
-                    unwrapped = self._enrich_domestic_fund(res, matcher, classifier, all_unresolved_entries)
-                    all_unwrapped_funds.append(unwrapped)
-
-        # 6b. Ingest BetaShares (ASX ETF) disclosures and Enrich
-        betashares_adapter = BetasharesAdapter()
-        betashares_dir = self.staging_dir / "betashares"
-        if betashares_dir.exists():
-            for f in sorted(p for p in betashares_dir.iterdir() if p.is_file() and p.suffix.lower() in {".csv", ".xlsx"}):
-                if betashares_adapter.can_handle(f):
-                    res = betashares_adapter.parse(f)
+        # 6. Ingest Kernel & BetaShares disclosures and enrich
+        for provider in ("kernel", "betashares"):
+            adapter = PROVIDER_ADAPTERS[provider]()
+            for f in iter_staged_files(self.staging_dir, provider):
+                if adapter.can_handle(f):
+                    res = adapter.parse(f)
                     unwrapped = self._enrich_domestic_fund(res, matcher, classifier, all_unresolved_entries)
                     all_unwrapped_funds.append(unwrapped)
 
@@ -211,11 +184,11 @@ class PipelineCompiler:
         # 9. Only write production files when validation passes (unless force=True)
         files_written = False
         if not dry_run and (validation_report.is_valid or force):
-            _atomic_write_json(self.security_master_path, security_master_data)
-            _atomic_write_json(direct_equities_output_path, direct_equities_data)
-            _atomic_write_json(self.output_dir / "funds_registry.json", funds_registry)
-            _atomic_write_json(self.output_dir / "constituents.json", constituents_map)
-            _atomic_write_json(self.output_dir / "unresolved_entries.json", all_unresolved_entries)
+            atomic_write_json(self.security_master_path, security_master_data)
+            atomic_write_json(direct_equities_output_path, direct_equities_data)
+            atomic_write_json(self.output_dir / "funds_registry.json", funds_registry)
+            atomic_write_json(self.output_dir / "constituents.json", constituents_map)
+            atomic_write_json(self.output_dir / "unresolved_entries.json", all_unresolved_entries)
             files_written = True
 
         summary_data = {
@@ -267,6 +240,35 @@ class PipelineCompiler:
             if issuer_name:
                 record["issuer_name"] = issuer_name
 
+    @staticmethod
+    def _accumulate_non_equity(
+        bucket: dict[str, dict],
+        normalized: dict[str, Any],
+        asset_class: str,
+        weight: float,
+        track_tranches: bool = False,
+    ) -> None:
+        isin_key = normalized["isin"]
+        if isin_key not in bucket:
+            entry: dict[str, Any] = {
+                "isin": isin_key,
+                "name": normalized["name"],
+                "ticker": "",
+                "country": normalized["country"],
+                "sector": normalized["sector"],
+                "weight": 0.0,
+                "asset_class": asset_class,
+            }
+            if track_tranches:
+                entry["tranche_count"] = 0
+            if normalized.get("issuer_key"):
+                entry["issuer_key"] = normalized["issuer_key"]
+                entry["issuer_name"] = normalized["issuer_name"]
+            bucket[isin_key] = entry
+        bucket[isin_key]["weight"] += weight
+        if track_tranches:
+            bucket[isin_key]["tranche_count"] += 1
+
     def _enrich_domestic_fund(
         self,
         fund_res: Any,
@@ -292,44 +294,12 @@ class PipelineCompiler:
 
             if row_class == "term_deposit":
                 td = classifier.normalize_term_deposit(h.name, country_hint=h.country or "")
-                isin_key = td["isin"]
-                if isin_key not in consolidated_tds:
-                    entry = {
-                        "isin": isin_key,
-                        "name": td["name"],
-                        "ticker": "",
-                        "country": td["country"],
-                        "sector": td["sector"],
-                        "weight": 0.0,
-                        "asset_class": "term_deposit",
-                    }
-                    if td["issuer_key"]:
-                        entry["issuer_key"] = td["issuer_key"]
-                        entry["issuer_name"] = td["issuer_name"]
-                    consolidated_tds[isin_key] = entry
-                consolidated_tds[isin_key]["weight"] += normalized_weight
+                self._accumulate_non_equity(consolidated_tds, td, "term_deposit", normalized_weight)
                 continue
 
             if row_class == "fixed_interest":
                 bond = classifier.normalize_bond_holding(h.name, country_hint=h.country or "")
-                isin_key = bond["isin"]
-                if isin_key not in consolidated_bonds:
-                    entry = {
-                        "isin": isin_key,
-                        "name": bond["name"],
-                        "ticker": "",
-                        "country": bond["country"],
-                        "sector": bond["sector"],
-                        "weight": 0.0,
-                        "asset_class": "fixed_interest",
-                        "tranche_count": 0,
-                    }
-                    if bond["issuer_key"]:
-                        entry["issuer_key"] = bond["issuer_key"]
-                        entry["issuer_name"] = bond["issuer_name"]
-                    consolidated_bonds[isin_key] = entry
-                consolidated_bonds[isin_key]["weight"] += normalized_weight
-                consolidated_bonds[isin_key]["tranche_count"] += 1
+                self._accumulate_non_equity(consolidated_bonds, bond, "fixed_interest", normalized_weight, track_tranches=True)
                 continue
 
             match = matcher.match(

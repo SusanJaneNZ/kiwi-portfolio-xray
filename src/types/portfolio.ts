@@ -115,6 +115,7 @@ export interface SubCategorySegment {
 export interface CategoryBreakdown {
   name: string;
   valueNZD: number;
+  /** Percentage of total equities (totalEquitiesNZD), summing to 100 across equity categories. */
   portfolioPercentage: number;
   subcategories: SubCategorySegment[];
 }

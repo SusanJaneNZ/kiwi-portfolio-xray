@@ -5,7 +5,7 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-from pipeline.adapters.base import BaseAdapter, FundExtractionResult
+from pipeline.adapters.base import BaseAdapter, FundExtractionResult, extract_code_from_filename
 from pipeline.adapters.sorted_parser import parse_nz_fund_file
 
 KERNEL_FUND_NAMES = {
@@ -45,6 +45,9 @@ KERNEL_NAME_HINTS = {
 }
 
 
+_SORTED_KERNEL_HINTS = sorted(KERNEL_NAME_HINTS.items(), key=lambda kv: len(kv[0]), reverse=True)
+
+
 class KernelAdapter(BaseAdapter):
     """Parses Kernel Wealth monthly fund portfolio disclosures (CSV or Sorted XLSX)."""
 
@@ -66,15 +69,9 @@ class KernelAdapter(BaseAdapter):
         )
 
     def _extract_code_from_filename(self, filename: str) -> str:
-        normalized = re.sub(r"[^A-Z0-9]+", " ", Path(filename).stem.upper()).strip()
-        underscore = normalized.replace(" ", "_")
-
-        for code in KERNEL_FUND_NAMES:
-            if code in underscore:
-                return code
-
-        for hint, code in KERNEL_NAME_HINTS.items():
-            if hint in normalized:
-                return code
-
-        return underscore or "KERNEL_FUND"
+        return extract_code_from_filename(
+            filename,
+            sorted_hints=_SORTED_KERNEL_HINTS,
+            known_codes=KERNEL_FUND_NAMES,
+            default_code="KERNEL_FUND",
+        )

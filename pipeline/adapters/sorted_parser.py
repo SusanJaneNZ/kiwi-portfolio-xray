@@ -11,6 +11,7 @@ from pipeline.adapters.base import (
     RawHolding,
     clean_float_cell,
     parse_effective_date,
+    should_divide_weights_by_100,
 )
 from pipeline.adapters.tabular_reader import read_tabular_rows
 
@@ -183,9 +184,7 @@ def parse_nz_fund_file(
         })
 
     # Determine whether raw numeric values without '%' are expressed on a 0..100 scale vs 0..1 Excel percentage scale
-    any_pct_symbol = any(e["has_pct"] for e in parsed_entries)
-    total_raw = sum(e["raw_val"] for e in parsed_entries)
-    divide_by_100 = any_pct_symbol or total_raw > 2.0
+    divide_by_100 = should_divide_weights_by_100(parsed_entries)
 
     holdings: list[RawHolding] = []
     cash_ratio = 0.0

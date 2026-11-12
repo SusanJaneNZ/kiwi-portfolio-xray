@@ -16,16 +16,12 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qs, urlparse
 
-from pipeline.adapters.betashares_adapter import BetasharesAdapter
-from pipeline.adapters.ishares_adapter import ISharesAdapter
-from pipeline.adapters.kernel_adapter import KernelAdapter
-from pipeline.adapters.smartshares_direct_adapter import SmartsharesDirectAdapter
+from pipeline.adapters import PROVIDER_ADAPTERS, iter_staged_files
 from pipeline.adapters.tabular_reader import read_tabular_rows
-from pipeline.adapters.vanguard_adapter import VanguardAdapter
 from pipeline.enrichment.fuzzy_matcher import SecurityMatcher, token_sort_similarity
 from pipeline.output.build_output import PipelineCompiler
 from pipeline.security_master.build_security_master import (
-    _atomic_write_json,
+    atomic_write_json,
     parse_asx_directory,
     parse_nzx_directory,
 )
@@ -59,16 +55,14 @@ class AdminService:
         """Lists all CSV and XLSX files currently staged under each provider folder."""
         result: dict[str, list[dict[str, Any]]] = {}
         for provider in sorted(ALLOWED_PROVIDERS):
-            p_dir = self.staging_dir / provider
             files: list[dict[str, Any]] = []
-            if p_dir.exists():
-                for f in sorted(p for p in p_dir.iterdir() if p.is_file() and p.suffix.lower() in {".csv", ".xlsx"}):
-                    stat = f.stat()
-                    files.append({
-                        "filename": f.name,
-                        "size_bytes": stat.st_size,
-                        "modified": datetime.fromtimestamp(stat.st_mtime, tz=timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
-                    })
+            for f in iter_staged_files(self.staging_dir, provider):
+                stat = f.stat()
+                files.append({
+                    "filename": f.name,
+                    "size_bytes": stat.st_size,
+                    "modified": datetime.fromtimestamp(stat.st_mtime, tz=timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
+                })
             result[provider] = files
         return result
 
@@ -160,14 +154,8 @@ class AdminService:
                 }
             return {"raw_lines": raw_lines, "parse_summary": parse_summary}
 
-        adapter_map = {
-            "vanguard": VanguardAdapter(),
-            "ishares": ISharesAdapter(),
-            "smartshares": SmartsharesDirectAdapter(),
-            "kernel": KernelAdapter(),
-            "betashares": BetasharesAdapter(),
-        }
-        adapter = adapter_map.get(provider)
+        adapter_cls = PROVIDER_ADAPTERS.get(provider)
+        adapter = adapter_cls() if adapter_cls else None
         if adapter:
             can_handle = adapter.can_handle(target_path)
             if can_handle:
@@ -268,7 +256,7 @@ class AdminService:
                         "sm_name": sec.get("name", ""),
                         "ticker": sec.get("ticker", ""),
                         "country": sec.get("country", "Global"),
-                        "sector": matcher._normalize_sector(sec.get("sector")),
+                        "sector": matcher.normalize_sector(sec.get("sector")),
                     }
                 else:
                     cands = matcher.suggest_candidates(raw_name, limit=2) if matcher else []
@@ -291,7 +279,7 @@ class AdminService:
         with self._lock:
             alias_map = self.get_alias_map()
             alias_map.setdefault(scope, {})[name] = clean_isin
-            _atomic_write_json(self.alias_map_path, alias_map)
+            atomic_write_json(self.alias_map_path, alias_map)
             return alias_map
 
     def bulk_set_alias_mappings(
@@ -330,7 +318,7 @@ class AdminService:
             if saved_count == 0:
                 raise ValueError("No valid (scope, companyName, isin) rows found to import.")
 
-            _atomic_write_json(self.alias_map_path, alias_map)
+            atomic_write_json(self.alias_map_path, alias_map)
             return alias_map, saved_count
 
     def delete_alias_mapping(self, scope_key: str, raw_name: str) -> dict[str, dict[str, str]]:
@@ -341,7 +329,7 @@ class AdminService:
                 del alias_map[scope_key][raw_name]
                 if not alias_map[scope_key]:
                     del alias_map[scope_key]
-                _atomic_write_json(self.alias_map_path, alias_map)
+                atomic_write_json(self.alias_map_path, alias_map)
             return alias_map
 
     def search_security_master(self, query: str, limit: int = 15) -> list[dict[str, Any]]:
@@ -407,7 +395,7 @@ class AdminService:
                 "master_provider": provider,
                 "master_ticker": ticker,
             }
-            _atomic_write_json(self.feeder_registry_path, registry)
+            atomic_write_json(self.feeder_registry_path, registry)
             return registry
 
     def delete_feeder_pairing(self, feeder_code: str) -> dict[str, dict[str, str]]:
@@ -417,7 +405,7 @@ class AdminService:
             registry = self.get_feeder_registry()
             if code in registry:
                 del registry[code]
-                _atomic_write_json(self.feeder_registry_path, registry)
+                atomic_write_json(self.feeder_registry_path, registry)
             return registry
 
 
