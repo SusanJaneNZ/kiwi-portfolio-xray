@@ -70,5 +70,107 @@
     "ticker": "P911",
     "country": "Germany",
     "sector": "Consumer Discretionary"
+  },
+  "2731978": {
+    "name": "Rex American Resources ORD",
+    "ticker": "REX",
+    "country": "United States",
+    "sector": "Materials"
+  },
+  "MANUAL:FCEL": {
+    "name": "Fuelcell Energy Inc",
+    "ticker": "FCEL",
+    "country": "United States",
+    "sector": "Energy"
+  },
+  "MANUAL:CSIQ": {
+    "name": "Canadian Solar Inc",
+    "ticker": "CSIQ",
+    "country": "Canada",
+    "sector": "Information Technology"
+  },
+  "MANUAL:RNW": {
+    "name": "Renew Energy Global CL A ORD",
+    "ticker": "RNW",
+    "country": "United Kingdom",
+    "sector": "Utilities"
+  },
+  "MANUAL:SIMO": {
+    "name": "SILICON MOTION TECHNOLOGY CORP",
+    "ticker": "SIMO",
+    "country": "Taiwan",
+    "sector": "Information Technology"
+  },
+  "MANUAL:SEBA": {
+    "name": "SEB-Skand Enskilda Banken A (EUR)",
+    "ticker": "SEBA",
+    "country": "Sweden",
+    "sector": "Financials"
+  },
+  "MANUAL:RCI.B": {
+    "name": "Rogers Communications Inc B",
+    "ticker": "RCI.B",
+    "country": "Canada",
+    "sector": "Communication Services"
+  },
+  "MANUAL:MLM": {
+    "name": "Martin Merietta Materials Inc Common Stock",
+    "ticker": "MLM",
+    "country": "United States",
+    "sector": "Materials"
+  },
+  "MANUAL:BNTX": {
+    "name": "BionTech SE",
+    "ticker": "BNTX",
+    "country": "Germany",
+    "sector": "Health Care"
+  },
+  "MANUAL:CCL.B": {
+    "name": "CCL Industries Inc. Class B NV",
+    "ticker": "CCL.B",
+    "country": "Canada",
+    "sector": "Materials"
+  },
+  "MANUAL:FUTU": {
+    "name": "Futu Holdings Ltd ADR",
+    "ticker": "FUTU",
+    "country": "China",
+    "sector": "Financials"
+  },
+  "MANUAL:6823": {
+    "name": "HKT Trust / HKT Ltd",
+    "ticker": "6823",
+    "country": "China",
+    "sector": "Communication Services"
+  },
+  "MANUAL:CDI": {
+    "name": "Christian Dior SE",
+    "ticker": "CDI",
+    "country": "France",
+    "sector": "Consumer Discretionary"
+  },
+  "MANUAL:ALHE": {
+    "name": "Aloni Hetz Properties",
+    "ticker": "ALHE",
+    "country": "isreal",
+    "sector": "Real Estate"
+  },
+  "MANUAL:CLBT": {
+    "name": "Cellebrite DI Ltd.",
+    "ticker": "CLBT",
+    "country": "Isreal",
+    "sector": "Information Technology"
+  },
+  "BS491D8": {
+    "name": "eToro Group Ltd",
+    "ticker": "ETOR",
+    "country": "Isreal",
+    "sector": "Financials"
+  },
+  "MANUAL:ILS": {
+    "name": "Israeli Sheqel",
+    "ticker": "ILS",
+    "country": "Isreal",
+    "sector": "Financials"
   }
 }

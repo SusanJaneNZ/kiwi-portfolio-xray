@@ -59,6 +59,27 @@ class TestSortedParserAndDates(unittest.TestCase):
         self.assertEqual(parse_effective_date("2032-11-01"), "2032-11-01")
         self.assertIsNone(parse_effective_date("2026-13-45"))
 
+    def test_israeli_sheqel_and_currency_variants_classified_as_cash(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            csv_path = Path(tmp) / "KERNEL-CLEAN.csv"
+            csv_path.write_text(
+                "Fund name,Kernel Global Clean Energy Fund\n"
+                "As at 30/09/2026\n"
+                "Asset name,% of fund net assets\n"
+                "First Solar Inc,95.0\n"
+                "Israeli Sheqel,2.0\n"
+                "Polish Zloty,1.5\n"
+                "Hungarian Forint,1.5\n",
+                encoding="utf-8",
+            )
+            res = parse_nz_fund_file(csv_path, "KERNEL_CLEAN_ENERGY", "Kernel Global Clean Energy Fund", "Kernel")
+            self.assertEqual(len(res.holdings), 1)
+            self.assertEqual(res.holdings[0].name, "First Solar Inc")
+            self.assertAlmostEqual(res.holdings[0].weight, 0.95, places=4)
+            # 2.0% + 1.5% + 1.5% = 5.0% = 0.05 cash
+            self.assertAlmostEqual(res.cash_ratio, 0.05, places=4)
+
+
 
 if __name__ == "__main__":
     unittest.main()
