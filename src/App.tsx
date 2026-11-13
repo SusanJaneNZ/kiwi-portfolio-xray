@@ -230,30 +230,7 @@ export const App: React.FC = () => {
           </div>
         )}
 
-        {/* 1. Asset Class / Liquidity Split */}
-        <LiquidityCard
-          liquidity={calculationResult.liquidity}
-          constituentCount={calculationResult.holdings.length}
-          bondIssuerCount={calculationResult.bondIssuerHoldings.length}
-        />
-
-        {/* 2. Sector & Country Allocation */}
-        <StackedBarChart
-          sectorBreakdown={calculationResult.sectorBreakdown}
-          countryBreakdown={calculationResult.countryBreakdown}
-        />
-
-        {/* 3. Look-Through Exposure */}
-        <HoldingsTable
-          holdings={calculationResult.holdings}
-          bondIssuerHoldings={calculationResult.bondIssuerHoldings}
-          issuerRollup={calculationResult.issuerRollup}
-        />
-
-        {/* 4. Rebalancing */}
-        <BucketRebalancer portfolioState={portfolioState} onUpdateState={handleUpdateState} />
-
-        {/* 5-7. Portfolio Inputs: Fund Allocations, Direct Shares, Term Deposits */}
+        {/* 1. Portfolio Holdings & Inputs */}
         <PortfolioInputTable
           portfolioState={portfolioState}
           fundsRegistry={fundsRegistry}
@@ -261,6 +238,29 @@ export const App: React.FC = () => {
           onUpdateState={handleUpdateState}
           totalPortfolioNZD={calculationResult.denominatorD}
         />
+
+        {/* 2. Asset Class / Liquidity Split */}
+        <LiquidityCard
+          liquidity={calculationResult.liquidity}
+          constituentCount={calculationResult.holdings.length}
+          bondIssuerCount={calculationResult.bondIssuerHoldings.length}
+        />
+
+        {/* 3. Sector & Country Allocation */}
+        <StackedBarChart
+          sectorBreakdown={calculationResult.sectorBreakdown}
+          countryBreakdown={calculationResult.countryBreakdown}
+        />
+
+        {/* 4. Look-Through Exposure */}
+        <HoldingsTable
+          holdings={calculationResult.holdings}
+          bondIssuerHoldings={calculationResult.bondIssuerHoldings}
+          issuerRollup={calculationResult.issuerRollup}
+        />
+
+        {/* 5. Rebalancing */}
+        <BucketRebalancer portfolioState={portfolioState} onUpdateState={handleUpdateState} />
       </div>
 
       {/* Unresolved Disclosures Modal */}

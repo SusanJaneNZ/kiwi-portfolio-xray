@@ -124,6 +124,7 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
   return (
     <CollapsiblePanel
       id="portfolio-inputs-group"
+      defaultOpen={false}
       title={
         <div className="flex items-center gap-2.5">
           <span className="text-sm font-semibold text-white">Portfolio</span>
