@@ -183,16 +183,35 @@ export const storageTestCases: Array<[string, () => void]> = [
             price: 0,
             value: 0,
           },
+          {
+            isin: "ASIA",
+            name: "Betashares Asia Technology Tigers Etf",
+            ticker: "ASIA.AX",
+            exchange: "ASX",
+            country: "Australia",
+            sector: "Broad Index ETF",
+            currency: "AUD",
+            isEtf: true,
+            fundCode: "ASIA",
+            units: 1800,
+            price: 17.98,
+            value: 32364,
+          },
         ],
         cashDeposits: [],
       });
 
       assertTrue(normalized !== null, "should normalize valid state");
-      assertEq(normalized!.directHoldings.length, 2, "both direct holdings preserved");
+      assertEq(normalized!.directHoldings.length, 3, "all three direct holdings preserved");
       assertEq(normalized!.directHoldings[0].shares, 2550, "shares must not be reset to 1 when price is 0");
       assertEq(normalized!.directHoldings[0].price, 0, "price preserved as 0");
       assertEq(normalized!.directHoldings[0].value, 0, "value preserved as 0");
       assertEq(normalized!.directHoldings[1].shares, 12406, "ETF shares preserved when unpriced");
+      assertEq(normalized!.directHoldings[2].shares, 1800, "ASX units recognized as shares");
+      assertEq(normalized!.directHoldings[2].units, 1800, "ASX units property preserved");
+      assertEq(normalized!.directHoldings[2].price, 17.98, "ASX manual price exported/imported");
+      assertEq(normalized!.directHoldings[2].currency, "AUD", "ASX currency preserved as AUD");
+      assertEq(normalized!.directHoldings[2].value, 32364, "ASX calculated value preserved");
     },
   ],
   [
@@ -393,6 +412,34 @@ export const storageTestCases: Array<[string, () => void]> = [
         fundBalances: { FNZ: 99999 },
       };
       assertTrue(!isSamplePortfolio(modifiedState), "modified state is not sample");
+
+      const unpricedSharesState: UserPortfolioState = {
+        version: 2,
+        timestamp: "2026-11-13T00:00:00Z",
+        audNzdRate: 1.10,
+        fundBalances: {},
+        directHoldings: [
+          {
+            isin: "AGG",
+            name: "Smart Global Aggregate Bond Etf",
+            ticker: "AGG.NZ",
+            exchange: "NZX",
+            country: "New Zealand",
+            sector: "Fixed Income",
+            currency: "NZD",
+            shares: 12406,
+            price: 0,
+            value: 0,
+            isEtf: true,
+            fundCode: "AGG",
+          },
+        ],
+        fixedInterest: [],
+        cashDeposits: [],
+        buckets: [],
+        bucketAssignments: {},
+      };
+      assertTrue(!isEmptyPortfolio(unpricedSharesState), "portfolio with unpriced direct shares is not empty");
     },
   ],
   [

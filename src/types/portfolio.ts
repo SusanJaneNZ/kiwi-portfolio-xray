@@ -47,6 +47,7 @@ export interface DirectEquityCatalogItem {
 export interface DirectHolding extends DirectEquityCatalogItem {
   currency: "NZD" | "AUD";
   shares: number; // Mandatory discrete share/unit count
+  units?: number; // Alias for discrete share/unit count
   price: number; // Native unit price (NZD or AUD)
   value: number; // Local currency worth: shares * price (read-only)
   isEtf?: boolean; // Flag indicating this listed asset is an ETF with underlying constituents

@@ -10,6 +10,18 @@ export interface DailyPriceCache {
   prices: Record<string, number>;
 }
 
+export interface PriceDiagnosticItem {
+  ticker: string;
+  url: string;
+  status: number;
+  statusText: string;
+  ok: boolean;
+  requestHeaders: Record<string, string>;
+  rawResponse: string | null;
+  extractedPrice: number | null;
+  error?: string | null;
+}
+
 export interface FetchPricesResult {
   ok: boolean;
   prices: Record<string, number>;
@@ -18,6 +30,8 @@ export interface FetchPricesResult {
   fetchedCount?: number;
   lastFetchedAt?: string;
   error?: string;
+  diagnostics?: PriceDiagnosticItem[];
+  logPath?: string;
 }
 
 export function getTodayDateString(): string {
@@ -120,6 +134,24 @@ export async function fetchNzxPrices(tickers: string[], force = false): Promise<
 
     const data = (await response.json()) as FetchPricesResult;
     const fetchTimestamp = new Date().toISOString();
+
+    // Log complete diagnostics to browser console for immediate visibility
+    if (data.diagnostics && data.diagnostics.length > 0) {
+      console.groupCollapsed(`[NZXplorer Pricing API] Request/Response details for ${cleanTickers.length} ticker(s)`);
+      console.table(
+        data.diagnostics.map((d) => ({
+          Ticker: d.ticker,
+          Status: `${d.status} ${d.statusText}`,
+          OK: d.ok,
+          Price: d.extractedPrice !== null ? `$${d.extractedPrice}` : 'N/A',
+          Error: d.error || (d.ok ? 'None' : 'Failed'),
+          URL: d.url,
+        }))
+      );
+      console.log('Full Diagnostics Objects:', data.diagnostics);
+      console.groupEnd();
+    }
+
     if (data.ok && data.prices) {
       const existingPrices = isStoredToday && stored ? stored.prices : {};
       const mergedPrices = { ...existingPrices, ...data.prices };

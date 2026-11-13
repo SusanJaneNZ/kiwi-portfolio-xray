@@ -140,7 +140,11 @@ function sanitizeDirectHoldings(raw: unknown): DirectHolding[] {
     const currency: "NZD" | "AUD" =
       h.currency === "AUD" || (h.currency !== "NZD" && exchange === "ASX") ? "AUD" : "NZD";
 
-    const rawShares = isFiniteNonNegative(h.shares) ? (h.shares as number) : undefined;
+    const rawShares = isFiniteNonNegative(h.shares)
+      ? (h.shares as number)
+      : isFiniteNonNegative(h.units)
+      ? (h.units as number)
+      : undefined;
     const rawPrice = isFiniteNonNegative(h.price) ? (h.price as number) : undefined;
     const rawValue = isFiniteNonNegative(h.value) ? (h.value as number) : undefined;
 
@@ -177,6 +181,7 @@ function sanitizeDirectHoldings(raw: unknown): DirectHolding[] {
       ...(typeof h.issuer_name === "string" && h.issuer_name ? { issuer_name: h.issuer_name } : {}),
       currency,
       shares,
+      units: shares,
       price,
       value,
       ...(h.isEtf ? { isEtf: true } : {}),
@@ -738,7 +743,7 @@ export function isEmptyPortfolio(state: UserPortfolioState): boolean {
   const fiList = state.fixedInterest || state.cashDeposits || [];
   return (
     Object.values(state.fundBalances).every((v) => v <= 0) &&
-    state.directHoldings.every((d) => d.value <= 0) &&
+    state.directHoldings.every((d) => (d.shares ?? 0) <= 0 && d.value <= 0) &&
     fiList.every((c) => c.valueNZD <= 0) &&
     state.buckets.length === 0
   );

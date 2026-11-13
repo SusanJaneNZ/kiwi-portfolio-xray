@@ -14,6 +14,7 @@ import {
   fetchNzxPrices,
   getTodayDateString,
   loadStoredDailyPrices,
+  PriceDiagnosticItem,
 } from '../../utils/prices';
 
 interface DirectSharesPanelProps {
@@ -65,6 +66,9 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
     return cached?.lastFetchedAt || null;
   });
   const [priceNotice, setPriceNotice] = useState<string | null>(null);
+  const [priceDiagnostics, setPriceDiagnostics] = useState<PriceDiagnosticItem[] | null>(null);
+  const [isDiagModalOpen, setIsDiagModalOpen] = useState(false);
+  const [diagCopied, setDiagCopied] = useState(false);
 
   const [isFetchingFx, setIsFetchingFx] = useState(false);
   const [fxTimestamp, setFxTimestamp] = useState<string | null>(null);
@@ -154,6 +158,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
     setPriceNotice(null);
     try {
       const res = await fetchNzxPrices(nzxTickers, true);
+      setPriceDiagnostics(res.diagnostics || null);
       if (res.ok && res.prices) {
         let updatedCount = 0;
         const updated = portfolioState.directHoldings.map((h) => {
@@ -176,7 +181,13 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
         if (res.lastFetchedAt) {
           setLastFetchedAt(res.lastFetchedAt);
         }
-        setPriceNotice(`Updated ${updatedCount} prices from NZXplorer`);
+        if (updatedCount === 0) {
+          setPriceNotice(
+            `Updated 0 prices from NZXplorer (${nzxTickers.length} requested). See request/response log.`
+          );
+        } else {
+          setPriceNotice(`Updated ${updatedCount} of ${nzxTickers.length} prices from NZXplorer`);
+        }
       } else if (res.error) {
         setPriceNotice(res.error);
       }
@@ -492,13 +503,24 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
         {/* Price Update Notice / Status Banner */}
         {priceNotice && (
           <div
-            className={`text-[11px] px-2.5 py-1.5 rounded-lg border flex items-center justify-between ${
-              priceNotice.toLowerCase().includes('error') || priceNotice.includes('HTTP')
-                ? 'bg-rose-950/40 border-rose-800/50 text-rose-300'
+            className={`text-[11px] px-2.5 py-1.5 rounded-lg border flex flex-wrap items-center justify-between gap-2 ${
+              priceNotice.toLowerCase().includes('error') || priceNotice.includes('HTTP') || (priceDiagnostics && priceDiagnostics.every((d) => !d.extractedPrice))
+                ? 'bg-amber-950/40 border-amber-800/50 text-amber-300'
                 : 'bg-emerald-950/40 border-emerald-800/50 text-emerald-300'
             }`}
           >
-            <span>{priceNotice}</span>
+            <div className="flex items-center gap-2 flex-wrap">
+              <span>{priceNotice}</span>
+              {priceDiagnostics && priceDiagnostics.length > 0 && (
+                <button
+                  type="button"
+                  onClick={() => setIsDiagModalOpen(true)}
+                  className="px-2 py-0.5 rounded bg-indigo-900/60 hover:bg-indigo-800/80 text-indigo-200 border border-indigo-700/60 font-medium text-[10px] transition-colors"
+                >
+                  🔍 View Request/Response Log ({priceDiagnostics.length})
+                </button>
+              )}
+            </div>
             <button
               type="button"
               onClick={() => setPriceNotice(null)}
@@ -510,13 +532,6 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
           </div>
         )}
 
-        {/* Informational Look-Through Note */}
-        <div className="bg-slate-900/40 border border-slate-800/60 rounded-lg p-2 text-[11px] text-slate-400 flex items-center gap-2">
-          <span className="text-emerald-400 text-sm">ℹ️</span>
-          <span>
-            Enter your exact <strong>Share / Unit Count</strong>. Listed ETFs (e.g. Smartshares USF, FNZ, DIV) automatically unwrap into their underlying companies with 100% look-through.
-          </span>
-        </div>
 
         {/* Direct Holdings Table */}
         <div className="space-y-2">
@@ -776,6 +791,119 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
           </div>
         </div>
       </div>
+
+      {/* NZXplorer API Diagnostics Modal */}
+      {isDiagModalOpen && priceDiagnostics && (
+        <div
+          className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          onClick={() => setIsDiagModalOpen(false)}
+        >
+          <div
+            className="bg-slate-900 border border-slate-700/80 rounded-2xl max-w-2xl w-full p-5 shadow-2xl space-y-4 max-h-[85vh] flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between border-b border-slate-800 pb-3 shrink-0">
+              <div>
+                <h3 className="text-base font-semibold text-white flex items-center gap-2">
+                  <span>NZXplorer API Request & Response Log</span>
+                </h3>
+                <p className="text-xs text-slate-400 mt-0.5">
+                  Logged in server terminal and saved to <code className="font-mono text-emerald-400">data/cache/nzxplorer_last_fetch.json</code>.
+                </p>
+              </div>
+              <button
+                onClick={() => setIsDiagModalOpen(false)}
+                className="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition-colors"
+                title="Close"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="overflow-y-auto space-y-3 pr-1 flex-1">
+              {priceDiagnostics.map((d) => (
+                <div
+                  key={d.ticker}
+                  className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2 text-xs"
+                >
+                  <div className="flex items-center justify-between flex-wrap gap-2">
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono font-bold text-white bg-slate-800 px-2 py-0.5 rounded border border-slate-700">
+                        {d.ticker}
+                      </span>
+                      <span
+                        className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-medium border ${
+                          d.ok
+                            ? 'bg-emerald-950/80 border-emerald-800/80 text-emerald-300'
+                            : 'bg-rose-950/80 border-rose-800/80 text-rose-300'
+                        }`}
+                      >
+                        {d.status ? `${d.status} ${d.statusText}` : 'Fetch Error'}
+                      </span>
+                    </div>
+                    <div className="font-mono text-xs">
+                      {d.extractedPrice !== null ? (
+                        <span className="text-emerald-400 font-bold">Extracted Price: ${d.extractedPrice.toFixed(2)}</span>
+                      ) : (
+                        <span className="text-amber-400">No Price Extracted</span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="space-y-1 font-mono text-[11px] text-slate-400">
+                    <div>
+                      <span className="text-slate-500">GET: </span>
+                      <span className="text-slate-300 break-all">{d.url}</span>
+                    </div>
+                    <div>
+                      <span className="text-slate-500">Headers: </span>
+                      <span className="text-slate-300">
+                        X-API-Key: {d.requestHeaders['X-API-Key'] || '***'}, User-Agent: {d.requestHeaders['User-Agent']}
+                      </span>
+                    </div>
+                    {d.error && (
+                      <div className="text-rose-400">
+                        <span className="font-bold">Error: </span>
+                        <span>{d.error}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div>
+                    <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">
+                      Raw Response Body
+                    </div>
+                    <pre className="bg-slate-900 border border-slate-800/90 rounded-lg p-2 font-mono text-[11px] text-slate-300 overflow-x-auto max-h-36 whitespace-pre-wrap break-all">
+                      {d.rawResponse || '(empty response)'}
+                    </pre>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="pt-2 border-t border-slate-800 flex items-center justify-between gap-3 shrink-0">
+              <button
+                type="button"
+                onClick={() => {
+                  navigator.clipboard.writeText(JSON.stringify(priceDiagnostics, null, 2));
+                  setDiagCopied(true);
+                  setTimeout(() => setDiagCopied(false), 3000);
+                }}
+                className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium border border-slate-700 transition-colors flex items-center gap-1.5"
+              >
+                <span>{diagCopied ? '✓ Copied JSON' : '📋 Copy All JSON'}</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsDiagModalOpen(false)}
+                className="px-4 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-medium transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </CollapsiblePanel>
   );
 };

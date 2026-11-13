@@ -286,6 +286,9 @@ function createPricesMiddleware(): Connect.NextHandleFunction {
         const match = envContent.match(/^NZXPLORER_API_KEY=["']?([^"'\r\n]+)["']?/m);
         if (match) apiKey = match[1].trim();
       }
+      if (apiKey) {
+        apiKey = apiKey.replace(/^["']|["']$/g, '').trim();
+      }
 
       // Read local daily cache if available
       let cachedData: { date?: string; prices?: Record<string, number> } = {};
@@ -314,34 +317,129 @@ function createPricesMiddleware(): Connect.NextHandleFunction {
       }
 
       if (!apiKey) {
+        console.warn('[NZXplorer] Cannot fetch prices: NZXPLORER_API_KEY is not configured in .env');
         res.statusCode = 400;
         res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify({ ok: false, error: 'NZXPLORER_API_KEY is not configured in .env' }));
         return;
       }
 
+      const diagnostics: Array<{
+        ticker: string;
+        url: string;
+        status: number;
+        statusText: string;
+        ok: boolean;
+        requestHeaders: Record<string, string>;
+        rawResponse: string | null;
+        extractedPrice: number | null;
+        error?: string | null;
+      }> = [];
+
+      const sanitizeSecret = (text: string | null | undefined): string => {
+        if (!text) return '';
+        if (!apiKey) return text;
+        return text.split(apiKey).join('[REDACTED]');
+      };
+
       // Fetch missing tickers from NZXplorer widget/company API
       for (const t of missingTickers) {
+        const fetchUrl = `https://nzxplorer.co.nz/api/v1/widgets/price-card?ticker=${encodeURIComponent(t)}`;
+        const headersSent = {
+          'X-API-Key': '[REDACTED]',
+          'User-Agent': 'KiwiPortfolioXRay/1.0',
+        };
+
+        console.log(`[NZXplorer] Fetching: ${fetchUrl} (X-API-Key: [CONFIGURED])`);
+
         try {
-          const fetchUrl = `https://nzxplorer.co.nz/api/v1/widgets/price-card?ticker=${encodeURIComponent(t)}`;
           const response = await fetch(fetchUrl, {
             headers: {
               'X-API-Key': apiKey,
               'User-Agent': 'KiwiPortfolioXRay/1.0',
             },
           });
-          if (response.ok) {
-            const data: any = await response.json();
-            if (typeof data.price === 'number') {
-              prices[t] = data.price;
+
+          const rawTextUnsanitized = await response.text();
+          const rawText = sanitizeSecret(rawTextUnsanitized);
+          console.log(`[NZXplorer] [${t}] Response Status: ${response.status} ${response.statusText}`);
+          console.log(`[NZXplorer] [${t}] Raw Body: ${rawText.slice(0, 300)}`);
+
+          let extractedPrice: number | null = null;
+          let parsedBody: any = null;
+          try {
+            parsedBody = JSON.parse(rawTextUnsanitized);
+            // Official NZXplorer /api/v1/widgets/price-card schema:
+            // { "widget": "price-card", "ticker": "AIR", "name": "...", "price": 0.38, "change_pct": -1.3, ... }
+            if (typeof parsedBody?.price === 'number' && Number.isFinite(parsedBody.price) && parsedBody.price > 0) {
+              extractedPrice = parsedBody.price;
             }
+          } catch {
+            // Raw text is not valid JSON
           }
+
+          if (typeof extractedPrice === 'number' && extractedPrice > 0) {
+            prices[t] = extractedPrice;
+          }
+
+          diagnostics.push({
+            ticker: t,
+            url: fetchUrl,
+            status: response.status,
+            statusText: response.statusText,
+            ok: response.ok,
+            requestHeaders: headersSent,
+            rawResponse: rawText.slice(0, 1000),
+            extractedPrice,
+            error: response.ok
+              ? extractedPrice === null
+                ? 'Response JSON missing numeric "price" attribute'
+                : null
+              : sanitizeSecret(`HTTP ${response.status}: ${response.statusText}`),
+          });
+
           if (missingTickers.length > 1) {
             await new Promise((r) => setTimeout(r, 200));
           }
         } catch (err) {
-          console.error(`Failed to fetch NZX price for ${t}:`, err);
+          const errMsg = sanitizeSecret(String(err));
+          console.error(`[NZXplorer] [${t}] Fetch Error:`, errMsg);
+          diagnostics.push({
+            ticker: t,
+            url: fetchUrl,
+            status: 0,
+            statusText: 'Network / Fetch Error',
+            ok: false,
+            requestHeaders: headersSent,
+            rawResponse: null,
+            extractedPrice: null,
+            error: errMsg,
+          });
         }
+      }
+
+      // Save complete diagnostics to disk in data/cache/nzxplorer_last_fetch.json
+      const logFile = path.join(cacheDir, 'nzxplorer_last_fetch.json');
+      try {
+        if (!fs.existsSync(cacheDir)) {
+          fs.mkdirSync(cacheDir, { recursive: true });
+        }
+        fs.writeFileSync(
+          logFile,
+          JSON.stringify(
+            {
+              timestamp: new Date().toISOString(),
+              tickersRequested: tickers,
+              missingTickers,
+              diagnostics,
+            },
+            null,
+            2
+          ),
+          'utf-8'
+        );
+      } catch (logErr) {
+        console.error('Failed to write nzxplorer_last_fetch.json:', logErr);
       }
 
       // Persist daily cache to disk
@@ -371,9 +469,12 @@ function createPricesMiddleware(): Connect.NextHandleFunction {
           date: today,
           cached: false,
           fetchedCount: missingTickers.length,
+          diagnostics,
+          logPath: 'data/cache/nzxplorer_last_fetch.json',
         })
       );
     } catch (err) {
+      console.error('[NZXplorer] Internal server error in prices middleware:', err);
       res.statusCode = 500;
       res.setHeader('Content-Type', 'application/json');
       res.end(JSON.stringify({ ok: false, error: String(err) }));
