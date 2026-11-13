@@ -12,7 +12,7 @@
 Currently, Kiwi Portfolio X-Ray only models equity funds, direct New Zealand Stock Exchange (NZX) / Australian Securities Exchange (ASX) shares, and fund-level cash/FX-hedging buffers. In practice, New Zealand retail investors frequently hold and manage portfolios using:
 1. **Direct Term Deposits & On-Call / Notice-Saver Cash** across NZ banks (ANZ, ASB, BNZ, Westpac, Kiwibank, Heartland, Rabobank, TSB, SBS).
 2. **Passive Bond & Multi-Asset / Balanced Funds** (e.g., Smart NZ Bond ETF `NZB`, Smart Global Bond ETF `GBF`, Kernel NZ Bond Fund, as well as diversified funds like **Kernel Balanced**, **Kernel High Growth**, **Kernel Conservative**, and **Kernel Cash Plus** whose [Sorted Smart Investor](https://smartinvestor.sorted.org.nz/) `.xlsx` fund disclosures list equities, bonds, bond ETFs, and term deposits in one flat table).
-3. **Semi-Annual Bucket Management & Withdrawal Rebalancing:** Many income/growth investors organize their funds and deposits into explicit strategic buckets (for example: **20% Term Deposits**, **20% High Dividend Yield Equities**, **60% Growth Equities**) and review every ~6 months to draw cash withdrawals while keeping bucket weights aligned to targets.
+3. **Bucket Management & Withdrawal Rebalancing:** Many income/growth investors organize their funds and deposits into explicit strategic buckets (for example: **20% Term Deposits**, **20% High Dividend Yield Equities**, **60% Growth Equities**) to draw cash withdrawals while keeping bucket weights aligned to targets.
 
 Without these capabilities:
 * Investors cannot see their true portfolio **Asset Class Split** (Equities vs. Fixed Interest vs. Term Deposits vs. Cash & Hedging, or Growth vs. Defensive).
@@ -219,7 +219,7 @@ Export `calculateBucketRebalance(input: { buckets: PortfolioBucket[]; bucketAssi
    * Explain briefly that **Asset Split** reflects look-through underlying assets (so a mixed fund stays split in Growth vs. Defensive above), whereas **Buckets** track user-grouped holding sleeves (`20/20/60`).
    * **Bucket Manager:** Add/rename/delete buckets (deleting removes the bucket and prunes matching `bucketAssignments`), edit Target `%` with live sum indicator + **Normalize to 100%** (rounds to 2 d.p. with remainder adjusted on largest bucket). The **"Load 20 / 20 / 60 Preset"** option is offered discreetly only when no buckets are configured yet (`buckets.length === 0`), and is hidden once buckets exist to prevent accidental overwrites. All buckets and assignments are continuously saved in the background (`portfolio_backup.json` and `localStorage`).
    * **Bucket Split & Unassigned Table:** Shows Current `$`, Current `%` (of Total Portfolio and of Assigned Buckets), Target `%`, Variance, and assigned holdings list, with an inline quick-assign fallback and an `Unassigned` warning badge if unassigned holdings > `$0`.
-   * **Semi-Annual Withdrawal & Rebalance Planner:** Inputs for **Planned Withdrawal (NZD)** (`$0` default). Per bucket renders `Current Balance ($ / %)`, `Withdraw ($)` (amber if $> 0$), `Rebalance Action` (`Buy $X`, `Sell $Y`, or `Hold — On Target`), and `Post-Rebalance Balance ($ / % of T_post)`. Shows explicit reminder that total liquidation from a bucket is `Withdraw + Sell` and notes early-break considerations if `Withdraw + Sell > 0` on a Term Deposit bucket. Displays **"No additional rebalancing buys or sells required after withdrawal."** when `rebalanceRequired === false`.
+   * **Withdrawal & Rebalance Planner:** Inputs for **Planned Withdrawal (NZD)** (`$0` default). Per bucket renders `Current Balance ($ / %)`, `Withdraw ($)` (amber if $> 0$), `Rebalance Action` (`Buy $X`, `Sell $Y`, or `Hold — On Target`), and `Post-Rebalance Balance ($ / % of T_post)`. Shows explicit reminder that total liquidation from a bucket is `Withdraw + Sell` and notes early-break considerations if `Withdraw + Sell > 0` on a Term Deposit bucket. Displays **"No additional rebalancing buys or sells required after withdrawal."** when `rebalanceRequired === false`.
 
 ---
 
@@ -274,7 +274,7 @@ Export `calculateBucketRebalance(input: { buckets: PortfolioBucket[]; bucketAssi
 
 ### Phase 3: UI Integration & Verification
 * **Files to Create:**
-  * `src/components/BucketRebalancer.tsx`: Bucket manager (`20/20/60` preset + custom targets), Bucket Split & Unassigned table, and Semi-Annual Withdrawal & Rebalance Planner.
+  * `src/components/BucketRebalancer.tsx`: Bucket manager (`20/20/60` preset + custom targets), Bucket Split & Unassigned table, and Withdrawal & Rebalance Planner.
 * **Files to Modify:**
   * `src/App.tsx`: Wire `cashDeposits`, `buckets`, `bucketAssignments`, updated `LiquidityCard`/`HoldingsTable` props, and render `BucketRebalancer`.
   * `src/components/PortfolioInputTable.tsx`: Add Clear Portfolio and Export/Import actions, resetting `cashDeposits` and `bucketAssignments` alongside balances/direct shares.

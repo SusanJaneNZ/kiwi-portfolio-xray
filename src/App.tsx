@@ -237,10 +237,8 @@ export const App: React.FC = () => {
         {/* Top Header & Freshness Envelope */}
         <FreshnessHeader
           envelope={freshnessEnvelope}
-          portfolioState={portfolioState}
           onOpenUnresolvedModal={() => setIsUnresolvedModalOpen(true)}
           unresolvedCount={unresolvedEntries.length}
-          loadSource={loadSource}
           recoveredNotice={recoveredNotice}
         />
 

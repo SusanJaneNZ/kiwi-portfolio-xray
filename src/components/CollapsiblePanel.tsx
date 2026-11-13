@@ -78,7 +78,7 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
   };
 
   return (
-    <section className={`bg-slate-900/80 border border-slate-800 rounded-2xl p-4 shadow-sm ${className}`}>
+    <section id={id} className={`bg-slate-900/80 border border-slate-800 rounded-2xl p-4 shadow-sm ${className}`}>
       <div className="flex flex-wrap items-center justify-between gap-2">
         <button
           type="button"

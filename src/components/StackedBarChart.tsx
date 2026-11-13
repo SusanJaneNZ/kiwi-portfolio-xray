@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { CollapsiblePanel } from './CollapsiblePanel';
 import { CategoryBreakdown } from '../types/portfolio';
 import { formatNZD } from '../utils/format';
@@ -27,15 +27,37 @@ const COLOR_PALETTE = [
   '#64748b', // slate-500
 ];
 
+const MAX_LEGEND_COUNTRIES = 15;
+
 export const StackedBarChart: React.FC<StackedBarChartProps> = ({
   sectorBreakdown,
   countryBreakdown,
 }) => {
   const [activeTab, setActiveTab] = useState<'sectors' | 'countries'>('sectors');
   const [hoveredSubcategory, setHoveredSubcategory] = useState<string | null>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const handleTabChange = (tab: 'sectors' | 'countries') => {
+    setActiveTab(tab);
+    // Jump back to the top of the internal scrollable bar chart list
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = 0;
+    }
+    // Also scroll the viewport back to the top of the bar graph panel if scrolled down past it
+    if (typeof document !== 'undefined') {
+      const panelEl = document.getElementById('macro-charts');
+      if (panelEl) {
+        const rect = panelEl.getBoundingClientRect();
+        if (rect.top < 0 || rect.top > (window.innerHeight || 800)) {
+          panelEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }
+  };
 
   const activeData = activeTab === 'sectors' ? sectorBreakdown : countryBreakdown;
-  const legendLabel = activeTab === 'sectors' ? 'Country Key' : 'Sector Key';
+  const isCountryKey = activeTab === 'sectors';
+  const legendLabel = isCountryKey ? 'Country Key' : 'Sector Key';
   const maxCategoryPct = useMemo(
     () => activeData.reduce((max, cat) => Math.max(max, cat.portfolioPercentage), 0),
     [activeData]
@@ -63,6 +85,20 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
     return { legendItems: items, colorBySubcategory: colorMap };
   }, [activeData]);
 
+  const isCountryKey = activeTab === 'sectors';
+  const displayedLegendItems = useMemo(
+    () => (isCountryKey ? legendItems.slice(0, 15) : legendItems),
+    [isCountryKey, legendItems]
+  );
+  const remainingLegendCount = legendItems.length - displayedLegendItems.length;
+
+  // Restrict country key to top 15 so it stays concise on a single line / compact block
+  const displayedLegendItems = useMemo(
+    () => (isCountryKey ? legendItems.slice(0, MAX_LEGEND_COUNTRIES) : legendItems),
+    [isCountryKey, legendItems]
+  );
+  const remainingLegendCount = legendItems.length - displayedLegendItems.length;
+
   return (
     <CollapsiblePanel
       id="macro-charts"
@@ -72,20 +108,22 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
       headerRight={
         <div className="flex gap-1.5">
           <button
-            onClick={() => setActiveTab('sectors')}
-            className={`text-xs font-semibold px-2.5 py-1 rounded-lg transition-colors ${activeTab === 'sectors'
+            onClick={() => handleTabChange('sectors')}
+            className={`text-xs font-semibold px-2.5 py-1 rounded-lg transition-colors ${
+              activeTab === 'sectors'
                 ? 'bg-indigo-600 text-white'
                 : 'bg-slate-950 text-slate-400 hover:text-white'
-              }`}
+            }`}
           >
             Sectors
           </button>
           <button
-            onClick={() => setActiveTab('countries')}
-            className={`text-xs font-semibold px-2.5 py-1 rounded-lg transition-colors ${activeTab === 'countries'
+            onClick={() => handleTabChange('countries')}
+            className={`text-xs font-semibold px-2.5 py-1 rounded-lg transition-colors ${
+              activeTab === 'countries'
                 ? 'bg-indigo-600 text-white'
                 : 'bg-slate-950 text-slate-400 hover:text-white'
-              }`}
+            }`}
           >
             Countries
           </button>
@@ -93,7 +131,7 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
       }
     >
       {/* Stacked bar visualization */}
-      <div className="py-2 space-y-3.5 flex-1 overflow-y-auto max-h-[460px]">
+      <div ref={scrollContainerRef} className="py-2 space-y-3.5 flex-1 overflow-y-auto max-h-[460px]">
         {activeData.length === 0 ? (
           <div className="text-center py-12 text-xs text-slate-500">
             No holdings entered. Add funds or shares in the portfolio inputs below to inspect look-through.
@@ -104,13 +142,19 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
               maxCategoryPct > 0
                 ? Math.min(100, Math.max(0, (category.portfolioPercentage / maxCategoryPct) * 100))
                 : 0;
-            return (
+            const isCountryKey = activeTab === 'sectors';
+  const displayedLegendItems = useMemo(
+    () => (isCountryKey ? legendItems.slice(0, 15) : legendItems),
+    [isCountryKey, legendItems]
+  );
+  const remainingLegendCount = legendItems.length - displayedLegendItems.length;
+
+  return (
               <div key={category.name} className="space-y-1">
                 <div className="flex justify-between text-xs font-medium">
                   <span className="text-white">{category.name}</span>
                   <span className="text-slate-300 font-mono">
-                    ${formatNZD(category.valueNZD, 0)} (
-                    {category.portfolioPercentage.toFixed(1)}%)
+                    ${formatNZD(category.valueNZD, 0)} ({category.portfolioPercentage.toFixed(1)}%)
                   </span>
                 </div>
 
@@ -122,7 +166,14 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
                     {category.subcategories.map((sub, idx) => {
                       const color =
                         colorBySubcategory.get(sub.name) ?? COLOR_PALETTE[idx % COLOR_PALETTE.length];
-                      return (
+                      const isCountryKey = activeTab === 'sectors';
+  const displayedLegendItems = useMemo(
+    () => (isCountryKey ? legendItems.slice(0, 15) : legendItems),
+    [isCountryKey, legendItems]
+  );
+  const remainingLegendCount = legendItems.length - displayedLegendItems.length;
+
+  return (
                         <div
                           key={sub.name}
                           onMouseEnter={() =>
@@ -149,7 +200,7 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
       </div>
 
       {/* Color Key & Hover Readout Footer */}
-      {legendItems.length > 0 && (
+      {displayedLegendItems.length > 0 && (
         <div className="pt-3 mt-2 border-t border-slate-800 space-y-2 text-xs">
           {hoveredSubcategory && (
             <div className="text-amber-300 font-medium font-mono">{hoveredSubcategory}</div>
@@ -158,7 +209,7 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
             <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mr-1">
               {legendLabel}:
             </span>
-            {legendItems.map((item) => (
+            {displayedLegendItems.map((item) => (
               <span key={item.name} className="inline-flex items-center gap-1.5 text-slate-300">
                 <span
                   className="w-2.5 h-2.5 rounded-sm shrink-0"
@@ -168,10 +219,14 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
                 <span className="text-[11px]">{item.name}</span>
               </span>
             ))}
+            {remainingLegendCount > 0 && (
+              <span className="text-[11px] text-slate-500 font-medium">
+                +{remainingLegendCount} more
+              </span>
+            )}
           </div>
         </div>
       )}
     </CollapsiblePanel>
   );
 };
-

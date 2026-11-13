@@ -126,14 +126,20 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
       id="portfolio-inputs-group"
       defaultOpen={false}
       title={
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2.5 flex-wrap">
           <span className="text-sm font-semibold text-white">Portfolio</span>
           <span className="text-xs font-mono font-normal bg-slate-800 text-slate-300 px-2 py-0.5 rounded-full border border-slate-700">
             ${totalPortfolioNZD.toLocaleString('en-NZ', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} NZD
           </span>
+          <span
+            title="Continuous background persistence to repository root (portfolio_backup.json in .gitignore) and browser storage."
+            className="inline-flex items-center gap-1.5 text-[11px] font-normal text-emerald-400 bg-emerald-950/50 border border-emerald-800/40 px-2 py-0.5 rounded-full"
+          >
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400" />
+            <span>Portfolio auto-saved to <code className="font-mono text-emerald-300">portfolio_backup.json</code></span>
+          </span>
         </div>
       }
-      subtitle="Manage your index/KiwiSaver fund allocations, direct NZX/ASX shares, and bank term deposits."
       headerRight={
         <div className="flex flex-wrap items-center gap-2" onClick={(e) => e.stopPropagation()}>
           <button

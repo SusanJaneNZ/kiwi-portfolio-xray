@@ -1,6 +1,6 @@
 import React from 'react';
 import { dispatchToggleAllPanels } from './CollapsiblePanel';
-import { FreshnessEnvelope, UserPortfolioState } from '../types/portfolio';
+import { FreshnessEnvelope } from '../types/portfolio';
 
 const ExpandAllIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -15,30 +15,19 @@ const CollapseAllIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-
     <path d="m17 11-5-5-5 5" />
   </svg>
 );
-import {
-  LoadSource,
-  isSamplePortfolio,
-} from '../storage/localStorage';
-
 interface FreshnessHeaderProps {
   envelope: FreshnessEnvelope;
-  portfolioState: UserPortfolioState;
   onOpenUnresolvedModal: () => void;
   unresolvedCount: number;
-  loadSource?: LoadSource;
   recoveredNotice?: string | null;
 }
 
 export const FreshnessHeader: React.FC<FreshnessHeaderProps> = ({
   envelope,
-  portfolioState,
   onOpenUnresolvedModal,
   unresolvedCount,
-  loadSource = 'v2',
   recoveredNotice = null,
 }) => {
-  const isCustomPortfolio = loadSource !== 'default' && !isSamplePortfolio(portfolioState);
-
   return (
     <header className="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 md:p-5 shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-4">
       <div className="space-y-1">
@@ -57,22 +46,11 @@ export const FreshnessHeader: React.FC<FreshnessHeaderProps> = ({
         <p className="text-xs text-slate-400">
           Aggregating Smartshares, Kernel, Vanguard, and direct NZX/ASX equities into true underlying company exposures.
         </p>
-        {(isCustomPortfolio || recoveredNotice) && (
+        {recoveredNotice && (
           <div className="flex flex-wrap items-center gap-2 text-[11px] text-slate-400 pt-0.5">
-            {isCustomPortfolio && (
-              <span
-                title="Auto-saves to portfolio_backup.json at repo root (and browser localStorage)."
-                className="inline-flex items-center gap-1.5"
-              >
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                <span>Auto-saved to repo &amp; browser</span>
-              </span>
-            )}
-            {recoveredNotice && (
-              <span className="text-amber-300 bg-amber-950/50 border border-amber-700/50 px-2 py-0.5 rounded">
-                {recoveredNotice}
-              </span>
-            )}
+            <span className="text-amber-300 bg-amber-950/50 border border-amber-700/50 px-2 py-0.5 rounded">
+              {recoveredNotice}
+            </span>
           </div>
         )}
       </div>

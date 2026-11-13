@@ -138,7 +138,7 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
   return (
     <CollapsiblePanel
       id="bucket-rebalancer"
-      title={<span>Buckets &amp; Semi-Annual Withdrawal Rebalancer</span>}
+      title={<span>Buckets &amp; Withdrawal Rebalancer</span>}
       subtitle="Unlike the look-through Asset Split above (which decomposes inside mixed funds), Buckets group your holdings into target sleeves and compute minimum-turnover withdrawals, buys, and sells."
       headerRight={
         portfolioState.buckets.length === 0 ? (
