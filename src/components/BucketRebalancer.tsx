@@ -132,12 +132,14 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
       title={<span>Buckets &amp; Semi-Annual Withdrawal Rebalancer</span>}
       subtitle="Unlike the look-through Asset Split above (which decomposes inside mixed funds), Buckets group your holdings into target sleeves and compute minimum-turnover withdrawals, buys, and sells."
       headerRight={
-        <button
-          onClick={handleApplyPreset}
-          className="text-xs bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
-        >
-          Load 20 / 20 / 60 Preset
-        </button>
+        portfolioState.buckets.length === 0 ? (
+          <button
+            onClick={handleApplyPreset}
+            className="text-xs bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800 px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
+          >
+            Load 20 / 20 / 60 Preset
+          </button>
+        ) : undefined
       }
       className="md:p-5"
     >
@@ -171,6 +173,18 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
             </div>
           )}
         </div>
+
+        {portfolioState.buckets.length === 0 && (
+          <div className="bg-slate-900/60 border border-slate-800 rounded-lg p-3 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-400">
+            <span>No buckets configured yet. Add custom buckets below, or load the starter preset.</span>
+            <button
+              onClick={handleApplyPreset}
+              className="text-xs text-indigo-400 hover:text-indigo-300 underline underline-offset-2 whitespace-nowrap font-medium"
+            >
+              Load 20 / 20 / 60 Preset
+            </button>
+          </div>
+        )}
 
         {portfolioState.buckets.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
