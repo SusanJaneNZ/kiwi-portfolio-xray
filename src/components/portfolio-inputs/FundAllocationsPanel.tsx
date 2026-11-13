@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { CollapsiblePanel } from '../CollapsiblePanel';
 import { BucketSelect } from './BucketSelect';
-import { FundMetadata, UserPortfolioState } from '../../types/portfolio';
+import { DEFAULT_STARTER_BUCKETS, FundMetadata, UserPortfolioState } from '../../types/portfolio';
 
 interface FundAllocationsPanelProps {
   portfolioState: UserPortfolioState;
@@ -22,6 +22,10 @@ export const FundAllocationsPanel: React.FC<FundAllocationsPanelProps> = ({
 }) => {
   const [fundFilter, setFundFilter] = useState('');
   const [heldOnly, setHeldOnly] = useState(false);
+
+  const availableBuckets = useMemo(() => {
+    return portfolioState.buckets.length > 0 ? portfolioState.buckets : DEFAULT_STARTER_BUCKETS;
+  }, [portfolioState.buckets]);
 
   const sortedFilteredFunds = useMemo(() => {
     const q = fundFilter.trim().toLowerCase();
@@ -57,7 +61,7 @@ export const FundAllocationsPanel: React.FC<FundAllocationsPanelProps> = ({
       id="input-funds"
       title={
         <span className="text-xs uppercase tracking-wider text-slate-300">
-          1. Fund Allocations by Ticker (NZD)
+          2. Off-Market Holdings (Unlisted Managed Funds in NZD)
         </span>
       }
       headerRight={
@@ -66,12 +70,20 @@ export const FundAllocationsPanel: React.FC<FundAllocationsPanelProps> = ({
         </span>
       }
     >
+      {/* Informational Look-Through Note */}
+      <div className="bg-slate-900/40 border border-slate-800/60 rounded-lg p-2 text-[11px] text-slate-400 flex items-center gap-2 mb-2.5">
+        <span className="text-sky-400 text-sm">ℹ️</span>
+        <span>
+          Enter your current dollar balance in <strong>NZD</strong> for off-market / unlisted index and managed funds (such as <strong>Kernel</strong>). Listed ETFs and direct shares (Smartshares, etc.) are entered in <strong>Panel 1</strong> by share count.
+        </span>
+      </div>
+
       <div className="flex items-center gap-2 mb-2.5 text-xs">
         <input
           type="text"
           value={fundFilter}
           onChange={(e) => setFundFilter(e.target.value)}
-          placeholder="Filter fund ticker or name..."
+          placeholder="Filter unlisted fund code or name (e.g. Kernel)..."
           className="flex-1 bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
         />
         <label className="flex items-center gap-1.5 text-[11px] text-slate-400 cursor-pointer select-none whitespace-nowrap">
@@ -110,7 +122,7 @@ export const FundAllocationsPanel: React.FC<FundAllocationsPanelProps> = ({
                 <div className="flex items-center gap-2">
                   <BucketSelect
                     instrumentKey={`fund:${fund.code}`}
-                    buckets={portfolioState.buckets}
+                    buckets={availableBuckets}
                     bucketAssignments={portfolioState.bucketAssignments}
                     onAssign={onAssignBucket}
                   />

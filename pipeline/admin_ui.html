@@ -158,6 +158,27 @@
     .panel-title-wrap h2 { margin-bottom: 0; }
     .panel-chevron { color: var(--muted); font-size: 11px; transition: transform 0.15s; display: inline-block; }
     details.card:not([open]) .panel-chevron { transform: rotate(-90deg); }
+    .source-link {
+      color: #818cf8;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .source-link:hover {
+      text-decoration: underline;
+      color: #a5b4fc;
+    }
+    .source-card-callout {
+      margin-top: 10px;
+      margin-bottom: 12px;
+      padding: 12px 14px;
+      background: rgba(99, 102, 241, 0.08);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 10px;
+      font-size: 12px;
+    }
   </style>
 </head>
 <body>
@@ -186,9 +207,9 @@
             <h2>1. Stage &amp; Inspect Provider CSVs</h2>
           </div>
         </summary>
-        <div class="row-actions" style="margin-bottom: 10px;">
+        <div class="row-actions" style="margin-bottom: 8px;">
           <label for="provider-select" style="color: var(--muted);">Target directory:</label>
-          <select id="provider-select">
+          <select id="provider-select" onchange="updateProviderSourceCallout()">
             <option value="smartshares">data/staging/smartshares/</option>
             <option value="kernel">data/staging/kernel/</option>
             <option value="vanguard">data/staging/vanguard/</option>
@@ -197,6 +218,8 @@
             <option value="directories">data/staging/directories/</option>
           </select>
         </div>
+
+        <div id="provider-source-callout" class="source-card-callout"></div>
 
         <div id="dropzone" class="dropzone">
           <p style="margin: 0 0 8px 0; color: var(--muted);">Drag &amp; drop CSV or XLSX file(s) here, or pick from disk:</p>
@@ -344,6 +367,141 @@
     ];
     function renderSectorOptions() {
       return GICS_SECTORS.map((s) => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('');
+    }
+
+    const PROVIDER_SOURCES = {
+      smartshares: {
+        name: 'Smartshares Direct & Feeder ETFs (FNZ, MDZ, USF, TWF, NZB, etc.)',
+        folder: 'data/staging/smartshares/',
+        format: 'XLSX (*.xlsx)',
+        links: [
+          { label: 'Sorted Smart Investor', url: 'https://smartinvestor.sorted.org.nz' },
+          { label: 'Disclose Register NZ', url: 'https://disclose-register.companiesoffice.govt.nz/' },
+        ],
+        instructions: 'Search fund by ticker or name (e.g. FNZ, USF, Total World) → Click "Download the full portfolio holdings" (XLSX).',
+        canAutoFetch: true,
+      },
+      kernel: {
+        name: 'Kernel Wealth Unlisted Index Funds (NZ 50, World Ex-US, Clean Energy, etc.)',
+        folder: 'data/staging/kernel/',
+        format: 'XLSX (*.xlsx)',
+        links: [
+          { label: 'Sorted Smart Investor', url: 'https://smartinvestor.sorted.org.nz' },
+          { label: 'Disclose Register NZ', url: 'https://disclose-register.companiesoffice.govt.nz/' },
+        ],
+        instructions: 'Search fund name (e.g. "Kernel S&P World Ex-US", "Kernel NZ 50") → Click "Download the full portfolio holdings" (XLSX).',
+        canAutoFetch: true,
+      },
+      vanguard: {
+        name: 'Vanguard US Master ETFs (VT, VOO, VGK, VPL, VWO, VO, VB)',
+        folder: 'data/staging/vanguard/',
+        format: 'CSV (Holdings_details_<TICKER_OR_FUND>.csv)',
+        links: [
+          { label: 'Vanguard Total World ETF (VT)', url: 'https://advisors.vanguard.com/investments/products/vt/vanguard-total-world-stock-etf' },
+          { label: 'Vanguard S&P 500 ETF (VOO)', url: 'https://advisors.vanguard.com/investments/products/voo/vanguard-sp-500-etf' },
+          { label: 'All Vanguard US ETFs', url: 'https://investor.vanguard.com/investment-products/etfs' },
+        ],
+        instructions: 'Open product page → Click "Holdings details" tab → Click "Export full holdings" (CSV).',
+        canAutoFetch: false,
+      },
+      betashares: {
+        name: 'BetaShares ASX ETFs (ASIA, etc.)',
+        folder: 'data/staging/betashares/',
+        format: 'CSV (ASIA_Portfolio_Holdings.csv)',
+        links: [
+          { label: 'BetaShares ASIA Fund', url: 'https://www.betashares.com.au/fund/asia-technology-tigers-etf/' },
+          { label: 'All BetaShares Funds', url: 'https://www.betashares.com.au/fund-profile/' },
+        ],
+        instructions: 'Open product page → Click "Holdings & allocation" tab → Click "Download CSV".',
+        canAutoFetch: false,
+      },
+      ishares: {
+        name: 'iShares (BlackRock) Master ETFs (IWLD, IVV, SAEU, etc.)',
+        folder: 'data/staging/ishares/',
+        format: 'CSV (<TICKER>_holdings.csv)',
+        links: [
+          { label: 'BlackRock Australia Products', url: 'https://www.blackrock.com/au/products/investment-funds' },
+          { label: 'iShares US Portal', url: 'https://www.ishares.com' },
+        ],
+        instructions: 'Search product ticker (e.g. IWLD) → Product page → Click "Download Holdings" (CSV).',
+        canAutoFetch: false,
+      },
+      directories: {
+        name: 'Official Security Master Directories (ASX & NZX)',
+        folder: 'data/staging/directories/',
+        format: 'CSV (ASXListedCompanies.csv / nzx_directory.csv)',
+        links: [
+          { label: 'ASX Listed Companies Directory', url: 'https://www.asx.com.au/markets/trade-our-cash-market/directory' },
+          { label: 'NZX Main Board Directory', url: 'https://www.nzx.com/markets/NZSX' },
+        ],
+        instructions: 'ASX: Download "All ASX Listed Companies .csv" (save as ASXListedCompanies.csv). NZX: Save table as nzx_directory.csv.',
+        canAutoFetch: false,
+      },
+    };
+
+    function updateProviderSourceCallout() {
+      const select = document.getElementById('provider-select');
+      const callout = document.getElementById('provider-source-callout');
+      if (!select || !callout) return;
+      const key = select.value;
+      const src = PROVIDER_SOURCES[key];
+      if (!src) {
+        callout.innerHTML = '';
+        return;
+      }
+
+      const linksHtml = src.links.map(l =>
+        `<a class="source-link" href="${escapeHtml(l.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(l.label)} ↗</a>`
+      ).join('&nbsp;&nbsp;·&nbsp;&nbsp;');
+
+      let autoFetchHtml = '';
+      if (src.canAutoFetch) {
+        autoFetchHtml = `
+          <div style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed rgba(99, 102, 241, 0.25); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <span style="color: var(--muted); font-size: 11px;">Or let the automated fetcher pull directly from Sorted Smart Investor:</span>
+            <button id="btn-auto-fetch" class="btn btn-sm btn-ok" onclick="handleAutoFetch('${key}')">⚡ Auto-Fetch Disclosures via Smart Investor</button>
+          </div>
+        `;
+      }
+
+      callout.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+          <div>
+            <strong style="color: #a5b4fc;">Sourcing: ${escapeHtml(src.name)}</strong>
+            <span class="mono" style="color: var(--muted); font-size: 11px; margin-left: 6px;">(${escapeHtml(src.format)})</span>
+          </div>
+          <div>${linksHtml}</div>
+        </div>
+        <div style="margin-top: 5px; color: #cbd5e1; font-size: 11.5px;">
+          ${escapeHtml(src.instructions)}
+        </div>
+        ${autoFetchHtml}
+      `;
+    }
+
+    async function handleAutoFetch(provider) {
+      const btn = document.getElementById('btn-auto-fetch');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = '⏳ Fetching from Smart Investor...';
+      }
+      try {
+        const res = await api('/api/pipeline/fetch', {
+          method: 'POST',
+          body: JSON.stringify({ providers: [provider] }),
+        });
+        const downloadedCount = res.downloaded ? res.downloaded.length : 0;
+        const cachedCount = res.cached ? res.cached.length : 0;
+        showToast(`Auto-fetch done: ${downloadedCount} downloaded, ${cachedCount} already up to date`);
+        await loadStagedFiles();
+      } catch (err) {
+        alert('Auto-fetch failed: ' + err.message);
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = '⚡ Auto-Fetch Disclosures via Smart Investor';
+        }
+      }
     }
     let unresolvedItemsState = [];
     let savedAliasPairsState = [];
@@ -1148,6 +1306,7 @@
 
     // Initial load
     initCollapsiblePanels();
+    updateProviderSourceCallout();
     loadStagedFiles();
     loadAliases();
     loadFeeders();

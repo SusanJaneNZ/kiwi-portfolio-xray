@@ -48,6 +48,18 @@
     "is_stale": false
   },
   {
+    "code": "OZY",
+    "name": "Smart Australian Top 20 Etf",
+    "provider": "Smartshares",
+    "effective_date": "2026-09-30",
+    "cash_ratio": 0.0007,
+    "hedging_ratio": 0.0,
+    "constituent_count": 20,
+    "asset_class": "equity",
+    "cadence": "monthly",
+    "is_stale": false
+  },
+  {
     "code": "AUS",
     "name": "Smart Australian Top 200 Etf",
     "provider": "Smartshares",

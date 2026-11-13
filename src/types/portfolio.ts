@@ -84,6 +84,12 @@ export interface PortfolioBucket {
   targetPercent: number;
 }
 
+export const DEFAULT_STARTER_BUCKETS: PortfolioBucket[] = [
+  { id: "bkt-growth", name: "Growth", targetPercent: 60 },
+  { id: "bkt-high-div", name: "High Div Yield", targetPercent: 20 },
+  { id: "bkt-bonds", name: "Bonds", targetPercent: 20 },
+];
+
 // Key format: "fund:<fundCode>" | "direct:<isin>" | "td:<cashDeposit.id>"
 export type BucketAssignmentMap = Record<string, string>;
 

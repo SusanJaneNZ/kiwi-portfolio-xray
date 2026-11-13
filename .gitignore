@@ -36,7 +36,9 @@ venv/
 # Local Env
 .env
 
-# Local user portfolio backups (auto-saved to repo root)
+# Local user portfolio backups (local backup folder and legacy root files)
+backups/
+backup/
 portfolio_backup.json
 portfolio_backup_*.json
 kiwi_portfolio_backup.json

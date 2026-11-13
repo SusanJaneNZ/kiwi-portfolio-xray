@@ -11,6 +11,8 @@ import {
   autoSavePortfolioToDisk,
   createDatedBackupOnDisk,
   exportHoldingsCSV,
+  exportPortfolioToDisk,
+  fetchBackupsList,
   importPortfolioJSON,
   isEmptyPortfolio,
   isSamplePortfolio,
@@ -148,6 +150,52 @@ export const storageTestCases: Array<[string, () => void]> = [
     },
   ],
   [
+    "preserves user discrete share counts when direct holding has zero or unknown price",
+    () => {
+      const normalized = normalizePortfolioState({
+        version: 2,
+        audNzdRate: 1.22,
+        fundBalances: {},
+        directHoldings: [
+          {
+            isin: "SEDOL:6161525",
+            name: "Ryman Healthcare Limited",
+            ticker: "RYM.NZ",
+            exchange: "NZX",
+            country: "New Zealand",
+            sector: "Health Care",
+            currency: "NZD",
+            shares: 2550,
+            price: 0,
+            value: 0,
+          },
+          {
+            isin: "AGG",
+            name: "Smart Global Aggregate Bond Etf",
+            ticker: "AGG.NZ",
+            exchange: "NZX",
+            country: "New Zealand",
+            sector: "Fixed Income",
+            currency: "NZD",
+            isEtf: true,
+            fundCode: "AGG",
+            shares: 12406,
+            price: 0,
+            value: 0,
+          },
+        ],
+        cashDeposits: [],
+      });
+
+      assertTrue(normalized !== null, "should normalize valid state");
+      assertEq(normalized!.directHoldings.length, 2, "both direct holdings preserved");
+      assertEq(normalized!.directHoldings[0].shares, 2550, "shares must not be reset to 1 when price is 0");
+      assertEq(normalized!.directHoldings[0].price, 0, "price preserved as 0");
+      assertEq(normalized!.directHoldings[0].value, 0, "value preserved as 0");
+      assertEq(normalized!.directHoldings[1].shares, 12406, "ETF shares preserved when unpriced");
+    },
+  ],
+  [
     "savePortfolioState writes both v2 primary and backup keys and import accepts v1 JSON",
     () => {
       const store = installMockLocalStorage();
@@ -231,16 +279,17 @@ export const storageTestCases: Array<[string, () => void]> = [
     },
   ],
   [
-    "autoSavePortfolioToDisk, loadPortfolioFromDisk, and createDatedBackupOnDisk hit local endpoints",
+    "autoSavePortfolioToDisk, loadPortfolioFromDisk, createDatedBackupOnDisk, fetchBackupsList, and exportPortfolioToDisk hit local endpoints",
     async () => {
       const originalFetch = globalThis.fetch;
       let postedBody: any = null;
       let snapshotCalled = false;
+      let exportCalled = false;
       globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
         const url = String(input);
         if (url === "/api/portfolio/save") {
           postedBody = JSON.parse(init?.body as string);
-          return { ok: true, json: async () => ({ ok: true, file: "portfolio_backup.json" }) } as Response;
+          return { ok: true, json: async () => ({ ok: true, file: "backups/portfolio_backup.json" }) } as Response;
         }
         if (url === "/api/portfolio/backup") {
           snapshotCalled = true;
@@ -249,7 +298,26 @@ export const storageTestCases: Array<[string, () => void]> = [
             json: async () => ({ ok: true, backupFile: "portfolio_backup_2026-11-13_120000.json" }),
           } as Response;
         }
-        if (url === "/api/portfolio/load") {
+        if (url === "/api/portfolio/export") {
+          exportCalled = true;
+          return {
+            ok: true,
+            json: async () => ({ ok: true, file: "kiwi_portfolio_2026-11-14_120000.json", path: "backups/kiwi_portfolio_2026-11-14_120000.json" }),
+          } as Response;
+        }
+        if (url === "/api/portfolio/backups") {
+          return {
+            ok: true,
+            json: async () => ({
+              ok: true,
+              backups: [
+                { filename: "portfolio_backup.json", isCurrent: true, modifiedAt: "2026-11-14T12:00:00Z", size: 6000 },
+                { filename: "portfolio_backup_2026-11-14_110000.json", isCurrent: false, modifiedAt: "2026-11-14T11:00:00Z", size: 5500 },
+              ],
+            }),
+          } as Response;
+        }
+        if (url.startsWith("/api/portfolio/load")) {
           return {
             ok: true,
             json: async () => ({
@@ -282,7 +350,16 @@ export const storageTestCases: Array<[string, () => void]> = [
         assertTrue(snapshotCalled, "createDatedBackupOnDisk triggered snapshot endpoint");
         assertEq(dated, "portfolio_backup_2026-11-13_120000.json", "returns dated backup filename");
 
-        const loaded = await loadPortfolioFromDisk();
+        const exported = await exportPortfolioToDisk(testState);
+        assertTrue(exportCalled, "exportPortfolioToDisk triggered endpoint");
+        assertTrue(exported.ok, "exportPortfolioToDisk reports ok");
+        assertEq(exported.path, "backups/kiwi_portfolio_2026-11-14_120000.json", "export path in backups/");
+
+        const backups = await fetchBackupsList();
+        assertEq(backups.length, 2, "fetched 2 backups from list endpoint");
+        assertEq(backups[0].filename, "portfolio_backup.json", "first backup is current auto-save");
+
+        const loaded = await loadPortfolioFromDisk("portfolio_backup_2026-11-14_110000.json");
         assertTrue(loaded !== null, "loadPortfolioFromDisk loads state");
         assertEq(loaded!.fundBalances.FNZ, 50000, "loaded FNZ balance from disk");
       } finally {

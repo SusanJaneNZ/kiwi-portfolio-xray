@@ -1,7 +1,13 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { CollapsiblePanel } from '../CollapsiblePanel';
 import { BucketSelect } from './BucketSelect';
-import { DirectEquityCatalogItem, DirectHolding, UserPortfolioState } from '../../types/portfolio';
+import {
+  DEFAULT_STARTER_BUCKETS,
+  DirectEquityCatalogItem,
+  DirectHolding,
+  PortfolioBucket,
+  UserPortfolioState,
+} from '../../types/portfolio';
 import { directHoldingValueNZD, formatNZD } from '../../utils/format';
 import { fetchLiveAudNzdRate } from '../../utils/fx';
 import {
@@ -29,9 +35,28 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedEquity, setSelectedEquity] = useState<DirectEquityCatalogItem | null>(null);
-  const [newShareCount, setNewShareCount] = useState<string>('100');
+  const [newShareCount, setNewShareCount] = useState<string>('');
   const [newSharePrice, setNewSharePrice] = useState<string>('');
   const [newShareCurrency, setNewShareCurrency] = useState<'NZD' | 'AUD'>('NZD');
+
+  const availableBuckets = useMemo<PortfolioBucket[]>(() => {
+    return portfolioState.buckets.length > 0 ? portfolioState.buckets : DEFAULT_STARTER_BUCKETS;
+  }, [portfolioState.buckets]);
+
+  const defaultBucketId = useMemo<string>(() => {
+    const growth = availableBuckets.find(
+      (b) => b.name.toLowerCase().includes('growth') || b.id.toLowerCase().includes('growth')
+    );
+    return growth ? growth.id : availableBuckets[0]?.id || '';
+  }, [availableBuckets]);
+
+  const [newShareBucket, setNewShareBucket] = useState<string>(() => defaultBucketId);
+
+  useEffect(() => {
+    if (!newShareBucket || !availableBuckets.some((b) => b.id === newShareBucket)) {
+      setNewShareBucket(defaultBucketId);
+    }
+  }, [availableBuckets, defaultBucketId]);
 
   const [isFetchingPrices, setIsFetchingPrices] = useState(false);
   const [cachedDate, setCachedDate] = useState<string | null>(null);
@@ -260,10 +285,15 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
     const val = Math.round(shares * price * 100) / 100;
     const baseTicker = selectedEquity.ticker.split('.')[0].toUpperCase();
     const KNOWN_SMARTSHARES_ETFS = new Set([
-      'USF', 'FNZ', 'DIV', 'TWF', 'ASIA', 'NPF', 'MDZ', 'TNZ', 'NZB', 'AGG', 'GBF',
+      'USF', 'FNZ', 'DIV', 'TWF', 'NPF', 'MDZ', 'TNZ', 'NZB', 'AGG', 'GBF',
       'APA', 'EUF', 'EMF', 'ESG', 'EUG', 'USA', 'USS', 'USM', 'AUS', 'ASD', 'ASF', 'MZY', 'OZY'
     ]);
-    const isEtf = Boolean(selectedEquity.isEtf || KNOWN_SMARTSHARES_ETFS.has(baseTicker));
+    const KNOWN_BETASHARES_ETFS = new Set(['ASIA']);
+    const isEtf = Boolean(
+      selectedEquity.isEtf ||
+      KNOWN_SMARTSHARES_ETFS.has(baseTicker) ||
+      KNOWN_BETASHARES_ETFS.has(baseTicker)
+    );
     const fundCode = selectedEquity.fundCode || (isEtf ? baseTicker : undefined);
 
     const existingIndex = portfolioState.directHoldings.findIndex(
@@ -310,11 +340,24 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
       updated.push(newHolding);
     }
 
-    onUpdateState({ ...portfolioState, directHoldings: updated });
+    const nextAssignments = { ...portfolioState.bucketAssignments };
+    const bucketToAssign = newShareBucket || defaultBucketId;
+    if (bucketToAssign) {
+      nextAssignments[`direct:${selectedEquity.isin}`] = bucketToAssign;
+    }
+    const nextBuckets = portfolioState.buckets.length > 0 ? portfolioState.buckets : availableBuckets;
+
+    onUpdateState({
+      ...portfolioState,
+      directHoldings: updated,
+      buckets: nextBuckets,
+      bucketAssignments: nextAssignments,
+    });
     setSelectedEquity(null);
     setSearchQuery('');
-    setNewShareCount('100');
+    setNewShareCount('');
     setNewSharePrice('');
+    setNewShareBucket(defaultBucketId);
   };
 
   return (
@@ -322,7 +365,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
       id="input-direct"
       title={
         <span className="text-xs uppercase tracking-wider text-slate-300">
-          2. Exchange-Traded Shares &amp; Listed ETFs (NZX / ASX)
+          1. Exchange-Traded Shares &amp; Listed ETFs (NZX / ASX)
         </span>
       }
       headerRight={
@@ -524,7 +567,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                 <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
                   <BucketSelect
                     instrumentKey={`direct:${dh.isin}`}
-                    buckets={portfolioState.buckets}
+                    buckets={availableBuckets}
                     bucketAssignments={portfolioState.bucketAssignments}
                     onAssign={onAssignBucket}
                   />
@@ -621,6 +664,20 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
               {selectedEquity && (
                 <>
                   <select
+                    value={newShareBucket}
+                    onChange={(e) => setNewShareBucket(e.target.value)}
+                    className="bg-slate-900 border border-slate-800 rounded-lg px-2 py-1.5 text-xs text-slate-300 font-mono focus:outline-none focus:border-indigo-500 max-w-[130px]"
+                    title="Assign to target bucket (defaults to Growth)"
+                  >
+                    {availableBuckets.map((b) => (
+                      <option key={b.id} value={b.id}>
+                        {b.name}
+                      </option>
+                    ))}
+                    <option value="">Unassigned</option>
+                  </select>
+
+                  <select
                     value={newShareCurrency}
                     onChange={(e) => setNewShareCurrency(e.target.value as 'NZD' | 'AUD')}
                     className="bg-slate-900 border border-slate-800 rounded-lg px-2 py-1.5 text-xs text-slate-300 font-mono focus:outline-none focus:border-indigo-500"
@@ -661,22 +718,24 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                   </div>
 
                   <div className="w-28 py-1.5 px-2 bg-slate-950 border border-slate-800 rounded-lg text-right text-xs font-mono flex items-center justify-end">
-                    {parseFloat(newSharePrice) > 0 ? (
+                    {parseFloat(newShareCount) > 0 && parseFloat(newSharePrice) > 0 ? (
                       <span className="text-emerald-400">
                         {newShareCurrency === 'AUD' ? 'A$' : '$'}
                         {formatNZD(
                           (parseFloat(newShareCount) || 0) * (parseFloat(newSharePrice) || 0)
                         )}
                       </span>
-                    ) : (
+                    ) : parseFloat(newShareCount) > 0 ? (
                       <span className="text-amber-400/80 italic text-[11px]">&lt;unknown&gt;</span>
+                    ) : (
+                      <span className="text-slate-600 font-mono text-xs">-</span>
                     )}
                   </div>
                 </>
               )}
 
               <button
-                disabled={!selectedEquity}
+                disabled={!selectedEquity || (parseFloat(newShareCount) || 0) <= 0}
                 onClick={handleAddDirect}
                 className="bg-indigo-600 disabled:opacity-40 hover:bg-indigo-500 text-white text-xs font-medium px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
               >

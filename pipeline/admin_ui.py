@@ -549,12 +549,56 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                 elif path == "/api/security-master":
                     q = qs.get("q", [""])[0]
                     self._send_json({"results": service.search_security_master(q)})
+                elif path == "/api/portfolio/backups":
+                    backups_dir = service.repo_root / "backups"
+                    backups_dir.mkdir(parents=True, exist_ok=True)
+                    items = []
+                    for f in backups_dir.glob("*.json"):
+                        if f.is_file():
+                            stat = f.stat()
+                            import datetime
+                            dt = datetime.datetime.fromtimestamp(stat.st_mtime, tz=datetime.timezone.utc)
+                            items.append({
+                                "filename": f.name,
+                                "isCurrent": f.name == "portfolio_backup.json",
+                                "modifiedAt": dt.isoformat(),
+                                "size": stat.st_size,
+                            })
+                    legacy = service.repo_root / "portfolio_backup.json"
+                    if legacy.exists() and not any(i["filename"] == "portfolio_backup.json" for i in items):
+                        stat = legacy.stat()
+                        import datetime
+                        dt = datetime.datetime.fromtimestamp(stat.st_mtime, tz=datetime.timezone.utc)
+                        items.append({
+                            "filename": "portfolio_backup.json",
+                            "isCurrent": True,
+                            "modifiedAt": dt.isoformat(),
+                            "size": stat.st_size,
+                        })
+                    items.sort(key=lambda x: (not x["isCurrent"], x["modifiedAt"]), reverse=True)
+                    self._send_json({"ok": True, "backups": items})
                 elif path == "/api/portfolio/load":
-                    main_backup = service.repo_root / "portfolio_backup.json"
-                    if main_backup.exists():
+                    target_file = qs.get("file", [""])[0]
+                    backups_dir = service.repo_root / "backups"
+                    backups_dir.mkdir(parents=True, exist_ok=True)
+                    main_backup = backups_dir / "portfolio_backup.json"
+                    legacy_backup = service.repo_root / "portfolio_backup.json"
+
+                    chosen = None
+                    if target_file:
+                        safe_name = Path(target_file).name
+                        cand = backups_dir / safe_name
+                        if cand.exists():
+                            chosen = cand
+                    elif main_backup.exists():
+                        chosen = main_backup
+                    elif legacy_backup.exists():
+                        chosen = legacy_backup
+
+                    if chosen and chosen.exists():
                         try:
-                            parsed = json.loads(main_backup.read_text(encoding="utf-8"))
-                            self._send_json({"exists": True, "state": parsed})
+                            parsed = json.loads(chosen.read_text(encoding="utf-8"))
+                            self._send_json({"exists": True, "state": parsed, "file": f"backups/{chosen.name}" if chosen.parent.name == "backups" else chosen.name})
                         except Exception as exc:
                             self._send_json({"exists": False, "error": str(exc)}, status=HTTPStatus.INTERNAL_SERVER_ERROR)
                     else:
@@ -642,20 +686,46 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                     )
                     self._send_json({"feeders": feeders})
                 elif path == "/api/portfolio/save":
-                    main_backup = service.repo_root / "portfolio_backup.json"
+                    backups_dir = service.repo_root / "backups"
+                    backups_dir.mkdir(parents=True, exist_ok=True)
+                    main_backup = backups_dir / "portfolio_backup.json"
                     main_backup.write_text(json.dumps(data, indent=2), encoding="utf-8")
-                    self._send_json({"ok": True, "file": "portfolio_backup.json"})
+                    self._send_json({"ok": True, "file": "backups/portfolio_backup.json"})
+                elif path == "/api/portfolio/export":
+                    backups_dir = service.repo_root / "backups"
+                    backups_dir.mkdir(parents=True, exist_ok=True)
+                    import datetime
+                    now = datetime.datetime.now()
+                    stamp = now.strftime("%Y-%m-%d_%H%M%S")
+                    export_name = f"kiwi_portfolio_{stamp}.json"
+                    export_path = backups_dir / export_name
+                    export_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
+                    self._send_json({"ok": True, "file": export_name, "path": f"backups/{export_name}"})
                 elif path == "/api/portfolio/backup":
-                    main_backup = service.repo_root / "portfolio_backup.json"
-                    if main_backup.exists():
+                    backups_dir = service.repo_root / "backups"
+                    backups_dir.mkdir(parents=True, exist_ok=True)
+                    main_backup = backups_dir / "portfolio_backup.json"
+                    legacy_backup = service.repo_root / "portfolio_backup.json"
+                    src = main_backup if main_backup.exists() else legacy_backup if legacy_backup.exists() else None
+                    if src and src.exists():
                         import datetime
                         import shutil
                         now = datetime.datetime.now()
                         stamp = now.strftime("%Y-%m-%d_%H%M%S")
                         dated_name = f"portfolio_backup_{stamp}.json"
-                        dated_path = service.repo_root / dated_name
-                        shutil.copyfile(main_backup, dated_path)
-                        self._send_json({"ok": True, "backupFile": dated_name})
+                        dated_path = backups_dir / dated_name
+                        shutil.copyfile(src, dated_path)
+
+                        # Prune older than 10
+                        try:
+                            dated_files = sorted([f for f in backups_dir.glob("portfolio_backup_*.json") if f.is_file()])
+                            if len(dated_files) > 10:
+                                for old_f in dated_files[:-10]:
+                                    old_f.unlink(missing_ok=True)
+                        except Exception:
+                            pass
+
+                        self._send_json({"ok": True, "backupFile": dated_name, "path": f"backups/{dated_name}"})
                     else:
                         self._send_json({"ok": True, "backupFile": None})
                 else:

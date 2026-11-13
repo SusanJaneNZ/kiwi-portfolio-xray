@@ -132,8 +132,7 @@ function sanitizeDirectHoldings(raw: unknown): DirectHolding[] {
       !h.isin.trim() ||
       typeof h.name !== "string" ||
       typeof h.ticker !== "string" ||
-      typeof h.exchange !== "string" ||
-      !isFiniteNonNegative(h.value)
+      typeof h.exchange !== "string"
     ) {
       continue;
     }
@@ -143,18 +142,28 @@ function sanitizeDirectHoldings(raw: unknown): DirectHolding[] {
 
     const rawShares = isFiniteNonNegative(h.shares) ? (h.shares as number) : undefined;
     const rawPrice = isFiniteNonNegative(h.price) ? (h.price as number) : undefined;
+    const rawValue = isFiniteNonNegative(h.value) ? (h.value as number) : undefined;
+
+    if (rawShares === undefined && rawValue === undefined) {
+      continue;
+    }
+
     let shares: number;
     let price: number;
     let value: number;
 
-    if (rawShares !== undefined && rawPrice !== undefined && rawShares > 0 && rawPrice > 0) {
+    if (rawShares !== undefined && rawShares > 0) {
       shares = rawShares;
-      price = rawPrice;
+      price = rawPrice !== undefined && rawPrice >= 0 ? rawPrice : 0;
       value = Math.round(shares * price * 100) / 100;
+    } else if (rawPrice !== undefined && rawPrice > 0 && rawValue !== undefined && rawValue > 0) {
+      value = rawValue;
+      shares = Math.round((value / rawPrice) * 100) / 100;
+      price = rawPrice;
     } else {
-      value = h.value as number;
-      shares = Math.max(1, Math.round(value));
-      price = value / shares;
+      value = rawValue !== undefined ? rawValue : 0;
+      shares = rawShares !== undefined ? rawShares : 0;
+      price = rawPrice !== undefined ? rawPrice : 0;
     }
 
     valid.push({
@@ -492,12 +501,78 @@ export async function createDatedBackupOnDisk(): Promise<string | null> {
 }
 
 /**
- * Loads the auto-saved portfolio from repo-root `portfolio_backup.json` if available.
+ * Metadata for a local backup file discovered on disk in backups/.
  */
-export async function loadPortfolioFromDisk(): Promise<UserPortfolioState | null> {
+export interface DiskBackupInfo {
+  filename: string;
+  isCurrent: boolean;
+  modifiedAt: string;
+  size: number;
+}
+
+/**
+ * Fetches the list of all available backups in the local backups/ folder.
+ */
+export async function fetchBackupsList(): Promise<DiskBackupInfo[]> {
+  if (typeof fetch === "undefined") return [];
+  try {
+    const res = await fetch("/api/portfolio/backups");
+    if (!res.ok) return [];
+    const data = await res.json();
+    return Array.isArray(data.backups) ? data.backups : [];
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * Exports the current portfolio directly into a timestamped file in the local backups/ folder.
+ */
+export async function exportPortfolioToDisk(
+  state: UserPortfolioState
+): Promise<{ ok: boolean; file?: string; path?: string }> {
+  if (typeof fetch === "undefined") return { ok: false };
+  try {
+    const res = await fetch("/api/portfolio/export", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Requested-With": "KiwiPortfolioXRay",
+      },
+      body: JSON.stringify(
+        {
+          version: 2,
+          timestamp: state.timestamp || new Date().toISOString(),
+          audNzdRate: state.audNzdRate,
+          fundBalances: state.fundBalances,
+          directHoldings: state.directHoldings,
+          fixedInterest: state.fixedInterest || state.cashDeposits,
+          cashDeposits: state.fixedInterest || state.cashDeposits,
+          buckets: state.buckets,
+          bucketAssignments: state.bucketAssignments,
+        },
+        null,
+        2
+      ),
+    });
+    if (!res.ok) return { ok: false };
+    const data = await res.json();
+    return { ok: true, file: data.file, path: data.path };
+  } catch {
+    return { ok: false };
+  }
+}
+
+/**
+ * Loads the auto-saved portfolio from the local `backups/` folder (or optional specific file).
+ */
+export async function loadPortfolioFromDisk(filename?: string): Promise<UserPortfolioState | null> {
   if (typeof fetch === "undefined") return null;
   try {
-    const res = await fetch("/api/portfolio/load");
+    const url = filename
+      ? `/api/portfolio/load?file=${encodeURIComponent(filename)}`
+      : "/api/portfolio/load";
+    const res = await fetch(url);
     if (!res.ok) return null;
     const data = await res.json();
     if (data.exists && data.state) {

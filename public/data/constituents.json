@@ -1664,6 +1664,196 @@
       "asset_class": "equity"
     }
   ],
+  "OZY": [
+    {
+      "isin": "SEDOL:6144690",
+      "name": "BHP GROUP LIMITED",
+      "ticker": "BHP.AX",
+      "country": "Australia",
+      "sector": "Materials",
+      "weight": 0.1827,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6215035",
+      "name": "COMMONWEALTH BANK OF AUSTRALIA.",
+      "ticker": "CBA.AX",
+      "country": "Australia",
+      "sector": "Financials",
+      "weight": 0.1494,
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_CBA_ASB",
+      "issuer_name": "Commonwealth Bank / ASB"
+    },
+    {
+      "isin": "SEDOL:6624608",
+      "name": "NATIONAL AUSTRALIA BANK LIMITED",
+      "ticker": "NAB.AX",
+      "country": "Australia",
+      "sector": "Financials",
+      "weight": 0.0721,
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_NAB_BNZ",
+      "issuer_name": "NAB / Bank of New Zealand"
+    },
+    {
+      "isin": "SEDOL:6076146",
+      "name": "Westpac Banking Corporation",
+      "ticker": "WBC.NZ",
+      "country": "Australia",
+      "sector": "Financials",
+      "weight": 0.0709,
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_WBC",
+      "issuer_name": "Westpac Banking Group"
+    },
+    {
+      "isin": "SEDOL:6065586",
+      "name": "ANZ Group Holdings Limited",
+      "ticker": "ANZ.NZ",
+      "country": "Australia",
+      "sector": "Financials",
+      "weight": 0.0683,
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_ANZ",
+      "issuer_name": "ANZ Group"
+    },
+    {
+      "isin": "SEDOL:6185495",
+      "name": "CSL LIMITED",
+      "ticker": "CSL.AX",
+      "country": "Australia",
+      "sector": "Health Care",
+      "weight": 0.0522,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6948836",
+      "name": "WESFARMERS LIMITED",
+      "ticker": "WES.AX",
+      "country": "Australia",
+      "sector": "Consumer Discretionary",
+      "weight": 0.0514,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B28YTC2",
+      "name": "MACQUARIE GROUP LIMITED",
+      "ticker": "MQG.AX",
+      "country": "Australia",
+      "sector": "Financials",
+      "weight": 0.0497,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:0718875",
+      "name": "RIO TINTO LIMITED",
+      "ticker": "RIO.AX",
+      "country": "Australia",
+      "sector": "Materials",
+      "weight": 0.0367,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BMGT167",
+      "name": "WOODSIDE ENERGY GROUP LTD",
+      "ticker": "WDS.AX",
+      "country": "Australia",
+      "sector": "Energy",
+      "weight": 0.0358,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B03FYZ4",
+      "name": "GOODMAN GROUP",
+      "ticker": "GMG.AX",
+      "country": "Australia",
+      "sector": "Real Estate",
+      "weight": 0.0329,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6087289",
+      "name": "TELSTRA GROUP LIMITED",
+      "ticker": "TLS.AX",
+      "country": "Australia",
+      "sector": "Communication Services",
+      "weight": 0.0318,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6981239",
+      "name": "WOOLWORTHS GROUP LIMITED",
+      "ticker": "WOW.AX",
+      "country": "Australia",
+      "sector": "Consumer Staples",
+      "weight": 0.0283,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6200882",
+      "name": "TRANSURBAN GROUP",
+      "ticker": "TCL.AX",
+      "country": "Australia",
+      "sector": "Industrials",
+      "weight": 0.0244,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6253983",
+      "name": "ARISTOCRAT LEISURE LIMITED",
+      "ticker": "ALL.AX",
+      "country": "Australia",
+      "sector": "Consumer Discretionary",
+      "weight": 0.0211,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6717456",
+      "name": "NORTHERN STAR RESOURCES LTD",
+      "ticker": "NST.AX",
+      "country": "Australia",
+      "sector": "Materials",
+      "weight": 0.0209,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6715740",
+      "name": "QBE INSURANCE GROUP LIMITED",
+      "ticker": "QBE.AX",
+      "country": "Australia",
+      "sector": "Financials",
+      "weight": 0.0206,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BYWR0T5",
+      "name": "COLES GROUP LIMITED.",
+      "ticker": "COL.AX",
+      "country": "Australia",
+      "sector": "Consumer Staples",
+      "weight": 0.0185,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6086253",
+      "name": "FORTESCUE LTD",
+      "ticker": "FMG.AX",
+      "country": "Australia",
+      "sector": "Materials",
+      "weight": 0.0162,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1FJ0C0",
+      "name": "BRAMBLES LIMITED",
+      "ticker": "BXB.AX",
+      "country": "Australia",
+      "sector": "Industrials",
+      "weight": 0.0154,
+      "asset_class": "equity"
+    }
+  ],
   "AUS": [
     {
       "isin": "SEDOL:6144690",

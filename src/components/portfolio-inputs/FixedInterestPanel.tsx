@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { CollapsiblePanel } from '../CollapsiblePanel';
 import { BucketSelect } from './BucketSelect';
 import {
+  DEFAULT_STARTER_BUCKETS,
   FixedInterestCategory,
   FixedInterestHolding,
   FixedInterestTaxType,
@@ -56,6 +57,10 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
 
   const holdingsList: FixedInterestHolding[] =
     portfolioState.fixedInterest || portfolioState.cashDeposits || [];
+
+  const availableBuckets = React.useMemo(() => {
+    return portfolioState.buckets.length > 0 ? portfolioState.buckets : DEFAULT_STARTER_BUCKETS;
+  }, [portfolioState.buckets]);
 
   const handleValueChange = (id: string, value: string) => {
     const num = parseFloat(value);
@@ -241,7 +246,7 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
                 <BucketSelect
                   instrumentKey={`fi:${dep.id}`}
                   fallbackKey={`td:${dep.id}`}
-                  buckets={portfolioState.buckets}
+                  buckets={availableBuckets}
                   bucketAssignments={portfolioState.bucketAssignments}
                   onAssign={onAssignBucket}
                 />

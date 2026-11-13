@@ -12,7 +12,13 @@ function createPortfolioMiddleware(): Connect.NextHandleFunction {
     }
 
     const repoRoot = process.cwd();
-    const mainBackupPath = path.join(repoRoot, 'portfolio_backup.json');
+    const backupsDir = path.join(repoRoot, 'backups');
+    const mainBackupPath = path.join(backupsDir, 'portfolio_backup.json');
+    const legacyBackupPath = path.join(repoRoot, 'portfolio_backup.json');
+
+    const ensureBackupsDir = async () => {
+      await fs.promises.mkdir(backupsDir, { recursive: true });
+    };
 
     // Protect POST endpoints against CSRF simple-request forgery from external origins
     if (req.method === 'POST') {
@@ -28,14 +34,93 @@ function createPortfolioMiddleware(): Connect.NextHandleFunction {
       }
     }
 
-    if (req.method === 'GET' && req.url === '/api/portfolio/load') {
-      fs.promises.readFile(mainBackupPath, 'utf-8')
+    // List available backups in the local backups/ directory
+    if (req.method === 'GET' && req.url === '/api/portfolio/backups') {
+      ensureBackupsDir()
+        .then(async () => {
+          const entries = await fs.promises.readdir(backupsDir, { withFileTypes: true });
+          const items: Array<{ filename: string; isCurrent: boolean; modifiedAt: string; size: number }> = [];
+
+          for (const ent of entries) {
+            if (ent.isFile() && ent.name.endsWith('.json')) {
+              try {
+                const stat = await fs.promises.stat(path.join(backupsDir, ent.name));
+                items.push({
+                  filename: ent.name,
+                  isCurrent: ent.name === 'portfolio_backup.json',
+                  modifiedAt: stat.mtime.toISOString(),
+                  size: stat.size,
+                });
+              } catch {
+                // Ignore stat errors
+              }
+            }
+          }
+
+          // Also check if there is an unmigrated legacy backup in repoRoot
+          try {
+            if (fs.existsSync(legacyBackupPath) && !items.some((i) => i.filename === 'portfolio_backup.json')) {
+              const stat = await fs.promises.stat(legacyBackupPath);
+              items.push({
+                filename: 'portfolio_backup.json',
+                isCurrent: true,
+                modifiedAt: stat.mtime.toISOString(),
+                size: stat.size,
+              });
+            }
+          } catch {
+            // Ignore
+          }
+
+          // Sort current first, then newest modifiedAt
+          items.sort((a, b) => {
+            if (a.isCurrent && !b.isCurrent) return -1;
+            if (!a.isCurrent && b.isCurrent) return 1;
+            return new Date(b.modifiedAt).getTime() - new Date(a.modifiedAt).getTime();
+          });
+
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ ok: true, backups: items }));
+        })
+        .catch((err) => {
+          res.statusCode = 500;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ ok: false, error: String(err) }));
+        });
+      return;
+    }
+
+    if (req.method === 'GET' && req.url?.startsWith('/api/portfolio/load')) {
+      const parsedUrl = new URL(req.url, 'http://localhost');
+      const targetFile = parsedUrl.searchParams.get('file');
+
+      let targetPath = mainBackupPath;
+      if (targetFile) {
+        const safeName = path.basename(targetFile);
+        targetPath = path.join(backupsDir, safeName);
+      }
+
+      fs.promises.readFile(targetPath, 'utf-8')
         .then((content) => {
           const parsed = JSON.parse(content);
           res.setHeader('Content-Type', 'application/json');
-          res.end(JSON.stringify({ exists: true, state: parsed }));
+          res.end(JSON.stringify({ exists: true, state: parsed, file: targetFile || 'backups/portfolio_backup.json' }));
         })
         .catch(() => {
+          // Fall back to legacy repo root if looking for default backup
+          if (!targetFile && fs.existsSync(legacyBackupPath)) {
+            fs.promises.readFile(legacyBackupPath, 'utf-8')
+              .then((content) => {
+                const parsed = JSON.parse(content);
+                res.setHeader('Content-Type', 'application/json');
+                res.end(JSON.stringify({ exists: true, state: parsed, file: 'portfolio_backup.json' }));
+              })
+              .catch(() => {
+                res.setHeader('Content-Type', 'application/json');
+                res.end(JSON.stringify({ exists: false }));
+              });
+            return;
+          }
           res.setHeader('Content-Type', 'application/json');
           res.end(JSON.stringify({ exists: false }));
         });
@@ -57,20 +142,53 @@ function createPortfolioMiddleware(): Connect.NextHandleFunction {
         }
       });
 
-      req.on('end', () => {
+      req.on('end', async () => {
         if (tooLarge) return;
         try {
+          await ensureBackupsDir();
           const parsed = JSON.parse(body);
-          fs.promises.writeFile(mainBackupPath, JSON.stringify(parsed, null, 2), 'utf-8')
-            .then(() => {
-              res.setHeader('Content-Type', 'application/json');
-              res.end(JSON.stringify({ ok: true, file: 'portfolio_backup.json' }));
-            })
-            .catch((err) => {
-              res.statusCode = 500;
-              res.setHeader('Content-Type', 'application/json');
-              res.end(JSON.stringify({ ok: false, error: String(err) }));
-            });
+          await fs.promises.writeFile(mainBackupPath, JSON.stringify(parsed, null, 2), 'utf-8');
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ ok: true, file: 'backups/portfolio_backup.json' }));
+        } catch (err) {
+          res.statusCode = typeof err === 'object' && err !== null && 'statusCode' in err ? 500 : 400;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ ok: false, error: String(err) }));
+        }
+      });
+      return;
+    }
+
+    // Export portfolio directly into local backups/ folder
+    if (req.method === 'POST' && req.url === '/api/portfolio/export') {
+      let body = '';
+      let tooLarge = false;
+
+      req.on('data', (chunk) => {
+        body += chunk;
+        if (body.length > MAX_BODY_BYTES) {
+          tooLarge = true;
+          req.destroy();
+          res.statusCode = 413;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ ok: false, error: 'Payload Too Large (max 5MB)' }));
+        }
+      });
+
+      req.on('end', async () => {
+        if (tooLarge) return;
+        try {
+          await ensureBackupsDir();
+          const parsed = JSON.parse(body);
+          const now = new Date();
+          const datePart = now.toISOString().split('T')[0];
+          const timePart = now.toTimeString().split(' ')[0].replace(/:/g, '');
+          const exportFilename = `kiwi_portfolio_${datePart}_${timePart}.json`;
+          const exportPath = path.join(backupsDir, exportFilename);
+          await fs.promises.writeFile(exportPath, JSON.stringify(parsed, null, 2), 'utf-8');
+
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ ok: true, file: exportFilename, path: `backups/${exportFilename}` }));
         } catch (err) {
           res.statusCode = 400;
           res.setHeader('Content-Type', 'application/json');
@@ -81,31 +199,38 @@ function createPortfolioMiddleware(): Connect.NextHandleFunction {
     }
 
     if (req.method === 'POST' && req.url === '/api/portfolio/backup') {
-      fs.promises.access(mainBackupPath)
+      ensureBackupsDir()
         .then(async () => {
+          const sourcePath = fs.existsSync(mainBackupPath) ? mainBackupPath : fs.existsSync(legacyBackupPath) ? legacyBackupPath : null;
+          if (!sourcePath) {
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ ok: true, backupFile: null }));
+            return;
+          }
+
           const now = new Date();
           const datePart = now.toISOString().split('T')[0];
           const timePart = now.toTimeString().split(' ')[0].replace(/:/g, '');
           const datedName = `portfolio_backup_${datePart}_${timePart}.json`;
-          const datedPath = path.join(repoRoot, datedName);
-          await fs.promises.copyFile(mainBackupPath, datedPath);
+          const datedPath = path.join(backupsDir, datedName);
+          await fs.promises.copyFile(sourcePath, datedPath);
 
-          // Prune older backups keeping max 10 latest files
+          // Prune older backups keeping max 10 latest files in backupsDir
           try {
-            const files = await fs.promises.readdir(repoRoot);
+            const files = await fs.promises.readdir(backupsDir);
             const backupFiles = files
               .filter((f) => /^portfolio_backup_\d{4}-\d{2}-\d{2}_\d{6}\.json$/.test(f))
               .sort();
             if (backupFiles.length > 10) {
               const toDelete = backupFiles.slice(0, backupFiles.length - 10);
-              await Promise.all(toDelete.map((f) => fs.promises.unlink(path.join(repoRoot, f)).catch(() => {})));
+              await Promise.all(toDelete.map((f) => fs.promises.unlink(path.join(backupsDir, f)).catch(() => {})));
             }
           } catch {
             // Ignore prune errors
           }
 
           res.setHeader('Content-Type', 'application/json');
-          res.end(JSON.stringify({ ok: true, backupFile: datedName }));
+          res.end(JSON.stringify({ ok: true, backupFile: datedName, path: `backups/${datedName}` }));
         })
         .catch(() => {
           res.setHeader('Content-Type', 'application/json');

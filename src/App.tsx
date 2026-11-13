@@ -55,7 +55,7 @@ export const App: React.FC = () => {
         candidates.push({
           state: diskState,
           source: 'v2',
-          notice: 'Loaded portfolio from repo backup (portfolio_backup.json).',
+          notice: 'Loaded portfolio from local backup (backups/portfolio_backup.json).',
         });
       }
       if (idbState && !isEmptyPortfolio(idbState) && !isSamplePortfolio(idbState)) {
@@ -125,16 +125,19 @@ export const App: React.FC = () => {
               f.provider.toLowerCase() === 'smartshares' ||
               f.provider.toLowerCase() === 'betashares'
           )
-          .map((f) => ({
-            isin: f.code,
-            ticker: `${f.code}.NZ`,
-            name: f.name,
-            exchange: 'NZX' as const,
-            country: 'New Zealand',
-            sector: f.asset_class === 'fixed_interest' ? 'Fixed Income' : 'Broad Index ETF',
-            isEtf: true,
-            fundCode: f.code,
-          }));
+          .map((f) => {
+            const isBetaShares = f.provider.toLowerCase() === 'betashares';
+            return {
+              isin: f.code,
+              ticker: isBetaShares ? `${f.code}.AX` : `${f.code}.NZ`,
+              name: f.name,
+              exchange: (isBetaShares ? 'ASX' : 'NZX') as 'ASX' | 'NZX',
+              country: isBetaShares ? 'Australia' : 'New Zealand',
+              sector: f.asset_class === 'fixed_interest' ? 'Fixed Income' : 'Broad Index ETF',
+              isEtf: true,
+              fundCode: f.code,
+            };
+          });
 
         const existingTickers = new Set(directRes.map((d) => d.ticker.toUpperCase()));
         const mergedCatalog = [
@@ -158,6 +161,30 @@ export const App: React.FC = () => {
             let changed = false;
             const nextAssignments = { ...prev.bucketAssignments };
             const reconciled = prev.directHoldings.map((dh) => {
+              // Reconcile BetaShares ASIA if previously saved as ASIA.NZ / NZX
+              if (
+                dh.ticker.toUpperCase() === 'ASIA.NZ' ||
+                (dh.fundCode === 'ASIA' && dh.exchange === 'NZX') ||
+                (dh.ticker.toUpperCase() === 'ASIA' && dh.exchange === 'NZX')
+              ) {
+                changed = true;
+                const oldBucketKey = `direct:${dh.isin}`;
+                const newBucketKey = `direct:ASIA`;
+                if (nextAssignments[oldBucketKey] && !nextAssignments[newBucketKey]) {
+                  nextAssignments[newBucketKey] = nextAssignments[oldBucketKey];
+                }
+                return {
+                  ...dh,
+                  isin: 'ASIA',
+                  ticker: 'ASIA.AX',
+                  exchange: 'ASX' as const,
+                  country: 'Australia',
+                  currency: 'AUD' as const,
+                  isEtf: true,
+                  fundCode: 'ASIA',
+                };
+              }
+
               const match = byTickerKey.get(`${dh.exchange}:${dh.ticker.toUpperCase()}`);
               if (match && match.isin && match.isin !== dh.isin) {
                 changed = true;
