@@ -542,6 +542,16 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                 elif path == "/api/security-master":
                     q = qs.get("q", [""])[0]
                     self._send_json({"results": service.search_security_master(q)})
+                elif path == "/api/portfolio/load":
+                    main_backup = service.repo_root / "portfolio_backup.json"
+                    if main_backup.exists():
+                        try:
+                            parsed = json.loads(main_backup.read_text(encoding="utf-8"))
+                            self._send_json({"exists": True, "state": parsed})
+                        except Exception as exc:
+                            self._send_json({"exists": False, "error": str(exc)}, status=HTTPStatus.INTERNAL_SERVER_ERROR)
+                    else:
+                        self._send_json({"exists": False})
                 else:
                     self._send_json({"error": "Not found"}, status=HTTPStatus.NOT_FOUND)
             except FileNotFoundError as exc:
@@ -620,6 +630,23 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                         feeder_code=data.get("feeder_code", ""),
                     )
                     self._send_json({"feeders": feeders})
+                elif path == "/api/portfolio/save":
+                    main_backup = service.repo_root / "portfolio_backup.json"
+                    main_backup.write_text(json.dumps(data, indent=2), encoding="utf-8")
+                    self._send_json({"ok": True, "file": "portfolio_backup.json"})
+                elif path == "/api/portfolio/backup":
+                    main_backup = service.repo_root / "portfolio_backup.json"
+                    if main_backup.exists():
+                        import datetime
+                        import shutil
+                        now = datetime.datetime.now()
+                        stamp = now.strftime("%Y-%m-%d_%H%M%S")
+                        dated_name = f"portfolio_backup_{stamp}.json"
+                        dated_path = service.repo_root / dated_name
+                        shutil.copyfile(main_backup, dated_path)
+                        self._send_json({"ok": True, "backupFile": dated_name})
+                    else:
+                        self._send_json({"ok": True, "backupFile": None})
                 else:
                     self._send_json({"error": "Not found"}, status=HTTPStatus.NOT_FOUND)
             except Exception as exc:

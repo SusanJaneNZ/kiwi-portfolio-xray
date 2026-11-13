@@ -3,6 +3,7 @@ import { CollapsiblePanel } from './CollapsiblePanel';
 import { ConsolidatedHolding, IssuerRollupEntry } from '../types/portfolio';
 import { filterAndGroupHoldings } from '../engine/microfilter';
 import { matchesSearchQuery } from '../utils/format';
+import { exportHoldingsCSV } from '../storage/localStorage';
 import { EquitiesTabTable } from './holdings/EquitiesTabTable';
 import { BondIssuersTabTable } from './holdings/BondIssuersTabTable';
 import { InstitutionRollupTabTable } from './holdings/InstitutionRollupTabTable';
@@ -29,6 +30,17 @@ export const HoldingsTable: React.FC<HoldingsTableProps> = ({
 
   const toggleRow = (key: string) => {
     setExpandedRows((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  const handleExportCSV = () => {
+    const csvStr = exportHoldingsCSV(holdings);
+    const blob = new Blob([csvStr], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `lookthrough_holdings_${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   const { visibleHoldings: groupedEquities } = filterAndGroupHoldings(holdings, {
@@ -168,7 +180,26 @@ export const HoldingsTable: React.FC<HoldingsTableProps> = ({
                   % Equities
                 </button>
               </div>
+
+              <button
+                onClick={handleExportCSV}
+                title="Download lookthrough holdings as a CSV spreadsheet"
+                className="text-xs bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800 px-2.5 py-1.5 rounded-lg transition-colors flex items-center gap-1.5"
+              >
+                <span>📥</span>
+                <span>Export CSV</span>
+              </button>
             </div>
+          )}
+          {activeTab !== 'equities' && (
+            <button
+              onClick={handleExportCSV}
+              title="Download lookthrough holdings as a CSV spreadsheet"
+              className="text-xs bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800 px-2.5 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ml-auto"
+            >
+              <span>📥</span>
+              <span>Export CSV</span>
+            </button>
           )}
         </div>
 

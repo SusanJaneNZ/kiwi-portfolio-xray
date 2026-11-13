@@ -405,11 +405,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_42",
-      "name": "SANFORD LTD/NZ",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "NZX:SAN",
+      "name": "Sanford Limited",
+      "ticker": "SAN.NZ",
+      "country": "New Zealand",
+      "sector": "Consumer Staples",
       "weight": 0.005,
       "asset_class": "equity"
     },
@@ -468,11 +468,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_49",
-      "name": "KMD BRANDS LTD NPV POST SPLIT",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "NZX:KMD",
+      "name": "KMD Brands Limited",
+      "ticker": "KMD.NZ",
+      "country": "New Zealand",
+      "sector": "Consumer Discretionary",
       "weight": 0.0014,
       "asset_class": "equity"
     }
@@ -741,11 +741,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_28",
-      "name": "DALRYMPLE BAY INFRASTRUCTURE LIMITED ORD STAPLED SECURITIES",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "ASX:DBI",
+      "name": "DALRYMPLE BAY INFRASTRUCTURE LIMITED",
+      "ticker": "DBI.AX",
+      "country": "Australia",
+      "sector": "Industrials",
       "weight": 0.0060006,
       "asset_class": "equity"
     },
@@ -1102,11 +1102,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_17",
-      "name": "BLOCK INC. CDI 1 1 FOREIGN EXEMPT NYSE",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BYNZGK1",
+      "name": "BLOCK, INC.",
+      "ticker": "XYZ.AX",
+      "country": "Australia",
+      "sector": "Financials",
       "weight": 0.00447792,
       "asset_class": "equity"
     },
@@ -1174,13 +1174,15 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_25",
-      "name": "INFRATIL LIMITED ORDINARY FULLY PAID FOREIGN EXEMPT NZX",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6459286",
+      "name": "Infratil Limited",
+      "ticker": "IFT.NZ",
+      "country": "New Zealand",
+      "sector": "Industrials",
       "weight": 0.00179117,
-      "asset_class": "equity"
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_IFT",
+      "issuer_name": "Infratil"
     },
     {
       "isin": "SEDOL:BP5HL07",
@@ -1201,11 +1203,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_28",
-      "name": "GENERATION DEVELOPMENT GROUP LIMITED ORDINARY FULLY PAID",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BF42CQ6",
+      "name": "GENERATION DEVELOPMENT GROUP LIMITED",
+      "ticker": "GDG.AX",
+      "country": "Australia",
+      "sector": "Financials",
       "weight": 0.0010946,
       "asset_class": "equity"
     }
@@ -1626,11 +1628,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_46",
-      "name": "BLOCK INC. CDI 1 1 FOREIGN EXEMPT NYSE",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BYNZGK1",
+      "name": "BLOCK, INC.",
+      "ticker": "XYZ.AX",
+      "country": "Australia",
+      "sector": "Financials",
       "weight": 0.01219634,
       "asset_class": "equity"
     },
@@ -1653,11 +1655,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_49",
+      "isin": "B1FBT05",
       "name": "LIONTOWN RESOURCES LTD",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "LTR",
+      "country": "Australia",
+      "sector": "Materials",
       "weight": 0.00679796,
       "asset_class": "equity"
     }
@@ -1747,8 +1749,8 @@
       "isin": "AU000000IOZ4",
       "name": "ISHARES CORE S&P/ASX 200 ETF",
       "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "country": "Australia",
+      "sector": "Financials",
       "weight": 0.02927358,
       "asset_class": "equity"
     },
@@ -2014,11 +2016,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_38",
-      "name": "PILBARA MINERALS LTD",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B2368L5",
+      "name": "PLS GROUP LIMITED",
+      "ticker": "PLS.AX",
+      "country": "Australia",
+      "sector": "Materials",
       "weight": 0.00449594,
       "asset_class": "equity"
     },
@@ -2266,11 +2268,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_66",
-      "name": "SGH LIMITED ORDINARY FULLY PAID",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BR858V2",
+      "name": "SGH LIMITED",
+      "ticker": "SGH.AX",
+      "country": "Australia",
+      "sector": "Industrials",
       "weight": 0.00269757,
       "asset_class": "equity"
     },
@@ -2311,11 +2313,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_71",
-      "name": "DYNO NOBEL LIMITED ORDINARY FULLY PAID",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BVBH523",
+      "name": "DYNO NOBEL LIMITED.",
+      "ticker": "DNL.AX",
+      "country": "Australia",
+      "sector": "Materials",
       "weight": 0.00239784,
       "asset_class": "equity"
     },
@@ -2410,11 +2412,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_82",
-      "name": "GREATLAND RES LTD",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BTXLW40",
+      "name": "GREATLAND RESOURCES LIMITED",
+      "ticker": "GGP.AX",
+      "country": "Australia",
+      "sector": "Materials",
       "weight": 0.00209811,
       "asset_class": "equity"
     },
@@ -2608,11 +2610,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_104",
-      "name": "BLOCK INC. CDI 1 1 FOREIGN EXEMPT NYSE",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BYNZGK1",
+      "name": "BLOCK, INC.",
+      "ticker": "XYZ.AX",
+      "country": "Australia",
+      "sector": "Financials",
       "weight": 0.00139874,
       "asset_class": "equity"
     },
@@ -2716,11 +2718,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_116",
-      "name": "CAPSTONE COPPER CORP CDI",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BMY5XY9",
+      "name": "CAPSTONE COPPER CORP.",
+      "ticker": "CSC.AX",
+      "country": "Australia",
+      "sector": "Materials",
       "weight": 0.00109901,
       "asset_class": "equity"
     },
@@ -2754,11 +2756,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_120",
-      "name": "DALRYMPLE BAY INFRASTRUCTURE LIMITED ORD STAPLED SECURITIES",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "ASX:DBI",
+      "name": "DALRYMPLE BAY INFRASTRUCTURE LIMITED",
+      "ticker": "DBI.AX",
+      "country": "Australia",
+      "sector": "Industrials",
       "weight": 0.0009991,
       "asset_class": "equity"
     },
@@ -2790,11 +2792,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_124",
-      "name": "REGION RE LTD",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BPBMY63",
+      "name": "REGION GROUP",
+      "ticker": "RGN.AX",
+      "country": "Australia",
+      "sector": "Real Estate",
       "weight": 0.00089919,
       "asset_class": "equity"
     },
@@ -2808,11 +2810,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_126",
-      "name": "SRG GLOBAL LIMITED ORDINARY FULLY PAID",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BFMZB82",
+      "name": "SRG GLOBAL LIMITED",
+      "ticker": "SRG.AX",
+      "country": "Australia",
+      "sector": "Industrials",
       "weight": 0.00089919,
       "asset_class": "equity"
     },
@@ -2826,20 +2828,20 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_128",
-      "name": "YANCOAL AUSTRALIA LIMITED ORDINARY FULLY PAID",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B84LB45",
+      "name": "YANCOAL AUSTRALIA LIMITED",
+      "ticker": "YAL.AX",
+      "country": "Australia",
+      "sector": "Energy",
       "weight": 0.00089919,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_129",
-      "name": "SUNRISE ENERGY METALS LIMITED ORDINARY FULLY PAID",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BN4MX14",
+      "name": "SUNRISE ENERGY METALS LIMITED",
+      "ticker": "SRL.AX",
+      "country": "Australia",
+      "sector": "Materials",
       "weight": 0.00089919,
       "asset_class": "equity"
     },
@@ -2900,11 +2902,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_136",
-      "name": "4DMEDICAL LIMITED ORDINARY FULLY PAID",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BMX3786",
+      "name": "4DMEDICAL LIMITED",
+      "ticker": "4DX.AX",
+      "country": "Australia",
+      "sector": "Health Care",
       "weight": 0.00079928,
       "asset_class": "equity"
     },
@@ -2918,20 +2920,20 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_138",
+      "isin": "B1FBT05",
       "name": "LIONTOWN RESOURCES LTD",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "LTR",
+      "country": "Australia",
+      "sector": "Materials",
       "weight": 0.00079928,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_139",
-      "name": "BWP TRUST",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6127453",
+      "name": "BWP Property Group Ltd",
+      "ticker": "BWP",
+      "country": "Australia",
+      "sector": "Real Estate",
       "weight": 0.00079928,
       "asset_class": "equity"
     },
@@ -3026,11 +3028,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_150",
-      "name": "MINERALS 260 LIMITED ORDINARY FULLY PAID",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BMT8S71",
+      "name": "MINERALS 260 LIMITED",
+      "ticker": "MI6.AX",
+      "country": "Australia",
+      "sector": "Materials",
       "weight": 0.00069937,
       "asset_class": "equity"
     },
@@ -3143,13 +3145,15 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_163",
-      "name": "INFRATIL LIMITED ORDINARY FULLY PAID FOREIGN EXEMPT NZX",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6459286",
+      "name": "Infratil Limited",
+      "ticker": "IFT.NZ",
+      "country": "New Zealand",
+      "sector": "Industrials",
       "weight": 0.00059946,
-      "asset_class": "equity"
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_IFT",
+      "issuer_name": "Infratil"
     },
     {
       "isin": "SEDOL:B987K72",
@@ -3287,20 +3291,20 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_179",
-      "name": "SUPERLOOP LIMITED ORDINARY FULLY PAID",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BYPC6V1",
+      "name": "SUPERLOOP LIMITED",
+      "ticker": "SLC.AX",
+      "country": "Australia",
+      "sector": "Communication Services",
       "weight": 0.00049955,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_180",
-      "name": "KINGSGATE CONSOLIDATED NL FPO 25C",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6492731",
+      "name": "KINGSGATE CONSOLIDATED LIMITED.",
+      "ticker": "KCN.AX",
+      "country": "Australia",
+      "sector": "Materials",
       "weight": 0.00049955,
       "asset_class": "equity"
     },
@@ -3314,11 +3318,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_182",
-      "name": "FIREFLY METALS LTD ORDINARY FULLY PAID",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BPDXXB2",
+      "name": "FIREFLY METALS LTD",
+      "ticker": "FFM.AX",
+      "country": "Australia",
+      "sector": "Materials",
       "weight": 0.00049955,
       "asset_class": "equity"
     },
@@ -3377,11 +3381,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_189",
-      "name": "ELSIGHT LIMITED ORDINARY FULLY PAID",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BD36ZB1",
+      "name": "ELSIGHT LIMITED",
+      "ticker": "ELS.AX",
+      "country": "Australia",
+      "sector": "Information Technology",
       "weight": 0.00039964,
       "asset_class": "equity"
     },
@@ -3413,20 +3417,20 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_193",
-      "name": "ELEVRA LITHIUM LIMITED ORDINARY FULLY PAID",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BVBM1M0",
+      "name": "ELEVRA LITHIUM LIMITED",
+      "ticker": "ELV.AX",
+      "country": "Australia",
+      "sector": "Materials",
       "weight": 0.00039964,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_194",
-      "name": "GENERATION DEVELOPMENT GROUP LIMITED ORDINARY FULLY PAID",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BF42CQ6",
+      "name": "GENERATION DEVELOPMENT GROUP LIMITED",
+      "ticker": "GDG.AX",
+      "country": "Australia",
+      "sector": "Financials",
       "weight": 0.00039964,
       "asset_class": "equity"
     },
@@ -3476,11 +3480,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_200",
-      "name": "VULCAN ENERGY RESOURCES LIMITED ORDINARY FULLY PAID",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BKYBH63",
+      "name": "VULCAN ENERGY RESOURCES LIMITED",
+      "ticker": "VUL.AX",
+      "country": "Australia",
+      "sector": "Materials",
       "weight": 0.00029973,
       "asset_class": "equity"
     }
@@ -3504,7 +3508,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.03362881,
+      "weight": 0.03364309,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -3514,7 +3518,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.03303883,
+      "weight": 0.03305286,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -3524,7 +3528,7 @@
       "ticker": "",
       "country": "United States",
       "sector": "Sovereign",
-      "weight": 0.11534092,
+      "weight": 0.1153899,
       "asset_class": "fixed_interest",
       "tranche_count": 20,
       "issuer_key": "ISSUER_US_TREASURY",
@@ -3536,7 +3540,7 @@
       "ticker": "",
       "country": "United Kingdom",
       "sector": "Sovereign",
-      "weight": 0.03087557,
+      "weight": 0.03088868,
       "asset_class": "fixed_interest",
       "tranche_count": 6,
       "issuer_key": "ISSUER_UK_GILT",
@@ -3548,7 +3552,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.05063987,
+      "weight": 0.05066138,
       "asset_class": "fixed_interest",
       "tranche_count": 5
     },
@@ -3558,7 +3562,7 @@
       "ticker": "",
       "country": "United States",
       "sector": "Corporate / Other",
-      "weight": 0.06607766,
+      "weight": 0.06610572,
       "asset_class": "fixed_interest",
       "tranche_count": 9
     },
@@ -3568,7 +3572,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.02005929,
+      "weight": 0.02006781,
       "asset_class": "fixed_interest",
       "tranche_count": 5
     },
@@ -3578,7 +3582,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.02133758,
+      "weight": 0.02134664,
       "asset_class": "fixed_interest",
       "tranche_count": 7
     },
@@ -3588,7 +3592,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.01337286,
+      "weight": 0.01337854,
       "asset_class": "fixed_interest",
       "tranche_count": 3
     },
@@ -3598,7 +3602,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00924301,
+      "weight": 0.00924693,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -3608,7 +3612,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00884969,
+      "weight": 0.00885344,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -3618,7 +3622,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.00865303,
+      "weight": 0.0086567,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -3628,7 +3632,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.01533946,
+      "weight": 0.01534597,
       "asset_class": "fixed_interest",
       "tranche_count": 4
     },
@@ -3638,7 +3642,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.01248789,
+      "weight": 0.01249319,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -3648,7 +3652,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.01111127,
+      "weight": 0.01111599,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -3658,7 +3662,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.01160292,
+      "weight": 0.01160785,
       "asset_class": "fixed_interest",
       "tranche_count": 4
     },
@@ -3668,7 +3672,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.01012797,
+      "weight": 0.01013228,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -3678,7 +3682,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00914468,
+      "weight": 0.00914856,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -3688,7 +3692,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Financial",
-      "weight": 0.00609645,
+      "weight": 0.00609904,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -3698,7 +3702,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Financial",
-      "weight": 0.00698142,
+      "weight": 0.00698438,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -3708,7 +3712,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.0056048,
+      "weight": 0.00560718,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -3718,7 +3722,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.01081628,
+      "weight": 0.01082088,
       "asset_class": "fixed_interest",
       "tranche_count": 3
     },
@@ -3728,7 +3732,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00786639,
+      "weight": 0.00786973,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -3738,7 +3742,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00511315,
+      "weight": 0.00511532,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -3748,7 +3752,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00511315,
+      "weight": 0.00511532,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -3758,7 +3762,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Financial",
-      "weight": 0.00511315,
+      "weight": 0.00511532,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -3768,7 +3772,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Financial",
-      "weight": 0.00737474,
+      "weight": 0.00737787,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -3778,7 +3782,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Financial",
-      "weight": 0.01091461,
+      "weight": 0.01091925,
       "asset_class": "fixed_interest",
       "tranche_count": 3
     },
@@ -3788,7 +3792,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00550647,
+      "weight": 0.00550881,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -3798,7 +3802,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.0046215,
+      "weight": 0.00462347,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -3808,7 +3812,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Financial",
-      "weight": 0.0046215,
+      "weight": 0.00462347,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -3818,7 +3822,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Financial",
-      "weight": 0.00688309,
+      "weight": 0.00688601,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -3828,7 +3832,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00914468,
+      "weight": 0.00914856,
       "asset_class": "fixed_interest",
       "tranche_count": 4
     },
@@ -3838,7 +3842,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.0046215,
+      "weight": 0.00462347,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -3848,7 +3852,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00688309,
+      "weight": 0.00688601,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -3858,7 +3862,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.0046215,
+      "weight": 0.00462347,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -3868,7 +3872,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Financial",
-      "weight": 0.00707975,
+      "weight": 0.00708276,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -3878,7 +3882,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00452317,
+      "weight": 0.00452509,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -3888,7 +3892,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Local Government",
-      "weight": 0.00452317,
+      "weight": 0.00452509,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -3898,7 +3902,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Financial",
-      "weight": 0.00452317,
+      "weight": 0.00452509,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -3908,7 +3912,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00540814,
+      "weight": 0.00541044,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -3918,7 +3922,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00884969,
+      "weight": 0.00885344,
       "asset_class": "fixed_interest",
       "tranche_count": 4
     },
@@ -3928,7 +3932,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00432651,
+      "weight": 0.00432835,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -3938,7 +3942,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00422818,
+      "weight": 0.00422998,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -3948,7 +3952,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.01130793,
+      "weight": 0.01131273,
       "asset_class": "fixed_interest",
       "tranche_count": 4
     },
@@ -3958,7 +3962,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00796472,
+      "weight": 0.0079681,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -3968,7 +3972,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Financial",
-      "weight": 0.00737474,
+      "weight": 0.00737787,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -3978,7 +3982,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00501482,
+      "weight": 0.00501695,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -3988,7 +3992,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00393319,
+      "weight": 0.00393486,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -3998,7 +4002,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Financial",
-      "weight": 0.00383486,
+      "weight": 0.00383649,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4008,7 +4012,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00373653,
+      "weight": 0.00373812,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4018,7 +4022,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00373653,
+      "weight": 0.00373812,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4028,7 +4032,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00373653,
+      "weight": 0.00373812,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4038,7 +4042,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.01052129,
+      "weight": 0.01052576,
       "asset_class": "fixed_interest",
       "tranche_count": 4
     },
@@ -4048,7 +4052,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.0036382,
+      "weight": 0.00363975,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4058,7 +4062,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00334322,
+      "weight": 0.00334463,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4068,7 +4072,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00599812,
+      "weight": 0.00600067,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -4078,7 +4082,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.00835804,
+      "weight": 0.00836159,
       "asset_class": "fixed_interest",
       "tranche_count": 9
     },
@@ -4088,7 +4092,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.00845637,
+      "weight": 0.00845996,
       "asset_class": "fixed_interest",
       "tranche_count": 4
     },
@@ -4098,7 +4102,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00324489,
+      "weight": 0.00324626,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4108,7 +4112,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.00747307,
+      "weight": 0.00747624,
       "asset_class": "fixed_interest",
       "tranche_count": 4
     },
@@ -4118,7 +4122,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00324489,
+      "weight": 0.00324626,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4128,7 +4132,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00353987,
+      "weight": 0.00354138,
       "asset_class": "fixed_interest",
       "tranche_count": 4
     },
@@ -4138,7 +4142,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00314656,
+      "weight": 0.00314789,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4148,7 +4152,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00314656,
+      "weight": 0.00314789,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4158,7 +4162,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00304823,
+      "weight": 0.00304952,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4168,7 +4172,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00422818,
+      "weight": 0.00422998,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -4178,7 +4182,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00511315,
+      "weight": 0.00511532,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -4188,7 +4192,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00265491,
+      "weight": 0.00265603,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4198,7 +4202,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.0046215,
+      "weight": 0.00462347,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -4208,7 +4212,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00265491,
+      "weight": 0.00265603,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4218,7 +4222,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Financial",
-      "weight": 0.00265491,
+      "weight": 0.00265603,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4228,7 +4232,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Financial",
-      "weight": 0.00255658,
+      "weight": 0.00255766,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4238,7 +4242,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.00255658,
+      "weight": 0.00255766,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4248,7 +4252,7 @@
       "ticker": "",
       "country": "New Zealand",
       "sector": "Financial",
-      "weight": 0.00255658,
+      "weight": 0.00255766,
       "asset_class": "fixed_interest",
       "tranche_count": 1,
       "issuer_key": "ISSUER_CBA_ASB",
@@ -4260,7 +4264,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00255658,
+      "weight": 0.00255766,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4270,7 +4274,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00255658,
+      "weight": 0.00255766,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4280,7 +4284,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00255658,
+      "weight": 0.00255766,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4290,7 +4294,7 @@
       "ticker": "",
       "country": "New Zealand",
       "sector": "Financial",
-      "weight": 0.00255658,
+      "weight": 0.00255766,
       "asset_class": "fixed_interest",
       "tranche_count": 1,
       "issuer_key": "ISSUER_WBC",
@@ -4302,7 +4306,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00255658,
+      "weight": 0.00255766,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4312,7 +4316,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00511315,
+      "weight": 0.00511532,
       "asset_class": "fixed_interest",
       "tranche_count": 3
     },
@@ -4322,7 +4326,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Financial",
-      "weight": 0.00255658,
+      "weight": 0.00255766,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4332,7 +4336,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Financial",
-      "weight": 0.00383486,
+      "weight": 0.00383649,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -4342,7 +4346,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Financial",
-      "weight": 0.00255658,
+      "weight": 0.00255766,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4352,7 +4356,7 @@
       "ticker": "",
       "country": "New Zealand",
       "sector": "Financial",
-      "weight": 0.00255658,
+      "weight": 0.00255766,
       "asset_class": "fixed_interest",
       "tranche_count": 1,
       "issuer_key": "ISSUER_NAB_BNZ",
@@ -4364,7 +4368,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00255658,
+      "weight": 0.00255766,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4374,7 +4378,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00373653,
+      "weight": 0.00373812,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -4384,7 +4388,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00245825,
+      "weight": 0.00245929,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4394,7 +4398,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00235992,
+      "weight": 0.00236092,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4404,7 +4408,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00245825,
+      "weight": 0.00245929,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -4414,7 +4418,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00235992,
+      "weight": 0.00236092,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4424,7 +4428,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00226159,
+      "weight": 0.00226255,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4434,7 +4438,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.00226159,
+      "weight": 0.00226255,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4444,7 +4448,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.00668643,
+      "weight": 0.00668927,
       "asset_class": "fixed_interest",
       "tranche_count": 3
     },
@@ -4454,7 +4458,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00226159,
+      "weight": 0.00226255,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4464,7 +4468,7 @@
       "ticker": "",
       "country": "Australia",
       "sector": "Sovereign",
-      "weight": 0.00324489,
+      "weight": 0.00324626,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -4474,7 +4478,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.00226159,
+      "weight": 0.00226255,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4484,7 +4488,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.00353987,
+      "weight": 0.00354138,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -4494,7 +4498,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00216326,
+      "weight": 0.00216418,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4504,7 +4508,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00216326,
+      "weight": 0.00216418,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4514,7 +4518,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00216326,
+      "weight": 0.00216418,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4524,7 +4528,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00216326,
+      "weight": 0.00216418,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4534,7 +4538,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00206493,
+      "weight": 0.0020658,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4544,7 +4548,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.0046215,
+      "weight": 0.00462347,
       "asset_class": "fixed_interest",
       "tranche_count": 3
     },
@@ -4554,7 +4558,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.0019666,
+      "weight": 0.00196743,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4564,7 +4568,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00186827,
+      "weight": 0.00186906,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4574,7 +4578,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00344154,
+      "weight": 0.00344301,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -4584,7 +4588,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00176994,
+      "weight": 0.00177069,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4594,7 +4598,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00167161,
+      "weight": 0.00167232,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4604,7 +4608,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00167161,
+      "weight": 0.00167232,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4614,7 +4618,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00167161,
+      "weight": 0.00167232,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4624,7 +4628,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00157328,
+      "weight": 0.00157395,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4634,7 +4638,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.00157328,
+      "weight": 0.00157395,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4644,7 +4648,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Financial",
-      "weight": 0.00157328,
+      "weight": 0.00157395,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4654,7 +4658,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00147495,
+      "weight": 0.00147557,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4664,7 +4668,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00147495,
+      "weight": 0.00147557,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4674,7 +4678,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00137662,
+      "weight": 0.0013772,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4684,7 +4688,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.00235992,
+      "weight": 0.00236092,
       "asset_class": "fixed_interest",
       "tranche_count": 3
     },
@@ -4694,7 +4698,7 @@
       "ticker": "",
       "country": "New Zealand",
       "sector": "Financial",
-      "weight": 0.00127829,
+      "weight": 0.00127883,
       "asset_class": "fixed_interest",
       "tranche_count": 1,
       "issuer_key": "ISSUER_TSB",
@@ -4706,7 +4710,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00127829,
+      "weight": 0.00127883,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4716,7 +4720,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00127829,
+      "weight": 0.00127883,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4726,7 +4730,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Financial",
-      "weight": 0.00127829,
+      "weight": 0.00127883,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4736,7 +4740,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00344154,
+      "weight": 0.00344301,
       "asset_class": "fixed_interest",
       "tranche_count": 3
     },
@@ -4746,7 +4750,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Financial",
-      "weight": 0.00127829,
+      "weight": 0.00127883,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4756,7 +4760,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00127829,
+      "weight": 0.00127883,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4766,7 +4770,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.00117996,
+      "weight": 0.00118046,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4776,7 +4780,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.00117996,
+      "weight": 0.00118046,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4786,7 +4790,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.00186827,
+      "weight": 0.00186906,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -4796,7 +4800,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.00117996,
+      "weight": 0.00118046,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4806,7 +4810,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00117996,
+      "weight": 0.00118046,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4816,7 +4820,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.00108163,
+      "weight": 0.00108209,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4826,7 +4830,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Financial",
-      "weight": 0.00108163,
+      "weight": 0.00108209,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4836,7 +4840,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00108163,
+      "weight": 0.00108209,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4846,7 +4850,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00206493,
+      "weight": 0.0020658,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -4856,7 +4860,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00206493,
+      "weight": 0.0020658,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -4866,7 +4870,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00108163,
+      "weight": 0.00108209,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4876,7 +4880,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.0009833,
+      "weight": 0.00098372,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4886,7 +4890,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.0009833,
+      "weight": 0.00098372,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4896,7 +4900,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00088497,
+      "weight": 0.00088534,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4906,7 +4910,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00088497,
+      "weight": 0.00088534,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4916,7 +4920,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00088497,
+      "weight": 0.00088534,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4926,7 +4930,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.00078664,
+      "weight": 0.00078697,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4936,7 +4940,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00078664,
+      "weight": 0.00078697,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4946,7 +4950,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.00108163,
+      "weight": 0.00108209,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -4956,7 +4960,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00068831,
+      "weight": 0.0006886,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4966,7 +4970,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00068831,
+      "weight": 0.0006886,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4976,7 +4980,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00058998,
+      "weight": 0.00059023,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4986,7 +4990,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00058998,
+      "weight": 0.00059023,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -4996,7 +5000,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00058998,
+      "weight": 0.00059023,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5006,7 +5010,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00049165,
+      "weight": 0.00049186,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5016,7 +5020,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00049165,
+      "weight": 0.00049186,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5026,7 +5030,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.00049165,
+      "weight": 0.00049186,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5036,7 +5040,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00068831,
+      "weight": 0.0006886,
       "asset_class": "fixed_interest",
       "tranche_count": 3
     },
@@ -5046,7 +5050,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00049165,
+      "weight": 0.00049186,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5056,7 +5060,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.00039332,
+      "weight": 0.00039349,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5066,7 +5070,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Sovereign",
-      "weight": 0.00039332,
+      "weight": 0.00039349,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5076,7 +5080,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00029499,
+      "weight": 0.00029511,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5086,7 +5090,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00029499,
+      "weight": 0.00029511,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5096,7 +5100,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00019666,
+      "weight": 0.00019674,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5106,7 +5110,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00019666,
+      "weight": 0.00019674,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5116,7 +5120,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00019666,
+      "weight": 0.00019674,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5126,7 +5130,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00019666,
+      "weight": 0.00019674,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5136,7 +5140,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00019666,
+      "weight": 0.00019674,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5146,7 +5150,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 9.833e-05,
+      "weight": 9.837e-05,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5156,7 +5160,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 9.833e-05,
+      "weight": 9.837e-05,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5166,7 +5170,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 9.833e-05,
+      "weight": 9.837e-05,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5176,7 +5180,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 9.833e-05,
+      "weight": 9.837e-05,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5186,7 +5190,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 9.833e-05,
+      "weight": 9.837e-05,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5196,7 +5200,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 9.833e-05,
+      "weight": 9.837e-05,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5206,7 +5210,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 9.833e-05,
+      "weight": 9.837e-05,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5216,7 +5220,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 9.833e-05,
+      "weight": 9.837e-05,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5226,7 +5230,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 9.833e-05,
+      "weight": 9.837e-05,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5236,7 +5240,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 9.833e-05,
+      "weight": 9.837e-05,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5246,7 +5250,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 9.833e-05,
+      "weight": 9.837e-05,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5256,7 +5260,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 9.833e-05,
+      "weight": 9.837e-05,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5266,7 +5270,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 9.833e-05,
+      "weight": 9.837e-05,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5276,7 +5280,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 9.833e-05,
+      "weight": 9.837e-05,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5286,7 +5290,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 9.833e-05,
+      "weight": 9.837e-05,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5296,7 +5300,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 9.833e-05,
+      "weight": 9.837e-05,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5306,7 +5310,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 9.833e-05,
+      "weight": 9.837e-05,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5316,7 +5320,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 9.833e-05,
+      "weight": 9.837e-05,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5326,7 +5330,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 9.833e-05,
+      "weight": 9.837e-05,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5336,7 +5340,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 9.833e-05,
+      "weight": 9.837e-05,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -5346,7 +5350,7 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 9.833e-05,
+      "weight": 9.837e-05,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     }
@@ -6326,11 +6330,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_32",
-      "name": "SANFORD LTD/NZ",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "NZX:SAN",
+      "name": "Sanford Limited",
+      "ticker": "SAN.NZ",
+      "country": "New Zealand",
+      "sector": "Consumer Staples",
       "weight": 0.0097,
       "asset_class": "equity"
     },
@@ -6389,11 +6393,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_39",
-      "name": "KMD BRANDS LTD NPV POST SPLIT",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "NZX:KMD",
+      "name": "KMD Brands Limited",
+      "ticker": "KMD.NZ",
+      "country": "New Zealand",
+      "sector": "Consumer Discretionary",
       "weight": 0.0027,
       "asset_class": "equity"
     }
@@ -6980,11 +6984,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_42",
-      "name": "SANFORD LTD/NZ",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "NZX:SAN",
+      "name": "Sanford Limited",
+      "ticker": "SAN.NZ",
+      "country": "New Zealand",
+      "sector": "Consumer Staples",
       "weight": 0.005,
       "asset_class": "equity"
     },
@@ -7043,11 +7047,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_49",
-      "name": "KMD BRANDS LTD NPV POST SPLIT",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "NZX:KMD",
+      "name": "KMD Brands Limited",
+      "ticker": "KMD.NZ",
+      "country": "New Zealand",
+      "sector": "Consumer Discretionary",
       "weight": 0.0014,
       "asset_class": "equity"
     }
@@ -220757,7 +220761,7 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SYNTH_P911",
+      "isin": "BJN59B8",
       "name": "DR ING HC F PORSCHE PRF AG",
       "ticker": "P911",
       "country": "Germany",
@@ -221191,11 +221195,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_16",
-      "name": "Monster Beverage Corp New",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BZ07BW4",
+      "name": "Monster Beverage Corp",
+      "ticker": "MNST",
+      "country": "United States",
+      "sector": "Consumer Staples",
       "weight": 0.01093704,
       "asset_class": "equity"
     },
@@ -221236,20 +221240,20 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_21",
-      "name": "Palo Alto Networks Inc. Common Stock",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B87ZMX0",
+      "name": "Palo Alto Networks Inc",
+      "ticker": "PANW",
+      "country": "United States",
+      "sector": "Information Technology",
       "weight": 0.00867081,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_22",
-      "name": "Deere & Company Common Stock",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2261203",
+      "name": "Deere & Co",
+      "ticker": "DE",
+      "country": "United States",
+      "sector": "Industrials",
       "weight": 0.00817815,
       "asset_class": "equity"
     },
@@ -221398,11 +221402,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_39",
-      "name": "Bank of Nova Scotia Halifax",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2076281",
+      "name": "Bank of Nova Scotia/The",
+      "ticker": "BNS",
+      "country": "Canada",
+      "sector": "Financials",
       "weight": 0.00532072,
       "asset_class": "equity"
     },
@@ -221416,11 +221420,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_41",
-      "name": "Salesforce.com Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2310525",
+      "name": "Salesforce Inc",
+      "ticker": "CRM",
+      "country": "United States",
+      "sector": "Information Technology",
       "weight": 0.00512366,
       "asset_class": "equity"
     },
@@ -221661,11 +221665,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_68",
-      "name": "DoorDash Inc. Class A",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BN13P03",
+      "name": "DoorDash Inc",
+      "ticker": "DASH",
+      "country": "United States",
+      "sector": "Consumer Discretionary",
       "weight": 0.00344862,
       "asset_class": "equity"
     },
@@ -221726,11 +221730,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_75",
-      "name": "Canadian Pacific Railway Ltd",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2180632",
+      "name": "Canadian National Railway Co",
+      "ticker": "CNR",
+      "country": "Canada",
+      "sector": "Industrials",
       "weight": 0.00295596,
       "asset_class": "equity"
     },
@@ -221906,11 +221910,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_95",
-      "name": "Airbnb Inc. Class A",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BMGYYH4",
+      "name": "Airbnb Inc",
+      "ticker": "ABNB",
+      "country": "United States",
+      "sector": "Consumer Discretionary",
       "weight": 0.00236477,
       "asset_class": "equity"
     },
@@ -222176,11 +222180,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_125",
-      "name": "Equinix REIT Ord",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BVLZX12",
+      "name": "Equinix Inc",
+      "ticker": "EQIX",
+      "country": "United States",
+      "sector": "Real Estate",
       "weight": 0.00167504,
       "asset_class": "equity"
     },
@@ -222349,11 +222353,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_144",
-      "name": "Nike INC - CL B",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2640147",
+      "name": "NIKE Inc",
+      "ticker": "NKE",
+      "country": "United States",
+      "sector": "Consumer Discretionary",
       "weight": 0.00137945,
       "asset_class": "equity"
     },
@@ -222475,11 +222479,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_158",
-      "name": "NXP Semiconductor NV",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B505PN7",
+      "name": "NXP Semiconductors NV",
+      "ticker": "NXPI",
+      "country": "United States",
+      "sector": "Information Technology",
       "weight": 0.00128091,
       "asset_class": "equity"
     },
@@ -222565,11 +222569,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_168",
-      "name": "Marriott International Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2210614",
+      "name": "Marriott International Inc/MD",
+      "ticker": "MAR",
+      "country": "United States",
+      "sector": "Consumer Discretionary",
       "weight": 0.00118238,
       "asset_class": "equity"
     },
@@ -222664,11 +222668,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_179",
-      "name": "D.R. Horton Inc.",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2250687",
+      "name": "DR Horton Inc",
+      "ticker": "DHI",
+      "country": "United States",
+      "sector": "Consumer Discretionary",
       "weight": 0.00108385,
       "asset_class": "equity"
     },
@@ -222691,11 +222695,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_182",
-      "name": "Hershey Foods Corp",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2422806",
+      "name": "Hershey Co/The",
+      "ticker": "HSY",
+      "country": "United States",
+      "sector": "Consumer Staples",
       "weight": 0.00108385,
       "asset_class": "equity"
     },
@@ -222718,11 +222722,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_185",
-      "name": "Workday Inc-Class A",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B8K6ZD1",
+      "name": "Workday Inc",
+      "ticker": "WDAY",
+      "country": "United States",
+      "sector": "Information Technology",
       "weight": 0.00098532,
       "asset_class": "equity"
     },
@@ -222817,13 +222821,15 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_196",
-      "name": "ANZ Bank (AU Register)",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6065586",
+      "name": "ANZ Group Holdings Limited",
+      "ticker": "ANZ.NZ",
+      "country": "Australia",
+      "sector": "Financials",
       "weight": 0.00098532,
-      "asset_class": "equity"
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_ANZ",
+      "issuer_name": "ANZ Group"
     },
     {
       "isin": "SEDOL:B0FS5D6",
@@ -223159,11 +223165,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_234",
-      "name": "Sea Ltd. (Singapore)-A",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:5258246",
+      "name": "Subsea 7 SA",
+      "ticker": "SUBC",
+      "country": "Norway",
+      "sector": "Energy",
       "weight": 0.00068972,
       "asset_class": "equity"
     },
@@ -223186,11 +223192,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_237",
-      "name": "Nippon Tel & Tel Corp",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6644060",
+      "name": "Nippon Television Holdings Inc",
+      "ticker": "9404",
+      "country": "Japan",
+      "sector": "Communication Services",
       "weight": 0.00068972,
       "asset_class": "equity"
     },
@@ -223213,11 +223219,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_240",
-      "name": "Assicurazioni Generali SpA",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:4056719",
+      "name": "Generali",
+      "ticker": "G",
+      "country": "Italy",
+      "sector": "Financials",
       "weight": 0.00059119,
       "asset_class": "equity"
     },
@@ -223249,11 +223255,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_244",
+      "isin": "MANUAL:SEBA",
       "name": "SEB-Skand Enskilda Banken A (EUR)",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "SEBA",
+      "country": "Sweden",
+      "sector": "Financials",
       "weight": 0.00059119,
       "asset_class": "equity"
     },
@@ -223366,11 +223372,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_257",
-      "name": "Barrick Gold Corp Ord",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BNM23Q1",
+      "name": "Barrick Mining Corp",
+      "ticker": "ABX",
+      "country": "Canada",
+      "sector": "Materials",
       "weight": 0.00059119,
       "asset_class": "equity"
     },
@@ -223393,11 +223399,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_260",
-      "name": "Iron Mountain Common Stock",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BVFTF03",
+      "name": "Iron Mountain Inc",
+      "ticker": "IRM",
+      "country": "United States",
+      "sector": "Real Estate",
       "weight": 0.00059119,
       "asset_class": "equity"
     },
@@ -223510,11 +223516,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_273",
-      "name": "Terna SpA",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B01BN57",
+      "name": "Terna - Rete Elettrica Nazionale",
+      "ticker": "TRN",
+      "country": "Italy",
+      "sector": "Utilities",
       "weight": 0.00049266,
       "asset_class": "equity"
     },
@@ -223591,11 +223597,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_282",
+      "isin": "MANUAL:MLM",
       "name": "Martin Merietta Materials Inc Common Stock",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "MLM",
+      "country": "United States",
+      "sector": "Materials",
       "weight": 0.00049266,
       "asset_class": "equity"
     },
@@ -223636,11 +223642,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_287",
-      "name": "Oriental Land Co",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6648891",
+      "name": "Oriental Land Co Ltd/Japan",
+      "ticker": "4661",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
       "weight": 0.00039413,
       "asset_class": "equity"
     },
@@ -223672,11 +223678,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_291",
-      "name": "Crown Castle Intl Corp",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BTGQCX1",
+      "name": "Crown Castle Inc",
+      "ticker": "CCI",
+      "country": "United States",
+      "sector": "Real Estate",
       "weight": 0.00039413,
       "asset_class": "equity"
     },
@@ -224221,11 +224227,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_352",
-      "name": "Roche Hldgs AG Br",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BTMJD19",
+      "name": "Roche Holding AG",
+      "ticker": "ROP",
+      "country": "Switzerland",
+      "sector": "Health Care",
       "weight": 0.00019706,
       "asset_class": "equity"
     },
@@ -224239,11 +224245,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_354",
-      "name": "BMW Ord",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:5756029",
+      "name": "Bayerische Motoren Werke AG",
+      "ticker": "BMW",
+      "country": "Germany",
+      "sector": "Consumer Discretionary",
       "weight": 0.00019706,
       "asset_class": "equity"
     },
@@ -224257,11 +224263,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_356",
+      "isin": "MANUAL:CCL.B",
       "name": "CCL Industries Inc. Class B NV",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "CCL.B",
+      "country": "Canada",
+      "sector": "Materials",
       "weight": 0.00019706,
       "asset_class": "equity"
     },
@@ -224302,11 +224308,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_361",
+      "isin": "MANUAL:RCI.B",
       "name": "Rogers Communications Inc B",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "RCI.B",
+      "country": "Canada",
+      "sector": "Communication Services",
       "weight": 0.00019706,
       "asset_class": "equity"
     },
@@ -224473,11 +224479,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_380",
-      "name": "Energias de Portugal SA",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:4103596",
+      "name": "EDP SA",
+      "ticker": "EDP",
+      "country": "Portugal",
+      "sector": "Utilities",
       "weight": 0.00019706,
       "asset_class": "equity"
     },
@@ -224538,11 +224544,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_387",
-      "name": "Grab Holdings Limited Class A",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BP6NH40",
+      "name": "Grab Holdings Ltd",
+      "ticker": "GRAB",
+      "country": "United States",
+      "sector": "Industrials",
       "weight": 0.00019706,
       "asset_class": "equity"
     },
@@ -224673,11 +224679,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_402",
-      "name": "NGK Spark Plug",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6619604",
+      "name": "Niterra Co Ltd",
+      "ticker": "5334",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
       "weight": 9.853e-05,
       "asset_class": "equity"
     },
@@ -224754,11 +224760,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_411",
+      "isin": "BJN59B8",
       "name": "Porsche AG Vz",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "P911",
+      "country": "Germany",
+      "sector": "Consumer Discretionary",
       "weight": 9.853e-05,
       "asset_class": "equity"
     },
@@ -224835,11 +224841,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_420",
-      "name": "NGK Insulators",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6619507",
+      "name": "NGK Corp",
+      "ticker": "5333",
+      "country": "Japan",
+      "sector": "Industrials",
       "weight": 9.853e-05,
       "asset_class": "equity"
     },
@@ -224943,11 +224949,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_432",
-      "name": "Hennes & Mauritz AB B",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:5687431",
+      "name": "H & M Hennes & Mauritz AB",
+      "ticker": "HMB",
+      "country": "Sweden",
+      "sector": "Consumer Discretionary",
       "weight": 9.853e-05,
       "asset_class": "equity"
     },
@@ -224970,20 +224976,20 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_435",
-      "name": "Nordnet AB",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BNDLH43",
+      "name": "Nordnet AB publ",
+      "ticker": "SAVE",
+      "country": "Sweden",
+      "sector": "Financials",
       "weight": 9.853e-05,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_436",
-      "name": "EDP Renovaveis SA",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B39GNW2",
+      "name": "EDP Renewables SA",
+      "ticker": "EDPR",
+      "country": "Portugal",
+      "sector": "Utilities",
       "weight": 9.853e-05,
       "asset_class": "equity"
     },
@@ -225060,7 +225066,7 @@
       "ticker": "BE",
       "country": "United States",
       "sector": "Industrials",
-      "weight": 0.09897848,
+      "weight": 0.09899812,
       "asset_class": "equity"
     },
     {
@@ -225069,7 +225075,7 @@
       "ticker": "FSLR",
       "country": "United States",
       "sector": "Information Technology",
-      "weight": 0.07101061,
+      "weight": 0.0710247,
       "asset_class": "equity"
     },
     {
@@ -225078,7 +225084,7 @@
       "ticker": "IBE",
       "country": "Spain",
       "sector": "Utilities",
-      "weight": 0.06773778,
+      "weight": 0.06775122,
       "asset_class": "equity"
     },
     {
@@ -225087,7 +225093,7 @@
       "ticker": "NXT",
       "country": "United States",
       "sector": "Industrials",
-      "weight": 0.06456412,
+      "weight": 0.06457693,
       "asset_class": "equity"
     },
     {
@@ -225096,7 +225102,7 @@
       "ticker": "VWS",
       "country": "Denmark",
       "sector": "Industrials",
-      "weight": 0.0513736,
+      "weight": 0.05138379,
       "asset_class": "equity"
     },
     {
@@ -225105,7 +225111,7 @@
       "ticker": "SSE",
       "country": "United Kingdom",
       "sector": "Utilities",
-      "weight": 0.04591887,
+      "weight": 0.04592798,
       "asset_class": "equity"
     },
     {
@@ -225114,7 +225120,7 @@
       "ticker": "GEV",
       "country": "United States",
       "sector": "Industrials",
-      "weight": 0.04036497,
+      "weight": 0.04037298,
       "asset_class": "equity"
     },
     {
@@ -225123,7 +225129,7 @@
       "ticker": "EOAN",
       "country": "Germany",
       "sector": "Utilities",
-      "weight": 0.03967073,
+      "weight": 0.0396786,
       "asset_class": "equity"
     },
     {
@@ -225132,7 +225138,7 @@
       "ticker": "NEE",
       "country": "United States",
       "sector": "Utilities",
-      "weight": 0.0393732,
+      "weight": 0.03938101,
       "asset_class": "equity"
     },
     {
@@ -225141,7 +225147,7 @@
       "ticker": "ENEL",
       "country": "Italy",
       "sector": "Utilities",
-      "weight": 0.03917485,
+      "weight": 0.03918262,
       "asset_class": "equity"
     },
     {
@@ -225150,7 +225156,7 @@
       "ticker": "EDP",
       "country": "Portugal",
       "sector": "Utilities",
-      "weight": 0.03659625,
+      "weight": 0.03660351,
       "asset_class": "equity"
     },
     {
@@ -225159,7 +225165,7 @@
       "ticker": "9502",
       "country": "Japan",
       "sector": "Utilities",
-      "weight": 0.03173659,
+      "weight": 0.03174288,
       "asset_class": "equity"
     },
     {
@@ -225168,7 +225174,7 @@
       "ticker": "ENPH",
       "country": "United States",
       "sector": "Information Technology",
-      "weight": 0.03054646,
+      "weight": 0.03055252,
       "asset_class": "equity"
     },
     {
@@ -225177,7 +225183,7 @@
       "ticker": "ORA",
       "country": "United States",
       "sector": "Utilities",
-      "weight": 0.02965387,
+      "weight": 0.02965976,
       "asset_class": "equity"
     },
     {
@@ -225186,7 +225192,7 @@
       "ticker": "ENLT",
       "country": "Israel",
       "sector": "Utilities",
-      "weight": 0.02271149,
+      "weight": 0.022716,
       "asset_class": "equity"
     },
     {
@@ -225195,7 +225201,7 @@
       "ticker": "CWEN",
       "country": "United States",
       "sector": "Utilities",
-      "weight": 0.02241396,
+      "weight": 0.02241841,
       "asset_class": "equity"
     },
     {
@@ -225204,7 +225210,7 @@
       "ticker": "PLUG",
       "country": "United States",
       "sector": "Industrials",
-      "weight": 0.01904195,
+      "weight": 0.01904573,
       "asset_class": "equity"
     },
     {
@@ -225213,7 +225219,7 @@
       "ticker": "ORSTED",
       "country": "Denmark",
       "sector": "Utilities",
-      "weight": 0.0188436,
+      "weight": 0.01884734,
       "asset_class": "equity"
     },
     {
@@ -225222,7 +225228,7 @@
       "ticker": "NDX1",
       "country": "Germany",
       "sector": "Industrials",
-      "weight": 0.01824854,
+      "weight": 0.01825216,
       "asset_class": "equity"
     },
     {
@@ -225231,34 +225237,34 @@
       "ticker": "916",
       "country": "Hong Kong",
       "sector": "Utilities",
-      "weight": 0.01527323,
+      "weight": 0.01527626,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_20",
+      "isin": "BWC52Q6",
       "name": "SolarEdge Technologies Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.01358723,
+      "ticker": "SEDG",
+      "country": "Isreal",
+      "sector": "Information Technology",
+      "weight": 0.01358992,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_21",
-      "name": "Solaria Energia y Medioambiente SA",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.01219875,
+      "isin": "SEDOL:B1YVKJ4",
+      "name": "Solaria Energia y Medio Ambiente SA",
+      "ticker": "SLR",
+      "country": "Spain",
+      "sector": "Utilities",
+      "weight": 0.01220117,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_22",
-      "name": "EDP Renovaveis SA",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00991768,
+      "isin": "SEDOL:B39GNW2",
+      "name": "EDP Renewables SA",
+      "ticker": "EDPR",
+      "country": "Portugal",
+      "sector": "Utilities",
+      "weight": 0.00991965,
       "asset_class": "equity"
     },
     {
@@ -225267,7 +225273,7 @@
       "ticker": "NPI",
       "country": "Canada",
       "sector": "Utilities",
-      "weight": 0.00981851,
+      "weight": 0.00982045,
       "asset_class": "equity"
     },
     {
@@ -225276,7 +225282,7 @@
       "ticker": "RUN",
       "country": "United States",
       "sector": "Industrials",
-      "weight": 0.00981851,
+      "weight": 0.00982045,
       "asset_class": "equity"
     },
     {
@@ -225285,16 +225291,16 @@
       "ticker": "CMIG3",
       "country": "Brazil",
       "sector": "Utilities",
-      "weight": 0.00971933,
+      "weight": 0.00972126,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_26",
-      "name": "Shoals Technologies Group Inc. Class A",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00952098,
+      "isin": "SEDOL:BMDJ085",
+      "name": "Shoals Technologies Group Inc",
+      "ticker": "SHLS",
+      "country": "United States",
+      "sector": "Industrials",
+      "weight": 0.00952286,
       "asset_class": "equity"
     },
     {
@@ -225303,25 +225309,25 @@
       "ticker": "VER",
       "country": "Austria",
       "sector": "Utilities",
-      "weight": 0.00783497,
+      "weight": 0.00783652,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_28",
+      "isin": "B11FJD6",
       "name": "Green Plains Inc.",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00743826,
+      "ticker": "GPRE",
+      "country": "United States",
+      "sector": "Energy",
+      "weight": 0.00743974,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_29",
-      "name": "Central New Energy Holding Group Ltd",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00723991,
+      "isin": "SEDOL:BQWJ9K9",
+      "name": "CGN New Energy Holdings Co Ltd",
+      "ticker": "1811",
+      "country": "Hong Kong",
+      "sector": "Utilities",
+      "weight": 0.00724135,
       "asset_class": "equity"
     },
     {
@@ -225330,7 +225336,7 @@
       "ticker": "BKW",
       "country": "Switzerland",
       "sector": "Utilities",
-      "weight": 0.0068432,
+      "weight": 0.00684456,
       "asset_class": "equity"
     },
     {
@@ -225339,7 +225345,7 @@
       "ticker": "DORL",
       "country": "Israel",
       "sector": "Utilities",
-      "weight": 0.00634732,
+      "weight": 0.00634858,
       "asset_class": "equity"
     },
     {
@@ -225348,16 +225354,16 @@
       "ticker": "002202",
       "country": "China",
       "sector": "Industrials",
-      "weight": 0.00614896,
+      "weight": 0.00615018,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_33",
+      "isin": "BSKPBK7",
       "name": "T1 Energy Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00565308,
+      "ticker": "TE",
+      "country": "United States",
+      "sector": "Industrials",
+      "weight": 0.0056542,
       "asset_class": "equity"
     },
     {
@@ -225366,16 +225372,16 @@
       "ticker": "BEPC",
       "country": "Canada",
       "sector": "Utilities",
-      "weight": 0.00565308,
+      "weight": 0.0056542,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_35",
-      "name": "Conch Venture ORD",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0055539,
+      "isin": "SEDOL:BH7HM06",
+      "name": "China Conch Venture Holdings Ltd",
+      "ticker": "586",
+      "country": "Hong Kong",
+      "sector": "Industrials",
+      "weight": 0.005555,
       "asset_class": "equity"
     },
     {
@@ -225384,7 +225390,7 @@
       "ticker": "S92",
       "country": "Germany",
       "sector": "Industrials",
-      "weight": 0.00505802,
+      "weight": 0.00505902,
       "asset_class": "equity"
     },
     {
@@ -225393,34 +225399,34 @@
       "ticker": "ERG",
       "country": "Italy",
       "sector": "Utilities",
-      "weight": 0.00476049,
+      "weight": 0.00476143,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_38",
+      "isin": "SEDOL:BG5KQW0",
       "name": "Ceres Power Holdings PLC",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00466131,
+      "ticker": "CWR",
+      "country": "United Kingdom",
+      "sector": "Energy",
+      "weight": 0.00466224,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_39",
+      "isin": "2731978",
       "name": "Rex American Resources ORD",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00456213,
+      "ticker": "REX",
+      "country": "United States",
+      "sector": "Materials",
+      "weight": 0.00456304,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_40",
+      "isin": "MANUAL:FCEL",
       "name": "Fuelcell Energy Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00456213,
+      "ticker": "FCEL",
+      "country": "United States",
+      "sector": "Energy",
+      "weight": 0.00456304,
       "asset_class": "equity"
     },
     {
@@ -225429,16 +225435,16 @@
       "ticker": "ARRY",
       "country": "United States",
       "sector": "Industrials",
-      "weight": 0.00436378,
+      "weight": 0.00436465,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_42",
-      "name": "Corporacion Acciona Energias Renovables SA",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00416543,
+      "isin": "SEDOL:BP7L895",
+      "name": "Corp ACCIONA Energias Renovables SA",
+      "ticker": "ANE",
+      "country": "Spain",
+      "sector": "Utilities",
+      "weight": 0.00416625,
       "asset_class": "equity"
     },
     {
@@ -225447,16 +225453,16 @@
       "ticker": "VBK",
       "country": "Germany",
       "sector": "Energy",
-      "weight": 0.0038679,
+      "weight": 0.00386866,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_44",
+      "isin": "MANUAL:CSIQ",
       "name": "Canadian Solar Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00376872,
+      "ticker": "CSIQ",
+      "country": "Canada",
+      "sector": "Information Technology",
+      "weight": 0.00376947,
       "asset_class": "equity"
     },
     {
@@ -225465,18 +225471,18 @@
       "ticker": "CEN.NZ",
       "country": "New Zealand",
       "sector": "Utilities",
-      "weight": 0.00366954,
+      "weight": 0.00367027,
       "asset_class": "equity",
       "issuer_key": "ISSUER_CEN",
       "issuer_name": "Contact Energy"
     },
     {
-      "isin": "UNRESOLVED_46",
+      "isin": "MANUAL:RNW",
       "name": "Renew Energy Global CL A ORD",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00327284,
+      "ticker": "RNW",
+      "country": "United Kingdom",
+      "sector": "Utilities",
+      "weight": 0.00327348,
       "asset_class": "equity"
     },
     {
@@ -225485,7 +225491,7 @@
       "ticker": "ENRG",
       "country": "Israel",
       "sector": "Utilities",
-      "weight": 0.00327284,
+      "weight": 0.00327348,
       "asset_class": "equity"
     },
     {
@@ -225494,7 +225500,7 @@
       "ticker": "NOFR",
       "country": "Israel",
       "sector": "Utilities",
-      "weight": 0.0029753,
+      "weight": 0.0029759,
       "asset_class": "equity"
     },
     {
@@ -225503,7 +225509,7 @@
       "ticker": "MEL.NZ",
       "country": "New Zealand",
       "sector": "Utilities",
-      "weight": 0.00277695,
+      "weight": 0.0027775,
       "asset_class": "equity",
       "issuer_key": "ISSUER_MEL",
       "issuer_name": "Meridian Energy"
@@ -225514,7 +225520,7 @@
       "ticker": "VUL.AX",
       "country": "Australia",
       "sector": "Materials",
-      "weight": 0.00247942,
+      "weight": 0.00247991,
       "asset_class": "equity"
     },
     {
@@ -225523,7 +225529,7 @@
       "ticker": "JKS",
       "country": "United States",
       "sector": "Information Technology",
-      "weight": 0.00208271,
+      "weight": 0.00208313,
       "asset_class": "equity"
     },
     {
@@ -225532,7 +225538,7 @@
       "ticker": "9519",
       "country": "Japan",
       "sector": "Utilities",
-      "weight": 0.00168601,
+      "weight": 0.00168634,
       "asset_class": "equity"
     },
     {
@@ -225541,16 +225547,7 @@
       "ticker": "1798",
       "country": "Hong Kong",
       "sector": "Utilities",
-      "weight": 0.0012893,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_54",
-      "name": "Israeli Sheqel",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00019835,
+      "weight": 0.00128955,
       "asset_class": "equity"
     }
   ],
@@ -225819,9 +225816,9 @@
     {
       "isin": "SEDOL:2679419",
       "name": "Peoples Bancorp Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "PEBO",
+      "country": "United States",
+      "sector": "Financials",
       "weight": 0.01377796,
       "asset_class": "equity"
     },
@@ -225835,11 +225832,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_31",
-      "name": "Energias de Portugal SA",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:4103596",
+      "name": "EDP SA",
+      "ticker": "EDP",
+      "country": "Portugal",
+      "sector": "Utilities",
       "weight": 0.01337859,
       "asset_class": "equity"
     },
@@ -225988,11 +225985,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_48",
+      "isin": "2172639",
       "name": "Canadian Utilities Ltd A NV",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "CU",
+      "country": "Canada",
+      "sector": "Utilities",
       "weight": 0.01128195,
       "asset_class": "equity"
     },
@@ -226132,29 +226129,29 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_64",
-      "name": "Bank of Nova Scotia Halifax",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2076281",
+      "name": "Bank of Nova Scotia/The",
+      "ticker": "BNS",
+      "country": "Canada",
+      "sector": "Financials",
       "weight": 0.00908546,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_65",
-      "name": "Banque Cant Vaudoise Reg",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BMFY8R3",
+      "name": "Banque Cantonale Vaudoise",
+      "ticker": "BCVN",
+      "country": "Switzerland",
+      "sector": "Financials",
       "weight": 0.00888578,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_66",
+      "isin": "2125901",
       "name": "OceanFirst Financial Corp",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "OCFC",
+      "country": "United States",
+      "sector": "Financials",
       "weight": 0.00878594,
       "asset_class": "equity"
     },
@@ -226186,11 +226183,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_70",
-      "name": "Terna SpA",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B01BN57",
+      "name": "Terna - Rete Elettrica Nazionale",
+      "ticker": "TRN",
+      "country": "Italy",
+      "sector": "Utilities",
       "weight": 0.0071885,
       "asset_class": "equity"
     },
@@ -227701,9 +227698,9 @@
     {
       "isin": "SEDOL:BQPGVF6",
       "name": "Arm Holdings plc ADR",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "ARM",
+      "country": "United Kingdom",
+      "sector": "Information Technology",
       "weight": 0.00161068,
       "asset_class": "equity"
     },
@@ -229715,11 +229712,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_383",
-      "name": "Concordia Financial Group",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BD97JW7",
+      "name": "Yokohama Financial Group Inc",
+      "ticker": "7186",
+      "country": "Japan",
+      "sector": "Financials",
       "weight": 0.000604,
       "asset_class": "equity"
     },
@@ -230201,11 +230198,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_437",
+      "isin": "MANUAL:RCI.B",
       "name": "Rogers Communications Inc B",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "RCI.B",
+      "country": "Canada",
+      "sector": "Communication Services",
       "weight": 0.00050334,
       "asset_class": "equity"
     },
@@ -230417,11 +230414,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_461",
+      "isin": "MANUAL:BNTX",
       "name": "BionTech SE",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "BNTX",
+      "country": "Germany",
+      "sector": "Health Care",
       "weight": 0.00040267,
       "asset_class": "equity"
     },
@@ -230714,11 +230711,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_494",
+      "isin": "MANUAL:CCL.B",
       "name": "CCL Industries Inc. Class B NV",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "CCL.B",
+      "country": "Canada",
+      "sector": "Materials",
       "weight": 0.00040267,
       "asset_class": "equity"
     },
@@ -231384,11 +231381,11 @@
       "issuer_name": "Infratil"
     },
     {
-      "isin": "UNRESOLVED_568",
-      "name": "Sartorius AG Nvtg - Pref",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BYZ2QP5",
+      "name": "Sartorius Stedim Biotech",
+      "ticker": "DIM",
+      "country": "France",
+      "sector": "Health Care",
       "weight": 0.000302,
       "asset_class": "equity"
     },
@@ -231654,11 +231651,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_598",
+      "isin": "MANUAL:FUTU",
       "name": "Futu Holdings Ltd ADR",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "FUTU",
+      "country": "China",
+      "sector": "Financials",
       "weight": 0.000302,
       "asset_class": "equity"
     },
@@ -232167,11 +232164,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_655",
+      "isin": "BJN59B8",
       "name": "Porsche AG Vz",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "P911",
+      "country": "Germany",
+      "sector": "Consumer Discretionary",
       "weight": 0.00020133,
       "asset_class": "equity"
     },
@@ -232203,11 +232200,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_659",
-      "name": "TIS Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B2Q4CR0",
+      "name": "TISI Inc",
+      "ticker": "3626",
+      "country": "Japan",
+      "sector": "Information Technology",
       "weight": 0.00020133,
       "asset_class": "equity"
     },
@@ -232257,11 +232254,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_665",
+      "isin": "MANUAL:6823",
       "name": "HKT Trust / HKT Ltd",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "6823",
+      "country": "China",
+      "sector": "Communication Services",
       "weight": 0.00020133,
       "asset_class": "equity"
     },
@@ -233723,11 +233720,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_827",
+      "isin": "MANUAL:CDI",
       "name": "Christian Dior SE",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "CDI",
+      "country": "France",
+      "sector": "Consumer Discretionary",
       "weight": 0.00010067,
       "asset_class": "equity"
     },
@@ -233795,11 +233792,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_835",
+      "isin": "MANUAL:ALHE",
       "name": "Aloni Hetz Properties",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "ALHE",
+      "country": "isreal",
+      "sector": "Real Estate",
       "weight": 0.00010067,
       "asset_class": "equity"
     },
@@ -233813,20 +233810,20 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_837",
+      "isin": "MANUAL:CLBT",
       "name": "Cellebrite DI Ltd.",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "CLBT",
+      "country": "Isreal",
+      "sector": "Information Technology",
       "weight": 0.00010067,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_838",
+      "isin": "BS491D8",
       "name": "eToro Group Ltd",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "ETOR",
+      "country": "Isreal",
+      "sector": "Financials",
       "weight": 0.00010067,
       "asset_class": "equity"
     },
@@ -234013,11 +234010,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_SE",
+      "isin": "BYWD7L4",
       "name": "SEA LTD",
       "ticker": "SE",
       "country": "Singapore",
-      "sector": "Unclassified",
+      "sector": "Consumer Discretionary",
       "weight": 0.0183428,
       "asset_class": "equity"
     },
@@ -234256,11 +234253,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_SIMO",
+      "isin": "MANUAL:SIMO",
       "name": "SILICON MOTION TECHNOLOGY CORP",
       "ticker": "SIMO",
       "country": "Taiwan",
-      "sector": "Unclassified",
+      "sector": "Information Technology",
       "weight": 0.00241426,
       "asset_class": "equity"
     },

@@ -33,3 +33,10 @@ __pycache__/
 .venv/
 venv/
 
+# Local user portfolio backups (auto-saved to repo root)
+portfolio_backup.json
+portfolio_backup_*.json
+kiwi_portfolio_backup.json
+kiwi_portfolio_backup_*.json
+
+

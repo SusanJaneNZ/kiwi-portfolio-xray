@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   DirectEquityCatalogItem,
   FundMetadata,
   UserPortfolioState,
 } from '../types/portfolio';
 import { directHoldingValueNZD } from '../utils/format';
+import { CollapsiblePanel } from './CollapsiblePanel';
+import {
+  DEFAULT_PORTFOLIO_STATE,
+  createDatedBackupOnDisk,
+  exportPortfolioJSON,
+  importPortfolioJSON,
+} from '../storage/localStorage';
 import { FundAllocationsPanel } from './portfolio-inputs/FundAllocationsPanel';
 import { DirectSharesPanel } from './portfolio-inputs/DirectSharesPanel';
 import { CashDepositsPanel } from './portfolio-inputs/CashDepositsPanel';
@@ -24,6 +31,79 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
   onUpdateState,
   totalPortfolioNZD,
 }) => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const hasEnteredPortfolio =
+    Object.keys(portfolioState.fundBalances).length > 0 ||
+    portfolioState.directHoldings.length > 0 ||
+    portfolioState.cashDeposits.length > 0 ||
+    portfolioState.buckets.length > 0;
+
+  const handleLoadSample = async () => {
+    if (
+      hasEnteredPortfolio &&
+      !window.confirm('Replace your saved portfolio with the sample portfolio?')
+    ) {
+      return;
+    }
+    if (hasEnteredPortfolio) {
+      await createDatedBackupOnDisk();
+    }
+    onUpdateState({
+      ...DEFAULT_PORTFOLIO_STATE,
+      timestamp: new Date().toISOString(),
+    });
+  };
+
+  const handleClearPortfolio = async () => {
+    if (
+      hasEnteredPortfolio &&
+      !window.confirm('Clear all entered funds, direct shares, and term deposits?')
+    ) {
+      return;
+    }
+    if (hasEnteredPortfolio) {
+      await createDatedBackupOnDisk();
+    }
+    onUpdateState({
+      ...portfolioState,
+      fundBalances: {},
+      directHoldings: [],
+      cashDeposits: [],
+      bucketAssignments: {},
+    });
+  };
+
+  const handleExportPortfolio = () => {
+    const jsonStr = exportPortfolioJSON(portfolioState);
+    const blob = new Blob([jsonStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `kiwi_portfolio_${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleImportFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputEl = e.target;
+    const file = inputEl.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const content = event.target?.result as string;
+        const imported = importPortfolioJSON(content);
+        onUpdateState(imported);
+      } catch (err) {
+        alert('Failed to import JSON portfolio file: ' + err);
+      } finally {
+        inputEl.value = '';
+      }
+    };
+    reader.readAsText(file);
+  };
+
   const setBucketForKey = (instrumentKey: string, bucketId: string) => {
     const nextAssignments = { ...portfolioState.bucketAssignments };
     if (!bucketId) {
@@ -42,32 +122,84 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
   const depositSumNZD = portfolioState.cashDeposits.reduce((acc, d) => acc + Math.max(0, d.valueNZD), 0);
 
   return (
-    <div className="space-y-4">
-      <FundAllocationsPanel
-        portfolioState={portfolioState}
-        fundsRegistry={fundsRegistry}
-        totalPortfolioNZD={totalPortfolioNZD}
-        fundSumNZD={fundSumNZD}
-        onAssignBucket={setBucketForKey}
-        onUpdateState={onUpdateState}
-      />
+    <CollapsiblePanel
+      id="portfolio-inputs-group"
+      title={
+        <div className="flex items-center gap-2.5">
+          <span className="text-sm font-semibold text-white">Portfolio</span>
+          <span className="text-xs font-mono font-normal bg-slate-800 text-slate-300 px-2 py-0.5 rounded-full border border-slate-700">
+            ${totalPortfolioNZD.toLocaleString('en-NZ', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} NZD
+          </span>
+        </div>
+      }
+      subtitle="Manage your index/KiwiSaver fund allocations, direct NZX/ASX shares, and bank term deposits."
+      headerRight={
+        <div className="flex flex-wrap items-center gap-2" onClick={(e) => e.stopPropagation()}>
+          <button
+            onClick={handleLoadSample}
+            className="text-xs bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-3 py-1.5 rounded-lg transition-colors shadow-sm"
+          >
+            Load Sample
+          </button>
+          <button
+            onClick={handleClearPortfolio}
+            title="Clear all entered fund balances, direct shares, and term deposits"
+            className="text-xs bg-slate-950 hover:bg-rose-950/40 text-slate-400 hover:text-rose-400 border border-slate-800 px-3 py-1.5 rounded-lg transition-colors"
+          >
+            Clear Portfolio
+          </button>
+          <button
+            onClick={handleExportPortfolio}
+            title="Export entered portfolio inputs as a JSON backup file"
+            className="text-xs bg-slate-950 hover:bg-slate-800 text-slate-200 border border-slate-800 px-3 py-1.5 rounded-lg transition-colors"
+          >
+            Export Portfolio
+          </button>
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            title="Import a previously saved JSON portfolio backup file"
+            className="text-xs bg-slate-950 hover:bg-slate-800 text-slate-200 border border-slate-800 px-3 py-1.5 rounded-lg transition-colors"
+          >
+            Import Portfolio
+          </button>
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleImportFile}
+            accept=".json"
+            className="hidden"
+          />
+        </div>
+      }
+      className="md:p-5"
+    >
+      <div className="space-y-4 pt-1">
+        <FundAllocationsPanel
+          portfolioState={portfolioState}
+          fundsRegistry={fundsRegistry}
+          totalPortfolioNZD={totalPortfolioNZD}
+          fundSumNZD={fundSumNZD}
+          onAssignBucket={setBucketForKey}
+          onUpdateState={onUpdateState}
+        />
 
-      <DirectSharesPanel
-        portfolioState={portfolioState}
-        directEquitiesCatalog={directEquitiesCatalog}
-        totalPortfolioNZD={totalPortfolioNZD}
-        directSumNZD={directSumNZD}
-        onAssignBucket={setBucketForKey}
-        onUpdateState={onUpdateState}
-      />
+        <DirectSharesPanel
+          portfolioState={portfolioState}
+          directEquitiesCatalog={directEquitiesCatalog}
+          totalPortfolioNZD={totalPortfolioNZD}
+          directSumNZD={directSumNZD}
+          onAssignBucket={setBucketForKey}
+          onUpdateState={onUpdateState}
+        />
 
-      <CashDepositsPanel
-        portfolioState={portfolioState}
-        totalPortfolioNZD={totalPortfolioNZD}
-        depositSumNZD={depositSumNZD}
-        onAssignBucket={setBucketForKey}
-        onUpdateState={onUpdateState}
-      />
-    </div>
+        <CashDepositsPanel
+          portfolioState={portfolioState}
+          totalPortfolioNZD={totalPortfolioNZD}
+          depositSumNZD={depositSumNZD}
+          onAssignBucket={setBucketForKey}
+          onUpdateState={onUpdateState}
+        />
+      </div>
+    </CollapsiblePanel>
   );
 };

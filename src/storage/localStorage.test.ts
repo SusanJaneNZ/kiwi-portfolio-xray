@@ -8,7 +8,10 @@ import {
   STORAGE_KEY_BACKUP_V2,
   STORAGE_KEY_V1,
   STORAGE_KEY_V2,
+  autoSavePortfolioToDisk,
+  createDatedBackupOnDisk,
   importPortfolioJSON,
+  loadPortfolioFromDisk,
   loadPortfolioStateWithMeta,
   normalizePortfolioState,
   resumeLinkedFileSync,
@@ -219,6 +222,66 @@ export const storageTestCases: Array<[string, () => void]> = [
       const ok = await writePortfolioToLinkedFile(mockHandle, updated);
       assertTrue(ok, "writePortfolioToLinkedFile succeeds");
       assertTrue(diskContent.includes("44000"), "disk content updated with new balance");
+    },
+  ],
+  [
+    "autoSavePortfolioToDisk, loadPortfolioFromDisk, and createDatedBackupOnDisk hit local endpoints",
+    async () => {
+      const originalFetch = globalThis.fetch;
+      let postedBody: any = null;
+      let snapshotCalled = false;
+      globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
+        const url = String(input);
+        if (url === "/api/portfolio/save") {
+          postedBody = JSON.parse(init?.body as string);
+          return { ok: true, json: async () => ({ ok: true, file: "portfolio_backup.json" }) } as Response;
+        }
+        if (url === "/api/portfolio/backup") {
+          snapshotCalled = true;
+          return {
+            ok: true,
+            json: async () => ({ ok: true, backupFile: "portfolio_backup_2026-11-13_120000.json" }),
+          } as Response;
+        }
+        if (url === "/api/portfolio/load") {
+          return {
+            ok: true,
+            json: async () => ({
+              exists: true,
+              state: {
+                version: 2,
+                timestamp: "2026-11-13T10:00:00Z",
+                fundBalances: { FNZ: 50000 },
+                directHoldings: [],
+                cashDeposits: [],
+                buckets: [],
+                bucketAssignments: {},
+              },
+            }),
+          } as Response;
+        }
+        return { ok: false, status: 404 } as Response;
+      }) as typeof fetch;
+
+      try {
+        const testState = {
+          ...DEFAULT_PORTFOLIO_STATE,
+          fundBalances: { ASIA: 25000 },
+        };
+        const saved = await autoSavePortfolioToDisk(testState);
+        assertTrue(saved, "autoSavePortfolioToDisk succeeds");
+        assertEq(postedBody.fundBalances.ASIA, 25000, "posted body preserves ASIA balance");
+
+        const dated = await createDatedBackupOnDisk();
+        assertTrue(snapshotCalled, "createDatedBackupOnDisk triggered snapshot endpoint");
+        assertEq(dated, "portfolio_backup_2026-11-13_120000.json", "returns dated backup filename");
+
+        const loaded = await loadPortfolioFromDisk();
+        assertTrue(loaded !== null, "loadPortfolioFromDisk loads state");
+        assertEq(loaded!.fundBalances.FNZ, 50000, "loaded FNZ balance from disk");
+      } finally {
+        globalThis.fetch = originalFetch;
+      }
     },
   ],
 ];

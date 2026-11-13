@@ -1,5 +1,237 @@
 [
   {
+    "isin": "SEDOL:BQPGVF6",
+    "name": "Arm Holdings plc ADR",
+    "ticker": "ARM",
+    "country": "United Kingdom",
+    "sector": "Information Technology",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "MANUAL:UCL",
+    "name": "Unlisted Co Ltd",
+    "ticker": "UCL",
+    "country": "New Zealand",
+    "sector": "Industrials",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "SEDOL:2679419",
+    "name": "Peoples Bancorp Inc",
+    "ticker": "PEBO",
+    "country": "United States",
+    "sector": "Financials",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "BWC52Q6",
+    "name": "SolarEdge Technologies Inc",
+    "ticker": "SEDG",
+    "country": "Isreal",
+    "sector": "Information Technology",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "BYWD7L4",
+    "name": "SEA LTD",
+    "ticker": "SE",
+    "country": "Singapore",
+    "sector": "Consumer Discretionary",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "2172639",
+    "name": "Canadian Utilities Ltd A NV",
+    "ticker": "CU",
+    "country": "Canada",
+    "sector": "Utilities",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "AU000000IOZ4",
+    "name": "ISHARES CORE S&P/ASX 200 ETF",
+    "ticker": "",
+    "country": "Australia",
+    "sector": "Financials",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "2125901",
+    "name": "OceanFirst Financial Corp",
+    "ticker": "OCFC",
+    "country": "United States",
+    "sector": "Financials",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "B11FJD6",
+    "name": "Green Plains Inc.",
+    "ticker": "GPRE",
+    "country": "United States",
+    "sector": "Energy",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "B1FBT05",
+    "name": "LIONTOWN RESOURCES LTD",
+    "ticker": "LTR",
+    "country": "Australia",
+    "sector": "Materials",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "BSKPBK7",
+    "name": "T1 Energy Inc",
+    "ticker": "TE",
+    "country": "United States",
+    "sector": "Industrials",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "BJN59B8",
+    "name": "Porsche AG Vz",
+    "ticker": "P911",
+    "country": "Germany",
+    "sector": "Consumer Discretionary",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "2731978",
+    "name": "Rex American Resources ORD",
+    "ticker": "REX",
+    "country": "United States",
+    "sector": "Materials",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "MANUAL:FCEL",
+    "name": "Fuelcell Energy Inc",
+    "ticker": "FCEL",
+    "country": "United States",
+    "sector": "Energy",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "MANUAL:CSIQ",
+    "name": "Canadian Solar Inc",
+    "ticker": "CSIQ",
+    "country": "Canada",
+    "sector": "Information Technology",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "MANUAL:RNW",
+    "name": "Renew Energy Global CL A ORD",
+    "ticker": "RNW",
+    "country": "United Kingdom",
+    "sector": "Utilities",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "MANUAL:SIMO",
+    "name": "SILICON MOTION TECHNOLOGY CORP",
+    "ticker": "SIMO",
+    "country": "Taiwan",
+    "sector": "Information Technology",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "MANUAL:SEBA",
+    "name": "SEB-Skand Enskilda Banken A (EUR)",
+    "ticker": "SEBA",
+    "country": "Sweden",
+    "sector": "Financials",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "MANUAL:RCI.B",
+    "name": "Rogers Communications Inc B",
+    "ticker": "RCI.B",
+    "country": "Canada",
+    "sector": "Communication Services",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "MANUAL:MLM",
+    "name": "Martin Merietta Materials Inc Common Stock",
+    "ticker": "MLM",
+    "country": "United States",
+    "sector": "Materials",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "MANUAL:BNTX",
+    "name": "BionTech SE",
+    "ticker": "BNTX",
+    "country": "Germany",
+    "sector": "Health Care",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "MANUAL:CCL.B",
+    "name": "CCL Industries Inc. Class B NV",
+    "ticker": "CCL.B",
+    "country": "Canada",
+    "sector": "Materials",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "MANUAL:FUTU",
+    "name": "Futu Holdings Ltd ADR",
+    "ticker": "FUTU",
+    "country": "China",
+    "sector": "Financials",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "MANUAL:6823",
+    "name": "HKT Trust / HKT Ltd",
+    "ticker": "6823",
+    "country": "China",
+    "sector": "Communication Services",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "MANUAL:CDI",
+    "name": "Christian Dior SE",
+    "ticker": "CDI",
+    "country": "France",
+    "sector": "Consumer Discretionary",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "MANUAL:ALHE",
+    "name": "Aloni Hetz Properties",
+    "ticker": "ALHE",
+    "country": "isreal",
+    "sector": "Real Estate",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "MANUAL:CLBT",
+    "name": "Cellebrite DI Ltd.",
+    "ticker": "CLBT",
+    "country": "Isreal",
+    "sector": "Information Technology",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "BS491D8",
+    "name": "eToro Group Ltd",
+    "ticker": "ETOR",
+    "country": "Isreal",
+    "sector": "Financials",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "MANUAL:ILS",
+    "name": "Israeli Sheqel",
+    "ticker": "ILS",
+    "country": "Isreal",
+    "sector": "Financials",
+    "exchange": "MANUAL"
+  },
+  {
     "isin": "SEDOL:6076146",
     "name": "Westpac Banking Corporation",
     "ticker": "WBC.NZ",
@@ -111980,5 +112212,1045 @@
     "exchange": "GLOBAL",
     "country": "United States",
     "sector": "Health Care"
+  },
+  {
+    "isin": "VANG:JGGI",
+    "name": "JPMorgan Global Growth & Income PLC/Fund",
+    "ticker": "JGGI",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:ROSE",
+    "name": "Rosebank Industries PLC",
+    "ticker": "ROSE",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "VANG:TEM",
+    "name": "Templeton Emerging Markets Investment Trust PLC",
+    "ticker": "TEM",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:CTY",
+    "name": "City of London Investment Trust PLC/The",
+    "ticker": "CTY",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:RCP",
+    "name": "RIT Capital Partners PLC/Fund",
+    "ticker": "RCP",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:3IN",
+    "name": "3i Infrastructure PLC",
+    "ticker": "3IN",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:ATT",
+    "name": "Allianz Technology Trust PLC",
+    "ticker": "ATT",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:UKW",
+    "name": "Greencoat UK Wind PLC/Funds",
+    "ticker": "UKW",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:HICL",
+    "name": "Hicl Infrastructure PLC",
+    "ticker": "HICL",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:INPP",
+    "name": "International Public Partnerships Ltd",
+    "ticker": "INPP",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:MNKS",
+    "name": "Monks Investment Trust PLC/The",
+    "ticker": "MNKS",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:HVPE",
+    "name": "HarbourVest Global Private Equity Ltd",
+    "ticker": "HVPE",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:MYI",
+    "name": "Murray International Trust PLC",
+    "ticker": "MYI",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:FEV",
+    "name": "Fidelity European Trust PLC",
+    "ticker": "FEV",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:JAM",
+    "name": "JPMorgan American Investment Trust PLC/Fund",
+    "ticker": "JAM",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:TRIG",
+    "name": "Renewables Infrastructure Group Ltd/The",
+    "ticker": "TRIG",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:BRWM",
+    "name": "BlackRock World Mining Trust PLC",
+    "ticker": "BRWM",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:MRC",
+    "name": "Mercantile Investment Trust PLC",
+    "ticker": "MRC",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:MNTN",
+    "name": "Schiehallion Fund Ltd/The",
+    "ticker": "MNTN",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:PNL",
+    "name": "Personal Assets Trust PLC/Fund",
+    "ticker": "PNL",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:LWDB",
+    "name": "Law Debenture Corp PLC/fund",
+    "ticker": "LWDB",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:JMGI",
+    "name": "JPMorgan Emerging Markets Growth & Income plc",
+    "ticker": "JMGI",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:PIN",
+    "name": "Pantheon International PLC/The Fund",
+    "ticker": "PIN",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:HGT",
+    "name": "HgCapital Trust PLC/Fund",
+    "ticker": "HGT",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:BNKR",
+    "name": "Bankers Investment Trust PLC/The",
+    "ticker": "BNKR",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:FSV",
+    "name": "Fidelity Special Values PLC",
+    "ticker": "FSV",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:WWH",
+    "name": "Worldwide Healthcare Trust PLC/Fund",
+    "ticker": "WWH",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:ASL",
+    "name": "Aberforth Smaller Companies Trust PLC",
+    "ticker": "ASL",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:KIE",
+    "name": "Kier Group PLC",
+    "ticker": "KIE",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "VANG:ATYM",
+    "name": "Atalaya Mining PLC",
+    "ticker": "ATYM",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Materials"
+  },
+  {
+    "isin": "VANG:TMPL",
+    "name": "Temple Bar Investment Trust PLC",
+    "ticker": "TMPL",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:JFJ",
+    "name": "JPMorgan Japanese Investment Trust plc",
+    "ticker": "JFJ",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:SEQI",
+    "name": "Sequoia Economic Infrastructure Income Fund Ltd",
+    "ticker": "SEQI",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:BHMG",
+    "name": "BH Macro Ltd",
+    "ticker": "BHMG",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:CLDN",
+    "name": "Caledonia Investments PLC",
+    "ticker": "CLDN",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:USA",
+    "name": "Baillie Gifford US Growth Trust PLC",
+    "ticker": "USA",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:SDP",
+    "name": "Schroder AsiaPacific Fund PLC",
+    "ticker": "SDP",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:ATR",
+    "name": "Schroder Asian Total Return Investment Co PLC",
+    "ticker": "ATR",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:EDIN",
+    "name": "Edinburgh Investment Trust PLC/The",
+    "ticker": "EDIN",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:SOI",
+    "name": "Schroder Oriental Income Fund Ltd",
+    "ticker": "SOI",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:AGT",
+    "name": "Avi Global Trust PLC",
+    "ticker": "AGT",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:TFIF",
+    "name": "TwentyFour Income Fund Ltd",
+    "ticker": "TFIF",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:IAD",
+    "name": "INVESCO Asia Trust PLC",
+    "ticker": "IAD",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:GAMA",
+    "name": "Gamma Communications PLC",
+    "ticker": "GAMA",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Communication Services"
+  },
+  {
+    "isin": "VANG:MRCH",
+    "name": "Merchants Trust PLC/The",
+    "ticker": "MRCH",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:EWI",
+    "name": "Edinburgh Worldwide Investment Trust PLC",
+    "ticker": "EWI",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:WIZZ",
+    "name": "Wizz Air Holdings Plc",
+    "ticker": "WIZZ",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "VANG:CORD",
+    "name": "Cordiant Digital Infrastructure Ltd/Fund",
+    "ticker": "CORD",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:MUT",
+    "name": "Murray Income Trust PLC",
+    "ticker": "MUT",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:RICA",
+    "name": "Ruffer Investment Co Ltd",
+    "ticker": "RICA",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:PHI",
+    "name": "Pacific Horizon Investment Trust PLC",
+    "ticker": "PHI",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:TRY",
+    "name": "TR Property Investment Trust PLC - Ordinary Shares",
+    "ticker": "TRY",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:VLX",
+    "name": "Volex PLC",
+    "ticker": "VLX",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "VANG:ICGT",
+    "name": "ICG Enterprise Trust PLC",
+    "ticker": "ICGT",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:FCSS",
+    "name": "Fidelity China Special Situations PLC",
+    "ticker": "FCSS",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:CVSG",
+    "name": "CVS Group PLC",
+    "ticker": "CVSG",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "VANG:JEGI",
+    "name": "JPMorgan European Growth & Income plc",
+    "ticker": "JEGI",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:VEIL",
+    "name": "Vietnam Enterprise Investments Ltd",
+    "ticker": "VEIL",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:CSN",
+    "name": "Chesnara PLC",
+    "ticker": "CSN",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:SAIN",
+    "name": "Scottish American Investment Co PLC/The",
+    "ticker": "SAIN",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:DSCV",
+    "name": "DiscoverIE Group PLC",
+    "ticker": "DSCV",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "VANG:ESCT",
+    "name": "European Smaller Companies/The",
+    "ticker": "ESCT",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:BPCR",
+    "name": "BioPharma Credit PLC/The Fund",
+    "ticker": "BPCR",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:CGT",
+    "name": "Capital Gearing Trust PLC",
+    "ticker": "CGT",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:GSCT",
+    "name": "THE GLOBAL SMALLER COMPANIES TRUST PLC",
+    "ticker": "GSCT",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:FGT",
+    "name": "Finsbury Growth & Income Trust PLC/Fund",
+    "ticker": "FGT",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:SAGA",
+    "name": "Saga PLC",
+    "ticker": "SAGA",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "VANG:OCI",
+    "name": "Oakley Capital Investments Ltd",
+    "ticker": "OCI",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:BGFD",
+    "name": "Baillie Gifford Japan Trust PLC/The",
+    "ticker": "BGFD",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:THRL",
+    "name": "Target Healthcare REIT PLC",
+    "ticker": "THRL",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Real Estate"
+  },
+  {
+    "isin": "SEDOL:BG5KQW0",
+    "name": "Ceres Power Holdings PLC",
+    "ticker": "CWR",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Energy"
+  },
+  {
+    "isin": "VANG:COST",
+    "name": "Costain Group PLC",
+    "ticker": "COST",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "VANG:GFRD",
+    "name": "Galliford Try Holdings PLC",
+    "ticker": "GFRD",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "VANG:PAGE",
+    "name": "Michael Page PLC",
+    "ticker": "PAGE",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "VANG:GCP",
+    "name": "GCP Infrastructure Investments Ltd",
+    "ticker": "GCP",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:BRSC",
+    "name": "BlackRock Smaller Cos Trust PLC",
+    "ticker": "BRSC",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:AAS",
+    "name": "Abrdn Asia Focus PLC",
+    "ticker": "AAS",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:HFEL",
+    "name": "Henderson Far East Income Ltd",
+    "ticker": "HFEL",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:BUT",
+    "name": "Brunner Investment Trust PLC/The",
+    "ticker": "BUT",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:XPS",
+    "name": "XPS Pensions Group PLC",
+    "ticker": "XPS",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:NBPE",
+    "name": "Neuberger Private Equity Partners Ltd",
+    "ticker": "NBPE",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:HFD",
+    "name": "Halfords Group PLC",
+    "ticker": "HFD",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "VANG:HRI",
+    "name": "Herald Investment Trust PLC",
+    "ticker": "HRI",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:JEMI",
+    "name": "JPMorgan Emerging Markets Dividend Income PLC",
+    "ticker": "JEMI",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:JEDT",
+    "name": "JPMorgan European Discovery Trust PLC",
+    "ticker": "JEDT",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:PINT",
+    "name": "Pantheon Infrastructure PLC",
+    "ticker": "PINT",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:FGEN",
+    "name": "Foresight Environmental Infrastructure Ltd",
+    "ticker": "FGEN",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:HSL",
+    "name": "Henderson Smaller Companies Investment Trust PLC/The",
+    "ticker": "HSL",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:AVON",
+    "name": "Avon Technologies PLC",
+    "ticker": "AVON",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "VANG:VOF",
+    "name": "VinaCapital Vietnam Opportunity Fund Ltd",
+    "ticker": "VOF",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:BRGE",
+    "name": "BlackRock Greater Europe Investment Trust PLC",
+    "ticker": "BRGE",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:MTRO",
+    "name": "Metro Bank Holdings PLC",
+    "ticker": "MTRO",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:JCH",
+    "name": "JPMorgan Claverhouse Investment Trust PLC/Fund",
+    "ticker": "JCH",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:SYNC",
+    "name": "Syncona Ltd",
+    "ticker": "SYNC",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:JSG",
+    "name": "Johnson Service Group PLC",
+    "ticker": "JSG",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "VANG:BMY",
+    "name": "Bloomsbury Publishing PLC",
+    "ticker": "BMY",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "VANG:HTG",
+    "name": "Hunting PLC",
+    "ticker": "HTG",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Energy"
+  },
+  {
+    "isin": "VANG:XPP",
+    "name": "XP Power Ltd",
+    "ticker": "XPP",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "VANG:RTW",
+    "name": "RTW Biotech Opportunities Ltd",
+    "ticker": "RTW",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:NAIT",
+    "name": "North American Income Trust PLC",
+    "ticker": "NAIT",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:PCGH",
+    "name": "Polar Capital Global Healthcare Trust PLC",
+    "ticker": "PCGH",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:UEM",
+    "name": "Utilico Emerging Markets Trust PLC/The Fund",
+    "ticker": "UEM",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:AIE",
+    "name": "Ashoka India Equity Investment Trust PLC/Fund",
+    "ticker": "AIE",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:OXB",
+    "name": "Oxford Biomedica PLC",
+    "ticker": "OXB",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Health Care"
+  },
+  {
+    "isin": "VANG:BOWL",
+    "name": "Hollywood Bowl Group PLC",
+    "ticker": "BOWL",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "VANG:SSIT",
+    "name": "Seraphim Space Investment Trust PLC",
+    "ticker": "SSIT",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:ATG",
+    "name": "Auction Technology Group PLC",
+    "ticker": "ATG",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "VANG:APN",
+    "name": "New Issuer: BB Company ID:71378065",
+    "ticker": "APN",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Consumer Staples"
+  },
+  {
+    "isin": "VANG:AEP",
+    "name": "AEP Plantations PLC",
+    "ticker": "AEP",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Consumer Staples"
+  },
+  {
+    "isin": "VANG:FEML",
+    "name": "Fidelity Emerging Markets Ltd",
+    "ticker": "FEML",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:NCC",
+    "name": "NCC Group PLC",
+    "ticker": "NCC",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "VANG:PPET",
+    "name": "Patria Private Equity Trust PLC",
+    "ticker": "PPET",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:PEY",
+    "name": "Partners Group Private Equity Ltd",
+    "ticker": "PEY",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:NAS",
+    "name": "North Atlantic Smaller Cos Investment Trust PLC",
+    "ticker": "NAS",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:PINE",
+    "name": "Pinewood Technologies Group PLC",
+    "ticker": "PINE",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "VANG:FSG",
+    "name": "Foresight Group Holdings Ltd",
+    "ticker": "FSG",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:POLN",
+    "name": "Pollen Street Group Ltd",
+    "ticker": "POLN",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:SEIT",
+    "name": "Sdcl Energy Efficiency Income Trust PLC",
+    "ticker": "SEIT",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:MEGP",
+    "name": "ME GROUP INTERNATIONAL PLC",
+    "ticker": "MEGP",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "VANG:PPH",
+    "name": "PPHE Hotel Group Ltd",
+    "ticker": "PPH",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "VANG:HWG",
+    "name": "Harworth Group PLC",
+    "ticker": "HWG",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Real Estate"
+  },
+  {
+    "isin": "VANG:FCH",
+    "name": "Funding Circle Holdings PLC",
+    "ticker": "FCH",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:ASC",
+    "name": "ASOS PLC",
+    "ticker": "ASC",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "isin": "VANG:EWG",
+    "name": "WAG Payment Solutions PLC",
+    "ticker": "EWG",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "VANG:ALFA",
+    "name": "Alfa Financial Software Holdings PLC",
+    "ticker": "ALFA",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "VANG:DATA",
+    "name": "GlobalData PLC",
+    "ticker": "DATA",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Industrials"
+  },
+  {
+    "isin": "VANG:SSIC",
+    "name": "Seraphim Space Investment Trust PLC",
+    "ticker": "SSIC",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:HAN",
+    "name": "Hansa Investment Co Ltd",
+    "ticker": "HAN",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Financials"
+  },
+  {
+    "isin": "VANG:PRN",
+    "name": "Princes Group PLC",
+    "ticker": "PRN",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Consumer Staples"
+  },
+  {
+    "isin": "VANG:MNO",
+    "name": "Meridian Mining PLC",
+    "ticker": "MNO",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Materials"
   }
 ]

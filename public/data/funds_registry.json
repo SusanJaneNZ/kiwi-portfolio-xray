@@ -76,7 +76,7 @@
     "name": "Smart Global Bond Etf",
     "provider": "Smartshares",
     "effective_date": "2026-09-30",
-    "cash_ratio": 0.0577,
+    "cash_ratio": 0.0573,
     "hedging_ratio": 0.0003,
     "constituent_count": 184,
     "asset_class": "fixed_interest",
@@ -294,7 +294,7 @@
     "effective_date": "2026-09-30",
     "cash_ratio": 0.0,
     "hedging_ratio": 0.0,
-    "constituent_count": 55,
+    "constituent_count": 54,
     "asset_class": "equity",
     "cadence": "monthly",
     "is_stale": false

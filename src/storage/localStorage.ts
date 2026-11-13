@@ -358,6 +358,71 @@ export function loadPortfolioState(): UserPortfolioState {
   return loadPortfolioStateWithMeta().state;
 }
 
+/**
+ * Persists the current portfolio state to the repo-root `portfolio_backup.json`
+ * via the local server API endpoint (/api/portfolio/save).
+ */
+export async function autoSavePortfolioToDisk(state: UserPortfolioState): Promise<boolean> {
+  if (typeof fetch === "undefined") return false;
+  try {
+    const res = await fetch("/api/portfolio/save", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(
+        {
+          version: 2,
+          timestamp: state.timestamp || new Date().toISOString(),
+          audNzdRate: state.audNzdRate,
+          fundBalances: state.fundBalances,
+          directHoldings: state.directHoldings,
+          cashDeposits: state.cashDeposits,
+          buckets: state.buckets,
+          bucketAssignments: state.bucketAssignments,
+        },
+        null,
+        2
+      ),
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Creates a timestamped backup copy on disk (e.g. portfolio_backup_YYYY-MM-DD_HHMMSS.json)
+ * before Clear or Load Sample operations so existing data is never wiped out.
+ */
+export async function createDatedBackupOnDisk(): Promise<string | null> {
+  if (typeof fetch === "undefined") return null;
+  try {
+    const res = await fetch("/api/portfolio/backup", { method: "POST" });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data.backupFile || null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Loads the auto-saved portfolio from repo-root `portfolio_backup.json` if available.
+ */
+export async function loadPortfolioFromDisk(): Promise<UserPortfolioState | null> {
+  if (typeof fetch === "undefined") return null;
+  try {
+    const res = await fetch("/api/portfolio/load");
+    if (!res.ok) return null;
+    const data = await res.json();
+    if (data.exists && data.state) {
+      return normalizePortfolioState(data.state);
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 export function isFileSyncSupported(): boolean {
   return typeof window !== "undefined" && "showSaveFilePicker" in window;
 }
