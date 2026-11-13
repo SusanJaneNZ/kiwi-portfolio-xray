@@ -1,8 +1,9 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { CollapsiblePanel } from '../CollapsiblePanel';
 import { BucketSelect } from './BucketSelect';
 import { DirectEquityCatalogItem, UserPortfolioState } from '../../types/portfolio';
 import { directHoldingValueNZD, formatNZD } from '../../utils/format';
+import { fetchLiveAudNzdRate } from '../../utils/fx';
 
 interface DirectSharesPanelProps {
   portfolioState: UserPortfolioState;
@@ -24,10 +25,40 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedEquity, setSelectedEquity] = useState<DirectEquityCatalogItem | null>(null);
   const [newShareValue, setNewShareValue] = useState<string>('1000');
+  const [newShareCurrency, setNewShareCurrency] = useState<'NZD' | 'AUD'>('NZD');
 
-  const hasASXHoldings = portfolioState.directHoldings.some(
-    (h) => h.exchange === 'ASX' || h.currency === 'AUD'
+  const [isFetchingFx, setIsFetchingFx] = useState(false);
+  const [fxTimestamp, setFxTimestamp] = useState<string | null>(null);
+  const hasAutoFetchedFx = useRef(false);
+
+  // Check if any direct holdings are currently entered in AUD
+  const hasAudHoldings = useMemo(
+    () => portfolioState.directHoldings.some((h) => h.currency === 'AUD'),
+    [portfolioState.directHoldings]
   );
+
+  const fetchFxRate = async () => {
+    setIsFetchingFx(true);
+    try {
+      const result = await fetchLiveAudNzdRate();
+      if (result && result.rate > 0) {
+        setFxTimestamp(result.timestamp);
+        onUpdateState({ ...portfolioState, audNzdRate: result.rate });
+      }
+    } catch {
+      // Fallback silently to existing rate
+    } finally {
+      setIsFetchingFx(false);
+    }
+  };
+
+  // Automatically fetch live FX rate if AUD holdings exist and we haven't fetched yet
+  useEffect(() => {
+    if (hasAudHoldings && !hasAutoFetchedFx.current) {
+      hasAutoFetchedFx.current = true;
+      fetchFxRate();
+    }
+  }, [hasAudHoldings]);
 
   const sortedDirectHoldings = useMemo(
     () => [...portfolioState.directHoldings].sort((a, b) => a.ticker.localeCompare(b.ticker)),
@@ -61,6 +92,13 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
     onUpdateState({ ...portfolioState, directHoldings: updated });
   };
 
+  const handleCurrencyChange = (isin: string, currency: 'NZD' | 'AUD') => {
+    const updated = portfolioState.directHoldings.map((h) =>
+      h.isin === isin ? { ...h, currency } : h
+    );
+    onUpdateState({ ...portfolioState, directHoldings: updated });
+  };
+
   const handleRemoveDirect = (isin: string) => {
     const updated = portfolioState.directHoldings.filter((h) => h.isin !== isin);
     const nextAssignments = { ...portfolioState.bucketAssignments };
@@ -81,11 +119,15 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
     );
     const updated = [...portfolioState.directHoldings];
     if (existingIndex >= 0) {
-      updated[existingIndex] = { ...updated[existingIndex], value: updated[existingIndex].value + val };
+      updated[existingIndex] = {
+        ...updated[existingIndex],
+        currency: newShareCurrency,
+        value: updated[existingIndex].value + val,
+      };
     } else {
       updated.push({
         ...selectedEquity,
-        currency: selectedEquity.exchange === 'ASX' ? 'AUD' : 'NZD',
+        currency: newShareCurrency,
         value: val,
       });
     }
@@ -109,31 +151,58 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
       }
     >
       <div className="space-y-3">
-        {hasASXHoldings && (
-          <div className="bg-amber-950/30 border border-amber-600/40 rounded-xl p-2.5 flex items-center justify-between gap-2 text-xs">
+        {/* Only display exchange rate panel if user has holdings entered in AUD */}
+        {hasAudHoldings && (
+          <div className="bg-slate-900/90 border border-indigo-900/40 rounded-xl p-2.5 flex flex-wrap items-center justify-between gap-2 text-xs">
             <div className="flex items-center gap-2">
               <span className="text-base">💱</span>
               <div>
-                <span className="font-semibold text-amber-300">ASX Holdings Detected:</span>
-                <p className="text-[11px] text-amber-200/70">Custom AUD / NZD Exchange Rate</p>
+                <div className="flex items-center gap-2">
+                  <span className="font-semibold text-slate-200">AUD / NZD Exchange Rate</span>
+                  {fxTimestamp && (
+                    <span className="text-[10px] text-emerald-400 bg-emerald-950/60 border border-emerald-800/40 rounded px-1.5 py-0.5">
+                      ● Live ({fxTimestamp})
+                    </span>
+                  )}
+                  {isFetchingFx && (
+                    <span className="text-[10px] text-indigo-400 animate-pulse">
+                      Updating...
+                    </span>
+                  )}
+                </div>
+                <p className="text-[11px] text-slate-400">
+                  Applied automatically to direct shares held in AUD
+                </p>
               </div>
             </div>
-            <div className="flex items-center gap-1.5">
-              <span className="text-xs text-slate-400">1 AUD =</span>
-              <input
-                type="number"
-                min="0.01"
-                value={portfolioState.audNzdRate}
-                step="0.005"
-                onChange={(e) => {
-                  const nextRate = parseFloat(e.target.value);
-                  if (Number.isFinite(nextRate) && nextRate > 0) {
-                    onUpdateState({ ...portfolioState, audNzdRate: nextRate });
-                  }
-                }}
-                className="w-24 bg-slate-950 border border-amber-500/50 rounded px-2.5 py-1.5 text-right text-xs text-amber-300 font-mono focus:outline-none focus:border-amber-400"
-              />
-              <span className="text-xs text-amber-300 font-mono">NZD</span>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={fetchFxRate}
+                disabled={isFetchingFx}
+                className="px-2 py-1 bg-slate-800 hover:bg-slate-700 disabled:opacity-50 text-slate-300 rounded text-[11px] font-medium border border-slate-700 transition-colors flex items-center gap-1"
+                title="Fetch current rate from live exchange API"
+              >
+                <span className={isFetchingFx ? 'animate-spin inline-block' : 'inline-block'}>↻</span>
+                <span>Live Rate</span>
+              </button>
+              <div className="flex items-center gap-1.5">
+                <span className="text-xs text-slate-400">1 AUD =</span>
+                <input
+                  type="number"
+                  min="0.01"
+                  value={portfolioState.audNzdRate}
+                  step="0.001"
+                  onChange={(e) => {
+                    const nextRate = parseFloat(e.target.value);
+                    if (Number.isFinite(nextRate) && nextRate > 0) {
+                      onUpdateState({ ...portfolioState, audNzdRate: nextRate });
+                    }
+                  }}
+                  className="w-20 bg-slate-950 border border-indigo-500/50 rounded px-2 py-1 text-right text-xs text-indigo-300 font-mono focus:outline-none focus:border-indigo-400"
+                />
+                <span className="text-xs text-indigo-300 font-mono">NZD</span>
+              </div>
             </div>
           </div>
         )}
@@ -163,7 +232,15 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                   </div>
                   <div className="text-[11px] text-slate-500">
                     {dh.exchange} · {dh.isin}
-                    {isAud && ` (${dh.value.toFixed(2)} AUD -> $${formatNZD(convertedNZD, 2)} NZD)`}
+                    {isAud ? (
+                      <span className="ml-1 text-amber-400/90">
+                        ({dh.value.toFixed(2)} AUD → ${formatNZD(convertedNZD, 2)} NZD)
+                      </span>
+                    ) : (
+                      <span className="ml-1 text-slate-400">
+                        (NZD)
+                      </span>
+                    )}
                   </div>
                 </div>
 
@@ -174,7 +251,19 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                     bucketAssignments={portfolioState.bucketAssignments}
                     onAssign={onAssignBucket}
                   />
-                  <div className="w-36 sm:w-44 relative">
+
+                  {/* Currency selector dropdown */}
+                  <select
+                    value={dh.currency || 'NZD'}
+                    onChange={(e) => handleCurrencyChange(dh.isin, e.target.value as 'NZD' | 'AUD')}
+                    className="bg-slate-900 border border-slate-800 rounded-lg px-2 py-1.5 text-xs text-slate-300 font-mono focus:outline-none focus:border-indigo-500"
+                    title="Select currency for this holding"
+                  >
+                    <option value="NZD">NZD</option>
+                    <option value="AUD">AUD</option>
+                  </select>
+
+                  <div className="w-32 sm:w-40 relative">
                     <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs">
                       {isAud ? 'A$' : '$'}
                     </span>
@@ -212,18 +301,29 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                 className="flex-1 bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
               />
               {selectedEquity && (
-                <div className="w-36 sm:w-44 relative">
-                  <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs">
-                    {selectedEquity.exchange === 'ASX' ? 'A$' : '$'}
-                  </span>
-                  <input
-                    type="number"
-                    min="0"
-                    value={newShareValue}
-                    onChange={(e) => setNewShareValue(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-7 pr-2.5 py-1.5 text-right text-xs sm:text-sm text-white font-mono"
-                  />
-                </div>
+                <>
+                  <select
+                    value={newShareCurrency}
+                    onChange={(e) => setNewShareCurrency(e.target.value as 'NZD' | 'AUD')}
+                    className="bg-slate-900 border border-slate-800 rounded-lg px-2 py-1.5 text-xs text-slate-300 font-mono focus:outline-none focus:border-indigo-500"
+                    title="Select currency for new holding"
+                  >
+                    <option value="NZD">NZD</option>
+                    <option value="AUD">AUD</option>
+                  </select>
+                  <div className="w-32 sm:w-40 relative">
+                    <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs">
+                      {newShareCurrency === 'AUD' ? 'A$' : '$'}
+                    </span>
+                    <input
+                      type="number"
+                      min="0"
+                      value={newShareValue}
+                      onChange={(e) => setNewShareValue(e.target.value)}
+                      className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-7 pr-2.5 py-1.5 text-right text-xs sm:text-sm text-white font-mono"
+                    />
+                  </div>
+                </>
               )}
               <button
                 disabled={!selectedEquity}
@@ -241,6 +341,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                     key={item.isin}
                     onClick={() => {
                       setSelectedEquity(item);
+                      setNewShareCurrency(item.exchange === 'ASX' ? 'AUD' : 'NZD');
                       setSearchQuery(`${item.ticker} - ${item.name}`);
                     }}
                     className="p-2 text-xs hover:bg-slate-800 cursor-pointer flex justify-between items-center"
@@ -259,4 +360,3 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
     </CollapsiblePanel>
   );
 };
-

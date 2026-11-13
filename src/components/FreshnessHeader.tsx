@@ -40,13 +40,7 @@ export const FreshnessHeader: React.FC<FreshnessHeaderProps> = ({
   loadSource = 'v2',
   recoveredNotice = null,
 }) => {
-  const originLabel = typeof window !== 'undefined' ? window.location.host || 'local file' : 'browser';
-  const savedTimeLabel = (() => {
-    const d = new Date(portfolioState.timestamp);
-    return Number.isNaN(d.getTime())
-      ? ''
-      : d.toLocaleTimeString('en-NZ', { hour: '2-digit', minute: '2-digit' });
-  })();
+  const isCustomPortfolio = loadSource !== 'default' && !isSamplePortfolio(portfolioState);
 
   return (
     <header className="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 md:p-5 shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -66,36 +60,24 @@ export const FreshnessHeader: React.FC<FreshnessHeaderProps> = ({
         <p className="text-xs text-slate-400">
           Aggregating Smartshares, Kernel, Vanguard, and direct NZX/ASX equities into true underlying company exposures.
         </p>
-        <div className="flex flex-wrap items-center gap-2 text-[11px] text-slate-400 pt-0.5">
-          <span
-            title="Auto-saves to portfolio_backup.json at repo root (and browser localStorage)."
-            className="inline-flex items-center gap-1.5"
-          >
-            <span
-              className={`inline-block w-1.5 h-1.5 rounded-full ${
-                loadSource === 'default' || isSamplePortfolio(portfolioState)
-                  ? 'bg-slate-500'
-                  : 'bg-emerald-400'
-              }`}
-            />
-            {loadSource === 'default' ? (
-              <span>Showing sample portfolio (edit any holding to auto-save in {originLabel})</span>
-            ) : isSamplePortfolio(portfolioState) ? (
-              <span>
-                Showing sample portfolio (saved in {originLabel}){savedTimeLabel ? ` · ${savedTimeLabel}` : ''}
-              </span>
-            ) : (
-              <span>
-                Auto-saved to repo &amp; browser ({originLabel}){savedTimeLabel ? ` · ${savedTimeLabel}` : ''}
+        {(isCustomPortfolio || recoveredNotice) && (
+          <div className="flex flex-wrap items-center gap-2 text-[11px] text-slate-400 pt-0.5">
+            {isCustomPortfolio && (
+              <span
+                title="Auto-saves to portfolio_backup.json at repo root (and browser localStorage)."
+                className="inline-flex items-center gap-1.5"
+              >
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                <span>Auto-saved to repo &amp; browser</span>
               </span>
             )}
-          </span>
-          {recoveredNotice && (
-            <span className="text-amber-300 bg-amber-950/50 border border-amber-700/50 px-2 py-0.5 rounded">
-              {recoveredNotice}
-            </span>
-          )}
-        </div>
+            {recoveredNotice && (
+              <span className="text-amber-300 bg-amber-950/50 border border-amber-700/50 px-2 py-0.5 rounded">
+                {recoveredNotice}
+              </span>
+            )}
+          </div>
+        )}
       </div>
 
       <div className="flex flex-col items-start md:items-end gap-2.5">
