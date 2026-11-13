@@ -44,8 +44,11 @@ export const CashDepositsPanel: React.FC<CashDepositsPanelProps> = ({
   };
 
   const handleAddDeposit = () => {
+    const parsedVal = parseFloat(depValue);
+    const valueNZD = Number.isFinite(parsedVal) && parsedVal > 0 ? parsedVal : 0;
+    if (valueNZD <= 0) return;
+
     const institution = (depInstitution === '__custom' ? depCustomBank : depInstitution).trim() || 'ANZ';
-    const valueNZD = Math.max(0, parseFloat(depValue) || 0);
     const label = depLabel.trim() || `${depType === 'term_deposit' ? 'Term Deposit' : 'Call Cash'}`;
     const id = `td-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
     const rateNum = parseFloat(depRate);

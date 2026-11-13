@@ -39,7 +39,8 @@ export const FundAllocationsPanel: React.FC<FundAllocationsPanelProps> = ({
   }, [fundsRegistry, fundFilter, heldOnly, portfolioState.fundBalances]);
 
   const handleFundChange = (code: string, value: string) => {
-    const num = parseFloat(value) || 0;
+    const parsed = parseFloat(value);
+    const num = Number.isFinite(parsed) && parsed > 0 ? parsed : 0;
     const newBalances = { ...portfolioState.fundBalances };
     const nextAssignments = { ...portfolioState.bucketAssignments };
     if (num <= 0) {

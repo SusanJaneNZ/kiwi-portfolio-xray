@@ -24,8 +24,6 @@ import { ConsolidatedHolding } from '../types/portfolio';
 interface FreshnessHeaderProps {
   envelope: FreshnessEnvelope;
   portfolioState: UserPortfolioState;
-  holdings?: ConsolidatedHolding[];
-  onUpdateState?: (state: UserPortfolioState) => void;
   onOpenUnresolvedModal: () => void;
   unresolvedCount: number;
   loadSource?: LoadSource;

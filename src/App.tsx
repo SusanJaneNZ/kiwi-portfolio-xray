@@ -37,35 +37,52 @@ export const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [dataLoadError, setDataLoadError] = useState<string | null>(null);
 
-  // Restore from IndexedDB mirror if localStorage was empty on boot and user hasn't edited yet
+  // Restore from backup sources (IndexedDB or disk backup) if localStorage was default on boot
   useEffect(() => {
     if (initialLoad.source !== 'default') return;
     let cancelled = false;
-    loadFromIndexedDBBackup().then((restored) => {
-      if (cancelled || !restored || hasUserEditedRef.current) return;
-      setPortfolioState(restored);
-      setLoadSource('indexeddb');
-      setRecoveredNotice('Restored saved portfolio from browser backup.');
-      savePortfolioState(restored);
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, [initialLoad.source]);
 
-  // Restore from repo root backup file (portfolio_backup.json) if local storage was default/empty
-  useEffect(() => {
-    if (initialLoad.source !== 'default') return;
-    let cancelled = false;
-    loadPortfolioFromDisk().then((fileState) => {
-      if (cancelled || !fileState || hasUserEditedRef.current) return;
-      if (!isEmptyPortfolio(fileState) && !isSamplePortfolio(fileState)) {
-        setPortfolioState(fileState);
-        setLoadSource('v2');
-        setRecoveredNotice('Loaded portfolio from repo backup (portfolio_backup.json).');
-        savePortfolioState(fileState);
+    async function restoreBackupSources() {
+      const [idbState, diskState] = await Promise.all([
+        loadFromIndexedDBBackup().catch(() => null),
+        loadPortfolioFromDisk().catch(() => null),
+      ]);
+
+      if (cancelled || hasUserEditedRef.current) return;
+
+      const candidates: { state: UserPortfolioState; source: LoadSource; notice: string }[] = [];
+      if (diskState && !isEmptyPortfolio(diskState) && !isSamplePortfolio(diskState)) {
+        candidates.push({
+          state: diskState,
+          source: 'v2',
+          notice: 'Loaded portfolio from repo backup (portfolio_backup.json).',
+        });
       }
-    });
+      if (idbState && !isEmptyPortfolio(idbState) && !isSamplePortfolio(idbState)) {
+        candidates.push({
+          state: idbState,
+          source: 'indexeddb',
+          notice: 'Restored saved portfolio from browser backup.',
+        });
+      }
+
+      if (candidates.length === 0) return;
+
+      // Select candidate with the newest timestamp
+      candidates.sort((a, b) => {
+        const timeA = new Date(a.state.timestamp || 0).getTime() || 0;
+        const timeB = new Date(b.state.timestamp || 0).getTime() || 0;
+        return timeB - timeA;
+      });
+
+      const best = candidates[0];
+      setPortfolioState(best.state);
+      setLoadSource(best.source);
+      setRecoveredNotice(best.notice);
+      savePortfolioState(best.state);
+    }
+
+    void restoreBackupSources();
     return () => {
       cancelled = true;
     };
@@ -157,19 +174,30 @@ export const App: React.FC = () => {
     loadData();
   }, []);
 
+  const autoSaveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   // Persist state changes to LocalStorage + IndexedDB mirror + linked backup file
-  const handleUpdateState = (newState: UserPortfolioState) => {
+  const handleUpdateState = (action: UserPortfolioState | ((prev: UserPortfolioState) => UserPortfolioState)) => {
     hasUserEditedRef.current = true;
-    const stamped: UserPortfolioState = {
-      ...newState,
-      version: 2,
-      timestamp: new Date().toISOString(),
-    };
-    setPortfolioState(stamped);
-    setLoadSource('v2');
-    setRecoveredNotice(null);
-    savePortfolioState(stamped);
-    autoSavePortfolioToDisk(stamped);
+    setPortfolioState((prev) => {
+      const next = typeof action === 'function' ? action(prev) : action;
+      const stamped: UserPortfolioState = {
+        ...next,
+        version: 2,
+        timestamp: new Date().toISOString(),
+      };
+      setLoadSource('v2');
+      setRecoveredNotice(null);
+      savePortfolioState(stamped);
+
+      // Trailing debounce autoSavePortfolioToDisk to prevent burst HTTP POST calls during typing
+      if (autoSaveTimerRef.current) clearTimeout(autoSaveTimerRef.current);
+      autoSaveTimerRef.current = setTimeout(() => {
+        void autoSavePortfolioToDisk(stamped);
+      }, 500);
+
+      return stamped;
+    });
   };
 
   // Perform core look-through calculations
@@ -210,8 +238,6 @@ export const App: React.FC = () => {
         <FreshnessHeader
           envelope={freshnessEnvelope}
           portfolioState={portfolioState}
-          holdings={calculationResult.holdings}
-          onUpdateState={handleUpdateState}
           onOpenUnresolvedModal={() => setIsUnresolvedModalOpen(true)}
           unresolvedCount={unresolvedEntries.length}
           loadSource={loadSource}

@@ -195,10 +195,12 @@ export function normalizePortfolioState(candidate: unknown): UserPortfolioState 
       ? obj.audNzdRate
       : 1.10;
 
+  const DANGEROUS_KEYS = new Set(["__proto__", "constructor", "prototype"]);
+
   const fundBalances: Record<string, number> = {};
   if (obj.fundBalances && typeof obj.fundBalances === "object" && !Array.isArray(obj.fundBalances)) {
     for (const [code, val] of Object.entries(obj.fundBalances as Record<string, unknown>)) {
-      if (code.trim() && isFiniteNonNegative(val) && val > 0) {
+      if (code.trim() && !DANGEROUS_KEYS.has(code) && isFiniteNonNegative(val) && val > 0) {
         fundBalances[code] = val;
       }
     }
@@ -207,7 +209,7 @@ export function normalizePortfolioState(candidate: unknown): UserPortfolioState 
   const bucketAssignments: Record<string, string> = {};
   if (obj.bucketAssignments && typeof obj.bucketAssignments === "object" && !Array.isArray(obj.bucketAssignments)) {
     for (const [k, v] of Object.entries(obj.bucketAssignments as Record<string, unknown>)) {
-      if (typeof k === "string" && typeof v === "string" && v) {
+      if (typeof k === "string" && !DANGEROUS_KEYS.has(k) && typeof v === "string" && v) {
         bucketAssignments[k] = v;
       }
     }
@@ -367,7 +369,10 @@ export async function autoSavePortfolioToDisk(state: UserPortfolioState): Promis
   try {
     const res = await fetch("/api/portfolio/save", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "X-Requested-With": "KiwiPortfolioXRay",
+      },
       body: JSON.stringify(
         {
           version: 2,
@@ -396,7 +401,13 @@ export async function autoSavePortfolioToDisk(state: UserPortfolioState): Promis
 export async function createDatedBackupOnDisk(): Promise<string | null> {
   if (typeof fetch === "undefined") return null;
   try {
-    const res = await fetch("/api/portfolio/backup", { method: "POST" });
+    const res = await fetch("/api/portfolio/backup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Requested-With": "KiwiPortfolioXRay",
+      },
+    });
     if (!res.ok) return null;
     const data = await res.json();
     return data.backupFile || null;
@@ -666,6 +677,13 @@ export function importPortfolioJSON(jsonStr: string): UserPortfolioState {
   };
 }
 
+function sanitizeCsvCell(value: string | number): string {
+  const str = String(value);
+  // Defend against spreadsheet formula injection (=, +, -, @, \t, \r)
+  const safeStr = /^[=+\-@\t\r]/.test(str) ? `'${str}` : str;
+  return `"${safeStr.replace(/"/g, '""')}"`;
+}
+
 export function exportHoldingsCSV(holdings: ConsolidatedHolding[]): string {
   const headers = [
     "Rank",
@@ -682,12 +700,12 @@ export function exportHoldingsCSV(holdings: ConsolidatedHolding[]): string {
 
   const rows = holdings.map((h, idx) => [
     idx + 1,
-    h.assetClass,
-    `"${h.name.replace(/"/g, '""')}"`,
-    h.ticker,
-    h.isin,
-    h.country,
-    `"${h.sector.replace(/"/g, '""')}"`,
+    sanitizeCsvCell(h.assetClass),
+    sanitizeCsvCell(h.name),
+    sanitizeCsvCell(h.ticker),
+    sanitizeCsvCell(h.isin),
+    sanitizeCsvCell(h.country),
+    sanitizeCsvCell(h.sector),
     h.valueNZD.toFixed(2),
     (h.portfolioWeight * 100).toFixed(4),
     (h.equityWeight * 100).toFixed(4),

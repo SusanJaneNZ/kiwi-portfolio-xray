@@ -29,7 +29,13 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
 
   const [isFetchingFx, setIsFetchingFx] = useState(false);
   const [fxTimestamp, setFxTimestamp] = useState<string | null>(null);
+  const [rateInput, setRateInput] = useState<string>(() => portfolioState.audNzdRate.toString());
   const hasAutoFetchedFx = useRef(false);
+
+  // Synchronize local rateInput when external/live audNzdRate updates
+  useEffect(() => {
+    setRateInput(portfolioState.audNzdRate.toString());
+  }, [portfolioState.audNzdRate]);
 
   // Check if any direct holdings are currently entered in AUD
   const hasAudHoldings = useMemo(
@@ -40,8 +46,9 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
   const fetchFxRate = async () => {
     setIsFetchingFx(true);
     try {
-      const result = await fetchLiveAudNzdRate();
+      const result = await fetchLiveAudNzdRate(true);
       if (result && result.rate > 0) {
+        hasAutoFetchedFx.current = true;
         setFxTimestamp(result.timestamp);
         onUpdateState({ ...portfolioState, audNzdRate: result.rate });
       }
@@ -55,7 +62,6 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
   // Automatically fetch live FX rate if AUD holdings exist and we haven't fetched yet
   useEffect(() => {
     if (hasAudHoldings && !hasAutoFetchedFx.current) {
-      hasAutoFetchedFx.current = true;
       fetchFxRate();
     }
   }, [hasAudHoldings]);
@@ -92,10 +98,18 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
     onUpdateState({ ...portfolioState, directHoldings: updated });
   };
 
-  const handleCurrencyChange = (isin: string, currency: 'NZD' | 'AUD') => {
-    const updated = portfolioState.directHoldings.map((h) =>
-      h.isin === isin ? { ...h, currency } : h
-    );
+  const handleCurrencyChange = (isin: string, newCurrency: 'NZD' | 'AUD') => {
+    const safeRate = Number.isFinite(portfolioState.audNzdRate) && portfolioState.audNzdRate > 0 ? portfolioState.audNzdRate : 1.10;
+    const updated = portfolioState.directHoldings.map((h) => {
+      if (h.isin !== isin || h.currency === newCurrency) return h;
+      // Convert face value dynamically to maintain the exact same underlying financial worth
+      const convertedValue = newCurrency === 'NZD' ? h.value * safeRate : h.value / safeRate;
+      return {
+        ...h,
+        currency: newCurrency,
+        value: Math.round(convertedValue * 100) / 100,
+      };
+    });
     onUpdateState({ ...portfolioState, directHoldings: updated });
   };
 
@@ -119,10 +133,16 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
     );
     const updated = [...portfolioState.directHoldings];
     if (existingIndex >= 0) {
+      const existing = updated[existingIndex];
+      const safeRate = Number.isFinite(portfolioState.audNzdRate) && portfolioState.audNzdRate > 0 ? portfolioState.audNzdRate : 1.10;
+      // Convert added value if currencies differ
+      let addedVal = val;
+      if (existing.currency !== newShareCurrency) {
+        addedVal = newShareCurrency === 'AUD' ? val * safeRate : val / safeRate;
+      }
       updated[existingIndex] = {
-        ...updated[existingIndex],
-        currency: newShareCurrency,
-        value: updated[existingIndex].value + val,
+        ...existing,
+        value: Math.round((existing.value + addedVal) * 100) / 100,
       };
     } else {
       updated.push({
@@ -191,12 +211,22 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                 <input
                   type="number"
                   min="0.01"
-                  value={portfolioState.audNzdRate}
+                  value={rateInput}
                   step="0.001"
                   onChange={(e) => {
+                    setRateInput(e.target.value);
                     const nextRate = parseFloat(e.target.value);
                     if (Number.isFinite(nextRate) && nextRate > 0) {
                       onUpdateState({ ...portfolioState, audNzdRate: nextRate });
+                    }
+                  }}
+                  onBlur={() => {
+                    const nextRate = parseFloat(rateInput);
+                    if (Number.isFinite(nextRate) && nextRate > 0) {
+                      setRateInput(nextRate.toString());
+                      onUpdateState({ ...portfolioState, audNzdRate: nextRate });
+                    } else {
+                      setRateInput(portfolioState.audNzdRate.toString());
                     }
                   }}
                   className="w-20 bg-slate-950 border border-indigo-500/50 rounded px-2 py-1 text-right text-xs text-indigo-300 font-mono focus:outline-none focus:border-indigo-400"

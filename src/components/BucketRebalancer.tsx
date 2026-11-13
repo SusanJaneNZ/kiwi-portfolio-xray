@@ -94,14 +94,23 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
   };
 
   const handleNormalizeTargets = () => {
+    if (portfolioState.buckets.length === 0) return;
     const sum = portfolioState.buckets.reduce((acc, b) => acc + Math.max(0, b.targetPercent), 0);
-    if (sum <= 0 || portfolioState.buckets.length === 0) return;
+    let scaled: number[];
 
-    const scaled = portfolioState.buckets.map((b) => Math.round(((Math.max(0, b.targetPercent) / sum) * 100) * 100) / 100);
-    const roundedSum = scaled.reduce((a, b) => a + b, 0);
-    const diff = Math.round((100 - roundedSum) * 100) / 100;
-    const largestIdx = scaled.reduce((best, val, i, arr) => (val > arr[best] ? i : best), 0);
-    scaled[largestIdx] = Math.round((scaled[largestIdx] + diff) * 100) / 100;
+    if (sum <= 0) {
+      // If all targets are 0, distribute equally across buckets
+      const base = Math.floor((100 / portfolioState.buckets.length) * 100) / 100;
+      scaled = portfolioState.buckets.map(() => base);
+      const roundedSum = scaled.reduce((a, b) => a + b, 0);
+      scaled[0] = Math.round((scaled[0] + (100 - roundedSum)) * 100) / 100;
+    } else {
+      scaled = portfolioState.buckets.map((b) => Math.round(((Math.max(0, b.targetPercent) / sum) * 100) * 100) / 100);
+      const roundedSum = scaled.reduce((a, b) => a + b, 0);
+      const diff = Math.round((100 - roundedSum) * 100) / 100;
+      const largestIdx = scaled.reduce((best, val, i, arr) => (val > arr[best] ? i : best), 0);
+      scaled[largestIdx] = Math.round((scaled[largestIdx] + diff) * 100) / 100;
+    }
 
     onUpdateState({
       ...portfolioState,
