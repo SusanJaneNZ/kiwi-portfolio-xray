@@ -137,19 +137,6 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
       headerRight={
         <div className="flex flex-wrap items-center gap-2" onClick={(e) => e.stopPropagation()}>
           <button
-            onClick={handleLoadSample}
-            className="text-xs bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-3 py-1.5 rounded-lg transition-colors shadow-sm"
-          >
-            Load Sample
-          </button>
-          <button
-            onClick={handleClearPortfolio}
-            title="Clear all entered fund balances, direct shares, and term deposits"
-            className="text-xs bg-slate-950 hover:bg-rose-950/40 text-slate-400 hover:text-rose-400 border border-slate-800 px-3 py-1.5 rounded-lg transition-colors"
-          >
-            Clear Portfolio
-          </button>
-          <button
             onClick={handleExportPortfolio}
             title="Export entered portfolio inputs as a JSON backup file"
             className="text-xs bg-slate-950 hover:bg-slate-800 text-slate-200 border border-slate-800 px-3 py-1.5 rounded-lg transition-colors"
@@ -163,6 +150,13 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
           >
             Import Portfolio
           </button>
+          <button
+            onClick={handleClearPortfolio}
+            title="Clear all entered fund balances, direct shares, and term deposits"
+            className="text-xs bg-slate-950 hover:bg-rose-950/40 text-slate-400 hover:text-rose-400 border border-slate-800 px-3 py-1.5 rounded-lg transition-colors"
+          >
+            Clear Portfolio
+          </button>
           <input
             type="file"
             ref={fileInputRef}
@@ -175,6 +169,17 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
       className="md:p-5"
     >
       <div className="space-y-4 pt-1">
+        {totalPortfolioNZD === 0 && (
+          <div className="bg-slate-950/60 border border-slate-800/80 rounded-xl p-3 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-400">
+            <span>Portfolio is empty. Enter your holdings below, import a backup, or load sample data to test.</span>
+            <button
+              onClick={handleLoadSample}
+              className="text-xs text-indigo-400 hover:text-indigo-300 underline underline-offset-2 whitespace-nowrap"
+            >
+              Load Sample Portfolio
+            </button>
+          </div>
+        )}
         <FundAllocationsPanel
           portfolioState={portfolioState}
           fundsRegistry={fundsRegistry}
