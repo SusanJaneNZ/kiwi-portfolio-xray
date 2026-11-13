@@ -173,4 +173,23 @@ export function runLookthroughTests(): void {
   // Invalid audNzdRate (<= 0) falls back cleanly instead of dropping ASX direct holdings
   const badFxRes = calculatePortfolioLookthrough({ ...input, audNzdRate: -1 });
   assertTrue(badFxRes.denominatorD > 29000, "ASX holding should not be dropped on invalid audNzdRate");
+
+  // Empty portfolio edge case (D = 0)
+  const emptyRes = calculatePortfolioLookthrough({
+    fundBalances: {},
+    directHoldings: [],
+    cashDeposits: [],
+    audNzdRate: 1.10,
+    fundsRegistry: input.fundsRegistry,
+    constituentsMap: input.constituentsMap,
+  });
+  assertTrue(emptyRes.denominatorD === 0, "denominatorD is 0");
+  assertTrue(emptyRes.holdings.length === 0, "no holdings");
+  assertTrue(emptyRes.liquidity.growthPercentage === 0, "growthPercentage safe 0");
+  assertTrue(emptyRes.liquidity.defensivePercentage === 0, "defensivePercentage safe 0");
+
+  // Custom bank fallback slug resolution
+  const customBank = resolveDepositIssuer("My Custom Credit Union");
+  assertTrue(customBank.issuerKey.startsWith("DEPOSIT_"), "slug starts with DEPOSIT_");
+  assertTrue(customBank.issuerName === "My Custom Credit Union", "name preserved");
 }

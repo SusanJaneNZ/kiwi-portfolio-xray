@@ -150,4 +150,81 @@ export const rebalanceTestCases: Array<[string, () => void]> = [
       assertTrue((badTargets.errorReason || "").includes("100%"), "mentions 100%");
     },
   ],
+  [
+    "converts AUD direct holdings using audNzdRate in bucket assignments",
+    () => {
+      const res = calculateBucketRebalance({
+        buckets: [
+          { id: "asx", name: "ASX Shares", targetPercent: 50 },
+          { id: "cash", name: "Cash", targetPercent: 50 },
+        ],
+        bucketAssignments: {
+          "direct:AU000000BHP4": "asx",
+          "td:dep-1": "cash",
+        },
+        fundBalances: {},
+        directHoldings: [
+          {
+            isin: "AU000000BHP4",
+            ticker: "BHP",
+            name: "BHP Group",
+            exchange: "ASX",
+            currency: "AUD",
+            country: "Australia",
+            sector: "Materials",
+            value: 1000,
+          },
+        ],
+        cashDeposits: [
+          {
+            id: "dep-1",
+            institution: "ANZ",
+            label: "On-Call",
+            type: "cash",
+            valueNZD: 1100,
+          },
+        ],
+        audNzdRate: 1.10,
+        plannedWithdrawalNZD: 0,
+      });
+
+      assertEq(res.isValid, true, "res isValid");
+      // 1000 AUD * 1.10 = 1100 NZD
+      const asxRow = res.rows.find((r) => r.bucket.id === "asx");
+      assertTrue(asxRow !== undefined, "asxRow exists");
+      assertEq(asxRow!.currentNZD, 1100, "1000 AUD converted to 1100 NZD");
+      assertEq(res.totalAssignedNZD, 2200, "total assigned 2200 NZD");
+      assertEq(res.rebalanceRequired, false, "already balanced 50/50");
+    },
+  ],
+  [
+    "handles zero withdrawal with exact buy/sell parity and boundary guards",
+    () => {
+      // Empty buckets test
+      const emptyBuckets = calculateBucketRebalance({
+        buckets: [],
+        bucketAssignments: {},
+        fundBalances: { TWF: 10000 },
+        directHoldings: [],
+        cashDeposits: [],
+        audNzdRate: 1.10,
+        plannedWithdrawalNZD: 0,
+      });
+      assertEq(emptyBuckets.isValid, false, "empty buckets invalid");
+
+      // Withdrawal exceeding total assigned balance
+      const excessiveWithdrawal = calculateBucketRebalance({
+        buckets: [
+          { id: "a", name: "A", targetPercent: 100 },
+        ],
+        bucketAssignments: { "fund:TWF": "a" },
+        fundBalances: { TWF: 1000 },
+        directHoldings: [],
+        cashDeposits: [],
+        audNzdRate: 1.10,
+        plannedWithdrawalNZD: 2000,
+      });
+      assertEq(excessiveWithdrawal.isValid, false, "excessive withdrawal invalid");
+    },
+  ],
 ];

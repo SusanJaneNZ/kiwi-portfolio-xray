@@ -370,7 +370,7 @@ Every portfolio edit triggers a background HTTP POST to `/api/portfolio/save`, i
       { "isin": "AU000000BHP4", "ticker": "BHP", "exchange": "ASX", "currency": "AUD", "value": 5000 }
     ],
     "cashDeposits": [
-      { "id": "dep-1", "name": "ANZ 1-Year TD", "type": "term_deposit", "value": 20000, "rate": 5.2 }
+      { "id": "dep-1", "institution": "ANZ", "label": "1-Year TD", "type": "term_deposit", "valueNZD": 20000, "interestRate": 5.2 }
     ],
     "buckets": [
       { "id": "bkt-term-deposits", "name": "Term Deposits", "targetPercent": 20 },

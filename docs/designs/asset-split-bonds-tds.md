@@ -1,6 +1,6 @@
 # Asset Split, Term Deposits, Bond Funds & Bucket Rebalancer Design Spec
 
-**Status:** Draft (Post-Goldfish Revision)  
+**Status:** Implemented  
 **Date:** 2026-11-11  
 **Author:** SusanJaneNZ  
 **Parent Spec:** [Kiwi Portfolio X-Ray](kiwi-portfolio-xray.md)
@@ -210,7 +210,7 @@ Export `calculateBucketRebalance(input: { buckets: PortfolioBucket[]; bucketAssi
 2. **`PortfolioInputTable.tsx` & `FreshnessHeader.tsx`:**
    * Adds **3. Term Deposits & Call Cash (NZD)** with NZ bank presets (`ANZ`, `ASB`, `BNZ`, `Westpac`, `Kiwibank`, `Heartland`, `Rabobank`, `TSB`, `SBS`), an optional non-sensitive **Reference / ID** tag (`depositId`, noting users should use bank certificate/receipt tags rather than full account numbers), Type selector (`Term Deposit` / `Call Cash`), NZD balance (retaining a `$0` row on rollover/edit until explicitly removed with `✕`), and optional Maturity Date / Rate %.
    * Adds inline **Bucket `<select>`** on Fund, Direct Share, and Cash/TD rows whenever `buckets.length > 0` (selecting `"Unassigned"` clears the key).
-   * Update `FreshnessHeader.tsx`'s **Clear** button to reset `fundBalances: {}`, `directHoldings: []`, `cashDeposits: []`, and `bucketAssignments: {}` (retaining user-configured `buckets`).
+   * Update `PortfolioInputTable.tsx`'s **Clear Portfolio** button to reset `fundBalances: {}`, `directHoldings: []`, `cashDeposits: []`, and `bucketAssignments: {}` (retaining user-configured `buckets`).
 3. **`HoldingsTable.tsx`:** Keep existing `viewMode` (`'total' | 'equities'`) untouched and add a separate `activeTab: "equities" | "bonds" | "institutions"` state:
    * **`Equities`**: Existing look-through equities table.
    * **`Bond Issuers`**: Consolidated `fixed_interest` issuers (`Issuer`, `Category`, `Country`, `Tranches`, `Weight %`, `NZD Value`, expandable fund sources).
@@ -277,7 +277,7 @@ Export `calculateBucketRebalance(input: { buckets: PortfolioBucket[]; bucketAssi
   * `src/components/BucketRebalancer.tsx`: Bucket manager (`20/20/60` preset + custom targets), Bucket Split & Unassigned table, and Semi-Annual Withdrawal & Rebalance Planner.
 * **Files to Modify:**
   * `src/App.tsx`: Wire `cashDeposits`, `buckets`, `bucketAssignments`, updated `LiquidityCard`/`HoldingsTable` props, and render `BucketRebalancer`.
-  * `src/components/FreshnessHeader.tsx`: Update `Clear` action to reset `cashDeposits` and `bucketAssignments` alongside balances/direct shares, and pass `equityHoldings` to `exportHoldingsCSV()`.
+  * `src/components/PortfolioInputTable.tsx`: Add Clear Portfolio and Export/Import actions, resetting `cashDeposits` and `bucketAssignments` alongside balances/direct shares.
   * `src/components/LiquidityCard.tsx`: Render 5-segment Asset Split bar, Growth/Defensive % badge, and 4 summary cards.
   * `src/components/PortfolioInputTable.tsx`: Add **3. Term Deposits & Call Cash** (presets, non-sensitive `depositId`, `$0` retention, date/rate) and inline Bucket `<select>` across all 3 holding types.
   * `src/components/HoldingsTable.tsx`: Keep `viewMode` (`total`/`equities`) and add `activeTab` (`Equities` | `Bond Issuers` | `Institution Rollup`) with multi-asset source drill-downs.

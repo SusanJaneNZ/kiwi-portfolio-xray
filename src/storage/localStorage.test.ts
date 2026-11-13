@@ -10,7 +10,10 @@ import {
   STORAGE_KEY_V2,
   autoSavePortfolioToDisk,
   createDatedBackupOnDisk,
+  exportHoldingsCSV,
   importPortfolioJSON,
+  isEmptyPortfolio,
+  isSamplePortfolio,
   loadPortfolioFromDisk,
   loadPortfolioStateWithMeta,
   normalizePortfolioState,
@@ -18,6 +21,7 @@ import {
   savePortfolioState,
   writePortfolioToLinkedFile,
 } from "./localStorage";
+import { ConsolidatedHolding, UserPortfolioState } from "../types/portfolio";
 
 function assertEq<T>(actual: T, expected: T, msg: string): void {
   if (actual !== expected) {
@@ -282,6 +286,77 @@ export const storageTestCases: Array<[string, () => void]> = [
       } finally {
         globalThis.fetch = originalFetch;
       }
+    },
+  ],
+  [
+    "isEmptyPortfolio and isSamplePortfolio accurately identify states",
+    () => {
+      const emptyState: UserPortfolioState = {
+        version: 2,
+        timestamp: "2026-11-13T00:00:00Z",
+        audNzdRate: 1.10,
+        fundBalances: {},
+        directHoldings: [],
+        cashDeposits: [],
+        buckets: [],
+        bucketAssignments: {},
+      };
+      assertTrue(isEmptyPortfolio(emptyState), "identifies empty portfolio");
+      assertTrue(!isSamplePortfolio(emptyState), "empty is not sample");
+
+      const sampleState = { ...DEFAULT_PORTFOLIO_STATE };
+      assertTrue(!isEmptyPortfolio(sampleState), "sample is not empty");
+      assertTrue(isSamplePortfolio(sampleState), "sample matches isSamplePortfolio");
+
+      const modifiedState = {
+        ...DEFAULT_PORTFOLIO_STATE,
+        fundBalances: { FNZ: 99999 },
+      };
+      assertTrue(!isSamplePortfolio(modifiedState), "modified state is not sample");
+    },
+  ],
+  [
+    "exportHoldingsCSV sanitizes spreadsheet formula triggers and escapes double quotes",
+    () => {
+      const maliciousHolding: ConsolidatedHolding = {
+        isin: "TEST0001",
+        ticker: "=CMD|' /C CALC'!A0",
+        name: "@Dangerous + Company",
+        country: "New Zealand",
+        sector: "-Finance",
+        assetClass: "equity",
+        valueNZD: 1000,
+        portfolioWeight: 0.5,
+        equityWeight: 0.5,
+        sources: [],
+      };
+      const csv = exportHoldingsCSV([maliciousHolding]);
+      assertTrue(csv.includes("'=CMD"), "formula trigger '=' escaped with leading single quote");
+      assertTrue(csv.includes("'@Dangerous"), "formula trigger '@' escaped with leading single quote");
+      assertTrue(csv.includes("'-Finance"), "formula trigger '-' escaped with leading single quote");
+    },
+  ],
+  [
+    "normalizePortfolioState defends against prototype pollution keys",
+    () => {
+      const maliciousPayload = {
+        version: 2,
+        fundBalances: {
+          __proto__: { polluted: true },
+          constructor: 5000,
+          TWF: 10000,
+        },
+        bucketAssignments: {
+          prototype: "bkt-growth",
+          "fund:TWF": "bkt-growth",
+        },
+      };
+      const normalized = normalizePortfolioState(maliciousPayload);
+      assertTrue(normalized !== null, "payload normalized");
+      assertEq(Object.prototype.hasOwnProperty.call(normalized!.fundBalances, "__proto__"), false, "no __proto__");
+      assertEq(Object.prototype.hasOwnProperty.call(normalized!.fundBalances, "constructor"), false, "no constructor");
+      assertEq(normalized!.fundBalances.TWF, 10000, "valid balance preserved");
+      assertEq(Object.prototype.hasOwnProperty.call(normalized!.bucketAssignments, "prototype"), false, "no prototype");
     },
   ],
 ];

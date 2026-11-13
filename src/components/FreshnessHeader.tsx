@@ -19,7 +19,6 @@ import {
   LoadSource,
   isSamplePortfolio,
 } from '../storage/localStorage';
-import { ConsolidatedHolding } from '../types/portfolio';
 
 interface FreshnessHeaderProps {
   envelope: FreshnessEnvelope;
