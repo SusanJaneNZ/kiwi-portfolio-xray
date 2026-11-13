@@ -6,6 +6,7 @@ import argparse
 import sys
 from pathlib import Path
 
+from pipeline.fetchers import SmartInvestorFetcher
 from pipeline.output.build_output import PipelineCompiler
 
 
@@ -15,6 +16,27 @@ def main() -> int:
         "--dry-run",
         action="store_true",
         help="Validate schemas and mappings without writing production files.",
+    )
+    parser.add_argument(
+        "--fetch",
+        action="store_true",
+        help="Fetch latest fund disclosures from Sorted Smart Investor & Disclose Register before compiling.",
+    )
+    parser.add_argument(
+        "--providers",
+        type=str,
+        default="",
+        help="Comma-separated list of providers to fetch (e.g., 'smartshares,kernel'). Defaults to all.",
+    )
+    parser.add_argument(
+        "--force-fetch",
+        action="store_true",
+        help="Force re-download of disclosures even if already cached on disk.",
+    )
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Force write production files even if validation or circuit breaker warnings occurred.",
     )
     parser.add_argument(
         "--staging-dir",
@@ -39,6 +61,20 @@ def main() -> int:
     print(f"Output Directory:  {args.output_dir}")
     print("-----------------------------------------------------------------")
 
+    if args.fetch:
+        providers = [p.strip() for p in args.providers.split(",") if p.strip()] or None
+        print(f"📡 Fetching disclosures from Sorted Smart Investor ({'providers: ' + ', '.join(providers) if providers else 'all providers'})...")
+        fetcher = SmartInvestorFetcher(staging_dir=args.staging_dir)
+        fetch_res = fetcher.fetch_all(providers=providers, force=args.force_fetch)
+        dl_count = len(fetch_res["downloaded"])
+        cached_count = len(fetch_res["cached"])
+        fail_count = len(fetch_res["failed"])
+        print(f"   [FETCH RESULT] Downloaded: {dl_count} | Cached: {cached_count} | Failed: {fail_count}")
+        if fail_count > 0:
+            for err in fetch_res["failed"]:
+                print(f"   [FETCH WARN] {err['provider']}:{err['code']} - {err['message']}", file=sys.stderr)
+        print("-----------------------------------------------------------------")
+
     compiler = PipelineCompiler(
         staging_dir=args.staging_dir,
         output_dir=args.output_dir,
@@ -46,7 +82,7 @@ def main() -> int:
     )
 
     try:
-        report, summary = compiler.compile(dry_run=args.dry_run)
+        report, summary = compiler.compile(dry_run=args.dry_run, force=args.force)
     except Exception as e:
         print(f"[FATAL] Compilation aborted due to error: {e}", file=sys.stderr)
         import traceback
@@ -78,6 +114,13 @@ def main() -> int:
             print(f"       ... and {unresolved_count - 5} more items (see public/data/unresolved_entries.json)")
     else:
         print("[PASS] Unresolved holdings: 0 items (All constituents canonical)")
+
+    build_errors = summary.get("build_errors", [])
+    if build_errors:
+        log_dest = "logged to pipeline/logs/build_errors.json" if not args.dry_run else "dry-run: logging to disk suppressed"
+        print(f"[WARN] Circuit breaker caught {len(build_errors)} corrupt/unparseable files ({log_dest}):")
+        for be in build_errors[:3]:
+            print(f"       - {be.get('filename', be.get('file'))}: {be.get('error')}")
 
     if report.warnings:
         print(f"[WARN] Taxonomy warnings ({len(report.warnings)}):")

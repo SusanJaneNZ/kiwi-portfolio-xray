@@ -85,14 +85,6 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
     return { legendItems: items, colorBySubcategory: colorMap };
   }, [activeData]);
 
-  const isCountryKey = activeTab === 'sectors';
-  const displayedLegendItems = useMemo(
-    () => (isCountryKey ? legendItems.slice(0, 15) : legendItems),
-    [isCountryKey, legendItems]
-  );
-  const remainingLegendCount = legendItems.length - displayedLegendItems.length;
-
-  // Restrict country key to top 15 so it stays concise on a single line / compact block
   const displayedLegendItems = useMemo(
     () => (isCountryKey ? legendItems.slice(0, MAX_LEGEND_COUNTRIES) : legendItems),
     [isCountryKey, legendItems]
@@ -142,14 +134,8 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
               maxCategoryPct > 0
                 ? Math.min(100, Math.max(0, (category.portfolioPercentage / maxCategoryPct) * 100))
                 : 0;
-            const isCountryKey = activeTab === 'sectors';
-  const displayedLegendItems = useMemo(
-    () => (isCountryKey ? legendItems.slice(0, 15) : legendItems),
-    [isCountryKey, legendItems]
-  );
-  const remainingLegendCount = legendItems.length - displayedLegendItems.length;
 
-  return (
+            return (
               <div key={category.name} className="space-y-1">
                 <div className="flex justify-between text-xs font-medium">
                   <span className="text-white">{category.name}</span>
@@ -166,14 +152,8 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
                     {category.subcategories.map((sub, idx) => {
                       const color =
                         colorBySubcategory.get(sub.name) ?? COLOR_PALETTE[idx % COLOR_PALETTE.length];
-                      const isCountryKey = activeTab === 'sectors';
-  const displayedLegendItems = useMemo(
-    () => (isCountryKey ? legendItems.slice(0, 15) : legendItems),
-    [isCountryKey, legendItems]
-  );
-  const remainingLegendCount = legendItems.length - displayedLegendItems.length;
 
-  return (
+                      return (
                         <div
                           key={sub.name}
                           onMouseEnter={() =>

@@ -34,7 +34,7 @@ export const rebalanceTestCases: Array<[string, () => void]> = [
         },
         fundBalances: { DIV: 22000, TWF: 63000 },
         directHoldings: [],
-        cashDeposits: [{ id: "td-1", institution: "ANZ", label: "TD", type: "term_deposit", valueNZD: 15000 }],
+        cashDeposits: [{ id: "td-1", institution: "ANZ", name: "TD", label: "TD", category: "term_deposit", type: "term_deposit", taxType: "pie", pirRate: 0.28, valueNZD: 15000 }],
         audNzdRate: 1.10,
         plannedWithdrawalNZD: 10000,
       });
@@ -70,7 +70,7 @@ export const rebalanceTestCases: Array<[string, () => void]> = [
         },
         fundBalances: { DIV: 25000, TWF: 65000 },
         directHoldings: [],
-        cashDeposits: [{ id: "td-1", institution: "ANZ", label: "TD", type: "term_deposit", valueNZD: 20000 }],
+        cashDeposits: [{ id: "td-1", institution: "ANZ", name: "TD", label: "TD", category: "term_deposit", type: "term_deposit", taxType: "pie", pirRate: 0.28, valueNZD: 20000 }],
         audNzdRate: 1.10,
         plannedWithdrawalNZD: 10000,
       });
@@ -172,6 +172,8 @@ export const rebalanceTestCases: Array<[string, () => void]> = [
             currency: "AUD",
             country: "Australia",
             sector: "Materials",
+            shares: 20,
+            price: 50.0,
             value: 1000,
           },
         ],
@@ -179,8 +181,11 @@ export const rebalanceTestCases: Array<[string, () => void]> = [
           {
             id: "dep-1",
             institution: "ANZ",
+            name: "On-Call",
             label: "On-Call",
+            category: "cash",
             type: "cash",
+            taxType: "rwt",
             valueNZD: 1100,
           },
         ],

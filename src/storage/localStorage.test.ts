@@ -101,6 +101,7 @@ export const storageTestCases: Array<[string, () => void]> = [
         ...DEFAULT_PORTFOLIO_STATE,
         fundBalances: { TWF: 42000 },
         directHoldings: [],
+        fixedInterest: [],
         cashDeposits: [],
       };
       installMockLocalStorage({
@@ -178,6 +179,7 @@ export const storageTestCases: Array<[string, () => void]> = [
         audNzdRate: 1.11,
         fundBalances: { ASIA: 33000 },
         directHoldings: [],
+        fixedInterest: [],
         cashDeposits: [],
         buckets: [],
         bucketAssignments: {},
@@ -297,6 +299,7 @@ export const storageTestCases: Array<[string, () => void]> = [
         audNzdRate: 1.10,
         fundBalances: {},
         directHoldings: [],
+        fixedInterest: [],
         cashDeposits: [],
         buckets: [],
         bucketAssignments: {},

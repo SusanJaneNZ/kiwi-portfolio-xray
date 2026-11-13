@@ -40,23 +40,43 @@ export interface DirectEquityCatalogItem {
   sector: string;
   issuer_key?: string;
   issuer_name?: string;
+  isEtf?: boolean;
+  fundCode?: string;
 }
 
 export interface DirectHolding extends DirectEquityCatalogItem {
   currency: "NZD" | "AUD";
-  value: number; // Value in local currency
+  shares: number; // Mandatory discrete share/unit count
+  price: number; // Native unit price (NZD or AUD)
+  value: number; // Local currency worth: shares * price (read-only)
+  isEtf?: boolean; // Flag indicating this listed asset is an ETF with underlying constituents
+  fundCode?: string; // Links to fund_holdings.json if isEtf === true
 }
 
-export interface CashDepositHolding {
+export type FixedInterestCategory = "term_deposit" | "bond" | "cash";
+export type FixedInterestTaxType = "rwt" | "pie";
+export type PaymentFrequency = "monthly" | "quarterly" | "semi-annual" | "annual" | "maturity";
+
+export interface FixedInterestHolding {
   id: string;
-  depositId?: string;
-  institution: string;
-  label: string;
-  type: "term_deposit" | "cash";
-  valueNZD: number;
-  maturityDate?: string;
-  interestRate?: number;
+  institution: string; // Issuer / Bank (e.g. "Contact Energy", "Heartland Bank", "ANZ")
+  name: string; // Description / Label (e.g. "CEN060 5.80% 2028", "12M PIE Term Deposit")
+  category: FixedInterestCategory;
+  taxType: FixedInterestTaxType; // 'rwt' or 'pie' (bonds are strictly 'rwt')
+  pirRate?: 0.105 | 0.175 | 0.28; // Applicable when category !== 'bond' && taxType === 'pie'
+  valueNZD: number; // Principal / Face value in NZD
+  interestRate?: number; // Annual coupon or interest rate % (e.g. 5.80)
+  maturityDate?: string; // YYYY-MM-DD
+  frequency?: PaymentFrequency; // Payment cadence
+  depositId?: string; // Optional account / reference code
+  issuerKey?: string; // Canonical issuer key (e.g. "ISSUER_CEN") for corporate bonds
+  // Backward compatibility alias for legacy code referencing .label or .type
+  label?: string;
+  type?: "term_deposit" | "cash";
 }
+
+// Backward-compatible alias for existing consumers
+export type CashDepositHolding = FixedInterestHolding;
 
 export interface PortfolioBucket {
   id: string;
@@ -151,7 +171,7 @@ export interface AssignedHoldingSummary {
   key: string;
   label: string;
   valueNZD: number;
-  kind: "fund" | "direct" | "deposit";
+  kind: "fund" | "direct" | "deposit" | "bond";
 }
 
 export interface BucketAllocationRow {
@@ -192,7 +212,8 @@ export interface UserPortfolioState {
   audNzdRate: number;
   fundBalances: Record<string, number>;
   directHoldings: DirectHolding[];
-  cashDeposits: CashDepositHolding[];
+  fixedInterest: FixedInterestHolding[];
+  cashDeposits: FixedInterestHolding[]; // Mirror alias for backwards compatibility
   buckets: PortfolioBucket[];
   bucketAssignments: BucketAssignmentMap;
 }

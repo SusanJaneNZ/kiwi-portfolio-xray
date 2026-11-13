@@ -33,6 +33,7 @@ class PipelineCompiler:
         self.issuer_alias_path = repo_root / "pipeline" / "enrichment" / "issuer_alias_map.json"
         self.gics_mapping_path = repo_root / "pipeline" / "normalizer" / "gics_mapping.json"
         self.feeder_registry_path = repo_root / "pipeline" / "feeder_registry.json"
+        self.logs_dir = repo_root / "pipeline" / "logs"
 
     def compile(self, dry_run: bool = False, force: bool = False) -> tuple[ValidationReport, dict[str, Any]]:
         # 1. Compile Security Master in-memory first (defer disk writes until validation passes)
@@ -70,12 +71,26 @@ class PipelineCompiler:
 
         # 2. Parse Master ETFs (Vanguard & iShares)
         master_funds: dict[str, Any] = {}
+        build_errors: list[dict[str, Any]] = []
+        extra_warnings: list[str] = []
+
         for provider in ("vanguard", "ishares"):
             adapter = PROVIDER_ADAPTERS[provider]()
             for f in iter_staged_files(self.staging_dir, provider, extensions=(".csv",)):
                 if adapter.can_handle(f):
-                    res = adapter.parse(f)
-                    master_funds[res.fund_code] = res
+                    try:
+                        res = adapter.parse(f)
+                        master_funds[res.fund_code] = res
+                    except Exception as exc:
+                        build_errors.append({
+                            "file": str(f),
+                            "filename": f.name,
+                            "provider": provider,
+                            "error": str(exc),
+                        })
+                        extra_warnings.append(
+                            f"[CIRCUIT BREAKER] Corrupt/unparseable file skipped in '{provider}': {f.name} ({exc})"
+                        )
 
         feeder_disc_map: dict[str, FeederWrapperDisclosure] = {}
 
@@ -87,32 +102,42 @@ class PipelineCompiler:
         all_unwrapped_funds: list[UnwrappedFund] = []
         all_unresolved_entries: list[dict] = []
         unconfigured_feeders: list[dict] = []
-        extra_warnings: list[str] = []
 
         for f in iter_staged_files(self.staging_dir, "smartshares"):
             if smartshares_adapter.can_handle(f):
-                res = smartshares_adapter.parse(f)
-                if res.fund_code in feeder_registry:
-                    feeder_disc_map[res.fund_code] = FeederWrapperDisclosure(
-                        feeder_code=res.fund_code,
-                        feeder_name=res.fund_name,
-                        master_ticker=feeder_registry[res.fund_code].get("master_ticker", ""),
-                        master_allocation=sum(h.weight for h in res.holdings),
-                        cash_ratio=res.cash_ratio,
-                        hedging_ratio=res.hedging_ratio,
-                        effective_date=res.effective_date,
-                    )
-                else:
-                    detected_feeder = self._detect_unconfigured_feeder(res, classifier)
-                    if detected_feeder:
-                        unconfigured_feeders.append(detected_feeder)
-                        extra_warnings.append(
-                            f"Feeder fund '{res.fund_code}' holds '{detected_feeder['master_holding_name']}' "
-                            f"({detected_feeder['master_weight'] * 100:.1f}%) — add a Feeder Pairing in the Feeder Pairings panel and stage its master ETF CSV to unwrap."
+                try:
+                    res = smartshares_adapter.parse(f)
+                    if res.fund_code in feeder_registry:
+                        feeder_disc_map[res.fund_code] = FeederWrapperDisclosure(
+                            feeder_code=res.fund_code,
+                            feeder_name=res.fund_name,
+                            master_ticker=feeder_registry[res.fund_code].get("master_ticker", ""),
+                            master_allocation=sum(h.weight for h in res.holdings),
+                            cash_ratio=res.cash_ratio,
+                            hedging_ratio=res.hedging_ratio,
+                            effective_date=res.effective_date,
                         )
                     else:
-                        unwrapped = self._enrich_domestic_fund(res, matcher, classifier, all_unresolved_entries)
-                        all_unwrapped_funds.append(unwrapped)
+                        detected_feeder = self._detect_unconfigured_feeder(res, classifier)
+                        if detected_feeder:
+                            unconfigured_feeders.append(detected_feeder)
+                            extra_warnings.append(
+                                f"Feeder fund '{res.fund_code}' holds '{detected_feeder['master_holding_name']}' "
+                                f"({detected_feeder['master_weight'] * 100:.1f}%) — add a Feeder Pairing in the Feeder Pairings panel and stage its master ETF CSV to unwrap."
+                            )
+                        else:
+                            unwrapped = self._enrich_domestic_fund(res, matcher, classifier, all_unresolved_entries)
+                            all_unwrapped_funds.append(unwrapped)
+                except Exception as exc:
+                    build_errors.append({
+                        "file": str(f),
+                        "filename": f.name,
+                        "provider": "smartshares",
+                        "error": str(exc),
+                    })
+                    extra_warnings.append(
+                        f"[CIRCUIT BREAKER] Corrupt/unparseable file skipped in 'smartshares': {f.name} ({exc})"
+                    )
 
         # 5. Unwrap Feeders using FeederUnwrapper
         unwrapper = FeederUnwrapper(self.feeder_registry_path, gics_mapping=gics_mapping, matcher=matcher)
@@ -129,19 +154,41 @@ class PipelineCompiler:
                         f"awaiting master ETF '{master_ticker}' in data/staging/{provider_folder}/."
                     )
                 continue
-            unwrapped = unwrapper.unwrap(feeder_code, master_fund, disc)
-            for c in unwrapped.constituents:
-                self._stamp_issuer(c, classifier)
-            all_unwrapped_funds.append(unwrapped)
+            try:
+                unwrapped = unwrapper.unwrap(feeder_code, master_fund, disc)
+                for c in unwrapped.constituents:
+                    self._stamp_issuer(c, classifier)
+                all_unwrapped_funds.append(unwrapped)
+            except Exception as exc:
+                build_errors.append({
+                    "feeder_code": feeder_code,
+                    "master_ticker": master_ticker,
+                    "provider": "feeder_unwrapper",
+                    "error": str(exc),
+                })
+                extra_warnings.append(
+                    f"[CIRCUIT BREAKER] Failed to unwrap feeder '{feeder_code}' -> '{master_ticker}': {exc}"
+                )
 
         # 6. Ingest Kernel & BetaShares disclosures and enrich
         for provider in ("kernel", "betashares"):
             adapter = PROVIDER_ADAPTERS[provider]()
             for f in iter_staged_files(self.staging_dir, provider):
                 if adapter.can_handle(f):
-                    res = adapter.parse(f)
-                    unwrapped = self._enrich_domestic_fund(res, matcher, classifier, all_unresolved_entries)
-                    all_unwrapped_funds.append(unwrapped)
+                    try:
+                        res = adapter.parse(f)
+                        unwrapped = self._enrich_domestic_fund(res, matcher, classifier, all_unresolved_entries)
+                        all_unwrapped_funds.append(unwrapped)
+                    except Exception as exc:
+                        build_errors.append({
+                            "file": str(f),
+                            "filename": f.name,
+                            "provider": provider,
+                            "error": str(exc),
+                        })
+                        extra_warnings.append(
+                            f"[CIRCUIT BREAKER] Corrupt/unparseable file skipped in '{provider}': {f.name} ({exc})"
+                        )
 
         # 7. Construct Funds Registry & Constituents Map (reject duplicate fund codes)
         funds_registry: list[dict] = []
@@ -181,6 +228,11 @@ class PipelineCompiler:
         if duplicate_errors:
             validation_report.errors.extend(duplicate_errors)
             validation_report.is_valid = False
+        if build_errors:
+            validation_report.errors.append(
+                f"Circuit breaker caught {len(build_errors)} corrupt/unparseable files. Production write aborted (use --force to bypass)."
+            )
+            validation_report.is_valid = False
         validation_report.warnings = extra_warnings + validation_report.warnings
 
         # 9. Only write production files when validation passes (unless force=True)
@@ -193,12 +245,21 @@ class PipelineCompiler:
             atomic_write_json(self.output_dir / "unresolved_entries.json", all_unresolved_entries)
             files_written = True
 
+        if not dry_run:
+            errors_file = self.logs_dir / "build_errors.json"
+            if build_errors:
+                self.logs_dir.mkdir(parents=True, exist_ok=True)
+                atomic_write_json(errors_file, build_errors)
+            elif errors_file.exists():
+                errors_file.unlink(missing_ok=True)
+
         summary_data = {
             "sec_master_summary": sec_master_summary,
             "total_funds_compiled": len(funds_registry),
             "total_unresolved_entries": len(all_unresolved_entries),
             "unresolved_entries": all_unresolved_entries,
             "unconfigured_feeders": unconfigured_feeders,
+            "build_errors": build_errors,
             "files_written": files_written,
             "_security_master_data": security_master_data,
             "validation_report": validation_report,

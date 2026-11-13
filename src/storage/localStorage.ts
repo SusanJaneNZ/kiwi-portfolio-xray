@@ -4,9 +4,12 @@
  */
 
 import {
-  CashDepositHolding,
   ConsolidatedHolding,
   DirectHolding,
+  FixedInterestCategory,
+  FixedInterestHolding,
+  FixedInterestTaxType,
+  PaymentFrequency,
   PortfolioBucket,
   UserPortfolioState,
 } from "../types/portfolio";
@@ -59,6 +62,8 @@ export const DEFAULT_PORTFOLIO_STATE: UserPortfolioState = {
       issuer_key: "ISSUER_MCY",
       issuer_name: "Mercury NZ",
       currency: "NZD",
+      shares: 500,
+      price: 5.0,
       value: 2500,
     },
     {
@@ -69,7 +74,26 @@ export const DEFAULT_PORTFOLIO_STATE: UserPortfolioState = {
       country: "Australia",
       sector: "Materials",
       currency: "AUD",
+      shares: 50,
+      price: 45.4546,
       value: 2272.73,
+    },
+  ],
+  fixedInterest: [
+    {
+      id: "td-sample-anz",
+      depositId: "TD-04192",
+      institution: "ANZ",
+      name: "6-Month Term Deposit",
+      category: "term_deposit",
+      taxType: "pie",
+      pirRate: 0.28,
+      valueNZD: 10000,
+      maturityDate: "2027-03-15",
+      interestRate: 4.85,
+      frequency: "maturity",
+      label: "6-Month Term Deposit",
+      type: "term_deposit",
     },
   ],
   cashDeposits: [
@@ -77,11 +101,16 @@ export const DEFAULT_PORTFOLIO_STATE: UserPortfolioState = {
       id: "td-sample-anz",
       depositId: "TD-04192",
       institution: "ANZ",
-      label: "6-Month Term Deposit",
-      type: "term_deposit",
+      name: "6-Month Term Deposit",
+      category: "term_deposit",
+      taxType: "pie",
+      pirRate: 0.28,
       valueNZD: 10000,
       maturityDate: "2027-03-15",
       interestRate: 4.85,
+      frequency: "maturity",
+      label: "6-Month Term Deposit",
+      type: "term_deposit",
     },
   ],
   buckets: [],
@@ -111,6 +140,23 @@ function sanitizeDirectHoldings(raw: unknown): DirectHolding[] {
     const exchange = h.exchange === "ASX" ? "ASX" : "NZX";
     const currency: "NZD" | "AUD" =
       h.currency === "AUD" || (h.currency !== "NZD" && exchange === "ASX") ? "AUD" : "NZD";
+
+    const rawShares = isFiniteNonNegative(h.shares) ? (h.shares as number) : undefined;
+    const rawPrice = isFiniteNonNegative(h.price) ? (h.price as number) : undefined;
+    let shares: number;
+    let price: number;
+    let value: number;
+
+    if (rawShares !== undefined && rawPrice !== undefined && rawShares > 0 && rawPrice > 0) {
+      shares = rawShares;
+      price = rawPrice;
+      value = Math.round(shares * price * 100) / 100;
+    } else {
+      value = h.value as number;
+      shares = Math.max(1, Math.round(value));
+      price = value / shares;
+    }
+
     valid.push({
       isin: h.isin,
       name: h.name,
@@ -121,36 +167,59 @@ function sanitizeDirectHoldings(raw: unknown): DirectHolding[] {
       ...(typeof h.issuer_key === "string" && h.issuer_key ? { issuer_key: h.issuer_key } : {}),
       ...(typeof h.issuer_name === "string" && h.issuer_name ? { issuer_name: h.issuer_name } : {}),
       currency,
-      value: h.value,
+      shares,
+      price,
+      value,
+      ...(h.isEtf ? { isEtf: true } : {}),
+      ...(typeof h.fundCode === "string" && h.fundCode ? { fundCode: h.fundCode } : {}),
     });
   }
   return valid;
 }
 
-function sanitizeCashDeposits(raw: unknown): CashDepositHolding[] {
+function sanitizeFixedInterest(raw: unknown): FixedInterestHolding[] {
   if (!Array.isArray(raw)) return [];
-  const valid: CashDepositHolding[] = [];
+  const valid: FixedInterestHolding[] = [];
   for (const item of raw) {
     if (!item || typeof item !== "object") continue;
     const d = item as Record<string, unknown>;
-    if (
-      typeof d.id !== "string" ||
-      typeof d.institution !== "string" ||
-      typeof d.label !== "string" ||
-      (d.type !== "term_deposit" && d.type !== "cash") ||
-      !isFiniteNonNegative(d.valueNZD)
-    ) {
-      continue;
-    }
+    const id = typeof d.id === "string" && d.id ? d.id : `fi-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+    const institution = typeof d.institution === "string" && d.institution ? d.institution : "NZ Institution";
+    const name = typeof d.name === "string" && d.name ? d.name : typeof d.label === "string" && d.label ? d.label : "Fixed Interest";
+    const category: FixedInterestCategory =
+      d.category === "bond" || d.category === "cash" || d.category === "term_deposit"
+        ? d.category
+        : d.type === "cash"
+        ? "cash"
+        : "term_deposit";
+    const taxType: FixedInterestTaxType = category === "bond" ? "rwt" : d.taxType === "pie" ? "pie" : "rwt";
+    const pirRate =
+      taxType === "pie"
+        ? d.pirRate === 0.105 || d.pirRate === 0.175 || d.pirRate === 0.28
+          ? d.pirRate
+          : 0.28
+        : undefined;
+    const valueNZD = isFiniteNonNegative(d.valueNZD) ? (d.valueNZD as number) : 0;
+    if (valueNZD < 0) continue;
+
+    const validFreqs = new Set<string>(["monthly", "quarterly", "semi-annual", "annual", "maturity"]);
+    const frequency = typeof d.frequency === "string" && validFreqs.has(d.frequency) ? (d.frequency as PaymentFrequency) : undefined;
+
     valid.push({
-      id: d.id,
-      institution: d.institution,
-      label: d.label,
-      type: d.type,
-      valueNZD: d.valueNZD,
+      id,
+      institution,
+      name,
+      category,
+      taxType,
+      pirRate,
+      valueNZD,
       ...(typeof d.depositId === "string" && d.depositId ? { depositId: d.depositId } : {}),
       ...(typeof d.maturityDate === "string" && d.maturityDate ? { maturityDate: d.maturityDate } : {}),
       ...(isFiniteNonNegative(d.interestRate) ? { interestRate: d.interestRate } : {}),
+      ...(frequency ? { frequency } : {}),
+      ...(typeof d.issuerKey === "string" && d.issuerKey ? { issuerKey: d.issuerKey } : {}),
+      label: name,
+      type: category === "cash" ? "cash" : "term_deposit",
     });
   }
   return valid;
@@ -185,6 +254,7 @@ export function normalizePortfolioState(candidate: unknown): UserPortfolioState 
   const hasRecognizableSection =
     (obj.fundBalances && typeof obj.fundBalances === "object" && !Array.isArray(obj.fundBalances)) ||
     Array.isArray(obj.directHoldings) ||
+    Array.isArray(obj.fixedInterest) ||
     Array.isArray(obj.cashDeposits) ||
     Array.isArray(obj.buckets);
 
@@ -210,10 +280,13 @@ export function normalizePortfolioState(candidate: unknown): UserPortfolioState 
   if (obj.bucketAssignments && typeof obj.bucketAssignments === "object" && !Array.isArray(obj.bucketAssignments)) {
     for (const [k, v] of Object.entries(obj.bucketAssignments as Record<string, unknown>)) {
       if (typeof k === "string" && !DANGEROUS_KEYS.has(k) && typeof v === "string" && v) {
-        bucketAssignments[k] = v;
+        const canonicalKey = k.startsWith("td:") ? `fi:${k.slice(3)}` : k;
+        bucketAssignments[canonicalKey] = v;
       }
     }
   }
+
+  const fi = sanitizeFixedInterest(obj.fixedInterest || obj.cashDeposits);
 
   return {
     version: 2,
@@ -221,7 +294,8 @@ export function normalizePortfolioState(candidate: unknown): UserPortfolioState 
     audNzdRate,
     fundBalances,
     directHoldings: sanitizeDirectHoldings(obj.directHoldings),
-    cashDeposits: sanitizeCashDeposits(obj.cashDeposits),
+    fixedInterest: fi,
+    cashDeposits: fi,
     buckets: sanitizeBuckets(obj.buckets),
     bucketAssignments,
   };
@@ -380,7 +454,8 @@ export async function autoSavePortfolioToDisk(state: UserPortfolioState): Promis
           audNzdRate: state.audNzdRate,
           fundBalances: state.fundBalances,
           directHoldings: state.directHoldings,
-          cashDeposits: state.cashDeposits,
+          fixedInterest: state.fixedInterest || state.cashDeposits,
+          cashDeposits: state.fixedInterest || state.cashDeposits,
           buckets: state.buckets,
           bucketAssignments: state.bucketAssignments,
         },
@@ -494,7 +569,8 @@ export async function writePortfolioToLinkedFile(
         audNzdRate: state.audNzdRate,
         fundBalances: state.fundBalances,
         directHoldings: state.directHoldings,
-        cashDeposits: state.cashDeposits,
+        fixedInterest: state.fixedInterest || state.cashDeposits,
+        cashDeposits: state.fixedInterest || state.cashDeposits,
         buckets: state.buckets,
         bucketAssignments: state.bucketAssignments,
       },
@@ -584,10 +660,11 @@ export async function pickExistingAndLinkBackupFile(): Promise<{
 }
 
 export function isEmptyPortfolio(state: UserPortfolioState): boolean {
+  const fiList = state.fixedInterest || state.cashDeposits || [];
   return (
     Object.values(state.fundBalances).every((v) => v <= 0) &&
     state.directHoldings.every((d) => d.value <= 0) &&
-    state.cashDeposits.every((c) => c.valueNZD <= 0) &&
+    fiList.every((c) => c.valueNZD <= 0) &&
     state.buckets.length === 0
   );
 }
@@ -610,7 +687,12 @@ export function isSamplePortfolio(state: UserPortfolioState): boolean {
     (d) => d.ticker === "BHP.AX" && Math.abs(d.value - 2272.73) < 0.01
   );
   if (!hasMcy || !hasBhp) return false;
-  if (state.cashDeposits.length !== 1 || state.cashDeposits[0].id !== "td-sample-anz") {
+  const fiList = state.fixedInterest || state.cashDeposits || [];
+  if (
+    fiList.length !== 1 ||
+    fiList[0].id !== "td-sample-anz" ||
+    Math.abs(fiList[0].valueNZD - 10000) >= 0.01
+  ) {
     return false;
   }
   return state.buckets.length === 0;
@@ -655,7 +737,8 @@ export function exportPortfolioJSON(state: UserPortfolioState): string {
       audNzdRate: state.audNzdRate,
       fundBalances: state.fundBalances,
       directHoldings: state.directHoldings,
-      cashDeposits: state.cashDeposits,
+      fixedInterest: state.fixedInterest || state.cashDeposits,
+      cashDeposits: state.fixedInterest || state.cashDeposits,
       buckets: state.buckets,
       bucketAssignments: state.bucketAssignments,
     },

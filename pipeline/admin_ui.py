@@ -227,6 +227,12 @@ class AdminService:
         )
         return SecurityMatcher(security_master=sm_data, alias_map=self.get_alias_map(), gics_mapping=gics_data)
 
+    def fetch_disclosures(self, providers: list[str] | None = None, force: bool = False) -> dict[str, Any]:
+        """Triggers SmartInvestorFetcher to synchronize disclosures into data/staging."""
+        from pipeline.fetchers import SmartInvestorFetcher
+        fetcher = SmartInvestorFetcher(staging_dir=self.staging_dir)
+        return fetcher.fetch_all(providers=providers, force=force)
+
     def run_pipeline(self, dry_run: bool = True) -> dict[str, Any]:
         """Executes PipelineCompiler in dry-run or production build mode."""
         compiler = PipelineCompiler(
@@ -255,6 +261,7 @@ class AdminService:
             "total_unresolved_entries": summary.get("total_unresolved_entries", 0),
             "unresolved_entries": unresolved,
             "unconfigured_feeders": summary.get("unconfigured_feeders", []),
+            "build_errors": summary.get("build_errors", []),
         }
 
     def get_alias_map(self) -> dict[str, dict[str, str]]:
@@ -582,6 +589,10 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                 elif path == "/api/pipeline/run":
                     dry_run = bool(data.get("dry_run", True))
                     self._send_json(service.run_pipeline(dry_run=dry_run))
+                elif path == "/api/pipeline/fetch":
+                    providers = data.get("providers")
+                    force = bool(data.get("force", False))
+                    self._send_json(service.fetch_disclosures(providers=providers, force=force))
                 elif path == "/api/aliases/set":
                     aliases = service.set_alias_mapping(
                         scope_key=data.get("scope_key", ""),

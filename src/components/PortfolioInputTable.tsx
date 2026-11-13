@@ -14,7 +14,7 @@ import {
 } from '../storage/localStorage';
 import { FundAllocationsPanel } from './portfolio-inputs/FundAllocationsPanel';
 import { DirectSharesPanel } from './portfolio-inputs/DirectSharesPanel';
-import { CashDepositsPanel } from './portfolio-inputs/CashDepositsPanel';
+import { FixedInterestPanel } from './portfolio-inputs/FixedInterestPanel';
 
 interface PortfolioInputTableProps {
   portfolioState: UserPortfolioState;
@@ -33,10 +33,11 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const fiList = portfolioState.fixedInterest || portfolioState.cashDeposits || [];
   const hasEnteredPortfolio =
     Object.keys(portfolioState.fundBalances).length > 0 ||
     portfolioState.directHoldings.length > 0 ||
-    portfolioState.cashDeposits.length > 0 ||
+    fiList.length > 0 ||
     portfolioState.buckets.length > 0;
 
   const handleLoadSample = async () => {
@@ -69,6 +70,7 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
       ...portfolioState,
       fundBalances: {},
       directHoldings: [],
+      fixedInterest: [],
       cashDeposits: [],
       bucketAssignments: {},
     });
@@ -108,8 +110,14 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
     const nextAssignments = { ...portfolioState.bucketAssignments };
     if (!bucketId) {
       delete nextAssignments[instrumentKey];
+      if (instrumentKey.startsWith('fi:')) {
+        delete nextAssignments[`td:${instrumentKey.slice(3)}`];
+      }
     } else {
       nextAssignments[instrumentKey] = bucketId;
+      if (instrumentKey.startsWith('fi:')) {
+        delete nextAssignments[`td:${instrumentKey.slice(3)}`];
+      }
     }
     onUpdateState({ ...portfolioState, bucketAssignments: nextAssignments });
   };
@@ -119,7 +127,7 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
     (acc, h) => acc + directHoldingValueNZD(h, portfolioState.audNzdRate),
     0
   );
-  const depositSumNZD = portfolioState.cashDeposits.reduce((acc, d) => acc + Math.max(0, d.valueNZD), 0);
+  const depositSumNZD = fiList.reduce((acc, d) => acc + Math.max(0, d.valueNZD), 0);
 
   return (
     <CollapsiblePanel
@@ -204,10 +212,10 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
           onUpdateState={onUpdateState}
         />
 
-        <CashDepositsPanel
+        <FixedInterestPanel
           portfolioState={portfolioState}
           totalPortfolioNZD={totalPortfolioNZD}
-          depositSumNZD={depositSumNZD}
+          fixedInterestSumNZD={depositSumNZD}
           onAssignBucket={setBucketForKey}
           onUpdateState={onUpdateState}
         />

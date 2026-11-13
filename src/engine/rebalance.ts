@@ -7,8 +7,8 @@ import {
   BucketAllocationRow,
   BucketAssignmentMap,
   BucketRebalanceResult,
-  CashDepositHolding,
   DirectHolding,
+  FixedInterestHolding,
   PortfolioBucket,
 } from "../types/portfolio";
 import { directHoldingValueNZD } from "../utils/format";
@@ -18,7 +18,8 @@ export interface RebalanceInput {
   bucketAssignments: BucketAssignmentMap;
   fundBalances: Record<string, number>;
   directHoldings: DirectHolding[];
-  cashDeposits: CashDepositHolding[];
+  fixedInterest?: FixedInterestHolding[];
+  cashDeposits?: FixedInterestHolding[];
   audNzdRate: number;
   plannedWithdrawalNZD: number;
 }
@@ -49,7 +50,6 @@ export function calculateBucketRebalance(input: RebalanceInput): BucketRebalance
     bucketAssignments,
     fundBalances,
     directHoldings,
-    cashDeposits,
     audNzdRate,
     plannedWithdrawalNZD,
   } = input;
@@ -88,16 +88,19 @@ export function calculateBucketRebalance(input: RebalanceInput): BucketRebalance
       assignItem({ key: `direct:${dh.isin}`, label: `${dh.ticker} (${dh.name})`, valueNZD: valNZD, kind: "direct" });
     }
   }
-  for (const dep of cashDeposits) {
+  const fiList = input.fixedInterest || input.cashDeposits || [];
+  for (const dep of fiList) {
     if (dep.valueNZD > 0) {
+      const isTermDeposit = (dep.category || dep.type) === "term_deposit";
+      const key = bucketAssignments[`fi:${dep.id}`] ? `fi:${dep.id}` : `td:${dep.id}`;
       assignItem(
         {
-          key: `td:${dep.id}`,
-          label: `${dep.institution} · ${dep.label}`,
+          key,
+          label: `${dep.institution} · ${dep.name || dep.label || dep.institution}`,
           valueNZD: dep.valueNZD,
           kind: "deposit",
         },
-        dep.type === "term_deposit"
+        isTermDeposit
       );
     }
   }

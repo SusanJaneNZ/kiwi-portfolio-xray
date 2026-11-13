@@ -34,7 +34,7 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
         bucketAssignments: portfolioState.bucketAssignments,
         fundBalances: portfolioState.fundBalances,
         directHoldings: portfolioState.directHoldings,
-        cashDeposits: portfolioState.cashDeposits,
+        fixedInterest: portfolioState.fixedInterest || portfolioState.cashDeposits,
         audNzdRate: portfolioState.audNzdRate,
         plannedWithdrawalNZD,
       }),
@@ -50,9 +50,10 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
     }
     const nextAssignments: Record<string, string> = {};
     // Convenience auto-assign direct term deposits into Term Deposits bucket when applying starter preset
-    for (const dep of portfolioState.cashDeposits) {
-      if (dep.type === 'term_deposit') {
-        nextAssignments[`td:${dep.id}`] = 'bkt-term-deposits';
+    const fiList = portfolioState.fixedInterest || portfolioState.cashDeposits || [];
+    for (const dep of fiList) {
+      if ((dep.category || dep.type) === 'term_deposit') {
+        nextAssignments[`fi:${dep.id}`] = 'bkt-term-deposits';
       }
     }
     onUpdateState({

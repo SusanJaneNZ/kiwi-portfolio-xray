@@ -3,11 +3,11 @@
  */
 
 import {
-  CashDepositHolding,
   CategoryBreakdown,
   ConsolidatedHolding,
   Constituent,
   DirectHolding,
+  FixedInterestHolding,
   FundMetadata,
   IssuerRollupEntry,
   LiquidityBreakdown,
@@ -17,7 +17,8 @@ import { directHoldingValueNZD } from "../utils/format";
 export interface CalculationInput {
   fundBalances: Record<string, number>;
   directHoldings: DirectHolding[];
-  cashDeposits: CashDepositHolding[];
+  fixedInterest?: FixedInterestHolding[];
+  cashDeposits?: FixedInterestHolding[];
   audNzdRate: number;
   fundsRegistry: FundMetadata[];
   constituentsMap: Record<string, Constituent[]>;
@@ -43,9 +44,22 @@ const NZ_BANK_ALIAS_RES: { key: string; name: string; regexes: RegExp[] }[] = [
   { key: "ISSUER_RABOBANK", name: "Rabobank", regexes: [/\brabobank\b/i] },
   { key: "ISSUER_TSB", name: "TSB Bank", regexes: [/\btsb bank\b/i, /\btsb nz\b/i, /\btsb\b/i] },
   { key: "ISSUER_SBS", name: "SBS Bank", regexes: [/\bsbs bank\b/i, /\bsouthland building\b/i, /\bsbs\b/i] },
+  { key: "ISSUER_CEN", name: "Contact Energy", regexes: [/\bcontact energy\b/i, /\bcontact\b/i, /\bcen\b/i] },
+  { key: "ISSUER_IFT", name: "Infratil", regexes: [/\binfratil\b/i, /\bift\b/i] },
+  { key: "ISSUER_SPK", name: "Spark New Zealand", regexes: [/\bspark\b/i, /\bspk\b/i] },
+  { key: "ISSUER_MEL", name: "Meridian Energy", regexes: [/\bmeridian\b/i, /\bmel\b/i] },
+  { key: "ISSUER_MCY", name: "Mercury NZ", regexes: [/\bmercury\b/i, /\bmcy\b/i] },
+  { key: "ISSUER_NZ_GOV", name: "New Zealand Government", regexes: [/\bnew zealand government\b/i, /\bnz government\b/i, /\bnz gov\b/i] },
+  { key: "ISSUER_AKL_COUNCIL", name: "Auckland Council", regexes: [/\bauckland council\b/i] },
 ];
 
-export function resolveDepositIssuer(institution: string): { issuerKey: string; issuerName: string } {
+export function resolveDepositIssuer(
+  institution: string,
+  explicitIssuerKey?: string
+): { issuerKey: string; issuerName: string } {
+  if (explicitIssuerKey) {
+    return { issuerKey: explicitIssuerKey, issuerName: institution };
+  }
   const clean = institution.trim();
   for (const bank of NZ_BANK_ALIAS_RES) {
     if (bank.regexes.some((rx) => rx.test(clean))) {
@@ -102,7 +116,7 @@ function buildCategoryBreakdown(
 
 function buildCrossAssetIssuerRollup(
   allHoldings: ConsolidatedHolding[],
-  cashDeposits: CashDepositHolding[],
+  fixedInterestList: FixedInterestHolding[],
   denominatorD: number
 ): IssuerRollupEntry[] {
   const rollupMap = new Map<string, IssuerRollupEntry>();
@@ -138,16 +152,18 @@ function buildCrossAssetIssuerRollup(
     }
   }
 
-  for (const dep of cashDeposits) {
+  for (const dep of fixedInterestList) {
     if (dep.valueNZD <= 0) continue;
-    const { issuerKey, issuerName } = resolveDepositIssuer(dep.institution);
+    const cat = dep.category || dep.type || "term_deposit";
+    if (cat === "bond") continue; // Direct bonds are already incorporated in allHoldings
+    const { issuerKey, issuerName } = resolveDepositIssuer(dep.institution, dep.issuerKey);
     const entry = ensureIssuer(issuerKey, issuerName);
     entry.depositNZD += dep.valueNZD;
     entry.sources.push({
       sourceType: "deposit",
-      fundName: `${dep.institution} · ${dep.label}`,
+      fundName: `${dep.institution} · ${dep.name || dep.label || dep.institution}`,
       depositId: dep.depositId,
-      assetClass: dep.type === "term_deposit" ? "term_deposit" : undefined,
+      assetClass: cat === "term_deposit" ? "term_deposit" : undefined,
       valueNZD: dep.valueNZD,
       effectiveDate: dep.maturityDate,
     });
@@ -173,7 +189,8 @@ function buildCrossAssetIssuerRollup(
 }
 
 export function calculatePortfolioLookthrough(input: CalculationInput): CalculationResult {
-  const { fundBalances, directHoldings, cashDeposits, audNzdRate, fundsRegistry, constituentsMap } = input;
+  const { fundBalances, directHoldings, audNzdRate, fundsRegistry, constituentsMap } = input;
+  const fiList = input.fixedInterest || input.cashDeposits || [];
   const safeAudNzdRate = Number.isFinite(audNzdRate) && audNzdRate > 0 ? audNzdRate : 1.10;
 
   const fundMetaMap = new Map<string, FundMetadata>();
@@ -181,7 +198,7 @@ export function calculatePortfolioLookthrough(input: CalculationInput): Calculat
     fundMetaMap.set(fm.code, fm);
   }
 
-  // 1. Total Denominator D = sum(Bf) + sum(DirectNZD) + sum(CashDepositsNZD)
+  // 1. Total Denominator D = sum(Bf) + sum(DirectNZD) + sum(BondsNZD) + sum(TDsNZD) + sum(CashNZD)
   let sumBf = 0;
   for (const balance of Object.values(fundBalances)) {
     if (balance > 0) sumBf += balance;
@@ -197,11 +214,15 @@ export function calculatePortfolioLookthrough(input: CalculationInput): Calculat
     }
   }
 
+  let directBondsNZD = 0;
   let directTermDepositsNZD = 0;
   let directCashNZD = 0;
-  for (const dep of cashDeposits) {
+  for (const dep of fiList) {
     if (dep.valueNZD > 0) {
-      if (dep.type === "term_deposit") {
+      const cat = dep.category || dep.type || "term_deposit";
+      if (cat === "bond") {
+        directBondsNZD += dep.valueNZD;
+      } else if (cat === "term_deposit") {
         directTermDepositsNZD += dep.valueNZD;
       } else {
         directCashNZD += dep.valueNZD;
@@ -209,9 +230,9 @@ export function calculatePortfolioLookthrough(input: CalculationInput): Calculat
     }
   }
 
-  const denominatorD = sumBf + sumDirectNZD + directTermDepositsNZD + directCashNZD;
+  const denominatorD = sumBf + sumDirectNZD + directBondsNZD + directTermDepositsNZD + directCashNZD;
 
-  // 2. Fund-level Cash & Hedging Reserves
+  // 2. Fund-level Cash & Hedging Reserves (from both unlisted funds and unwrapped listed ETFs)
   let fundCashNZD = 0;
   let totalHedgingNZD = 0;
   for (const [code, balance] of Object.entries(fundBalances)) {
@@ -220,6 +241,17 @@ export function calculatePortfolioLookthrough(input: CalculationInput): Calculat
       if (meta) {
         fundCashNZD += balance * (meta.cash_ratio || 0);
         totalHedgingNZD += balance * Math.max(0, meta.hedging_ratio || 0);
+      }
+    }
+  }
+  for (const { holding, valueNZD } of directNZDValues) {
+    const baseTicker = holding.ticker.split(".")[0].trim().toUpperCase();
+    const etfCode = holding.fundCode || (holding.isEtf ? baseTicker : undefined) || (constituentsMap[baseTicker] ? baseTicker : undefined);
+    if (etfCode && constituentsMap[etfCode]) {
+      const meta = fundMetaMap.get(etfCode);
+      if (meta) {
+        fundCashNZD += valueNZD * (meta.cash_ratio || 0);
+        totalHedgingNZD += valueNZD * Math.max(0, meta.hedging_ratio || 0);
       }
     }
   }
@@ -305,34 +337,120 @@ export function calculatePortfolioLookthrough(input: CalculationInput): Calculat
   }
 
   for (const { holding, valueNZD } of directNZDValues) {
-    const isin = holding.isin || `SYNTH_${holding.ticker}`;
-    const holdingKey = `equity:${isin}`;
-    let record = holdingsMap.get(holdingKey);
-    if (!record) {
-      record = {
-        isin,
-        name: holding.name,
-        ticker: holding.ticker,
-        country: holding.country,
-        sector: holding.sector,
-        assetClass: "equity",
-        issuerKey: holding.issuer_key,
-        issuerName: holding.issuer_name,
-        valueNZD: 0,
-        portfolioWeight: 0,
-        equityWeight: 0,
-        sources: [],
-      };
-      holdingsMap.set(holdingKey, record);
-    }
+    const baseTicker = holding.ticker.split(".")[0].toUpperCase();
+    const etfCode = holding.fundCode || (holding.isEtf ? baseTicker : undefined) || (constituentsMap[baseTicker] ? baseTicker : undefined);
+    const etfConstituents = etfCode ? constituentsMap[etfCode] : undefined;
+    const etfMeta = etfCode ? fundMetaMap.get(etfCode) : undefined;
 
-    record.valueNZD += valueNZD;
-    record.sources.push({
-      sourceType: "direct",
-      assetClass: "equity",
-      valueNZD,
-      effectiveDate: new Date().toISOString().split("T")[0],
-    });
+    if (etfConstituents && etfConstituents.length > 0) {
+      // UNWRAP listed ETF into its underlying constituents!
+      for (const c of etfConstituents) {
+        const assetClass = c.asset_class || "equity";
+        const isin = c.isin || `SYNTH_${c.ticker || c.name}`;
+        const holdingKey = `${assetClass}:${isin}`;
+        const exposureNZD = valueNZD * c.weight;
+
+        let record = holdingsMap.get(holdingKey);
+        if (!record) {
+          record = {
+            isin,
+            name: c.name,
+            ticker: c.ticker || "",
+            country: c.country || "Global",
+            sector: c.sector || "Unclassified",
+            assetClass,
+            issuerKey: c.issuer_key,
+            issuerName: c.issuer_name,
+            trancheCount: c.tranche_count,
+            valueNZD: 0,
+            portfolioWeight: 0,
+            equityWeight: 0,
+            sources: [],
+          };
+          holdingsMap.set(holdingKey, record);
+        } else if (c.tranche_count) {
+          record.trancheCount = (record.trancheCount || 0) + c.tranche_count;
+        }
+
+        record.valueNZD += exposureNZD;
+        record.sources.push({
+          sourceType: "direct",
+          fundCode: etfCode,
+          fundName: `${holding.ticker} (${etfMeta?.name || holding.name})`,
+          assetClass,
+          valueNZD: exposureNZD,
+          weightInFund: c.weight,
+          effectiveDate: etfMeta?.effective_date || new Date().toISOString().split("T")[0],
+        });
+      }
+    } else {
+      const isin = holding.isin || `SYNTH_${holding.ticker}`;
+      const holdingKey = `equity:${isin}`;
+      let record = holdingsMap.get(holdingKey);
+      if (!record) {
+        record = {
+          isin,
+          name: holding.name,
+          ticker: holding.ticker,
+          country: holding.country,
+          sector: holding.sector,
+          assetClass: "equity",
+          issuerKey: holding.issuer_key,
+          issuerName: holding.issuer_name,
+          valueNZD: 0,
+          portfolioWeight: 0,
+          equityWeight: 0,
+          sources: [],
+        };
+        holdingsMap.set(holdingKey, record);
+      }
+
+      record.valueNZD += valueNZD;
+      record.sources.push({
+        sourceType: "direct",
+        assetClass: "equity",
+        valueNZD,
+        effectiveDate: new Date().toISOString().split("T")[0],
+      });
+    }
+  }
+
+  // Add direct corporate/government bonds into holdingsMap
+  for (const fi of fiList) {
+    const cat = fi.category || fi.type || "term_deposit";
+    if (cat === "bond" && fi.valueNZD > 0) {
+      const isin = fi.depositId || `BOND_${fi.id}`;
+      const holdingKey = `fixed_interest:${isin}`;
+      let record = holdingsMap.get(holdingKey);
+      if (!record) {
+        const { issuerKey, issuerName } = resolveDepositIssuer(fi.institution, fi.issuerKey);
+        record = {
+          isin,
+          name: fi.name || fi.label || `${fi.institution} Bond`,
+          ticker: (fi.name || fi.institution).split(" ")[0],
+          country: "New Zealand",
+          sector: "Fixed Interest",
+          assetClass: "fixed_interest",
+          issuerKey,
+          issuerName,
+          valueNZD: 0,
+          portfolioWeight: 0,
+          equityWeight: 0,
+          sources: [],
+        };
+        holdingsMap.set(holdingKey, record);
+      }
+
+      record.valueNZD += fi.valueNZD;
+      record.sources.push({
+        sourceType: "deposit",
+        depositId: fi.id,
+        fundName: `${fi.institution} · ${fi.name || fi.label || fi.institution}`,
+        assetClass: "fixed_interest",
+        valueNZD: fi.valueNZD,
+        effectiveDate: fi.maturityDate,
+      });
+    }
   }
 
   const allHoldings = Array.from(holdingsMap.values());
@@ -397,7 +515,7 @@ export function calculatePortfolioLookthrough(input: CalculationInput): Calculat
   };
 
   // 4. Cross-Asset Institution Rollup & 5. Equity-Only Macro Breakdowns
-  const issuerRollup = buildCrossAssetIssuerRollup(allHoldings, cashDeposits, denominatorD);
+  const issuerRollup = buildCrossAssetIssuerRollup(allHoldings, fiList, denominatorD);
   const sectorBreakdown = buildCategoryBreakdown(equityHoldings, "sector", "country", totalEquitiesNZD);
   const countryBreakdown = buildCategoryBreakdown(equityHoldings, "country", "sector", totalEquitiesNZD);
 

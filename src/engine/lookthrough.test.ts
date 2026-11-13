@@ -3,7 +3,7 @@
  */
 
 import { calculatePortfolioLookthrough, CalculationInput, resolveDepositIssuer } from "./lookthrough";
-import { CashDepositHolding, Constituent, DirectHolding, FundMetadata } from "../types/portfolio";
+import { Constituent, DirectHolding, FixedInterestHolding, FundMetadata } from "../types/portfolio";
 
 function assertTrue(cond: boolean, msg: string): void {
   if (!cond) throw new Error(msg);
@@ -93,6 +93,8 @@ export function runLookthroughTests(): void {
       issuer_key: "ISSUER_MCY",
       issuer_name: "Mercury NZ",
       currency: "NZD",
+      shares: 200,
+      price: 5.0,
       value: 1000,
     },
     {
@@ -103,24 +105,33 @@ export function runLookthroughTests(): void {
       country: "Australia",
       sector: "Materials",
       currency: "AUD",
+      shares: 20,
+      price: 50.0,
       value: 1000, // 1100 NZD @ 1.10
     },
   ];
 
-  const cashDeposits: CashDepositHolding[] = [
+  const cashDeposits: FixedInterestHolding[] = [
     {
       id: "td-1",
       depositId: "TD-04192",
       institution: "ANZ",
+      name: "6-Month Term Deposit",
       label: "6-Month Term Deposit",
+      category: "term_deposit",
       type: "term_deposit",
+      taxType: "pie",
+      pirRate: 0.28,
       valueNZD: 5000,
     },
     {
       id: "cash-1",
       institution: "Kiwibank",
+      name: "Call Account",
       label: "Call Account",
+      category: "cash",
       type: "cash",
+      taxType: "rwt",
       valueNZD: 2900,
     },
   ];
@@ -192,4 +203,110 @@ export function runLookthroughTests(): void {
   const customBank = resolveDepositIssuer("My Custom Credit Union");
   assertTrue(customBank.issuerKey.startsWith("DEPOSIT_"), "slug starts with DEPOSIT_");
   assertTrue(customBank.issuerName === "My Custom Credit Union", "name preserved");
+
+  // PHASE 1 VERIFICATION: Direct Corporate Bonds & Cross-Asset Issuer Rollup
+  const directBondsInput: CalculationInput = {
+    fundBalances: {},
+    directHoldings: [
+      {
+        isin: "NZCENE0001S6",
+        name: "Contact Energy Limited",
+        ticker: "CEN.NZ",
+        exchange: "NZX",
+        country: "New Zealand",
+        sector: "Utilities",
+        issuer_key: "ISSUER_CEN",
+        issuer_name: "Contact Energy",
+        currency: "NZD",
+        shares: 1000,
+        price: 8.50,
+        value: 8500,
+      },
+    ],
+    fixedInterest: [
+      {
+        id: "bond-cen060",
+        depositId: "CEN060",
+        institution: "Contact Energy",
+        name: "CEN060 5.80% 2028",
+        category: "bond",
+        taxType: "rwt",
+        valueNZD: 15000,
+        interestRate: 5.80,
+        maturityDate: "2028-04-15",
+        frequency: "semi-annual",
+      },
+      {
+        id: "td-heartland",
+        depositId: "HLD-01",
+        institution: "Heartland",
+        name: "Heartland PIE Term Deposit",
+        category: "term_deposit",
+        taxType: "pie",
+        pirRate: 0.175,
+        valueNZD: 20000,
+        interestRate: 5.25,
+      },
+    ],
+    audNzdRate: 1.10,
+    fundsRegistry: input.fundsRegistry,
+    constituentsMap: input.constituentsMap,
+  };
+
+  const bondRes = calculatePortfolioLookthrough(directBondsInput);
+  // Denominator: 8500 (equity) + 15000 (bond) + 20000 (TD) = 43500
+  assertTrue(Math.abs(bondRes.denominatorD - 43500) < 0.01, `Bond test D mismatch: ${bondRes.denominatorD}`);
+  assertTrue(Math.abs(bondRes.liquidity.totalBondsNZD - 15000) < 0.01, `Direct bond not counted in totalBondsNZD: ${bondRes.liquidity.totalBondsNZD}`);
+  assertTrue(Math.abs(bondRes.liquidity.totalTermDepositsNZD - 20000) < 0.01, `TD mismatch: ${bondRes.liquidity.totalTermDepositsNZD}`);
+
+  // Direct bond must appear in bondIssuerHoldings
+  const cenBondHolding = bondRes.bondIssuerHoldings.find((b) => b.isin === "CEN060");
+  if (!cenBondHolding) throw new Error("Direct corporate bond CEN060 missing from bondIssuerHoldings");
+  assertTrue(cenBondHolding.valueNZD === 15000, "CEN060 valueNZD mismatch");
+  assertTrue(cenBondHolding.assetClass === "fixed_interest", "CEN060 assetClass is fixed_interest");
+
+  // Contact Energy cross-asset rollup combining equity and bond under ISSUER_CEN
+  const cenRollup = bondRes.issuerRollup.find((r) => r.issuerKey === "ISSUER_CEN");
+  if (!cenRollup) throw new Error("Contact Energy missing from cross-asset issuerRollup");
+  assertTrue(Math.abs(cenRollup.equityNZD - 8500) < 0.01, `CEN equity mismatch: ${cenRollup.equityNZD}`);
+  assertTrue(Math.abs(cenRollup.bondNZD - 15000) < 0.01, `CEN bond mismatch: ${cenRollup.bondNZD}`);
+  assertTrue(Math.abs(cenRollup.totalNZD - 23500) < 0.01, `CEN total mismatch: ${cenRollup.totalNZD}`);
+  assertTrue(cenRollup.assetClassCount === 2, `Expected 2 CEN asset classes (equity + bond), got ${cenRollup.assetClassCount}`);
+
+  // PHASE 1 VERIFICATION: Listed ETF Constituent Unwrapping
+  const etfUnwrapInput: CalculationInput = {
+    fundBalances: {},
+    directHoldings: [
+      {
+        isin: "NZTWFE0001S9",
+        name: "Smartshares Total World ETF",
+        ticker: "TWF.NZ",
+        exchange: "NZX",
+        country: "Global",
+        sector: "Unclassified",
+        currency: "NZD",
+        shares: 2000,
+        price: 3.50,
+        value: 7000, // 7000 NZD
+        isEtf: true,
+        fundCode: "TWF",
+      },
+    ],
+    fixedInterest: [],
+    audNzdRate: 1.10,
+    fundsRegistry: input.fundsRegistry,
+    constituentsMap: input.constituentsMap,
+  };
+
+  const etfRes = calculatePortfolioLookthrough(etfUnwrapInput);
+  // TWF has 60% US Tech, 37.5% ANZ Bank, 1.5% Cash, 1.0% Hedging
+  // 7000 * 0.60 = 4200 in US Tech
+  // 7000 * 0.375 = 2625 in ANZ Bank
+  assertTrue(Math.abs(etfRes.denominatorD - 7000) < 0.01, `ETF test D mismatch: ${etfRes.denominatorD}`);
+  const msft = etfRes.holdings.find((h) => h.isin === "US5949181045");
+  if (!msft) throw new Error("Listed ETF did not unwrap Microsoft constituent!");
+  assertTrue(Math.abs(msft.valueNZD - 4200) < 0.01, `Unwrapped Microsoft value mismatch: ${msft.valueNZD}`);
+  const anzInEtf = etfRes.holdings.find((h) => h.isin === "AU000000ANZ3");
+  if (!anzInEtf) throw new Error("Listed ETF did not unwrap ANZ Bank constituent!");
+  assertTrue(Math.abs(anzInEtf.valueNZD - 2625) < 0.01, `Unwrapped ANZ value mismatch: ${anzInEtf.valueNZD}`);
 }

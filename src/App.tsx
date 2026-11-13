@@ -119,16 +119,39 @@ export const App: React.FC = () => {
           fetchJson<UnresolvedItem[]>(`${basePath}data/unresolved_entries.json`),
         ]);
 
+        const listedEtfs: DirectEquityCatalogItem[] = fundsRes
+          .filter(
+            (f) =>
+              f.provider.toLowerCase() === 'smartshares' ||
+              f.provider.toLowerCase() === 'betashares'
+          )
+          .map((f) => ({
+            isin: f.code,
+            ticker: `${f.code}.NZ`,
+            name: f.name,
+            exchange: 'NZX' as const,
+            country: 'New Zealand',
+            sector: f.asset_class === 'fixed_interest' ? 'Fixed Income' : 'Broad Index ETF',
+            isEtf: true,
+            fundCode: f.code,
+          }));
+
+        const existingTickers = new Set(directRes.map((d) => d.ticker.toUpperCase()));
+        const mergedCatalog = [
+          ...directRes,
+          ...listedEtfs.filter((e) => !existingTickers.has(e.ticker.toUpperCase())),
+        ];
+
         setFundsRegistry(fundsRes);
         setConstituentsMap(constRes);
-        setDirectCatalog(directRes);
+        setDirectCatalog(mergedCatalog);
         setUnresolvedEntries(unresRes);
         setDataLoadError(null);
 
         // Reconcile any saved direct holdings whose legacy ISIN differs from compiled canonical ISIN/SEDOL
-        if (directRes.length > 0) {
+        if (mergedCatalog.length > 0) {
           const byTickerKey = new Map<string, DirectEquityCatalogItem>();
-          for (const item of directRes) {
+          for (const item of mergedCatalog) {
             byTickerKey.set(`${item.exchange}:${item.ticker.toUpperCase()}`, item);
           }
           setPortfolioState((prev) => {
@@ -205,7 +228,7 @@ export const App: React.FC = () => {
     return calculatePortfolioLookthrough({
       fundBalances: portfolioState.fundBalances,
       directHoldings: portfolioState.directHoldings,
-      cashDeposits: portfolioState.cashDeposits,
+      fixedInterest: portfolioState.fixedInterest || portfolioState.cashDeposits,
       audNzdRate: portfolioState.audNzdRate,
       fundsRegistry,
       constituentsMap,

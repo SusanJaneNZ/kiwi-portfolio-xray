@@ -6,6 +6,7 @@ interface BucketSelectProps {
   buckets: PortfolioBucket[];
   bucketAssignments: BucketAssignmentMap;
   onAssign: (instrumentKey: string, bucketId: string) => void;
+  fallbackKey?: string;
 }
 
 export const BucketSelect: React.FC<BucketSelectProps> = ({
@@ -13,9 +14,10 @@ export const BucketSelect: React.FC<BucketSelectProps> = ({
   buckets,
   bucketAssignments,
   onAssign,
+  fallbackKey,
 }) => {
   if (buckets.length === 0) return null;
-  const current = bucketAssignments[instrumentKey] || '';
+  const current = bucketAssignments[instrumentKey] || (fallbackKey ? bucketAssignments[fallbackKey] : '') || '';
   return (
     <select
       value={current}
