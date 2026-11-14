@@ -247,6 +247,109 @@ function createPricesMiddleware(): Connect.NextHandleFunction {
   const repoRoot = process.cwd();
   const cacheDir = path.join(repoRoot, 'data', 'cache');
   const cacheFile = path.join(cacheDir, 'daily_prices.json');
+  const logFile = path.join(cacheDir, 'yahoo_last_fetch.json');
+
+  const resolveYahooSymbol = (ticker: string): string => {
+    const upper = ticker.trim().toUpperCase();
+    if (upper.includes('.')) return upper;
+    return `${upper}.NZ`;
+  };
+
+  const fetchYahooQuote = async (symbol: string): Promise<{
+    price: number | null;
+    currency: string | null;
+    rawText: string;
+    status: number;
+    statusText: string;
+    url: string;
+    ok: boolean;
+    error?: string | null;
+  }> => {
+    const primaryUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?interval=1d&range=1d`;
+    const fallbackUrl = `https://query2.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?interval=1d&range=1d`;
+    const headers = {
+      'User-Agent':
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+      Accept: 'application/json',
+    };
+
+    let usedUrl = primaryUrl;
+    let response: Response | null = null;
+    let rawText = '';
+
+    try {
+      response = await fetch(primaryUrl, { headers, signal: AbortSignal.timeout(6000) });
+      rawText = await response.text();
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+    } catch (err) {
+      try {
+        usedUrl = fallbackUrl;
+        response = await fetch(fallbackUrl, { headers, signal: AbortSignal.timeout(6000) });
+        rawText = await response.text();
+      } catch (fallbackErr) {
+        return {
+          price: null,
+          currency: null,
+          rawText: String(err),
+          status: response ? response.status : 0,
+          statusText: response ? response.statusText : 'Network / Timeout Error',
+          url: usedUrl,
+          ok: false,
+          error: String(err),
+        };
+      }
+    }
+
+    let extractedPrice: number | null = null;
+    let currency: string | null = null;
+    let parseError: string | null = null;
+
+    try {
+      const parsedBody = JSON.parse(rawText);
+      const result = parsedBody?.chart?.result?.[0];
+      const meta = result?.meta;
+      currency = meta?.currency || null;
+
+      const candidate =
+        typeof meta?.regularMarketPrice === 'number' && Number.isFinite(meta.regularMarketPrice) && meta.regularMarketPrice > 0
+          ? meta.regularMarketPrice
+          : typeof meta?.chartPreviousClose === 'number' && Number.isFinite(meta.chartPreviousClose) && meta.chartPreviousClose > 0
+          ? meta.chartPreviousClose
+          : typeof meta?.previousClose === 'number' && Number.isFinite(meta.previousClose) && meta.previousClose > 0
+          ? meta.previousClose
+          : null;
+
+      if (typeof candidate === 'number' && candidate > 0) {
+        extractedPrice = candidate;
+      } else if (Array.isArray(result?.indicators?.quote?.[0]?.close)) {
+        const closes = result.indicators.quote[0].close.filter(
+          (c: any) => typeof c === 'number' && Number.isFinite(c) && c > 0
+        );
+        if (closes.length > 0) {
+          extractedPrice = closes[closes.length - 1];
+        }
+      }
+
+      if (extractedPrice === null) {
+        parseError = parsedBody?.chart?.error?.description || 'No numeric price found in Yahoo Finance chart payload';
+      }
+    } catch {
+      parseError = 'Failed to parse JSON response from Yahoo Finance';
+    }
+
+    return {
+      price: extractedPrice,
+      currency,
+      rawText: rawText.slice(0, 1000),
+      status: response ? response.status : 0,
+      statusText: response ? response.statusText : 'OK',
+      url: usedUrl,
+      ok: Boolean(response?.ok) && extractedPrice !== null,
+      error: parseError,
+    };
+  };
 
   return async (req, res, next) => {
     if (!req.url?.startsWith('/api/prices')) {
@@ -267,7 +370,7 @@ function createPricesMiddleware(): Connect.NextHandleFunction {
 
       const tickers = tickersParam
         .split(',')
-        .map((t) => t.trim().toUpperCase().replace(/\.NZ$/i, ''))
+        .map((t) => t.trim().toUpperCase())
         .filter(Boolean);
 
       const today = new Date().toISOString().split('T')[0];
@@ -276,18 +379,6 @@ function createPricesMiddleware(): Connect.NextHandleFunction {
         res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify({ ok: true, prices: {}, date: today, cached: true }));
         return;
-      }
-
-      // Read .env for API key
-      const envPath = path.join(repoRoot, '.env');
-      let apiKey = process.env.NZXPLORER_API_KEY;
-      if (!apiKey && fs.existsSync(envPath)) {
-        const envContent = fs.readFileSync(envPath, 'utf-8');
-        const match = envContent.match(/^NZXPLORER_API_KEY=["']?([^"'\r\n]+)["']?/m);
-        if (match) apiKey = match[1].trim();
-      }
-      if (apiKey) {
-        apiKey = apiKey.replace(/^["']|["']$/g, '').trim();
       }
 
       // Read local daily cache if available
@@ -303,135 +394,131 @@ function createPricesMiddleware(): Connect.NextHandleFunction {
       const isToday = cachedData.date === today;
       const prices: Record<string, number> = isToday && cachedData.prices ? { ...cachedData.prices } : {};
 
-      const missingTickers = tickers.filter((t) => force || typeof prices[t] !== 'number');
+      const missingTickers = tickers.filter((t) => {
+        const sym = resolveYahooSymbol(t);
+        const base = t.replace(/\.(NZ|AX)$/i, '');
+        return force || (typeof prices[t] !== 'number' && typeof prices[sym] !== 'number' && typeof prices[base] !== 'number');
+      });
 
       // If all tickers are cached for today and not forced, return cached prices directly (0 API calls!)
       if (missingTickers.length === 0) {
         const filteredPrices: Record<string, number> = {};
         for (const t of tickers) {
-          if (typeof prices[t] === 'number') filteredPrices[t] = prices[t];
+          const sym = resolveYahooSymbol(t);
+          const base = t.replace(/\.(NZ|AX)$/i, '');
+          const p = prices[t] ?? prices[sym] ?? prices[base];
+          if (typeof p === 'number') {
+            filteredPrices[t] = p;
+            filteredPrices[sym] = p;
+            filteredPrices[base] = p;
+          }
         }
         res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify({ ok: true, prices: filteredPrices, date: today, cached: true }));
         return;
       }
 
-      if (!apiKey) {
-        console.warn('[NZXplorer] Cannot fetch prices: NZXPLORER_API_KEY is not configured in .env');
-        res.statusCode = 400;
-        res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify({ ok: false, error: 'NZXPLORER_API_KEY is not configured in .env' }));
-        return;
-      }
-
       const diagnostics: Array<{
         ticker: string;
+        symbol: string;
         url: string;
         status: number;
         statusText: string;
         ok: boolean;
-        requestHeaders: Record<string, string>;
+        currency?: string | null;
         rawResponse: string | null;
         extractedPrice: number | null;
         error?: string | null;
       }> = [];
 
-      const sanitizeSecret = (text: string | null | undefined): string => {
-        if (!text) return '';
-        if (!apiKey) return text;
-        return text.split(apiKey).join('[REDACTED]');
-      };
+      // Fetch missing tickers from Yahoo Finance in parallel batches of 5
+      const CHUNK_SIZE = 5;
+      for (let i = 0; i < missingTickers.length; i += CHUNK_SIZE) {
+        const chunk = missingTickers.slice(i, i + CHUNK_SIZE);
+        await Promise.all(
+          chunk.map(async (t) => {
+            const symbol = resolveYahooSymbol(t);
+            const base = t.replace(/\.(NZ|AX)$/i, '');
+            console.log(`[Yahoo Finance] Fetching: ${symbol}`);
 
-      // Fetch missing tickers from NZXplorer widget/company API
-      for (const t of missingTickers) {
-        const fetchUrl = `https://nzxplorer.co.nz/api/v1/widgets/price-card?ticker=${encodeURIComponent(t)}`;
-        const headersSent = {
-          'X-API-Key': '[REDACTED]',
-          'User-Agent': 'KiwiPortfolioXRay/1.0',
-        };
+            try {
+              const result = await fetchYahooQuote(symbol);
+              if (result.price !== null && result.price > 0) {
+                prices[t] = result.price;
+                prices[symbol] = result.price;
+                prices[base] = result.price;
+              }
 
-        console.log(`[NZXplorer] Fetching: ${fetchUrl} (X-API-Key: [CONFIGURED])`);
-
-        try {
-          const response = await fetch(fetchUrl, {
-            headers: {
-              'X-API-Key': apiKey,
-              'User-Agent': 'KiwiPortfolioXRay/1.0',
-            },
-          });
-
-          const rawTextUnsanitized = await response.text();
-          const rawText = sanitizeSecret(rawTextUnsanitized);
-          console.log(`[NZXplorer] [${t}] Response Status: ${response.status} ${response.statusText}`);
-          console.log(`[NZXplorer] [${t}] Raw Body: ${rawText.slice(0, 300)}`);
-
-          let extractedPrice: number | null = null;
-          let parsedBody: any = null;
-          try {
-            parsedBody = JSON.parse(rawTextUnsanitized);
-            // Official NZXplorer /api/v1/widgets/price-card schema:
-            // { "widget": "price-card", "ticker": "AIR", "name": "...", "price": 0.38, "change_pct": -1.3, ... }
-            if (typeof parsedBody?.price === 'number' && Number.isFinite(parsedBody.price) && parsedBody.price > 0) {
-              extractedPrice = parsedBody.price;
+              diagnostics.push({
+                ticker: t,
+                symbol,
+                url: result.url,
+                status: result.status,
+                statusText: result.statusText,
+                ok: result.ok,
+                currency: result.currency,
+                rawResponse: result.rawText,
+                extractedPrice: result.price,
+                error: result.error,
+              });
+            } catch (err) {
+              const errMsg = String(err);
+              console.error(`[Yahoo Finance] [${symbol}] Error:`, errMsg);
+              diagnostics.push({
+                ticker: t,
+                symbol,
+                url: `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}`,
+                status: 0,
+                statusText: 'Fetch Error',
+                ok: false,
+                currency: null,
+                rawResponse: null,
+                extractedPrice: null,
+                error: errMsg,
+              });
             }
-          } catch {
-            // Raw text is not valid JSON
-          }
+          })
+        );
 
-          if (typeof extractedPrice === 'number' && extractedPrice > 0) {
-            prices[t] = extractedPrice;
-          }
-
-          diagnostics.push({
-            ticker: t,
-            url: fetchUrl,
-            status: response.status,
-            statusText: response.statusText,
-            ok: response.ok,
-            requestHeaders: headersSent,
-            rawResponse: rawText.slice(0, 1000),
-            extractedPrice,
-            error: response.ok
-              ? extractedPrice === null
-                ? 'Response JSON missing numeric "price" attribute'
-                : null
-              : sanitizeSecret(`HTTP ${response.status}: ${response.statusText}`),
-          });
-
-          if (missingTickers.length > 1) {
-            await new Promise((r) => setTimeout(r, 200));
-          }
-        } catch (err) {
-          const errMsg = sanitizeSecret(String(err));
-          console.error(`[NZXplorer] [${t}] Fetch Error:`, errMsg);
-          diagnostics.push({
-            ticker: t,
-            url: fetchUrl,
-            status: 0,
-            statusText: 'Network / Fetch Error',
-            ok: false,
-            requestHeaders: headersSent,
-            rawResponse: null,
-            extractedPrice: null,
-            error: errMsg,
-          });
+        if (i + CHUNK_SIZE < missingTickers.length) {
+          await new Promise((r) => setTimeout(r, 60));
         }
       }
 
-      // Save complete diagnostics to disk in data/cache/nzxplorer_last_fetch.json
-      const logFile = path.join(cacheDir, 'nzxplorer_last_fetch.json');
+      // Save complete diagnostics to disk in data/cache/yahoo_last_fetch.json
       try {
         if (!fs.existsSync(cacheDir)) {
           fs.mkdirSync(cacheDir, { recursive: true });
         }
+        let history: Record<string, any> = {};
+        try {
+          if (fs.existsSync(logFile)) {
+            const existing = JSON.parse(fs.readFileSync(logFile, 'utf-8'));
+            if (existing && typeof existing === 'object') {
+              if (existing.history && typeof existing.history === 'object') {
+                history = existing.history;
+              } else if (Array.isArray(existing.diagnostics)) {
+                for (const d of existing.diagnostics) {
+                  if (d.ticker) history[d.ticker] = d;
+                }
+              }
+            }
+          }
+        } catch {}
+
+        for (const d of diagnostics) {
+          history[d.ticker] = { ...d, timestamp: new Date().toISOString() };
+        }
+
         fs.writeFileSync(
           logFile,
           JSON.stringify(
             {
               timestamp: new Date().toISOString(),
-              tickersRequested: tickers,
-              missingTickers,
-              diagnostics,
+              source: 'Yahoo Finance API (v8 chart)',
+              lastTickersRequested: tickers,
+              history,
+              diagnostics: Object.values(history),
             },
             null,
             2
@@ -439,7 +526,7 @@ function createPricesMiddleware(): Connect.NextHandleFunction {
           'utf-8'
         );
       } catch (logErr) {
-        console.error('Failed to write nzxplorer_last_fetch.json:', logErr);
+        console.error('Failed to write yahoo_last_fetch.json:', logErr);
       }
 
       // Persist daily cache to disk
@@ -458,7 +545,14 @@ function createPricesMiddleware(): Connect.NextHandleFunction {
 
       const finalPrices: Record<string, number> = {};
       for (const t of tickers) {
-        if (typeof prices[t] === 'number') finalPrices[t] = prices[t];
+        const sym = resolveYahooSymbol(t);
+        const base = t.replace(/\.(NZ|AX)$/i, '');
+        const p = prices[t] ?? prices[sym] ?? prices[base];
+        if (typeof p === 'number') {
+          finalPrices[t] = p;
+          finalPrices[sym] = p;
+          finalPrices[base] = p;
+        }
       }
 
       res.setHeader('Content-Type', 'application/json');
@@ -470,11 +564,11 @@ function createPricesMiddleware(): Connect.NextHandleFunction {
           cached: false,
           fetchedCount: missingTickers.length,
           diagnostics,
-          logPath: 'data/cache/nzxplorer_last_fetch.json',
+          logPath: 'data/cache/yahoo_last_fetch.json',
         })
       );
     } catch (err) {
-      console.error('[NZXplorer] Internal server error in prices middleware:', err);
+      console.error('[Yahoo Finance] Internal server error in prices middleware:', err);
       res.statusCode = 500;
       res.setHeader('Content-Type', 'application/json');
       res.end(JSON.stringify({ ok: false, error: String(err) }));

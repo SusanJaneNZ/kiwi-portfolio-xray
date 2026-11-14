@@ -75,7 +75,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
   const [rateInput, setRateInput] = useState<string>(() => portfolioState.audNzdRate.toString());
   const hasAutoFetchedFx = useRef(false);
 
-  // Check if current NZX direct holdings have cached date/time
+  // Check if current direct holdings have cached date/time
   useEffect(() => {
     const cached = loadStoredDailyPrices();
     if (cached?.lastFetchedAt) {
@@ -98,14 +98,14 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
     [portfolioState.directHoldings]
   );
 
-  const nzxHoldingsCount = useMemo(
-    () => portfolioState.directHoldings.filter((h) => h.exchange === 'NZX').length,
+  const directHoldingsCount = useMemo(
+    () => portfolioState.directHoldings.length,
     [portfolioState.directHoldings]
   );
 
-  const unpricedNzxCount = useMemo(() => {
+  const unpricedCount = useMemo(() => {
     return portfolioState.directHoldings.filter(
-      (h) => h.exchange === 'NZX' && (typeof h.price !== 'number' || h.price <= 0)
+      (h) => typeof h.price !== 'number' || h.price <= 0
     ).length;
   }, [portfolioState.directHoldings]);
 
@@ -145,54 +145,86 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
   };
 
   const handleUpdatePrices = async () => {
-    const nzxTickers = portfolioState.directHoldings
-      .filter((h) => h.exchange === 'NZX')
-      .map((h) => h.ticker.split('.')[0].toUpperCase());
-
-    if (nzxTickers.length === 0) {
-      setPriceNotice('No NZX holdings in portfolio to update.');
+    const directHoldings = portfolioState.directHoldings;
+    if (directHoldings.length === 0) {
+      setPriceNotice('No direct holdings in portfolio to update.');
       return;
     }
 
-    setIsFetchingPrices(true);
-    setPriceNotice(null);
-    try {
-      const res = await fetchNzxPrices(nzxTickers, true);
-      setPriceDiagnostics(res.diagnostics || null);
-      if (res.ok && res.prices) {
-        let updatedCount = 0;
-        const updated = portfolioState.directHoldings.map((h) => {
-          if (h.exchange !== 'NZX') return h;
-          const clean = h.ticker.split('.')[0].toUpperCase();
-          const newPrice = res.prices[clean];
-          if (typeof newPrice === 'number' && newPrice > 0) {
-            updatedCount++;
-            return {
-              ...h,
-              price: newPrice,
-              value: Math.round(h.shares * newPrice * 100) / 100,
-            };
-          }
-          return h;
-        });
+    const tickersToFetch = Array.from(
+      new Set(
+        directHoldings
+          .map((h) => {
+            const raw = h.ticker.trim().toUpperCase();
+            if (raw.includes('.')) return raw;
+            return h.exchange === 'ASX' ? `${raw}.AX` : `${raw}.NZ`;
+          })
+          .filter(Boolean)
+      )
+    );
 
-        onUpdateState({ ...portfolioState, directHoldings: updated });
-        setCachedDate(res.date);
-        if (res.lastFetchedAt) {
-          setLastFetchedAt(res.lastFetchedAt);
-        }
-        if (updatedCount === 0) {
-          setPriceNotice(
-            `Updated 0 prices from NZXplorer (${nzxTickers.length} requested). See request/response log.`
-          );
-        } else {
-          setPriceNotice(`Updated ${updatedCount} of ${nzxTickers.length} prices from NZXplorer`);
-        }
-      } else if (res.error) {
-        setPriceNotice(res.error);
+    setIsFetchingPrices(true);
+    setPriceNotice(`Fetching live prices for ${tickersToFetch.length} ticker(s) from Yahoo Finance...`);
+    setPriceDiagnostics(null);
+
+    try {
+      const res = await fetchNzxPrices(tickersToFetch, true);
+      if (res.diagnostics) {
+        setPriceDiagnostics(res.diagnostics);
       }
+
+      if (!res.ok && res.error) {
+        setPriceNotice(`Price update error: ${res.error}`);
+        setIsFetchingPrices(false);
+        return;
+      }
+
+      let updatedCount = 0;
+      const updatedHoldings = portfolioState.directHoldings.map((item) => {
+        const symbolWithExt = item.ticker.includes('.')
+          ? item.ticker.toUpperCase()
+          : item.exchange === 'ASX'
+          ? `${item.ticker.toUpperCase()}.AX`
+          : `${item.ticker.toUpperCase()}.NZ`;
+        const baseSymbol = item.ticker.split('.')[0].toUpperCase();
+
+        const price =
+          res.prices?.[symbolWithExt] ??
+          res.prices?.[item.ticker.toUpperCase()] ??
+          res.prices?.[baseSymbol];
+
+        if (typeof price === 'number' && price > 0) {
+          updatedCount++;
+          return {
+            ...item,
+            price,
+            value: Math.round(item.shares * price * 100) / 100,
+          };
+        }
+        return item;
+      });
+
+      if (updatedCount > 0) {
+        onUpdateState({ ...portfolioState, directHoldings: updatedHoldings });
+      }
+
+      if (updatedCount === 0) {
+        setPriceNotice(
+          `Updated 0 prices from Yahoo Finance (${tickersToFetch.length} requested). Click "View Request/Response Log" to inspect diagnostics.`
+        );
+      } else if (updatedCount < tickersToFetch.length) {
+        setPriceNotice(
+          `Updated ${updatedCount} of ${tickersToFetch.length} prices from Yahoo Finance (${tickersToFetch.length - updatedCount} had no price data).`
+        );
+      } else {
+        setPriceNotice(`✓ Successfully updated all ${updatedCount} prices from Yahoo Finance`);
+      }
+
+      const today = getTodayDateString();
+      setCachedDate(today);
+      setLastFetchedAt(new Date().toISOString());
     } catch (err) {
-      setPriceNotice(String(err));
+      setPriceNotice(`Price update failed: ${String(err)}`);
     } finally {
       setIsFetchingPrices(false);
     }
@@ -449,29 +481,29 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
           </div>
         )}
 
-        {/* NZX Live Pricing Panel (when NZX holdings exist) */}
-        {nzxHoldingsCount > 0 && (
+        {/* Live Pricing Panel (when direct holdings exist) */}
+        {directHoldingsCount > 0 && (
           <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-2.5 flex flex-wrap items-center justify-between gap-2 text-xs">
             <div className="flex items-center gap-2">
               <span className="text-base">📈</span>
               <div>
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="font-semibold text-slate-200">NZX Pricing</span>
-                  {currentAsAtText && unpricedNzxCount === 0 ? (
+                  <span className="font-semibold text-slate-200">Live Pricing</span>
+                  {currentAsAtText && unpricedCount === 0 ? (
                     <span
                       className="text-[11px] text-emerald-400 font-medium bg-emerald-950/60 border border-emerald-800/40 rounded px-2 py-0.5"
                     >
                       ✓ Prices are current as at {currentAsAtText}
                     </span>
-                  ) : currentAsAtText && unpricedNzxCount > 0 ? (
+                  ) : currentAsAtText && unpricedCount > 0 ? (
                     <span
                       className="text-[11px] text-amber-300 font-medium bg-amber-950/60 border border-amber-800/40 rounded px-2 py-0.5"
                     >
-                      Prices are current as at {currentAsAtText} ({unpricedNzxCount} unpriced)
+                      Prices are current as at {currentAsAtText} ({unpricedCount} unpriced)
                     </span>
                   ) : (
                     <span className="text-[11px] text-amber-400 italic">
-                      Prices not yet fetched for {unpricedNzxCount > 0 ? `${unpricedNzxCount} holding${unpricedNzxCount > 1 ? 's' : ''}` : 'current holdings'}
+                      Prices not yet fetched for {unpricedCount > 0 ? `${unpricedCount} holding${unpricedCount > 1 ? 's' : ''}` : 'current holdings'}
                     </span>
                   )}
                   {isFetchingPrices && (
@@ -481,7 +513,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                   )}
                 </div>
                 <p className="text-[11px] text-slate-400">
-                  Batches all NZX tickers in one call to NZXplorer.
+                  On-demand live price refresh via Yahoo Finance API (NZX & ASX).
                 </p>
               </div>
             </div>
@@ -491,10 +523,10 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                 onClick={handleUpdatePrices}
                 disabled={isFetchingPrices}
                 className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5 shadow-sm"
-                title="Fetch latest prices for all NZX direct shares"
+                title="Fetch latest live prices for direct shares and ETFs via Yahoo Finance"
               >
                 <span className={isFetchingPrices ? 'animate-spin inline-block' : 'inline-block'}>↻</span>
-                <span>Update NZX Prices</span>
+                <span>{isFetchingPrices ? 'Updating...' : 'Update Prices'}</span>
               </button>
             </div>
           </div>
@@ -725,7 +757,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                       value={newSharePrice}
                       onChange={(e) => setNewSharePrice(e.target.value)}
                       className="w-full bg-slate-950 border border-slate-800 rounded-lg px-2 py-1.5 text-right text-xs text-white font-mono placeholder-amber-400/60"
-                      title={`Price per share in ${newShareCurrency} (leave empty to fetch via NZXplorer)`}
+                      title={`Price per share in ${newShareCurrency} (leave empty to fetch via Yahoo Finance)`}
                     />
                     <span className="text-[9px] text-slate-500 block text-right pr-1">
                       {newShareCurrency === 'AUD' ? 'A$/sh' : 'NZ$/sh'}
@@ -768,9 +800,11 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                       setNewShareCurrency(item.exchange === 'ASX' ? 'AUD' : 'NZD');
                       setSearchQuery(`${item.ticker} - ${item.name}`);
                       const clean = item.ticker.split('.')[0].toUpperCase();
+                      const full = item.ticker.toUpperCase();
                       const cached = loadStoredDailyPrices();
-                      if (cached?.date === getTodayDateString() && typeof cached.prices[clean] === 'number' && cached.prices[clean] > 0) {
-                        setNewSharePrice(cached.prices[clean].toString());
+                      const cachedPrice = cached?.prices[full] ?? cached?.prices[clean];
+                      if (cached?.date === getTodayDateString() && typeof cachedPrice === 'number' && cachedPrice > 0) {
+                        setNewSharePrice(cachedPrice.toString());
                       } else {
                         setNewSharePrice('');
                       }
@@ -792,7 +826,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
         </div>
       </div>
 
-      {/* NZXplorer API Diagnostics Modal */}
+      {/* Yahoo Finance API Diagnostics Modal */}
       {isDiagModalOpen && priceDiagnostics && (
         <div
           className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4"
@@ -805,10 +839,10 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
             <div className="flex items-center justify-between border-b border-slate-800 pb-3 shrink-0">
               <div>
                 <h3 className="text-base font-semibold text-white flex items-center gap-2">
-                  <span>NZXplorer API Request & Response Log</span>
+                  <span>Yahoo Finance API Request & Response Log</span>
                 </h3>
                 <p className="text-xs text-slate-400 mt-0.5">
-                  Logged in server terminal and saved to <code className="font-mono text-emerald-400">data/cache/nzxplorer_last_fetch.json</code>.
+                  Logged in server terminal and saved to <code className="font-mono text-emerald-400">data/cache/yahoo_last_fetch.json</code>.
                 </p>
               </div>
               <button
@@ -855,12 +889,18 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                       <span className="text-slate-500">GET: </span>
                       <span className="text-slate-300 break-all">{d.url}</span>
                     </div>
-                    <div>
-                      <span className="text-slate-500">Headers: </span>
-                      <span className="text-slate-300">
-                        X-API-Key: {d.requestHeaders['X-API-Key'] || '***'}, User-Agent: {d.requestHeaders['User-Agent']}
-                      </span>
-                    </div>
+                    {d.currency && (
+                      <div>
+                        <span className="text-slate-500">Currency: </span>
+                        <span className="text-slate-300 font-semibold">{d.currency}</span>
+                      </div>
+                    )}
+                    {d.requestHeaders && d.requestHeaders['User-Agent'] && (
+                      <div>
+                        <span className="text-slate-500">User-Agent: </span>
+                        <span className="text-slate-300 font-mono text-[10px]">{d.requestHeaders['User-Agent']}</span>
+                      </div>
+                    )}
                     {d.error && (
                       <div className="text-rose-400">
                         <span className="font-bold">Error: </span>
