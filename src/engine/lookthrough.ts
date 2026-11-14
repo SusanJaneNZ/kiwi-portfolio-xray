@@ -373,10 +373,16 @@ export function calculatePortfolioLookthrough(input: CalculationInput): Calculat
         }
 
         record.valueNZD += exposureNZD;
+        const code = etfCode || baseTicker;
+        const resolvedFundName = etfMeta?.name || holding.name || code;
+        const displayFundName = resolvedFundName.toUpperCase().includes(code.toUpperCase())
+          ? resolvedFundName
+          : `${code} - ${resolvedFundName}`;
+
         record.sources.push({
-          sourceType: "direct",
-          fundCode: etfCode,
-          fundName: `${holding.ticker} (${etfMeta?.name || holding.name})`,
+          sourceType: "fund",
+          fundCode: code,
+          fundName: displayFundName,
           assetClass,
           valueNZD: exposureNZD,
           weightInFund: c.weight,

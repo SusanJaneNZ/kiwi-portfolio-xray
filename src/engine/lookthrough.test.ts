@@ -306,7 +306,77 @@ export function runLookthroughTests(): void {
   const msft = etfRes.holdings.find((h) => h.isin === "US5949181045");
   if (!msft) throw new Error("Listed ETF did not unwrap Microsoft constituent!");
   assertTrue(Math.abs(msft.valueNZD - 4200) < 0.01, `Unwrapped Microsoft value mismatch: ${msft.valueNZD}`);
+  assertTrue(msft.sources.length === 1, "Microsoft should have exactly 1 source");
+  assertTrue(msft.sources[0].sourceType === "fund", `Expected sourceType 'fund', got ${msft.sources[0].sourceType}`);
+  assertTrue(msft.sources[0].fundCode === "TWF", `Expected fundCode 'TWF', got ${msft.sources[0].fundCode}`);
+  assertTrue(
+    Boolean(msft.sources[0].fundName?.includes("TWF") || msft.sources[0].fundName?.includes("Total World")),
+    `Expected fundName to mention TWF or Total World, got ${msft.sources[0].fundName}`
+  );
+  assertTrue(Math.abs((msft.sources[0].weightInFund || 0) - 0.60) < 0.001, "Weight in fund should be 60%");
+
   const anzInEtf = etfRes.holdings.find((h) => h.isin === "AU000000ANZ3");
   if (!anzInEtf) throw new Error("Listed ETF did not unwrap ANZ Bank constituent!");
   assertTrue(Math.abs(anzInEtf.valueNZD - 2625) < 0.01, `Unwrapped ANZ value mismatch: ${anzInEtf.valueNZD}`);
+  assertTrue(anzInEtf.sources[0].sourceType === "fund", "ANZ source should be 'fund'");
+  assertTrue(anzInEtf.sources[0].fundCode === "TWF", "ANZ fundCode should be 'TWF'");
+
+  // Test dual contributing sources: stock held BOTH directly and through an ETF
+  const dualSourceInput: CalculationInput = {
+    fundBalances: {},
+    directHoldings: [
+      {
+        isin: "NZTWFE0001S9",
+        name: "Smartshares Total World ETF",
+        ticker: "TWF.NZ",
+        exchange: "NZX",
+        country: "Global",
+        sector: "Unclassified",
+        currency: "NZD",
+        shares: 2000,
+        price: 3.50,
+        value: 7000,
+        isEtf: true,
+        fundCode: "TWF",
+      },
+      {
+        isin: "AU000000ANZ3",
+        name: "ANZ Group Holdings Limited",
+        ticker: "ANZ.AX",
+        exchange: "ASX",
+        country: "Australia",
+        sector: "Financials",
+        currency: "AUD",
+        shares: 100,
+        price: 30.0,
+        value: 3000, // 3300 NZD @ 1.10
+      },
+    ],
+    fixedInterest: [],
+    audNzdRate: 1.10,
+    fundsRegistry: input.fundsRegistry,
+    constituentsMap: input.constituentsMap,
+  };
+
+  const dualRes = calculatePortfolioLookthrough(dualSourceInput);
+  const dualAnz = dualRes.holdings.find((h) => h.isin === "AU000000ANZ3");
+  if (!dualAnz) throw new Error("Dual ANZ holding missing from lookthrough");
+  // Total ANZ = 3300 (direct) + 2625 (from TWF ETF) = 5925 NZD
+  assertTrue(Math.abs(dualAnz.valueNZD - 5925) < 0.01, `Expected 5925 ANZ total, got ${dualAnz.valueNZD}`);
+  assertTrue(dualAnz.sources.length === 2, `Expected 2 sources for dual ANZ, got ${dualAnz.sources.length}`);
+
+  const directSrc = dualAnz.sources.find((s) => s.sourceType === "direct");
+  const fundSrc = dualAnz.sources.find((s) => s.sourceType === "fund");
+  if (!directSrc) throw new Error("Missing direct source on dual ANZ holding");
+  if (!fundSrc) throw new Error("Missing fund source on dual ANZ holding");
+
+  assertTrue(Math.abs(directSrc.valueNZD - 3300) < 0.01, `Direct ANZ value mismatch: ${directSrc.valueNZD}`);
+  assertTrue(!directSrc.fundCode, "Direct source must not have a fundCode");
+
+  assertTrue(Math.abs(fundSrc.valueNZD - 2625) < 0.01, `Fund ANZ value mismatch: ${fundSrc.valueNZD}`);
+  assertTrue(fundSrc.fundCode === "TWF", `Fund source should have fundCode 'TWF', got ${fundSrc.fundCode}`);
+  assertTrue(
+    Boolean(fundSrc.fundName?.includes("TWF") || fundSrc.fundName?.includes("Total World")),
+    `Fund source should name TWF, got ${fundSrc.fundName}`
+  );
 }

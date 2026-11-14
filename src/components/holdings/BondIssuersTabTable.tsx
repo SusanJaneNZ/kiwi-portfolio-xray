@@ -65,7 +65,19 @@ export const BondIssuersTabTable: React.FC<BondIssuersTabTableProps> = ({
                           {b.sources.map((s, sIdx) => (
                             <div key={sIdx} className="flex justify-between py-1 border-b border-slate-800 last:border-0">
                               <span>
-                                {s.fundName} (<strong className="text-white font-mono">{s.fundCode}</strong>)
+                                {s.fundCode || s.fundName ? (
+                                  <>
+                                    {s.fundName || s.fundCode}
+                                    {s.fundCode && s.fundName && !s.fundName.includes(s.fundCode) && (
+                                      <> (<strong className="text-white font-mono">{s.fundCode}</strong>)</>
+                                    )}
+                                  </>
+                                ) : (
+                                  <>
+                                    <strong className="text-white">Direct Bond</strong>
+                                    {s.depositId ? ` (${s.depositId})` : ''}
+                                  </>
+                                )}
                               </span>
                               <span className="font-mono text-white">
                                 ${formatNZD(s.valueNZD, 2)}{' '}

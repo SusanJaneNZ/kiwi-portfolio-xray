@@ -65,8 +65,8 @@ export const EquitiesTabTable: React.FC<EquitiesTabTableProps> = ({
                 );
               }
 
-              const hasDirectSource = h.sources.some((s) => s.sourceType === 'direct');
-              const hasFundSource = h.sources.some((s) => s.sourceType === 'fund');
+              const hasDirectSource = h.sources.some((s) => s.sourceType === 'direct' && !s.fundCode);
+              const hasFundSource = h.sources.some((s) => s.sourceType === 'fund' || Boolean(s.fundCode));
 
               return (
                 <React.Fragment key={h.isin}>
@@ -121,17 +121,20 @@ export const EquitiesTabTable: React.FC<EquitiesTabTableProps> = ({
                               <span className="flex items-center gap-2">
                                 <span
                                   className={`w-2 h-2 rounded-full ${
-                                    s.sourceType === 'direct' ? 'bg-emerald-400' : 'bg-indigo-400'
+                                    s.sourceType === 'direct' && !s.fundCode ? 'bg-emerald-400' : 'bg-indigo-400'
                                   }`}
                                 />
-                                {s.sourceType === 'direct' ? (
+                                {s.fundCode || s.fundName ? (
                                   <span>
-                                    <strong className="text-white">Direct Holding</strong> (Broker Account)
+                                    {s.fundName || s.fundCode}
+                                    {s.fundCode && s.fundName && !s.fundName.includes(s.fundCode) && (
+                                      <> (<strong className="text-white font-mono">{s.fundCode}</strong>)</>
+                                    )}
+                                    {s.effectiveDate && <span className="text-slate-500"> · As of {s.effectiveDate}</span>}
                                   </span>
                                 ) : (
                                   <span>
-                                    {s.fundName} (<strong className="text-white font-mono">{s.fundCode}</strong>)
-                                    {s.effectiveDate && <span className="text-slate-500"> · As of {s.effectiveDate}</span>}
+                                    <strong className="text-white">Direct Holding</strong> (Broker Account)
                                   </span>
                                 )}
                               </span>

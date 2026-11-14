@@ -83,7 +83,7 @@ export const InstitutionRollupTabTable: React.FC<InstitutionRollupTabTableProps>
                                 <strong className="text-white uppercase text-[10px] mr-1.5">
                                   [{s.sourceType === 'deposit' ? 'Deposit' : s.assetClass || s.sourceType}]
                                 </strong>
-                                {s.fundName || 'Direct Equity'} {s.depositId ? `· ID: ${s.depositId}` : ''}
+                                {s.fundName || (s.sourceType === 'deposit' ? 'Direct Deposit / Bond' : 'Direct Equity')} {s.depositId ? `· ID: ${s.depositId}` : ''}
                               </span>
                               <span className="font-mono text-white">
                                 ${formatNZD(s.valueNZD, 2)}

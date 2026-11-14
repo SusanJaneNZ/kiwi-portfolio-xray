@@ -49,11 +49,12 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
   const [fiCustomInstitution, setFiCustomInstitution] = useState('');
   const [fiName, setFiName] = useState('');
   const [fiTaxSelection, setFiTaxSelection] = useState<'rwt' | 'pie_105' | 'pie_175' | 'pie_28'>('pie_28');
-  const [fiValue, setFiValue] = useState('10000');
+  const [fiValue, setFiValue] = useState('');
   const [fiRate, setFiRate] = useState('');
   const [fiMaturity, setFiMaturity] = useState('');
   const [fiFrequency, setFiFrequency] = useState<PaymentFrequency>('maturity');
   const [fiDepositId, setFiDepositId] = useState('');
+  const [editingId, setEditingId] = useState<string | null>(null);
 
   const holdingsList: FixedInterestHolding[] =
     portfolioState.fixedInterest || portfolioState.cashDeposits || [];
@@ -73,7 +74,51 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
     });
   };
 
+  const handleStartEdit = (dep: FixedInterestHolding) => {
+    setEditingId(dep.id);
+    const cat = dep.category || (dep.type === 'cash' ? 'cash' : 'term_deposit');
+    setFiCategory(cat);
+
+    if (NZ_BANK_PRESETS.includes(dep.institution)) {
+      setFiInstitution(dep.institution);
+      setFiCustomInstitution('');
+    } else {
+      setFiInstitution('__custom');
+      setFiCustomInstitution(dep.institution);
+    }
+
+    setFiName(dep.name || dep.label || '');
+    setFiValue(dep.valueNZD.toString());
+    setFiRate(dep.interestRate !== undefined ? dep.interestRate.toString() : '');
+    setFiMaturity(dep.maturityDate || '');
+    setFiFrequency(dep.frequency || 'maturity');
+    setFiDepositId(dep.depositId || '');
+
+    if (dep.taxType === 'rwt') {
+      setFiTaxSelection('rwt');
+    } else if (dep.pirRate === 0.105) {
+      setFiTaxSelection('pie_105');
+    } else if (dep.pirRate === 0.175) {
+      setFiTaxSelection('pie_175');
+    } else {
+      setFiTaxSelection('pie_28');
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setEditingId(null);
+    setFiName('');
+    setFiDepositId('');
+    setFiMaturity('');
+    setFiRate('');
+    setFiValue('');
+    setFiFrequency('maturity');
+  };
+
   const handleRemoveHolding = (id: string) => {
+    if (editingId === id) {
+      handleCancelEdit();
+    }
     const updated = holdingsList.filter((d) => d.id !== id);
     const nextAssignments = { ...portfolioState.bucketAssignments };
     delete nextAssignments[`fi:${id}`];
@@ -100,7 +145,7 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
         ? `${institution} Term Deposit`
         : `${institution} On-Call Cash`;
     const name = fiName.trim() || defaultLabel;
-    const id = `fi-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+    const id = editingId || `fi-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
     const rateNum = parseFloat(fiRate);
 
     // Bonds are strictly RWT under NZ tax law; Term Deposits/Cash can be PIE or RWT
@@ -128,17 +173,17 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
       type: fiCategory === 'cash' ? 'cash' : 'term_deposit',
     };
 
-    const updated = [...holdingsList, newHolding];
+    const updated = editingId
+      ? holdingsList.map((h) => (h.id === editingId ? newHolding : h))
+      : [...holdingsList, newHolding];
+
     onUpdateState({
       ...portfolioState,
       fixedInterest: updated,
       cashDeposits: updated,
     });
 
-    setFiName('');
-    setFiDepositId('');
-    setFiMaturity('');
-    setFiRate('');
+    handleCancelEdit();
   };
 
   return (
@@ -251,6 +296,20 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
                   onAssign={onAssignBucket}
                 />
 
+                {/* Edit Button */}
+                <button
+                  type="button"
+                  onClick={() => handleStartEdit(dep)}
+                  title="Edit details (rate, payment frequency, maturity, etc.)"
+                  className={`p-1.5 rounded-lg transition-colors ${
+                    editingId === dep.id
+                      ? 'text-amber-400 bg-amber-950/60 border border-amber-500/50'
+                      : 'text-slate-400 hover:text-amber-300 hover:bg-slate-800'
+                  }`}
+                >
+                  ✎
+                </button>
+
                 {/* Delete Button */}
                 <button
                   type="button"
@@ -265,10 +324,30 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
           );
         })}
 
-        {/* Add New Holding Form */}
-        <div className="bg-slate-950/40 border border-slate-800/60 rounded-xl p-3 space-y-3 mt-3">
-          <div className="text-[11px] uppercase tracking-wider text-slate-400 font-medium">
-            Add Fixed Interest or Cash
+        {/* Add / Edit Holding Form */}
+        <div className={`bg-slate-950/40 border rounded-xl p-3 space-y-3 mt-3 transition-colors ${editingId ? 'border-amber-500/50 bg-amber-950/10' : 'border-slate-800/60'}`}>
+          <div className="flex items-center justify-between">
+            <div className="text-[11px] uppercase tracking-wider text-slate-400 font-medium">
+              {editingId ? (
+                <span className="text-amber-400 font-semibold flex items-center gap-1.5">
+                  <span>✎ Editing Holding</span>
+                  <span className="text-slate-400 font-normal">
+                    ({holdingsList.find((h) => h.id === editingId)?.name || 'Selected'})
+                  </span>
+                </span>
+              ) : (
+                'Add Fixed Interest or Cash'
+              )}
+            </div>
+            {editingId && (
+              <button
+                type="button"
+                onClick={handleCancelEdit}
+                className="text-[11px] text-slate-400 hover:text-white underline cursor-pointer"
+              >
+                Cancel Edit
+              </button>
+            )}
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -377,7 +456,7 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
                 type="number"
                 min="0"
                 step="500"
-                placeholder="10000"
+                placeholder="e.g. 10000"
                 value={fiValue}
                 onChange={(e) => setFiValue(e.target.value)}
                 className="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white text-right font-mono focus:outline-none focus:ring-1 focus:ring-amber-500"
@@ -433,15 +512,27 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
               </select>
             </div>
 
-            {/* Add Button */}
+            {/* Submit / Save Button */}
             <div>
-              <button
-                type="button"
-                onClick={handleAddHolding}
-                className="w-full py-1.5 px-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold rounded-lg text-xs transition-colors"
-              >
-                + Add {fiCategory === 'bond' ? 'Bond' : fiCategory === 'term_deposit' ? 'Term Deposit' : 'Cash'}
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handleAddHolding}
+                  disabled={!(parseFloat(fiValue) > 0)}
+                  className="flex-1 py-1.5 px-3 bg-amber-500 hover:bg-amber-400 disabled:opacity-50 disabled:cursor-not-allowed text-slate-950 font-semibold rounded-lg text-xs transition-colors"
+                >
+                  {editingId ? '✓ Save Changes' : `+ Add ${fiCategory === 'bond' ? 'Bond' : fiCategory === 'term_deposit' ? 'Term Deposit' : 'Cash'}`}
+                </button>
+                {editingId && (
+                  <button
+                    type="button"
+                    onClick={handleCancelEdit}
+                    className="py-1.5 px-3 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs transition-colors"
+                  >
+                    Cancel
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>
