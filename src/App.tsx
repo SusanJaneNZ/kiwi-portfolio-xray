@@ -4,9 +4,11 @@ import { FreshnessHeader } from './components/FreshnessHeader';
 import { HoldingsTable } from './components/HoldingsTable';
 import { LiquidityCard } from './components/LiquidityCard';
 import { PortfolioInputTable } from './components/PortfolioInputTable';
+import { RetirementCashflowPanel } from './components/RetirementCashflowPanel';
 import { StackedBarChart } from './components/StackedBarChart';
 import { UnresolvedItem, UnresolvedModal } from './components/UnresolvedModal';
 import { computeFreshnessEnvelope } from './engine/freshness';
+import { calculateRetirementCashflow } from './engine/income';
 import { calculatePortfolioLookthrough } from './engine/lookthrough';
 import {
   LoadSource,
@@ -262,6 +264,24 @@ export const App: React.FC = () => {
     });
   }, [portfolioState, fundsRegistry, constituentsMap]);
 
+  // Compute 12-month forward retirement cashflow and net drawdown
+  const cashflowResult = useMemo(() => {
+    return calculateRetirementCashflow({
+      portfolioState,
+      fundsRegistry,
+    });
+  }, [portfolioState, fundsRegistry]);
+
+  const [activeWithdrawal, setActiveWithdrawal] = useState<number | undefined>(undefined);
+
+  const handleApplyDrawdownToRebalancer = (amount: number) => {
+    setActiveWithdrawal(amount);
+    const el = document.getElementById('bucket-rebalancer');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   // Compute portfolio-level freshness envelope
   const freshnessEnvelope = useMemo(() => {
     const heldCodes = Object.keys(portfolioState.fundBalances).filter(
@@ -333,8 +353,21 @@ export const App: React.FC = () => {
           issuerRollup={calculationResult.issuerRollup}
         />
 
-        {/* 5. Rebalancing */}
-        <BucketRebalancer portfolioState={portfolioState} onUpdateState={handleUpdateState} />
+        {/* 5. Retirement Cashflow & Drawdown */}
+        <RetirementCashflowPanel
+          portfolioState={portfolioState}
+          fundsRegistry={fundsRegistry}
+          onUpdateState={handleUpdateState}
+          onApplyDrawdownToRebalancer={handleApplyDrawdownToRebalancer}
+        />
+
+        {/* 6. Rebalancing */}
+        <BucketRebalancer
+          portfolioState={portfolioState}
+          onUpdateState={handleUpdateState}
+          suggestedDrawdownNZD={cashflowResult.netCapitalDrawdownRequiredNZD}
+          activeWithdrawal={activeWithdrawal}
+        />
       </div>
 
       {/* Unresolved Disclosures Modal */}

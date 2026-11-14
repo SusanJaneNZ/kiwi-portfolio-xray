@@ -52,6 +52,8 @@ export interface DirectHolding extends DirectEquityCatalogItem {
   value: number; // Local currency worth: shares * price (read-only)
   isEtf?: boolean; // Flag indicating this listed asset is an ETF with underlying constituents
   fundCode?: string; // Links to fund_holdings.json if isEtf === true
+  dividendYield?: number; // Optional annual dividend yield % (e.g. 5.5 for 5.5%)
+  dividendPerShare?: number; // Optional dividend per share in native currency
 }
 
 export type FixedInterestCategory = "term_deposit" | "bond" | "cash";
@@ -213,6 +215,26 @@ export interface BucketRebalanceResult {
   rows: BucketAllocationRow[];
 }
 
+export type NZSuperType = 'none' | 'single_alone' | 'single_sharing' | 'couple_both' | 'custom';
+
+export interface RetirementCashflowSettings {
+  annualLivingBudget: number;         // e.g. 80000
+  nzSuperType: NZSuperType;
+  nzSuperCustomAnnual: number;        // used if nzSuperType === 'custom'
+  otherIncomeAnnual: number;          // net rental, foreign pensions, etc.
+  marginalTaxRate: number;            // default 0.33 for RWT interest
+  dividendYieldOverrides?: Record<string, number>; // ticker or fundCode -> yield %
+}
+
+export const DEFAULT_CASHFLOW_SETTINGS: RetirementCashflowSettings = {
+  annualLivingBudget: 80000,
+  nzSuperType: 'none',
+  nzSuperCustomAnnual: 0,
+  otherIncomeAnnual: 0,
+  marginalTaxRate: 0.33,
+  dividendYieldOverrides: {},
+};
+
 export interface UserPortfolioState {
   version: 2;
   timestamp: string;
@@ -223,4 +245,5 @@ export interface UserPortfolioState {
   cashDeposits: FixedInterestHolding[]; // Mirror alias for backwards compatibility
   buckets: PortfolioBucket[];
   bucketAssignments: BucketAssignmentMap;
+  cashflowSettings?: RetirementCashflowSettings;
 }

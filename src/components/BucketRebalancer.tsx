@@ -7,6 +7,8 @@ import { formatNZD } from '../utils/format';
 interface BucketRebalancerProps {
   portfolioState: UserPortfolioState;
   onUpdateState: (state: UserPortfolioState) => void;
+  suggestedDrawdownNZD?: number;
+  activeWithdrawal?: number;
 }
 
 const STARTER_PRESET: PortfolioBucket[] = [
@@ -20,8 +22,18 @@ const fmtMoney = (v: number) => formatNZD(v, 2);
 export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
   portfolioState,
   onUpdateState,
+  suggestedDrawdownNZD,
+  activeWithdrawal,
 }) => {
-  const [withdrawalInput, setWithdrawalInput] = useState<string>('0');
+  const [withdrawalInput, setWithdrawalInput] = useState<string>(() =>
+    activeWithdrawal !== undefined ? String(activeWithdrawal) : '0'
+  );
+
+  React.useEffect(() => {
+    if (activeWithdrawal !== undefined && !isNaN(activeWithdrawal)) {
+      setWithdrawalInput(String(activeWithdrawal));
+    }
+  }, [activeWithdrawal]);
   const [newBucketName, setNewBucketName] = useState<string>('');
   const [newBucketTarget, setNewBucketTarget] = useState<string>('20');
 
@@ -305,7 +317,7 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
       {portfolioState.buckets.length > 0 && (
         <div className="space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-950/70 border border-slate-800 rounded-xl p-3 text-xs">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 flex-wrap">
               <label htmlFor="planned-withdrawal-input" className="font-semibold text-white">
                 Planned Withdrawal (NZD):
               </label>
@@ -321,6 +333,17 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
                   className="w-full bg-slate-900 border border-slate-700 rounded-lg pl-7 pr-3 py-2 text-right text-sm text-amber-300 font-mono font-bold focus:outline-none focus:border-amber-500"
                 />
               </div>
+
+              {suggestedDrawdownNZD !== undefined && suggestedDrawdownNZD > 0 && Math.abs(plannedWithdrawalNZD - suggestedDrawdownNZD) > 1 && (
+                <button
+                  type="button"
+                  onClick={() => setWithdrawalInput(String(suggestedDrawdownNZD))}
+                  className="text-[11px] bg-amber-900/40 hover:bg-amber-800/60 text-amber-200 border border-amber-700/50 rounded-lg px-2.5 py-1.5 transition-colors font-medium flex items-center gap-1 shadow-sm"
+                  title="Sync with net capital shortfall calculated in Retirement Cashflow above"
+                >
+                  <span>⚡ Use Net Shortfall (${fmtMoney(suggestedDrawdownNZD)})</span>
+                </button>
+              )}
             </div>
 
             <div className="flex flex-wrap items-center gap-4 font-mono text-slate-300">
