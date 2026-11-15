@@ -11,6 +11,7 @@ import {
   autoSavePortfolioToDisk,
   createDatedBackupOnDisk,
   exportHoldingsCSV,
+  exportPortfolioJSON,
   exportPortfolioToDisk,
   fetchBackupsList,
   importPortfolioJSON,
@@ -484,6 +485,103 @@ export const storageTestCases: Array<[string, () => void]> = [
       assertEq(Object.prototype.hasOwnProperty.call(normalized!.fundBalances, "constructor"), false, "no constructor");
       assertEq(normalized!.fundBalances.TWF, 10000, "valid balance preserved");
       assertEq(Object.prototype.hasOwnProperty.call(normalized!.bucketAssignments, "prototype"), false, "no prototype");
+    },
+  ],
+  [
+    "normalizePortfolioState preserves and sanitizes cashflowSettings and pirRate",
+    () => {
+      const payload = {
+        version: 2,
+        fundBalances: { TWF: 10000 },
+        pirRate: 0.175,
+        cashflowSettings: {
+          annualLivingBudget: 65000,
+          nzSuperType: "couple_both",
+          nzSuperCustomAnnual: 0,
+          otherGrossIncomeAnnual: 18000,
+          pirRate: 0.175,
+          dividendYieldOverrides: {
+            "MCY.NZ": 4.5,
+            __proto__: 99,
+          },
+        },
+      };
+      const normalized = normalizePortfolioState(payload);
+      assertTrue(normalized !== null, "payload normalized");
+      assertEq(normalized!.pirRate, 0.175, "top-level pirRate preserved");
+      assertTrue(normalized!.cashflowSettings !== undefined, "cashflowSettings defined");
+      assertEq(normalized!.cashflowSettings!.annualLivingBudget, 65000, "budget preserved");
+      assertEq(normalized!.cashflowSettings!.nzSuperType, "couple_both", "super type preserved");
+      assertEq(normalized!.cashflowSettings!.otherGrossIncomeAnnual, 18000, "otherGrossIncomeAnnual preserved");
+      assertEq(normalized!.cashflowSettings!.pirRate, 0.175, "cashflowSettings pirRate preserved");
+      assertEq(normalized!.cashflowSettings!.dividendYieldOverrides?.["MCY.NZ"], 4.5, "override preserved");
+      assertEq(
+        Object.prototype.hasOwnProperty.call(normalized!.cashflowSettings!.dividendYieldOverrides || {}, "__proto__"),
+        false,
+        "__proto__ stripped from overrides"
+      );
+    },
+  ],
+  [
+    "exportPortfolioJSON and importPortfolioJSON round-trip Super, Other Income, and PIR",
+    () => {
+      const state: UserPortfolioState = {
+        version: 2,
+        timestamp: "2026-11-15T10:00:00Z",
+        audNzdRate: 1.10,
+        fundBalances: { TWF: 25000 },
+        directHoldings: [],
+        fixedInterest: [],
+        cashDeposits: [],
+        buckets: [],
+        bucketAssignments: {},
+        pirRate: 0.175,
+        cashflowSettings: {
+          annualLivingBudget: 90000,
+          nzSuperType: "custom",
+          nzSuperCustomAnnual: 42000,
+          otherIncomeAnnual: 12000,
+          otherGrossIncomeAnnual: 12000,
+          pirRate: 0.175,
+          dividendYieldOverrides: { FNZ: 3.2 },
+          tdProjectionMode: "rollover",
+        },
+      };
+
+      const jsonStr = exportPortfolioJSON(state);
+      assertTrue(jsonStr.includes('"cashflowSettings"'), "JSON includes cashflowSettings");
+      assertTrue(jsonStr.includes('"otherGrossIncomeAnnual": 12000'), "JSON includes otherGrossIncomeAnnual");
+      assertTrue(jsonStr.includes('"nzSuperType": "custom"'), "JSON includes nzSuperType");
+      assertTrue(jsonStr.includes('"nzSuperCustomAnnual": 42000'), "JSON includes nzSuperCustomAnnual");
+      assertTrue(jsonStr.includes('"pirRate": 0.175'), "JSON includes pirRate");
+
+      const imported = importPortfolioJSON(jsonStr);
+      assertEq(imported.pirRate, 0.175, "imported top-level pirRate matches");
+      assertTrue(imported.cashflowSettings !== undefined, "imported cashflowSettings defined");
+      assertEq(imported.cashflowSettings!.nzSuperType, "custom", "imported nzSuperType matches");
+      assertEq(imported.cashflowSettings!.nzSuperCustomAnnual, 42000, "imported nzSuperCustomAnnual matches");
+      assertEq(imported.cashflowSettings!.otherGrossIncomeAnnual, 12000, "imported otherGrossIncomeAnnual matches");
+      assertEq(imported.cashflowSettings!.pirRate, 0.175, "imported cashflowSettings pirRate matches");
+      assertEq(imported.cashflowSettings!.annualLivingBudget, 90000, "imported annualLivingBudget matches");
+      assertEq(imported.cashflowSettings!.dividendYieldOverrides?.FNZ, 3.2, "imported overrides match");
+    },
+  ],
+  [
+    "importPortfolioJSON gracefully handles legacy payload without cashflowSettings",
+    () => {
+      const legacyJson = JSON.stringify({
+        version: 2,
+        audNzdRate: 1.10,
+        fundBalances: { TWF: 20000 },
+        directHoldings: [],
+        fixedInterest: [],
+        cashDeposits: [],
+        buckets: [],
+        bucketAssignments: {},
+      });
+      const imported = importPortfolioJSON(legacyJson);
+      assertEq(imported.fundBalances.TWF, 20000, "balance imported");
+      assertEq(imported.cashflowSettings, undefined, "cashflowSettings undefined for legacy payload");
     },
   ],
 ];

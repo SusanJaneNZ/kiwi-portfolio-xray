@@ -4,6 +4,7 @@
 
 import {
   calculateFixedInterestItem,
+  calculateNzIncomeTax,
   calculateRetirementCashflow,
   parseTermMonthsFromName,
   resolveEffectiveDividendYield,
@@ -44,7 +45,7 @@ export const incomeTestCases: Array<[string, () => void]> = [
       assertEq(pieResult.effectiveTaxRate, 0.28, "PIE effective tax rate");
       assertEq(pieResult.netAnnualNZD, 3960, "PIE net annual interest (5500 * (1 - 0.28))");
 
-      // 2. Corporate Bond: $50,000 at 6.0% with 33% standard RWT
+      // 2. Corporate Bond: $50,000 at 6.0% (Non-PIE RWT)
       const corpBond: FixedInterestHolding = {
         id: "bond-cen",
         institution: "Contact Energy",
@@ -55,10 +56,10 @@ export const incomeTestCases: Array<[string, () => void]> = [
         interestRate: 6.0,
         frequency: "semi-annual",
       };
-      const bondResult = calculateFixedInterestItem(corpBond, 0.33);
+      const bondResult = calculateFixedInterestItem(corpBond);
       assertEq(bondResult.grossAnnualNZD, 3000, "Bond gross coupon");
-      assertEq(bondResult.effectiveTaxRate, 0.33, "Bond effective tax rate");
-      assertEq(bondResult.netAnnualNZD, 2010, "Bond net coupon (3000 * 0.67)");
+      assertEq(bondResult.effectiveTaxRate, 0, "Bond effective tax rate at source is 0 (taxed in brackets)");
+      assertEq(bondResult.netAnnualNZD, 3000, "Bond gross flows to non-PIE pool");
     },
   ],
 
@@ -162,35 +163,38 @@ export const incomeTestCases: Array<[string, () => void]> = [
         bucketAssignments: {},
       };
 
-      // Case 1: Living budget = $80,000 with Couple NZ Super ($44,000)
+      // Case 1: Living budget = $80,000 with Couple NZ Super ($52,050 gross)
       const res1 = calculateRetirementCashflow({
         portfolioState: mockState,
         settings: {
           annualLivingBudget: 80000,
           nzSuperType: "couple_both",
           nzSuperCustomAnnual: 0,
-          otherIncomeAnnual: 10000, // e.g. rental income
-          marginalTaxRate: 0.33,
+          otherGrossIncomeAnnual: 10000, // e.g. rental income
         },
       });
 
-      assertEq(res1.nzSuperAnnualNZD, 44000, "NZ Super couple amount");
+      assertEq(res1.nzSuperGrossAnnualNZD, 52050, "NZ Super couple gross amount");
       assertEq(res1.otherGrossIncomeAnnualNZD, 10000, "Other gross income amount");
-      assertEq(res1.otherNetIncomeAnnualNZD, 6700, "Other net income at 33% marginal tax");
-      assertEq(res1.totalExternalIncomeNZD, 50700, "Total external net income");
+      assertTrue(res1.totalNonPieGrossAnnualNZD > 60000, "Total non-pie gross income includes Super, other, and CEN dividends");
+      assertTrue(res1.nonPieGrossTaxPayableNZD > 0, "Tax calculated in progressive brackets");
+      assertTrue(res1.nzImputationCreditsNZD > 0, "Imputation credits attached to CEN direct shares");
+      assertTrue(res1.totalNonPieNetNZD > 50000, "Total non-pie net cashflow after bracket tax");
       assertEq(res1.totalFixedInterestGrossNZD, 5000, "Gross fixed interest");
-      assertEq(res1.totalFixedInterestNetNZD, 3600, "Net fixed interest");
+      assertEq(res1.totalFixedInterestNetNZD, 3600, "Net fixed interest after 28% PIR");
       assertTrue(res1.totalDividendsGrossNZD > 6000, "Gross dividends calculated");
 
       // Total retirement inflow > 55k
       assertTrue(res1.totalRetirementInflowNZD > 55000, "Total retirement inflow includes external + organic");
-      assertEq(res1.netCapitalDrawdownRequiredNZD, Math.max(0, 80000 - res1.totalRetirementInflowNZD), "Drawdown math");
+      assertEq(
+        res1.netCapitalDrawdownRequiredNZD,
+        Math.round(Math.max(0, 80000 - res1.totalRetirementInflowNZD) * 100) / 100,
+        "Drawdown math"
+      );
 
       // Verify PIE vs Non-PIE calculations
-      // PIE: $3,600 from PIE TD + $1,440 from TWF (fund) = $5,040
       assertTrue(res1.totalPieNetNZD > 5000, "PIE net inflow includes PIE TD and pooled fund");
-      // Non-PIE: CEN (direct with 28% imputation and 33% rate = 95% net) + $44k NZ Super + $6.7k net rental = >$54k
-      assertTrue(res1.totalNonPieNetNZD > 54000, "Non-PIE net inflow includes direct share and external income");
+      assertTrue(res1.totalNonPieNetNZD > 50000, "Non-PIE net inflow includes direct share and external income");
       assertEq(
         Math.round((res1.totalPieNetNZD + res1.totalNonPieNetNZD) * 100) / 100,
         res1.totalRetirementInflowNZD,
@@ -202,10 +206,9 @@ export const incomeTestCases: Array<[string, () => void]> = [
         portfolioState: mockState,
         settings: {
           annualLivingBudget: 50000,
-          nzSuperType: "couple_both", // $44,000
+          nzSuperType: "couple_both",
           nzSuperCustomAnnual: 0,
-          otherIncomeAnnual: 20000,   // $20,000 -> external alone is $64k
-          marginalTaxRate: 0.33,
+          otherGrossIncomeAnnual: 20000,
         },
       });
 
@@ -283,6 +286,26 @@ export const incomeTestCases: Array<[string, () => void]> = [
       // 3. Listed ETF (USF): $1,500 * (1 - 0.28) = $1,080 net (fixed at 28%)
       const usfItem = res.dividendItems.find((i) => i.key.includes("USF") || i.ticker === "USF.NZ")!;
       assertEq(usfItem.estimatedNetAnnualNZD, 1080, "Listed ETF taxed at statutory 28% flat rate");
+    },
+  ],
+
+  [
+    "calculateNzIncomeTax calculates correct progressive tax across all 2024+ NZ statutory brackets",
+    () => {
+      // Bracket 1: $15,600 @ 10.5% = $1,638.00
+      assertEq(calculateNzIncomeTax(15600), 1638.00, "$15,600 tax");
+
+      // Bracket 2: $53,500 = $1,638 + (37,900 * 0.175) = $8,270.50
+      assertEq(calculateNzIncomeTax(53500), 8270.50, "$53,500 tax");
+
+      // Bracket 3: $78,100 = $8,270.50 + (24,600 * 0.30) = $15,650.50
+      assertEq(calculateNzIncomeTax(78100), 15650.50, "$78,100 tax");
+
+      // Bracket 4: $180,000 = $15,650.50 + (101,900 * 0.33) = $49,277.50
+      assertEq(calculateNzIncomeTax(180000), 49277.50, "$180,000 tax");
+
+      // Bracket 5: $200,000 = $49,277.50 + (20,000 * 0.39) = $57,077.50
+      assertEq(calculateNzIncomeTax(200000), 57077.50, "$200,000 tax");
     },
   ],
 ];

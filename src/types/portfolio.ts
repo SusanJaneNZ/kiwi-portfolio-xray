@@ -227,8 +227,8 @@ export interface RetirementCashflowSettings {
   nzSuperCustomAnnual: number;        // used if nzSuperType === 'custom'
   otherIncomeAnnual: number;          // gross annual other income (backwards-compat alias)
   otherGrossIncomeAnnual?: number;    // gross annual rental, foreign pensions, etc.
-  marginalTaxRate: number;            // 0.105, 0.175, 0.30, 0.33, 0.39 for non-PIE income
   pirRate?: PirRate;                  // 0.105, 0.175, or 0.28 for PIE income (default 0.28)
+  marginalTaxRate?: number;           // legacy optional field (now computed dynamically via progressive brackets)
   dividendYieldOverrides?: Record<string, number>; // ticker or fundCode -> yield %
   tdProjectionMode?: TdProjectionMode; // 'rollover' (default 12M run-rate) vs 'term_only' (interest for actual term)
 }
@@ -238,7 +238,6 @@ export const DEFAULT_CASHFLOW_SETTINGS: RetirementCashflowSettings = {
   nzSuperType: 'none',
   nzSuperCustomAnnual: 0,
   otherIncomeAnnual: 0,
-  marginalTaxRate: 0.33,
   pirRate: 0.28,
   dividendYieldOverrides: {},
   tdProjectionMode: 'rollover',

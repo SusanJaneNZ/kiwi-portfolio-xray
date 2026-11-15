@@ -9,8 +9,12 @@ import {
   FixedInterestCategory,
   FixedInterestHolding,
   FixedInterestTaxType,
+  NZSuperType,
   PaymentFrequency,
+  PirRate,
   PortfolioBucket,
+  RetirementCashflowSettings,
+  TdProjectionMode,
   UserPortfolioState,
 } from "../types/portfolio";
 
@@ -115,6 +119,17 @@ export const DEFAULT_PORTFOLIO_STATE: UserPortfolioState = {
   ],
   buckets: [],
   bucketAssignments: {},
+  pirRate: 0.28,
+  cashflowSettings: {
+    annualLivingBudget: 80000,
+    nzSuperType: "none",
+    nzSuperCustomAnnual: 0,
+    otherIncomeAnnual: 0,
+    otherGrossIncomeAnnual: 0,
+    pirRate: 0.28,
+    dividendYieldOverrides: {},
+    tdProjectionMode: "rollover",
+  },
 };
 
 function isFiniteNonNegative(val: unknown): val is number {
@@ -253,6 +268,63 @@ function sanitizeBuckets(raw: unknown): PortfolioBucket[] {
   return valid;
 }
 
+function sanitizeCashflowSettings(raw: unknown): RetirementCashflowSettings | undefined {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return undefined;
+  const s = raw as Record<string, unknown>;
+
+  const annualLivingBudget =
+    typeof s.annualLivingBudget === "number" && Number.isFinite(s.annualLivingBudget) && s.annualLivingBudget >= 0
+      ? s.annualLivingBudget
+      : 80000;
+
+  const validSuperTypes = new Set<NZSuperType>(['none', 'single_alone', 'single_sharing', 'couple_both', 'custom']);
+  const nzSuperType: NZSuperType =
+    typeof s.nzSuperType === "string" && validSuperTypes.has(s.nzSuperType as NZSuperType)
+      ? (s.nzSuperType as NZSuperType)
+      : 'none';
+
+  const nzSuperCustomAnnual =
+    typeof s.nzSuperCustomAnnual === "number" && Number.isFinite(s.nzSuperCustomAnnual) && s.nzSuperCustomAnnual >= 0
+      ? s.nzSuperCustomAnnual
+      : 0;
+
+  const otherGrossVal =
+    typeof s.otherGrossIncomeAnnual === "number" && Number.isFinite(s.otherGrossIncomeAnnual) && s.otherGrossIncomeAnnual >= 0
+      ? s.otherGrossIncomeAnnual
+      : (typeof s.otherIncomeAnnual === "number" && Number.isFinite(s.otherIncomeAnnual) && s.otherIncomeAnnual >= 0
+          ? s.otherIncomeAnnual
+          : 0);
+
+  let pirRate: PirRate = 0.28;
+  if (s.pirRate === 0.105 || s.pirRate === 0.175 || s.pirRate === 0.28) {
+    pirRate = s.pirRate;
+  }
+
+  const tdProjectionMode: TdProjectionMode =
+    s.tdProjectionMode === 'term_only' ? 'term_only' : 'rollover';
+
+  const dividendYieldOverrides: Record<string, number> = {};
+  if (s.dividendYieldOverrides && typeof s.dividendYieldOverrides === "object" && !Array.isArray(s.dividendYieldOverrides)) {
+    const DANGEROUS_KEYS = new Set(["__proto__", "constructor", "prototype"]);
+    for (const [k, v] of Object.entries(s.dividendYieldOverrides as Record<string, unknown>)) {
+      if (typeof k === "string" && !DANGEROUS_KEYS.has(k) && typeof v === "number" && Number.isFinite(v) && v >= 0) {
+        dividendYieldOverrides[k] = v;
+      }
+    }
+  }
+
+  return {
+    annualLivingBudget,
+    nzSuperType,
+    nzSuperCustomAnnual,
+    otherGrossIncomeAnnual: otherGrossVal,
+    otherIncomeAnnual: otherGrossVal,
+    pirRate,
+    tdProjectionMode,
+    dividendYieldOverrides,
+  };
+}
+
 /**
  * Normalizes v1 or v2 saved/imported portfolio payloads into a valid v2 state.
  * Sanitizes per-field rather than discarding the entire portfolio if one entry is malformed.
@@ -301,6 +373,13 @@ export function normalizePortfolioState(candidate: unknown): UserPortfolioState 
   }
 
   const fi = sanitizeFixedInterest(obj.fixedInterest || obj.cashDeposits);
+  const cashflowSettings = sanitizeCashflowSettings(obj.cashflowSettings);
+  let pirRate: PirRate | undefined = undefined;
+  if (obj.pirRate === 0.105 || obj.pirRate === 0.175 || obj.pirRate === 0.28) {
+    pirRate = obj.pirRate;
+  } else if (cashflowSettings?.pirRate) {
+    pirRate = cashflowSettings.pirRate;
+  }
 
   return {
     version: 2,
@@ -312,6 +391,8 @@ export function normalizePortfolioState(candidate: unknown): UserPortfolioState 
     cashDeposits: fi,
     buckets: sanitizeBuckets(obj.buckets),
     bucketAssignments,
+    ...(cashflowSettings ? { cashflowSettings } : {}),
+    ...(pirRate !== undefined ? { pirRate } : {}),
   };
 }
 
@@ -449,6 +530,25 @@ export function loadPortfolioState(): UserPortfolioState {
 }
 
 /**
+ * Serializes the canonical portfolio representation for backup, disk sync, and file export.
+ */
+export function serializePortfolioPayload(state: UserPortfolioState): Record<string, unknown> {
+  return {
+    version: 2,
+    timestamp: state.timestamp || new Date().toISOString(),
+    audNzdRate: state.audNzdRate,
+    fundBalances: state.fundBalances,
+    directHoldings: state.directHoldings,
+    fixedInterest: state.fixedInterest || state.cashDeposits,
+    cashDeposits: state.fixedInterest || state.cashDeposits,
+    buckets: state.buckets,
+    bucketAssignments: state.bucketAssignments,
+    ...(state.cashflowSettings ? { cashflowSettings: state.cashflowSettings } : {}),
+    ...(state.pirRate !== undefined ? { pirRate: state.pirRate } : {}),
+  };
+}
+
+/**
  * Persists the current portfolio state to the repo-root `portfolio_backup.json`
  * via the local server API endpoint (/api/portfolio/save).
  */
@@ -461,21 +561,7 @@ export async function autoSavePortfolioToDisk(state: UserPortfolioState): Promis
         "Content-Type": "application/json",
         "X-Requested-With": "KiwiPortfolioXRay",
       },
-      body: JSON.stringify(
-        {
-          version: 2,
-          timestamp: state.timestamp || new Date().toISOString(),
-          audNzdRate: state.audNzdRate,
-          fundBalances: state.fundBalances,
-          directHoldings: state.directHoldings,
-          fixedInterest: state.fixedInterest || state.cashDeposits,
-          cashDeposits: state.fixedInterest || state.cashDeposits,
-          buckets: state.buckets,
-          bucketAssignments: state.bucketAssignments,
-        },
-        null,
-        2
-      ),
+      body: JSON.stringify(serializePortfolioPayload(state), null, 2),
     });
     return res.ok;
   } catch {
@@ -544,21 +630,7 @@ export async function exportPortfolioToDisk(
         "Content-Type": "application/json",
         "X-Requested-With": "KiwiPortfolioXRay",
       },
-      body: JSON.stringify(
-        {
-          version: 2,
-          timestamp: state.timestamp || new Date().toISOString(),
-          audNzdRate: state.audNzdRate,
-          fundBalances: state.fundBalances,
-          directHoldings: state.directHoldings,
-          fixedInterest: state.fixedInterest || state.cashDeposits,
-          cashDeposits: state.fixedInterest || state.cashDeposits,
-          buckets: state.buckets,
-          bucketAssignments: state.bucketAssignments,
-        },
-        null,
-        2
-      ),
+      body: JSON.stringify(serializePortfolioPayload(state), null, 2),
     });
     if (!res.ok) return { ok: false };
     const data = await res.json();
@@ -642,21 +714,7 @@ export async function writePortfolioToLinkedFile(
 ): Promise<boolean> {
   try {
     const writable = await handle.createWritable();
-    const payload = JSON.stringify(
-      {
-        version: 2,
-        timestamp: state.timestamp || new Date().toISOString(),
-        audNzdRate: state.audNzdRate,
-        fundBalances: state.fundBalances,
-        directHoldings: state.directHoldings,
-        fixedInterest: state.fixedInterest || state.cashDeposits,
-        cashDeposits: state.fixedInterest || state.cashDeposits,
-        buckets: state.buckets,
-        bucketAssignments: state.bucketAssignments,
-      },
-      null,
-      2
-    );
+    const payload = JSON.stringify(serializePortfolioPayload(state), null, 2);
     await writable.write(payload);
     await writable.close();
     return true;
@@ -810,21 +868,7 @@ export async function resumeLinkedFileSync(
 }
 
 export function exportPortfolioJSON(state: UserPortfolioState): string {
-  return JSON.stringify(
-    {
-      version: 2,
-      timestamp: new Date().toISOString(),
-      audNzdRate: state.audNzdRate,
-      fundBalances: state.fundBalances,
-      directHoldings: state.directHoldings,
-      fixedInterest: state.fixedInterest || state.cashDeposits,
-      cashDeposits: state.fixedInterest || state.cashDeposits,
-      buckets: state.buckets,
-      bucketAssignments: state.bucketAssignments,
-    },
-    null,
-    2
-  );
+  return JSON.stringify(serializePortfolioPayload(state), null, 2);
 }
 
 export function importPortfolioJSON(jsonStr: string): UserPortfolioState {
