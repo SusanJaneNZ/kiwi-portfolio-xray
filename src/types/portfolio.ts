@@ -71,6 +71,7 @@ export interface FixedInterestHolding {
   interestRate?: number; // Annual coupon or interest rate % (e.g. 5.80)
   maturityDate?: string; // YYYY-MM-DD
   frequency?: PaymentFrequency; // Payment cadence
+  termMonths?: number; // Optional term duration in months (e.g. 6 for a 6-month TD)
   depositId?: string; // Optional account / reference code
   issuerKey?: string; // Canonical issuer key (e.g. "ISSUER_CEN") for corporate bonds
   // Backward compatibility alias for legacy code referencing .label or .type
@@ -217,13 +218,19 @@ export interface BucketRebalanceResult {
 
 export type NZSuperType = 'none' | 'single_alone' | 'single_sharing' | 'couple_both' | 'custom';
 
+export type TdProjectionMode = 'rollover' | 'term_only';
+export type PirRate = 0.105 | 0.175 | 0.28;
+
 export interface RetirementCashflowSettings {
-  annualLivingBudget: number;         // e.g. 80000
+  annualLivingBudget: number;         // after-tax spendable living budget (e.g. 80000)
   nzSuperType: NZSuperType;
   nzSuperCustomAnnual: number;        // used if nzSuperType === 'custom'
-  otherIncomeAnnual: number;          // net rental, foreign pensions, etc.
-  marginalTaxRate: number;            // default 0.33 for RWT interest
+  otherIncomeAnnual: number;          // gross annual other income (backwards-compat alias)
+  otherGrossIncomeAnnual?: number;    // gross annual rental, foreign pensions, etc.
+  marginalTaxRate: number;            // 0.105, 0.175, 0.30, 0.33, 0.39 for non-PIE income
+  pirRate?: PirRate;                  // 0.105, 0.175, or 0.28 for PIE income (default 0.28)
   dividendYieldOverrides?: Record<string, number>; // ticker or fundCode -> yield %
+  tdProjectionMode?: TdProjectionMode; // 'rollover' (default 12M run-rate) vs 'term_only' (interest for actual term)
 }
 
 export const DEFAULT_CASHFLOW_SETTINGS: RetirementCashflowSettings = {
@@ -232,7 +239,9 @@ export const DEFAULT_CASHFLOW_SETTINGS: RetirementCashflowSettings = {
   nzSuperCustomAnnual: 0,
   otherIncomeAnnual: 0,
   marginalTaxRate: 0.33,
+  pirRate: 0.28,
   dividendYieldOverrides: {},
+  tdProjectionMode: 'rollover',
 };
 
 export interface UserPortfolioState {
@@ -245,5 +254,6 @@ export interface UserPortfolioState {
   cashDeposits: FixedInterestHolding[]; // Mirror alias for backwards compatibility
   buckets: PortfolioBucket[];
   bucketAssignments: BucketAssignmentMap;
+  pirRate?: PirRate;
   cashflowSettings?: RetirementCashflowSettings;
 }

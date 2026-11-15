@@ -15,6 +15,19 @@ import {
 } from "../types/portfolio";
 import { directHoldingValueNZD } from "../utils/format";
 
+export interface NzSuperRateMeta {
+  gross: number;
+  netM: number;
+}
+
+export const NZ_SUPER_RATES: Record<NZSuperType, NzSuperRateMeta> = {
+  none: { gross: 0, netM: 0 },
+  single_alone: { gross: 33830, netM: 28600 },
+  single_sharing: { gross: 31230, netM: 26400 },
+  couple_both: { gross: 52050, netM: 44000 },
+  custom: { gross: 0, netM: 0 },
+};
+
 export const NZ_SUPER_ANNUAL_RATES: Record<NZSuperType, number> = {
   none: 0,
   single_alone: 28600,     // ~$550 / week net
@@ -82,6 +95,9 @@ export interface FixedInterestCashflowItem {
   netAnnualNZD: number;
   frequency: string;
   maturityDate?: string;
+  termMonths?: number;
+  termFactor: number;
+  isTermAdjusted: boolean;
 }
 
 export interface DividendCashflowItem {
@@ -96,6 +112,7 @@ export interface DividendCashflowItem {
   isOverride: boolean;
   grossAnnualNZD: number;
   estimatedNetAnnualNZD: number;
+  isPie: boolean;
 }
 
 export interface RetirementCashflowResult {
@@ -118,13 +135,33 @@ export interface RetirementCashflowResult {
   totalOrganicNetNZD: number;
 
   // External Guaranteed Income
+  nzSuperGrossAnnualNZD: number;
+  nzSuperNetAnnualNZD: number;
   nzSuperAnnualNZD: number;
+  otherGrossIncomeAnnualNZD: number;
+  otherNetIncomeAnnualNZD: number;
   otherIncomeAnnualNZD: number;
+  totalExternalGrossIncomeNZD: number;
   totalExternalIncomeNZD: number;
 
   // Total Retirement Cashflow (Net)
   totalRetirementInflowNZD: number;
   annualLivingBudgetNZD: number;
+
+  // PIE vs Non-PIE Breakdown of Net Inflows
+  totalPieNetNZD: number;
+  totalNonPieNetNZD: number;
+  pieFixedNetNZD: number;
+  pieDividendsNetNZD: number;
+  nonPieFixedNetNZD: number;
+  nonPieDividendsNetNZD: number;
+  pieInflowPercent: number;
+  nonPieInflowPercent: number;
+
+  // Relative to Living Budget
+  pieBudgetPercent: number;
+  nonPieBudgetPercent: number;
+  drawdownBudgetPercent: number;
 
   // Net Capital Drawdown Required
   netCapitalDrawdownRequiredNZD: number;
@@ -134,22 +171,47 @@ export interface RetirementCashflowResult {
 }
 
 /**
- * Calculates interest for a single Fixed Interest holding.
+ * Parses term length in months from description or name (e.g. "6M PIE TD", "12 Month Term Deposit").
+ */
+export function parseTermMonthsFromName(name: string): number | undefined {
+  const clean = name.trim();
+  // Match "6M", "6 Month", "6 Months", "9mo"
+  const mMatch = clean.match(/\b(\d+)\s*m(?:onth|o)?s?\b/i);
+  if (mMatch) {
+    const val = parseInt(mMatch[1], 10);
+    if (val > 0 && val <= 120) return val;
+  }
+  // Match "1 Year", "2 Years", "1 YR", "1yr"
+  const yrMatch = clean.match(/\b(\d+)\s*(?:year|yr)s?\b/i);
+  if (yrMatch) {
+    const val = parseInt(yrMatch[1], 10);
+    if (val > 0 && val <= 10) return val * 12;
+  }
+  return undefined;
+}
+
+/**
+ * Calculates 12-month forward interest for a single Fixed Interest holding,
+ * assuming current term deposits and bonds rollover at their stated annual rates.
+ * PIE deposits apply the investor's PIR rate (10.5%, 17.5%, or 28%).
+ * Non-PIE deposits and bonds apply the investor's personal marginal tax rate.
  */
 export function calculateFixedInterestItem(
   holding: FixedInterestHolding,
-  marginalTaxRate: number = 0.33
+  marginalTaxRate: number = 0.33,
+  pirRate: number = 0.28
 ): FixedInterestCashflowItem {
   const principalNZD = Math.max(0, holding.valueNZD || 0);
   const interestRate = Math.max(0, holding.interestRate ?? 0);
   const grossAnnualNZD = Math.round((principalNZD * (interestRate / 100)) * 100) / 100;
 
-  // Effective tax rate: PIE PIR rate (10.5%, 17.5%, 28%) vs standard RWT
+  // Effective tax rate: PIE uses investor's PIR (10.5%, 17.5%, 28%), standard RWT uses marginal rate
   let effectiveTaxRate: number;
   if (holding.category === 'bond' || holding.taxType === 'rwt') {
     effectiveTaxRate = marginalTaxRate;
   } else {
-    effectiveTaxRate = holding.pirRate ?? 0.28;
+    // If holding has specific legacy pirRate, use it; otherwise use investor's global PIR
+    effectiveTaxRate = holding.pirRate ?? pirRate;
   }
 
   const netAnnualNZD = Math.round((grossAnnualNZD * (1 - effectiveTaxRate)) * 100) / 100;
@@ -167,6 +229,8 @@ export function calculateFixedInterestItem(
     netAnnualNZD,
     frequency: holding.frequency || 'maturity',
     maturityDate: holding.maturityDate,
+    termFactor: 1.0,
+    isTermAdjusted: false,
   };
 }
 
@@ -201,7 +265,7 @@ export function resolveEffectiveDividendYield(
  */
 export function calculateRetirementCashflow(params: {
   portfolioState: UserPortfolioState;
-  settings?: RetirementCashflowSettings;
+  settings?: Partial<RetirementCashflowSettings>;
   fundsRegistry?: FundMetadata[];
 }): RetirementCashflowResult {
   const { portfolioState, fundsRegistry = [] } = params;
@@ -214,10 +278,11 @@ export function calculateRetirementCashflow(params: {
   const audNzdRate = portfolioState.audNzdRate || 1.10;
   const fixedList = portfolioState.fixedInterest || portfolioState.cashDeposits || [];
   const overrides = settings.dividendYieldOverrides || {};
+  const pirRate = settings.pirRate ?? portfolioState.pirRate ?? 0.28;
 
-  // 1. Fixed Interest Items
+  // 1. Fixed Interest Items (PIE TDs use investor's global PIR; non-PIE & bonds use marginal tax rate)
   const fixedInterestItems: FixedInterestCashflowItem[] = fixedList.map((h) =>
-    calculateFixedInterestItem(h, settings.marginalTaxRate)
+    calculateFixedInterestItem(h, settings.marginalTaxRate, pirRate)
   );
 
   const totalFixedInterestPrincipalNZD = fixedInterestItems.reduce((acc, i) => acc + i.principalNZD, 0);
@@ -240,10 +305,21 @@ export function calculateRetirementCashflow(params: {
     );
 
     const grossAnnualNZD = Math.round((valNZD * (yieldPercent / 100)) * 100) / 100;
-    // Estimated net after tax: for NZ direct shares, 28% imputation credits largely offset tax drag.
-    // We apply standard estimated net factor (~90% for NZ shares with imputation, ~70% for foreign)
-    const netFactor = dh.country === 'New Zealand' ? 0.90 : 0.70;
-    const estimatedNetAnnualNZD = Math.round((grossAnnualNZD * netFactor) * 100) / 100;
+    const isPie = Boolean(dh.isEtf || dh.fundCode);
+
+    let estimatedNetAnnualNZD: number;
+    if (isPie) {
+      // Listed PIE ETF (e.g. Smartshares) - tax capped at max 28% PIR inside fund
+      estimatedNetAnnualNZD = Math.round((grossAnnualNZD * (1 - 0.28)) * 100) / 100;
+    } else if (dh.country === 'New Zealand') {
+      // NZ Direct Equity (with 28% company imputation credits attached)
+      // Top-up tax = (marginalRate - 0.28). If marginal rate is below 28%, investor receives refund
+      const topUpTax = settings.marginalTaxRate - 0.28;
+      estimatedNetAnnualNZD = Math.round((grossAnnualNZD * (1 - topUpTax)) * 100) / 100;
+    } else {
+      // Foreign / ASX Direct Equity (taxed at investor's full personal marginal tax rate)
+      estimatedNetAnnualNZD = Math.round((grossAnnualNZD * (1 - settings.marginalTaxRate)) * 100) / 100;
+    }
 
     dividendItems.push({
       key,
@@ -257,6 +333,7 @@ export function calculateRetirementCashflow(params: {
       isOverride,
       grossAnnualNZD,
       estimatedNetAnnualNZD,
+      isPie,
     });
   }
 
@@ -278,7 +355,8 @@ export function calculateRetirementCashflow(params: {
     );
 
     const grossAnnualNZD = Math.round((balance * (yieldPercent / 100)) * 100) / 100;
-    const estimatedNetAnnualNZD = Math.round((grossAnnualNZD * 0.72) * 100) / 100; // Multi-rate PIE ~28%
+    // Multi-rate PIE funds (e.g. Kernel, InvestNow) deduct tax at the investor's selected PIR (10.5%, 17.5%, or 28%)
+    const estimatedNetAnnualNZD = Math.round((grossAnnualNZD * (1 - pirRate)) * 100) / 100;
 
     dividendItems.push({
       key,
@@ -290,6 +368,7 @@ export function calculateRetirementCashflow(params: {
       isOverride,
       grossAnnualNZD,
       estimatedNetAnnualNZD,
+      isPie: true,
     });
   }
 
@@ -302,13 +381,33 @@ export function calculateRetirementCashflow(params: {
   const totalOrganicNetNZD = Math.round((totalFixedInterestNetNZD + totalDividendsNetNZD) * 100) / 100;
 
   // 5. External Guaranteed Income
-  const nzSuperAnnualNZD =
+  const superRateMeta = NZ_SUPER_RATES[settings.nzSuperType] || { gross: 0, netM: 0 };
+  const nzSuperGrossAnnualNZD =
     settings.nzSuperType === 'custom'
       ? Math.max(0, settings.nzSuperCustomAnnual || 0)
-      : (NZ_SUPER_ANNUAL_RATES[settings.nzSuperType] || 0);
+      : superRateMeta.gross;
 
-  const otherIncomeAnnualNZD = Math.max(0, settings.otherIncomeAnnual || 0);
-  const totalExternalIncomeNZD = Math.round((nzSuperAnnualNZD + otherIncomeAnnualNZD) * 100) / 100;
+  const nzSuperNetAnnualNZD =
+    settings.nzSuperType === 'custom'
+      ? Math.max(0, settings.nzSuperCustomAnnual || 0)
+      : superRateMeta.netM;
+
+  const otherGrossIncomeAnnualNZD = Math.max(
+    0,
+    settings.otherGrossIncomeAnnual ?? settings.otherIncomeAnnual ?? 0
+  );
+
+  // Other gross income (rental property, foreign pension, consulting) taxed at investor's personal marginal rate
+  const otherNetIncomeAnnualNZD = Math.round(
+    (otherGrossIncomeAnnualNZD * (1 - settings.marginalTaxRate)) * 100
+  ) / 100;
+
+  const totalExternalGrossIncomeNZD = Math.round((nzSuperGrossAnnualNZD + otherGrossIncomeAnnualNZD) * 100) / 100;
+  const totalExternalIncomeNZD = Math.round((nzSuperNetAnnualNZD + otherNetIncomeAnnualNZD) * 100) / 100;
+
+  // Backwards compatibility aliases
+  const nzSuperAnnualNZD = nzSuperNetAnnualNZD;
+  const otherIncomeAnnualNZD = otherNetIncomeAnnualNZD;
 
   // 6. Net Retirement Cashflow & Drawdown Calculation
   const totalRetirementInflowNZD = Math.round((totalOrganicNetNZD + totalExternalIncomeNZD) * 100) / 100;
@@ -322,6 +421,44 @@ export function calculateRetirementCashflow(params: {
       ? Math.round((totalRetirementInflowNZD / annualLivingBudgetNZD) * 1000) / 10
       : 100;
 
+  // 7. PIE vs Non-PIE Split Calculation
+  const pieFixedNetNZD = Math.round(
+    fixedInterestItems.filter((i) => i.taxType === 'pie').reduce((acc, i) => acc + i.netAnnualNZD, 0) * 100
+  ) / 100;
+
+  const pieDividendsNetNZD = Math.round(
+    dividendItems.filter((i) => i.isPie).reduce((acc, i) => acc + i.estimatedNetAnnualNZD, 0) * 100
+  ) / 100;
+
+  const totalPieNetNZD = Math.round((pieFixedNetNZD + pieDividendsNetNZD) * 100) / 100;
+
+  const nonPieFixedNetNZD = Math.round(
+    fixedInterestItems.filter((i) => i.taxType !== 'pie').reduce((acc, i) => acc + i.netAnnualNZD, 0) * 100
+  ) / 100;
+
+  const nonPieDividendsNetNZD = Math.round(
+    dividendItems.filter((i) => !i.isPie).reduce((acc, i) => acc + i.estimatedNetAnnualNZD, 0) * 100
+  ) / 100;
+
+  const totalNonPieNetNZD = Math.round(
+    (nonPieFixedNetNZD + nonPieDividendsNetNZD + totalExternalIncomeNZD) * 100
+  ) / 100;
+
+  const safeInflow = totalRetirementInflowNZD > 0 ? totalRetirementInflowNZD : 1;
+  const pieInflowPercent = Math.round((totalPieNetNZD / safeInflow) * 1000) / 10;
+  const nonPieInflowPercent = Math.round((totalNonPieNetNZD / safeInflow) * 1000) / 10;
+
+  const safeBudget = annualLivingBudgetNZD > 0 ? annualLivingBudgetNZD : 1;
+  const pieBudgetPercent = Math.min(100, Math.round((totalPieNetNZD / safeBudget) * 1000) / 10);
+  const nonPieBudgetPercent = Math.min(
+    Math.max(0, 100 - pieBudgetPercent),
+    Math.round((totalNonPieNetNZD / safeBudget) * 1000) / 10
+  );
+  const drawdownBudgetPercent = Math.max(
+    0,
+    Math.round((100 - (pieBudgetPercent + nonPieBudgetPercent)) * 10) / 10
+  );
+
   return {
     settings,
     fixedInterestItems,
@@ -334,11 +471,27 @@ export function calculateRetirementCashflow(params: {
     totalDividendsNetNZD,
     totalOrganicGrossNZD,
     totalOrganicNetNZD,
+    nzSuperGrossAnnualNZD,
+    nzSuperNetAnnualNZD,
     nzSuperAnnualNZD,
+    otherGrossIncomeAnnualNZD,
+    otherNetIncomeAnnualNZD,
     otherIncomeAnnualNZD,
+    totalExternalGrossIncomeNZD,
     totalExternalIncomeNZD,
     totalRetirementInflowNZD,
     annualLivingBudgetNZD,
+    totalPieNetNZD,
+    totalNonPieNetNZD,
+    pieFixedNetNZD,
+    pieDividendsNetNZD,
+    nonPieFixedNetNZD,
+    nonPieDividendsNetNZD,
+    pieInflowPercent,
+    nonPieInflowPercent,
+    pieBudgetPercent,
+    nonPieBudgetPercent,
+    drawdownBudgetPercent,
     netCapitalDrawdownRequiredNZD,
     surplusDeficitNZD,
     isFullyFunded,

@@ -353,7 +353,7 @@ export const App: React.FC = () => {
           issuerRollup={calculationResult.issuerRollup}
         />
 
-        {/* 5. Retirement Cashflow & Drawdown */}
+        {/* 5. Projected Organic Cashflow */}
         <RetirementCashflowPanel
           portfolioState={portfolioState}
           fundsRegistry={fundsRegistry}

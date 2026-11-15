@@ -48,7 +48,7 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
   const [fiInstitution, setFiInstitution] = useState('ANZ');
   const [fiCustomInstitution, setFiCustomInstitution] = useState('');
   const [fiName, setFiName] = useState('');
-  const [fiTaxSelection, setFiTaxSelection] = useState<'rwt' | 'pie_105' | 'pie_175' | 'pie_28'>('pie_28');
+  const [fiTaxSelection, setFiTaxSelection] = useState<FixedInterestTaxType>('pie');
   const [fiValue, setFiValue] = useState('');
   const [fiRate, setFiRate] = useState('');
   const [fiMaturity, setFiMaturity] = useState('');
@@ -94,14 +94,10 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
     setFiFrequency(dep.frequency || 'maturity');
     setFiDepositId(dep.depositId || '');
 
-    if (dep.taxType === 'rwt') {
+    if (dep.category === 'bond' || dep.taxType === 'rwt') {
       setFiTaxSelection('rwt');
-    } else if (dep.pirRate === 0.105) {
-      setFiTaxSelection('pie_105');
-    } else if (dep.pirRate === 0.175) {
-      setFiTaxSelection('pie_175');
     } else {
-      setFiTaxSelection('pie_28');
+      setFiTaxSelection('pie');
     }
   };
 
@@ -149,13 +145,7 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
     const rateNum = parseFloat(fiRate);
 
     // Bonds are strictly RWT under NZ tax law; Term Deposits/Cash can be PIE or RWT
-    const taxType: FixedInterestTaxType = fiCategory === 'bond' ? 'rwt' : fiTaxSelection === 'rwt' ? 'rwt' : 'pie';
-    let pirRate: 0.105 | 0.175 | 0.28 | undefined = undefined;
-    if (taxType === 'pie') {
-      if (fiTaxSelection === 'pie_105') pirRate = 0.105;
-      else if (fiTaxSelection === 'pie_175') pirRate = 0.175;
-      else pirRate = 0.28;
-    }
+    const taxType: FixedInterestTaxType = fiCategory === 'bond' ? 'rwt' : fiTaxSelection;
 
     const newHolding: FixedInterestHolding = {
       id,
@@ -164,7 +154,6 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
       name,
       category: fiCategory,
       taxType,
-      pirRate,
       valueNZD,
       maturityDate: fiMaturity.trim() || undefined,
       interestRate: Number.isFinite(rateNum) && rateNum >= 0 ? rateNum : undefined,
@@ -233,7 +222,7 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
                 setFiTaxSelection('rwt'); // NZDX bonds are strictly RWT
                 setFiFrequency('semi-annual');
               } else if (cat === 'term_deposit') {
-                setFiTaxSelection('pie_28');
+                setFiTaxSelection('pie');
                 setFiFrequency('maturity');
               }
             }}
@@ -279,17 +268,15 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
             Tax Treatment {fiCategory === 'bond' && <span className="text-slate-500">(Bonds strictly RWT)</span>}
           </label>
           <select
-            value={fiTaxSelection}
+            value={fiCategory === 'bond' ? 'rwt' : fiTaxSelection}
             disabled={fiCategory === 'bond'}
-            onChange={(e) => setFiTaxSelection(e.target.value as any)}
+            onChange={(e) => setFiTaxSelection(e.target.value as FixedInterestTaxType)}
             className={`w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:ring-1 focus:ring-amber-500 ${
               fiCategory === 'bond' ? 'opacity-60 cursor-not-allowed' : ''
             }`}
           >
-            <option value="pie_28">PIE (28% PIR - Default)</option>
-            <option value="pie_175">PIE (17.5% PIR)</option>
-            <option value="pie_105">PIE (10.5% PIR)</option>
-            <option value="rwt">Standard RWT</option>
+            <option value="pie">PIE (Applies your global PIR rate)</option>
+            <option value="rwt">Standard RWT (Non-PIE)</option>
           </select>
         </div>
       </div>
@@ -466,7 +453,7 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
                     {/* Tax Badge */}
                     {dep.taxType === 'pie' ? (
                       <span className="bg-cyan-950 text-cyan-300 px-1.5 py-0.5 rounded text-[10px] font-mono border border-cyan-800/50">
-                        PIE {(dep.pirRate ? dep.pirRate * 100 : 28).toFixed(1)}%
+                        PIE (PIR)
                       </span>
                     ) : (
                       <span className="bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded text-[10px] font-mono">

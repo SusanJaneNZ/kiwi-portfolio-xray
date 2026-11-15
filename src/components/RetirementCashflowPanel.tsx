@@ -21,6 +21,7 @@ interface RetirementCashflowPanelProps {
 }
 
 type ActiveTab = 'overview' | 'fixed-interest' | 'dividends';
+type BarViewMode = 'tax' | 'source';
 
 const fmtMoney = (v: number) => formatNZD(v, 2);
 
@@ -31,6 +32,7 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
   onApplyDrawdownToRebalancer,
 }) => {
   const [activeTab, setActiveTab] = useState<ActiveTab>('overview');
+  const [barViewMode, setBarViewMode] = useState<BarViewMode>('tax');
   const [editingYieldKey, setEditingYieldKey] = useState<string | null>(null);
   const [editingYieldValue, setEditingYieldValue] = useState<string>('');
 
@@ -81,32 +83,33 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
 
   const hasOverrides = Object.keys(settings.dividendYieldOverrides || {}).length > 0;
 
-  // Breakdown percentages for the visual coverage bar
+  // Breakdown percentages for visual bars
   const budget = Math.max(1, cashflowResult.annualLivingBudgetNZD);
+
+  // Source view breakdown
   const fixedNetPct = Math.min(100, (cashflowResult.totalFixedInterestNetNZD / budget) * 100);
   const divNetPct = Math.min(100 - fixedNetPct, (cashflowResult.totalDividendsNetNZD / budget) * 100);
   const superPct = Math.min(
     100 - fixedNetPct - divNetPct,
     (cashflowResult.totalExternalIncomeNZD / budget) * 100
   );
-  const gapPct = Math.max(0, 100 - (fixedNetPct + divNetPct + superPct));
+  const sourceGapPct = Math.max(0, 100 - (fixedNetPct + divNetPct + superPct));
+
+  // Tax view breakdown (PIE vs Non-PIE vs Drawdown)
+  const piePct = Math.min(100, (cashflowResult.totalPieNetNZD / budget) * 100);
+  const nonPiePct = Math.min(100 - piePct, (cashflowResult.totalNonPieNetNZD / budget) * 100);
+  const taxGapPct = Math.max(0, 100 - (piePct + nonPiePct));
 
   return (
     <CollapsiblePanel
       id="retirement-cashflow"
-      title={<span>Retirement Cashflow &amp; Drawdown</span>}
-      subtitle="Project 12-month forward dividends, interest, and NZ Superannuation to fund retirement spending before liquidating capital."
+      title={<span>Projected Organic Cashflow</span>}
+      subtitle="Analyze 12-month forward cashflow across PIE vs Non-PIE income, and determine any capital drawdown needed for living expenses."
       headerRight={
-        <span
-          className={`font-mono px-2.5 py-1 rounded-full text-xs font-semibold border ${
-            cashflowResult.isFullyFunded
-              ? 'bg-emerald-950/70 text-emerald-300 border-emerald-700/60'
-              : 'bg-amber-950/70 text-amber-300 border-amber-700/60'
-          }`}
-        >
+        <span className="font-mono px-2.5 py-1 rounded-full text-xs font-semibold border bg-slate-900 text-slate-300 border-slate-700">
           {cashflowResult.isFullyFunded
-            ? `✓ 100% Fully Funded (+${fmtMoney(cashflowResult.surplusDeficitNZD)})`
-            : `⚠ Shortfall: ${fmtMoney(cashflowResult.netCapitalDrawdownRequiredNZD)} Drawdown`}
+            ? `Income Exceeds Budget (+${fmtMoney(cashflowResult.surplusDeficitNZD)})`
+            : `Capital Drawdown: $${fmtMoney(cashflowResult.netCapitalDrawdownRequiredNZD)}`}
         </span>
       }
       className="md:p-5"
@@ -114,12 +117,12 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
       <div className="space-y-4">
         {/* Executive KPI Summary Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {/* Card 1: Annual Living Budget */}
+          {/* Card 1: Annual Living Budget (After-Tax) */}
           <div className="bg-slate-950 border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between">
             <div>
               <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider flex items-center justify-between">
                 <span>Living Budget</span>
-                <span className="text-slate-500 font-normal">Target / Yr</span>
+                <span className="text-amber-400 font-semibold font-mono text-[10px]">After-Tax Cash</span>
               </div>
               <div className="mt-2 flex items-center gap-1.5">
                 <span className="text-slate-400 font-mono text-sm">$</span>
@@ -137,92 +140,99 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
                 />
               </div>
             </div>
-            <div className="mt-2 flex items-center gap-1.5 flex-wrap">
-              {[60000, 80000, 100000, 120000].map((preset) => (
-                <button
-                  key={preset}
-                  type="button"
-                  onClick={() => handleSetBudgetPreset(preset)}
-                  className={`text-[10px] px-1.5 py-0.5 rounded font-mono transition-colors ${
-                    settings.annualLivingBudget === preset
-                      ? 'bg-indigo-600 text-white font-semibold'
-                      : 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800'
-                  }`}
-                >
-                  ${preset / 1000}k
-                </button>
-              ))}
+            <div className="mt-2">
+              <div className="flex items-center gap-1.5 flex-wrap">
+                {[60000, 80000, 100000, 120000].map((preset) => (
+                  <button
+                    key={preset}
+                    type="button"
+                    onClick={() => handleSetBudgetPreset(preset)}
+                    className={`text-[10px] px-1.5 py-0.5 rounded font-mono transition-colors ${
+                      settings.annualLivingBudget === preset
+                        ? 'bg-indigo-600 text-white font-semibold'
+                        : 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800'
+                    }`}
+                  >
+                    ${preset / 1000}k
+                  </button>
+                ))}
+              </div>
+              <p className="text-[10px] text-slate-500 mt-1">
+                Net spendable cash needed in bank. Inflows below are shown net of tax.
+              </p>
             </div>
           </div>
 
-          {/* Card 2: Organic Portfolio Cashflow */}
+          {/* Card 2: PIE Inflows (Net) */}
           <div className="bg-slate-950 border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between">
             <div>
               <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider flex items-center justify-between">
-                <span>Organic Cashflow</span>
-                <span className="text-emerald-400 font-mono font-bold">Net</span>
+                <span>PIE Inflows</span>
+                <span className="text-teal-400 font-mono font-bold text-[10px]">Net (Capped PIR)</span>
               </div>
-              <div className="mt-2 font-mono text-xl font-bold text-emerald-400">
-                ${fmtMoney(cashflowResult.totalOrganicNetNZD)}
+              <div className="mt-2 font-mono text-xl font-bold text-teal-400">
+                ${fmtMoney(cashflowResult.totalPieNetNZD)}
               </div>
             </div>
-            <div className="mt-2 text-[11px] text-slate-400 font-mono flex items-center justify-between">
-              <span>Gross: ${fmtMoney(cashflowResult.totalOrganicGrossNZD)}</span>
-              <span>
-                TDs ${fmtMoney(cashflowResult.totalFixedInterestNetNZD)} + Divs ${fmtMoney(cashflowResult.totalDividendsNetNZD)}
-              </span>
+            <div className="mt-2 text-[11px] text-slate-400 font-mono">
+              <div className="flex justify-between">
+                <span>PIE TDs: ${fmtMoney(cashflowResult.pieFixedNetNZD)}</span>
+                <span>PIE Funds: ${fmtMoney(cashflowResult.pieDividendsNetNZD)}</span>
+              </div>
+              <div className="text-[10px] text-slate-500 mt-0.5">
+                Tax capped at max 28% PIR; excluded from personal tax returns.
+              </div>
             </div>
           </div>
 
-          {/* Card 3: Guaranteed External Income */}
+          {/* Card 3: Non-PIE Inflows (Net) */}
           <div className="bg-slate-950 border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between">
             <div>
               <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider flex items-center justify-between">
-                <span>External Inflows</span>
-                <span className="text-sky-400 font-mono font-bold">Net</span>
+                <span>Non-PIE Inflows</span>
+                <span className="text-sky-400 font-mono font-bold text-[10px]">Net</span>
               </div>
               <div className="mt-2 font-mono text-xl font-bold text-sky-400">
-                ${fmtMoney(cashflowResult.totalExternalIncomeNZD)}
+                ${fmtMoney(cashflowResult.totalNonPieNetNZD)}
               </div>
             </div>
-            <div className="mt-2 text-[11px] text-slate-400 font-mono flex items-center justify-between">
-              <span>NZ Super: ${fmtMoney(cashflowResult.nzSuperAnnualNZD)}</span>
-              {cashflowResult.otherIncomeAnnualNZD > 0 && (
-                <span>Other: ${fmtMoney(cashflowResult.otherIncomeAnnualNZD)}</span>
-              )}
+            <div className="mt-2 text-[11px] text-slate-400 font-mono">
+              <div className="flex justify-between">
+                <span>NZ Super: ${fmtMoney(cashflowResult.nzSuperNetAnnualNZD)}</span>
+                {cashflowResult.otherGrossIncomeAnnualNZD > 0 && (
+                  <span>Other Net: ${fmtMoney(cashflowResult.otherNetIncomeAnnualNZD)}</span>
+                )}
+              </div>
+              <div className="text-[10px] text-slate-500 mt-0.5">
+                Direct: ${fmtMoney(cashflowResult.nonPieDividendsNetNZD + cashflowResult.nonPieFixedNetNZD)} (with 28% imputation offset)
+              </div>
             </div>
           </div>
 
-          {/* Card 4: Net Capital Drawdown Needed */}
-          <div
-            className={`border rounded-xl p-3.5 flex flex-col justify-between ${
-              cashflowResult.isFullyFunded
-                ? 'bg-emerald-950/30 border-emerald-800/60'
-                : 'bg-amber-950/30 border-amber-800/60'
-            }`}
-          >
+          {/* Card 4: Capital Drawdown / Net Shortfall */}
+          <div className="bg-slate-950 border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between">
             <div>
               <div className="text-[11px] font-semibold uppercase tracking-wider flex items-center justify-between">
-                <span className={cashflowResult.isFullyFunded ? 'text-emerald-300' : 'text-amber-300'}>
-                  Net Capital Drawdown
+                <span className={cashflowResult.isFullyFunded ? 'text-slate-300' : 'text-amber-300'}>
+                  Capital Drawdown
                 </span>
                 <span className="text-[11px] font-mono text-slate-400">
-                  {cashflowResult.coverageRatioPercent.toFixed(0)}% Funded
+                  {cashflowResult.coverageRatioPercent.toFixed(0)}% from Income
                 </span>
               </div>
               <div
                 className={`mt-2 font-mono text-xl font-bold ${
-                  cashflowResult.isFullyFunded ? 'text-emerald-400' : 'text-amber-300'
+                  cashflowResult.isFullyFunded ? 'text-slate-300' : 'text-amber-300'
                 }`}
               >
                 ${fmtMoney(cashflowResult.netCapitalDrawdownRequiredNZD)}
               </div>
             </div>
             <div className="mt-2 flex items-center justify-between gap-2">
-              <span className="text-[11px] text-slate-400">
+              <span className="text-[10px] text-slate-400">
                 {cashflowResult.isFullyFunded
-                  ? `+$${fmtMoney(cashflowResult.surplusDeficitNZD)} surplus buffer`
-                  : 'Liquidation required'}
+                  ? 'Budget fully met from income'
+                  : 'Funded by selling assets (CGT-free for NZ/ASX)'}
               </span>
               {onApplyDrawdownToRebalancer && !cashflowResult.isFullyFunded && (
                 <button
@@ -238,117 +248,186 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
           </div>
         </div>
 
-        {/* Coverage Status Banner */}
-        <div
-          className={`border rounded-xl p-3 text-xs flex flex-wrap items-center justify-between gap-3 ${
-            cashflowResult.isFullyFunded
-              ? 'bg-emerald-950/40 border-emerald-700/50 text-emerald-200'
-              : 'bg-amber-950/40 border-amber-700/50 text-amber-200'
-          }`}
-        >
-          <div className="flex items-center gap-2">
-            <span className="text-base">{cashflowResult.isFullyFunded ? '🎉' : '🛡'}</span>
-            <div>
-              <strong>
-                {cashflowResult.isFullyFunded
-                  ? 'Living Budget 100% Funded by Organic Cashflows & Pensions!'
-                  : `Living Budget ${cashflowResult.coverageRatioPercent.toFixed(1)}% Covered by Inflows.`}
-              </strong>
-              <div className="text-[11px] opacity-90 mt-0.5">
-                {cashflowResult.isFullyFunded
-                  ? `Your total net cashflow of $${fmtMoney(
-                      cashflowResult.totalRetirementInflowNZD
-                    )} covers your $${fmtMoney(
-                      cashflowResult.annualLivingBudgetNZD
-                    )} budget with a $${fmtMoney(
-                      cashflowResult.surplusDeficitNZD
-                    )} surplus buffer. Zero shares need to be sold this year.`
-                  : `Net inflows fund $${fmtMoney(
-                      cashflowResult.totalRetirementInflowNZD
-                    )} of your $${fmtMoney(
-                      cashflowResult.annualLivingBudgetNZD
-                    )} budget. Only the remaining $${fmtMoney(
-                      cashflowResult.netCapitalDrawdownRequiredNZD
-                    )} shortfall needs to be liquidated via bucket rebalancing.`}
-              </div>
-            </div>
+        {/* Cashflow Summary Banner */}
+        <div className="bg-slate-950/90 border border-slate-800 rounded-xl p-3.5 space-y-2.5 text-xs">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <span className="font-semibold text-slate-200">
+              {cashflowResult.isFullyFunded
+                ? `Budget Fully Met by Income: +$${fmtMoney(cashflowResult.surplusDeficitNZD)} annual cashflow surplus`
+                : `Budget Funding Split: ${cashflowResult.coverageRatioPercent.toFixed(1)}% Income / ${(
+                    100 - cashflowResult.coverageRatioPercent
+                  ).toFixed(1)}% Capital Drawdown`}
+            </span>
+            {onApplyDrawdownToRebalancer && !cashflowResult.isFullyFunded && (
+              <button
+                type="button"
+                onClick={() => onApplyDrawdownToRebalancer(cashflowResult.netCapitalDrawdownRequiredNZD)}
+                className="text-xs bg-slate-900 hover:bg-slate-800 text-white border border-slate-700 px-3 py-1 rounded-lg font-medium transition-colors whitespace-nowrap"
+              >
+                Apply ${fmtMoney(cashflowResult.netCapitalDrawdownRequiredNZD)} Drawdown to Rebalancer ↓
+              </button>
+            )}
           </div>
-          {onApplyDrawdownToRebalancer && (
-            <button
-              type="button"
-              onClick={() => onApplyDrawdownToRebalancer(cashflowResult.netCapitalDrawdownRequiredNZD)}
-              className="text-xs bg-slate-900 hover:bg-slate-800 text-white border border-slate-700 px-3 py-1.5 rounded-lg font-medium transition-colors whitespace-nowrap ml-auto"
-            >
-              Apply ${fmtMoney(cashflowResult.netCapitalDrawdownRequiredNZD)} to Rebalancer ↓
-            </button>
-          )}
+
+          <p className="text-slate-400 text-[11.5px] leading-relaxed">
+            {cashflowResult.isFullyFunded
+              ? `Projected net cashflow ($${fmtMoney(
+                  cashflowResult.totalRetirementInflowNZD
+                )}) exceeds your after-tax budget ($${fmtMoney(
+                  cashflowResult.annualLivingBudgetNZD
+                )}) by $${fmtMoney(
+                  cashflowResult.surplusDeficitNZD
+                )}. Living expenses can be funded entirely from income without liquidating capital.`
+              : `Net income funds $${fmtMoney(
+                  cashflowResult.totalRetirementInflowNZD
+                )} of your $${fmtMoney(
+                  cashflowResult.annualLivingBudgetNZD
+                )} after-tax budget. The remaining $${fmtMoney(
+                  cashflowResult.netCapitalDrawdownRequiredNZD
+                )} is funded via capital drawdown.`}
+          </p>
         </div>
 
-        {/* Visual Living Budget Cashflow Coverage Bar */}
-        <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-3 space-y-2">
-          <div className="flex items-center justify-between text-xs text-slate-400">
+        {/* Visual Living Budget Funding Sources Bar */}
+        <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-3 space-y-2.5">
+          <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
             <span className="font-semibold text-slate-300">Annual Budget Funding Sources</span>
-            <span className="font-mono text-[11px]">
-              Total Inflows: ${fmtMoney(cashflowResult.totalRetirementInflowNZD)} / Target: ${fmtMoney(cashflowResult.annualLivingBudgetNZD)}
-            </span>
-          </div>
-
-          <div className="w-full bg-slate-900 rounded-full h-3 flex overflow-hidden border border-slate-800">
-            {fixedNetPct > 0 && (
-              <div
-                style={{ width: `${fixedNetPct}%` }}
-                className="bg-sky-500 hover:brightness-110 transition-all"
-                title={`Fixed Interest & TDs: $${fmtMoney(cashflowResult.totalFixedInterestNetNZD)} (${fixedNetPct.toFixed(1)}%)`}
-              />
-            )}
-            {divNetPct > 0 && (
-              <div
-                style={{ width: `${divNetPct}%` }}
-                className="bg-emerald-500 hover:brightness-110 transition-all"
-                title={`Dividends & Distributions: $${fmtMoney(cashflowResult.totalDividendsNetNZD)} (${divNetPct.toFixed(1)}%)`}
-              />
-            )}
-            {superPct > 0 && (
-              <div
-                style={{ width: `${superPct}%` }}
-                className="bg-indigo-500 hover:brightness-110 transition-all"
-                title={`NZ Super & Other External: $${fmtMoney(cashflowResult.totalExternalIncomeNZD)} (${superPct.toFixed(1)}%)`}
-              />
-            )}
-            {gapPct > 0 && (
-              <div
-                style={{ width: `${gapPct}%` }}
-                className="bg-amber-600/70 hover:brightness-110 transition-all pattern-diagonal-stripes"
-                title={`Capital Drawdown Shortfall: $${fmtMoney(cashflowResult.netCapitalDrawdownRequiredNZD)} (${gapPct.toFixed(1)}%)`}
-              />
-            )}
-          </div>
-
-          <div className="flex flex-wrap items-center justify-between gap-3 text-[11px] text-slate-400 pt-1 font-mono">
-            <div className="flex items-center gap-4 flex-wrap">
-              <span className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-sm bg-sky-500 inline-block" />
-                <span>TDs &amp; Bonds ({fixedNetPct.toFixed(0)}%)</span>
-              </span>
-              <span className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-sm bg-emerald-500 inline-block" />
-                <span>Dividends ({divNetPct.toFixed(0)}%)</span>
-              </span>
-              <span className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-sm bg-indigo-500 inline-block" />
-                <span>NZ Super &amp; Other ({superPct.toFixed(0)}%)</span>
-              </span>
-              {gapPct > 0 && (
-                <span className="flex items-center gap-1.5 text-amber-300 font-semibold">
-                  <span className="w-2.5 h-2.5 rounded-sm bg-amber-600 inline-block" />
-                  <span>Capital Drawdown ({gapPct.toFixed(0)}%)</span>
-                </span>
-              )}
+            <div className="flex items-center gap-1 bg-slate-900 border border-slate-800 rounded-lg p-0.5 text-[11px]">
+              <button
+                type="button"
+                onClick={() => setBarViewMode('tax')}
+                className={`px-2 py-0.5 rounded transition-colors ${
+                  barViewMode === 'tax'
+                    ? 'bg-indigo-600 text-white font-semibold'
+                    : 'text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                Split by Tax Regime (PIE vs Non-PIE)
+              </button>
+              <button
+                type="button"
+                onClick={() => setBarViewMode('source')}
+                className={`px-2 py-0.5 rounded transition-colors ${
+                  barViewMode === 'source'
+                    ? 'bg-indigo-600 text-white font-semibold'
+                    : 'text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                Split by Asset Class
+              </button>
             </div>
-            {cashflowResult.isFullyFunded && (
-              <span className="text-emerald-400 font-semibold">✓ 100% Organic Funded</span>
-            )}
           </div>
+
+          {/* Bar 1: Tax Regime (PIE vs Non-PIE vs Capital Drawdown) */}
+          {barViewMode === 'tax' ? (
+            <div className="space-y-1.5">
+              <div className="w-full bg-slate-900 rounded-full h-3.5 flex overflow-hidden border border-slate-800">
+                {piePct > 0 && (
+                  <div
+                    style={{ width: `${piePct}%` }}
+                    className="bg-teal-500 hover:brightness-110 transition-all"
+                    title={`PIE Inflows (Net): $${fmtMoney(cashflowResult.totalPieNetNZD)} (${piePct.toFixed(1)}% of budget)`}
+                  />
+                )}
+                {nonPiePct > 0 && (
+                  <div
+                    style={{ width: `${nonPiePct}%` }}
+                    className="bg-sky-500 hover:brightness-110 transition-all"
+                    title={`Non-PIE Inflows (Net): $${fmtMoney(cashflowResult.totalNonPieNetNZD)} (${nonPiePct.toFixed(1)}% of budget)`}
+                  />
+                )}
+                {taxGapPct > 0 && (
+                  <div
+                    style={{ width: `${taxGapPct}%` }}
+                    className="bg-amber-600/80 hover:brightness-110 transition-all"
+                    title={`Capital Drawdown: $${fmtMoney(cashflowResult.netCapitalDrawdownRequiredNZD)} (${taxGapPct.toFixed(1)}% of budget)`}
+                  />
+                )}
+              </div>
+
+              <div className="flex flex-wrap items-center justify-between gap-3 text-[11px] text-slate-400 pt-1 font-mono">
+                <div className="flex items-center gap-4 flex-wrap">
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-sm bg-teal-500 inline-block" />
+                    <span>PIE Net: ${fmtMoney(cashflowResult.totalPieNetNZD)} ({piePct.toFixed(0)}%)</span>
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-sm bg-sky-500 inline-block" />
+                    <span>Non-PIE Net: ${fmtMoney(cashflowResult.totalNonPieNetNZD)} ({nonPiePct.toFixed(0)}%)</span>
+                  </span>
+                  {taxGapPct > 0 && (
+                    <span className="flex items-center gap-1.5 text-amber-300 font-semibold">
+                      <span className="w-2.5 h-2.5 rounded-sm bg-amber-600 inline-block" />
+                      <span>Capital Drawdown: ${fmtMoney(cashflowResult.netCapitalDrawdownRequiredNZD)} ({taxGapPct.toFixed(0)}%)</span>
+                    </span>
+                  )}
+                </div>
+                <span className="text-slate-400">
+                  Target: ${fmtMoney(cashflowResult.annualLivingBudgetNZD)}
+                </span>
+              </div>
+            </div>
+          ) : (
+            /* Bar 2: Asset Class / Source (Fixed Interest vs Dividends vs NZ Super vs Drawdown) */
+            <div className="space-y-1.5">
+              <div className="w-full bg-slate-900 rounded-full h-3.5 flex overflow-hidden border border-slate-800">
+                {fixedNetPct > 0 && (
+                  <div
+                    style={{ width: `${fixedNetPct}%` }}
+                    className="bg-sky-500 hover:brightness-110 transition-all"
+                    title={`Fixed Interest & TDs: $${fmtMoney(cashflowResult.totalFixedInterestNetNZD)} (${fixedNetPct.toFixed(1)}%)`}
+                  />
+                )}
+                {divNetPct > 0 && (
+                  <div
+                    style={{ width: `${divNetPct}%` }}
+                    className="bg-emerald-500 hover:brightness-110 transition-all"
+                    title={`Dividends & Distributions: $${fmtMoney(cashflowResult.totalDividendsNetNZD)} (${divNetPct.toFixed(1)}%)`}
+                  />
+                )}
+                {superPct > 0 && (
+                  <div
+                    style={{ width: `${superPct}%` }}
+                    className="bg-indigo-500 hover:brightness-110 transition-all"
+                    title={`NZ Super & Other External: $${fmtMoney(cashflowResult.totalExternalIncomeNZD)} (${superPct.toFixed(1)}%)`}
+                  />
+                )}
+                {sourceGapPct > 0 && (
+                  <div
+                    style={{ width: `${sourceGapPct}%` }}
+                    className="bg-amber-600/80 hover:brightness-110 transition-all"
+                    title={`Capital Drawdown: $${fmtMoney(cashflowResult.netCapitalDrawdownRequiredNZD)} (${sourceGapPct.toFixed(1)}%)`}
+                  />
+                )}
+              </div>
+
+              <div className="flex flex-wrap items-center justify-between gap-3 text-[11px] text-slate-400 pt-1 font-mono">
+                <div className="flex items-center gap-4 flex-wrap">
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-sm bg-sky-500 inline-block" />
+                    <span>TDs &amp; Bonds ({fixedNetPct.toFixed(0)}%)</span>
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-sm bg-emerald-500 inline-block" />
+                    <span>Dividends ({divNetPct.toFixed(0)}%)</span>
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-sm bg-indigo-500 inline-block" />
+                    <span>NZ Super &amp; Other ({superPct.toFixed(0)}%)</span>
+                  </span>
+                  {sourceGapPct > 0 && (
+                    <span className="flex items-center gap-1.5 text-amber-300 font-semibold">
+                      <span className="w-2.5 h-2.5 rounded-sm bg-amber-600 inline-block" />
+                      <span>Capital Drawdown ({sourceGapPct.toFixed(0)}%)</span>
+                    </span>
+                  )}
+                </div>
+                <span className="text-slate-400">
+                  Target: ${fmtMoney(cashflowResult.annualLivingBudgetNZD)}
+                </span>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Tab Navigation */}
@@ -452,36 +531,69 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
                 </p>
               </div>
 
-              {/* Other Net Guaranteed Income */}
+              {/* Other Gross Taxable Income */}
               <div className="space-y-2">
-                <label className="font-semibold text-slate-300 block">
-                  Other Net Guaranteed Inflows (Annual)
-                </label>
+                <div className="flex items-center justify-between">
+                  <label className="font-semibold text-slate-300 block">
+                    Other Gross Taxable Inflows (Annual)
+                  </label>
+                  {cashflowResult.otherGrossIncomeAnnualNZD > 0 && (
+                    <span className="text-[11px] font-mono text-emerald-400 font-medium">
+                      Net: ${fmtMoney(cashflowResult.otherNetIncomeAnnualNZD)}
+                    </span>
+                  )}
+                </div>
                 <div className="flex items-center gap-2">
                   <span className="text-slate-400 font-mono">$</span>
                   <input
                     type="number"
                     min="0"
                     step="500"
-                    value={settings.otherIncomeAnnual || ''}
-                    placeholder="e.g. 12000"
-                    onChange={(e) =>
+                    value={settings.otherGrossIncomeAnnual ?? settings.otherIncomeAnnual ?? ''}
+                    placeholder="e.g. 15000"
+                    onChange={(e) => {
+                      const val = Math.max(0, parseFloat(e.target.value) || 0);
                       handleUpdateSettings({
-                        otherIncomeAnnual: Math.max(0, parseFloat(e.target.value) || 0),
-                      })
-                    }
+                        otherGrossIncomeAnnual: val,
+                        otherIncomeAnnual: val,
+                      });
+                    }}
                     className="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-white font-mono focus:outline-none focus:border-indigo-500"
                   />
                 </div>
                 <p className="text-[11px] text-slate-500">
-                  Net residential rental income, foreign state pensions (UK/Australian), or private lifetime annuities.
+                  Gross residential rental income, foreign state pensions (UK/Australian), or consulting.
+                  Taxed dynamically at your personal marginal tax rate ({(settings.marginalTaxRate * 100).toFixed(1)}%: -${fmtMoney(cashflowResult.otherGrossIncomeAnnualNZD * settings.marginalTaxRate)} tax drag).
+                </p>
+              </div>
+
+              {/* Investor Prescribed Investor Rate (PIR) */}
+              <div className="space-y-2">
+                <label className="font-semibold text-slate-300 block">
+                  Investor Prescribed Investor Rate (PIR)
+                </label>
+                <select
+                  value={(settings.pirRate ?? 0.28).toString()}
+                  onChange={(e) => {
+                    const pir = parseFloat(e.target.value) as 0.105 | 0.175 | 0.28;
+                    handleUpdateSettings({ pirRate: pir });
+                    onUpdateState({ ...portfolioState, pirRate: pir });
+                  }}
+                  className="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-white font-medium focus:outline-none focus:border-indigo-500"
+                >
+                  <option value="0.28">28.0% PIR (Taxable income over $48k or total income over $70k) [Default]</option>
+                  <option value="0.175">17.5% PIR (Taxable income up to $48k &amp; total income up to $70k)</option>
+                  <option value="0.105">10.5% PIR (Taxable income up to $14k &amp; total income up to $48k)</option>
+                </select>
+                <p className="text-[11px] text-slate-500">
+                  Applied to all PIE Term Deposits and multi-rate unlisted PIE funds (e.g. Kernel). Listed PIE funds and ETFs (e.g. Smartshares on NZX) are legally fixed at 28% under NZ tax legislation.
                 </p>
               </div>
 
               {/* Marginal Tax Rate for Standard RWT */}
               <div className="space-y-2">
                 <label className="font-semibold text-slate-300 block">
-                  Investor Marginal Tax Rate (for RWT Interest &amp; Bonds)
+                  Investor Marginal Tax Rate (for RWT Interest, Direct Shares &amp; Other Inflows)
                 </label>
                 <select
                   value={settings.marginalTaxRate.toString()}
@@ -497,7 +609,7 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
                   <option value="0.39">39.0% (Taxable income over $180,000)</option>
                 </select>
                 <p className="text-[11px] text-slate-500">
-                  Applied strictly to standard Resident Withholding Tax (RWT) deposits and corporate bonds. Variable-rate PIE deposits use their own configured PIR (10.5%, 17.5%, or 28%).
+                  Applied to standard Resident Withholding Tax (RWT) deposits, corporate bonds, foreign/ASX shares, and other gross taxable inflows. NZ direct shares offset this with 28% imputation credits.
                 </p>
               </div>
             </div>
@@ -506,84 +618,94 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
 
         {/* Tab 2: Fixed Interest & Term Deposits Breakdown Table */}
         {activeTab === 'fixed-interest' && (
-          <div className="border border-slate-800 rounded-xl overflow-x-auto bg-slate-950">
+          <div className="border border-slate-800 rounded-xl overflow-hidden bg-slate-950">
+            {/* Tab 2 Header Note */}
+            <div className="px-3 py-2 bg-slate-900/70 border-b border-slate-800 text-xs text-slate-400">
+              Assumes current term deposits and bonds run for 12 months at stated rates (assuming rollover upon maturity).
+            </div>
+
             {cashflowResult.fixedInterestItems.length === 0 ? (
               <div className="p-4 text-center text-slate-500 text-xs">
                 No term deposits, corporate bonds, or cash holdings entered yet in Panel 3.
               </div>
             ) : (
-              <table className="w-full text-left text-xs min-w-[700px]">
-                <thead className="bg-slate-900 border-b border-slate-800 text-slate-400 font-semibold uppercase tracking-wider text-[11px]">
-                  <tr>
-                    <th className="py-2.5 px-3">Institution &amp; Security</th>
-                    <th className="py-2.5 px-3">Category</th>
-                    <th className="py-2.5 px-3">Tax Structure</th>
-                    <th className="py-2.5 px-3 text-right">Principal</th>
-                    <th className="py-2.5 px-3 text-right">Rate</th>
-                    <th className="py-2.5 px-3 text-right">Cadence</th>
-                    <th className="py-2.5 px-3 text-right">Gross / Yr</th>
-                    <th className="py-2.5 px-3 text-right">Net / Yr</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-800/60">
-                  {cashflowResult.fixedInterestItems.map((item) => (
-                    <tr key={item.id} className="hover:bg-slate-900/50">
-                      <td className="py-2.5 px-3">
-                        <div className="font-semibold text-white">{item.name}</div>
-                        <div className="text-[11px] text-slate-500">{item.institution}</div>
-                      </td>
-                      <td className="py-2.5 px-3">
-                        <span className="capitalize px-2 py-0.5 rounded text-[11px] bg-slate-800 text-slate-300">
-                          {item.category.replace('_', ' ')}
-                        </span>
-                      </td>
-                      <td className="py-2.5 px-3 font-mono text-[11px]">
-                        {item.taxType === 'pie' ? (
-                          <span className="text-emerald-400">
-                            PIE ({(item.effectiveTaxRate * 100).toFixed(1)}% PIR)
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs min-w-[760px]">
+                  <thead className="bg-slate-900 border-b border-slate-800 text-slate-400 font-semibold uppercase tracking-wider text-[11px]">
+                    <tr>
+                      <th className="py-2.5 px-3">Institution &amp; Security</th>
+                      <th className="py-2.5 px-3">Category</th>
+                      <th className="py-2.5 px-3">Tax Structure</th>
+                      <th className="py-2.5 px-3 text-right">Principal</th>
+                      <th className="py-2.5 px-3 text-right">Rate p.a.</th>
+                      <th className="py-2.5 px-3 text-right">Payment Cadence</th>
+                      <th className="py-2.5 px-3 text-right">Gross Annual</th>
+                      <th className="py-2.5 px-3 text-right">Net Annual</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-800/60">
+                    {cashflowResult.fixedInterestItems.map((item) => (
+                      <tr key={item.id} className="hover:bg-slate-900/50">
+                        <td className="py-2.5 px-3">
+                          <div className="font-semibold text-white">{item.name}</div>
+                          <div className="text-[11px] text-slate-500">{item.institution}</div>
+                        </td>
+                        <td className="py-2.5 px-3">
+                          <span className="capitalize px-2 py-0.5 rounded text-[11px] bg-slate-800 text-slate-300">
+                            {item.category.replace('_', ' ')}
                           </span>
-                        ) : (
-                          <span className="text-slate-400">
-                            RWT ({(item.effectiveTaxRate * 100).toFixed(1)}%)
-                          </span>
-                        )}
+                        </td>
+                        <td className="py-2.5 px-3 font-mono text-[11px]">
+                          {item.taxType === 'pie' ? (
+                            <span className="text-teal-400 bg-teal-950/50 border border-teal-800/40 rounded px-1.5 py-0.5">
+                              PIE ({(item.effectiveTaxRate * 100).toFixed(1)}% PIR)
+                            </span>
+                          ) : (
+                            <span className="text-slate-400 bg-slate-900 border border-slate-800 rounded px-1.5 py-0.5">
+                              Non-PIE RWT ({(item.effectiveTaxRate * 100).toFixed(1)}%)
+                            </span>
+                          )}
+                        </td>
+                        <td className="py-2.5 px-3 text-right font-mono text-white">
+                          ${fmtMoney(item.principalNZD)}
+                        </td>
+                        <td className="py-2.5 px-3 text-right font-mono text-sky-400 font-semibold">
+                          {item.interestRate.toFixed(2)}%
+                        </td>
+                        <td className="py-2.5 px-3 text-right text-slate-300 font-mono text-[11px]">
+                          <div className="capitalize">{item.frequency}</div>
+                          {item.maturityDate && (
+                            <div className="text-[10px] text-slate-500">Mat: {item.maturityDate}</div>
+                          )}
+                        </td>
+                        <td className="py-2.5 px-3 text-right font-mono text-slate-300">
+                          ${fmtMoney(item.grossAnnualNZD)}
+                        </td>
+                        <td className="py-2.5 px-3 text-right font-mono text-emerald-400 font-bold">
+                          ${fmtMoney(item.netAnnualNZD)}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                  <tfoot className="bg-slate-900/80 border-t border-slate-800 font-semibold text-slate-300 font-mono text-xs">
+                    <tr>
+                      <td colSpan={3} className="py-2.5 px-3">
+                        Total Fixed Interest &amp; Cash (PIE Net: ${fmtMoney(cashflowResult.pieFixedNetNZD)} | Non-PIE Net: ${fmtMoney(cashflowResult.nonPieFixedNetNZD)})
                       </td>
-                      <td className="py-2.5 px-3 text-right font-mono text-white">
-                        ${fmtMoney(item.principalNZD)}
+                      <td className="py-2.5 px-3 text-right text-white">
+                        ${fmtMoney(cashflowResult.totalFixedInterestPrincipalNZD)}
                       </td>
-                      <td className="py-2.5 px-3 text-right font-mono text-sky-400 font-semibold">
-                        {item.interestRate.toFixed(2)}%
+                      <td colSpan={2} />
+                      <td className="py-2.5 px-3 text-right text-slate-300">
+                        ${fmtMoney(cashflowResult.totalFixedInterestGrossNZD)}
                       </td>
-                      <td className="py-2.5 px-3 text-right capitalize text-slate-400">
-                        {item.frequency}
-                      </td>
-                      <td className="py-2.5 px-3 text-right font-mono text-slate-300">
-                        ${fmtMoney(item.grossAnnualNZD)}
-                      </td>
-                      <td className="py-2.5 px-3 text-right font-mono text-emerald-400 font-bold">
-                        ${fmtMoney(item.netAnnualNZD)}
+                      <td className="py-2.5 px-3 text-right text-emerald-400 font-bold">
+                        ${fmtMoney(cashflowResult.totalFixedInterestNetNZD)}
                       </td>
                     </tr>
-                  ))}
-                </tbody>
-                <tfoot className="bg-slate-900/80 border-t border-slate-800 font-semibold text-slate-300 font-mono text-xs">
-                  <tr>
-                    <td colSpan={3} className="py-2.5 px-3">
-                      Total Fixed Interest &amp; Cash ({cashflowResult.fixedInterestItems.length} holdings)
-                    </td>
-                    <td className="py-2.5 px-3 text-right text-white">
-                      ${fmtMoney(cashflowResult.totalFixedInterestPrincipalNZD)}
-                    </td>
-                    <td colSpan={2} />
-                    <td className="py-2.5 px-3 text-right text-slate-300">
-                      ${fmtMoney(cashflowResult.totalFixedInterestGrossNZD)}
-                    </td>
-                    <td className="py-2.5 px-3 text-right text-emerald-400 font-bold">
-                      ${fmtMoney(cashflowResult.totalFixedInterestNetNZD)}
-                    </td>
-                  </tr>
-                </tfoot>
-              </table>
+                  </tfoot>
+                </table>
+              </div>
             )}
           </div>
         )}
@@ -600,7 +722,7 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
                 <thead className="bg-slate-900 border-b border-slate-800 text-slate-400 font-semibold uppercase tracking-wider text-[11px]">
                   <tr>
                     <th className="py-2.5 px-3">Holding</th>
-                    <th className="py-2.5 px-3">Type</th>
+                    <th className="py-2.5 px-3">Tax Classification</th>
                     <th className="py-2.5 px-3 text-right">Holdings / Units</th>
                     <th className="py-2.5 px-3 text-right">Value (NZD)</th>
                     <th className="py-2.5 px-3 text-right">Div Yield %</th>
@@ -626,8 +748,18 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
                             <span className="truncate max-w-[200px]">{item.label}</span>
                           </div>
                         </td>
-                        <td className="py-2.5 px-3 capitalize text-slate-400">
-                          {item.kind === 'direct' ? 'Direct / ETF' : 'Pooled Fund'}
+                        <td className="py-2.5 px-3 text-[11px]">
+                          {item.isPie ? (
+                            <span className="text-teal-400 bg-teal-950/60 border border-teal-800/40 rounded px-1.5 py-0.5 font-mono">
+                              {item.kind === 'fund'
+                                ? `Multi-Rate PIE (${((settings.pirRate ?? 0.28) * 100).toFixed(1)}% PIR)`
+                                : 'Listed PIE ETF (28% Fixed)'}
+                            </span>
+                          ) : (
+                            <span className="text-slate-400 bg-slate-900 border border-slate-800 rounded px-1.5 py-0.5 font-mono">
+                              Direct Non-PIE Share
+                            </span>
+                          )}
                         </td>
                         <td className="py-2.5 px-3 text-right font-mono text-slate-300">
                           {item.shares !== undefined ? `${item.shares.toLocaleString()} sh` : '—'}
@@ -699,7 +831,7 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
                 <tfoot className="bg-slate-900/80 border-t border-slate-800 font-semibold text-slate-300 font-mono text-xs">
                   <tr>
                     <td colSpan={3} className="py-2.5 px-3">
-                      Total Equities &amp; Funds ({cashflowResult.dividendItems.length} holdings)
+                      Total Equities &amp; Funds (PIE Net: ${fmtMoney(cashflowResult.pieDividendsNetNZD)} | Direct Non-PIE: ${fmtMoney(cashflowResult.nonPieDividendsNetNZD)})
                     </td>
                     <td className="py-2.5 px-3 text-right text-white">
                       ${fmtMoney(cashflowResult.totalEquitiesValueNZD)}
@@ -721,4 +853,3 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
     </CollapsiblePanel>
   );
 };
-
