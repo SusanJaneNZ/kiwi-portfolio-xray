@@ -304,10 +304,40 @@ class AdminService:
             self.fund_catalog_path.write_text(json.dumps(catalog, indent=2), encoding="utf-8")
             return catalog
 
-    def fetch_disclosures(self, providers: list[str] | None = None, force: bool = False) -> dict[str, Any]:
+    def fetch_disclosures(
+        self,
+        providers: list[str] | None = None,
+        force: bool = False,
+        fund_code: str | None = None,
+    ) -> dict[str, Any]:
         """Triggers SmartInvestorFetcher to synchronize disclosures into data/staging."""
         from pipeline.fetchers import SmartInvestorFetcher
         fetcher = SmartInvestorFetcher(staging_dir=self.staging_dir, catalog_path=self.fund_catalog_path)
+        if fund_code:
+            clean_code = str(fund_code).strip().upper()
+            target = next((m for m in fetcher.catalog if m.target_code.upper() == clean_code), None)
+            if not target:
+                return {
+                    "downloaded": [],
+                    "cached": [],
+                    "failed": [{"code": clean_code, "message": f"Fund code '{clean_code}' not found in catalogue", "fund_id": ""}],
+                    "success": False,
+                }
+            success, message, path = fetcher.fetch_fund(target, force=force)
+            entry = {
+                "code": target.target_code,
+                "fund_id": target.fund_id,
+                "provider": target.provider,
+                "message": message,
+                "path": str(path) if path else None,
+            }
+            return {
+                "downloaded": [entry] if success and ("cached" not in message and "existing" not in message) else [],
+                "cached": [entry] if success and ("cached" in message or "existing" in message) else [],
+                "failed": [entry] if not success else [],
+                "success": success,
+                "total_catalog": len(fetcher.catalog),
+            }
         return fetcher.fetch_all(providers=providers, force=force)
 
     def run_pipeline(self, dry_run: bool = True) -> dict[str, Any]:
@@ -715,7 +745,8 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                 elif path == "/api/pipeline/fetch":
                     providers = data.get("providers")
                     force = bool(data.get("force", False))
-                    self._send_json(service.fetch_disclosures(providers=providers, force=force))
+                    fund_code = data.get("fund_code")
+                    self._send_json(service.fetch_disclosures(providers=providers, force=force, fund_code=fund_code))
                 elif path == "/api/catalog/save":
                     catalog = service.save_fund_catalog_entry(data)
                     self._send_json({"ok": True, "catalog": catalog})

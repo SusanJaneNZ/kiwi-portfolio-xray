@@ -185,5 +185,92 @@
   "Smartshares:ASF": {
     "GENERATION DEVELOPMENT GROUP LIMITED ORDINARY FULLY PAID": "SEDOL:BF42CQ6",
     "INFRATIL LIMITED ORDINARY FULLY PAID FOREIGN EXEMPT NZX": "SEDOL:6459286"
+  },
+  "Kernel:KERNEL_NZ_COMMERCIAL_PROPERTY": {
+    "Precinct Properties New Zealand Limited": "SEDOL:6093275",
+    "Goodman NZ Limited & Goodman Property Service Unt": "SEDOL:6299192",
+    "Vital Healthcare Property": "SEDOL:6173843"
+  },
+  "Kernel:KERNEL_CASH_PLUS": {
+    "Bank of China Deposit": "SEDOL:B154564"
+  },
+  "Kernel:KERNEL_NZ_SMALL_MID_CAP": {
+    "Fonterra Shareholders' Fund": "NZX:FCG",
+    "Sky City Entertainment Limited (NZ Registry)": "SEDOL:6823193"
+  },
+  "Kernel:KERNEL_GLOBAL_100": {
+    "Exxon Holdings Corporation": "SEDOL:BVSRPD7",
+    "Merck & Co Inc Common Stock": "SEDOL:2778844",
+    "Roche Hldgs AG Br": "SEDOL:BTMJD19"
+  },
+  "Kernel:KERNEL_SP_500_UNHEDGED": {
+    "Berkshire Hathaway Inc Cl B": "SEDOL:2073390",
+    "Palantir Technologies Inc. Class A": "SEDOL:BN78DQ4",
+    "Intuitive Surgical Inc Common Stock": "SEDOL:2871301",
+    "PNC Finl Services Group": "SEDOL:2692665",
+    "Warner Bros Discovery Series A": "SEDOL:BM8JYX3",
+    "Mondolez International Corp": "SEDOL:B8CKK03",
+    "Zoetis Inc Common Stock": "SEDOL:B95WG16",
+    "Cognizant Tech Solutions Corp": "SEDOL:2257019",
+    "Expeditors Intl of WA Inc": "SEDOL:2325507",
+    "Xylem Inc": "SEDOL:B3P2CN8",
+    "Estee Lauder CL A Ord": "SEDOL:2320524",
+    "Fidelity National Information": "SEDOL:2769796",
+    "CDW Corp": "SEDOL:BBM5MD6",
+    "WR Berkley Corp": "SEDOL:2093644",
+    "Charles River Laboratories Ord": "SEDOL:2604336",
+    "Fox Corp Class A": "SEDOL:BJJMGY5",
+    "McCormick & Co": "SEDOL:2550161"
+  },
+  "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
+    "Mid-America Apt Communties": "SEDOL:2589132",
+    "Alexandria Real Estate Eqty": "SEDOL:2009210",
+    "Federal Realty Invt Trust": "SEDOL:BN7P9B2",
+    "Dexus Units": "SEDOL:B033YN6",
+    "Covivio": "SEDOL:7745638",
+    "Frasers Logistics & Commercial Asset Management Pte Ltd": "SEDOL:BYYFHZ2",
+    "Japan Prime Realty Inv Corp JREIT": "SEDOL:6528175",
+    "CapitaLand Ascott Stapled Unit": "SEDOL:BG0RZ29",
+    "Corporacion Inmobiliaria Vesta SAB de CV - VESTA (MX)": "SEDOL:B8F6ZF8",
+    "Big Yellow Group REIT": "SEDOL:0286941",
+    "Piedmont Office Realty Trust Inc": "SEDOL:B3M3278",
+    "Nippon Accommodations Fund": "SEDOL:6396800",
+    "Leopalace 21 Corp": "SEDOL:6598424",
+    "Mori Trust Sogo REIT": "SEDOL:6729558"
+  },
+  "Kernel:KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED": {
+    "Cia de Saneamento Basico Es de S Paulo ADR": "SEDOL:B1YCHL8",
+    "Grupo Aeroportuario del Pacifico S A B de C V ADR": "SEDOL:B0ZV104",
+    "Brookfield Infrastructure Corporation Class A": "SEDOL:BSQLM28",
+    "Northwestern Corp": "SEDOL:B03PGL4",
+    "Grupo Aeroportuario Cen-Adr": "SEDOL:B1KFX13",
+    "Fraport AG": "SEDOL:7107551",
+    "INWIT - Infrastrutture Wireless Spa": "SEDOL:BZ0P4R4",
+    "Jiangsu Expressway Co Ltd H Shares": "SEDOL:6005504",
+    "Eutelsat Communications": "SEDOL:B0M7KJ7"
+  },
+  "Kernel:KERNEL_GLOBAL_ESG_HEDGED": {
+    "Canadian Pacific Railway Ltd": "SEDOL:2180632",
+    "Nippon Tel & Tel Corp": "SEDOL:6644060",
+    "Roche Hldgs AG Br": "SEDOL:BTMJD19"
+  },
+  "Kernel:KERNEL_HIGH_GROWTH": {
+    "Canadian Pacific Railway Ltd": "SEDOL:2180632",
+    "Nippon Tel & Tel Corp": "SEDOL:6644060",
+    "Roche Hldgs AG Br": "SEDOL:BTMJD19"
+  },
+  "Kernel:KERNEL_SP_500_HEDGED": {
+    "VICI PPTYS ORD": "SEDOL:BYWH073",
+    "Bunge Limited": "SEDOL:BQ6BPG9"
+  },
+  "Kernel:KERNEL_BALANCED": {
+    "Red Electrica Corporacion SA": "SEDOL:2205706",
+    "Canadian Pacific Railway Ltd": "SEDOL:2180632",
+    "Nippon Tel & Tel Corp": "SEDOL:6644060",
+    "Roche Hldgs AG Br": "SEDOL:BTMJD19",
+    "Aurizon Holdings Limited Star Stock": "SEDOL:B87CVM3"
+  },
+  "Kernel:KERNEL_GLOBAL_100_HEDGED": {
+    "Roche Hldgs AG Br": "SEDOL:BTMJD19"
   }
 }
