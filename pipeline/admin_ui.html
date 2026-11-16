@@ -275,13 +275,49 @@
       <div id="feeder-pairings-list">Loading feeder pairings...</div>
     </details>
 
+    <!-- MANAGED FUND CATALOGUE -->
+    <details open class="card" id="panel-catalog" data-panel="panel-catalog">
+      <summary class="panel-summary">
+        <div class="panel-title-wrap">
+          <span class="panel-chevron">▼</span>
+          <h2>5. Managed Fund Catalogue (Kernel &amp; Smartshares Disclose Feed)</h2>
+          <span id="catalog-count-badge" class="badge badge-info">Loading...</span>
+        </div>
+      </summary>
+      <p class="subtitle" style="margin-bottom: 12px;">
+        Registered funds driving automated quarterly constituent downloads. Add new Kernel or Smartshares funds by code or by pasting their Smart Investor URL.
+      </p>
+
+      <div class="row-actions" style="margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+        <select id="catalog-add-provider" style="width: 140px;">
+          <option value="Kernel">Kernel</option>
+          <option value="Smartshares">Smartshares</option>
+        </select>
+        <input type="text" id="catalog-add-code" placeholder="Fund Code (e.g. KERNEL_TOTAL_WORLD, USF)" style="width: 220px;">
+        <input type="text" id="catalog-add-name" placeholder="Fund Name (e.g. Kernel Total World Fund)" style="flex: 1; min-width: 200px;">
+        <input type="text" id="catalog-add-fnd" placeholder="FND Code or Smart Investor URL (e.g. FND62001 or https://...)" style="flex: 1; min-width: 260px;">
+        <button class="btn btn-primary btn-sm" onclick="saveCatalogFund()">➕ Add Fund to Catalogue</button>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+        <div style="display: flex; gap: 6px;">
+          <button class="btn btn-sm" onclick="filterCatalog('all')">All</button>
+          <button class="btn btn-sm" onclick="filterCatalog('Kernel')">Kernel</button>
+          <button class="btn btn-sm" onclick="filterCatalog('Smartshares')">Smartshares</button>
+        </div>
+        <input type="text" id="catalog-search" placeholder="Search catalogue..." style="width: 220px;" oninput="renderCatalogList()">
+      </div>
+
+      <div id="catalog-list" style="max-height: 380px; overflow-y: auto;">Loading catalogue...</div>
+    </details>
+
     <!-- UNRESOLVED MAPPER & SAVED ALIASES -->
     <div class="grid-2">
       <details open class="card" id="panel-unresolved" data-panel="panel-unresolved">
         <summary class="panel-summary">
           <div class="panel-title-wrap">
             <span class="panel-chevron">▼</span>
-            <h2>5. Unresolved Holdings Mapper</h2>
+            <h2>6. Unresolved Holdings Mapper</h2>
             <span id="unresolved-count-badge" class="badge badge-info" style="display: none;"></span>
           </div>
           <div class="row-actions" onclick="event.stopPropagation();">
@@ -373,23 +409,15 @@
       smartshares: {
         name: 'Smartshares Direct & Feeder ETFs (FNZ, MDZ, USF, TWF, NZB, etc.)',
         folder: 'data/staging/smartshares/',
-        format: 'XLSX (*.xlsx)',
-        links: [
-          { label: 'Sorted Smart Investor', url: 'https://smartinvestor.sorted.org.nz' },
-          { label: 'Disclose Register NZ', url: 'https://disclose-register.companiesoffice.govt.nz/' },
-        ],
-        instructions: 'Search fund by ticker or name (e.g. FNZ, USF, Total World) → Click "Download the full portfolio holdings" (XLSX).',
+        format: 'Automated Disclose Register Feed',
+        buttonLabel: 'Update Smart ETF Constituents',
         canAutoFetch: true,
       },
       kernel: {
-        name: 'Kernel Wealth Unlisted Index Funds (NZ 50, World Ex-US, Clean Energy, etc.)',
+        name: 'Kernel Wealth Unlisted Index Funds (NZ 20, NZ 50, World Ex-US, Clean Energy, etc.)',
         folder: 'data/staging/kernel/',
-        format: 'XLSX (*.xlsx)',
-        links: [
-          { label: 'Sorted Smart Investor', url: 'https://smartinvestor.sorted.org.nz' },
-          { label: 'Disclose Register NZ', url: 'https://disclose-register.companiesoffice.govt.nz/' },
-        ],
-        instructions: 'Search fund name (e.g. "Kernel S&P World Ex-US", "Kernel NZ 50") → Click "Download the full portfolio holdings" (XLSX).',
+        format: 'Automated Disclose Register Feed',
+        buttonLabel: 'Update Kernel Fund Constituents',
         canAutoFetch: true,
       },
       vanguard: {
@@ -450,19 +478,26 @@
         return;
       }
 
-      const linksHtml = src.links.map(l =>
-        `<a class="source-link" href="${escapeHtml(l.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(l.label)} ↗</a>`
-      ).join('&nbsp;&nbsp;·&nbsp;&nbsp;');
-
-      let autoFetchHtml = '';
       if (src.canAutoFetch) {
-        autoFetchHtml = `
-          <div style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed rgba(99, 102, 241, 0.25); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
-            <span style="color: var(--muted); font-size: 11px;">Or let the automated fetcher pull directly from Sorted Smart Investor:</span>
-            <button id="btn-auto-fetch" class="btn btn-sm btn-ok" onclick="handleAutoFetch('${key}')">⚡ Auto-Fetch Disclosures via Smart Investor</button>
+        const btnLabel = src.buttonLabel || 'Update Constituents';
+        callout.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <div>
+              <strong style="color: #a5b4fc;">Sourcing: ${escapeHtml(src.name)}</strong>
+              <span class="badge badge-ok" style="font-size: 10px; margin-left: 6px;">Automated Feed</span>
+            </div>
+          </div>
+          <div style="margin-top: 8px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <span style="color: var(--muted); font-size: 11.5px;">Pulls official quarterly constituent disclosures directly from the Disclose Register:</span>
+            <button id="btn-auto-fetch" class="btn btn-sm btn-ok" onclick="handleAutoFetch('${key}')">⚡ ${escapeHtml(btnLabel)}</button>
           </div>
         `;
+        return;
       }
+
+      const linksHtml = (src.links || []).map(l =>
+        `<a class="source-link" href="${escapeHtml(l.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(l.label)} ↗</a>`
+      ).join('&nbsp;&nbsp;·&nbsp;&nbsp;');
 
       callout.innerHTML = `
         <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap;">
@@ -473,17 +508,18 @@
           <div>${linksHtml}</div>
         </div>
         <div style="margin-top: 5px; color: #cbd5e1; font-size: 11.5px;">
-          ${escapeHtml(src.instructions)}
+          ${escapeHtml(src.instructions || '')}
         </div>
-        ${autoFetchHtml}
       `;
     }
 
     async function handleAutoFetch(provider) {
       const btn = document.getElementById('btn-auto-fetch');
+      const src = PROVIDER_SOURCES[provider] || {};
+      const originalLabel = src.buttonLabel || 'Update Constituents';
       if (btn) {
         btn.disabled = true;
-        btn.textContent = '⏳ Fetching from Smart Investor...';
+        btn.textContent = `⏳ Updating constituents...`;
       }
       try {
         const res = await api('/api/pipeline/fetch', {
@@ -492,14 +528,34 @@
         });
         const downloadedCount = res.downloaded ? res.downloaded.length : 0;
         const cachedCount = res.cached ? res.cached.length : 0;
-        showToast(`Auto-fetch done: ${downloadedCount} downloaded, ${cachedCount} already up to date`);
+        const failedCount = res.failed ? res.failed.length : 0;
+
+        if (failedCount > 0) {
+          const failList = res.failed.map(f => `• ${f.code} (${f.fund_id}): ${f.message}`).join('\n');
+          console.warn('Disclose Register fetch errors:\n', failList);
+          if (downloadedCount > 0 || cachedCount > 0) {
+            showToast(`Update: ${downloadedCount} updated, ${cachedCount} cached (${failedCount} failed)`);
+          } else {
+            showToast(`⚠️ Update encountered ${failedCount} error(s) (check console)`);
+          }
+          alert(
+            `Disclose Register Synchronization Report for ${src.name || provider}:\n\n` +
+            `• Successfully downloaded: ${downloadedCount}\n` +
+            `• Already up-to-date: ${cachedCount}\n` +
+            `• Failed: ${failedCount}\n\n` +
+            `Failed endpoints:\n${failList}\n\n` +
+            `Note: Funds returning 404 indicate that their Disclose scheme registration code or quarterly filing is not yet available at the public endpoint.`
+          );
+        } else {
+          showToast(`Update complete: ${downloadedCount} updated, ${cachedCount} already up to date`);
+        }
         await loadStagedFiles();
       } catch (err) {
-        alert('Auto-fetch failed: ' + err.message);
+        alert('Update failed: ' + err.message);
       } finally {
         if (btn) {
           btn.disabled = false;
-          btn.textContent = '⚡ Auto-Fetch Disclosures via Smart Investor';
+          btn.textContent = `⚡ ${originalLabel}`;
         }
       }
     }
@@ -1274,6 +1330,146 @@
       container.innerHTML = html;
     }
 
+    // Managed Fund Catalogue state and handlers
+    let catalogData = [];
+    let currentCatalogFilter = 'all';
+
+    async function loadCatalog() {
+      try {
+        const data = await api('/api/catalog');
+        catalogData = data.catalog || [];
+        renderCatalogList();
+      } catch (err) {
+        document.getElementById('catalog-list').innerHTML = `<div style="color: var(--err);">Failed to load catalogue: ${escapeHtml(err.message)}</div>`;
+      }
+    }
+
+    function filterCatalog(provider) {
+      currentCatalogFilter = provider;
+      renderCatalogList();
+    }
+
+    function renderCatalogList() {
+      const container = document.getElementById('catalog-list');
+      const badge = document.getElementById('catalog-count-badge');
+      if (badge) badge.textContent = `${catalogData.length} funds`;
+
+      const searchInput = (document.getElementById('catalog-search')?.value || '').trim().toLowerCase();
+
+      let filtered = catalogData;
+      if (currentCatalogFilter !== 'all') {
+        filtered = filtered.filter(c => (c.provider || '').toLowerCase() === currentCatalogFilter.toLowerCase());
+      }
+      if (searchInput) {
+        filtered = filtered.filter(c =>
+          (c.fund_code || '').toLowerCase().includes(searchInput) ||
+          (c.fund_name || '').toLowerCase().includes(searchInput) ||
+          (c.fnd_code || '').toLowerCase().includes(searchInput)
+        );
+      }
+
+      if (!filtered.length) {
+        container.innerHTML = `<div style="color: var(--muted); padding: 8px;">No matching funds found in catalogue.</div>`;
+        return;
+      }
+
+      let html = `<table>
+        <thead>
+          <tr>
+            <th>Provider</th>
+            <th>Fund Code</th>
+            <th>Fund Name</th>
+            <th>Disclose FND Code</th>
+            <th>Scheme / Offer</th>
+            <th>Type</th>
+            <th style="text-align: right;">Actions</th>
+          </tr>
+        </thead>
+        <tbody>`;
+
+      filtered.forEach((c) => {
+        const typeBadge = c.is_etf
+          ? `<span class="badge badge-info" style="font-size: 10px;">Listed ETF</span>`
+          : `<span class="badge badge-ok" style="font-size: 10px;">Unlisted Fund</span>`;
+        const link = `https://www.smartinvestor.sorted.org.nz/kiwisaver-and-managed-funds/${encodeURIComponent(c.scheme_id)}/${encodeURIComponent(c.offer_id)}/${encodeURIComponent(c.fnd_code)}/`;
+        html += `
+          <tr>
+            <td><strong>${escapeHtml(c.provider)}</strong></td>
+            <td><code class="mono" style="color: var(--primary); font-weight: bold;">${escapeHtml(c.fund_code)}</code></td>
+            <td>${escapeHtml(c.fund_name)}</td>
+            <td>
+              <a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; text-decoration: underline;" title="View on Smart Investor">
+                ${escapeHtml(c.fnd_code)} ↗
+              </a>
+            </td>
+            <td class="mono" style="color: var(--muted); font-size: 11px;">${escapeHtml(c.scheme_id)} / ${escapeHtml(c.offer_id)}</td>
+            <td>${typeBadge}</td>
+            <td style="text-align: right;">
+              <button class="btn btn-sm btn-danger" onclick="deleteCatalogFund('${escapeHtml(c.fund_code)}')">Remove</button>
+            </td>
+          </tr>
+        `;
+      });
+
+      html += `</tbody></table>`;
+      container.innerHTML = html;
+    }
+
+    async function saveCatalogFund() {
+      const provider = document.getElementById('catalog-add-provider').value;
+      const fund_code = document.getElementById('catalog-add-code').value.trim();
+      const fund_name = document.getElementById('catalog-add-name').value.trim();
+      const fnd_code = document.getElementById('catalog-add-fnd').value.trim();
+
+      if (!fund_code) {
+        alert('Please enter a Fund Code (e.g. KERNEL_TOTAL_WORLD or USF)');
+        return;
+      }
+      if (!fnd_code) {
+        alert('Please enter an FND code (e.g. FND62001) or paste the Smart Investor fund URL');
+        return;
+      }
+
+      try {
+        const res = await api('/api/catalog/save', {
+          method: 'POST',
+          body: JSON.stringify({
+            provider,
+            fund_code,
+            fund_name,
+            fnd_code,
+          }),
+        });
+        if (res.ok) {
+          showToast(`Saved ${fund_code} to catalogue!`);
+          document.getElementById('catalog-add-code').value = '';
+          document.getElementById('catalog-add-name').value = '';
+          document.getElementById('catalog-add-fnd').value = '';
+          catalogData = res.catalog || [];
+          renderCatalogList();
+        }
+      } catch (err) {
+        alert(`Failed to save fund: ${err.message}`);
+      }
+    }
+
+    async function deleteCatalogFund(fundCode) {
+      if (!confirm(`Are you sure you want to remove ${fundCode} from the Managed Fund Catalogue?`)) return;
+      try {
+        const res = await api('/api/catalog/delete', {
+          method: 'POST',
+          body: JSON.stringify({ fund_code: fundCode }),
+        });
+        if (res.ok) {
+          showToast(`Removed ${fundCode} from catalogue`);
+          catalogData = res.catalog || [];
+          renderCatalogList();
+        }
+      } catch (err) {
+        alert(`Failed to delete fund: ${err.message}`);
+      }
+    }
+
     // Panel collapse/expand state (persisted in localStorage)
     const PANEL_STATE_KEY = 'admin_ui_panel_state_v1';
 
@@ -1310,6 +1506,7 @@
     loadStagedFiles();
     loadAliases();
     loadFeeders();
+    loadCatalog();
   </script>
 </body>
 </html>

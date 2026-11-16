@@ -55,6 +55,7 @@ class AdminService:
         self.security_master_path = repo_root / "pipeline" / "security_master" / "security_master.json"
         self.gics_mapping_path = repo_root / "pipeline" / "normalizer" / "gics_mapping.json"
         self.feeder_registry_path = repo_root / "pipeline" / "feeder_registry.json"
+        self.fund_catalog_path = repo_root / "pipeline" / "fund_catalog.json"
         self._lock = threading.Lock()
 
     def list_staged_files(self) -> dict[str, list[dict[str, Any]]]:
@@ -227,10 +228,86 @@ class AdminService:
         )
         return SecurityMatcher(security_master=sm_data, alias_map=self.get_alias_map(), gics_mapping=gics_data)
 
+    def get_fund_catalog(self) -> list[dict[str, Any]]:
+        """Returns the list of managed funds from fund_catalog.json."""
+        if not self.fund_catalog_path.exists():
+            return []
+        try:
+            return json.loads(self.fund_catalog_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            logger.warning("Error reading %s: %s", self.fund_catalog_path, exc)
+            return []
+
+    def save_fund_catalog_entry(self, entry: dict[str, Any]) -> list[dict[str, Any]]:
+        """Adds or updates a fund in fund_catalog.json."""
+        with self._lock:
+            catalog = self.get_fund_catalog()
+            fund_code = str(entry.get("fund_code", "")).strip().upper()
+            if not fund_code:
+                raise ValueError("fund_code is required")
+
+            provider = str(entry.get("provider", "Kernel")).strip().title()
+            if provider.lower() not in {"kernel", "smartshares", "simplicity"}:
+                raise ValueError("Provider must be Kernel, Smartshares, or Simplicity")
+
+            fnd_raw = str(entry.get("fnd_code", "")).strip()
+            scheme_id = str(entry.get("scheme_id", "")).strip().upper()
+            offer_id = str(entry.get("offer_id", "")).strip().upper()
+            fnd_code = ""
+
+            if "FND" in fnd_raw.upper():
+                fnd_match = re.search(r"(FND\d+)", fnd_raw, re.IGNORECASE)
+                if fnd_match:
+                    fnd_code = fnd_match.group(1).upper()
+            if not fnd_code:
+                raise ValueError("A valid FND code (e.g. FND15841) or Smart Investor URL is required")
+
+            if not scheme_id:
+                sch_m = re.search(r"(SCH\d+)", fnd_raw, re.IGNORECASE)
+                scheme_id = sch_m.group(1).upper() if sch_m else ("SCH12697" if provider.lower() == "kernel" else "SCH10752")
+
+            if not offer_id:
+                ofr_m = re.search(r"(OFR\d+)", fnd_raw, re.IGNORECASE)
+                offer_id = ofr_m.group(1).upper() if ofr_m else ("OFR12698" if provider.lower() == "kernel" else "OFR10865")
+
+            fund_name = str(entry.get("fund_name", "")).strip() or fund_code.replace("_", " ").title()
+            is_etf = bool(entry.get("is_etf", provider.lower() == "smartshares"))
+
+            clean_entry = {
+                "fund_code": fund_code,
+                "fund_name": fund_name,
+                "provider": provider,
+                "fnd_code": fnd_code,
+                "scheme_id": scheme_id,
+                "offer_id": offer_id,
+                "is_etf": is_etf,
+            }
+
+            idx = next((i for i, c in enumerate(catalog) if c.get("fund_code", "").upper() == fund_code), None)
+            if idx is not None:
+                catalog[idx] = clean_entry
+            else:
+                catalog.append(clean_entry)
+
+            catalog.sort(key=lambda x: (x.get("provider", ""), x.get("fund_name", "")))
+            self.fund_catalog_path.parent.mkdir(parents=True, exist_ok=True)
+            self.fund_catalog_path.write_text(json.dumps(catalog, indent=2), encoding="utf-8")
+            return catalog
+
+    def delete_fund_catalog_entry(self, fund_code: str) -> list[dict[str, Any]]:
+        """Deletes a fund entry from fund_catalog.json by its fund_code."""
+        with self._lock:
+            catalog = self.get_fund_catalog()
+            fcode_clean = str(fund_code).strip().upper()
+            catalog = [c for c in catalog if c.get("fund_code", "").upper() != fcode_clean]
+            self.fund_catalog_path.parent.mkdir(parents=True, exist_ok=True)
+            self.fund_catalog_path.write_text(json.dumps(catalog, indent=2), encoding="utf-8")
+            return catalog
+
     def fetch_disclosures(self, providers: list[str] | None = None, force: bool = False) -> dict[str, Any]:
         """Triggers SmartInvestorFetcher to synchronize disclosures into data/staging."""
         from pipeline.fetchers import SmartInvestorFetcher
-        fetcher = SmartInvestorFetcher(staging_dir=self.staging_dir)
+        fetcher = SmartInvestorFetcher(staging_dir=self.staging_dir, catalog_path=self.fund_catalog_path)
         return fetcher.fetch_all(providers=providers, force=force)
 
     def run_pipeline(self, dry_run: bool = True) -> dict[str, Any]:
@@ -549,6 +626,8 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                 elif path == "/api/security-master":
                     q = qs.get("q", [""])[0]
                     self._send_json({"results": service.search_security_master(q)})
+                elif path == "/api/catalog":
+                    self._send_json({"catalog": service.get_fund_catalog()})
                 elif path == "/api/portfolio/backups":
                     backups_dir = service.repo_root / "backups"
                     backups_dir.mkdir(parents=True, exist_ok=True)
@@ -637,6 +716,12 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                     providers = data.get("providers")
                     force = bool(data.get("force", False))
                     self._send_json(service.fetch_disclosures(providers=providers, force=force))
+                elif path == "/api/catalog/save":
+                    catalog = service.save_fund_catalog_entry(data)
+                    self._send_json({"ok": True, "catalog": catalog})
+                elif path == "/api/catalog/delete":
+                    catalog = service.delete_fund_catalog_entry(data.get("fund_code", ""))
+                    self._send_json({"ok": True, "catalog": catalog})
                 elif path == "/api/aliases/set":
                     aliases = service.set_alias_mapping(
                         scope_key=data.get("scope_key", ""),

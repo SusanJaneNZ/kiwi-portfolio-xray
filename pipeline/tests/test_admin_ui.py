@@ -214,6 +214,84 @@ class TestAdminUI(unittest.TestCase):
         exact = self.service.search_security_master("MCY")
         self.assertTrue(any(r["isin"] == "NZMCYE0001S8" for r in exact))
 
+    def test_api_pipeline_fetch_endpoint(self):
+        """POST /api/pipeline/fetch returns structured JSON with downloaded, cached, and failed lists."""
+        handler = make_handler(self.service)
+        server = ThreadingHTTPServer(("127.0.0.1", 0), handler)
+        port = server.server_address[1]
+        t = threading.Thread(target=server.serve_forever, daemon=True)
+        t.start()
+        try:
+            req = urllib.request.Request(
+                f"http://127.0.0.1:{port}/api/pipeline/fetch",
+                data=json.dumps({"providers": ["kernel"], "force": False}).encode("utf-8"),
+                headers={"Content-Type": "application/json"},
+                method="POST",
+            )
+            with urllib.request.urlopen(req) as resp:
+                self.assertEqual(resp.status, 200)
+                payload = json.loads(resp.read().decode("utf-8"))
+                self.assertIn("downloaded", payload)
+                self.assertIn("cached", payload)
+                self.assertIn("failed", payload)
+                self.assertIsInstance(payload["failed"], list)
+        finally:
+            server.shutdown()
+            server.server_close()
+
+    def test_fund_catalog_api_get_save_delete(self):
+        """GET, POST save, and POST delete for /api/catalog."""
+        handler = make_handler(self.service)
+        server = ThreadingHTTPServer(("127.0.0.1", 0), handler)
+        port = server.server_address[1]
+        t = threading.Thread(target=server.serve_forever, daemon=True)
+        t.start()
+        try:
+            # 1. GET /api/catalog
+            with urllib.request.urlopen(f"http://127.0.0.1:{port}/api/catalog") as resp:
+                self.assertEqual(resp.status, 200)
+                data = json.loads(resp.read().decode("utf-8"))
+                self.assertIn("catalog", data)
+
+            # 2. POST /api/catalog/save with URL parsing
+            save_req = urllib.request.Request(
+                f"http://127.0.0.1:{port}/api/catalog/save",
+                data=json.dumps({
+                    "fund_code": "KERNEL_TEST_NEW",
+                    "fund_name": "Kernel Test New Fund",
+                    "provider": "Kernel",
+                    "fnd_code": "https://smartinvestor.sorted.org.nz/kiwisaver-and-managed-funds/SCH12697/OFR12698/FND99999/",
+                }).encode("utf-8"),
+                headers={"Content-Type": "application/json"},
+                method="POST",
+            )
+            with urllib.request.urlopen(save_req) as resp:
+                self.assertEqual(resp.status, 200)
+                saved = json.loads(resp.read().decode("utf-8"))
+                self.assertTrue(saved.get("ok"))
+                entry = next((c for c in saved["catalog"] if c["fund_code"] == "KERNEL_TEST_NEW"), None)
+                self.assertIsNotNone(entry)
+                self.assertEqual(entry["fnd_code"], "FND99999")
+                self.assertEqual(entry["scheme_id"], "SCH12697")
+                self.assertEqual(entry["offer_id"], "OFR12698")
+
+            # 3. POST /api/catalog/delete
+            del_req = urllib.request.Request(
+                f"http://127.0.0.1:{port}/api/catalog/delete",
+                data=json.dumps({"fund_code": "KERNEL_TEST_NEW"}).encode("utf-8"),
+                headers={"Content-Type": "application/json"},
+                method="POST",
+            )
+            with urllib.request.urlopen(del_req) as resp:
+                self.assertEqual(resp.status, 200)
+                deleted = json.loads(resp.read().decode("utf-8"))
+                self.assertTrue(deleted.get("ok"))
+                entry = next((c for c in deleted["catalog"] if c["fund_code"] == "KERNEL_TEST_NEW"), None)
+                self.assertIsNone(entry)
+        finally:
+            server.shutdown()
+            server.server_close()
+
 
 if __name__ == "__main__":
     unittest.main()

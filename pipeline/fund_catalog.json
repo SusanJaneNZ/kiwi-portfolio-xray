@@ -1,0 +1,371 @@
+[
+  {
+    "fund_code": "KERNEL_BALANCED",
+    "fund_name": "Kernel Balanced Fund",
+    "provider": "Kernel",
+    "fnd_code": "FND40595",
+    "scheme_id": "SCH12697",
+    "offer_id": "OFR12698",
+    "is_etf": false
+  },
+  {
+    "fund_code": "KERNEL_CASH_PLUS",
+    "fund_name": "Kernel Cash Plus Fund",
+    "provider": "Kernel",
+    "fnd_code": "FND40596",
+    "scheme_id": "SCH12697",
+    "offer_id": "OFR12698",
+    "is_etf": false
+  },
+  {
+    "fund_code": "KERNEL_EMERGING_MARKETS",
+    "fund_name": "Kernel Emerging Markets Fund",
+    "provider": "Kernel",
+    "fnd_code": "FND52049",
+    "scheme_id": "SCH12697",
+    "offer_id": "OFR12698",
+    "is_etf": false
+  },
+  {
+    "fund_code": "KERNEL_GLOBAL_ESG_NZD_HEDGED",
+    "fund_name": "Kernel Global ESG (Nzd Hedged) Fund",
+    "provider": "Kernel",
+    "fnd_code": "FND43022",
+    "scheme_id": "SCH12697",
+    "offer_id": "OFR12698",
+    "is_etf": false
+  },
+  {
+    "fund_code": "KERNEL_GLOBAL_ESG",
+    "fund_name": "Kernel Global ESG Fund",
+    "provider": "Kernel",
+    "fnd_code": "FND43021",
+    "scheme_id": "SCH12697",
+    "offer_id": "OFR12698",
+    "is_etf": false
+  },
+  {
+    "fund_code": "KERNEL_GLOBAL_INFRASTRUCTURE_NZD_HEDGED",
+    "fund_name": "Kernel Global Infrastructure (Nzd Hedged) Fund",
+    "provider": "Kernel",
+    "fnd_code": "FND39207",
+    "scheme_id": "SCH12697",
+    "offer_id": "OFR12698",
+    "is_etf": false
+  },
+  {
+    "fund_code": "KERNEL_GLOBAL_INFRASTRUCTURE",
+    "fund_name": "Kernel Global Infrastructure Fund",
+    "provider": "Kernel",
+    "fnd_code": "FND19301",
+    "scheme_id": "SCH12697",
+    "offer_id": "OFR12698",
+    "is_etf": false
+  },
+  {
+    "fund_code": "KERNEL_GLOBAL_PROPERTY_NZD_HEDGED",
+    "fund_name": "Kernel Global Property (Nzd Hedged) Fund",
+    "provider": "Kernel",
+    "fnd_code": "FND23718",
+    "scheme_id": "SCH12697",
+    "offer_id": "OFR12698",
+    "is_etf": false
+  },
+  {
+    "fund_code": "KERNEL_HIGH_GROWTH",
+    "fund_name": "Kernel High Growth Fund",
+    "provider": "Kernel",
+    "fnd_code": "FND37639",
+    "scheme_id": "SCH12697",
+    "offer_id": "OFR12698",
+    "is_etf": false
+  },
+  {
+    "fund_code": "KERNEL_MARCH_2027_NZ_BOND",
+    "fund_name": "Kernel March 2027 NZ Bond Fund",
+    "provider": "Kernel",
+    "fnd_code": "FND46943",
+    "scheme_id": "SCH12697",
+    "offer_id": "OFR12698",
+    "is_etf": false
+  },
+  {
+    "fund_code": "KERNEL_MARCH_2029_NZ_BOND",
+    "fund_name": "Kernel March 2029 NZ Bond Fund",
+    "provider": "Kernel",
+    "fnd_code": "FND46944",
+    "scheme_id": "SCH12697",
+    "offer_id": "OFR12698",
+    "is_etf": false
+  },
+  {
+    "fund_code": "KERNEL_NZ_20",
+    "fund_name": "Kernel NZ 20 Fund",
+    "provider": "Kernel",
+    "fnd_code": "FND15841",
+    "scheme_id": "SCH12697",
+    "offer_id": "OFR12698",
+    "is_etf": false
+  },
+  {
+    "fund_code": "KERNEL_NZ_50",
+    "fund_name": "Kernel NZ 50 ESG Tilted Fund",
+    "provider": "Kernel",
+    "fnd_code": "FND23720",
+    "scheme_id": "SCH12697",
+    "offer_id": "OFR12698",
+    "is_etf": false
+  },
+  {
+    "fund_code": "KERNEL_NZ_BOND",
+    "fund_name": "Kernel NZ Bond Fund",
+    "provider": "Kernel",
+    "fnd_code": "FND46942",
+    "scheme_id": "SCH12697",
+    "offer_id": "OFR12698",
+    "is_etf": false
+  },
+  {
+    "fund_code": "KERNEL_NZ_COMMERCIAL_PROPERTY",
+    "fund_name": "Kernel NZ Commercial Property Fund",
+    "provider": "Kernel",
+    "fnd_code": "FND15843",
+    "scheme_id": "SCH12697",
+    "offer_id": "OFR12698",
+    "is_etf": false
+  },
+  {
+    "fund_code": "KERNEL_NZ_SMALL_AND_MID_CAP_OPPORTUNITIES",
+    "fund_name": "Kernel NZ Small & Mid Cap Opportunities Fund",
+    "provider": "Kernel",
+    "fnd_code": "FND15842",
+    "scheme_id": "SCH12697",
+    "offer_id": "OFR12698",
+    "is_etf": false
+  },
+  {
+    "fund_code": "KERNEL_SANDP_500_NZD_HEDGED",
+    "fund_name": "Kernel S&P 500 (Nzd Hedged) Fund",
+    "provider": "Kernel",
+    "fnd_code": "FND37638",
+    "scheme_id": "SCH12697",
+    "offer_id": "OFR12698",
+    "is_etf": false
+  },
+  {
+    "fund_code": "KERNEL_SANDP_500_UNHEDGED",
+    "fund_name": "Kernel S&P 500 (Unhedged) Fund",
+    "provider": "Kernel",
+    "fnd_code": "FND52048",
+    "scheme_id": "SCH12697",
+    "offer_id": "OFR12698",
+    "is_etf": false
+  },
+  {
+    "fund_code": "KERNEL_SANDP_GLOBAL_100_NZD_HEDGED",
+    "fund_name": "Kernel S&P Global 100 (Nzd Hedged) Fund",
+    "provider": "Kernel",
+    "fnd_code": "FND40594",
+    "scheme_id": "SCH12697",
+    "offer_id": "OFR12698",
+    "is_etf": false
+  },
+  {
+    "fund_code": "KERNEL_GLOBAL_100",
+    "fund_name": "Kernel S&P Global 100 Fund",
+    "provider": "Kernel",
+    "fnd_code": "FND19303",
+    "scheme_id": "SCH12697",
+    "offer_id": "OFR12698",
+    "is_etf": false
+  },
+  {
+    "fund_code": "KERNEL_CLEAN_ENERGY",
+    "fund_name": "Kernel S&P Global Clean Energy Fund",
+    "provider": "Kernel",
+    "fnd_code": "FND23719",
+    "scheme_id": "SCH12697",
+    "offer_id": "OFR12698",
+    "is_etf": false
+  },
+  {
+    "fund_code": "KERNEL_GLOBAL_DIVIDEND",
+    "fund_name": "Kernel S&P Global Dividend Aristocrats Fund",
+    "provider": "Kernel",
+    "fnd_code": "FND19302",
+    "scheme_id": "SCH12697",
+    "offer_id": "OFR12698",
+    "is_etf": false
+  },
+  {
+    "fund_code": "KERNEL_US_BOND",
+    "fund_name": "Kernel US Bond Fund",
+    "provider": "Kernel",
+    "fnd_code": "FND46941",
+    "scheme_id": "SCH12697",
+    "offer_id": "OFR12698",
+    "is_etf": false
+  },
+  {
+    "fund_code": "APA",
+    "fund_name": "Smart Asia Pacific ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND1100",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "EMF",
+    "fund_name": "Smart Emerging Markets ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND1097",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "EUF",
+    "fund_name": "Smart Europe ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND1094",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "AGG",
+    "fund_name": "Smart Global Aggregate Bond ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND14632",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "GBF",
+    "fund_name": "Smart Global Bond ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND1101",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "JPN",
+    "fund_name": "Smart Japan ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND1111",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "NZB",
+    "fund_name": "Smart NZ Bond ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND1103",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "NZC",
+    "fund_name": "Smart NZ Cash ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND1115",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "DIV",
+    "fund_name": "Smart NZ Dividend ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND1117",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "MDZ",
+    "fund_name": "Smart NZ Mid Cap ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND1114",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "NPF",
+    "fund_name": "Smart NZ Property ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND1116",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "TNZ",
+    "fund_name": "Smart NZ Top 10 ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND1106",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "FNZ",
+    "fund_name": "Smart NZ Top 50 ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND1105",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "TWF",
+    "fund_name": "Smart Total World ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND1096",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "USF",
+    "fund_name": "Smart US 500 ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND1095",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "USG",
+    "fund_name": "Smart US Growth ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND19355",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "LNF",
+    "fund_name": "Smart US Large Growth ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND14633",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "USV",
+    "fund_name": "Smart US Value ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND1112",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  }
+]

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import html as html_lib
+import json
 import logging
 import os
 import re
@@ -25,10 +27,50 @@ class DiscloseFundMeta:
     scheme_id: str           # e.g., "SCH10174"
     manager_name: str        # e.g., "Smartshares Limited"
     fund_name: str           # e.g., "Smartshares NZ Dividend ETF"
-    holdings_url: str        # Direct download link to .xlsx / .csv
+    holdings_url: str        # Direct download link to .xlsx / .csv or page URL
     filing_date: str         # Effective date (YYYY-MM-DD)
     target_code: str         # Internal app code (e.g., "DIV", "KERNEL_GLOBAL_100")
     provider: str            # "smartshares" | "kernel" | "simplicity"
+    offer_id: str = ""       # e.g., "OFR12698"
+    is_etf: bool = False
+
+
+def get_default_catalog_path() -> Path:
+    """Returns default path to pipeline/fund_catalog.json."""
+    return Path(__file__).resolve().parent.parent / "fund_catalog.json"
+
+
+def load_catalog(catalog_path: Path | None = None) -> list[DiscloseFundMeta]:
+    """Loads fund metadata entries from fund_catalog.json or falls back to KNOWN_FUND_CATALOG."""
+    path = catalog_path or get_default_catalog_path()
+    if not path.exists():
+        return list(KNOWN_FUND_CATALOG)
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        metas = []
+        for item in data:
+            provider = str(item.get("provider", "kernel")).strip().lower()
+            scheme_id = item.get("scheme_id") or ("SCH12697" if provider == "kernel" else "SCH10752")
+            offer_id = item.get("offer_id") or ("OFR12698" if provider == "kernel" else "OFR10865")
+            manager = item.get("manager_name") or ("Kernel Wealth Limited" if provider == "kernel" else "Smartshares Limited")
+            metas.append(
+                DiscloseFundMeta(
+                    fund_id=item.get("fnd_code") or item.get("fund_id", ""),
+                    scheme_id=scheme_id,
+                    manager_name=manager,
+                    fund_name=item.get("fund_name", ""),
+                    holdings_url=item.get("holdings_url", ""),
+                    filing_date=item.get("filing_date", "2026-09-30"),
+                    target_code=item.get("fund_code") or item.get("target_code", ""),
+                    provider=provider,
+                    offer_id=offer_id,
+                    is_etf=bool(item.get("is_etf", False)),
+                )
+            )
+        return metas if metas else list(KNOWN_FUND_CATALOG)
+    except Exception as exc:
+        logger.warning("Failed to load fund catalog from %s: %s", path, exc)
+        return list(KNOWN_FUND_CATALOG)
 
 
 # Seed catalog of core Kiwi retail retirement funds on Disclose Register / Smart Investor
@@ -215,67 +257,7 @@ KNOWN_FUND_CATALOG: tuple[DiscloseFundMeta, ...] = (
         target_code="ESG",
         provider="smartshares",
     ),
-    # --- Kernel Funds ---
-    DiscloseFundMeta(
-        fund_id="FND15841",
-        scheme_id="SCH12697",
-        manager_name="Kernel Wealth Limited",
-        fund_name="Kernel NZ 20 Fund",
-        holdings_url="https://smartinvestor.sorted.org.nz/api/funds/FND15841/holdings.xlsx",
-        filing_date="2026-09-30",
-        target_code="KERNEL_NZ_20",
-        provider="kernel",
-    ),
-    DiscloseFundMeta(
-        fund_id="FND23720",
-        scheme_id="SCH12697",
-        manager_name="Kernel Wealth Limited",
-        fund_name="Kernel NZ 50 ESG Tilted Fund",
-        holdings_url="https://smartinvestor.sorted.org.nz/api/funds/FND23720/holdings.xlsx",
-        filing_date="2026-09-30",
-        target_code="KERNEL_NZ_50",
-        provider="kernel",
-    ),
-    DiscloseFundMeta(
-        fund_id="FND19303",
-        scheme_id="SCH12697",
-        manager_name="Kernel Wealth Limited",
-        fund_name="Kernel S&P Global 100 Fund",
-        holdings_url="https://smartinvestor.sorted.org.nz/api/funds/FND19303/holdings.xlsx",
-        filing_date="2026-09-30",
-        target_code="KERNEL_GLOBAL_100",
-        provider="kernel",
-    ),
-    DiscloseFundMeta(
-        fund_id="FND40595",
-        scheme_id="SCH12697",
-        manager_name="Kernel Wealth Limited",
-        fund_name="Kernel Balanced Fund",
-        holdings_url="https://smartinvestor.sorted.org.nz/api/funds/FND40595/holdings.xlsx",
-        filing_date="2026-09-30",
-        target_code="KERNEL_BALANCED",
-        provider="kernel",
-    ),
-    DiscloseFundMeta(
-        fund_id="FND46942",
-        scheme_id="SCH12697",
-        manager_name="Kernel Wealth Limited",
-        fund_name="Kernel NZ Bond Fund",
-        holdings_url="https://smartinvestor.sorted.org.nz/api/funds/FND46942/holdings.xlsx",
-        filing_date="2026-09-30",
-        target_code="KERNEL_NZ_BOND",
-        provider="kernel",
-    ),
-    DiscloseFundMeta(
-        fund_id="FND58858",
-        scheme_id="SCH12697",
-        manager_name="Kernel Wealth Limited",
-        fund_name="Kernel Conservative Fund",
-        holdings_url="https://smartinvestor.sorted.org.nz/api/funds/FND58858/holdings.xlsx",
-        filing_date="2026-09-30",
-        target_code="KERNEL_CONSERVATIVE",
-        provider="kernel",
-    ),
+    # --- Kernel Funds (Verified Disclose Endpoints) ---
     DiscloseFundMeta(
         fund_id="FND43023",
         scheme_id="SCH12697",
@@ -325,16 +307,47 @@ class SmartInvestorFetcher:
     def __init__(
         self,
         staging_dir: Path | None = None,
-        catalog: Sequence[DiscloseFundMeta] = KNOWN_FUND_CATALOG,
+        catalog: Optional[Sequence[DiscloseFundMeta]] = None,
+        catalog_path: Optional[Path] = None,
         delay_seconds: float = 1.0,
         user_agent: str = DEFAULT_USER_AGENT,
         downloader: Optional[Callable[[str, str], bytes]] = None,
     ) -> None:
         self.staging_dir = staging_dir or Path("data/staging")
-        self.catalog = list(catalog)
+        if catalog is not None:
+            self.catalog = list(catalog)
+        else:
+            self.catalog = load_catalog(catalog_path)
         self.delay_seconds = max(0.0, float(delay_seconds))
         self.user_agent = user_agent
         self._downloader = downloader or self._default_download
+
+    def resolve_holdings_url(self, meta: DiscloseFundMeta) -> Optional[str]:
+        """Scrapes fund profile page to discover current live quarterly disclose document link."""
+        if meta.holdings_url and "disclose-document/full-portfolio" in meta.holdings_url:
+            return meta.holdings_url
+
+        scheme = meta.scheme_id or ("SCH12697" if meta.provider.lower() == "kernel" else "SCH10752")
+        offer = meta.offer_id or ("OFR12698" if meta.provider.lower() == "kernel" else "OFR10865")
+        fnd = meta.fund_id.strip()
+
+        page_url = f"https://www.smartinvestor.sorted.org.nz/kiwisaver-and-managed-funds/{scheme}/{offer}/{fnd}/"
+        try:
+            content = self._downloader(page_url, self.user_agent)
+            html_text = content.decode("utf-8", errors="replace")
+            m = re.search(
+                r'href=[\"\']([^\"\']*disclose-document/full-portfolio/[^\"\']+\.xlsx)[\"\']',
+                html_text,
+                re.IGNORECASE,
+            )
+            if m:
+                raw_link = html_lib.unescape(m.group(1))
+                if raw_link.startswith("/"):
+                    raw_link = f"https://www.smartinvestor.sorted.org.nz{raw_link}"
+                return raw_link
+        except Exception as exc:
+            logger.debug("Failed to resolve live holdings link for %s: %s", meta.target_code, exc)
+        return None
 
     @staticmethod
     def sanitize_filename(name: str) -> str:
@@ -398,17 +411,37 @@ class SmartInvestorFetcher:
             if existing_match:
                 return True, f"Found existing staged file ({existing_match.name})", existing_match
 
-        # 2. Download from remote URL
-        tmp_path = target_path.with_suffix(".tmp")
-        try:
-            content = self._downloader(meta.holdings_url, self.user_agent)
-        except Exception as exc:
-            logger.warning("Failed to fetch %s (%s): %s", meta.target_code, meta.holdings_url, exc)
-            # If download fails, check if we have any existing file as fallback
+        # 2. Download from remote URL (with automatic live resolution fallback)
+        download_url = meta.holdings_url
+        content = None
+        last_exc: Optional[Exception] = None
+
+        if download_url:
+            try:
+                content = self._downloader(download_url, self.user_agent)
+            except Exception as exc:
+                last_exc = exc
+                logger.debug("Initial fetch for %s from %s failed: %s", meta.target_code, download_url, exc)
+                content = None
+
+        if content is None:
+            resolved = self.resolve_holdings_url(meta)
+            if resolved and resolved != download_url:
+                try:
+                    content = self._downloader(resolved, self.user_agent)
+                    download_url = resolved
+                    last_exc = None
+                except Exception as exc:
+                    last_exc = exc
+                    logger.warning("Failed to fetch %s from resolved URL %s: %s", meta.target_code, resolved, exc)
+                    content = None
+
+        if content is None:
             fallback = self._find_existing_staged_file(meta)
             if fallback:
-                return True, f"Remote download failed ({exc}), fell back to existing staged file", fallback
-            return False, f"Remote download failed: {exc}", None
+                return True, f"Remote download failed ({last_exc}), fell back to existing staged file", fallback
+            err_detail = f": {last_exc}" if last_exc else f": could not fetch {meta.target_code} ({meta.fund_id})"
+            return False, f"Remote download failed{err_detail}", None
 
         # 3. Validate content
         is_valid, reason = self.validate_content(content)
@@ -420,6 +453,7 @@ class SmartInvestorFetcher:
             return False, f"Invalid payload: {reason}", None
 
         # 4. Atomic write: write to .tmp, then replace target
+        tmp_path = target_path.with_suffix(".tmp")
         try:
             with open(tmp_path, "wb") as f:
                 f.write(content)
