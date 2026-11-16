@@ -1234,6 +1234,16 @@
     "fundCode": "NZG"
   },
   {
+    "isin": "NZX:NZT",
+    "name": "Smartshares S&P/NZX 20 ETF",
+    "ticker": "NZT.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "NZT"
+  },
+  {
     "isin": "NZX:DIV",
     "name": "Smartshares NZ Dividend ETF",
     "ticker": "DIV.NZ",
@@ -1254,6 +1264,16 @@
     "fundCode": "NPF"
   },
   {
+    "isin": "NZX:NZC",
+    "name": "Smartshares NZ Cash ETF",
+    "ticker": "NZC.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "NZC"
+  },
+  {
     "isin": "NZX:NZB",
     "name": "Smartshares NZ Bond ETF",
     "ticker": "NZB.NZ",
@@ -1262,6 +1282,18 @@
     "sector": "Fixed Interest",
     "isEtf": true,
     "fundCode": "NZB"
+  },
+  {
+    "isin": "NZX:NGB",
+    "name": "Smart S&P/NZX NZ Government Bond ETF",
+    "ticker": "NGB.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Fixed Interest",
+    "isEtf": true,
+    "fundCode": "NGB",
+    "issuer_key": "ISSUER_NZ_GOVT",
+    "issuer_name": "New Zealand Government"
   },
   {
     "isin": "NZX:GBF",
@@ -1282,6 +1314,16 @@
     "sector": "Fixed Interest",
     "isEtf": true,
     "fundCode": "AGG"
+  },
+  {
+    "isin": "NZX:GGB",
+    "name": "Smart Global Government Bond ETF",
+    "ticker": "GGB.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Fixed Interest",
+    "isEtf": true,
+    "fundCode": "GGB"
   },
   {
     "isin": "NZX:OZY",
@@ -1334,6 +1376,36 @@
     "fundCode": "MZY"
   },
   {
+    "isin": "NZX:ASP",
+    "name": "Smartshares Australian Property ETF",
+    "ticker": "ASP.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Real Estate",
+    "isEtf": true,
+    "fundCode": "ASP"
+  },
+  {
+    "isin": "NZX:ASR",
+    "name": "Smartshares Australian Resources ETF",
+    "ticker": "ASR.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "ASR"
+  },
+  {
+    "isin": "NZX:AUE",
+    "name": "Smartshares Australian ESG ETF",
+    "ticker": "AUE.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "AUE"
+  },
+  {
     "isin": "NZX:TWF",
     "name": "Smartshares Total World ETF",
     "ticker": "TWF.NZ",
@@ -1344,6 +1416,16 @@
     "fundCode": "TWF"
   },
   {
+    "isin": "NZX:TWH",
+    "name": "Smartshares Total World (NZD Hedged) ETF",
+    "ticker": "TWH.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "TWH"
+  },
+  {
     "isin": "NZX:USF",
     "name": "Smartshares US 500 ETF",
     "ticker": "USF.NZ",
@@ -1352,6 +1434,36 @@
     "sector": "Broad Market",
     "isEtf": true,
     "fundCode": "USF"
+  },
+  {
+    "isin": "NZX:USE",
+    "name": "Smartshares US 500 (NZD Hedged) ETF",
+    "ticker": "USE.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "USE"
+  },
+  {
+    "isin": "NZX:USG",
+    "name": "Smartshares US Large Growth ETF",
+    "ticker": "USG.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "USG"
+  },
+  {
+    "isin": "NZX:USV",
+    "name": "Smartshares US Large Value ETF",
+    "ticker": "USV.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "USV"
   },
   {
     "isin": "NZX:USM",
@@ -1374,6 +1486,26 @@
     "fundCode": "USS"
   },
   {
+    "isin": "NZX:UST",
+    "name": "Smartshares US Technology (NZD Hedged) ETF",
+    "ticker": "UST.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "UST"
+  },
+  {
+    "isin": "NZX:USA",
+    "name": "Smartshares US ESG ETF",
+    "ticker": "USA.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "USA"
+  },
+  {
     "isin": "NZX:EUF",
     "name": "Smartshares Europe ETF",
     "ticker": "EUF.NZ",
@@ -1382,6 +1514,16 @@
     "sector": "Broad Market",
     "isEtf": true,
     "fundCode": "EUF"
+  },
+  {
+    "isin": "NZX:EUG",
+    "name": "Smartshares Europe ESG ETF",
+    "ticker": "EUG.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "EUG"
   },
   {
     "isin": "NZX:APA",
@@ -1404,6 +1546,46 @@
     "fundCode": "EMF"
   },
   {
+    "isin": "NZX:EMG",
+    "name": "Smartshares Emerging Markets ESG ETF",
+    "ticker": "EMG.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "EMG"
+  },
+  {
+    "isin": "NZX:JPG",
+    "name": "Smartshares Japan ESG ETF",
+    "ticker": "JPG.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "JPG"
+  },
+  {
+    "isin": "NZX:BOT",
+    "name": "Smartshares Automation & Robotics ETF",
+    "ticker": "BOT.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "BOT"
+  },
+  {
+    "isin": "NZX:HLT",
+    "name": "Smartshares Healthcare Innovation ETF",
+    "ticker": "HLT.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "HLT"
+  },
+  {
     "isin": "NZX:ESG",
     "name": "Smartshares Global Equities ESG ETF",
     "ticker": "ESG.NZ",
@@ -1414,24 +1596,44 @@
     "fundCode": "ESG"
   },
   {
-    "isin": "NZX:EUG",
-    "name": "Smartshares Europe ESG ETF",
-    "ticker": "EUG.NZ",
+    "isin": "NZX:INF",
+    "name": "Smartshares Global Infrastructure ETF",
+    "ticker": "INF.NZ",
     "exchange": "NZX",
     "country": "New Zealand",
     "sector": "Broad Market",
     "isEtf": true,
-    "fundCode": "EUG"
+    "fundCode": "INF"
   },
   {
-    "isin": "NZX:USA",
-    "name": "Smartshares US ESG ETF",
-    "ticker": "USA.NZ",
+    "isin": "NZX:GPR",
+    "name": "Smartshares Global Property ETF",
+    "ticker": "GPR.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Real Estate",
+    "isEtf": true,
+    "fundCode": "GPR"
+  },
+  {
+    "isin": "NZX:GLD",
+    "name": "Smartshares Gold ETF",
+    "ticker": "GLD.NZ",
     "exchange": "NZX",
     "country": "New Zealand",
     "sector": "Broad Market",
     "isEtf": true,
-    "fundCode": "USA"
+    "fundCode": "GLD"
+  },
+  {
+    "isin": "NZX:BTC",
+    "name": "Smartshares Bitcoin ETF",
+    "ticker": "BTC.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "BTC"
   },
   {
     "isin": "ASX:10X",

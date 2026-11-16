@@ -27,8 +27,8 @@
     "is_etf": false
   },
   {
-    "fund_code": "KERNEL_GLOBAL_ESG_NZD_HEDGED",
-    "fund_name": "Kernel Global ESG (Nzd Hedged) Fund",
+    "fund_code": "KERNEL_GLOBAL_ESG_HEDGED",
+    "fund_name": "Kernel Global ESG (NZD Hedged) Fund",
     "provider": "Kernel",
     "fnd_code": "FND43022",
     "scheme_id": "SCH12697",
@@ -45,8 +45,8 @@
     "is_etf": false
   },
   {
-    "fund_code": "KERNEL_GLOBAL_INFRASTRUCTURE_NZD_HEDGED",
-    "fund_name": "Kernel Global Infrastructure (Nzd Hedged) Fund",
+    "fund_code": "KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED",
+    "fund_name": "Kernel Global Infrastructure (NZD Hedged) Fund",
     "provider": "Kernel",
     "fnd_code": "FND39207",
     "scheme_id": "SCH12697",
@@ -63,8 +63,8 @@
     "is_etf": false
   },
   {
-    "fund_code": "KERNEL_GLOBAL_PROPERTY_NZD_HEDGED",
-    "fund_name": "Kernel Global Property (Nzd Hedged) Fund",
+    "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
+    "fund_name": "Kernel Global Property (NZD Hedged) Fund",
     "provider": "Kernel",
     "fnd_code": "FND23718",
     "scheme_id": "SCH12697",
@@ -135,7 +135,7 @@
     "is_etf": false
   },
   {
-    "fund_code": "KERNEL_NZ_SMALL_AND_MID_CAP_OPPORTUNITIES",
+    "fund_code": "KERNEL_NZ_SMALL_MID_CAP",
     "fund_name": "Kernel NZ Small & Mid Cap Opportunities Fund",
     "provider": "Kernel",
     "fnd_code": "FND15842",
@@ -144,8 +144,8 @@
     "is_etf": false
   },
   {
-    "fund_code": "KERNEL_SANDP_500_NZD_HEDGED",
-    "fund_name": "Kernel S&P 500 (Nzd Hedged) Fund",
+    "fund_code": "KERNEL_SP_500_HEDGED",
+    "fund_name": "Kernel S&P 500 (NZD Hedged) Fund",
     "provider": "Kernel",
     "fnd_code": "FND37638",
     "scheme_id": "SCH12697",
@@ -153,7 +153,7 @@
     "is_etf": false
   },
   {
-    "fund_code": "KERNEL_SANDP_500_UNHEDGED",
+    "fund_code": "KERNEL_SP_500_UNHEDGED",
     "fund_name": "Kernel S&P 500 (Unhedged) Fund",
     "provider": "Kernel",
     "fnd_code": "FND52048",
@@ -162,8 +162,8 @@
     "is_etf": false
   },
   {
-    "fund_code": "KERNEL_SANDP_GLOBAL_100_NZD_HEDGED",
-    "fund_name": "Kernel S&P Global 100 (Nzd Hedged) Fund",
+    "fund_code": "KERNEL_GLOBAL_100_HEDGED",
+    "fund_name": "Kernel S&P Global 100 (NZD Hedged) Fund",
     "provider": "Kernel",
     "fnd_code": "FND40594",
     "scheme_id": "SCH12697",
@@ -210,7 +210,106 @@
     "fund_code": "APA",
     "fund_name": "Smart Asia Pacific ETF",
     "provider": "Smartshares",
-    "fnd_code": "FND1100",
+    "fnd_code": "FND1094",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "ASD",
+    "fund_name": "Smart Australian Dividend ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND1095",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "AUE",
+    "fund_name": "Smart Australian ESG ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND44255",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "ASF",
+    "fund_name": "Smart Australian Financials ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND1096",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "MZY",
+    "fund_name": "Smart Australian Mid Cap ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND1097",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "ASP",
+    "fund_name": "Smart Australian Property ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND1098",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "ASR",
+    "fund_name": "Smart Australian Resources ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND1099",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "OZY",
+    "fund_name": "Smart Australian Top 20 ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND1113",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "AUS",
+    "fund_name": "Smart Australian Top 200 ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND19355",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "BOT",
+    "fund_name": "Smart Automation and Robotics ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND14629",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "BTC",
+    "fund_name": "Smart Bitcoin ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND51046",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "EMG",
+    "fund_name": "Smart Emerging Markets ESG ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND14630",
     "scheme_id": "SCH10752",
     "offer_id": "OFR10865",
     "is_etf": true
@@ -219,7 +318,16 @@
     "fund_code": "EMF",
     "fund_name": "Smart Emerging Markets ETF",
     "provider": "Smartshares",
-    "fnd_code": "FND1097",
+    "fnd_code": "FND1111",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "EUG",
+    "fund_name": "Smart Europe ESG ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND14631",
     "scheme_id": "SCH10752",
     "offer_id": "OFR10865",
     "is_etf": true
@@ -228,7 +336,7 @@
     "fund_code": "EUF",
     "fund_name": "Smart Europe ETF",
     "provider": "Smartshares",
-    "fnd_code": "FND1094",
+    "fnd_code": "FND1100",
     "scheme_id": "SCH10752",
     "offer_id": "OFR10865",
     "is_etf": true
@@ -252,10 +360,64 @@
     "is_etf": true
   },
   {
-    "fund_code": "JPN",
-    "fund_name": "Smart Japan ETF",
+    "fund_code": "ESG",
+    "fund_name": "Smart Global ESG ETF",
     "provider": "Smartshares",
-    "fnd_code": "FND1111",
+    "fnd_code": "FND14633",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "GGB",
+    "fund_name": "Smart Global Government Bond ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND44258",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "INF",
+    "fund_name": "Smart Global Infrastructure ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND44256",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "GPR",
+    "fund_name": "Smart Global Property ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND44257",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "GLD",
+    "fund_name": "Smart Gold ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND51047",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "HLT",
+    "fund_name": "Smart Healthcare Innovation ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND14634",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "JPG",
+    "fund_name": "Smart Japan ESG ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND14635",
     "scheme_id": "SCH10752",
     "offer_id": "OFR10865",
     "is_etf": true
@@ -273,7 +435,7 @@
     "fund_code": "NZC",
     "fund_name": "Smart NZ Cash ETF",
     "provider": "Smartshares",
-    "fnd_code": "FND1115",
+    "fnd_code": "FND1104",
     "scheme_id": "SCH10752",
     "offer_id": "OFR10865",
     "is_etf": true
@@ -282,7 +444,7 @@
     "fund_code": "DIV",
     "fund_name": "Smart NZ Dividend ETF",
     "provider": "Smartshares",
-    "fnd_code": "FND1117",
+    "fnd_code": "FND1105",
     "scheme_id": "SCH10752",
     "offer_id": "OFR10865",
     "is_etf": true
@@ -291,7 +453,7 @@
     "fund_code": "MDZ",
     "fund_name": "Smart NZ Mid Cap ETF",
     "provider": "Smartshares",
-    "fnd_code": "FND1114",
+    "fnd_code": "FND1117",
     "scheme_id": "SCH10752",
     "offer_id": "OFR10865",
     "is_etf": true
@@ -309,7 +471,7 @@
     "fund_code": "TNZ",
     "fund_name": "Smart NZ Top 10 ETF",
     "provider": "Smartshares",
-    "fnd_code": "FND1106",
+    "fnd_code": "FND1114",
     "scheme_id": "SCH10752",
     "offer_id": "OFR10865",
     "is_etf": true
@@ -318,7 +480,43 @@
     "fund_code": "FNZ",
     "fund_name": "Smart NZ Top 50 ETF",
     "provider": "Smartshares",
-    "fnd_code": "FND1105",
+    "fnd_code": "FND1115",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "NZT",
+    "fund_name": "Smart S&P/NZX 20 ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND51048",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "NZG",
+    "fund_name": "Smart S&P/NZX 50 ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND19356",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "NGB",
+    "fund_name": "Smart S&P/NZX NZ Government Bond ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND19357",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "TWH",
+    "fund_name": "Smart Total World (NZD Hedged) ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND19358",
     "scheme_id": "SCH10752",
     "offer_id": "OFR10865",
     "is_etf": true
@@ -327,7 +525,16 @@
     "fund_code": "TWF",
     "fund_name": "Smart Total World ETF",
     "provider": "Smartshares",
-    "fnd_code": "FND1096",
+    "fnd_code": "FND1112",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "USE",
+    "fund_name": "Smart US 500 (NZD Hedged) ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND44259",
     "scheme_id": "SCH10752",
     "offer_id": "OFR10865",
     "is_etf": true
@@ -336,34 +543,61 @@
     "fund_code": "USF",
     "fund_name": "Smart US 500 ETF",
     "provider": "Smartshares",
-    "fnd_code": "FND1095",
+    "fnd_code": "FND1106",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "USA",
+    "fund_name": "Smart US ESG ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND14636",
     "scheme_id": "SCH10752",
     "offer_id": "OFR10865",
     "is_etf": true
   },
   {
     "fund_code": "USG",
-    "fund_name": "Smart US Growth ETF",
-    "provider": "Smartshares",
-    "fnd_code": "FND19355",
-    "scheme_id": "SCH10752",
-    "offer_id": "OFR10865",
-    "is_etf": true
-  },
-  {
-    "fund_code": "LNF",
     "fund_name": "Smart US Large Growth ETF",
     "provider": "Smartshares",
-    "fnd_code": "FND14633",
+    "fnd_code": "FND1107",
     "scheme_id": "SCH10752",
     "offer_id": "OFR10865",
     "is_etf": true
   },
   {
     "fund_code": "USV",
-    "fund_name": "Smart US Value ETF",
+    "fund_name": "Smart US Large Value ETF",
     "provider": "Smartshares",
-    "fnd_code": "FND1112",
+    "fnd_code": "FND1108",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "USM",
+    "fund_name": "Smart US Mid Cap ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND1109",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "USS",
+    "fund_name": "Smart US Small Cap ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND1110",
+    "scheme_id": "SCH10752",
+    "offer_id": "OFR10865",
+    "is_etf": true
+  },
+  {
+    "fund_code": "UST",
+    "fund_name": "Smart US Technology (NZD Hedged) ETF",
+    "provider": "Smartshares",
+    "fnd_code": "FND51049",
     "scheme_id": "SCH10752",
     "offer_id": "OFR10865",
     "is_etf": true
