@@ -29,6 +29,7 @@ export interface FundMetadata {
   asset_class: FundAssetClass;
   cadence?: string;
   is_stale?: boolean;
+  isEtf?: boolean;
 }
 
 export interface DirectEquityCatalogItem {

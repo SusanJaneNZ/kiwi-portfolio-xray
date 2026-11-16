@@ -1194,6 +1194,246 @@
     "sector": "Industrials"
   },
   {
+    "isin": "NZX:FNZ",
+    "name": "Smartshares NZ Top 50 ETF",
+    "ticker": "FNZ.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "FNZ"
+  },
+  {
+    "isin": "NZX:TNZ",
+    "name": "Smartshares NZ Top 10 ETF",
+    "ticker": "TNZ.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "TNZ"
+  },
+  {
+    "isin": "NZX:MDZ",
+    "name": "Smartshares NZ Mid Cap ETF",
+    "ticker": "MDZ.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "MDZ"
+  },
+  {
+    "isin": "NZX:NZG",
+    "name": "Smartshares S&P/NZX 50 ETF",
+    "ticker": "NZG.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "NZG"
+  },
+  {
+    "isin": "NZX:DIV",
+    "name": "Smartshares NZ Dividend ETF",
+    "ticker": "DIV.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "DIV"
+  },
+  {
+    "isin": "NZX:NPF",
+    "name": "Smartshares NZ Property ETF",
+    "ticker": "NPF.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Real Estate",
+    "isEtf": true,
+    "fundCode": "NPF"
+  },
+  {
+    "isin": "NZX:NZB",
+    "name": "Smartshares NZ Bond ETF",
+    "ticker": "NZB.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Fixed Interest",
+    "isEtf": true,
+    "fundCode": "NZB"
+  },
+  {
+    "isin": "NZX:GBF",
+    "name": "Smartshares Global Bond ETF",
+    "ticker": "GBF.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Fixed Interest",
+    "isEtf": true,
+    "fundCode": "GBF"
+  },
+  {
+    "isin": "NZX:AGG",
+    "name": "Smartshares Global Aggregate Bond ETF",
+    "ticker": "AGG.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Fixed Interest",
+    "isEtf": true,
+    "fundCode": "AGG"
+  },
+  {
+    "isin": "NZX:OZY",
+    "name": "Smartshares Australian Top 20 ETF",
+    "ticker": "OZY.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "OZY"
+  },
+  {
+    "isin": "NZX:AUS",
+    "name": "Smartshares Australian Top 200 ETF",
+    "ticker": "AUS.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "AUS"
+  },
+  {
+    "isin": "NZX:ASD",
+    "name": "Smartshares Australian Dividend ETF",
+    "ticker": "ASD.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "ASD"
+  },
+  {
+    "isin": "NZX:ASF",
+    "name": "Smartshares Australian Financials ETF",
+    "ticker": "ASF.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "ASF"
+  },
+  {
+    "isin": "NZX:MZY",
+    "name": "Smartshares Australian Mid Cap ETF",
+    "ticker": "MZY.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "MZY"
+  },
+  {
+    "isin": "NZX:TWF",
+    "name": "Smartshares Total World ETF",
+    "ticker": "TWF.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "TWF"
+  },
+  {
+    "isin": "NZX:USF",
+    "name": "Smartshares US 500 ETF",
+    "ticker": "USF.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "USF"
+  },
+  {
+    "isin": "NZX:USM",
+    "name": "Smartshares US Mid Cap ETF",
+    "ticker": "USM.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "USM"
+  },
+  {
+    "isin": "NZX:USS",
+    "name": "Smartshares US Small Cap ETF",
+    "ticker": "USS.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "USS"
+  },
+  {
+    "isin": "NZX:EUF",
+    "name": "Smartshares Europe ETF",
+    "ticker": "EUF.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "EUF"
+  },
+  {
+    "isin": "NZX:APA",
+    "name": "Smartshares Asia Pacific ETF",
+    "ticker": "APA.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "APA"
+  },
+  {
+    "isin": "NZX:EMF",
+    "name": "Smartshares Emerging Markets ETF",
+    "ticker": "EMF.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "EMF"
+  },
+  {
+    "isin": "NZX:ESG",
+    "name": "Smartshares Global Equities ESG ETF",
+    "ticker": "ESG.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "ESG"
+  },
+  {
+    "isin": "NZX:EUG",
+    "name": "Smartshares Europe ESG ETF",
+    "ticker": "EUG.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "EUG"
+  },
+  {
+    "isin": "NZX:USA",
+    "name": "Smartshares US ESG ETF",
+    "ticker": "USA.NZ",
+    "exchange": "NZX",
+    "country": "New Zealand",
+    "sector": "Broad Market",
+    "isEtf": true,
+    "fundCode": "USA"
+  },
+  {
     "isin": "ASX:10X",
     "name": "EXULTANT MINING LIMITED",
     "ticker": "10X.AX",
@@ -15628,6 +15868,16 @@
     "exchange": "ASX",
     "country": "Australia",
     "sector": "Materials"
+  },
+  {
+    "isin": "ASX:ASIA",
+    "name": "BetaShares Asia Technology Tigers ETF",
+    "ticker": "ASIA.AX",
+    "exchange": "ASX",
+    "country": "Australia",
+    "sector": "Information Technology",
+    "isEtf": true,
+    "fundCode": "ASIA"
   },
   {
     "isin": "SEDOL:2379504",

@@ -32,9 +32,13 @@ Kiwi Portfolio X-Ray provides look-through asset allocation, sector/country expo
    * Term Deposits categorized as **Standard RWT** or **Variable-Rate PIE** (with PIR rates 10.5%, 17.5%, 28%).
 3. **Organic Retirement Income Projection:** Project estimated 12-month forward income from dividends and fixed interest, and automatically calculate the **Net Capital Drawdown** needed at rebalancing:
    $$\text{Net Capital Withdrawal} = \text{Annual Living Budget} - \text{Total Organic Income}$$
-4. **Self-Managed Index Replicator:** Provide a lightweight tool to replicate top-heavy indices (like `DIV`) directly with 5–10 shares, displaying target weights and simple rebalancing guidance to avoid recurring fund fees.
-5. **Automated Fund Ingestion Pipeline:** Automate extraction of fund constituents directly from the Companies Office Disclose Register / Sorted Smart Investor filings.
-6. **Bucket Drift & Rebalance Snapshots:** Automatically record a clean snapshot at each rebalance milestone, allowing investors to inspect bucket evolution and verify contrarian rebalancing over time without daily transaction bookkeeping.
+4. **KiwiSaver Dedicated Portfolio Allocation (Roadmap Addition):** Account for KiwiSaver as a segregated portfolio asset:
+   * **Accessibility Constraint:** Locked until age 65 (distinguishing liquid retirement capital available for bucket rebalancing from locked KiwiSaver capital).
+   * **Ongoing Accumulation:** Optional modeling of ongoing contributions (e.g. 3% / 3.5% employee + employer match).
+   * **Full Look-Through Integration:** Unlisted KiwiSaver schemes (Kernel, Simplicity, Milford, Fisher, Booster, SuperLife) fully unwrap into underlying company and bond constituents alongside liquid assets in macro sector/country breakdowns.
+5. **Self-Managed Index Replicator:** Provide a lightweight tool to replicate top-heavy indices (like `DIV`) directly with 5–10 shares, displaying target weights and simple rebalancing guidance to avoid recurring fund fees.
+6. **Automated Fund Ingestion Pipeline:** Automate extraction of fund constituents directly from the Companies Office Disclose Register / Sorted Smart Investor filings.
+7. **Bucket Drift & Rebalance Snapshots:** Automatically record a clean snapshot at each rebalance milestone, allowing investors to inspect bucket evolution and verify contrarian rebalancing over time without daily transaction bookkeeping.
 
 ### Non-Goals
 * **No Daily/Weekly Squiggly Line Performance Tracking:** No complex transaction ledger, TWR, or MWR accounting. Focus is exclusively on milestone snapshots.

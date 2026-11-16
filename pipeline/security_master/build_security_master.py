@@ -323,9 +323,43 @@ def compile_security_master(
     nzx_file = _find_directory_file(directories_dir, "nzx", "nzx_directory.csv")
     nzx_records = parse_nzx_directory(nzx_file, gics_mapping) if nzx_file else []
 
+    # Add Smartshares NZX-listed ETFs to direct equities so they can be entered in Panel 1 by share count
+    from pipeline.adapters.smartshares_direct_adapter import SMARTSHARES_DIRECT_FUNDS
+    for code, fund_name in SMARTSHARES_DIRECT_FUNDS.items():
+        if code == "FNZ_FUND":
+            continue
+        etf_ticker = f"{code}.NZ"
+        sector = (
+            "Fixed Interest"
+            if ("Bond" in fund_name or "Aggregate" in fund_name)
+            else ("Real Estate" if "Property" in fund_name else "Broad Market")
+        )
+        nzx_records.append({
+            "isin": f"NZX:{code}",
+            "name": fund_name,
+            "ticker": etf_ticker,
+            "exchange": "NZX",
+            "country": "New Zealand",
+            "sector": sector,
+            "isEtf": True,
+            "fundCode": code,
+        })
+
     # 2. Parse ASX (supports ASXListedCompanies.csv or asx_directory.csv)
     asx_file = _find_directory_file(directories_dir, "asx", "asx_directory.csv")
     asx_records = parse_asx_directory(asx_file, gics_mapping) if asx_file else []
+
+    # Add BetaShares ASIA to ASX direct equities
+    asx_records.append({
+        "isin": "ASX:ASIA",
+        "name": "BetaShares Asia Technology Tigers ETF",
+        "ticker": "ASIA.AX",
+        "exchange": "ASX",
+        "country": "Australia",
+        "sector": "Information Technology",
+        "isEtf": True,
+        "fundCode": "ASIA",
+    })
 
     # 3. Parse all Vanguard Global CSVs (preferring VT first)
     vanguard_dir = staging_dir / "vanguard"

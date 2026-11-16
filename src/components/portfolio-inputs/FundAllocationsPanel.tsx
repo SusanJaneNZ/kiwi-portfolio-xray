@@ -32,7 +32,17 @@ export const FundAllocationsPanel: React.FC<FundAllocationsPanelProps> = ({
     return [...fundsRegistry]
       .sort((a, b) => a.code.localeCompare(b.code))
       .filter((f) => {
-        if (heldOnly && (portfolioState.fundBalances[f.code] || 0) <= 0) return false;
+        // Panel 3 is strictly for unlisted managed funds (Kernel, etc.).
+        // Listed ETFs (Smartshares, BetaShares) are entered in Panel 1 with discrete share count,
+        // unless the user has an existing balance in fundBalances.
+        const isListedEtf =
+          f.provider?.toLowerCase().includes('smartshares') ||
+          f.provider?.toLowerCase().includes('betashares') ||
+          Boolean(f.isEtf);
+        const hasBalance = (portfolioState.fundBalances[f.code] || 0) > 0;
+        if (isListedEtf && !hasBalance) return false;
+
+        if (heldOnly && !hasBalance) return false;
         if (!q) return true;
         return (
           f.code.toLowerCase().includes(q) ||

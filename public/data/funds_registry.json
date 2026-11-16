@@ -1,17 +1,5 @@
 [
   {
-    "code": "FNZ_FUND",
-    "name": "Nz Top 50 Fund",
-    "provider": "Smartshares",
-    "effective_date": "2026-09-30",
-    "cash_ratio": 0.0077,
-    "hedging_ratio": 0.0,
-    "constituent_count": 50,
-    "asset_class": "equity",
-    "cadence": "monthly",
-    "is_stale": false
-  },
-  {
     "code": "ASD",
     "name": "Smart Australian Dividend Etf",
     "provider": "Smartshares",

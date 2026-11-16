@@ -10,7 +10,6 @@ from pipeline.adapters.sorted_parser import parse_nz_fund_file
 
 SMARTSHARES_DIRECT_FUNDS = {
     "FNZ": "Smartshares NZ Top 50 ETF",
-    "FNZ_FUND": "Smart NZ Top 50 Fund",
     "TNZ": "Smartshares NZ Top 10 ETF",
     "MDZ": "Smartshares NZ Mid Cap ETF",
     "NZG": "Smartshares S&P/NZX 50 ETF",
@@ -44,7 +43,7 @@ SMARTSHARES_NAME_HINTS = {
     "AUSTRALIAN TOP 20": "OZY",
     "AUSTRALIAN MID CAP": "MZY",
     "EMERGING MARKETS": "EMF",
-    "NZ TOP 50 FUND": "FNZ_FUND",
+    "NZ TOP 50 FUND": "FNZ",
     "EUROPE ESG": "EUG",
     "GLOBAL ESG": "ESG",
     "US SMALL CAP": "USS",
@@ -74,7 +73,7 @@ SMARTSHARES_NAME_HINTS = {
     "FND1110": "USS",
     "FND1114": "TNZ",
     "FND1116": "NPF",
-    "FND2471": "FNZ_FUND",
+    "FND2471": "FNZ",
 }
 
 # Pre-sort hints longest-first so "EUROPE ESG" / "AUSTRALIAN TOP 200" win over substrings
