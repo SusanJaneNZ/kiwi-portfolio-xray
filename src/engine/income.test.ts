@@ -3,6 +3,7 @@
  */
 
 import {
+  calculateEligiblePirRate,
   calculateFixedInterestItem,
   calculateNzIncomeTax,
   calculateRetirementCashflow,
@@ -306,6 +307,61 @@ export const incomeTestCases: Array<[string, () => void]> = [
 
       // Bracket 5: $200,000 = $49,277.50 + (20,000 * 0.39) = $57,077.50
       assertEq(calculateNzIncomeTax(200000), 57077.50, "$200,000 tax");
+    },
+  ],
+
+  [
+    "calculateEligiblePirRate accurately evaluates NZ IRD 10.5%, 17.5%, and 28% criteria and defaults correctly",
+    () => {
+      // 10.5% PIR: Taxable <= 14k AND Total <= 48k
+      assertEq(calculateEligiblePirRate(10000, 30000), 0.105, "10.5% PIR when low taxable and low total");
+      assertEq(calculateEligiblePirRate(14000, 48000), 0.105, "10.5% PIR at boundary");
+
+      // 17.5% PIR: Taxable <= 48k AND Total <= 70k (and not 10.5%)
+      assertEq(calculateEligiblePirRate(35000, 55000), 0.175, "17.5% PIR when taxable <= 48k and total <= 70k");
+      assertEq(calculateEligiblePirRate(12000, 55000), 0.175, "17.5% PIR when taxable <= 14k but total > 48k");
+      assertEq(calculateEligiblePirRate(48000, 70000), 0.175, "17.5% PIR at 70k total boundary");
+
+      // 28.0% PIR: Taxable > 48k OR Total > 70k
+      assertEq(calculateEligiblePirRate(50000, 65000), 0.28, "28.0% PIR when taxable > 48k");
+      assertEq(calculateEligiblePirRate(30000, 72000), 0.28, "28.0% PIR when total > 70k");
+
+      // Verify calculateRetirementCashflow defaults to eligible PIR when unselected
+      const state: UserPortfolioState = {
+        version: 2,
+        timestamp: "2026-11-15T00:00:00Z",
+        audNzdRate: 1.10,
+        fundBalances: {},
+        directHoldings: [],
+        fixedInterest: [
+          {
+            id: "pie-td-1",
+            name: "PIE TD 1",
+            institution: "BNZ",
+            category: "term_deposit",
+            taxType: "pie",
+            valueNZD: 100000,
+            interestRate: 5.0,
+            frequency: "maturity",
+          },
+        ],
+        cashDeposits: [],
+        buckets: [],
+        bucketAssignments: {},
+      };
+
+      // $5,000 PIE TD gross + $25,000 Super net = $30,000 total income (well under $70k total, taxable under $48k)
+      const res = calculateRetirementCashflow({
+        portfolioState: state,
+        settings: {
+          annualLivingBudget: 40000,
+          nzSuperType: "single_alone",
+        },
+      });
+
+      assertEq(res.eligiblePirRate, 0.175, "eligible PIR is 17.5% for sub-$70k total income");
+      assertEq(res.pirRate, 0.175, "pirRate defaults to eligible 17.5% PIR");
+      assertEq(res.totalFixedInterestNetNZD, 4125, "$5,000 gross * (1 - 0.175) = $4,125 net");
     },
   ],
 ];

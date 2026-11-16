@@ -10,6 +10,7 @@ import {
   FixedInterestHolding,
   FundMetadata,
   NZSuperType,
+  PirRate,
   RetirementCashflowSettings,
   UserPortfolioState,
 } from "../types/portfolio";
@@ -195,6 +196,11 @@ export interface RetirementCashflowResult {
   totalRetirementInflowNZD: number;
   annualLivingBudgetNZD: number;
 
+  // Investor Prescribed Investor Rate (PIR)
+  pirRate: PirRate;
+  eligiblePirRate: PirRate;
+  isManualPir: boolean;
+
   // PIE vs Non-PIE Breakdown of Net Inflows
   totalPieGrossNZD: number;
   totalPieNetNZD: number;
@@ -311,6 +317,28 @@ export function resolveEffectiveDividendYield(
 }
 
 /**
+ * Calculates the investor's eligible Prescribed Investor Rate (PIR) for New Zealand PIE funds
+ * based on projected taxable and total income under statutory IRD criteria.
+ *
+ * IRD Criteria for NZ Tax Resident Individuals:
+ * - 10.5%: Taxable income <= $14,000 AND Total income (taxable + PIE) <= $48,000
+ * - 17.5%: Taxable income <= $48,000 AND Total income (taxable + PIE) <= $70,000 (and not 10.5%)
+ * - 28.0%: Taxable income > $48,000 OR Total income > $70,000
+ */
+export function calculateEligiblePirRate(taxableIncome: number, totalIncome: number): PirRate {
+  const safeTaxable = Math.max(0, Number.isFinite(taxableIncome) ? taxableIncome : 0);
+  const safeTotal = Math.max(0, Number.isFinite(totalIncome) ? totalIncome : safeTaxable);
+
+  if (safeTaxable <= 14000 && safeTotal <= 48000) {
+    return 0.105;
+  }
+  if (safeTaxable <= 48000 && safeTotal <= 70000) {
+    return 0.175;
+  }
+  return 0.28;
+}
+
+/**
  * Calculates complete 12-month forward retirement cashflow and net drawdown requirement.
  */
 export function calculateRetirementCashflow(params: {
@@ -328,9 +356,98 @@ export function calculateRetirementCashflow(params: {
   const audNzdRate = portfolioState.audNzdRate || 1.10;
   const fixedList = portfolioState.fixedInterest || portfolioState.cashDeposits || [];
   const overrides = settings.dividendYieldOverrides || {};
-  const pirRate = settings.pirRate ?? portfolioState.pirRate ?? 0.28;
 
-  // 1. Fixed Interest Items (PIE TDs use investor's global PIR; non-PIE & bonds use marginal tax rate)
+  // 1. External Inflows (Gross)
+  const superRateMeta = NZ_SUPER_RATES[settings.nzSuperType] || { gross: 0, netM: 0 };
+  const nzSuperGrossAnnualNZD =
+    settings.nzSuperType === 'custom'
+      ? Math.max(0, settings.nzSuperCustomAnnual || 0)
+      : superRateMeta.gross;
+
+  const otherGrossIncomeAnnualNZD = Math.max(
+    0,
+    settings.otherGrossIncomeAnnual ?? settings.otherIncomeAnnual ?? 0
+  );
+  const totalExternalGrossIncomeNZD = Math.round((nzSuperGrossAnnualNZD + otherGrossIncomeAnnualNZD) * 100) / 100;
+
+  // 2. Pre-calculate Gross Inflows across PIE vs Non-PIE to accurately determine eligible PIR
+  let prelimNonPieFixedGrossNZD = 0;
+  let prelimPieFixedGrossNZD = 0;
+  for (const h of fixedList) {
+    const principal = Math.max(0, h.valueNZD || 0);
+    const rate = Math.max(0, h.interestRate ?? 0);
+    const gross = Math.round((principal * (rate / 100)) * 100) / 100;
+    if (h.category !== 'bond' && h.taxType === 'pie') {
+      prelimPieFixedGrossNZD += gross;
+    } else {
+      prelimNonPieFixedGrossNZD += gross;
+    }
+  }
+
+  let prelimNonPieDividendsGrossNZD = 0;
+  let prelimDirectPieDividendsGrossNZD = 0;
+  for (const dh of portfolioState.directHoldings || []) {
+    const valNZD = directHoldingValueNZD(dh, audNzdRate);
+    if (valNZD <= 0) continue;
+    const tickerBase = (dh.ticker || dh.isin).replace(/\.(NZ|AX)$/i, '').toUpperCase();
+    const key = `direct:${dh.isin}`;
+    const { yieldPercent } = resolveEffectiveDividendYield(
+      tickerBase,
+      overrides[tickerBase] ?? overrides[key],
+      dh.dividendYield
+    );
+    const gross = Math.round((valNZD * (yieldPercent / 100)) * 100) / 100;
+    if (dh.isEtf || dh.fundCode) {
+      prelimDirectPieDividendsGrossNZD += gross;
+    } else {
+      prelimNonPieDividendsGrossNZD += gross;
+    }
+  }
+
+  const registryByCode = new Map(fundsRegistry.map((f) => [f.code.toUpperCase(), f]));
+  let prelimUnlistedFundsPieGrossNZD = 0;
+  for (const [code, balance] of Object.entries(portfolioState.fundBalances || {})) {
+    if (balance <= 0) continue;
+    const cleanCode = code.toUpperCase();
+    const fundMeta = registryByCode.get(cleanCode);
+    const key = `fund:${code}`;
+    const defaultFundYield = fundMeta?.asset_class === 'fixed_interest' ? 4.5 : 2.5;
+    const { yieldPercent } = resolveEffectiveDividendYield(
+      cleanCode,
+      overrides[cleanCode] ?? overrides[key],
+      undefined,
+      defaultFundYield
+    );
+    const gross = Math.round((balance * (yieldPercent / 100)) * 100) / 100;
+    prelimUnlistedFundsPieGrossNZD += gross;
+  }
+
+  const totalNonPieGrossAnnualNZD = Math.round(
+    (nzSuperGrossAnnualNZD + otherGrossIncomeAnnualNZD + prelimNonPieFixedGrossNZD + prelimNonPieDividendsGrossNZD) * 100
+  ) / 100;
+
+  const totalPieGrossNZD = Math.round(
+    (prelimPieFixedGrossNZD + prelimDirectPieDividendsGrossNZD + prelimUnlistedFundsPieGrossNZD) * 100
+  ) / 100;
+
+  // Split income per taxpayer if married/partnered couple where both qualify for NZ Super
+  const nonPieTaxpayerCount = settings.nzSuperType === 'couple_both' ? 2 : 1;
+  const taxablePerPerson = totalNonPieGrossAnnualNZD / nonPieTaxpayerCount;
+  const totalIncomePerPerson = (totalNonPieGrossAnnualNZD + totalPieGrossNZD) / nonPieTaxpayerCount;
+
+  // Determine eligible PIR based on IRD progressive rules
+  const eligiblePirRate = calculateEligiblePirRate(taxablePerPerson, totalIncomePerPerson);
+
+  const isManualPir = Boolean(settings.isManualPir);
+  const pirRate: PirRate = isManualPir && settings.pirRate !== undefined
+    ? settings.pirRate
+    : (settings.pirRate !== undefined && settings.pirRate !== 0.28)
+      ? settings.pirRate
+      : (portfolioState.pirRate !== undefined && portfolioState.pirRate !== 0.28)
+        ? portfolioState.pirRate
+        : eligiblePirRate;
+
+  // 3. Itemized Fixed Interest Items (apply resolved pirRate)
   const fixedInterestItems: FixedInterestCashflowItem[] = fixedList.map((h) =>
     calculateFixedInterestItem(h, settings.marginalTaxRate, pirRate)
   );
@@ -338,7 +455,7 @@ export function calculateRetirementCashflow(params: {
   const totalFixedInterestPrincipalNZD = fixedInterestItems.reduce((acc, i) => acc + i.principalNZD, 0);
   const totalFixedInterestGrossNZD = fixedInterestItems.reduce((acc, i) => acc + i.grossAnnualNZD, 0);
 
-  // 2. Equity Dividends & Listed ETFs
+  // 4. Equity Dividends & Listed ETFs
   const dividendItems: DividendCashflowItem[] = [];
 
   for (const dh of portfolioState.directHoldings || []) {
@@ -387,9 +504,7 @@ export function calculateRetirementCashflow(params: {
     });
   }
 
-  // 3. Unlisted Pooled Funds
-  const registryByCode = new Map(fundsRegistry.map((f) => [f.code.toUpperCase(), f]));
-
+  // 5. Unlisted Pooled Funds (apply resolved pirRate)
   for (const [code, balance] of Object.entries(portfolioState.fundBalances || {})) {
     if (balance <= 0) continue;
     const cleanCode = code.toUpperCase();
@@ -426,36 +541,10 @@ export function calculateRetirementCashflow(params: {
   const totalEquitiesValueNZD = dividendItems.reduce((acc, i) => acc + i.valueNZD, 0);
   const totalDividendsGrossNZD = Math.round(dividendItems.reduce((acc, i) => acc + i.grossAnnualNZD, 0) * 100) / 100;
 
-  // 4. External Guaranteed Inflows (Gross)
-  const superRateMeta = NZ_SUPER_RATES[settings.nzSuperType] || { gross: 0, netM: 0 };
-  const nzSuperGrossAnnualNZD =
-    settings.nzSuperType === 'custom'
-      ? Math.max(0, settings.nzSuperCustomAnnual || 0)
-      : superRateMeta.gross;
+  // 6. Progressive Personal Income Tax on Non-PIE Gross Inflows
+  const nonPieFixedGrossNZD = prelimNonPieFixedGrossNZD;
+  const nonPieDividendsGrossNZD = prelimNonPieDividendsGrossNZD;
 
-  const otherGrossIncomeAnnualNZD = Math.max(
-    0,
-    settings.otherGrossIncomeAnnual ?? settings.otherIncomeAnnual ?? 0
-  );
-
-  const totalExternalGrossIncomeNZD = Math.round((nzSuperGrossAnnualNZD + otherGrossIncomeAnnualNZD) * 100) / 100;
-
-  // 5. Non-PIE Gross Inflows & Progressive Personal Income Tax
-  const nonPieFixedGrossNZD = Math.round(
-    fixedInterestItems.filter((i) => i.taxType !== 'pie').reduce((acc, i) => acc + i.grossAnnualNZD, 0) * 100
-  ) / 100;
-
-  const nonPieDividendsGrossNZD = Math.round(
-    dividendItems.filter((i) => !i.isPie).reduce((acc, i) => acc + i.grossAnnualNZD, 0) * 100
-  ) / 100;
-
-  const totalNonPieGrossAnnualNZD = Math.round(
-    (nzSuperGrossAnnualNZD + otherGrossIncomeAnnualNZD + nonPieFixedGrossNZD + nonPieDividendsGrossNZD) * 100
-  ) / 100;
-
-  // Taxpayer count: 2 if couple_both (split income across spouses for progressive brackets), 1 otherwise
-  const nonPieTaxpayerCount = settings.nzSuperType === 'couple_both' ? 2 : 1;
-  const taxablePerPerson = totalNonPieGrossAnnualNZD / nonPieTaxpayerCount;
   const grossTaxPerPerson = calculateNzIncomeTax(taxablePerPerson);
   const nonPieGrossTaxPayableNZD = Math.round((grossTaxPerPerson * nonPieTaxpayerCount) * 100) / 100;
 
@@ -492,10 +581,8 @@ export function calculateRetirementCashflow(params: {
   const nzSuperAnnualNZD = nzSuperNetAnnualNZD;
   const otherIncomeAnnualNZD = otherNetIncomeAnnualNZD;
 
-  // 6. PIE Income (Tax Deducted at Source)
-  const pieFixedGrossNZD = Math.round(
-    fixedInterestItems.filter((i) => i.taxType === 'pie').reduce((acc, i) => acc + i.grossAnnualNZD, 0) * 100
-  ) / 100;
+  // 7. PIE Income (Tax Deducted at Source)
+  const pieFixedGrossNZD = prelimPieFixedGrossNZD;
   const pieFixedNetNZD = Math.round(
     fixedInterestItems.filter((i) => i.taxType === 'pie').reduce((acc, i) => acc + i.netAnnualNZD, 0) * 100
   ) / 100;
@@ -507,7 +594,6 @@ export function calculateRetirementCashflow(params: {
     dividendItems.filter((i) => i.isPie).reduce((acc, i) => acc + i.estimatedNetAnnualNZD, 0) * 100
   ) / 100;
 
-  const totalPieGrossNZD = Math.round((pieFixedGrossNZD + pieDividendsGrossNZD) * 100) / 100;
   const totalPieNetNZD = Math.round((pieFixedNetNZD + pieDividendsNetNZD) * 100) / 100;
 
   // Rollup totals
@@ -571,6 +657,9 @@ export function calculateRetirementCashflow(params: {
     effectivePersonalTaxRate,
     totalRetirementInflowNZD,
     annualLivingBudgetNZD,
+    pirRate,
+    eligiblePirRate,
+    isManualPir,
     totalPieGrossNZD,
     totalPieNetNZD,
     totalNonPieNetNZD,

@@ -119,14 +119,13 @@ export const DEFAULT_PORTFOLIO_STATE: UserPortfolioState = {
   ],
   buckets: [],
   bucketAssignments: {},
-  pirRate: 0.28,
   cashflowSettings: {
     annualLivingBudget: 80000,
     nzSuperType: "none",
     nzSuperCustomAnnual: 0,
     otherIncomeAnnual: 0,
     otherGrossIncomeAnnual: 0,
-    pirRate: 0.28,
+    isManualPir: false,
     dividendYieldOverrides: {},
     tdProjectionMode: "rollover",
   },
@@ -158,8 +157,8 @@ function sanitizeDirectHoldings(raw: unknown): DirectHolding[] {
     const rawShares = isFiniteNonNegative(h.shares)
       ? (h.shares as number)
       : isFiniteNonNegative(h.units)
-      ? (h.units as number)
-      : undefined;
+        ? (h.units as number)
+        : undefined;
     const rawPrice = isFiniteNonNegative(h.price) ? (h.price as number) : undefined;
     const rawValue = isFiniteNonNegative(h.value) ? (h.value as number) : undefined;
 
@@ -219,8 +218,8 @@ function sanitizeFixedInterest(raw: unknown): FixedInterestHolding[] {
       d.category === "bond" || d.category === "cash" || d.category === "term_deposit"
         ? d.category
         : d.type === "cash"
-        ? "cash"
-        : "term_deposit";
+          ? "cash"
+          : "term_deposit";
     const taxType: FixedInterestTaxType = category === "bond" ? "rwt" : d.taxType === "pie" ? "pie" : "rwt";
     const pirRate =
       taxType === "pie"
@@ -292,10 +291,11 @@ function sanitizeCashflowSettings(raw: unknown): RetirementCashflowSettings | un
     typeof s.otherGrossIncomeAnnual === "number" && Number.isFinite(s.otherGrossIncomeAnnual) && s.otherGrossIncomeAnnual >= 0
       ? s.otherGrossIncomeAnnual
       : (typeof s.otherIncomeAnnual === "number" && Number.isFinite(s.otherIncomeAnnual) && s.otherIncomeAnnual >= 0
-          ? s.otherIncomeAnnual
-          : 0);
+        ? s.otherIncomeAnnual
+        : 0);
 
-  let pirRate: PirRate = 0.28;
+  const isManualPir = Boolean(s.isManualPir);
+  let pirRate: PirRate | undefined = undefined;
   if (s.pirRate === 0.105 || s.pirRate === 0.175 || s.pirRate === 0.28) {
     pirRate = s.pirRate;
   }
@@ -319,7 +319,8 @@ function sanitizeCashflowSettings(raw: unknown): RetirementCashflowSettings | un
     nzSuperCustomAnnual,
     otherGrossIncomeAnnual: otherGrossVal,
     otherIncomeAnnual: otherGrossVal,
-    pirRate,
+    ...(pirRate !== undefined ? { pirRate } : {}),
+    ...(isManualPir ? { isManualPir: true } : {}),
     tdProjectionMode,
     dividendYieldOverrides,
   };

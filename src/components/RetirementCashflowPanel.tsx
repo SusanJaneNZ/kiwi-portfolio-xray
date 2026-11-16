@@ -8,6 +8,7 @@ import {
 import {
   FundMetadata,
   NZSuperType,
+  PirRate,
   RetirementCashflowSettings,
   UserPortfolioState,
 } from '../types/portfolio';
@@ -62,11 +63,16 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
       ...settings,
       ...patch,
     };
-    onUpdateState({
+    const nextState: UserPortfolioState = {
       ...portfolioState,
-      ...(patch.pirRate !== undefined ? { pirRate: patch.pirRate } : {}),
       cashflowSettings: updatedSettings,
-    });
+    };
+    if (patch.isManualPir === false || (patch.pirRate === undefined && 'pirRate' in patch)) {
+      delete nextState.pirRate;
+    } else if (patch.pirRate !== undefined) {
+      nextState.pirRate = patch.pirRate;
+    }
+    onUpdateState(nextState);
   };
 
   const handleSetBudgetPreset = (preset: number) => {
@@ -180,9 +186,8 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
           {/* Card 2: PIE Inflows */}
           <div className="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
             <div>
-              <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider flex items-center justify-between">
+              <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
                 <span>PIE Inflows</span>
-                <span className="text-teal-400 font-mono font-bold text-[10px]">Net (Capped PIR)</span>
               </div>
               <div className="mt-2 flex items-baseline justify-between gap-3">
                 <div>
@@ -200,22 +205,17 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
               </div>
             </div>
 
-            <div className="mt-3 text-xs space-y-1">
-              <div className="flex items-center justify-between py-0.5 border-b border-slate-800/40">
-                <span className="text-slate-300">PIE Term Deposits:</span>
-                <span className="font-mono">
-                  <strong className="text-white">${fmtMoney(cashflowResult.pieFixedNetNZD)}</strong>
-                  <span className="text-slate-400 text-[11px] ml-1.5">(${fmtMoney(cashflowResult.pieFixedGrossNZD)} gross)</span>
-                </span>
+            <div className="mt-3 text-xs">
+              <div className="grid grid-cols-[1fr_auto_auto] items-center gap-x-2.5 gap-y-1">
+                <span className="text-slate-300 py-0.5 border-b border-slate-800/40">PIE Term Deposits:</span>
+                <strong className="text-white font-mono text-right py-0.5 border-b border-slate-800/40">${fmtMoney(cashflowResult.pieFixedNetNZD)}</strong>
+                <span className="text-slate-400 font-mono text-[11px] text-right py-0.5 border-b border-slate-800/40">(${fmtMoney(cashflowResult.pieFixedGrossNZD)} gross)</span>
+
+                <span className="text-slate-300 py-0.5 border-b border-slate-800/40">PIE Funds &amp; ETFs:</span>
+                <strong className="text-white font-mono text-right py-0.5 border-b border-slate-800/40">${fmtMoney(cashflowResult.pieDividendsNetNZD)}</strong>
+                <span className="text-slate-400 font-mono text-[11px] text-right py-0.5 border-b border-slate-800/40">(${fmtMoney(cashflowResult.pieDividendsGrossNZD)} gross)</span>
               </div>
-              <div className="flex items-center justify-between py-0.5 border-b border-slate-800/40">
-                <span className="text-slate-300">PIE Funds &amp; ETFs:</span>
-                <span className="font-mono">
-                  <strong className="text-white">${fmtMoney(cashflowResult.pieDividendsNetNZD)}</strong>
-                  <span className="text-slate-400 text-[11px] ml-1.5">(${fmtMoney(cashflowResult.pieDividendsGrossNZD)} gross)</span>
-                </span>
-              </div>
-              <div className="text-[10px] text-slate-500 pt-1">
+              <div className="text-[10px] text-slate-500 pt-1.5">
                 Tax capped at max 28% PIR; excluded from personal tax returns.
               </div>
             </div>
@@ -224,9 +224,8 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
           {/* Card 3: Non-PIE Inflows */}
           <div className="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
             <div>
-              <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider flex items-center justify-between">
+              <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
                 <span>Non-PIE Inflows</span>
-                <span className="text-sky-400 font-mono font-bold text-[10px]">Net (Progressive)</span>
               </div>
               <div className="mt-2 flex items-baseline justify-between gap-3">
                 <div>
@@ -244,38 +243,29 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
               </div>
             </div>
 
-            <div className="mt-3 text-xs space-y-1">
-              <div className="flex items-center justify-between py-0.5 border-b border-slate-800/40">
-                <span className="text-slate-300">Non-PIE TDs &amp; Cash:</span>
-                <span className="font-mono">
-                  <strong className="text-white">${fmtMoney(cashflowResult.nonPieFixedNetNZD)}</strong>
-                  <span className="text-slate-400 text-[11px] ml-1.5">(${fmtMoney(cashflowResult.nonPieFixedGrossNZD)} gross)</span>
-                </span>
+            <div className="mt-3 text-xs">
+              <div className="grid grid-cols-[1fr_auto_auto] items-center gap-x-2.5 gap-y-1">
+                <span className="text-slate-300 py-0.5 border-b border-slate-800/40">Non-PIE TDs &amp; Cash:</span>
+                <strong className="text-white font-mono text-right py-0.5 border-b border-slate-800/40">${fmtMoney(cashflowResult.nonPieFixedNetNZD)}</strong>
+                <span className="text-slate-400 font-mono text-[11px] text-right py-0.5 border-b border-slate-800/40">(${fmtMoney(cashflowResult.nonPieFixedGrossNZD)} gross)</span>
+
+                <span className="text-slate-300 py-0.5 border-b border-slate-800/40">Direct Share Dividends:</span>
+                <strong className="text-white font-mono text-right py-0.5 border-b border-slate-800/40">${fmtMoney(cashflowResult.nonPieDividendsNetNZD)}</strong>
+                <span className="text-slate-400 font-mono text-[11px] text-right py-0.5 border-b border-slate-800/40">(${fmtMoney(cashflowResult.nonPieDividendsGrossNZD)} gross)</span>
+
+                <span className="text-slate-300 py-0.5 border-b border-slate-800/40">NZ Superannuation:</span>
+                <strong className="text-white font-mono text-right py-0.5 border-b border-slate-800/40">${fmtMoney(cashflowResult.nzSuperNetAnnualNZD)}</strong>
+                <span className="text-slate-400 font-mono text-[11px] text-right py-0.5 border-b border-slate-800/40">(${fmtMoney(cashflowResult.nzSuperGrossAnnualNZD)} gross)</span>
+
+                {cashflowResult.otherGrossIncomeAnnualNZD > 0 && (
+                  <>
+                    <span className="text-slate-300 py-0.5 border-b border-slate-800/40">Other Inflows:</span>
+                    <strong className="text-white font-mono text-right py-0.5 border-b border-slate-800/40">${fmtMoney(cashflowResult.otherNetIncomeAnnualNZD)}</strong>
+                    <span className="text-slate-400 font-mono text-[11px] text-right py-0.5 border-b border-slate-800/40">(${fmtMoney(cashflowResult.otherGrossIncomeAnnualNZD)} gross)</span>
+                  </>
+                )}
               </div>
-              <div className="flex items-center justify-between py-0.5 border-b border-slate-800/40">
-                <span className="text-slate-300">Direct Share Dividends:</span>
-                <span className="font-mono">
-                  <strong className="text-white">${fmtMoney(cashflowResult.nonPieDividendsNetNZD)}</strong>
-                  <span className="text-slate-400 text-[11px] ml-1.5">(${fmtMoney(cashflowResult.nonPieDividendsGrossNZD)} gross)</span>
-                </span>
-              </div>
-              <div className="flex items-center justify-between py-0.5 border-b border-slate-800/40">
-                <span className="text-slate-300">NZ Superannuation:</span>
-                <span className="font-mono">
-                  <strong className="text-white">${fmtMoney(cashflowResult.nzSuperNetAnnualNZD)}</strong>
-                  <span className="text-slate-400 text-[11px] ml-1.5">(${fmtMoney(cashflowResult.nzSuperGrossAnnualNZD)} gross)</span>
-                </span>
-              </div>
-              {cashflowResult.otherGrossIncomeAnnualNZD > 0 && (
-                <div className="flex items-center justify-between py-0.5 border-b border-slate-800/40">
-                  <span className="text-slate-300">Other Inflows:</span>
-                  <span className="font-mono">
-                    <strong className="text-white">${fmtMoney(cashflowResult.otherNetIncomeAnnualNZD)}</strong>
-                    <span className="text-slate-400 text-[11px] ml-1.5">(${fmtMoney(cashflowResult.otherGrossIncomeAnnualNZD)} gross)</span>
-                  </span>
-                </div>
-              )}
-              <div className="text-[10px] text-slate-500 pt-1">
+              <div className="text-[10px] text-slate-500 pt-1.5">
                 Taxed via personal brackets{cashflowResult.nzImputationCreditsNZD > 0 ? ` (less $${fmtMoney(cashflowResult.nzImputationCreditsNZD)} imputation credits)` : ''}
               </div>
             </div>
@@ -494,7 +484,7 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
         {/* Tab 1: External Income */}
         {activeTab === 'external-income' && (
           <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-4 space-y-4 text-xs">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* NZ Superannuation */}
               <div className="space-y-2">
                 <label className="font-semibold text-slate-300 block">
@@ -570,28 +560,6 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
                   Gross residential rental income, foreign state pensions (UK/Australian), or consulting. Automatically included in total non-PIE income and taxed across progressive NZ brackets.
                 </p>
               </div>
-
-              {/* Investor Prescribed Investor Rate (PIR) */}
-              <div className="space-y-2">
-                <label className="font-semibold text-slate-300 block">
-                  Investor Prescribed Investor Rate (PIR)
-                </label>
-                <select
-                  value={(settings.pirRate ?? 0.28).toString()}
-                  onChange={(e) => {
-                    const pir = parseFloat(e.target.value) as 0.105 | 0.175 | 0.28;
-                    handleUpdateSettings({ pirRate: pir });
-                  }}
-                  className="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-white font-medium focus:outline-none focus:border-indigo-500"
-                >
-                  <option value="0.28">28.0% PIR (Taxable income over $48k or total income over $70k) [Default]</option>
-                  <option value="0.175">17.5% PIR (Taxable income up to $48k &amp; total income up to $70k)</option>
-                  <option value="0.105">10.5% PIR (Taxable income up to $14k &amp; total income up to $48k)</option>
-                </select>
-                <p className="text-[11px] text-slate-500">
-                  Applied to all PIE Term Deposits and multi-rate unlisted PIE funds (e.g. Kernel). Listed PIE funds and ETFs (e.g. Smartshares on NZX) are legally fixed at 28% under NZ tax legislation.
-                </p>
-              </div>
             </div>
           </div>
         )}
@@ -599,6 +567,62 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
         {/* Tab 2: Tax Assessment */}
         {activeTab === 'tax-assessment' && (
           <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-4 space-y-4 text-xs">
+            {/* Prescribed Investor Rate (PIR) for PIE Inflows */}
+            <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-3.5 space-y-2.5">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="font-semibold text-slate-200 text-xs flex items-center gap-2">
+                  <span>Prescribed Investor Rate (PIR) on PIE Inflows</span>
+                  <span className="text-[10px] text-slate-400 font-normal">
+                    (Multi-rate PIE funds &amp; PIE Term Deposits)
+                  </span>
+                </div>
+                <span className="text-xs font-mono font-semibold text-emerald-400">
+                  Active PIR: {(cashflowResult.pirRate * 100).toFixed(1)}% {!cashflowResult.isManualPir ? '(Auto-Default)' : '(Manual Override)'}
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 items-center">
+                <div className="md:col-span-2">
+                  <select
+                    value={settings.isManualPir && settings.pirRate !== undefined ? settings.pirRate.toString() : 'auto'}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      if (val === 'auto') {
+                        handleUpdateSettings({ pirRate: undefined, isManualPir: false });
+                      } else {
+                        const pir = parseFloat(val) as PirRate;
+                        handleUpdateSettings({ pirRate: pir, isManualPir: true });
+                      }
+                    }}
+                    className="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-white font-medium focus:outline-none focus:border-indigo-500 text-xs"
+                  >
+                    <option value="auto">
+                      Auto: {(cashflowResult.eligiblePirRate * 100).toFixed(1)}% PIR (Default based on projected ${fmtMoney(cashflowResult.totalNonPieGrossAnnualNZD)} taxable / ${fmtMoney(cashflowResult.totalNonPieGrossAnnualNZD + cashflowResult.totalPieGrossNZD)} total income) [Recommended]
+                    </option>
+                    <option value="0.28">28.0% PIR (Taxable income over $48k or total income over $70k)</option>
+                    <option value="0.175">17.5% PIR (Taxable income up to $48k &amp; total income up to $70k)</option>
+                    <option value="0.105">10.5% PIR (Taxable income up to $14k &amp; total income up to $48k)</option>
+                  </select>
+                </div>
+
+                <div className="text-[11px] text-slate-400 bg-slate-950/60 p-2 rounded-lg border border-slate-800">
+                  <span>Eligible Tier: </span>
+                  <strong className="text-white font-mono">{(cashflowResult.eligiblePirRate * 100).toFixed(1)}%</strong>
+                  <span className="text-slate-500 block text-[10px] mt-0.5">
+                    {cashflowResult.eligiblePirRate === 0.105
+                      ? 'Taxable ≤ $14k & Total ≤ $48k'
+                      : cashflowResult.eligiblePirRate === 0.175
+                      ? 'Taxable ≤ $48k & Total ≤ $70k'
+                      : 'Taxable > $48k or Total > $70k'}
+                  </span>
+                </div>
+              </div>
+
+              <p className="text-[11px] text-slate-500 leading-relaxed">
+                Applied to all PIE Term Deposits and multi-rate unlisted PIE funds (e.g. Kernel). Listed PIE funds and ETFs (e.g. Smartshares on NZX) are legally fixed at 28% under NZ tax legislation. Under IRD rules, your PIR is determined by your taxable and total income across the previous two tax years.
+              </p>
+            </div>
+
             {/* Progressive NZ Personal Income Tax Assessment Card */}
             <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-3.5 space-y-3">
               <div className="flex flex-wrap items-center justify-between gap-2">
