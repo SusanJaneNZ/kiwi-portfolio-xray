@@ -1,643 +1,6 @@
 [
   {
     "provider": "Kernel",
-    "fund_code": "KERNEL_EMERGING_MARKETS",
-    "raw_name": "SPDR Portfolio Emerging Markets ETF",
-    "raw_ticker": "",
-    "weight": 0.9993,
-    "reason": "ambiguous_collision_spread_0.04",
-    "suggested_snippet": {
-      "Kernel:KERNEL_EMERGING_MARKETS": {
-        "SPDR Portfolio Emerging Markets ETF": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_NZ_COMMERCIAL_PROPERTY",
-    "raw_name": "Precinct Properties New Zealand Limited",
-    "raw_ticker": "",
-    "weight": 0.172265,
-    "reason": "ambiguous_collision_spread_0.08",
-    "suggested_snippet": {
-      "Kernel:KERNEL_NZ_COMMERCIAL_PROPERTY": {
-        "Precinct Properties New Zealand Limited": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_NZ_COMMERCIAL_PROPERTY",
-    "raw_name": "Goodman NZ Limited & Goodman Property Service Unt",
-    "raw_ticker": "",
-    "weight": 0.167466,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_NZ_COMMERCIAL_PROPERTY": {
-        "Goodman NZ Limited & Goodman Property Service Unt": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_CASH_PLUS",
-    "raw_name": "Bank of China Deposit",
-    "raw_ticker": "",
-    "weight": 0.146445,
-    "reason": "ambiguous_collision_spread_0.06",
-    "suggested_snippet": {
-      "Kernel:KERNEL_CASH_PLUS": {
-        "Bank of China Deposit": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_NZ_COMMERCIAL_PROPERTY",
-    "raw_name": "Vital Healthcare Property",
-    "raw_ticker": "",
-    "weight": 0.133773,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_NZ_COMMERCIAL_PROPERTY": {
-        "Vital Healthcare Property": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_MARCH_2027_NZ_BOND",
-    "raw_name": "Bank of China Deposit",
-    "raw_ticker": "",
-    "weight": 0.126377,
-    "reason": "ambiguous_collision_spread_0.06",
-    "suggested_snippet": {
-      "Kernel:KERNEL_MARCH_2027_NZ_BOND": {
-        "Bank of China Deposit": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_NZ_SMALL_MID_CAP",
-    "raw_name": "Vital Healthcare Property",
-    "raw_ticker": "",
-    "weight": 0.074085,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_NZ_SMALL_MID_CAP": {
-        "Vital Healthcare Property": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "SPDR Portfolio Emerging Markets ETF",
-    "raw_ticker": "",
-    "weight": 0.069625,
-    "reason": "ambiguous_collision_spread_0.04",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "SPDR Portfolio Emerging Markets ETF": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_NZ_SMALL_MID_CAP",
-    "raw_name": "Fonterra Shareholders' Fund",
-    "raw_ticker": "",
-    "weight": 0.061388,
-    "reason": "ambiguous_collision_spread_0.00",
-    "suggested_snippet": {
-      "Kernel:KERNEL_NZ_SMALL_MID_CAP": {
-        "Fonterra Shareholders' Fund": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_NZ_SMALL_MID_CAP",
-    "raw_name": "Sky City Entertainment Limited (NZ Registry)",
-    "raw_ticker": "",
-    "weight": 0.04869,
-    "reason": "ambiguous_collision_spread_0.00",
-    "suggested_snippet": {
-      "Kernel:KERNEL_NZ_SMALL_MID_CAP": {
-        "Sky City Entertainment Limited (NZ Registry)": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "Redemptions",
-    "raw_ticker": "",
-    "weight": 0.047479,
-    "reason": "no_candidates_above_70",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "Redemptions": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_NZ_50",
-    "raw_name": "Precinct Properties New Zealand Limited",
-    "raw_ticker": "",
-    "weight": 0.046805,
-    "reason": "ambiguous_collision_spread_0.08",
-    "suggested_snippet": {
-      "Kernel:KERNEL_NZ_50": {
-        "Precinct Properties New Zealand Limited": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_ESG_HEDGED",
-    "raw_name": "Redemptions",
-    "raw_ticker": "",
-    "weight": 0.04431,
-    "reason": "no_candidates_above_70",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_ESG_HEDGED": {
-        "Redemptions": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_100_HEDGED",
-    "raw_name": "Redemptions",
-    "raw_ticker": "",
-    "weight": 0.04346,
-    "reason": "no_candidates_above_70",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_100_HEDGED": {
-        "Redemptions": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_MARCH_2029_NZ_BOND",
-    "raw_name": "Bank of China Deposit",
-    "raw_ticker": "",
-    "weight": 0.041475,
-    "reason": "ambiguous_collision_spread_0.06",
-    "suggested_snippet": {
-      "Kernel:KERNEL_MARCH_2029_NZ_BOND": {
-        "Bank of China Deposit": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED",
-    "raw_name": "Redemptions",
-    "raw_ticker": "",
-    "weight": 0.038671,
-    "reason": "no_candidates_above_70",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED": {
-        "Redemptions": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "SPDR Portfolio Emerging Markets ETF",
-    "raw_ticker": "",
-    "weight": 0.035789,
-    "reason": "ambiguous_collision_spread_0.04",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "SPDR Portfolio Emerging Markets ETF": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED",
-    "raw_name": "Sempra Energy",
-    "raw_ticker": "",
-    "weight": 0.030173,
-    "reason": "ambiguous_collision_spread_0.05",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED": {
-        "Sempra Energy": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_NZ_50",
-    "raw_name": "Goodman NZ Limited & Goodman Property Service Unt",
-    "raw_ticker": "",
-    "weight": 0.021102,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_NZ_50": {
-        "Goodman NZ Limited & Goodman Property Service Unt": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_NZ_20",
-    "raw_name": "Goodman NZ Limited & Goodman Property Service Unt",
-    "raw_ticker": "",
-    "weight": 0.018206,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_NZ_20": {
-        "Goodman NZ Limited & Goodman Property Service Unt": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_100",
-    "raw_name": "Exxon Holdings Corporation",
-    "raw_ticker": "",
-    "weight": 0.01637,
-    "reason": "no_candidates_above_70",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_100": {
-        "Exxon Holdings Corporation": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_NZ_20",
-    "raw_name": "Precinct Properties New Zealand Limited",
-    "raw_ticker": "",
-    "weight": 0.016205,
-    "reason": "ambiguous_collision_spread_0.08",
-    "suggested_snippet": {
-      "Kernel:KERNEL_NZ_20": {
-        "Precinct Properties New Zealand Limited": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_100_HEDGED",
-    "raw_name": "Exxon Holdings Corporation",
-    "raw_ticker": "",
-    "weight": 0.015673,
-    "reason": "no_candidates_above_70",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_100_HEDGED": {
-        "Exxon Holdings Corporation": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Redemptions",
-    "raw_ticker": "",
-    "weight": 0.014402,
-    "reason": "no_candidates_above_70",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Redemptions": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "Berkshire Hathaway Inc Cl B",
-    "raw_ticker": "",
-    "weight": 0.014078,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "Berkshire Hathaway Inc Cl B": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "Berkshire Hathaway Inc Cl B",
-    "raw_ticker": "",
-    "weight": 0.013336,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "Berkshire Hathaway Inc Cl B": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_NZ_BOND",
-    "raw_name": "Bank of China Deposit",
-    "raw_ticker": "",
-    "weight": 0.012195,
-    "reason": "ambiguous_collision_spread_0.06",
-    "suggested_snippet": {
-      "Kernel:KERNEL_NZ_BOND": {
-        "Bank of China Deposit": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_100",
-    "raw_name": "Wal-Mart Stores Inc",
-    "raw_ticker": "",
-    "weight": 0.011349,
-    "reason": "ambiguous_collision_spread_0.04",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_100": {
-        "Wal-Mart Stores Inc": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_100_HEDGED",
-    "raw_name": "Wal-Mart Stores Inc",
-    "raw_ticker": "",
-    "weight": 0.010865,
-    "reason": "ambiguous_collision_spread_0.04",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_100_HEDGED": {
-        "Wal-Mart Stores Inc": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
-    "raw_name": "Mid-America Apt Communties",
-    "raw_ticker": "",
-    "weight": 0.010202,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
-        "Mid-America Apt Communties": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "Exxon Holdings Corporation",
-    "raw_ticker": "",
-    "weight": 0.010112,
-    "reason": "no_candidates_above_70",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "Exxon Holdings Corporation": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "Exxon Holdings Corporation",
-    "raw_ticker": "",
-    "weight": 0.009647,
-    "reason": "no_candidates_above_70",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "Exxon Holdings Corporation": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Redemptions",
-    "raw_ticker": "",
-    "weight": 0.009297,
-    "reason": "no_candidates_above_70",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Redemptions": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_100",
-    "raw_name": "Merck & Co Inc Common Stock",
-    "raw_ticker": "",
-    "weight": 0.008738,
-    "reason": "ambiguous_collision_spread_0.07",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_100": {
-        "Merck & Co Inc Common Stock": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_100_HEDGED",
-    "raw_name": "Merck & Co Inc Common Stock",
-    "raw_ticker": "",
-    "weight": 0.008365,
-    "reason": "ambiguous_collision_spread_0.07",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_100_HEDGED": {
-        "Merck & Co Inc Common Stock": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED",
-    "raw_name": "Cia de Saneamento Basico Es de S Paulo ADR",
-    "raw_ticker": "",
-    "weight": 0.008021,
-    "reason": "ambiguous_collision_spread_0.05",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED": {
-        "Cia de Saneamento Basico Es de S Paulo ADR": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
-    "raw_name": "Alexandria Real Estate Eqty",
-    "raw_ticker": "",
-    "weight": 0.008009,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
-        "Alexandria Real Estate Eqty": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_NZ_BOND",
-    "raw_name": "Kiwibank Limited 4.93% PRF",
-    "raw_ticker": "",
-    "weight": 0.007997,
-    "reason": "ambiguous_collision_spread_0.09",
-    "suggested_snippet": {
-      "Kernel:KERNEL_NZ_BOND": {
-        "Kiwibank Limited 4.93% PRF": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_100",
-    "raw_name": "GE Aerospace",
-    "raw_ticker": "",
-    "weight": 0.007934,
-    "reason": "ambiguous_collision_spread_0.03",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_100": {
-        "GE Aerospace": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
-    "raw_name": "Boston Properties Inc",
-    "raw_ticker": "",
-    "weight": 0.007819,
-    "reason": "ambiguous_collision_spread_0.03",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
-        "Boston Properties Inc": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Bank of China Deposit",
-    "raw_ticker": "",
-    "weight": 0.007798,
-    "reason": "ambiguous_collision_spread_0.06",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Bank of China Deposit": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_100_HEDGED",
-    "raw_name": "GE Aerospace",
-    "raw_ticker": "",
-    "weight": 0.007596,
-    "reason": "ambiguous_collision_spread_0.03",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_100_HEDGED": {
-        "GE Aerospace": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "Wal-Mart Stores Inc",
-    "raw_ticker": "",
-    "weight": 0.007039,
-    "reason": "ambiguous_collision_spread_0.04",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "Wal-Mart Stores Inc": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "Wal-Mart Stores Inc",
-    "raw_ticker": "",
-    "weight": 0.006715,
-    "reason": "ambiguous_collision_spread_0.04",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "Wal-Mart Stores Inc": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Exxon Holdings Corporation",
-    "raw_ticker": "",
-    "weight": 0.006555,
-    "reason": "no_candidates_above_70",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Exxon Holdings Corporation": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "Palantir Technologies Inc. Class A",
-    "raw_ticker": "",
-    "weight": 0.006543,
-    "reason": "ambiguous_collision_spread_0.12",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "Palantir Technologies Inc. Class A": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
-    "raw_name": "Federal Realty Invt Trust",
-    "raw_ticker": "",
-    "weight": 0.006388,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
-        "Federal Realty Invt Trust": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "Palantir Technologies Inc. Class A",
-    "raw_ticker": "",
-    "weight": 0.006242,
-    "reason": "ambiguous_collision_spread_0.12",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "Palantir Technologies Inc. Class A": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_NZ_50",
-    "raw_name": "Vital Healthcare Property",
-    "raw_ticker": "",
-    "weight": 0.006101,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_NZ_50": {
-        "Vital Healthcare Property": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
     "fund_code": "KERNEL_CASH_PLUS",
     "raw_name": "Avanti Kea PL 2026-1 Class A 15/06/2035",
     "raw_ticker": "",
@@ -646,110 +9,6 @@
     "suggested_snippet": {
       "Kernel:KERNEL_CASH_PLUS": {
         "Avanti Kea PL 2026-1 Class A 15/06/2035": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "Merck & Co Inc Common Stock",
-    "raw_ticker": "",
-    "weight": 0.005453,
-    "reason": "ambiguous_collision_spread_0.07",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "Merck & Co Inc Common Stock": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED",
-    "raw_name": "Grupo Aeroportuario del Pacifico S A B de C V ADR",
-    "raw_ticker": "",
-    "weight": 0.005347,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED": {
-        "Grupo Aeroportuario del Pacifico S A B de C V ADR": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "Merck & Co Inc Common Stock",
-    "raw_ticker": "",
-    "weight": 0.005202,
-    "reason": "ambiguous_collision_spread_0.07",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "Merck & Co Inc Common Stock": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_NZ_50",
-    "raw_name": "Fonterra Shareholders' Fund",
-    "raw_ticker": "",
-    "weight": 0.0049,
-    "reason": "ambiguous_collision_spread_0.00",
-    "suggested_snippet": {
-      "Kernel:KERNEL_NZ_50": {
-        "Fonterra Shareholders' Fund": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "GE Aerospace",
-    "raw_ticker": "",
-    "weight": 0.004858,
-    "reason": "ambiguous_collision_spread_0.03",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "GE Aerospace": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "GE Aerospace",
-    "raw_ticker": "",
-    "weight": 0.004634,
-    "reason": "ambiguous_collision_spread_0.03",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "GE Aerospace": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Wal-Mart Stores Inc",
-    "raw_ticker": "",
-    "weight": 0.004569,
-    "reason": "ambiguous_collision_spread_0.04",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Wal-Mart Stores Inc": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED",
-    "raw_name": "Red Electrica Corporacion SA",
-    "raw_ticker": "",
-    "weight": 0.004392,
-    "reason": "ambiguous_collision_spread_0.01",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED": {
-        "Red Electrica Corporacion SA": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -768,23 +27,10 @@
   },
   {
     "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Exxon Holdings Corporation",
-    "raw_ticker": "",
-    "weight": 0.003699,
-    "reason": "no_candidates_above_70",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Exxon Holdings Corporation": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
     "fund_code": "KERNEL_SP_500_HEDGED",
     "raw_name": "Raytheon Technologies Corp",
     "raw_ticker": "",
-    "weight": 0.003594,
+    "weight": 0.00361,
     "reason": "ambiguous_collision_spread_0.02",
     "suggested_snippet": {
       "Kernel:KERNEL_SP_500_HEDGED": {
@@ -794,23 +40,10 @@
   },
   {
     "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Merck & Co Inc Common Stock",
-    "raw_ticker": "",
-    "weight": 0.003576,
-    "reason": "ambiguous_collision_spread_0.07",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Merck & Co Inc Common Stock": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
     "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
     "raw_name": "Tanger Factory Outlet Centers",
     "raw_ticker": "",
-    "weight": 0.003433,
+    "weight": 0.003434,
     "reason": "ambiguous_collision_spread_0.01",
     "suggested_snippet": {
       "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
@@ -820,36 +53,10 @@
   },
   {
     "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Goodman NZ Limited & Goodman Property Service Unt",
-    "raw_ticker": "",
-    "weight": 0.003278,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Goodman NZ Limited & Goodman Property Service Unt": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "GE Aerospace",
-    "raw_ticker": "",
-    "weight": 0.003178,
-    "reason": "ambiguous_collision_spread_0.03",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "GE Aerospace": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
     "fund_code": "KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED",
     "raw_name": "ADP Promesses",
     "raw_ticker": "",
-    "weight": 0.003055,
+    "weight": 0.003073,
     "reason": "no_candidates_above_70",
     "suggested_snippet": {
       "Kernel:KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED": {
@@ -859,66 +66,27 @@
   },
   {
     "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Precinct Properties New Zealand Limited",
-    "raw_ticker": "",
-    "weight": 0.00288,
-    "reason": "ambiguous_collision_spread_0.08",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Precinct Properties New Zealand Limited": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
-    "raw_name": "Dexus Units",
-    "raw_ticker": "",
-    "weight": 0.00286,
-    "reason": "ambiguous_collision_spread_0.04",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
-        "Dexus Units": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_ESG_HEDGED",
-    "raw_name": "Canadian Pacific Railway Ltd",
-    "raw_ticker": "",
-    "weight": 0.002828,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_ESG_HEDGED": {
-        "Canadian Pacific Railway Ltd": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED",
-    "raw_name": "Brookfield Infrastructure Corporation Class A",
-    "raw_ticker": "",
-    "weight": 0.002769,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED": {
-        "Brookfield Infrastructure Corporation Class A": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
     "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
     "raw_name": "RioCan REIT",
     "raw_ticker": "",
-    "weight": 0.002765,
+    "weight": 0.002766,
     "reason": "ambiguous_collision_spread_0.06",
     "suggested_snippet": {
       "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
         "RioCan REIT": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "GGB",
+    "raw_name": "FRENCH GOVERNMENT 042529 5.5",
+    "raw_ticker": "",
+    "weight": 0.002695,
+    "reason": "ambiguous_collision_spread_0.03",
+    "suggested_snippet": {
+      "Smartshares:GGB": {
+        "FRENCH GOVERNMENT 042529 5.5": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -936,54 +104,28 @@
     }
   },
   {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Wal-Mart Stores Inc",
+    "provider": "Smartshares",
+    "fund_code": "GGB",
+    "raw_name": "CHINA PEOPLE'S REPUBLIC OF GOVERNMENT 220371 3.76 GB",
     "raw_ticker": "",
-    "weight": 0.002599,
-    "reason": "ambiguous_collision_spread_0.04",
+    "weight": 0.002496,
+    "reason": "ambiguous_collision_spread_0.02",
     "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Wal-Mart Stores Inc": "INSERT_CANONICAL_ISIN"
+      "Smartshares:GGB": {
+        "CHINA PEOPLE'S REPUBLIC OF GOVERNMENT 220371 3.76 GB": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED",
-    "raw_name": "Northwestern Corp",
+    "provider": "Smartshares",
+    "fund_code": "GGB",
+    "raw_name": "CHINA PEOPLE'S REPUBLIC OF GOVERNMENT 250373 3.27 GB",
     "raw_ticker": "",
-    "weight": 0.002483,
-    "reason": "score_below_90",
+    "weight": 0.002396,
+    "reason": "ambiguous_collision_spread_0.02",
     "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED": {
-        "Northwestern Corp": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Sempra Energy",
-    "raw_ticker": "",
-    "weight": 0.002483,
-    "reason": "ambiguous_collision_spread_0.05",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Sempra Energy": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Sempra Energy",
-    "raw_ticker": "",
-    "weight": 0.002399,
-    "reason": "ambiguous_collision_spread_0.05",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Sempra Energy": "INSERT_CANONICAL_ISIN"
+      "Smartshares:GGB": {
+        "CHINA PEOPLE'S REPUBLIC OF GOVERNMENT 250373 3.27 GB": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -1005,50 +147,11 @@
     "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
     "raw_name": "National Retail Properties Inc",
     "raw_ticker": "",
-    "weight": 0.002288,
+    "weight": 0.002289,
     "reason": "ambiguous_collision_spread_0.00",
     "suggested_snippet": {
       "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
         "National Retail Properties Inc": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Goodman NZ Limited & Goodman Property Service Unt",
-    "raw_ticker": "",
-    "weight": 0.002199,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Goodman NZ Limited & Goodman Property Service Unt": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED",
-    "raw_name": "Grupo Aeroportuario Cen-Adr",
-    "raw_ticker": "",
-    "weight": 0.002196,
-    "reason": "ambiguous_collision_spread_0.01",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED": {
-        "Grupo Aeroportuario Cen-Adr": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "Intuitive Surgical Inc Common Stock",
-    "raw_ticker": "",
-    "weight": 0.002181,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "Intuitive Surgical Inc Common Stock": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -1068,71 +171,6 @@
   {
     "provider": "Kernel",
     "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
-    "raw_name": "Covivio",
-    "raw_ticker": "",
-    "weight": 0.002098,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
-        "Covivio": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "Intuitive Surgical Inc Common Stock",
-    "raw_ticker": "",
-    "weight": 0.002081,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "Intuitive Surgical Inc Common Stock": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Merck & Co Inc Common Stock",
-    "raw_ticker": "",
-    "weight": 0.001999,
-    "reason": "ambiguous_collision_spread_0.07",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Merck & Co Inc Common Stock": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Precinct Properties New Zealand Limited",
-    "raw_ticker": "",
-    "weight": 0.001899,
-    "reason": "ambiguous_collision_spread_0.08",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Precinct Properties New Zealand Limited": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Kiwibank Limited 4.93% PRF",
-    "raw_ticker": "",
-    "weight": 0.001899,
-    "reason": "ambiguous_collision_spread_0.09",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Kiwibank Limited 4.93% PRF": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
     "raw_name": "SmartCentres REIT",
     "raw_ticker": "",
     "weight": 0.001812,
@@ -1145,36 +183,10 @@
   },
   {
     "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "GE Aerospace",
-    "raw_ticker": "",
-    "weight": 0.001799,
-    "reason": "ambiguous_collision_spread_0.03",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "GE Aerospace": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Berkshire Hathaway Inc Cl B",
-    "raw_ticker": "",
-    "weight": 0.001788,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Berkshire Hathaway Inc Cl B": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
     "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
     "raw_name": "First Capital REIT",
     "raw_ticker": "",
-    "weight": 0.001621,
+    "weight": 0.001622,
     "reason": "ambiguous_collision_spread_0.10",
     "suggested_snippet": {
       "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
@@ -1183,145 +195,15 @@
     }
   },
   {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
-    "raw_name": "Frasers Logistics & Commercial Asset Management Pte Ltd",
+    "provider": "Smartshares",
+    "fund_code": "GGB",
+    "raw_name": "TREASURY 071242 GOVT",
     "raw_ticker": "",
-    "weight": 0.001526,
-    "reason": "ambiguous_collision_spread_0.14",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
-        "Frasers Logistics & Commercial Asset Management Pte Ltd": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
-    "raw_name": "Japan Prime Realty Inv Corp JREIT",
-    "raw_ticker": "",
-    "weight": 0.001526,
+    "weight": 0.001397,
     "reason": "score_below_90",
     "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
-        "Japan Prime Realty Inv Corp JREIT": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Vital Healthcare Property",
-    "raw_ticker": "",
-    "weight": 0.00149,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Vital Healthcare Property": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED",
-    "raw_name": "Fraport AG",
-    "raw_ticker": "",
-    "weight": 0.001432,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED": {
-        "Fraport AG": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
-    "raw_name": "CapitaLand Ascott Stapled Unit",
-    "raw_ticker": "",
-    "weight": 0.00143,
-    "reason": "ambiguous_collision_spread_0.15",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
-        "CapitaLand Ascott Stapled Unit": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
-    "raw_name": "Corporacion Inmobiliaria Vesta SAB de CV - VESTA (MX)",
-    "raw_ticker": "",
-    "weight": 0.00143,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
-        "Corporacion Inmobiliaria Vesta SAB de CV - VESTA (MX)": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
-    "raw_name": "Big Yellow Group REIT",
-    "raw_ticker": "",
-    "weight": 0.00143,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
-        "Big Yellow Group REIT": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "PNC Finl Services Group",
-    "raw_ticker": "",
-    "weight": 0.001388,
-    "reason": "ambiguous_collision_spread_0.10",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "PNC Finl Services Group": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "PNC Finl Services Group",
-    "raw_ticker": "",
-    "weight": 0.001324,
-    "reason": "ambiguous_collision_spread_0.10",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "PNC Finl Services Group": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Bank of China Deposit",
-    "raw_ticker": "",
-    "weight": 0.001291,
-    "reason": "ambiguous_collision_spread_0.06",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Bank of China Deposit": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED",
-    "raw_name": "INWIT - Infrastrutture Wireless Spa",
-    "raw_ticker": "",
-    "weight": 0.001241,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED": {
-        "INWIT - Infrastrutture Wireless Spa": "INSERT_CANONICAL_ISIN"
+      "Smartshares:GGB": {
+        "TREASURY 071242 GOVT": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -1335,58 +217,6 @@
     "suggested_snippet": {
       "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
         "Granite REIT": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_MARCH_2029_NZ_BOND",
-    "raw_name": "Kiwibank Limited 4.93% PRF",
-    "raw_ticker": "",
-    "weight": 0.001199,
-    "reason": "ambiguous_collision_spread_0.09",
-    "suggested_snippet": {
-      "Kernel:KERNEL_MARCH_2029_NZ_BOND": {
-        "Kiwibank Limited 4.93% PRF": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Fonterra Shareholders' Fund",
-    "raw_ticker": "",
-    "weight": 0.001192,
-    "reason": "ambiguous_collision_spread_0.00",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Fonterra Shareholders' Fund": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "Warner Bros Discovery Series A",
-    "raw_ticker": "",
-    "weight": 0.00119,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "Warner Bros Discovery Series A": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "Warner Bros Discovery Series A",
-    "raw_ticker": "",
-    "weight": 0.001135,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "Warner Bros Discovery Series A": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -1406,19 +236,6 @@
   {
     "provider": "Kernel",
     "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "Mondolez International Corp",
-    "raw_ticker": "",
-    "weight": 0.001091,
-    "reason": "ambiguous_collision_spread_0.10",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "Mondolez International Corp": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
     "raw_name": "Schlumberger Limited",
     "raw_ticker": "",
     "weight": 0.001091,
@@ -1431,66 +248,14 @@
   },
   {
     "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED",
-    "raw_name": "Jiangsu Expressway Co Ltd H Shares",
-    "raw_ticker": "",
-    "weight": 0.00105,
-    "reason": "ambiguous_collision_spread_0.08",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED": {
-        "Jiangsu Expressway Co Ltd H Shares": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "Mondolez International Corp",
-    "raw_ticker": "",
-    "weight": 0.00104,
-    "reason": "ambiguous_collision_spread_0.10",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "Mondolez International Corp": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
     "fund_code": "KERNEL_SP_500_HEDGED",
     "raw_name": "Schlumberger Limited",
     "raw_ticker": "",
-    "weight": 0.00104,
+    "weight": 0.001045,
     "reason": "no_candidates_above_70",
     "suggested_snippet": {
       "Kernel:KERNEL_SP_500_HEDGED": {
         "Schlumberger Limited": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Berkshire Hathaway Inc Cl B",
-    "raw_ticker": "",
-    "weight": 0.001,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Berkshire Hathaway Inc Cl B": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Sky City Entertainment Limited (NZ Registry)",
-    "raw_ticker": "",
-    "weight": 0.000993,
-    "reason": "ambiguous_collision_spread_0.00",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Sky City Entertainment Limited (NZ Registry)": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -1499,7 +264,7 @@
     "fund_code": "KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED",
     "raw_name": "WaterBridge Infrastructure LLC Class A",
     "raw_ticker": "",
-    "weight": 0.000955,
+    "weight": 0.00096,
     "reason": "ambiguous_collision_spread_0.02",
     "suggested_snippet": {
       "Kernel:KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED": {
@@ -1535,71 +300,6 @@
   },
   {
     "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
-    "raw_name": "Piedmont Office Realty Trust Inc",
-    "raw_ticker": "",
-    "weight": 0.000858,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
-        "Piedmont Office Realty Trust Inc": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
-    "raw_name": "Nippon Accommodations Fund",
-    "raw_ticker": "",
-    "weight": 0.000858,
-    "reason": "ambiguous_collision_spread_0.05",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
-        "Nippon Accommodations Fund": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Palantir Technologies Inc. Class A",
-    "raw_ticker": "",
-    "weight": 0.000795,
-    "reason": "ambiguous_collision_spread_0.12",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Palantir Technologies Inc. Class A": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "Sempra Energy",
-    "raw_ticker": "",
-    "weight": 0.000793,
-    "reason": "ambiguous_collision_spread_0.05",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "Sempra Energy": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "Sempra Energy",
-    "raw_ticker": "",
-    "weight": 0.000757,
-    "reason": "ambiguous_collision_spread_0.05",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "Sempra Energy": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
     "fund_code": "KERNEL_SP_500_UNHEDGED",
     "raw_name": "Wabtec",
     "raw_ticker": "",
@@ -1614,22 +314,9 @@
   {
     "provider": "Kernel",
     "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
-    "raw_name": "Mori Trust Sogo REIT",
-    "raw_ticker": "",
-    "weight": 0.000667,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
-        "Mori Trust Sogo REIT": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
     "raw_name": "Frontier Real Estate Investment",
     "raw_ticker": "",
-    "weight": 0.000667,
+    "weight": 0.000668,
     "reason": "ambiguous_collision_spread_0.05",
     "suggested_snippet": {
       "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
@@ -1642,7 +329,7 @@
     "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
     "raw_name": "SmartStop Self Storage REIT Inc",
     "raw_ticker": "",
-    "weight": 0.000667,
+    "weight": 0.000668,
     "reason": "ambiguous_collision_spread_0.14",
     "suggested_snippet": {
       "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
@@ -1655,37 +342,11 @@
     "fund_code": "KERNEL_SP_500_HEDGED",
     "raw_name": "Wabtec",
     "raw_ticker": "",
-    "weight": 0.000662,
+    "weight": 0.000665,
     "reason": "no_candidates_above_70",
     "suggested_snippet": {
       "Kernel:KERNEL_SP_500_HEDGED": {
         "Wabtec": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_ESG_HEDGED",
-    "raw_name": "Nippon Tel & Tel Corp",
-    "raw_ticker": "",
-    "weight": 0.00066,
-    "reason": "ambiguous_collision_spread_0.14",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_ESG_HEDGED": {
-        "Nippon Tel & Tel Corp": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Cia de Saneamento Basico Es de S Paulo ADR",
-    "raw_ticker": "",
-    "weight": 0.0006,
-    "reason": "ambiguous_collision_spread_0.05",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Cia de Saneamento Basico Es de S Paulo ADR": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -1699,19 +360,6 @@
     "suggested_snippet": {
       "Kernel:KERNEL_MARCH_2029_NZ_BOND": {
         "Avanti Kea PL 2026-1 Class A 15/06/2035": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Cia de Saneamento Basico Es de S Paulo ADR",
-    "raw_ticker": "",
-    "weight": 0.000596,
-    "reason": "ambiguous_collision_spread_0.05",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Cia de Saneamento Basico Es de S Paulo ADR": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -1733,7 +381,7 @@
     "fund_code": "KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED",
     "raw_name": "UNITIL Corp",
     "raw_ticker": "",
-    "weight": 0.000573,
+    "weight": 0.000576,
     "reason": "no_candidates_above_70",
     "suggested_snippet": {
       "Kernel:KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED": {
@@ -1759,37 +407,11 @@
     "fund_code": "KERNEL_SP_500_HEDGED",
     "raw_name": "Block CL A Ord",
     "raw_ticker": "",
-    "weight": 0.000567,
+    "weight": 0.00057,
     "reason": "ambiguous_collision_spread_0.04",
     "suggested_snippet": {
       "Kernel:KERNEL_SP_500_HEDGED": {
         "Block CL A Ord": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Palantir Technologies Inc. Class A",
-    "raw_ticker": "",
-    "weight": 0.0005,
-    "reason": "ambiguous_collision_spread_0.12",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Palantir Technologies Inc. Class A": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_MARCH_2027_NZ_BOND",
-    "raw_name": "Redemptions",
-    "raw_ticker": "",
-    "weight": 0.0005,
-    "reason": "no_candidates_above_70",
-    "suggested_snippet": {
-      "Kernel:KERNEL_MARCH_2027_NZ_BOND": {
-        "Redemptions": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -1824,24 +446,11 @@
     "fund_code": "KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED",
     "raw_name": "Corporacion America Airports SA",
     "raw_ticker": "",
-    "weight": 0.000477,
+    "weight": 0.00048,
     "reason": "ambiguous_collision_spread_0.03",
     "suggested_snippet": {
       "Kernel:KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED": {
         "Corporacion America Airports SA": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED",
-    "raw_name": "Eutelsat Communications",
-    "raw_ticker": "",
-    "weight": 0.000477,
-    "reason": "ambiguous_collision_spread_0.04",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED": {
-        "Eutelsat Communications": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -1902,89 +511,11 @@
     "fund_code": "KERNEL_SP_500_HEDGED",
     "raw_name": "Hartford Finl Services Group",
     "raw_ticker": "",
-    "weight": 0.000473,
+    "weight": 0.000475,
     "reason": "ambiguous_collision_spread_0.05",
     "suggested_snippet": {
       "Kernel:KERNEL_SP_500_HEDGED": {
         "Hartford Finl Services Group": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Grupo Aeroportuario del Pacifico S A B de C V ADR",
-    "raw_ticker": "",
-    "weight": 0.0004,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Grupo Aeroportuario del Pacifico S A B de C V ADR": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Grupo Aeroportuario del Pacifico S A B de C V ADR",
-    "raw_ticker": "",
-    "weight": 0.000397,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Grupo Aeroportuario del Pacifico S A B de C V ADR": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Canadian Pacific Railway Ltd",
-    "raw_ticker": "",
-    "weight": 0.000397,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Canadian Pacific Railway Ltd": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "Zoetis Inc Common Stock",
-    "raw_ticker": "",
-    "weight": 0.000397,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "Zoetis Inc Common Stock": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "Cognizant Tech Solutions Corp",
-    "raw_ticker": "",
-    "weight": 0.000397,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "Cognizant Tech Solutions Corp": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "VICI PPTYS ORD",
-    "raw_ticker": "",
-    "weight": 0.000397,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "VICI PPTYS ORD": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -2003,49 +534,10 @@
   },
   {
     "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "Expeditors Intl of WA Inc",
-    "raw_ticker": "",
-    "weight": 0.000397,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "Expeditors Intl of WA Inc": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "Xylem Inc",
-    "raw_ticker": "",
-    "weight": 0.000397,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "Xylem Inc": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "Estee Lauder CL A Ord",
-    "raw_ticker": "",
-    "weight": 0.000397,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "Estee Lauder CL A Ord": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
     "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
     "raw_name": "Diversified Healthcare Trust",
     "raw_ticker": "",
-    "weight": 0.000381,
+    "weight": 0.000382,
     "reason": "ambiguous_collision_spread_0.02",
     "suggested_snippet": {
       "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
@@ -2058,7 +550,7 @@
     "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
     "raw_name": "Dream Industrial REIT",
     "raw_ticker": "",
-    "weight": 0.000381,
+    "weight": 0.000382,
     "reason": "ambiguous_collision_spread_0.03",
     "suggested_snippet": {
       "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
@@ -2071,7 +563,7 @@
     "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
     "raw_name": "Gladstone Commercial Corp",
     "raw_ticker": "",
-    "weight": 0.000381,
+    "weight": 0.000382,
     "reason": "ambiguous_collision_spread_0.05",
     "suggested_snippet": {
       "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
@@ -2084,7 +576,7 @@
     "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
     "raw_name": "Service Properties Trust",
     "raw_ticker": "",
-    "weight": 0.000381,
+    "weight": 0.000382,
     "reason": "ambiguous_collision_spread_0.04",
     "suggested_snippet": {
       "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
@@ -2097,7 +589,7 @@
     "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
     "raw_name": "Brandywine Realty Trust",
     "raw_ticker": "",
-    "weight": 0.000381,
+    "weight": 0.000382,
     "reason": "ambiguous_collision_spread_0.01",
     "suggested_snippet": {
       "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
@@ -2108,130 +600,13 @@
   {
     "provider": "Kernel",
     "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "Zoetis Inc Common Stock",
-    "raw_ticker": "",
-    "weight": 0.000378,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "Zoetis Inc Common Stock": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "Cognizant Tech Solutions Corp",
-    "raw_ticker": "",
-    "weight": 0.000378,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "Cognizant Tech Solutions Corp": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "VICI PPTYS ORD",
-    "raw_ticker": "",
-    "weight": 0.000378,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "VICI PPTYS ORD": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
     "raw_name": "F5 Networks Inc",
     "raw_ticker": "",
-    "weight": 0.000378,
+    "weight": 0.00038,
     "reason": "ambiguous_collision_spread_0.13",
     "suggested_snippet": {
       "Kernel:KERNEL_SP_500_HEDGED": {
         "F5 Networks Inc": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "Expeditors Intl of WA Inc",
-    "raw_ticker": "",
-    "weight": 0.000378,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "Expeditors Intl of WA Inc": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "Xylem Inc",
-    "raw_ticker": "",
-    "weight": 0.000378,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "Xylem Inc": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "Estee Lauder CL A Ord",
-    "raw_ticker": "",
-    "weight": 0.000378,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "Estee Lauder CL A Ord": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_100",
-    "raw_name": "Roche Hldgs AG Br",
-    "raw_ticker": "",
-    "weight": 0.000301,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_100": {
-        "Roche Hldgs AG Br": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Red Electrica Corporacion SA",
-    "raw_ticker": "",
-    "weight": 0.0003,
-    "reason": "ambiguous_collision_spread_0.01",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Red Electrica Corporacion SA": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Mid-America Apt Communties",
-    "raw_ticker": "",
-    "weight": 0.0003,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Mid-America Apt Communties": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -2250,19 +625,6 @@
   },
   {
     "provider": "Kernel",
-    "fund_code": "KERNEL_MARCH_2027_NZ_BOND",
-    "raw_name": "Kiwibank Limited 4.93% PRF",
-    "raw_ticker": "",
-    "weight": 0.0003,
-    "reason": "ambiguous_collision_spread_0.09",
-    "suggested_snippet": {
-      "Kernel:KERNEL_MARCH_2027_NZ_BOND": {
-        "Kiwibank Limited 4.93% PRF": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
     "fund_code": "KERNEL_MARCH_2029_NZ_BOND",
     "raw_name": "MTF Magnum Trust 2025 Class A 19/04/2033",
     "raw_ticker": "",
@@ -2275,80 +637,41 @@
     }
   },
   {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Red Electrica Corporacion SA",
+    "provider": "Smartshares",
+    "fund_code": "GGB",
+    "raw_name": "UNITED KINGDOM OF GREAT BRITAIN AND NORTHERN 221073 1.275 GB",
     "raw_ticker": "",
-    "weight": 0.000298,
-    "reason": "ambiguous_collision_spread_0.01",
+    "weight": 0.000299,
+    "reason": "ambiguous_collision_spread_0.05",
     "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Red Electrica Corporacion SA": "INSERT_CANONICAL_ISIN"
+      "Smartshares:GGB": {
+        "UNITED KINGDOM OF GREAT BRITAIN AND NORTHERN 221073 1.275 GB": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Mid-America Apt Communties",
+    "provider": "Smartshares",
+    "fund_code": "GGB",
+    "raw_name": "ITALY REPUBLIC OF GOVERNMENT 010372 2.15 GB",
     "raw_ticker": "",
-    "weight": 0.000298,
-    "reason": "score_below_90",
+    "weight": 0.000299,
+    "reason": "ambiguous_collision_spread_0.04",
     "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Mid-America Apt Communties": "INSERT_CANONICAL_ISIN"
+      "Smartshares:GGB": {
+        "ITALY REPUBLIC OF GOVERNMENT 010372 2.15 GB": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Intuitive Surgical Inc Common Stock",
+    "provider": "Smartshares",
+    "fund_code": "GGB",
+    "raw_name": "AUSTRIA REPUBLIC OF GOVERNMENT 230523 1.85 GB",
     "raw_ticker": "",
-    "weight": 0.000298,
-    "reason": "score_below_90",
+    "weight": 0.000299,
+    "reason": "ambiguous_collision_spread_0.02",
     "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Intuitive Surgical Inc Common Stock": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "Fidelity National Information",
-    "raw_ticker": "",
-    "weight": 0.000297,
-    "reason": "ambiguous_collision_spread_0.08",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "Fidelity National Information": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "Bunge Limited",
-    "raw_ticker": "",
-    "weight": 0.000297,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "Bunge Limited": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_100_HEDGED",
-    "raw_name": "Roche Hldgs AG Br",
-    "raw_ticker": "",
-    "weight": 0.000288,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_100_HEDGED": {
-        "Roche Hldgs AG Br": "INSERT_CANONICAL_ISIN"
+      "Smartshares:GGB": {
+        "AUSTRIA REPUBLIC OF GOVERNMENT 230523 1.85 GB": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -2357,7 +680,7 @@
     "fund_code": "KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED",
     "raw_name": "Consolidated Water Co Ltd",
     "raw_ticker": "",
-    "weight": 0.000286,
+    "weight": 0.000288,
     "reason": "ambiguous_collision_spread_0.02",
     "suggested_snippet": {
       "Kernel:KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED": {
@@ -2375,19 +698,6 @@
     "suggested_snippet": {
       "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
         "CBL & Associates Properties Inc": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
-    "raw_name": "Leopalace 21 Corp",
-    "raw_ticker": "",
-    "weight": 0.000286,
-    "reason": "no_candidates_above_70",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
-        "Leopalace 21 Corp": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -2418,80 +728,28 @@
     }
   },
   {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_US_BOND",
-    "raw_name": "KW NZD.USD @ 0.56503, 04 November 2026 (Fair Value)",
+    "provider": "Smartshares",
+    "fund_code": "GGB",
+    "raw_name": "THAILAND KINGDOM OF GOVERNMENT 170672 4.00 GB",
     "raw_ticker": "",
-    "weight": 0.000285,
-    "reason": "score_below_90",
+    "weight": 0.0002,
+    "reason": "ambiguous_collision_spread_0.06",
     "suggested_snippet": {
-      "Kernel:KERNEL_US_BOND": {
-        "KW NZD.USD @ 0.56503, 04 November 2026 (Fair Value)": "INSERT_CANONICAL_ISIN"
+      "Smartshares:GGB": {
+        "THAILAND KINGDOM OF GOVERNMENT 170672 4.00 GB": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_US_BOND",
-    "raw_name": "KW NZD.USD @ 0.58802, 02 October 2026 (Fair Value)",
+    "provider": "Smartshares",
+    "fund_code": "GGB",
+    "raw_name": "SPAIN KINGDOM OF GOVERNMENT 311071 1.45 GB",
     "raw_ticker": "",
-    "weight": 0.000285,
-    "reason": "score_below_90",
+    "weight": 0.0002,
+    "reason": "ambiguous_collision_spread_0.02",
     "suggested_snippet": {
-      "Kernel:KERNEL_US_BOND": {
-        "KW NZD.USD @ 0.58802, 02 October 2026 (Fair Value)": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_US_BOND",
-    "raw_name": "KW NZD.USD @ 0.57392, 02 October 2026 (Fair Value)",
-    "raw_ticker": "",
-    "weight": 0.000285,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_US_BOND": {
-        "KW NZD.USD @ 0.57392, 02 October 2026 (Fair Value)": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "KW NZD.USD @ 0.56503, 04 November 2026 (FIF)",
-    "raw_ticker": "",
-    "weight": 0.000284,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "KW NZD.USD @ 0.56503, 04 November 2026 (FIF)": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "Fidelity National Information",
-    "raw_ticker": "",
-    "weight": 0.000284,
-    "reason": "ambiguous_collision_spread_0.08",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "Fidelity National Information": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "Bunge Limited",
-    "raw_ticker": "",
-    "weight": 0.000284,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "Bunge Limited": "INSERT_CANONICAL_ISIN"
+      "Smartshares:GGB": {
+        "SPAIN KINGDOM OF GOVERNMENT 311071 1.45 GB": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -2505,110 +763,6 @@
     "suggested_snippet": {
       "Kernel:KERNEL_BALANCED": {
         "ADP Promesses": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Brookfield Infrastructure Corporation Class A",
-    "raw_ticker": "",
-    "weight": 0.0002,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Brookfield Infrastructure Corporation Class A": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Canadian Pacific Railway Ltd",
-    "raw_ticker": "",
-    "weight": 0.0002,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Canadian Pacific Railway Ltd": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Alexandria Real Estate Eqty",
-    "raw_ticker": "",
-    "weight": 0.0002,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Alexandria Real Estate Eqty": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Boston Properties Inc",
-    "raw_ticker": "",
-    "weight": 0.0002,
-    "reason": "ambiguous_collision_spread_0.03",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Boston Properties Inc": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Northwestern Corp",
-    "raw_ticker": "",
-    "weight": 0.0002,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Northwestern Corp": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Federal Realty Invt Trust",
-    "raw_ticker": "",
-    "weight": 0.0002,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Federal Realty Invt Trust": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Grupo Aeroportuario Cen-Adr",
-    "raw_ticker": "",
-    "weight": 0.0002,
-    "reason": "ambiguous_collision_spread_0.01",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Grupo Aeroportuario Cen-Adr": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Intuitive Surgical Inc Common Stock",
-    "raw_ticker": "",
-    "weight": 0.0002,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Intuitive Surgical Inc Common Stock": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -2627,19 +781,6 @@
   },
   {
     "provider": "Kernel",
-    "fund_code": "KERNEL_NZ_BOND",
-    "raw_name": "KW NZD.AUD @ 0.807915, 28 October 2026 (Fair Value)",
-    "raw_ticker": "",
-    "weight": 0.0002,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_NZ_BOND": {
-        "KW NZD.AUD @ 0.807915, 28 October 2026 (Fair Value)": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
     "fund_code": "KERNEL_HIGH_GROWTH",
     "raw_name": "ADP Promesses",
     "raw_ticker": "",
@@ -2648,253 +789,6 @@
     "suggested_snippet": {
       "Kernel:KERNEL_HIGH_GROWTH": {
         "ADP Promesses": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Brookfield Infrastructure Corporation Class A",
-    "raw_ticker": "",
-    "weight": 0.000199,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Brookfield Infrastructure Corporation Class A": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Alexandria Real Estate Eqty",
-    "raw_ticker": "",
-    "weight": 0.000199,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Alexandria Real Estate Eqty": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Boston Properties Inc",
-    "raw_ticker": "",
-    "weight": 0.000199,
-    "reason": "ambiguous_collision_spread_0.03",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Boston Properties Inc": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Northwestern Corp",
-    "raw_ticker": "",
-    "weight": 0.000199,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Northwestern Corp": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Federal Realty Invt Trust",
-    "raw_ticker": "",
-    "weight": 0.000199,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Federal Realty Invt Trust": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Dexus Units",
-    "raw_ticker": "",
-    "weight": 0.000199,
-    "reason": "ambiguous_collision_spread_0.04",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Dexus Units": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Grupo Aeroportuario Cen-Adr",
-    "raw_ticker": "",
-    "weight": 0.000199,
-    "reason": "ambiguous_collision_spread_0.01",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Grupo Aeroportuario Cen-Adr": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "PNC Finl Services Group",
-    "raw_ticker": "",
-    "weight": 0.000199,
-    "reason": "ambiguous_collision_spread_0.10",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "PNC Finl Services Group": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Nippon Tel & Tel Corp",
-    "raw_ticker": "",
-    "weight": 0.000199,
-    "reason": "ambiguous_collision_spread_0.14",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Nippon Tel & Tel Corp": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Roche Hldgs AG Br",
-    "raw_ticker": "",
-    "weight": 0.000199,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Roche Hldgs AG Br": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "CDW Corp",
-    "raw_ticker": "",
-    "weight": 0.000198,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "CDW Corp": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "WR Berkley Corp",
-    "raw_ticker": "",
-    "weight": 0.000198,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "WR Berkley Corp": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "Charles River Laboratories Ord",
-    "raw_ticker": "",
-    "weight": 0.000198,
-    "reason": "ambiguous_collision_spread_0.00",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "Charles River Laboratories Ord": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "Mid-America Apt Communties",
-    "raw_ticker": "",
-    "weight": 0.000198,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "Mid-America Apt Communties": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "Fox Corp Class A",
-    "raw_ticker": "",
-    "weight": 0.000198,
-    "reason": "ambiguous_collision_spread_0.13",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "Fox Corp Class A": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "McCormick & Co",
-    "raw_ticker": "",
-    "weight": 0.000198,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "McCormick & Co": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_100_HEDGED",
-    "raw_name": "KW NZD.USD @ 0.56503, 04 November 2026 (FIF)",
-    "raw_ticker": "",
-    "weight": 0.000192,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_100_HEDGED": {
-        "KW NZD.USD @ 0.56503, 04 November 2026 (FIF)": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED",
-    "raw_name": "KW NZD.USD @ 0.56503, 04 November 2026 (FIF)",
-    "raw_ticker": "",
-    "weight": 0.000191,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED": {
-        "KW NZD.USD @ 0.56503, 04 November 2026 (FIF)": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
-    "raw_name": "KW NZD.USD @ 0.56503, 04 November 2026 (FIF)",
-    "raw_ticker": "",
-    "weight": 0.000191,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
-        "KW NZD.USD @ 0.56503, 04 November 2026 (FIF)": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -2925,197 +819,93 @@
     }
   },
   {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_ESG_HEDGED",
-    "raw_name": "Roche Hldgs AG Br",
+    "provider": "Smartshares",
+    "fund_code": "GGB",
+    "raw_name": "FRANCE REPUBLIC OF GOVERNMENT 250572 0.50 GB",
     "raw_ticker": "",
-    "weight": 0.000189,
-    "reason": "score_below_90",
+    "weight": 0.0001,
+    "reason": "ambiguous_collision_spread_0.02",
     "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_ESG_HEDGED": {
-        "Roche Hldgs AG Br": "INSERT_CANONICAL_ISIN"
+      "Smartshares:GGB": {
+        "FRANCE REPUBLIC OF GOVERNMENT 250572 0.50 GB": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_ESG_HEDGED",
-    "raw_name": "KW NZD.USD @ 0.56503, 04 November 2026 (FIF)",
+    "provider": "Smartshares",
+    "fund_code": "GGB",
+    "raw_name": "AUSTRIA REPUBLIC OF GOVERNMENT 20092117 2.10 GB",
     "raw_ticker": "",
-    "weight": 0.000189,
-    "reason": "score_below_90",
+    "weight": 0.0001,
+    "reason": "ambiguous_collision_spread_0.02",
     "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_ESG_HEDGED": {
-        "KW NZD.USD @ 0.56503, 04 November 2026 (FIF)": "INSERT_CANONICAL_ISIN"
+      "Smartshares:GGB": {
+        "AUSTRIA REPUBLIC OF GOVERNMENT 20092117 2.10 GB": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "CDW Corp",
+    "provider": "Smartshares",
+    "fund_code": "GGB",
+    "raw_name": "SINGAPORE REPUBLIC OF GOVERNMENT 010872 3.00 GB",
     "raw_ticker": "",
-    "weight": 0.000189,
-    "reason": "score_below_90",
+    "weight": 0.0001,
+    "reason": "ambiguous_collision_spread_0.01",
     "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "CDW Corp": "INSERT_CANONICAL_ISIN"
+      "Smartshares:GGB": {
+        "SINGAPORE REPUBLIC OF GOVERNMENT 010872 3.00 GB": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "WR Berkley Corp",
+    "provider": "Smartshares",
+    "fund_code": "GGB",
+    "raw_name": "GERMANY FEDERAL REPUBLIC OF GOVERNMENT150829 0.00 GB",
     "raw_ticker": "",
-    "weight": 0.000189,
-    "reason": "score_below_90",
+    "weight": 0.0001,
+    "reason": "ambiguous_collision_spread_0.07",
     "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "WR Berkley Corp": "INSERT_CANONICAL_ISIN"
+      "Smartshares:GGB": {
+        "GERMANY FEDERAL REPUBLIC OF GOVERNMENT150829 0.00 GB": "INSERT_CANONICAL_ISIN"
       }
     }
   },
   {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "Charles River Laboratories Ord",
+    "provider": "Smartshares",
+    "fund_code": "GGB",
+    "raw_name": "AUSTRIA REPUBLIC OF GOVERNMENT 200471 0.70 GB",
     "raw_ticker": "",
-    "weight": 0.000189,
+    "weight": 0.0001,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Smartshares:GGB": {
+        "AUSTRIA REPUBLIC OF GOVERNMENT 200471 0.70 GB": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "GGB",
+    "raw_name": "BELGIUM KINGDOM OF GOVERNMENT 220671 0.65 GB",
+    "raw_ticker": "",
+    "weight": 0.0001,
+    "reason": "ambiguous_collision_spread_0.07",
+    "suggested_snippet": {
+      "Smartshares:GGB": {
+        "BELGIUM KINGDOM OF GOVERNMENT 220671 0.65 GB": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "GGB",
+    "raw_name": "CHINA PEOPLES REPUBLIC OF GOVERNMENT 250570 3.73 GB",
+    "raw_ticker": "",
+    "weight": 0.0001,
     "reason": "ambiguous_collision_spread_0.00",
     "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "Charles River Laboratories Ord": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "Mid-America Apt Communties",
-    "raw_ticker": "",
-    "weight": 0.000189,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "Mid-America Apt Communties": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "Fox Corp Class A",
-    "raw_ticker": "",
-    "weight": 0.000189,
-    "reason": "ambiguous_collision_spread_0.13",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "Fox Corp Class A": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "McCormick & Co",
-    "raw_ticker": "",
-    "weight": 0.000189,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "McCormick & Co": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "KW NZD.AUD @ 0.808235, 28 October 2026 (Fair Value)",
-    "raw_ticker": "",
-    "weight": 0.0001,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "KW NZD.AUD @ 0.808235, 28 October 2026 (Fair Value)": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Dexus Units",
-    "raw_ticker": "",
-    "weight": 0.0001,
-    "reason": "ambiguous_collision_spread_0.04",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Dexus Units": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Fraport AG",
-    "raw_ticker": "",
-    "weight": 0.0001,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Fraport AG": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "PNC Finl Services Group",
-    "raw_ticker": "",
-    "weight": 0.0001,
-    "reason": "ambiguous_collision_spread_0.10",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "PNC Finl Services Group": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "INWIT - Infrastrutture Wireless Spa",
-    "raw_ticker": "",
-    "weight": 0.0001,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "INWIT - Infrastrutture Wireless Spa": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Nippon Tel & Tel Corp",
-    "raw_ticker": "",
-    "weight": 0.0001,
-    "reason": "ambiguous_collision_spread_0.14",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Nippon Tel & Tel Corp": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Roche Hldgs AG Br",
-    "raw_ticker": "",
-    "weight": 0.0001,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Roche Hldgs AG Br": "INSERT_CANONICAL_ISIN"
+      "Smartshares:GGB": {
+        "CHINA PEOPLES REPUBLIC OF GOVERNMENT 250570 3.73 GB": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -3129,45 +919,6 @@
     "suggested_snippet": {
       "Kernel:KERNEL_BALANCED": {
         "Tanger Factory Outlet Centers": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Warner Bros Discovery Series A",
-    "raw_ticker": "",
-    "weight": 0.0001,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Warner Bros Discovery Series A": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Jiangsu Expressway Co Ltd H Shares",
-    "raw_ticker": "",
-    "weight": 0.0001,
-    "reason": "ambiguous_collision_spread_0.08",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Jiangsu Expressway Co Ltd H Shares": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Mondolez International Corp",
-    "raw_ticker": "",
-    "weight": 0.0001,
-    "reason": "ambiguous_collision_spread_0.10",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Mondolez International Corp": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -3226,19 +977,6 @@
   {
     "provider": "Kernel",
     "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Aurizon Holdings Limited Star Stock",
-    "raw_ticker": "",
-    "weight": 0.0001,
-    "reason": "ambiguous_collision_spread_0.07",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Aurizon Holdings Limited Star Stock": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
     "raw_name": "National Retail Properties Inc",
     "raw_ticker": "",
     "weight": 0.0001,
@@ -3277,45 +1015,6 @@
   },
   {
     "provider": "Kernel",
-    "fund_code": "KERNEL_BALANCED",
-    "raw_name": "Covivio",
-    "raw_ticker": "",
-    "weight": 0.0001,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_BALANCED": {
-        "Covivio": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Warner Bros Discovery Series A",
-    "raw_ticker": "",
-    "weight": 9.9e-05,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Warner Bros Discovery Series A": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Mondolez International Corp",
-    "raw_ticker": "",
-    "weight": 9.9e-05,
-    "reason": "ambiguous_collision_spread_0.10",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Mondolez International Corp": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
     "fund_code": "KERNEL_HIGH_GROWTH",
     "raw_name": "Schlumberger Limited",
     "raw_ticker": "",
@@ -3324,45 +1023,6 @@
     "suggested_snippet": {
       "Kernel:KERNEL_HIGH_GROWTH": {
         "Schlumberger Limited": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Fraport AG",
-    "raw_ticker": "",
-    "weight": 9.9e-05,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Fraport AG": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Aurizon Holdings Limited Star Stock",
-    "raw_ticker": "",
-    "weight": 9.9e-05,
-    "reason": "ambiguous_collision_spread_0.07",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Aurizon Holdings Limited Star Stock": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "INWIT - Infrastrutture Wireless Spa",
-    "raw_ticker": "",
-    "weight": 9.9e-05,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "INWIT - Infrastrutture Wireless Spa": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -3389,19 +1049,6 @@
     "suggested_snippet": {
       "Kernel:KERNEL_HIGH_GROWTH": {
         "Tanger Factory Outlet Centers": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Jiangsu Expressway Co Ltd H Shares",
-    "raw_ticker": "",
-    "weight": 9.9e-05,
-    "reason": "ambiguous_collision_spread_0.08",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Jiangsu Expressway Co Ltd H Shares": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -3447,19 +1094,6 @@
   {
     "provider": "Kernel",
     "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "KW NZD.JPY @ 88.548, 04 November 2026 (FIF)",
-    "raw_ticker": "",
-    "weight": 9.9e-05,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "KW NZD.JPY @ 88.548, 04 November 2026 (FIF)": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
     "raw_name": "Hartford Finl Services Group",
     "raw_ticker": "",
     "weight": 9.9e-05,
@@ -3486,32 +1120,6 @@
   {
     "provider": "Kernel",
     "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "KW NZD.USD @ 0.56503, 04 November 2026 (FIF)",
-    "raw_ticker": "",
-    "weight": 9.9e-05,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "KW NZD.USD @ 0.56503, 04 November 2026 (FIF)": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Zoetis Inc Common Stock",
-    "raw_ticker": "",
-    "weight": 9.9e-05,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Zoetis Inc Common Stock": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
     "raw_name": "Kenedix Office Investment Corp",
     "raw_ticker": "",
     "weight": 9.9e-05,
@@ -3519,19 +1127,6 @@
     "suggested_snippet": {
       "Kernel:KERNEL_HIGH_GROWTH": {
         "Kenedix Office Investment Corp": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_HIGH_GROWTH",
-    "raw_name": "Covivio",
-    "raw_ticker": "",
-    "weight": 9.9e-05,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_HIGH_GROWTH": {
-        "Covivio": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -3551,32 +1146,6 @@
   {
     "provider": "Kernel",
     "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "Boston Properties Inc",
-    "raw_ticker": "",
-    "weight": 9.9e-05,
-    "reason": "ambiguous_collision_spread_0.03",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "Boston Properties Inc": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "Federal Realty Invt Trust",
-    "raw_ticker": "",
-    "weight": 9.9e-05,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "Federal Realty Invt Trust": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
     "raw_name": "Fox Corp Class B",
     "raw_ticker": "",
     "weight": 9.9e-05,
@@ -3584,32 +1153,6 @@
     "suggested_snippet": {
       "Kernel:KERNEL_SP_500_UNHEDGED": {
         "Fox Corp Class B": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_UNHEDGED",
-    "raw_name": "Alexandria Real Estate Eqty",
-    "raw_ticker": "",
-    "weight": 9.9e-05,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_UNHEDGED": {
-        "Alexandria Real Estate Eqty": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED",
-    "raw_name": "KW NZD.EUR @ 0.49672, 04 November 2026 (FIF)",
-    "raw_ticker": "",
-    "weight": 9.5e-05,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED": {
-        "KW NZD.EUR @ 0.49672, 04 November 2026 (FIF)": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -3623,19 +1166,6 @@
     "suggested_snippet": {
       "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
         "Community Healthcare Trust Inc": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
-    "raw_name": "KW NZD.JPY @ 88.548, 04 November 2026 (FIF)",
-    "raw_ticker": "",
-    "weight": 9.5e-05,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
-        "KW NZD.JPY @ 88.548, 04 November 2026 (FIF)": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -3681,19 +1211,6 @@
   {
     "provider": "Kernel",
     "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
-    "raw_name": "KW NZD.USD @ 0.58802, 02 October 2026 (FIF)",
-    "raw_ticker": "",
-    "weight": 9.5e-05,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
-        "KW NZD.USD @ 0.58802, 02 October 2026 (FIF)": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
     "raw_name": "SITE Centers Corp",
     "raw_ticker": "",
     "weight": 9.5e-05,
@@ -3707,32 +1224,6 @@
   {
     "provider": "Kernel",
     "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "Boston Properties Inc",
-    "raw_ticker": "",
-    "weight": 9.5e-05,
-    "reason": "ambiguous_collision_spread_0.03",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "Boston Properties Inc": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "Federal Realty Invt Trust",
-    "raw_ticker": "",
-    "weight": 9.5e-05,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "Federal Realty Invt Trust": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
     "raw_name": "Fox Corp Class B",
     "raw_ticker": "",
     "weight": 9.5e-05,
@@ -3740,32 +1231,6 @@
     "suggested_snippet": {
       "Kernel:KERNEL_SP_500_HEDGED": {
         "Fox Corp Class B": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_SP_500_HEDGED",
-    "raw_name": "Alexandria Real Estate Eqty",
-    "raw_ticker": "",
-    "weight": 9.5e-05,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_SP_500_HEDGED": {
-        "Alexandria Real Estate Eqty": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Kernel",
-    "fund_code": "KERNEL_GLOBAL_ESG_HEDGED",
-    "raw_name": "KW NZD.JPY @ 88.548, 04 November 2026 (FIF)",
-    "raw_ticker": "",
-    "weight": 9.4e-05,
-    "reason": "score_below_90",
-    "suggested_snippet": {
-      "Kernel:KERNEL_GLOBAL_ESG_HEDGED": {
-        "KW NZD.JPY @ 88.548, 04 November 2026 (FIF)": "INSERT_CANONICAL_ISIN"
       }
     }
   }

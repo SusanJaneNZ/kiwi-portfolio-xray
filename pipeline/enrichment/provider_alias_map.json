@@ -201,7 +201,9 @@
   "Kernel:KERNEL_GLOBAL_100": {
     "Exxon Holdings Corporation": "SEDOL:BVSRPD7",
     "Merck & Co Inc Common Stock": "SEDOL:2778844",
-    "Roche Hldgs AG Br": "SEDOL:BTMJD19"
+    "Roche Hldgs AG Br": "SEDOL:BTMJD19",
+    "Wal-Mart Stores Inc": "SEDOL:2936921",
+    "GE Aerospace": "SEDOL:BL59CR9"
   },
   "Kernel:KERNEL_SP_500_UNHEDGED": {
     "Berkshire Hathaway Inc Cl B": "SEDOL:2073390",
@@ -236,7 +238,8 @@
     "Piedmont Office Realty Trust Inc": "SEDOL:B3M3278",
     "Nippon Accommodations Fund": "SEDOL:6396800",
     "Leopalace 21 Corp": "SEDOL:6598424",
-    "Mori Trust Sogo REIT": "SEDOL:6729558"
+    "Mori Trust Sogo REIT": "SEDOL:6729558",
+    "Boston Properties Inc": "SEDOL:2019479"
   },
   "Kernel:KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED": {
     "Cia de Saneamento Basico Es de S Paulo ADR": "SEDOL:B1YCHL8",
@@ -247,7 +250,8 @@
     "Fraport AG": "SEDOL:7107551",
     "INWIT - Infrastrutture Wireless Spa": "SEDOL:BZ0P4R4",
     "Jiangsu Expressway Co Ltd H Shares": "SEDOL:6005504",
-    "Eutelsat Communications": "SEDOL:B0M7KJ7"
+    "Eutelsat Communications": "SEDOL:B0M7KJ7",
+    "Sempra Energy": "SEDOL:2138158"
   },
   "Kernel:KERNEL_GLOBAL_ESG_HEDGED": {
     "Canadian Pacific Railway Ltd": "SEDOL:2180632",
@@ -255,6 +259,7 @@
     "Roche Hldgs AG Br": "SEDOL:BTMJD19"
   },
   "Kernel:KERNEL_HIGH_GROWTH": {
+    "SPDR Portfolio Emerging Markets ETF": "US78464A7550",
     "Canadian Pacific Railway Ltd": "SEDOL:2180632",
     "Nippon Tel & Tel Corp": "SEDOL:6644060",
     "Roche Hldgs AG Br": "SEDOL:BTMJD19"
@@ -264,6 +269,7 @@
     "Bunge Limited": "SEDOL:BQ6BPG9"
   },
   "Kernel:KERNEL_BALANCED": {
+    "SPDR Portfolio Emerging Markets ETF": "US78464A7550",
     "Red Electrica Corporacion SA": "SEDOL:2205706",
     "Canadian Pacific Railway Ltd": "SEDOL:2180632",
     "Nippon Tel & Tel Corp": "SEDOL:6644060",
@@ -272,5 +278,11 @@
   },
   "Kernel:KERNEL_GLOBAL_100_HEDGED": {
     "Roche Hldgs AG Br": "SEDOL:BTMJD19"
+  },
+  "Kernel:KERNEL_EMERGING_MARKETS": {
+    "SPDR Portfolio Emerging Markets ETF": "US78464A7550"
+  },
+  "Smartshares:NZC": {
+    "GENESIS ENERGY LTD 121026 PNOTE": "SEDOL:BL10N28"
   }
 }

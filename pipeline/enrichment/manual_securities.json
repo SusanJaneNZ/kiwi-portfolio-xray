@@ -1,4 +1,10 @@
 {
+  "US78464A7550": {
+    "name": "SPDR Portfolio Emerging Markets ETF",
+    "ticker": "SPEM",
+    "country": "Global",
+    "sector": "Broad Market"
+  },
   "SEDOL:BQPGVF6": {
     "name": "Arm Holdings plc ADR",
     "ticker": "ARM",

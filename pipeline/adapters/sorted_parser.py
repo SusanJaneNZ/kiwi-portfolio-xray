@@ -216,14 +216,20 @@ def parse_nz_fund_file(
             or any(pat.search(name_lower) for pat in _CASH_TOKEN_RES)
             or "receivable" in name_lower
             or "payable" in name_lower
+            or name_lower.startswith("redemption")
+            or name_lower.startswith("subscription")
+            or bool(re.search(r"\b(?:csh|cash)\b", name_lower))
+            or "cogent nom" in name_lower
         )
         # Note: explicit deposit phrases ("term deposit", "call deposit", "notice saver") are investable rows handled downstream.
-        if "term deposit" in name_lower or "call deposit" in name_lower or "notice saver" in name_lower:
+        if "term deposit" in name_lower or "call deposit" in name_lower or "notice saver" in name_lower or bool(re.search(r"\bdeposit\b", name_lower)):
             is_cash = False
         is_hedging_name = (
             "forward" in name_lower
             or "hedg" in name_lower
             or bool(re.search(r"(?:\b|-)ndf\b", name_lower))
+            or bool(re.search(r"\b[a-z]{3}\.[a-z]{3}\s*@", name_lower))
+            or name_lower.startswith("kw nzd.")
         )
         is_etf_or_fund_product = bool(re.search(r"\b(?:etf|fund|trust|ucits)\b", name_lower))
         is_hedging = (

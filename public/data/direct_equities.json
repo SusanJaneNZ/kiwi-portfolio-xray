@@ -53,7 +53,9 @@
     "ticker": "FCG.NZ",
     "exchange": "NZX",
     "country": "New Zealand",
-    "sector": "Consumer Staples"
+    "sector": "Consumer Staples",
+    "issuer_key": "ISSUER_FONTERRA",
+    "issuer_name": "Fonterra"
   },
   {
     "isin": "SEDOL:6459286",
@@ -3949,7 +3951,9 @@
     "ticker": "BPP.AX",
     "exchange": "ASX",
     "country": "Australia",
-    "sector": "Industrials"
+    "sector": "Industrials",
+    "issuer_key": "ISSUER_POWERCO",
+    "issuer_name": "Powerco"
   },
   {
     "isin": "SEDOL:6088204",
@@ -9049,7 +9053,9 @@
     "ticker": "KPO.AX",
     "exchange": "ASX",
     "country": "Australia",
-    "sector": "Utilities"
+    "sector": "Utilities",
+    "issuer_key": "ISSUER_POWERCO",
+    "issuer_name": "Powerco"
   },
   {
     "isin": "ASX:KRM",
@@ -9289,7 +9295,9 @@
     "ticker": "LFT.AX",
     "exchange": "ASX",
     "country": "Australia",
-    "sector": "Materials"
+    "sector": "Materials",
+    "issuer_key": "ISSUER_POWERCO",
+    "issuer_name": "Powerco"
   },
   {
     "isin": "ASX:LGF",
@@ -11999,7 +12007,9 @@
     "ticker": "PNN.AX",
     "exchange": "ASX",
     "country": "Australia",
-    "sector": "Materials"
+    "sector": "Materials",
+    "issuer_key": "ISSUER_POWERCO",
+    "issuer_name": "Powerco"
   },
   {
     "isin": "SEDOL:6210289",

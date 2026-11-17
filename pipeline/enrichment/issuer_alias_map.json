@@ -290,5 +290,63 @@
       "Vector Limited",
       "Vector"
     ]
+  },
+  "ISSUER_BOC": {
+    "display_name": "Bank of China",
+    "country": "China",
+    "category": "Financial",
+    "aliases": [
+      "Bank of China Limited",
+      "Bank of China"
+    ]
+  },
+  "ISSUER_ICBC": {
+    "display_name": "ICBC",
+    "country": "China",
+    "category": "Financial",
+    "aliases": [
+      "Industrial and Commercial Bank of China",
+      "Industrial and Commerical Bank of China",
+      "ICBC"
+    ]
+  },
+  "ISSUER_NZ_POST": {
+    "display_name": "New Zealand Post",
+    "country": "New Zealand",
+    "category": "Corporate / Other",
+    "aliases": [
+      "New Zealand Post Limited",
+      "New Zealand Post"
+    ]
+  },
+  "ISSUER_WIA": {
+    "display_name": "Wellington International Airport",
+    "country": "New Zealand",
+    "category": "Corporate / Other",
+    "aliases": [
+      "Wellington International Airport Limited",
+      "Wellington International Airport"
+    ]
+  },
+  "ISSUER_FONTERRA": {
+    "display_name": "Fonterra",
+    "country": "New Zealand",
+    "category": "Corporate / Other",
+    "aliases": [
+      "Fonterra Co-operative Group Limited",
+      "Fonterra Co-operative Group",
+      "Fonterra Co Operative Group Ltd",
+      "Fonterra"
+    ]
+  },
+  "ISSUER_POWERCO": {
+    "display_name": "Powerco",
+    "country": "New Zealand",
+    "category": "Corporate / Other",
+    "aliases": [
+      "Powerco Limited",
+      "Power Co Ltd",
+      "Powerco"
+    ]
   }
 }

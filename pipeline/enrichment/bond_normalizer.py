@@ -35,6 +35,8 @@ BANK_ISSUER_KEYS = {
     "ISSUER_RABOBANK",
     "ISSUER_TSB",
     "ISSUER_SBS",
+    "ISSUER_BOC",
+    "ISSUER_ICBC",
 }
 
 _DATE_MONTHS = r"(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*"
@@ -55,7 +57,7 @@ _COUPON_RE = re.compile(
     re.IGNORECASE,
 )
 _EXPLICIT_TD_RE = re.compile(
-    r"\b(?:term\s+deposit|call\s+deposit|notice\s+saver|bank\s+deposit)\b",
+    r"\b(?:term\s+deposit|call\s+deposit|notice\s+saver|bank\s+deposit|deposit)\b",
     re.IGNORECASE,
 )
 _BOND_KEYWORD_RE = re.compile(
@@ -63,6 +65,7 @@ _BOND_KEYWORD_RE = re.compile(
     r"us\s+treasury|u\.s\.\s+treasury|uk\s+gilt|bundesrepublik|"
     r"treasury\s+(?:bill|note|bond)|frn|floating\s+rate\s+note|fixed\s+rate\s+note|"
     r"capital\s+notes?|subordinated\s+notes?|senior\s+notes?|perpetual(?!\s+(?:limited|ltd|group|plc|corp|inc|holdings)\b)|"
+    r"pnote|promissory\s+notes?|\bprf\b|\bpref\b|preference\s+shares?|"
     r"rcd|ncd|commercial\s+paper|via\s+sb\s+capital)\b",
     re.IGNORECASE,
 )
@@ -81,6 +84,7 @@ _TRANCHE_STRIP_PATTERNS = [
     re.compile(
         r"\b(?:senior|unsecured|secured|subordinated|notes?|frn|fixed|floating|"
         r"green\s+bond|social\s+bond|sustainability\s+bond|international\s+bond|bond|perpetual|callable|"
+        r"pnote|promissory\s+notes?|\bprf\b|\bpref\b|preference\s+shares?|"
         r"registered\s+certificate\s+of\s+deposit|certificate\s+of\s+deposit|rcd|ncd|cb|gb|abs|mbs|rmbs|frm)\b",
         re.IGNORECASE,
     ),
