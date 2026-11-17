@@ -348,5 +348,119 @@
       "Power Co Ltd",
       "Powerco"
     ]
+  },
+  "ISSUER_FRENCH_GOVT": {
+    "display_name": "French Republic",
+    "country": "France",
+    "category": "Sovereign",
+    "aliases": [
+      "FRENCH GOVERNMENT",
+      "FRANCE REPUBLIC OF GOVERNMENT",
+      "French Republic",
+      "French Government"
+    ]
+  },
+  "ISSUER_CHINA_GOVT": {
+    "display_name": "People's Republic of China",
+    "country": "China",
+    "category": "Sovereign",
+    "aliases": [
+      "CHINA PEOPLE'S REPUBLIC OF GOVERNMENT",
+      "CHINA PEOPLES REPUBLIC OF GOVERNMENT",
+      "China Government"
+    ]
+  },
+  "ISSUER_GERMAN_GOVT": {
+    "display_name": "Federal Republic of Germany",
+    "country": "Germany",
+    "category": "Sovereign",
+    "aliases": [
+      "GERMANY FEDERAL REPUBLIC OF GOVERNMENT",
+      "Germany Government",
+      "Bundesrepublik Deutschland"
+    ]
+  },
+  "ISSUER_ITALY_GOVT": {
+    "display_name": "Republic of Italy",
+    "country": "Italy",
+    "category": "Sovereign",
+    "aliases": [
+      "ITALY REPUBLIC OF GOVERNMENT",
+      "Italy Government"
+    ]
+  },
+  "ISSUER_AUSTRIA_GOVT": {
+    "display_name": "Republic of Austria",
+    "country": "Austria",
+    "category": "Sovereign",
+    "aliases": [
+      "AUSTRIA REPUBLIC OF GOVERNMENT",
+      "Austria Government"
+    ]
+  },
+  "ISSUER_BELGIUM_GOVT": {
+    "display_name": "Kingdom of Belgium",
+    "country": "Belgium",
+    "category": "Sovereign",
+    "aliases": [
+      "BELGIUM KINGDOM OF GOVERNMENT",
+      "Belgium Government"
+    ]
+  },
+  "ISSUER_SPAIN_GOVT": {
+    "display_name": "Kingdom of Spain",
+    "country": "Spain",
+    "category": "Sovereign",
+    "aliases": [
+      "SPAIN KINGDOM OF GOVERNMENT",
+      "Spain Government"
+    ]
+  },
+  "ISSUER_THAILAND_GOVT": {
+    "display_name": "Kingdom of Thailand",
+    "country": "Thailand",
+    "category": "Sovereign",
+    "aliases": [
+      "THAILAND KINGDOM OF GOVERNMENT",
+      "Thailand Government"
+    ]
+  },
+  "ISSUER_SINGAPORE_GOVT": {
+    "display_name": "Republic of Singapore",
+    "country": "Singapore",
+    "category": "Sovereign",
+    "aliases": [
+      "SINGAPORE REPUBLIC OF GOVERNMENT",
+      "Singapore Government"
+    ]
+  },
+  "ISSUER_AVANTI": {
+    "display_name": "Avanti Finance",
+    "country": "New Zealand",
+    "category": "Financial",
+    "aliases": [
+      "Avanti Finance Limited",
+      "Avanti Finance",
+      "Avanti Kea PL"
+    ]
+  },
+  "ISSUER_MTF": {
+    "display_name": "MTF Finance",
+    "country": "New Zealand",
+    "category": "Financial",
+    "aliases": [
+      "MTF Finance Limited",
+      "MTF Finance",
+      "MTF Magnum Trust"
+    ]
+  },
+  "ISSUER_FLEETPARTNER": {
+    "display_name": "FleetPartners",
+    "country": "New Zealand",
+    "category": "Financial",
+    "aliases": [
+      "FleetPartners",
+      "FleetPartner Ignition"
+    ]
   }
 }

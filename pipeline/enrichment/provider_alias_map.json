@@ -222,7 +222,14 @@
     "WR Berkley Corp": "SEDOL:2093644",
     "Charles River Laboratories Ord": "SEDOL:2604336",
     "Fox Corp Class A": "SEDOL:BJJMGY5",
-    "McCormick & Co": "SEDOL:2550161"
+    "McCormick & Co": "SEDOL:2550161",
+    "Raytheon Technologies Corp": "SEDOL:BM5M5Y3",
+    "Schlumberger Limited": "SEDOL:2779201",
+    "Wabtec": "SEDOL:2955733",
+    "Block CL A Ord": "US8522341036",
+    "Hartford Finl Services Group": "SEDOL:2476193",
+    "Fox Corp Class B": "SEDOL:BJJMGY5",
+    "F5 Networks Inc": "SEDOL:2427599"
   },
   "Kernel:KERNEL_GLOBAL_PROPERTY_HEDGED": {
     "Mid-America Apt Communties": "SEDOL:2589132",
@@ -239,7 +246,37 @@
     "Nippon Accommodations Fund": "SEDOL:6396800",
     "Leopalace 21 Corp": "SEDOL:6598424",
     "Mori Trust Sogo REIT": "SEDOL:6729558",
-    "Boston Properties Inc": "SEDOL:2019479"
+    "Boston Properties Inc": "SEDOL:2019479",
+    "Tanger Factory Outlet Centers": "SEDOL:2874582",
+    "RioCan REIT": "SEDOL:2229610",
+    "National Retail Properties Inc": "SEDOL:2211811",
+    "Kenedix Office Investment Corp": "SEDOL:B0C5Q59",
+    "SmartCentres REIT": "SEDOL:BZ22BK5",
+    "First Capital REIT": "SEDOL:BKSLS55",
+    "Granite REIT": "SEDOL:BRYQ8P3",
+    "H&R REIT": "SEDOL:BGM8DW6",
+    "Dream Industrial REIT": "SEDOL:BMH4P92",
+    "Inmobiliaria Colonial SA": "SEDOL:BD0PJ08",
+    "Global One REIT": "SEDOL:6693608",
+    "Hudson Pacific Properties Inc": "US4440971095",
+    "Netstreit Ord": "US64110R1068",
+    "UMH Properties Inc": "US9030021039",
+    "Diversified Healthcare Trust": "US2544231069",
+    "Gladstone Commercial Corp": "US3765361080",
+    "Service Properties Trust": "US81761L1026",
+    "Brandywine Realty Trust": "US1053682035",
+    "CBL & Associates Properties Inc": "US1248302027",
+    "Summit Hotel Properties Inc": "US8660821008",
+    "Easterly Government Properties Inc": "US27874Q1004",
+    "NexPoint Residential Trust Inc": "US65341G1067",
+    "Community Healthcare Trust Inc": "US20369C1062",
+    "Universal Health Realty Trust": "US91359E1055",
+    "Postal Realty Trust Inc.": "US73757U1007",
+    "SITE Centers Corp": "US82981J1097",
+    "SmartStop Self Storage REIT Inc": "US83173P1057",
+    "Frontier Real Estate Investment": "JP3046220004",
+    "Chiron Real Estate Inc": "JP3048530004",
+    "Lend Lease Group Stapled": "SEDOL:6512004"
   },
   "Kernel:KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED": {
     "Cia de Saneamento Basico Es de S Paulo ADR": "SEDOL:B1YCHL8",
@@ -251,7 +288,12 @@
     "INWIT - Infrastrutture Wireless Spa": "SEDOL:BZ0P4R4",
     "Jiangsu Expressway Co Ltd H Shares": "SEDOL:6005504",
     "Eutelsat Communications": "SEDOL:B0M7KJ7",
-    "Sempra Energy": "SEDOL:2138158"
+    "Sempra Energy": "SEDOL:2138158",
+    "ADP Promesses": "SEDOL:B164FY1",
+    "WaterBridge Infrastructure LLC Class A": "US94111E1010",
+    "Corporacion America Airports SA": "LU1734076819",
+    "Consolidated Water Co Ltd": "KYG237731073",
+    "UNITIL Corp": "US91325V1089"
   },
   "Kernel:KERNEL_GLOBAL_ESG_HEDGED": {
     "Canadian Pacific Railway Ltd": "SEDOL:2180632",
@@ -266,7 +308,14 @@
   },
   "Kernel:KERNEL_SP_500_HEDGED": {
     "VICI PPTYS ORD": "SEDOL:BYWH073",
-    "Bunge Limited": "SEDOL:BQ6BPG9"
+    "Bunge Limited": "SEDOL:BQ6BPG9",
+    "Raytheon Technologies Corp": "SEDOL:BM5M5Y3",
+    "Schlumberger Limited": "SEDOL:2779201",
+    "Wabtec": "SEDOL:2955733",
+    "Block CL A Ord": "US8522341036",
+    "Hartford Finl Services Group": "SEDOL:2476193",
+    "Fox Corp Class B": "SEDOL:BJJMGY5",
+    "F5 Networks Inc": "SEDOL:2427599"
   },
   "Kernel:KERNEL_BALANCED": {
     "SPDR Portfolio Emerging Markets ETF": "US78464A7550",

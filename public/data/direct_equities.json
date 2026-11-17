@@ -6959,7 +6959,9 @@
     "ticker": "FPR.AX",
     "exchange": "ASX",
     "country": "Australia",
-    "sector": "Financials"
+    "sector": "Financials",
+    "issuer_key": "ISSUER_FLEETPARTNER",
+    "issuer_name": "FleetPartners"
   },
   {
     "isin": "ASX:FRB",

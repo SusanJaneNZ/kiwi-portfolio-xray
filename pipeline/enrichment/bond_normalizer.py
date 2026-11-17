@@ -63,8 +63,10 @@ _EXPLICIT_TD_RE = re.compile(
 _BOND_KEYWORD_RE = re.compile(
     r"\b(?:new\s+zealand\s+government|nzgs|lgfa|nzlgfa|local\s+government\s+funding|housing\s+new\s+zealand|"
     r"us\s+treasury|u\.s\.\s+treasury|uk\s+gilt|bundesrepublik|"
+    r"government\d*|govt|republic\s+of|kingdom\s+of|sovereign|"
     r"treasury\s+(?:bill|note|bond)|frn|floating\s+rate\s+note|fixed\s+rate\s+note|"
-    r"capital\s+notes?|subordinated\s+notes?|senior\s+notes?|perpetual(?!\s+(?:limited|ltd|group|plc|corp|inc|holdings)\b)|"
+    r"capital\s+notes?|subordinated\s+notes?|senior\s+notes?|perpetual(?!\s+(?:limited|ltd|group|plc|corp|inc|holdings)\b)|perp|"
+    r"class\s+[a-z]\b|magnum\s+trust|kea\s+pl|ignition|"
     r"pnote|promissory\s+notes?|\bprf\b|\bpref\b|preference\s+shares?|"
     r"rcd|ncd|commercial\s+paper|via\s+sb\s+capital)\b",
     re.IGNORECASE,
@@ -83,7 +85,8 @@ _TRANCHE_STRIP_PATTERNS = [
     re.compile(r"\b(?:series|tranche)\s+[a-z0-9-]+\b", re.IGNORECASE),
     re.compile(
         r"\b(?:senior|unsecured|secured|subordinated|notes?|frn|fixed|floating|"
-        r"green\s+bond|social\s+bond|sustainability\s+bond|international\s+bond|bond|perpetual|callable|"
+        r"green\s+bond|social\s+bond|sustainability\s+bond|international\s+bond|bond|perpetual|callable|perp|"
+        r"class\s+[a-z]\b|magnum\s+trust|kea\s+pl|ignition|"
         r"pnote|promissory\s+notes?|\bprf\b|\bpref\b|preference\s+shares?|"
         r"registered\s+certificate\s+of\s+deposit|certificate\s+of\s+deposit|rcd|ncd|cb|gb|abs|mbs|rmbs|frm)\b",
         re.IGNORECASE,

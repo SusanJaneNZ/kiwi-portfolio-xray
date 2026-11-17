@@ -1,4 +1,142 @@
 {
+  "US8522341036": {
+    "name": "Block Inc",
+    "ticker": "SQ",
+    "country": "United States",
+    "sector": "Financials"
+  },
+  "US4440971095": {
+    "name": "Hudson Pacific Properties Inc",
+    "ticker": "HPP",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  "LU1734076819": {
+    "name": "Corporacion America Airports SA",
+    "ticker": "CAAP",
+    "country": "Argentina",
+    "sector": "Industrials"
+  },
+  "US64110R1068": {
+    "name": "NETSTREIT Corp",
+    "ticker": "NTST",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  "US9030021039": {
+    "name": "UMH Properties Inc",
+    "ticker": "UMH",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  "US2544231069": {
+    "name": "Diversified Healthcare Trust",
+    "ticker": "DHC",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  "US3765361080": {
+    "name": "Gladstone Commercial Corp",
+    "ticker": "GOOD",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  "US81761L1026": {
+    "name": "Service Properties Trust",
+    "ticker": "SVC",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  "US1053682035": {
+    "name": "Brandywine Realty Trust",
+    "ticker": "BDN",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  "KYG237731073": {
+    "name": "Consolidated Water Co Inc",
+    "ticker": "CWCO",
+    "country": "United States",
+    "sector": "Utilities"
+  },
+  "US1248302027": {
+    "name": "CBL & Associates Properties Inc",
+    "ticker": "CBL",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  "US8660821008": {
+    "name": "Summit Hotel Properties Inc",
+    "ticker": "INN",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  "US27874Q1004": {
+    "name": "Easterly Government Properties Inc",
+    "ticker": "DEA",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  "US65341G1067": {
+    "name": "NexPoint Residential Trust Inc",
+    "ticker": "NXRT",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  "US20369C1062": {
+    "name": "Community Healthcare Trust Inc",
+    "ticker": "CHCT",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  "US91359E1055": {
+    "name": "Universal Health Realty Trust",
+    "ticker": "UHT",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  "US73757U1007": {
+    "name": "Postal Realty Trust Inc",
+    "ticker": "PSTL",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  "US82981J1097": {
+    "name": "SITE Centers Corp",
+    "ticker": "SITC",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  "US91325V1089": {
+    "name": "Unitil Corp",
+    "ticker": "UTL",
+    "country": "United States",
+    "sector": "Utilities"
+  },
+  "US94111E1010": {
+    "name": "WaterBridge Infrastructure LLC",
+    "ticker": "WBI",
+    "country": "United States",
+    "sector": "Utilities"
+  },
+  "US83173P1057": {
+    "name": "SmartStop Self Storage REIT Inc",
+    "ticker": "SMST",
+    "country": "United States",
+    "sector": "Real Estate"
+  },
+  "JP3046220004": {
+    "name": "Frontier Real Estate Investment Corp",
+    "ticker": "8964.T",
+    "country": "Japan",
+    "sector": "Real Estate"
+  },
+  "JP3048530004": {
+    "name": "Chiron Real Estate Inc",
+    "ticker": "2972.T",
+    "country": "Japan",
+    "sector": "Real Estate"
+  },
   "US78464A7550": {
     "name": "SPDR Portfolio Emerging Markets ETF",
     "ticker": "SPEM",

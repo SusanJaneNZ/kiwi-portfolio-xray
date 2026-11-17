@@ -42,7 +42,7 @@
     "effective_date": "2026-09-30",
     "cash_ratio": 0.0,
     "hedging_ratio": 0.0,
-    "constituent_count": 163,
+    "constituent_count": 145,
     "asset_class": "fixed_interest",
     "cadence": "monthly",
     "is_stale": false
@@ -342,7 +342,7 @@
     "effective_date": "2026-09-30",
     "cash_ratio": 0.0196,
     "hedging_ratio": 0.0,
-    "constituent_count": 867,
+    "constituent_count": 865,
     "asset_class": "mixed",
     "cadence": "monthly",
     "is_stale": false
@@ -367,7 +367,7 @@
     "cash_ratio": 0.0,
     "hedging_ratio": 0.0,
     "constituent_count": 54,
-    "asset_class": "equity",
+    "asset_class": "mixed",
     "cadence": "monthly",
     "is_stale": false
   },
@@ -390,8 +390,8 @@
     "effective_date": "2026-09-30",
     "cash_ratio": 0.0007,
     "hedging_ratio": 0.0,
-    "constituent_count": 99,
-    "asset_class": "equity",
+    "constituent_count": 98,
+    "asset_class": "mixed",
     "cadence": "monthly",
     "is_stale": false
   },
@@ -414,8 +414,8 @@
     "effective_date": "2026-09-30",
     "cash_ratio": 0.0316,
     "hedging_ratio": 0.0,
-    "constituent_count": 444,
-    "asset_class": "equity",
+    "constituent_count": 443,
+    "asset_class": "mixed",
     "cadence": "monthly",
     "is_stale": false
   },
@@ -450,8 +450,8 @@
     "effective_date": "2026-09-30",
     "cash_ratio": 0.0181,
     "hedging_ratio": 0.0,
-    "constituent_count": 1101,
-    "asset_class": "equity",
+    "constituent_count": 1100,
+    "asset_class": "mixed",
     "cadence": "monthly",
     "is_stale": false
   },
@@ -546,8 +546,8 @@
     "effective_date": "2026-09-30",
     "cash_ratio": 0.0436,
     "hedging_ratio": 0.0,
-    "constituent_count": 504,
-    "asset_class": "equity",
+    "constituent_count": 502,
+    "asset_class": "mixed",
     "cadence": "monthly",
     "is_stale": false
   },
@@ -558,8 +558,8 @@
     "effective_date": "2026-09-30",
     "cash_ratio": 0.0,
     "hedging_ratio": 0.0,
-    "constituent_count": 504,
-    "asset_class": "equity",
+    "constituent_count": 502,
+    "asset_class": "mixed",
     "cadence": "monthly",
     "is_stale": false
   },
@@ -570,8 +570,8 @@
     "effective_date": "2026-09-30",
     "cash_ratio": 0.0459,
     "hedging_ratio": 0.0,
-    "constituent_count": 99,
-    "asset_class": "equity",
+    "constituent_count": 98,
+    "asset_class": "mixed",
     "cadence": "monthly",
     "is_stale": false
   },

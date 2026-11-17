@@ -1,5 +1,189 @@
 [
   {
+    "isin": "US8522341036",
+    "name": "Block Inc",
+    "ticker": "SQ",
+    "country": "United States",
+    "sector": "Financials",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "US4440971095",
+    "name": "Hudson Pacific Properties Inc",
+    "ticker": "HPP",
+    "country": "United States",
+    "sector": "Real Estate",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "LU1734076819",
+    "name": "Corporacion America Airports SA",
+    "ticker": "CAAP",
+    "country": "Argentina",
+    "sector": "Industrials",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "US64110R1068",
+    "name": "NETSTREIT Corp",
+    "ticker": "NTST",
+    "country": "United States",
+    "sector": "Real Estate",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "US9030021039",
+    "name": "UMH Properties Inc",
+    "ticker": "UMH",
+    "country": "United States",
+    "sector": "Real Estate",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "US2544231069",
+    "name": "Diversified Healthcare Trust",
+    "ticker": "DHC",
+    "country": "United States",
+    "sector": "Real Estate",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "US3765361080",
+    "name": "Gladstone Commercial Corp",
+    "ticker": "GOOD",
+    "country": "United States",
+    "sector": "Real Estate",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "US81761L1026",
+    "name": "Service Properties Trust",
+    "ticker": "SVC",
+    "country": "United States",
+    "sector": "Real Estate",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "US1053682035",
+    "name": "Brandywine Realty Trust",
+    "ticker": "BDN",
+    "country": "United States",
+    "sector": "Real Estate",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "KYG237731073",
+    "name": "Consolidated Water Co Inc",
+    "ticker": "CWCO",
+    "country": "United States",
+    "sector": "Utilities",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "US1248302027",
+    "name": "CBL & Associates Properties Inc",
+    "ticker": "CBL",
+    "country": "United States",
+    "sector": "Real Estate",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "US8660821008",
+    "name": "Summit Hotel Properties Inc",
+    "ticker": "INN",
+    "country": "United States",
+    "sector": "Real Estate",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "US27874Q1004",
+    "name": "Easterly Government Properties Inc",
+    "ticker": "DEA",
+    "country": "United States",
+    "sector": "Real Estate",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "US65341G1067",
+    "name": "NexPoint Residential Trust Inc",
+    "ticker": "NXRT",
+    "country": "United States",
+    "sector": "Real Estate",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "US20369C1062",
+    "name": "Community Healthcare Trust Inc",
+    "ticker": "CHCT",
+    "country": "United States",
+    "sector": "Real Estate",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "US91359E1055",
+    "name": "Universal Health Realty Trust",
+    "ticker": "UHT",
+    "country": "United States",
+    "sector": "Real Estate",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "US73757U1007",
+    "name": "Postal Realty Trust Inc",
+    "ticker": "PSTL",
+    "country": "United States",
+    "sector": "Real Estate",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "US82981J1097",
+    "name": "SITE Centers Corp",
+    "ticker": "SITC",
+    "country": "United States",
+    "sector": "Real Estate",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "US91325V1089",
+    "name": "Unitil Corp",
+    "ticker": "UTL",
+    "country": "United States",
+    "sector": "Utilities",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "US94111E1010",
+    "name": "WaterBridge Infrastructure LLC",
+    "ticker": "WBI",
+    "country": "United States",
+    "sector": "Utilities",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "US83173P1057",
+    "name": "SmartStop Self Storage REIT Inc",
+    "ticker": "SMST",
+    "country": "United States",
+    "sector": "Real Estate",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "JP3046220004",
+    "name": "Frontier Real Estate Investment Corp",
+    "ticker": "8964.T",
+    "country": "Japan",
+    "sector": "Real Estate",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "JP3048530004",
+    "name": "Chiron Real Estate Inc",
+    "ticker": "2972.T",
+    "country": "Japan",
+    "sector": "Real Estate",
+    "exchange": "MANUAL"
+  },
+  {
     "isin": "US78464A7550",
     "name": "SPDR Portfolio Emerging Markets ETF",
     "ticker": "SPEM",
@@ -7103,7 +7287,9 @@
     "ticker": "FPR.AX",
     "exchange": "ASX",
     "country": "Australia",
-    "sector": "Financials"
+    "sector": "Financials",
+    "issuer_key": "ISSUER_FLEETPARTNER",
+    "issuer_name": "FleetPartners"
   },
   {
     "isin": "ASX:FRB",

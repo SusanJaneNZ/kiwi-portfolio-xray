@@ -2343,158 +2343,16 @@
   ],
   "GGB": [
     {
-      "isin": "UNRESOLVED_55",
-      "name": "FRENCH GOVERNMENT 042529 5.5",
+      "isin": "BOND:ISSUER_CHINA_GOVT",
+      "name": "People's Republic of China",
       "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00269515,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_64",
-      "name": "CHINA PEOPLE'S REPUBLIC OF GOVERNMENT 220371 3.76 GB",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00249551,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_70",
-      "name": "CHINA PEOPLE'S REPUBLIC OF GOVERNMENT 250373 3.27 GB",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00239569,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_202",
-      "name": "TREASURY 071242 GOVT",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00139748,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_798",
-      "name": "UNITED KINGDOM OF GREAT BRITAIN AND NORTHERN 221073 1.275 GB",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00029946,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_869",
-      "name": "ITALY REPUBLIC OF GOVERNMENT 010372 2.15 GB",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00029946,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_873",
-      "name": "AUSTRIA REPUBLIC OF GOVERNMENT 230523 1.85 GB",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00029946,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_924",
-      "name": "THAILAND KINGDOM OF GOVERNMENT 170672 4.00 GB",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00019964,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_968",
-      "name": "SPAIN KINGDOM OF GOVERNMENT 311071 1.45 GB",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00019964,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1008",
-      "name": "FRANCE REPUBLIC OF GOVERNMENT 250572 0.50 GB",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 9.982e-05,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1010",
-      "name": "AUSTRIA REPUBLIC OF GOVERNMENT 20092117 2.10 GB",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 9.982e-05,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1043",
-      "name": "SINGAPORE REPUBLIC OF GOVERNMENT 010872 3.00 GB",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 9.982e-05,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1051",
-      "name": "GERMANY FEDERAL REPUBLIC OF GOVERNMENT150829 0.00 GB",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 9.982e-05,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1054",
-      "name": "AUSTRIA REPUBLIC OF GOVERNMENT 200471 0.70 GB",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 9.982e-05,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1068",
-      "name": "BELGIUM KINGDOM OF GOVERNMENT 220671 0.65 GB",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 9.982e-05,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1073",
-      "name": "CHINA PEOPLES REPUBLIC OF GOVERNMENT 250570 3.73 GB",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 9.982e-05,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "BOND:CHINA_GOVERNMENT",
-      "name": "CHINA GOVERNMENT",
-      "ticker": "",
-      "country": "Global",
+      "country": "China",
       "sector": "Sovereign",
-      "weight": 0.10551008,
+      "weight": 0.11998403,
       "asset_class": "fixed_interest",
-      "tranche_count": 17
+      "tranche_count": 24,
+      "issuer_key": "ISSUER_CHINA_GOVT",
+      "issuer_name": "People's Republic of China"
     },
     {
       "isin": "BOND:ISSUER_US_TREASURY",
@@ -2507,16 +2365,6 @@
       "tranche_count": 213,
       "issuer_key": "ISSUER_US_TREASURY",
       "issuer_name": "United States Treasury"
-    },
-    {
-      "isin": "BOND:CHINA_PEOPLES_REPUBLIC_OF_GOVERNMENT",
-      "name": "CHINA PEOPLES REPUBLIC OF GOVERNMENT",
-      "ticker": "",
-      "country": "Global",
-      "sector": "Sovereign",
-      "weight": 0.00788581,
-      "asset_class": "fixed_interest",
-      "tranche_count": 2
     },
     {
       "isin": "BOND:USA_TREASURY_NTS",
@@ -2559,14 +2407,16 @@
       "tranche_count": 4
     },
     {
-      "isin": "BOND:GERMANY_FEDERAL_REPUBLIC_OF_GOVERNMENT",
-      "name": "GERMANY FEDERAL REPUBLIC OF GOVERNMENT",
+      "isin": "BOND:ISSUER_GERMAN_GOVT",
+      "name": "Federal Republic of Germany",
       "ticker": "",
-      "country": "Global",
+      "country": "Germany",
       "sector": "Sovereign",
-      "weight": 0.02395688,
+      "weight": 0.02545418,
       "asset_class": "fixed_interest",
-      "tranche_count": 29
+      "tranche_count": 31,
+      "issuer_key": "ISSUER_GERMAN_GOVT",
+      "issuer_name": "Federal Republic of Germany"
     },
     {
       "isin": "BOND:UNITED_KGDM_OF_GREAT_BRITAIN_AND_NOR_IRELD",
@@ -2579,6 +2429,18 @@
       "tranche_count": 1
     },
     {
+      "isin": "BOND:ISSUER_FRENCH_GOVT",
+      "name": "French Republic",
+      "ticker": "",
+      "country": "France",
+      "sector": "Sovereign",
+      "weight": 0.04052705,
+      "asset_class": "fixed_interest",
+      "tranche_count": 36,
+      "issuer_key": "ISSUER_FRENCH_GOVT",
+      "issuer_name": "French Republic"
+    },
+    {
       "isin": "BOND:JAPAN_GOVERMENT",
       "name": "JAPAN GOVERMENT",
       "ticker": "",
@@ -2587,16 +2449,6 @@
       "weight": 0.00259533,
       "asset_class": "fixed_interest",
       "tranche_count": 1
-    },
-    {
-      "isin": "BOND:FRANCE_REPUBLIC_OF_GOVERNMENT",
-      "name": "FRANCE REPUBLIC OF GOVERNMENT",
-      "ticker": "",
-      "country": "Global",
-      "sector": "Sovereign",
-      "weight": 0.03773208,
-      "asset_class": "fixed_interest",
-      "tranche_count": 34
     },
     {
       "isin": "BOND:JAPAN_20_YEAR_ISSUE",
@@ -2701,24 +2553,28 @@
       "tranche_count": 2
     },
     {
-      "isin": "BOND:ITALY_REPUBLIC_OF_GOVERNMENT",
-      "name": "ITALY REPUBLIC OF GOVERNMENT",
+      "isin": "BOND:ISSUER_ITALY_GOVT",
+      "name": "Republic of Italy",
       "ticker": "",
-      "country": "Global",
+      "country": "Italy",
       "sector": "Sovereign",
-      "weight": 0.03164304,
+      "weight": 0.0319425,
       "asset_class": "fixed_interest",
-      "tranche_count": 45
+      "tranche_count": 46,
+      "issuer_key": "ISSUER_ITALY_GOVT",
+      "issuer_name": "Republic of Italy"
     },
     {
-      "isin": "BOND:SPAIN_KINGDOM_OF_GOVERNMENT",
-      "name": "SPAIN KINGDOM OF GOVERNMENT",
+      "isin": "BOND:ISSUER_SPAIN_GOVT",
+      "name": "Kingdom of Spain",
       "ticker": "",
-      "country": "Global",
+      "country": "Spain",
       "sector": "Sovereign",
-      "weight": 0.02265921,
+      "weight": 0.02285885,
       "asset_class": "fixed_interest",
-      "tranche_count": 32
+      "tranche_count": 33,
+      "issuer_key": "ISSUER_SPAIN_GOVT",
+      "issuer_name": "Kingdom of Spain"
     },
     {
       "isin": "BOND:JAPAN_2_YEAR_ISSUE",
@@ -2781,6 +2637,16 @@
       "tranche_count": 2
     },
     {
+      "isin": "BOND:TREASURY_GOVT",
+      "name": "TREASURY GOVT",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Sovereign",
+      "weight": 0.00139748,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
       "isin": "BOND:GOVERNMENT_OF_FRANCE",
       "name": "GOVERNMENT OF FRANCE",
       "ticker": "",
@@ -2791,14 +2657,16 @@
       "tranche_count": 1
     },
     {
-      "isin": "BOND:THAILAND_GOVERNMENT",
-      "name": "THAILAND GOVERNMENT",
+      "isin": "BOND:ISSUER_THAILAND_GOVT",
+      "name": "Kingdom of Thailand",
       "ticker": "",
-      "country": "Global",
+      "country": "Thailand",
       "sector": "Sovereign",
-      "weight": 0.00319425,
+      "weight": 0.0063885,
       "asset_class": "fixed_interest",
-      "tranche_count": 8
+      "tranche_count": 16,
+      "issuer_key": "ISSUER_THAILAND_GOVT",
+      "issuer_name": "Kingdom of Thailand"
     },
     {
       "isin": "BOND:BONOS_Y_OBLIG_DEL_ESTADO",
@@ -2849,16 +2717,6 @@
       "weight": 0.00129766,
       "asset_class": "fixed_interest",
       "tranche_count": 1
-    },
-    {
-      "isin": "BOND:CHINA_PEOPLE_S_REPUBLIC_OF_GOVERNMENT",
-      "name": "CHINA PEOPLE'S REPUBLIC OF GOVERNMENT",
-      "ticker": "",
-      "country": "Global",
-      "sector": "Sovereign",
-      "weight": 0.00159713,
-      "asset_class": "fixed_interest",
-      "tranche_count": 2
     },
     {
       "isin": "BOND:UNITES_STATES_TREASURY_3_125_CD",
@@ -3001,14 +2859,16 @@
       "tranche_count": 1
     },
     {
-      "isin": "BOND:BELGIUM_KINGDOM_OF_GOVERNMENT",
-      "name": "BELGIUM KINGDOM OF GOVERNMENT",
+      "isin": "BOND:ISSUER_BELGIUM_GOVT",
+      "name": "Kingdom of Belgium",
       "ticker": "",
-      "country": "Global",
+      "country": "Belgium",
       "sector": "Sovereign",
-      "weight": 0.00848473,
+      "weight": 0.00858455,
       "asset_class": "fixed_interest",
-      "tranche_count": 20
+      "tranche_count": 21,
+      "issuer_key": "ISSUER_BELGIUM_GOVT",
+      "issuer_name": "Kingdom of Belgium"
     },
     {
       "isin": "BOND:UNITED_SATES_TREASURY",
@@ -3039,16 +2899,6 @@
       "weight": 0.00239569,
       "asset_class": "fixed_interest",
       "tranche_count": 4
-    },
-    {
-      "isin": "BOND:GERMANY_GOVERNMENT_OF",
-      "name": "GERMANY GOVERNMENT OF",
-      "ticker": "",
-      "country": "Global",
-      "sector": "Sovereign",
-      "weight": 0.00089838,
-      "asset_class": "fixed_interest",
-      "tranche_count": 1
     },
     {
       "isin": "BOND:PORTUGAL_REPUBLIC_OF_GOVERNMENT",
@@ -3131,14 +2981,16 @@
       "tranche_count": 4
     },
     {
-      "isin": "BOND:AUSTRIA_REPUBLIC_OF_GOVERNMENT",
-      "name": "AUSTRIA REPUBLIC OF GOVERNMENT",
+      "isin": "BOND:ISSUER_AUSTRIA_GOVT",
+      "name": "Republic of Austria",
       "ticker": "",
-      "country": "Global",
+      "country": "Austria",
       "sector": "Sovereign",
-      "weight": 0.00519066,
+      "weight": 0.00568976,
       "asset_class": "fixed_interest",
-      "tranche_count": 15
+      "tranche_count": 18,
+      "issuer_key": "ISSUER_AUSTRIA_GOVT",
+      "issuer_name": "Republic of Austria"
     },
     {
       "isin": "BOND:POLAND_GOVERNMENT",
@@ -3231,16 +3083,6 @@
       "tranche_count": 4
     },
     {
-      "isin": "BOND:THAILAND_KINGDOM_OF_GOVERNMENT",
-      "name": "THAILAND KINGDOM OF GOVERNMENT",
-      "ticker": "",
-      "country": "Global",
-      "sector": "Sovereign",
-      "weight": 0.00299461,
-      "asset_class": "fixed_interest",
-      "tranche_count": 7
-    },
-    {
       "isin": "BOND:CANADA_GOVERNMNT",
       "name": "CANADA GOVERNMNT",
       "ticker": "",
@@ -3281,14 +3123,16 @@
       "tranche_count": 1
     },
     {
-      "isin": "BOND:SINGAPORE_REPUBLIC_OF_GOVERNMENT",
-      "name": "SINGAPORE REPUBLIC OF GOVERNMENT",
+      "isin": "BOND:ISSUER_SINGAPORE_GOVT",
+      "name": "Republic of Singapore",
       "ticker": "",
-      "country": "Global",
+      "country": "Singapore",
       "sector": "Sovereign",
-      "weight": 0.00299461,
+      "weight": 0.00309443,
       "asset_class": "fixed_interest",
-      "tranche_count": 13
+      "tranche_count": 14,
+      "issuer_key": "ISSUER_SINGAPORE_GOVT",
+      "issuer_name": "Republic of Singapore"
     },
     {
       "isin": "BOND:JAPAN_2_40_YR_ISSUE",
@@ -3369,16 +3213,6 @@
       "weight": 0.00129766,
       "asset_class": "fixed_interest",
       "tranche_count": 4
-    },
-    {
-      "isin": "BOND:BUNDESREPUBLIK_DEUTSCHLAND",
-      "name": "BUNDESREPUBLIK DEUTSCHLAND",
-      "ticker": "",
-      "country": "Global",
-      "sector": "Sovereign",
-      "weight": 0.00059892,
-      "asset_class": "fixed_interest",
-      "tranche_count": 1
     },
     {
       "isin": "BOND:GERMANY_FEDERATION_OF",
@@ -3723,6 +3557,16 @@
       "tranche_count": 2
     },
     {
+      "isin": "BOND:UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_221",
+      "name": "UNITED KINGDOM OF GREAT BRITAIN AND NORTHERN 221073",
+      "ticker": "",
+      "country": "United Kingdom",
+      "sector": "Corporate / Other",
+      "weight": 0.00029946,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
       "isin": "BOND:NORWAY_KINGDOM_OF_GOVERNMENT",
       "name": "NORWAY KINGDOM OF GOVERNMENT",
       "ticker": "",
@@ -3941,6 +3785,16 @@
       "weight": 0.00019964,
       "asset_class": "fixed_interest",
       "tranche_count": 2
+    },
+    {
+      "isin": "BOND:GERMANY_FEDERAL_REPUBLIC_OF_GOVERNMENT150829",
+      "name": "GERMANY FEDERAL REPUBLIC OF GOVERNMENT150829",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Sovereign",
+      "weight": 9.982e-05,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
     },
     {
       "isin": "BOND:IRELAND_GOVERNEMENT",
@@ -7586,14 +7440,16 @@
       "tranche_count": 1
     },
     {
-      "isin": "BOND:FRENCH_REPUBLIC_GOVERNMENT_OAT",
-      "name": "FRENCH REPUBLIC GOVERNMENT OAT",
+      "isin": "BOND:ISSUER_FRENCH_GOVT",
+      "name": "French Republic",
       "ticker": "",
-      "country": "Global",
+      "country": "France",
       "sector": "Sovereign",
       "weight": 0.03305286,
       "asset_class": "fixed_interest",
-      "tranche_count": 2
+      "tranche_count": 2,
+      "issuer_key": "ISSUER_FRENCH_GOVT",
+      "issuer_name": "French Republic"
     },
     {
       "isin": "BOND:ISSUER_US_TREASURY",
@@ -7650,14 +7506,16 @@
       "tranche_count": 5
     },
     {
-      "isin": "BOND:SPAIN_GOVERNMENT",
-      "name": "SPAIN GOVERNMENT",
+      "isin": "BOND:ISSUER_SPAIN_GOVT",
+      "name": "Kingdom of Spain",
       "ticker": "",
-      "country": "Global",
+      "country": "Spain",
       "sector": "Sovereign",
       "weight": 0.02134664,
       "asset_class": "fixed_interest",
-      "tranche_count": 7
+      "tranche_count": 7,
+      "issuer_key": "ISSUER_SPAIN_GOVT",
+      "issuer_name": "Kingdom of Spain"
     },
     {
       "isin": "BOND:REALKREDIT_DANMARK_A_S",
@@ -7870,14 +7728,16 @@
       "tranche_count": 2
     },
     {
-      "isin": "BOND:THAILAND_GOVERNMENT",
-      "name": "THAILAND GOVERNMENT",
+      "isin": "BOND:ISSUER_THAILAND_GOVT",
+      "name": "Kingdom of Thailand",
       "ticker": "",
-      "country": "Global",
+      "country": "Thailand",
       "sector": "Sovereign",
       "weight": 0.00462347,
       "asset_class": "fixed_interest",
-      "tranche_count": 1
+      "tranche_count": 1,
+      "issuer_key": "ISSUER_THAILAND_GOVT",
+      "issuer_name": "Kingdom of Thailand"
     },
     {
       "isin": "BOND:MITSUBISHI_UFJ_FINANCIAL_GROUP_INC",
@@ -8706,14 +8566,16 @@
       "tranche_count": 1
     },
     {
-      "isin": "BOND:REPUBLIC_OF_ITALY_GOVERNMENT",
-      "name": "REPUBLIC OF ITALY GOVERNMENT",
+      "isin": "BOND:ISSUER_ITALY_GOVT",
+      "name": "Republic of Italy",
       "ticker": "",
-      "country": "Global",
+      "country": "Italy",
       "sector": "Sovereign",
       "weight": 0.00157395,
       "asset_class": "fixed_interest",
-      "tranche_count": 1
+      "tranche_count": 1,
+      "issuer_key": "ISSUER_ITALY_GOVT",
+      "issuer_name": "Republic of Italy"
     },
     {
       "isin": "BOND:SBERBANK_OF_RUSSIA_VIA_SB_CAPITAL_SA",
@@ -66161,7 +66023,9 @@
       "country": "Australia",
       "sector": "Financials",
       "weight": 3.876e-05,
-      "asset_class": "equity"
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_FLEETPARTNER",
+      "issuer_name": "FleetPartners"
     },
     {
       "isin": "SEDOL:BMW7F41",
@@ -132488,7 +132352,9 @@
       "country": "Australia",
       "sector": "Financials",
       "weight": 5.078e-05,
-      "asset_class": "equity"
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_FLEETPARTNER",
+      "issuer_name": "FleetPartners"
     },
     {
       "isin": "SEDOL:B4KDPZ6",
@@ -225760,15 +225626,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SEDOL:BYVY8G0",
-      "name": "Alphabet Inc",
-      "ticker": "GOOGL",
-      "country": "United States",
-      "sector": "Communication Services",
-      "weight": 0.01109774,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:6152529",
       "name": "Contact Energy Limited",
       "ticker": "CEN.NZ",
@@ -225786,15 +225643,6 @@
       "country": "United States",
       "sector": "Information Technology",
       "weight": 0.00919812,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BYY88Y7",
-      "name": "Alphabet Inc",
-      "ticker": "GOOG",
-      "country": "United States",
-      "sector": "Communication Services",
-      "weight": 0.00889818,
       "asset_class": "equity"
     },
     {
@@ -226085,15 +225933,6 @@
       "ticker": "FRW.NZ",
       "country": "New Zealand",
       "sector": "Industrials",
-      "weight": 0.00249949,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B121557",
-      "name": "Mastercard Inc",
-      "ticker": "MA",
-      "country": "United States",
-      "sector": "Financials",
       "weight": 0.00249949,
       "asset_class": "equity"
     },
@@ -226781,15 +226620,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_181",
-      "name": "FleetPartner Ignition - Class A Notes",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00089982,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:2550707",
       "name": "McDonald's Corp",
       "ticker": "MCD",
@@ -227263,15 +227093,6 @@
       "ticker": "MMM",
       "country": "United States",
       "sector": "Industrials",
-      "weight": 0.0004999,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BN78DQ4",
-      "name": "Palantir Technologies Inc",
-      "ticker": "PLTR",
-      "country": "United States",
-      "sector": "Information Technology",
       "weight": 0.0004999,
       "asset_class": "equity"
     },
@@ -227897,11 +227718,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_334",
-      "name": "Raytheon Technologies Corp",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BM5M5Y3",
+      "name": "RTX Corp",
+      "ticker": "RTX",
+      "country": "United States",
+      "sector": "Industrials",
       "weight": 0.00029994,
       "asset_class": "equity"
     },
@@ -228059,11 +227880,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_361",
-      "name": "ADP Promesses",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B164FY1",
+      "name": "Aeroports de Paris SA",
+      "ticker": "ADP",
+      "country": "France",
+      "sector": "Industrials",
       "weight": 0.00019996,
       "asset_class": "equity"
     },
@@ -228217,15 +228038,6 @@
       "ticker": "KIM",
       "country": "United States",
       "sector": "Real Estate",
-      "weight": 0.00019996,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BSQLM28",
-      "name": "Brookfield Infrastructure Corp",
-      "ticker": "BIPC",
-      "country": "Canada",
-      "sector": "Utilities",
       "weight": 0.00019996,
       "asset_class": "equity"
     },
@@ -230662,15 +230474,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SEDOL:2879327",
-      "name": "Teck Resources Ltd",
-      "ticker": "TECK/B",
-      "country": "Canada",
-      "sector": "Materials",
-      "weight": 9.998e-05,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:6161978",
       "name": "MIRVAC GROUP",
       "ticker": "MGR.AX",
@@ -230788,11 +230591,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_704",
-      "name": "Tanger Factory Outlet Centers",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2874582",
+      "name": "Tanger Inc",
+      "ticker": "SKT",
+      "country": "United States",
+      "sector": "Real Estate",
       "weight": 9.998e-05,
       "asset_class": "equity"
     },
@@ -231148,11 +230951,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_747",
-      "name": "Schlumberger Limited",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2779201",
+      "name": "SLB Ltd",
+      "ticker": "SLB",
+      "country": "United States",
+      "sector": "Energy",
       "weight": 9.998e-05,
       "asset_class": "equity"
     },
@@ -231373,15 +231176,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SEDOL:BN13P03",
-      "name": "DoorDash Inc",
-      "ticker": "DASH",
-      "country": "United States",
-      "sector": "Consumer Discretionary",
-      "weight": 9.998e-05,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:B6SW913",
       "name": "CubeSmart",
       "ticker": "CUBE",
@@ -231421,15 +231215,6 @@
       "isin": "SEDOL:B665KZ5",
       "name": "General Motors Co",
       "ticker": "GM",
-      "country": "United States",
-      "sector": "Consumer Discretionary",
-      "weight": 9.998e-05,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BMGYYH4",
-      "name": "Airbnb Inc",
-      "ticker": "ABNB",
       "country": "United States",
       "sector": "Consumer Discretionary",
       "weight": 9.998e-05,
@@ -231528,15 +231313,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_789",
-      "name": "WaterBridge Infrastructure LLC Class A",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 9.998e-05,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:BTF8CF0",
       "name": "Restaurant Brands International Inc",
       "ticker": "QSR",
@@ -231584,11 +231360,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_795",
-      "name": "RioCan REIT",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2229610",
+      "name": "RioCan Real Estate Investment Trust",
+      "ticker": "REI-U",
+      "country": "Canada",
+      "sector": "Real Estate",
       "weight": 9.998e-05,
       "asset_class": "equity"
     },
@@ -231796,15 +231572,6 @@
       "ticker": "DNL.AX",
       "country": "Australia",
       "sector": "Materials",
-      "weight": 9.998e-05,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_823",
-      "name": "Avanti Kea PL 2026-1 Class A 15/06/2035",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 9.998e-05,
       "asset_class": "equity"
     },
@@ -232349,11 +232116,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_889",
-      "name": "National Retail Properties Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2211811",
+      "name": "NNN REIT Inc",
+      "ticker": "NNN",
+      "country": "United States",
+      "sector": "Real Estate",
       "weight": 9.998e-05,
       "asset_class": "equity"
     },
@@ -232547,11 +232314,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_911",
-      "name": "Kenedix Office Investment Corp",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B0C5Q59",
+      "name": "KDX Realty Investment Corp",
+      "ticker": "8972",
+      "country": "Japan",
+      "sector": "Real Estate",
       "weight": 9.998e-05,
       "asset_class": "equity"
     },
@@ -232691,11 +232458,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_927",
-      "name": "Wabtec",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2955733",
+      "name": "Westinghouse Air Brake Technologies Corp",
+      "ticker": "WAB",
+      "country": "United States",
+      "sector": "Industrials",
       "weight": 9.998e-05,
       "asset_class": "equity"
     },
@@ -232922,6 +232689,16 @@
       "issuer_name": "New Zealand Government"
     },
     {
+      "isin": "BOND:ALPHABET_INC",
+      "name": "Alphabet Inc",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.01999592,
+      "asset_class": "fixed_interest",
+      "tranche_count": 2
+    },
+    {
       "isin": "BOND:ISSUER_LGFA",
       "name": "NZ Local Government Funding Agency",
       "ticker": "",
@@ -233072,8 +232849,8 @@
       "tranche_count": 1
     },
     {
-      "isin": "BOND:TURNERS_MARQUE_1_TRUST_CLASS_A",
-      "name": "Turners Marque -1 Trust Class A",
+      "isin": "BOND:TURNERS_MARQUE_1_TRUST",
+      "name": "Turners Marque -1 Trust",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -233094,14 +232871,24 @@
       "issuer_name": "Chorus"
     },
     {
-      "isin": "BOND:UDC_ENDEAVOUR_TRUST_1_CLASS_A",
-      "name": "UDC Endeavour Trust -1 Class A",
+      "isin": "BOND:MASTERCARD_INC_ORD",
+      "name": "Mastercard Inc Ord",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
       "weight": 0.00249949,
       "asset_class": "fixed_interest",
       "tranche_count": 1
+    },
+    {
+      "isin": "BOND:UDC_ENDEAVOUR_TRUST_1",
+      "name": "UDC Endeavour Trust -1",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00469904,
+      "asset_class": "fixed_interest",
+      "tranche_count": 2
     },
     {
       "isin": "BOND:METLIFECARE_LIMITED",
@@ -233222,16 +233009,6 @@
       "issuer_name": "Kainga Ora / Housing NZ"
     },
     {
-      "isin": "BOND:UDC_ENDEAVOUR_TRUST_1",
-      "name": "UDC Endeavour Trust -1",
-      "ticker": "",
-      "country": "Global",
-      "sector": "Corporate / Other",
-      "weight": 0.00219955,
-      "asset_class": "fixed_interest",
-      "tranche_count": 1
-    },
-    {
       "isin": "BOND:BANCO_SANTANDER_S_A",
       "name": "Banco Santander, S.A.",
       "ticker": "",
@@ -233314,8 +233091,8 @@
       "tranche_count": 2
     },
     {
-      "isin": "BOND:HUMM_GROUP_LTD_CLASS_A_25_3",
-      "name": "Humm Group Ltd Class A 25-3",
+      "isin": "BOND:HUMM_GROUP_LTD_25_3",
+      "name": "Humm Group Ltd 25-3",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -233354,6 +233131,18 @@
       "weight": 0.00089982,
       "asset_class": "fixed_interest",
       "tranche_count": 1
+    },
+    {
+      "isin": "BOND:ISSUER_FLEETPARTNER",
+      "name": "FleetPartners",
+      "ticker": "",
+      "country": "New Zealand",
+      "sector": "Financial",
+      "weight": 0.00089982,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1,
+      "issuer_key": "ISSUER_FLEETPARTNER",
+      "issuer_name": "FleetPartners"
     },
     {
       "isin": "BOND:CHRISTCHURCH_CITY_HOLDINGS",
@@ -233422,8 +233211,18 @@
       "issuer_name": "Transpower New Zealand"
     },
     {
-      "isin": "BOND:SPEIRS_TRUST_1_CLASS_A",
-      "name": "Speirs Trust -1 Class A",
+      "isin": "BOND:PALANTIR_TECHNOLOGIES_INC",
+      "name": "Palantir Technologies Inc.",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.0004999,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:SPEIRS_TRUST_1",
+      "name": "Speirs Trust -1",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -233524,6 +233323,16 @@
       "tranche_count": 1
     },
     {
+      "isin": "BOND:BROOKFIELD_INFRASTRUCTURE_CORPORATION",
+      "name": "Brookfield Infrastructure Corporation",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00019996,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
       "isin": "BOND:ISSUER_POT",
       "name": "Port of Tauranga",
       "ticker": "",
@@ -233562,6 +233371,16 @@
     {
       "isin": "BOND:IAG",
       "name": "IAG",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 9.998e-05,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:TECK_RESOURCES_LIMITED_SV",
+      "name": "Teck Resources Limited SV",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -233616,6 +233435,48 @@
       "issuer_name": "Mercury NZ"
     },
     {
+      "isin": "BOND:DOORDASH_INC",
+      "name": "DoorDash Inc.",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 9.998e-05,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:AIRBNB_INC",
+      "name": "Airbnb Inc.",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 9.998e-05,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:WATERBRIDGE_INFRASTRUCTURE_LLC",
+      "name": "WaterBridge Infrastructure LLC",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 9.998e-05,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:ISSUER_AVANTI",
+      "name": "Avanti Finance",
+      "ticker": "",
+      "country": "New Zealand",
+      "sector": "Financial",
+      "weight": 9.998e-05,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1,
+      "issuer_key": "ISSUER_AVANTI",
+      "issuer_name": "Avanti Finance"
+    },
+    {
       "isin": "BOND:UDC_ENDEAVOUR_AUTO",
       "name": "UDC Endeavour Auto",
       "ticker": "",
@@ -233638,24 +233499,6 @@
     }
   ],
   "KERNEL_CASH_PLUS": [
-    {
-      "isin": "UNRESOLVED_52",
-      "name": "Avanti Kea PL 2026-1 Class A 15/06/2035",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0055017,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_67",
-      "name": "MTF Magnum Trust 2025 Class A 19/04/2033",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0026008,
-      "asset_class": "equity"
-    },
     {
       "isin": "BOND:ISSUER_KIWIBANK",
       "name": "Kiwibank",
@@ -234001,8 +233844,20 @@
       "issuer_name": "Chorus"
     },
     {
-      "isin": "BOND:UDC_ENDEAVOUR_TRUST_1_CLASS_A",
-      "name": "UDC Endeavour Trust -1 Class A",
+      "isin": "BOND:ISSUER_AVANTI",
+      "name": "Avanti Finance",
+      "ticker": "",
+      "country": "New Zealand",
+      "sector": "Financial",
+      "weight": 0.0055017,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1,
+      "issuer_key": "ISSUER_AVANTI",
+      "issuer_name": "Avanti Finance"
+    },
+    {
+      "isin": "BOND:UDC_ENDEAVOUR_TRUST_1",
+      "name": "UDC Endeavour Trust -1",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -234011,8 +233866,8 @@
       "tranche_count": 1
     },
     {
-      "isin": "BOND:HUMM_GROUP_LTD_CLASS_A_26_1",
-      "name": "Humm Group Ltd Class A 26-1",
+      "isin": "BOND:HUMM_GROUP_LTD_26_1",
+      "name": "Humm Group Ltd 26-1",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -234033,14 +233888,26 @@
       "issuer_name": "Auckland International Airport"
     },
     {
-      "isin": "BOND:TURNERS_MARQUE_1_TRUST_CLASS_A",
-      "name": "Turners Marque -1 Trust Class A",
+      "isin": "BOND:TURNERS_MARQUE_1_TRUST",
+      "name": "Turners Marque -1 Trust",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
       "weight": 0.00280087,
       "asset_class": "fixed_interest",
       "tranche_count": 1
+    },
+    {
+      "isin": "BOND:ISSUER_MTF",
+      "name": "MTF Finance",
+      "ticker": "",
+      "country": "New Zealand",
+      "sector": "Financial",
+      "weight": 0.0026008,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1,
+      "issuer_key": "ISSUER_MTF",
+      "issuer_name": "MTF Finance"
     },
     {
       "isin": "BOND:UDC_ENDEAVOUR_TRUST_2",
@@ -234053,8 +233920,8 @@
       "tranche_count": 1
     },
     {
-      "isin": "BOND:HUMM_GROUP_LTD_CLASS_A_25_3",
-      "name": "Humm Group Ltd Class A 25-3",
+      "isin": "BOND:HUMM_GROUP_LTD_25_3",
+      "name": "Humm Group Ltd 25-3",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -234144,15 +234011,6 @@
       "country": "Spain",
       "sector": "Utilities",
       "weight": 0.06775122,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BR1GTS6",
-      "name": "Nextpower Inc",
-      "ticker": "NXT",
-      "country": "United States",
-      "sector": "Industrials",
-      "weight": 0.06457693,
       "asset_class": "equity"
     },
     {
@@ -234257,15 +234115,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SEDOL:BGJRH57",
-      "name": "Clearway Energy Inc",
-      "ticker": "CWEN",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.02241841,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:2508386",
       "name": "Plug Power Inc",
       "ticker": "PLUG",
@@ -234350,15 +234199,6 @@
       "country": "United States",
       "sector": "Industrials",
       "weight": 0.00982045,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BMDJ085",
-      "name": "Shoals Technologies Group Inc",
-      "ticker": "SHLS",
-      "country": "United States",
-      "sector": "Industrials",
-      "weight": 0.00952286,
       "asset_class": "equity"
     },
     {
@@ -234613,12 +234453,42 @@
       "issuer_name": "Powerco"
     },
     {
+      "isin": "BOND:NEXTRACKER_INC",
+      "name": "Nextracker Inc",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.06457693,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:CLEARWAY_ENERGY_INC",
+      "name": "Clearway Energy Inc",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.02241841,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
       "isin": "BOND:CIA_ENERGETICA_DE_MINAS_GERAIS_ADR",
       "name": "Cia Energetica de Minas Gerais ADR",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
       "weight": 0.00972126,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:SHOALS_TECHNOLOGIES_GROUP_INC",
+      "name": "Shoals Technologies Group Inc.",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00952286,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     }
@@ -234672,30 +234542,12 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SEDOL:BYVY8G0",
-      "name": "Alphabet Inc",
-      "ticker": "GOOGL",
-      "country": "United States",
-      "sector": "Communication Services",
-      "weight": 0.04941262,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:BDZ78H9",
       "name": "Broadcom Inc",
       "ticker": "AVGO",
       "country": "United States",
       "sector": "Information Technology",
       "weight": 0.04087589,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BYY88Y7",
-      "name": "Alphabet Inc",
-      "ticker": "GOOG",
-      "country": "United States",
-      "sector": "Communication Services",
-      "weight": 0.0396707,
       "asset_class": "equity"
     },
     {
@@ -234768,15 +234620,6 @@
       "country": "United States",
       "sector": "Consumer Staples",
       "weight": 0.01134883,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B121557",
-      "name": "Mastercard Inc",
-      "ticker": "MA",
-      "country": "United States",
-      "sector": "Financials",
-      "weight": 0.01094711,
       "asset_class": "equity"
     },
     {
@@ -235525,6 +235368,26 @@
       "sector": "Health Care",
       "weight": 0.0003013,
       "asset_class": "equity"
+    },
+    {
+      "isin": "BOND:ALPHABET_INC",
+      "name": "Alphabet Inc",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.08908333,
+      "asset_class": "fixed_interest",
+      "tranche_count": 2
+    },
+    {
+      "isin": "BOND:MASTERCARD_INC_ORD",
+      "name": "Mastercard Inc Ord",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.01094711,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
     }
   ],
   "KERNEL_GLOBAL_DIVIDEND": [
@@ -236271,30 +236134,12 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SEDOL:BYVY8G0",
-      "name": "Alphabet Inc",
-      "ticker": "GOOGL",
-      "country": "United States",
-      "sector": "Communication Services",
-      "weight": 0.02341208,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:B616C79",
       "name": "Tesla Inc",
       "ticker": "TSLA",
       "country": "United States",
       "sector": "Consumer Discretionary",
       "weight": 0.0200675,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B121557",
-      "name": "Mastercard Inc",
-      "ticker": "MA",
-      "country": "United States",
-      "sector": "Financials",
-      "weight": 0.0195897,
       "asset_class": "equity"
     },
     {
@@ -236313,15 +236158,6 @@
       "country": "United States",
       "sector": "Information Technology",
       "weight": 0.0191119,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BYY88Y7",
-      "name": "Alphabet Inc",
-      "ticker": "GOOG",
-      "country": "United States",
-      "sector": "Communication Services",
-      "weight": 0.0186341,
       "asset_class": "equity"
     },
     {
@@ -236849,15 +236685,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SEDOL:BN13P03",
-      "name": "DoorDash Inc",
-      "ticker": "DASH",
-      "country": "United States",
-      "sector": "Consumer Discretionary",
-      "weight": 0.00334458,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:6870490",
       "name": "Advantest Corp",
       "ticker": "6857",
@@ -237090,15 +236917,6 @@
       "ticker": "IBE",
       "country": "Spain",
       "sector": "Utilities",
-      "weight": 0.00229343,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BMGYYH4",
-      "name": "Airbnb Inc",
-      "ticker": "ABNB",
-      "country": "United States",
-      "sector": "Consumer Discretionary",
       "weight": 0.00229343,
       "asset_class": "equity"
     },
@@ -237902,15 +237720,6 @@
       "ticker": "LR",
       "country": "France",
       "sector": "Industrials",
-      "weight": 0.0009556,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B8K6ZD1",
-      "name": "Workday Inc",
-      "ticker": "WDAY",
-      "country": "United States",
-      "sector": "Information Technology",
       "weight": 0.0009556,
       "asset_class": "equity"
     },
@@ -239451,15 +239260,6 @@
       "issuer_name": "Powerco"
     },
     {
-      "isin": "MANUAL:CCL.B",
-      "name": "CCL Industries Inc. Class B NV",
-      "ticker": "CCL.B",
-      "country": "Canada",
-      "sector": "Materials",
-      "weight": 0.00019112,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:4031879",
       "name": "Veolia Environnement SA",
       "ticker": "VIE",
@@ -239728,15 +239528,6 @@
       "ticker": "WN",
       "country": "Canada",
       "sector": "Consumer Staples",
-      "weight": 0.00019112,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BP6NH40",
-      "name": "Grab Holdings Ltd",
-      "ticker": "GRAB",
-      "country": "United States",
-      "sector": "Industrials",
       "weight": 0.00019112,
       "asset_class": "equity"
     },
@@ -240245,6 +240036,76 @@
       "sector": "Information Technology",
       "weight": 9.556e-05,
       "asset_class": "equity"
+    },
+    {
+      "isin": "BOND:ALPHABET_INC",
+      "name": "Alphabet Inc",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.04204618,
+      "asset_class": "fixed_interest",
+      "tranche_count": 2
+    },
+    {
+      "isin": "BOND:MASTERCARD_INC_ORD",
+      "name": "Mastercard Inc Ord",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.0195897,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:DOORDASH_INC",
+      "name": "DoorDash Inc.",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00334458,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:AIRBNB_INC",
+      "name": "Airbnb Inc.",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00229343,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:WORKDAY_INC",
+      "name": "Workday Inc",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.0009556,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:CCL_INDUSTRIES_INC_NV",
+      "name": "CCL Industries Inc. NV",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00019112,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:GRAB_HOLDINGS_LIMITED",
+      "name": "Grab Holdings Limited",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00019112,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
     }
   ],
   "KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED": [
@@ -240719,11 +240580,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_52",
-      "name": "ADP Promesses",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B164FY1",
+      "name": "Aeroports de Paris SA",
+      "ticker": "ADP",
+      "country": "France",
+      "sector": "Industrials",
       "weight": 0.00307346,
       "asset_class": "equity"
     },
@@ -240761,15 +240622,6 @@
       "country": "Spain",
       "sector": "Utilities",
       "weight": 0.00288137,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BSQLM28",
-      "name": "Brookfield Infrastructure Corp",
-      "ticker": "BIPC",
-      "country": "Canada",
-      "sector": "Utilities",
-      "weight": 0.00278533,
       "asset_class": "equity"
     },
     {
@@ -241016,15 +240868,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_85",
-      "name": "WaterBridge Infrastructure LLC Class A",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00096046,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:B233HR5",
       "name": "REN - Redes Energeticas Nacionais SGPS SA",
       "ticker": "RENE",
@@ -241079,11 +240922,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_92",
-      "name": "UNITIL Corp",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "US91325V1089",
+      "name": "Unitil Corp",
+      "ticker": "UTL",
+      "country": "United States",
+      "sector": "Utilities",
       "weight": 0.00057627,
       "asset_class": "equity"
     },
@@ -241097,11 +240940,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_94",
+      "isin": "LU1734076819",
       "name": "Corporacion America Airports SA",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "CAAP",
+      "country": "Argentina",
+      "sector": "Industrials",
       "weight": 0.00048023,
       "asset_class": "equity"
     },
@@ -241142,11 +240985,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_99",
-      "name": "Consolidated Water Co Ltd",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "KYG237731073",
+      "name": "Consolidated Water Co Inc",
+      "ticker": "CWCO",
+      "country": "United States",
+      "sector": "Utilities",
       "weight": 0.00028814,
       "asset_class": "equity"
     },
@@ -241185,6 +241028,26 @@
       "sector": "Industrials",
       "weight": 0.00019209,
       "asset_class": "equity"
+    },
+    {
+      "isin": "BOND:BROOKFIELD_INFRASTRUCTURE_CORPORATION",
+      "name": "Brookfield Infrastructure Corporation",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00278533,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:WATERBRIDGE_INFRASTRUCTURE_LLC",
+      "name": "WaterBridge Infrastructure LLC",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00096046,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
     }
   ],
   "KERNEL_GLOBAL_PROPERTY_HEDGED": [
@@ -241657,11 +241520,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_52",
-      "name": "Tanger Factory Outlet Centers",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2874582",
+      "name": "Tanger Inc",
+      "ticker": "SKT",
+      "country": "United States",
+      "sector": "Real Estate",
       "weight": 0.0034339,
       "asset_class": "equity"
     },
@@ -241792,11 +241655,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_67",
-      "name": "RioCan REIT",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2229610",
+      "name": "RioCan Real Estate Investment Trust",
+      "ticker": "REI-U",
+      "country": "Canada",
+      "sector": "Real Estate",
       "weight": 0.00276619,
       "asset_class": "equity"
     },
@@ -241891,11 +241754,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_78",
-      "name": "National Retail Properties Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2211811",
+      "name": "NNN REIT Inc",
+      "ticker": "NNN",
+      "country": "United States",
+      "sector": "Real Estate",
       "weight": 0.00228926,
       "asset_class": "equity"
     },
@@ -241909,11 +241772,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_80",
-      "name": "Kenedix Office Investment Corp",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B0C5Q59",
+      "name": "KDX Realty Investment Corp",
+      "ticker": "8972",
+      "country": "Japan",
+      "sector": "Real Estate",
       "weight": 0.00209849,
       "asset_class": "equity"
     },
@@ -241990,11 +241853,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_89",
-      "name": "SmartCentres REIT",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BZ22BK5",
+      "name": "SmartCentres Real Estate Investment Trust",
+      "ticker": "SRU-U",
+      "country": "Canada",
+      "sector": "Real Estate",
       "weight": 0.00181233,
       "asset_class": "equity"
     },
@@ -242071,11 +241934,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_98",
-      "name": "First Capital REIT",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BKSLS55",
+      "name": "First Capital Real Estate Investment Trust",
+      "ticker": "FCR-U",
+      "country": "Canada",
+      "sector": "Real Estate",
       "weight": 0.00162156,
       "asset_class": "equity"
     },
@@ -242242,11 +242105,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_117",
-      "name": "Granite REIT",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BRYQ8P3",
+      "name": "Granite Real Estate Investment Trust",
+      "ticker": "GRT-U",
+      "country": "Canada",
+      "sector": "Real Estate",
       "weight": 0.00124002,
       "asset_class": "equity"
     },
@@ -242395,11 +242258,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_134",
-      "name": "Inmobiliaria Colonial SA",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BD0PJ08",
+      "name": "Colonial SFL Socimi SA",
+      "ticker": "COL",
+      "country": "Spain",
+      "sector": "Real Estate",
       "weight": 0.00085847,
       "asset_class": "equity"
     },
@@ -242566,11 +242429,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_153",
-      "name": "Frontier Real Estate Investment",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "JP3046220004",
+      "name": "Frontier Real Estate Investment Corp",
+      "ticker": "8964.T",
+      "country": "Japan",
+      "sector": "Real Estate",
       "weight": 0.0006677,
       "asset_class": "equity"
     },
@@ -242593,11 +242456,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_156",
+      "isin": "US83173P1057",
       "name": "SmartStop Self Storage REIT Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "SMST",
+      "country": "United States",
+      "sector": "Real Estate",
       "weight": 0.0006677,
       "asset_class": "equity"
     },
@@ -242674,29 +242537,29 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_165",
+      "isin": "US4440971095",
       "name": "Hudson Pacific Properties Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "HPP",
+      "country": "United States",
+      "sector": "Real Estate",
       "weight": 0.00057232,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_166",
-      "name": "Netstreit Ord",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "US64110R1068",
+      "name": "NETSTREIT Corp",
+      "ticker": "NTST",
+      "country": "United States",
+      "sector": "Real Estate",
       "weight": 0.00047693,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_167",
-      "name": "H&R REIT",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BGM8DW6",
+      "name": "H&R Real Estate Investment Trust",
+      "ticker": "HR-U",
+      "country": "Canada",
+      "sector": "Real Estate",
       "weight": 0.00047693,
       "asset_class": "equity"
     },
@@ -242755,20 +242618,20 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_174",
-      "name": "Global One REIT",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6693608",
+      "name": "Global One Real Estate Investment Corp",
+      "ticker": "8958",
+      "country": "Japan",
+      "sector": "Real Estate",
       "weight": 0.00047693,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_175",
+      "isin": "US9030021039",
       "name": "UMH Properties Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "UMH",
+      "country": "United States",
+      "sector": "Real Estate",
       "weight": 0.00047693,
       "asset_class": "equity"
     },
@@ -242836,11 +242699,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_183",
+      "isin": "US2544231069",
       "name": "Diversified Healthcare Trust",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "DHC",
+      "country": "United States",
+      "sector": "Real Estate",
       "weight": 0.00038154,
       "asset_class": "equity"
     },
@@ -242872,29 +242735,29 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_187",
-      "name": "Dream Industrial REIT",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BMH4P92",
+      "name": "Dream Industrial Real Estate Investment Trust",
+      "ticker": "DIR-U",
+      "country": "Canada",
+      "sector": "Real Estate",
       "weight": 0.00038154,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_188",
+      "isin": "US3765361080",
       "name": "Gladstone Commercial Corp",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "GOOD",
+      "country": "United States",
+      "sector": "Real Estate",
       "weight": 0.00038154,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_189",
+      "isin": "US81761L1026",
       "name": "Service Properties Trust",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "SVC",
+      "country": "United States",
+      "sector": "Real Estate",
       "weight": 0.00038154,
       "asset_class": "equity"
     },
@@ -242908,11 +242771,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_191",
+      "isin": "US1053682035",
       "name": "Brandywine Realty Trust",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "BDN",
+      "country": "United States",
+      "sector": "Real Estate",
       "weight": 0.00038154,
       "asset_class": "equity"
     },
@@ -242962,11 +242825,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_197",
+      "isin": "US1248302027",
       "name": "CBL & Associates Properties Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "CBL",
+      "country": "United States",
+      "sector": "Real Estate",
       "weight": 0.00028616,
       "asset_class": "equity"
     },
@@ -242980,20 +242843,20 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_199",
-      "name": "Lend Lease Group Stapled",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6512004",
+      "name": "LENDLEASE GROUP",
+      "ticker": "LLC.AX",
+      "country": "Australia",
+      "sector": "Real Estate",
       "weight": 0.00028616,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_200",
+      "isin": "US8660821008",
       "name": "Summit Hotel Properties Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "INN",
+      "country": "United States",
+      "sector": "Real Estate",
       "weight": 0.00028616,
       "asset_class": "equity"
     },
@@ -243007,15 +242870,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_202",
-      "name": "Easterly Government Properties Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00019077,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:B12RQH4",
       "name": "Keppel REIT",
       "ticker": "KREIT",
@@ -243025,47 +242879,47 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_204",
+      "isin": "US65341G1067",
       "name": "NexPoint Residential Trust Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "NXRT",
+      "country": "United States",
+      "sector": "Real Estate",
       "weight": 0.00019077,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_205",
+      "isin": "US20369C1062",
       "name": "Community Healthcare Trust Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "CHCT",
+      "country": "United States",
+      "sector": "Real Estate",
       "weight": 9.539e-05,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_206",
+      "isin": "US91359E1055",
       "name": "Universal Health Realty Trust",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "UHT",
+      "country": "United States",
+      "sector": "Real Estate",
       "weight": 9.539e-05,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_207",
-      "name": "Postal Realty Trust Inc.",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "US73757U1007",
+      "name": "Postal Realty Trust Inc",
+      "ticker": "PSTL",
+      "country": "United States",
+      "sector": "Real Estate",
       "weight": 9.539e-05,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_208",
+      "isin": "JP3048530004",
       "name": "Chiron Real Estate Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "2972.T",
+      "country": "Japan",
+      "sector": "Real Estate",
       "weight": 9.539e-05,
       "asset_class": "equity"
     },
@@ -243079,13 +242933,23 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_210",
+      "isin": "US82981J1097",
       "name": "SITE Centers Corp",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "ticker": "SITC",
+      "country": "United States",
+      "sector": "Real Estate",
       "weight": 9.539e-05,
       "asset_class": "equity"
+    },
+    {
+      "isin": "BOND:EASTERLY_GOVERNMENT_PROPERTIES_INC",
+      "name": "Easterly Government Properties Inc",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Sovereign",
+      "weight": 0.00019077,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
     }
   ],
   "KERNEL_HIGH_GROWTH": [
@@ -243166,30 +243030,12 @@
       "issuer_name": "Infratil"
     },
     {
-      "isin": "SEDOL:BYVY8G0",
-      "name": "Alphabet Inc",
-      "ticker": "GOOGL",
-      "country": "United States",
-      "sector": "Communication Services",
-      "weight": 0.01986646,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:BDZ78H9",
       "name": "Broadcom Inc",
       "ticker": "AVGO",
       "country": "United States",
       "sector": "Information Technology",
       "weight": 0.01648917,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BYY88Y7",
-      "name": "Alphabet Inc",
-      "ticker": "GOOG",
-      "country": "United States",
-      "sector": "Communication Services",
-      "weight": 0.0159925,
       "asset_class": "equity"
     },
     {
@@ -243400,15 +243246,6 @@
       "country": "United Kingdom",
       "sector": "Financials",
       "weight": 0.00446995,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B121557",
-      "name": "Mastercard Inc",
-      "ticker": "MA",
-      "country": "United States",
-      "sector": "Financials",
-      "weight": 0.00437062,
       "asset_class": "equity"
     },
     {
@@ -244623,15 +244460,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SEDOL:BN78DQ4",
-      "name": "Palantir Technologies Inc",
-      "ticker": "PLTR",
-      "country": "United States",
-      "sector": "Information Technology",
-      "weight": 0.00079466,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:6429104",
       "name": "Hitachi Ltd",
       "ticker": "6501",
@@ -245370,11 +245198,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_252",
-      "name": "Raytheon Technologies Corp",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BM5M5Y3",
+      "name": "RTX Corp",
+      "ticker": "RTX",
+      "country": "United States",
+      "sector": "Industrials",
       "weight": 0.00049666,
       "asset_class": "equity"
     },
@@ -246486,11 +246314,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_378",
-      "name": "ADP Promesses",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B164FY1",
+      "name": "Aeroports de Paris SA",
+      "ticker": "ADP",
+      "country": "France",
+      "sector": "Industrials",
       "weight": 0.00019866,
       "asset_class": "equity"
     },
@@ -246725,15 +246553,6 @@
       "ticker": "EBS",
       "country": "Austria",
       "sector": "Financials",
-      "weight": 0.00019866,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BSQLM28",
-      "name": "Brookfield Infrastructure Corp",
-      "ticker": "BIPC",
-      "country": "Canada",
-      "sector": "Utilities",
       "weight": 0.00019866,
       "asset_class": "equity"
     },
@@ -247946,15 +247765,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SEDOL:2879327",
-      "name": "Teck Resources Ltd",
-      "ticker": "TECK/B",
-      "country": "Canada",
-      "sector": "Materials",
-      "weight": 0.00019866,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:6563024",
       "name": "Sumitomo Mitsui Financial Group Inc",
       "ticker": "8316",
@@ -248540,11 +248350,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_624",
-      "name": "Schlumberger Limited",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2779201",
+      "name": "SLB Ltd",
+      "ticker": "SLB",
+      "country": "United States",
+      "sector": "Energy",
       "weight": 9.933e-05,
       "asset_class": "equity"
     },
@@ -248738,15 +248548,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SEDOL:BN13P03",
-      "name": "DoorDash Inc",
-      "ticker": "DASH",
-      "country": "United States",
-      "sector": "Consumer Discretionary",
-      "weight": 9.933e-05,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:BYT8143",
       "name": "Japan Post Holdings Co Ltd",
       "ticker": "6178",
@@ -248795,15 +248596,6 @@
       "isin": "SEDOL:B665KZ5",
       "name": "General Motors Co",
       "ticker": "GM",
-      "country": "United States",
-      "sector": "Consumer Discretionary",
-      "weight": 9.933e-05,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BMGYYH4",
-      "name": "Airbnb Inc",
-      "ticker": "ABNB",
       "country": "United States",
       "sector": "Consumer Discretionary",
       "weight": 9.933e-05,
@@ -250076,11 +249868,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_801",
-      "name": "Wabtec",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2955733",
+      "name": "Westinghouse Air Brake Technologies Corp",
+      "ticker": "WAB",
+      "country": "United States",
+      "sector": "Industrials",
       "weight": 9.933e-05,
       "asset_class": "equity"
     },
@@ -250229,11 +250021,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_818",
-      "name": "Tanger Factory Outlet Centers",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2874582",
+      "name": "Tanger Inc",
+      "ticker": "SKT",
+      "country": "United States",
+      "sector": "Real Estate",
       "weight": 9.933e-05,
       "asset_class": "equity"
     },
@@ -250922,11 +250714,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_899",
-      "name": "Block CL A Ord",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "US8522341036",
+      "name": "Block Inc",
+      "ticker": "SQ",
+      "country": "United States",
+      "sector": "Financials",
       "weight": 9.933e-05,
       "asset_class": "equity"
     },
@@ -251138,29 +250930,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_923",
-      "name": "WaterBridge Infrastructure LLC Class A",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 9.933e-05,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:6076243",
       "name": "BANK OF QUEENSLAND LIMITED.",
       "ticker": "BOQ.AX",
       "country": "Australia",
       "sector": "Financials",
-      "weight": 9.933e-05,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B8K6ZD1",
-      "name": "Workday Inc",
-      "ticker": "WDAY",
-      "country": "United States",
-      "sector": "Information Technology",
       "weight": 9.933e-05,
       "asset_class": "equity"
     },
@@ -251336,11 +251110,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_946",
-      "name": "RioCan REIT",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2229610",
+      "name": "RioCan Real Estate Investment Trust",
+      "ticker": "REI-U",
+      "country": "Canada",
+      "sector": "Real Estate",
       "weight": 9.933e-05,
       "asset_class": "equity"
     },
@@ -251599,10 +251373,10 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SEDOL:BYNZGK1",
-      "name": "BLOCK, INC.",
-      "ticker": "XYZ.AX",
-      "country": "Australia",
+      "isin": "US8522341036",
+      "name": "Block Inc",
+      "ticker": "SQ",
+      "country": "United States",
       "sector": "Financials",
       "weight": 9.933e-05,
       "asset_class": "equity"
@@ -251752,15 +251526,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SEDOL:BJ2L575",
-      "name": "CGI Inc",
-      "ticker": "GIB/A",
-      "country": "Canada",
-      "sector": "Information Technology",
-      "weight": 9.933e-05,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:BF0GWS4",
       "name": "Wharf Real Estate Investment Co Ltd",
       "ticker": "1997",
@@ -251806,11 +251571,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_1010",
-      "name": "Hartford Finl Services Group",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2476193",
+      "name": "Hartford Insurance Group Inc/The",
+      "ticker": "HIG",
+      "country": "United States",
+      "sector": "Financials",
       "weight": 9.933e-05,
       "asset_class": "equity"
     },
@@ -252112,11 +251877,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_1045",
-      "name": "National Retail Properties Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2211811",
+      "name": "NNN REIT Inc",
+      "ticker": "NNN",
+      "country": "United States",
+      "sector": "Real Estate",
       "weight": 9.933e-05,
       "asset_class": "equity"
     },
@@ -252355,11 +252120,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_1074",
-      "name": "Kenedix Office Investment Corp",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B0C5Q59",
+      "name": "KDX Realty Investment Corp",
+      "ticker": "8972",
+      "country": "Japan",
+      "sector": "Real Estate",
       "weight": 9.933e-05,
       "asset_class": "equity"
     },
@@ -252735,13 +252500,34 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_1121",
-      "name": "Avanti Kea PL 2026-1 Class A 15/06/2035",
+      "isin": "BOND:ALPHABET_INC",
+      "name": "Alphabet Inc",
       "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 9.933e-05,
-      "asset_class": "equity"
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.03585897,
+      "asset_class": "fixed_interest",
+      "tranche_count": 2
+    },
+    {
+      "isin": "BOND:MASTERCARD_INC_ORD",
+      "name": "Mastercard Inc Ord",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00437062,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:PALANTIR_TECHNOLOGIES_INC",
+      "name": "Palantir Technologies Inc.",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00079466,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
     },
     {
       "isin": "BOND:ISSUER_KIWIBANK",
@@ -252778,6 +252564,16 @@
       "tranche_count": 2,
       "issuer_key": "ISSUER_CBA_ASB",
       "issuer_name": "Commonwealth Bank / ASB"
+    },
+    {
+      "isin": "BOND:BROOKFIELD_INFRASTRUCTURE_CORPORATION",
+      "name": "Brookfield Infrastructure Corporation",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00019866,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
     },
     {
       "isin": "BOND:ISSUER_NAB_BNZ",
@@ -252888,6 +252684,16 @@
       "tranche_count": 1
     },
     {
+      "isin": "BOND:TECK_RESOURCES_LIMITED_SV",
+      "name": "Teck Resources Limited SV",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00019866,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
       "isin": "BOND:ISSUER_POT",
       "name": "Port of Tauranga",
       "ticker": "",
@@ -252898,6 +252704,26 @@
       "tranche_count": 1,
       "issuer_key": "ISSUER_POT",
       "issuer_name": "Port of Tauranga"
+    },
+    {
+      "isin": "BOND:DOORDASH_INC",
+      "name": "DoorDash Inc.",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 9.933e-05,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:AIRBNB_INC",
+      "name": "Airbnb Inc.",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 9.933e-05,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
     },
     {
       "isin": "BOND:AUCKLAND_CITY_COUNCIL",
@@ -252958,6 +252784,26 @@
     {
       "isin": "BOND:CHRISTCHURCH_CITY_HOLDINGS",
       "name": "Christchurch City Holdings",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 9.933e-05,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:WATERBRIDGE_INFRASTRUCTURE_LLC",
+      "name": "WaterBridge Infrastructure LLC",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 9.933e-05,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:WORKDAY_INC",
+      "name": "Workday Inc",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -253056,6 +252902,16 @@
       "tranche_count": 1
     },
     {
+      "isin": "BOND:CGI_INC_SV",
+      "name": "CGI Inc. SV",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 9.933e-05,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
       "isin": "BOND:KIWI_PROPERTY_GROUP",
       "name": "Kiwi Property Group",
       "ticker": "",
@@ -253098,6 +252954,18 @@
       "issuer_name": "Chorus"
     },
     {
+      "isin": "BOND:ISSUER_AVANTI",
+      "name": "Avanti Finance",
+      "ticker": "",
+      "country": "New Zealand",
+      "sector": "Financial",
+      "weight": 9.933e-05,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1,
+      "issuer_key": "ISSUER_AVANTI",
+      "issuer_name": "Avanti Finance"
+    },
+    {
       "isin": "TD:ISSUER_BOC",
       "name": "Bank of China Term Deposit",
       "ticker": "",
@@ -253110,24 +252978,6 @@
     }
   ],
   "KERNEL_MARCH_2027_NZ_BOND": [
-    {
-      "isin": "UNRESOLVED_62",
-      "name": "Avanti Kea PL 2026-1 Class A 15/06/2035",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00230141,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_81",
-      "name": "MTF Magnum Trust 2025 Class A 19/04/2033",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00110067,
-      "asset_class": "equity"
-    },
     {
       "isin": "BOND:ISSUER_SBS",
       "name": "SBS Bank",
@@ -253483,8 +253333,20 @@
       "issuer_name": "Mercury NZ"
     },
     {
-      "isin": "BOND:UDC_ENDEAVOUR_TRUST_1_CLASS_A",
-      "name": "UDC Endeavour Trust -1 Class A",
+      "isin": "BOND:ISSUER_AVANTI",
+      "name": "Avanti Finance",
+      "ticker": "",
+      "country": "New Zealand",
+      "sector": "Financial",
+      "weight": 0.00230141,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1,
+      "issuer_key": "ISSUER_AVANTI",
+      "issuer_name": "Avanti Finance"
+    },
+    {
+      "isin": "BOND:UDC_ENDEAVOUR_TRUST_1",
+      "name": "UDC Endeavour Trust -1",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -253493,8 +253355,8 @@
       "tranche_count": 1
     },
     {
-      "isin": "BOND:HUMM_GROUP_LTD_CLASS_A_26_1",
-      "name": "Humm Group Ltd Class A 26-1",
+      "isin": "BOND:HUMM_GROUP_LTD_26_1",
+      "name": "Humm Group Ltd 26-1",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -253527,8 +253389,8 @@
       "issuer_name": "Wellington International Airport"
     },
     {
-      "isin": "BOND:TURNERS_MARQUE_1_TRUST_CLASS_A",
-      "name": "Turners Marque -1 Trust Class A",
+      "isin": "BOND:TURNERS_MARQUE_1_TRUST",
+      "name": "Turners Marque -1 Trust",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -253547,8 +253409,20 @@
       "tranche_count": 1
     },
     {
-      "isin": "BOND:HUMM_GROUP_LTD_CLASS_A_25_3",
-      "name": "Humm Group Ltd Class A 25-3",
+      "isin": "BOND:ISSUER_MTF",
+      "name": "MTF Finance",
+      "ticker": "",
+      "country": "New Zealand",
+      "sector": "Financial",
+      "weight": 0.00110067,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1,
+      "issuer_key": "ISSUER_MTF",
+      "issuer_name": "MTF Finance"
+    },
+    {
+      "isin": "BOND:HUMM_GROUP_LTD_25_3",
+      "name": "Humm Group Ltd 25-3",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -253703,8 +253577,8 @@
       "tranche_count": 1
     },
     {
-      "isin": "BOND:SPEIRS_TRUST_1_CLASS_A",
-      "name": "Speirs Trust -1 Class A",
+      "isin": "BOND:SPEIRS_TRUST_1",
+      "name": "Speirs Trust -1",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -253725,24 +253599,6 @@
     }
   ],
   "KERNEL_MARCH_2029_NZ_BOND": [
-    {
-      "isin": "UNRESOLVED_104",
-      "name": "Avanti Kea PL 2026-1 Class A 15/06/2035",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00059964,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_126",
-      "name": "MTF Magnum Trust 2025 Class A 19/04/2033",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00029982,
-      "asset_class": "equity"
-    },
     {
       "isin": "BOND:ISSUER_WBC",
       "name": "Westpac Banking Group",
@@ -254064,8 +253920,8 @@
       "tranche_count": 1
     },
     {
-      "isin": "BOND:UDC_ENDEAVOUR_TRUST_1_CLASS_A",
-      "name": "UDC Endeavour Trust -1 Class A",
+      "isin": "BOND:UDC_ENDEAVOUR_TRUST_1",
+      "name": "UDC Endeavour Trust -1",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -254172,8 +254028,8 @@
       "tranche_count": 3
     },
     {
-      "isin": "BOND:HUMM_GROUP_LTD_CLASS_A_25_3",
-      "name": "Humm Group Ltd Class A 25-3",
+      "isin": "BOND:HUMM_GROUP_LTD_25_3",
+      "name": "Humm Group Ltd 25-3",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -254280,6 +254136,18 @@
       "tranche_count": 1
     },
     {
+      "isin": "BOND:ISSUER_AVANTI",
+      "name": "Avanti Finance",
+      "ticker": "",
+      "country": "New Zealand",
+      "sector": "Financial",
+      "weight": 0.00059964,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1,
+      "issuer_key": "ISSUER_AVANTI",
+      "issuer_name": "Avanti Finance"
+    },
+    {
       "isin": "BOND:RYMAN_HEALTHCARE_LTD",
       "name": "Ryman Healthcare Ltd",
       "ticker": "",
@@ -254300,8 +254168,8 @@
       "tranche_count": 3
     },
     {
-      "isin": "BOND:HUMM_GROUP_LTD_CLASS_A_26_1",
-      "name": "Humm Group Ltd Class A 26-1",
+      "isin": "BOND:HUMM_GROUP_LTD_26_1",
+      "name": "Humm Group Ltd 26-1",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -254320,8 +254188,8 @@
       "tranche_count": 1
     },
     {
-      "isin": "BOND:TURNERS_MARQUE_1_TRUST_CLASS_A",
-      "name": "Turners Marque -1 Trust Class A",
+      "isin": "BOND:TURNERS_MARQUE_1_TRUST",
+      "name": "Turners Marque -1 Trust",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -254330,8 +254198,20 @@
       "tranche_count": 1
     },
     {
-      "isin": "BOND:SPEIRS_TRUST_1_CLASS_A",
-      "name": "Speirs Trust -1 Class A",
+      "isin": "BOND:ISSUER_MTF",
+      "name": "MTF Finance",
+      "ticker": "",
+      "country": "New Zealand",
+      "sector": "Financial",
+      "weight": 0.00029982,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1,
+      "issuer_key": "ISSUER_MTF",
+      "issuer_name": "MTF Finance"
+    },
+    {
+      "isin": "BOND:SPEIRS_TRUST_1",
+      "name": "Speirs Trust -1",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -255016,15 +254896,6 @@
   ],
   "KERNEL_NZ_BOND": [
     {
-      "isin": "UNRESOLVED_84",
-      "name": "ANZ Perp 6.95",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00019992,
-      "asset_class": "equity"
-    },
-    {
       "isin": "BOND:ISSUER_NZ_GOVT",
       "name": "New Zealand Government",
       "ticker": "",
@@ -255199,8 +255070,8 @@
       "tranche_count": 1
     },
     {
-      "isin": "BOND:UDC_ENDEAVOUR_TRUST_1_CLASS_A",
-      "name": "UDC Endeavour Trust -1 Class A",
+      "isin": "BOND:UDC_ENDEAVOUR_TRUST_1",
+      "name": "UDC Endeavour Trust -1",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -255287,8 +255158,8 @@
       "tranche_count": 2
     },
     {
-      "isin": "BOND:HUMM_GROUP_LTD_CLASS_A_25_3",
-      "name": "Humm Group Ltd Class A 25-3",
+      "isin": "BOND:HUMM_GROUP_LTD_25_3",
+      "name": "Humm Group Ltd 25-3",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -255381,8 +255252,8 @@
       "issuer_name": "Transpower New Zealand"
     },
     {
-      "isin": "BOND:SPEIRS_TRUST_1_CLASS_A",
-      "name": "Speirs Trust -1 Class A",
+      "isin": "BOND:SPEIRS_TRUST_1",
+      "name": "Speirs Trust -1",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -255465,6 +255336,18 @@
       "weight": 0.00019992,
       "asset_class": "fixed_interest",
       "tranche_count": 1
+    },
+    {
+      "isin": "BOND:ISSUER_ANZ",
+      "name": "ANZ Group",
+      "ticker": "",
+      "country": "New Zealand",
+      "sector": "Financial",
+      "weight": 0.00019992,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1,
+      "issuer_key": "ISSUER_ANZ",
+      "issuer_name": "ANZ Group"
     },
     {
       "isin": "BOND:SUMMERSET_GROUP",
@@ -255885,30 +255768,12 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SEDOL:BYVY8G0",
-      "name": "Alphabet Inc",
-      "ticker": "GOOGL",
-      "country": "United States",
-      "sector": "Communication Services",
-      "weight": 0.02925816,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:BDZ78H9",
       "name": "Broadcom Inc",
       "ticker": "AVGO",
       "country": "United States",
       "sector": "Information Technology",
       "weight": 0.02422348,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BYY88Y7",
-      "name": "Alphabet Inc",
-      "ticker": "GOOG",
-      "country": "United States",
-      "sector": "Communication Services",
-      "weight": 0.02346353,
       "asset_class": "equity"
     },
     {
@@ -256026,24 +255891,6 @@
       "country": "United States",
       "sector": "Health Care",
       "weight": 0.00664958,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B121557",
-      "name": "Mastercard Inc",
-      "ticker": "MA",
-      "country": "United States",
-      "sector": "Financials",
-      "weight": 0.00645959,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BN78DQ4",
-      "name": "Palantir Technologies Inc",
-      "ticker": "PLTR",
-      "country": "United States",
-      "sector": "Information Technology",
-      "weight": 0.00626961,
       "asset_class": "equity"
     },
     {
@@ -256254,11 +256101,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_45",
-      "name": "Raytheon Technologies Corp",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BM5M5Y3",
+      "name": "RTX Corp",
+      "ticker": "RTX",
+      "country": "United States",
+      "sector": "Industrials",
       "weight": 0.00360977,
       "asset_class": "equity"
     },
@@ -257253,11 +257100,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_156",
-      "name": "Schlumberger Limited",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2779201",
+      "name": "SLB Ltd",
+      "ticker": "SLB",
+      "country": "United States",
+      "sector": "Energy",
       "weight": 0.00104493,
       "asset_class": "equity"
     },
@@ -257352,15 +257199,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SEDOL:BN13P03",
-      "name": "DoorDash Inc",
-      "ticker": "DASH",
-      "country": "United States",
-      "sector": "Consumer Discretionary",
-      "weight": 0.00104493,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:2209106",
       "name": "Colgate-Palmolive Co",
       "ticker": "CL",
@@ -257382,15 +257220,6 @@
       "isin": "SEDOL:B665KZ5",
       "name": "General Motors Co",
       "ticker": "GM",
-      "country": "United States",
-      "sector": "Consumer Discretionary",
-      "weight": 0.00094994,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BMGYYH4",
-      "name": "Airbnb Inc",
-      "ticker": "ABNB",
       "country": "United States",
       "sector": "Consumer Discretionary",
       "weight": 0.00094994,
@@ -257869,11 +257698,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_224",
-      "name": "Wabtec",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2955733",
+      "name": "Westinghouse Air Brake Technologies Corp",
+      "ticker": "WAB",
+      "country": "United States",
+      "sector": "Industrials",
       "weight": 0.00066496,
       "asset_class": "equity"
     },
@@ -258220,11 +258049,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_263",
-      "name": "Block CL A Ord",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "US8522341036",
+      "name": "Block Inc",
+      "ticker": "SQ",
+      "country": "United States",
+      "sector": "Financials",
       "weight": 0.00056996,
       "asset_class": "equity"
     },
@@ -258261,15 +258090,6 @@
       "ticker": "IBKR",
       "country": "United States",
       "sector": "Financials",
-      "weight": 0.00056996,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B8K6ZD1",
-      "name": "Workday Inc",
-      "ticker": "WDAY",
-      "country": "United States",
-      "sector": "Information Technology",
       "weight": 0.00056996,
       "asset_class": "equity"
     },
@@ -258418,11 +258238,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_285",
-      "name": "Hartford Finl Services Group",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2476193",
+      "name": "Hartford Insurance Group Inc/The",
+      "ticker": "HIG",
+      "country": "United States",
+      "sector": "Financials",
       "weight": 0.00047497,
       "asset_class": "equity"
     },
@@ -258868,11 +258688,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_335",
-      "name": "F5 Networks Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2427599",
+      "name": "F5 Inc",
+      "ticker": "FFIV",
+      "country": "United States",
+      "sector": "Information Technology",
       "weight": 0.00037998,
       "asset_class": "equity"
     },
@@ -259903,15 +259723,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SEDOL:BJJMGY5",
-      "name": "Fox Corp",
-      "ticker": "FOX",
-      "country": "United States",
-      "sector": "Communication Services",
-      "weight": 0.00018999,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:2085102",
       "name": "Baxter International Inc",
       "ticker": "BAX",
@@ -260263,15 +260074,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_490",
-      "name": "Fox Corp Class B",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 9.499e-05,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:2009210",
       "name": "Alexandria Real Estate Equities Inc",
       "ticker": "ARE",
@@ -260387,6 +260189,76 @@
       "sector": "Communication Services",
       "weight": 9.499e-05,
       "asset_class": "equity"
+    },
+    {
+      "isin": "BOND:ALPHABET_INC",
+      "name": "Alphabet Inc",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.05272169,
+      "asset_class": "fixed_interest",
+      "tranche_count": 2
+    },
+    {
+      "isin": "BOND:MASTERCARD_INC_ORD",
+      "name": "Mastercard Inc Ord",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00645959,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:PALANTIR_TECHNOLOGIES_INC",
+      "name": "Palantir Technologies Inc.",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00626961,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:DOORDASH_INC",
+      "name": "DoorDash Inc.",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00104493,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:AIRBNB_INC",
+      "name": "Airbnb Inc.",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00094994,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:WORKDAY_INC",
+      "name": "Workday Inc",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00056996,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:FOX_CORP",
+      "name": "Fox Corp",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00028498,
+      "asset_class": "fixed_interest",
+      "tranche_count": 2
     }
   ],
   "KERNEL_SP_500_UNHEDGED": [
@@ -260427,30 +260299,12 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SEDOL:BYVY8G0",
-      "name": "Alphabet Inc",
-      "ticker": "GOOGL",
-      "country": "United States",
-      "sector": "Communication Services",
-      "weight": 0.03053435,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:BDZ78H9",
       "name": "Broadcom Inc",
       "ticker": "AVGO",
       "country": "United States",
       "sector": "Information Technology",
       "weight": 0.02528006,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BYY88Y7",
-      "name": "Alphabet Inc",
-      "ticker": "GOOG",
-      "country": "United States",
-      "sector": "Communication Services",
-      "weight": 0.02448696,
       "asset_class": "equity"
     },
     {
@@ -260568,24 +260422,6 @@
       "country": "United States",
       "sector": "Health Care",
       "weight": 0.00703876,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B121557",
-      "name": "Mastercard Inc",
-      "ticker": "MA",
-      "country": "United States",
-      "sector": "Financials",
-      "weight": 0.00674135,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BN78DQ4",
-      "name": "Palantir Technologies Inc",
-      "ticker": "PLTR",
-      "country": "United States",
-      "sector": "Information Technology",
-      "weight": 0.00654308,
       "asset_class": "equity"
     },
     {
@@ -260796,11 +260632,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_45",
-      "name": "Raytheon Technologies Corp",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BM5M5Y3",
+      "name": "RTX Corp",
+      "ticker": "RTX",
+      "country": "United States",
+      "sector": "Industrials",
       "weight": 0.00376723,
       "asset_class": "equity"
     },
@@ -261795,11 +261631,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_156",
-      "name": "Schlumberger Limited",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2779201",
+      "name": "SLB Ltd",
+      "ticker": "SLB",
+      "country": "United States",
+      "sector": "Energy",
       "weight": 0.00109051,
       "asset_class": "equity"
     },
@@ -261894,15 +261730,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SEDOL:BN13P03",
-      "name": "DoorDash Inc",
-      "ticker": "DASH",
-      "country": "United States",
-      "sector": "Consumer Discretionary",
-      "weight": 0.00109051,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:2209106",
       "name": "Colgate-Palmolive Co",
       "ticker": "CL",
@@ -261924,15 +261751,6 @@
       "isin": "SEDOL:B665KZ5",
       "name": "General Motors Co",
       "ticker": "GM",
-      "country": "United States",
-      "sector": "Consumer Discretionary",
-      "weight": 0.00099138,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BMGYYH4",
-      "name": "Airbnb Inc",
-      "ticker": "ABNB",
       "country": "United States",
       "sector": "Consumer Discretionary",
       "weight": 0.00099138,
@@ -262411,11 +262229,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_224",
-      "name": "Wabtec",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2955733",
+      "name": "Westinghouse Air Brake Technologies Corp",
+      "ticker": "WAB",
+      "country": "United States",
+      "sector": "Industrials",
       "weight": 0.00069396,
       "asset_class": "equity"
     },
@@ -262762,11 +262580,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_263",
-      "name": "Block CL A Ord",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "US8522341036",
+      "name": "Block Inc",
+      "ticker": "SQ",
+      "country": "United States",
+      "sector": "Financials",
       "weight": 0.00059483,
       "asset_class": "equity"
     },
@@ -262803,15 +262621,6 @@
       "ticker": "IBKR",
       "country": "United States",
       "sector": "Financials",
-      "weight": 0.00059483,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B8K6ZD1",
-      "name": "Workday Inc",
-      "ticker": "WDAY",
-      "country": "United States",
-      "sector": "Information Technology",
       "weight": 0.00059483,
       "asset_class": "equity"
     },
@@ -262960,11 +262769,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_285",
-      "name": "Hartford Finl Services Group",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2476193",
+      "name": "Hartford Insurance Group Inc/The",
+      "ticker": "HIG",
+      "country": "United States",
+      "sector": "Financials",
       "weight": 0.00049569,
       "asset_class": "equity"
     },
@@ -263410,11 +263219,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_335",
-      "name": "F5 Networks Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2427599",
+      "name": "F5 Inc",
+      "ticker": "FFIV",
+      "country": "United States",
+      "sector": "Information Technology",
       "weight": 0.00039655,
       "asset_class": "equity"
     },
@@ -264445,15 +264254,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SEDOL:BJJMGY5",
-      "name": "Fox Corp",
-      "ticker": "FOX",
-      "country": "United States",
-      "sector": "Communication Services",
-      "weight": 0.00019828,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:2085102",
       "name": "Baxter International Inc",
       "ticker": "BAX",
@@ -264805,15 +264605,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_490",
-      "name": "Fox Corp Class B",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 9.914e-05,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:2009210",
       "name": "Alexandria Real Estate Equities Inc",
       "ticker": "ARE",
@@ -264929,6 +264720,76 @@
       "sector": "Communication Services",
       "weight": 9.914e-05,
       "asset_class": "equity"
+    },
+    {
+      "isin": "BOND:ALPHABET_INC",
+      "name": "Alphabet Inc",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.05502131,
+      "asset_class": "fixed_interest",
+      "tranche_count": 2
+    },
+    {
+      "isin": "BOND:MASTERCARD_INC_ORD",
+      "name": "Mastercard Inc Ord",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00674135,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:PALANTIR_TECHNOLOGIES_INC",
+      "name": "Palantir Technologies Inc.",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00654308,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:DOORDASH_INC",
+      "name": "DoorDash Inc.",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00109051,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:AIRBNB_INC",
+      "name": "Airbnb Inc.",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00099138,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:WORKDAY_INC",
+      "name": "Workday Inc",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00059483,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:FOX_CORP",
+      "name": "Fox Corp",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00029741,
+      "asset_class": "fixed_interest",
+      "tranche_count": 2
     }
   ],
   "KERNEL_GLOBAL_100_HEDGED": [
@@ -264969,30 +264830,12 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SEDOL:BYVY8G0",
-      "name": "Alphabet Inc",
-      "ticker": "GOOGL",
-      "country": "United States",
-      "sector": "Communication Services",
-      "weight": 0.04713383,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:BDZ78H9",
       "name": "Broadcom Inc",
       "ticker": "AVGO",
       "country": "United States",
       "sector": "Information Technology",
       "weight": 0.0390702,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BYY88Y7",
-      "name": "Alphabet Inc",
-      "ticker": "GOOG",
-      "country": "United States",
-      "sector": "Communication Services",
-      "weight": 0.03782226,
       "asset_class": "equity"
     },
     {
@@ -265065,15 +264908,6 @@
       "country": "United States",
       "sector": "Consumer Staples",
       "weight": 0.0108475,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B121557",
-      "name": "Mastercard Inc",
-      "ticker": "MA",
-      "country": "United States",
-      "sector": "Financials",
-      "weight": 0.01046352,
       "asset_class": "equity"
     },
     {
@@ -265822,6 +265656,26 @@
       "sector": "Health Care",
       "weight": 0.00028799,
       "asset_class": "equity"
+    },
+    {
+      "isin": "BOND:ALPHABET_INC",
+      "name": "Alphabet Inc",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.08495608,
+      "asset_class": "fixed_interest",
+      "tranche_count": 2
+    },
+    {
+      "isin": "BOND:MASTERCARD_INC_ORD",
+      "name": "Mastercard Inc Ord",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.01046352,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
     }
   ],
   "KERNEL_US_BOND": [
