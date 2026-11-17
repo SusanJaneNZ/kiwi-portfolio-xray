@@ -295,6 +295,105 @@ export function calculatePortfolioLookthrough(input: CalculationInput): Calculat
     const constituents = constituentsMap[fundCode] || [];
     const meta = fundMetaMap.get(fundCode);
 
+    if (constituents.length === 0) {
+      const isKiwi = Boolean(meta?.isKiwiSaver || meta?.provider?.toLowerCase().includes("kiwi") || meta?.provider?.toLowerCase().includes("fisher"));
+      const fundName = meta?.name || fundCode;
+      const isin = `FUND_${fundCode}`;
+      const exposureNZD = balance * (1 - (meta?.cash_ratio || 0));
+
+      if (meta?.asset_class === "mixed") {
+        const equityPortion = 0.80 * exposureNZD;
+        const bondPortion = 0.20 * exposureNZD;
+
+        const eqKey = `equity:${isin}_EQ`;
+        let eqRecord = holdingsMap.get(eqKey);
+        if (!eqRecord) {
+          eqRecord = {
+            isin: `${isin}_EQ`,
+            name: `${fundName} (Growth Equities)`,
+            ticker: fundCode,
+            country: "New Zealand",
+            sector: isKiwi ? "KiwiSaver Scheme" : "Managed Fund",
+            assetClass: "equity",
+            valueNZD: 0,
+            portfolioWeight: 0,
+            equityWeight: 0,
+            sources: [],
+          };
+          holdingsMap.set(eqKey, eqRecord);
+        }
+        eqRecord.valueNZD += equityPortion;
+        eqRecord.sources.push({
+          sourceType: "fund",
+          fundCode,
+          fundName: `${fundName} (Growth Equities)`,
+          assetClass: "equity",
+          valueNZD: equityPortion,
+          weightInFund: 0.80,
+          effectiveDate: meta?.effective_date || new Date().toISOString().split("T")[0],
+        });
+
+        const bondKey = `fixed_interest:${isin}_FI`;
+        let bondRecord = holdingsMap.get(bondKey);
+        if (!bondRecord) {
+          bondRecord = {
+            isin: `${isin}_FI`,
+            name: `${fundName} (Fixed Interest)`,
+            ticker: fundCode,
+            country: "New Zealand",
+            sector: "Fixed Interest",
+            assetClass: "fixed_interest",
+            valueNZD: 0,
+            portfolioWeight: 0,
+            equityWeight: 0,
+            sources: [],
+          };
+          holdingsMap.set(bondKey, bondRecord);
+        }
+        bondRecord.valueNZD += bondPortion;
+        bondRecord.sources.push({
+          sourceType: "fund",
+          fundCode,
+          fundName: `${fundName} (Fixed Interest)`,
+          assetClass: "fixed_interest",
+          valueNZD: bondPortion,
+          weightInFund: 0.20,
+          effectiveDate: meta?.effective_date || new Date().toISOString().split("T")[0],
+        });
+        continue;
+      }
+
+      const assetClass = meta?.asset_class === "fixed_interest" ? "fixed_interest" : "equity";
+      const holdingKey = `${assetClass}:${isin}`;
+      let record = holdingsMap.get(holdingKey);
+      if (!record) {
+        record = {
+          isin,
+          name: fundName,
+          ticker: fundCode,
+          country: "New Zealand",
+          sector: isKiwi ? "KiwiSaver Scheme" : "Managed Fund",
+          assetClass,
+          valueNZD: 0,
+          portfolioWeight: 0,
+          equityWeight: 0,
+          sources: [],
+        };
+        holdingsMap.set(holdingKey, record);
+      }
+      record.valueNZD += exposureNZD;
+      record.sources.push({
+        sourceType: "fund",
+        fundCode,
+        fundName,
+        assetClass,
+        valueNZD: exposureNZD,
+        weightInFund: 1.0,
+        effectiveDate: meta?.effective_date || new Date().toISOString().split("T")[0],
+      });
+      continue;
+    }
+
     for (const c of constituents) {
       const assetClass = c.asset_class || "equity";
       const isin = c.isin || `SYNTH_${c.ticker || c.name}`;

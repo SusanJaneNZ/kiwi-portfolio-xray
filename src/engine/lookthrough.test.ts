@@ -379,4 +379,37 @@ export function runLookthroughTests(): void {
     Boolean(fundSrc.fundName?.includes("TWF") || fundSrc.fundName?.includes("Total World")),
     `Fund source should name TWF, got ${fundSrc.fundName}`
   );
+
+  // Test custom KiwiSaver fund lookthrough handling (mixed asset class)
+  const kiwiInput: CalculationInput = {
+    fundBalances: {
+      FISHER_KIWISAVER_GROWTH: 50000,
+    },
+    directHoldings: [],
+    fixedInterest: [],
+    audNzdRate: 1.10,
+    fundsRegistry: [
+      {
+        code: "FISHER_KIWISAVER_GROWTH",
+        name: "Fisher Funds KiwiSaver Growth Fund",
+        provider: "Fisher Funds",
+        effective_date: "2026-09-30",
+        cash_ratio: 0.035,
+        hedging_ratio: 0,
+        constituent_count: 0,
+        asset_class: "mixed",
+        isKiwiSaver: true,
+      },
+    ],
+    constituentsMap: {},
+  };
+
+  const kiwiRes = calculatePortfolioLookthrough(kiwiInput);
+  assertTrue(kiwiRes.denominatorD === 50000, `Expected denominator 50000, got ${kiwiRes.denominatorD}`);
+  // Cash is 3.5% = 1750 NZD, remaining 48250 is split 80% equity (38600) and 20% fixed interest (9650)
+  assertTrue(Math.abs(kiwiRes.liquidity.totalCashNZD - 1750) < 0.01, `Expected 1750 cash, got ${kiwiRes.liquidity.totalCashNZD}`);
+  assertTrue(Math.abs(kiwiRes.liquidity.totalEquitiesNZD - 38600) < 0.01, `Expected 38600 equities, got ${kiwiRes.liquidity.totalEquitiesNZD}`);
+  assertTrue(Math.abs(kiwiRes.liquidity.totalBondsNZD - 9650) < 0.01, `Expected 9650 bonds, got ${kiwiRes.liquidity.totalBondsNZD}`);
+  assertTrue(kiwiRes.holdings.length === 1, `Expected 1 synthetic equity holding, got ${kiwiRes.holdings.length}`);
+  assertTrue(kiwiRes.bondIssuerHoldings.length === 1, `Expected 1 synthetic bond holding, got ${kiwiRes.bondIssuerHoldings.length}`);
 }

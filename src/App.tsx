@@ -252,6 +252,14 @@ export const App: React.FC = () => {
     });
   };
 
+  // Merge static registry with user custom/KiwiSaver funds
+  const mergedFundsRegistry = useMemo(() => {
+    const custom = portfolioState.customFunds || [];
+    if (custom.length === 0) return fundsRegistry;
+    const existing = new Set(fundsRegistry.map((f) => f.code.toUpperCase()));
+    return [...fundsRegistry, ...custom.filter((c) => !existing.has(c.code.toUpperCase()))];
+  }, [fundsRegistry, portfolioState.customFunds]);
+
   // Perform core look-through calculations
   const calculationResult = useMemo(() => {
     return calculatePortfolioLookthrough({
@@ -259,18 +267,18 @@ export const App: React.FC = () => {
       directHoldings: portfolioState.directHoldings,
       fixedInterest: portfolioState.fixedInterest || portfolioState.cashDeposits,
       audNzdRate: portfolioState.audNzdRate,
-      fundsRegistry,
+      fundsRegistry: mergedFundsRegistry,
       constituentsMap,
     });
-  }, [portfolioState, fundsRegistry, constituentsMap]);
+  }, [portfolioState, mergedFundsRegistry, constituentsMap]);
 
   // Compute 12-month forward retirement cashflow and net drawdown
   const cashflowResult = useMemo(() => {
     return calculateRetirementCashflow({
       portfolioState,
-      fundsRegistry,
+      fundsRegistry: mergedFundsRegistry,
     });
-  }, [portfolioState, fundsRegistry]);
+  }, [portfolioState, mergedFundsRegistry]);
 
   const [activeWithdrawal, setActiveWithdrawal] = useState<number | undefined>(undefined);
 
@@ -287,8 +295,8 @@ export const App: React.FC = () => {
     const heldCodes = Object.keys(portfolioState.fundBalances).filter(
       (code) => portfolioState.fundBalances[code] > 0
     );
-    return computeFreshnessEnvelope(heldCodes, fundsRegistry);
-  }, [portfolioState.fundBalances, fundsRegistry]);
+    return computeFreshnessEnvelope(heldCodes, mergedFundsRegistry);
+  }, [portfolioState.fundBalances, mergedFundsRegistry]);
 
   if (isLoading) {
     return (
@@ -327,7 +335,7 @@ export const App: React.FC = () => {
         {/* 1. Portfolio Holdings & Inputs */}
         <PortfolioInputTable
           portfolioState={portfolioState}
-          fundsRegistry={fundsRegistry}
+          fundsRegistry={mergedFundsRegistry}
           directEquitiesCatalog={directCatalog}
           onUpdateState={handleUpdateState}
           totalPortfolioNZD={calculationResult.denominatorD}
@@ -356,7 +364,7 @@ export const App: React.FC = () => {
         {/* 5. Projected Organic Cashflow */}
         <RetirementCashflowPanel
           portfolioState={portfolioState}
-          fundsRegistry={fundsRegistry}
+          fundsRegistry={mergedFundsRegistry}
           onUpdateState={handleUpdateState}
           onApplyDrawdownToRebalancer={handleApplyDrawdownToRebalancer}
         />

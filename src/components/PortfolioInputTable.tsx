@@ -18,6 +18,7 @@ import {
   DiskBackupInfo,
 } from '../storage/localStorage';
 import { FundAllocationsPanel } from './portfolio-inputs/FundAllocationsPanel';
+import { KiwiSaverPanel } from './portfolio-inputs/KiwiSaverPanel';
 import { DirectSharesPanel } from './portfolio-inputs/DirectSharesPanel';
 import { FixedInterestPanel } from './portfolio-inputs/FixedInterestPanel';
 
@@ -170,7 +171,31 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
     onUpdateState({ ...portfolioState, buckets: nextBuckets, bucketAssignments: nextAssignments });
   };
 
-  const fundSumNZD = Object.values(portfolioState.fundBalances).reduce((acc, v) => acc + v, 0);
+  const isKiwiFund = (code: string) => {
+    const codeUpper = code.toUpperCase();
+    if (codeUpper.includes('KIWISAVER') || codeUpper.includes('FISHER')) return true;
+    const meta =
+      fundsRegistry.find((f) => f.code.toUpperCase() === codeUpper) ||
+      (portfolioState.customFunds || []).find((c) => c.code.toUpperCase() === codeUpper);
+    return Boolean(
+      meta?.isKiwiSaver ||
+      meta?.provider?.toLowerCase().includes('kiwi') ||
+      meta?.provider?.toLowerCase().includes('fisher')
+    );
+  };
+
+  let kiwisaverSumNZD = 0;
+  let unlistedFundSumNZD = 0;
+  for (const [code, val] of Object.entries(portfolioState.fundBalances)) {
+    if (val > 0) {
+      if (isKiwiFund(code)) {
+        kiwisaverSumNZD += val;
+      } else {
+        unlistedFundSumNZD += val;
+      }
+    }
+  }
+
   const directSumNZD = portfolioState.directHoldings.reduce(
     (acc, h) => acc + directHoldingValueNZD(h, portfolioState.audNzdRate),
     0
@@ -261,7 +286,16 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
             portfolioState={portfolioState}
             fundsRegistry={fundsRegistry}
             totalPortfolioNZD={totalPortfolioNZD}
-            fundSumNZD={fundSumNZD}
+            fundSumNZD={unlistedFundSumNZD}
+            onAssignBucket={setBucketForKey}
+            onUpdateState={onUpdateState}
+          />
+
+          <KiwiSaverPanel
+            portfolioState={portfolioState}
+            fundsRegistry={fundsRegistry}
+            totalPortfolioNZD={totalPortfolioNZD}
+            kiwisaverSumNZD={kiwisaverSumNZD}
             onAssignBucket={setBucketForKey}
             onUpdateState={onUpdateState}
           />

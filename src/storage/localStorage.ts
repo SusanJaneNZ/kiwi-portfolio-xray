@@ -9,6 +9,7 @@ import {
   FixedInterestCategory,
   FixedInterestHolding,
   FixedInterestTaxType,
+  FundMetadata,
   NZSuperType,
   PaymentFrequency,
   PirRate,
@@ -267,6 +268,33 @@ function sanitizeBuckets(raw: unknown): PortfolioBucket[] {
   return valid;
 }
 
+function sanitizeCustomFunds(raw: unknown): FundMetadata[] {
+  if (!Array.isArray(raw)) return [];
+  const valid: FundMetadata[] = [];
+  for (const item of raw) {
+    if (!item || typeof item !== "object") continue;
+    const f = item as Record<string, unknown>;
+    const code = String(f.code || "").trim().toUpperCase();
+    if (!code) continue;
+    valid.push({
+      code,
+      name: String(f.name || code).trim(),
+      provider: String(f.provider || "Custom").trim(),
+      effective_date: String(f.effective_date || new Date().toISOString().split("T")[0]).trim(),
+      cash_ratio: Number.isFinite(f.cash_ratio) ? Number(f.cash_ratio) : 0,
+      hedging_ratio: Number.isFinite(f.hedging_ratio) ? Number(f.hedging_ratio) : 0,
+      constituent_count: Number.isFinite(f.constituent_count) ? Number(f.constituent_count) : 0,
+      asset_class: (f.asset_class === "fixed_interest" || f.asset_class === "mixed") ? f.asset_class : "equity",
+      ...(f.cadence ? { cadence: String(f.cadence) } : {}),
+      ...(f.is_stale !== undefined ? { is_stale: Boolean(f.is_stale) } : {}),
+      ...(f.isEtf !== undefined ? { isEtf: Boolean(f.isEtf) } : {}),
+      ...(f.isKiwiSaver !== undefined ? { isKiwiSaver: Boolean(f.isKiwiSaver) } : {}),
+      ...(typeof f.smartInvestorUrl === "string" && f.smartInvestorUrl ? { smartInvestorUrl: f.smartInvestorUrl } : {}),
+    });
+  }
+  return valid;
+}
+
 function sanitizeCashflowSettings(raw: unknown): RetirementCashflowSettings | undefined {
   if (!raw || typeof raw !== "object" || Array.isArray(raw)) return undefined;
   const s = raw as Record<string, unknown>;
@@ -375,6 +403,7 @@ export function normalizePortfolioState(candidate: unknown): UserPortfolioState 
 
   const fi = sanitizeFixedInterest(obj.fixedInterest || obj.cashDeposits);
   const cashflowSettings = sanitizeCashflowSettings(obj.cashflowSettings);
+  const customFunds = sanitizeCustomFunds(obj.customFunds);
   let pirRate: PirRate | undefined = undefined;
   if (obj.pirRate === 0.105 || obj.pirRate === 0.175 || obj.pirRate === 0.28) {
     pirRate = obj.pirRate;
@@ -392,6 +421,7 @@ export function normalizePortfolioState(candidate: unknown): UserPortfolioState 
     cashDeposits: fi,
     buckets: sanitizeBuckets(obj.buckets),
     bucketAssignments,
+    ...(customFunds.length > 0 ? { customFunds } : {}),
     ...(cashflowSettings ? { cashflowSettings } : {}),
     ...(pirRate !== undefined ? { pirRate } : {}),
   };

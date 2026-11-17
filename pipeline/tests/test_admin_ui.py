@@ -1,7 +1,9 @@
 """Unit tests for the local-only Admin Web UI backend service and HTTP routes."""
 
 import json
+import re
 import shutil
+import subprocess
 import tempfile
 import threading
 import unittest
@@ -330,6 +332,32 @@ class TestAdminUI(unittest.TestCase):
         finally:
             server.shutdown()
             server.server_close()
+
+    def test_admin_ui_html_syntax_and_script_validity(self):
+        """Verifies that admin_ui.html exists and all embedded <script> tags contain valid JavaScript with no syntax errors or duplicate declarations."""
+        html_path = REPO_ROOT / "pipeline" / "admin_ui.html"
+        self.assertTrue(html_path.exists(), "pipeline/admin_ui.html must exist")
+        content = html_path.read_text(encoding="utf-8")
+        self.assertGreater(len(content), 1000)
+
+        scripts = re.findall(r"<script[\s\S]*?>([\s\S]*?)</script>", content, re.IGNORECASE)
+        self.assertGreater(len(scripts), 0, "admin_ui.html must contain at least one <script> tag")
+
+        for idx, script_body in enumerate(scripts):
+            trimmed = script_body.strip()
+            if not trimmed:
+                continue
+            proc = subprocess.run(
+                ["node", "--input-type=module", "--check"],
+                input=trimmed,
+                text=True,
+                capture_output=True,
+            )
+            self.assertEqual(
+                proc.returncode,
+                0,
+                f"JavaScript syntax error in admin_ui.html <script> tag #{idx}:\n{proc.stderr}",
+            )
 
 
 if __name__ == "__main__":

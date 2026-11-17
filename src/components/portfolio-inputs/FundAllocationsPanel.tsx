@@ -42,6 +42,14 @@ export const FundAllocationsPanel: React.FC<FundAllocationsPanelProps> = ({
         const hasBalance = (portfolioState.fundBalances[f.code] || 0) > 0;
         if (isListedEtf && !hasBalance) return false;
 
+        // KiwiSaver funds and custom schemes are managed in Panel 3
+        const isKiwiSaver =
+          Boolean(f.isKiwiSaver) ||
+          f.provider?.toLowerCase().includes('fisher') ||
+          f.provider?.toLowerCase().includes('kiwisaver') ||
+          f.code.includes('KIWISAVER');
+        if (isKiwiSaver) return false;
+
         if (heldOnly && !hasBalance) return false;
         if (!q) return true;
         return (
@@ -71,7 +79,7 @@ export const FundAllocationsPanel: React.FC<FundAllocationsPanelProps> = ({
       id="input-funds"
       title={
         <span className="text-xs uppercase tracking-wider text-slate-300">
-          2. Off-Market Holdings (Unlisted Managed Funds in NZD)
+          2. Off-Market Holdings (Unlisted Index Funds in NZD)
         </span>
       }
       headerRight={
@@ -84,7 +92,7 @@ export const FundAllocationsPanel: React.FC<FundAllocationsPanelProps> = ({
       <div className="bg-slate-900/40 border border-slate-800/60 rounded-lg p-2 text-[11px] text-slate-400 flex items-center gap-2 mb-2.5">
         <span className="text-sky-400 text-sm">ℹ️</span>
         <span>
-          Enter your current dollar balance in <strong>NZD</strong> for off-market / unlisted index and managed funds (such as <strong>Kernel</strong>). Listed ETFs and direct shares (Smartshares, etc.) are entered in <strong>Panel 1</strong> by share count.
+          Enter your current dollar balance in <strong>NZD</strong> for off-market / unlisted index funds (such as <strong>Kernel</strong>). Listed ETFs and direct shares are entered in <strong>Panel 1</strong> by share count, and KiwiSaver / custom funds are entered in <strong>Panel 3</strong>.
         </span>
       </div>
 

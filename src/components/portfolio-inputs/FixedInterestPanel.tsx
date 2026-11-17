@@ -398,7 +398,7 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
       id="input-fixed-interest"
       title={
         <span className="text-xs uppercase tracking-wider text-slate-300">
-          3. Fixed Interest &amp; Cash (NZD)
+          4. Fixed Interest &amp; Cash (NZD)
         </span>
       }
       headerRight={

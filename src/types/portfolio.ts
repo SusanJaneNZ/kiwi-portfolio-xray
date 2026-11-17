@@ -30,6 +30,8 @@ export interface FundMetadata {
   cadence?: string;
   is_stale?: boolean;
   isEtf?: boolean;
+  isKiwiSaver?: boolean;
+  smartInvestorUrl?: string;
 }
 
 export interface DirectEquityCatalogItem {
@@ -255,6 +257,7 @@ export interface UserPortfolioState {
   cashDeposits: FixedInterestHolding[]; // Mirror alias for backwards compatibility
   buckets: PortfolioBucket[];
   bucketAssignments: BucketAssignmentMap;
+  customFunds?: FundMetadata[];
   pirRate?: PirRate;
   cashflowSettings?: RetirementCashflowSettings;
 }

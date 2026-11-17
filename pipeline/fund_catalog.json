@@ -1,5 +1,15 @@
 [
   {
+    "fund_code": "FISHER_KIWISAVER_GROWTH",
+    "fund_name": "Fisher Funds KiwiSaver Growth Fund",
+    "provider": "Fisher Funds",
+    "fnd_code": "FND555",
+    "scheme_id": "SCH10713",
+    "offer_id": "OFR10715",
+    "is_etf": false,
+    "is_kiwisaver": true
+  },
+  {
     "fund_code": "KERNEL_BALANCED",
     "fund_name": "Kernel Balanced Fund",
     "provider": "Kernel",

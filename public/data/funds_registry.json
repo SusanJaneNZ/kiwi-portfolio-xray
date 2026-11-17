@@ -1,5 +1,19 @@
 [
   {
+    "code": "FISHER_KIWISAVER_GROWTH",
+    "name": "Fisher Funds KiwiSaver Growth Fund",
+    "provider": "Fisher Funds",
+    "effective_date": "2026-09-30",
+    "cash_ratio": 0.035,
+    "hedging_ratio": 0.0,
+    "constituent_count": 0,
+    "asset_class": "mixed",
+    "cadence": "quarterly",
+    "is_stale": false,
+    "isKiwiSaver": true,
+    "smartInvestorUrl": "https://www.smartinvestor.sorted.org.nz/kiwisaver-and-managed-funds/SCH10713/OFR10715/FND555/"
+  },
+  {
     "code": "ASP",
     "name": "Smart Australian Property Etf",
     "provider": "Smartshares",
