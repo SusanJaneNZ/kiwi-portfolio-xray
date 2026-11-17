@@ -715,6 +715,7 @@
       if (btn) {
         btn.disabled = true;
         btn.textContent = `⏳ Updating constituents...`;
+      }
 
         if (!catalogData || !catalogData.length) {
           try {
@@ -734,13 +735,6 @@
         const failed = [];
 
         try {
-          const res = await api('/api/pipeline/fetch', {
-            method: 'POST',
-            body: JSON.stringify({ providers: [provider] }),
-          });
-          const downloadedCount = res.downloaded ? res.downloaded.length : 0;
-          const cachedCount = res.cached ? res.cached.length : 0;
-          const failedCount = res.failed ? res.failed.length : 0;
           if (targetFunds.length > 0) {
             const total = targetFunds.length;
             for (let i = 0; i < total; i++) {
@@ -775,7 +769,6 @@
           const failedCount = failed.length;
 
           if (failedCount > 0) {
-            const failList = res.failed.map(f => `• ${f.code} (${f.fund_id}): ${f.message}`).join('\n');
             const failList = failed.map(f => `• ${f.code} (${f.fund_id}): ${f.message}`).join('\n');
             console.warn('Disclose Register fetch errors:\n', failList);
             if (downloadedCount > 0 || cachedCount > 0) {

@@ -864,7 +864,7 @@ def main() -> int:
     output_dir = args.output_dir if args.output_dir.is_absolute() else (repo_root / args.output_dir)
 
     service = AdminService(repo_root=repo_root, staging_dir=staging_dir, output_dir=output_dir)
-    server = ThreadingHTTPServer(("127.0.0.1", args.port), make_handler(service))
+    server = ThreadingHTTPServer(("0.0.0.0", args.port), make_handler(service))
 
     print("=================================================================")
     print("🥝 Kiwi Portfolio X-Ray — Local Admin UI")
