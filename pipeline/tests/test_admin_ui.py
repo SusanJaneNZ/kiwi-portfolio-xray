@@ -178,6 +178,19 @@ class TestAdminUI(unittest.TestCase):
                 self.assertEqual(resp.status, 200)
                 payload = json.loads(resp.read().decode("utf-8"))
                 self.assertNotIn("USM", payload["feeders"])
+            # 4. POST /api/pipeline/fetch with single fund_code
+            fetch_req = urllib.request.Request(
+                f"http://127.0.0.1:{port}/api/pipeline/fetch",
+                data=json.dumps({"fund_code": "FNZ", "force": False}).encode("utf-8"),
+                headers={"Content-Type": "application/json"},
+                method="POST",
+            )
+            with urllib.request.urlopen(fetch_req) as resp:
+                self.assertEqual(resp.status, 200)
+                res = json.loads(resp.read().decode("utf-8"))
+                self.assertIn("downloaded", res)
+                self.assertIn("cached", res)
+                self.assertIn("failed", res)
         finally:
             server.shutdown()
             server.server_close()
@@ -235,6 +248,19 @@ class TestAdminUI(unittest.TestCase):
                 self.assertIn("cached", payload)
                 self.assertIn("failed", payload)
                 self.assertIsInstance(payload["failed"], list)
+            # 4. POST /api/pipeline/fetch with single fund_code
+            fetch_req = urllib.request.Request(
+                f"http://127.0.0.1:{port}/api/pipeline/fetch",
+                data=json.dumps({"fund_code": "FNZ", "force": False}).encode("utf-8"),
+                headers={"Content-Type": "application/json"},
+                method="POST",
+            )
+            with urllib.request.urlopen(fetch_req) as resp:
+                self.assertEqual(resp.status, 200)
+                res = json.loads(resp.read().decode("utf-8"))
+                self.assertIn("downloaded", res)
+                self.assertIn("cached", res)
+                self.assertIn("failed", res)
         finally:
             server.shutdown()
             server.server_close()
@@ -288,6 +314,19 @@ class TestAdminUI(unittest.TestCase):
                 self.assertTrue(deleted.get("ok"))
                 entry = next((c for c in deleted["catalog"] if c["fund_code"] == "KERNEL_TEST_NEW"), None)
                 self.assertIsNone(entry)
+            # 4. POST /api/pipeline/fetch with single fund_code
+            fetch_req = urllib.request.Request(
+                f"http://127.0.0.1:{port}/api/pipeline/fetch",
+                data=json.dumps({"fund_code": "FNZ", "force": False}).encode("utf-8"),
+                headers={"Content-Type": "application/json"},
+                method="POST",
+            )
+            with urllib.request.urlopen(fetch_req) as resp:
+                self.assertEqual(resp.status, 200)
+                res = json.loads(resp.read().decode("utf-8"))
+                self.assertIn("downloaded", res)
+                self.assertIn("cached", res)
+                self.assertIn("failed", res)
         finally:
             server.shutdown()
             server.server_close()
