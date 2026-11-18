@@ -72,7 +72,7 @@ class TestPipelineEndToEnd(unittest.TestCase):
 
             self.assertTrue(report.is_valid, f"Validation errors: {report.errors}")
             self.assertEqual(len(report.errors), 0)
-            self.assertEqual(summary.get("total_funds_compiled"), 3)
+            self.assertEqual(summary.get("total_funds_compiled"), 4)
             self.assertEqual(summary.get("total_unresolved_entries"), 0)
 
             self.assertTrue((output_dir / "funds_registry.json").exists())

@@ -6,7 +6,6 @@ import { LiquidityCard } from './components/LiquidityCard';
 import { PortfolioInputTable } from './components/PortfolioInputTable';
 import { RetirementCashflowPanel } from './components/RetirementCashflowPanel';
 import { StackedBarChart } from './components/StackedBarChart';
-import { UnresolvedItem, UnresolvedModal } from './components/UnresolvedModal';
 import { computeFreshnessEnvelope } from './engine/freshness';
 import { calculateRetirementCashflow } from './engine/income';
 import { calculatePortfolioLookthrough } from './engine/lookthrough';
@@ -34,8 +33,6 @@ export const App: React.FC = () => {
   const [fundsRegistry, setFundsRegistry] = useState<FundMetadata[]>([]);
   const [constituentsMap, setConstituentsMap] = useState<Record<string, Constituent[]>>({});
   const [directCatalog, setDirectCatalog] = useState<DirectEquityCatalogItem[]>([]);
-  const [unresolvedEntries, setUnresolvedEntries] = useState<UnresolvedItem[]>([]);
-  const [isUnresolvedModalOpen, setIsUnresolvedModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [dataLoadError, setDataLoadError] = useState<string | null>(null);
 
@@ -114,11 +111,10 @@ export const App: React.FC = () => {
     async function loadData() {
       try {
         const basePath = import.meta.env.BASE_URL || '/';
-        const [fundsRes, constRes, directRes, unresRes] = await Promise.all([
+        const [fundsRes, constRes, directRes] = await Promise.all([
           fetchJson<FundMetadata[]>(`${basePath}data/funds_registry.json`),
           fetchJson<Record<string, Constituent[]>>(`${basePath}data/constituents.json`),
           fetchJson<DirectEquityCatalogItem[]>(`${basePath}data/direct_equities.json`),
-          fetchJson<UnresolvedItem[]>(`${basePath}data/unresolved_entries.json`),
         ]);
 
         const listedEtfs: DirectEquityCatalogItem[] = fundsRes
@@ -150,7 +146,6 @@ export const App: React.FC = () => {
         setFundsRegistry(fundsRes);
         setConstituentsMap(constRes);
         setDirectCatalog(mergedCatalog);
-        setUnresolvedEntries(unresRes);
         setDataLoadError(null);
 
         // Reconcile any saved direct holdings whose legacy ISIN differs from compiled canonical ISIN/SEDOL
@@ -315,8 +310,6 @@ export const App: React.FC = () => {
         {/* Top Header & Freshness Envelope */}
         <FreshnessHeader
           envelope={freshnessEnvelope}
-          onOpenUnresolvedModal={() => setIsUnresolvedModalOpen(true)}
-          unresolvedCount={unresolvedEntries.length}
           recoveredNotice={recoveredNotice}
         />
 
@@ -377,13 +370,6 @@ export const App: React.FC = () => {
           activeWithdrawal={activeWithdrawal}
         />
       </div>
-
-      {/* Unresolved Disclosures Modal */}
-      <UnresolvedModal
-        isOpen={isUnresolvedModalOpen}
-        onClose={() => setIsUnresolvedModalOpen(false)}
-        unresolvedEntries={unresolvedEntries}
-      />
     </div>
   );
 };

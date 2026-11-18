@@ -528,6 +528,18 @@
     "is_stale": false
   },
   {
+    "code": "KERNEL_WORLD_EX_US",
+    "name": "Kernel World Ex-Us Fund",
+    "provider": "Kernel",
+    "effective_date": "2026-09-30",
+    "cash_ratio": 0.0042,
+    "hedging_ratio": 0.0,
+    "constituent_count": 846,
+    "asset_class": "equity",
+    "cadence": "monthly",
+    "is_stale": false
+  },
+  {
     "code": "KERNEL_BALANCED",
     "name": "Kernel Balanced Fund",
     "provider": "Kernel",

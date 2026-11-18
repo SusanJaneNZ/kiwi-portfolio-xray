@@ -17,15 +17,11 @@ const CollapseAllIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-
 );
 interface FreshnessHeaderProps {
   envelope: FreshnessEnvelope;
-  onOpenUnresolvedModal: () => void;
-  unresolvedCount: number;
   recoveredNotice?: string | null;
 }
 
 export const FreshnessHeader: React.FC<FreshnessHeaderProps> = ({
   envelope,
-  onOpenUnresolvedModal,
-  unresolvedCount,
   recoveredNotice = null,
 }) => {
   return (
@@ -34,14 +30,6 @@ export const FreshnessHeader: React.FC<FreshnessHeaderProps> = ({
         <div className="flex items-center gap-2.5 flex-wrap">
           <span className="text-2xl">🥝</span>
           <h1 className="text-xl font-bold tracking-tight text-white">Kiwi Portfolio X-Ray</h1>
-          {unresolvedCount > 0 && (
-            <button
-              onClick={onOpenUnresolvedModal}
-              className="text-xs bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 font-medium px-2.5 py-0.5 rounded-full border border-amber-500/40 transition-colors"
-            >
-              ⚠ {unresolvedCount} Unresolved
-            </button>
-          )}
         </div>
         <p className="text-xs text-slate-400">
           Aggregating Smartshares, Kernel, Vanguard, and direct NZX/ASX equities into true underlying company exposures.

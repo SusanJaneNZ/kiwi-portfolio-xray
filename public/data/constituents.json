@@ -355112,6 +355112,7662 @@
       "asset_class": "equity"
     }
   ],
+  "KERNEL_WORLD_EX_US": [
+    {
+      "isin": "SEDOL:B929F46",
+      "name": "ASML Holding NV",
+      "ticker": "ASML",
+      "country": "Netherlands",
+      "sector": "Information Technology",
+      "weight": 0.02879082,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:0540528",
+      "name": "HSBC Holdings PLC",
+      "ticker": "HSBA",
+      "country": "United Kingdom",
+      "sector": "Financials",
+      "weight": 0.01399274,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BTMJD19",
+      "name": "Roche Holding AG",
+      "ticker": "ROP",
+      "country": "Switzerland",
+      "sector": "Health Care",
+      "weight": 0.01208006,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6335171",
+      "name": "Mitsubishi UFJ Financial Group Inc",
+      "ticker": "8306",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.01157673,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BP6MXD8",
+      "name": "Shell PLC",
+      "ticker": "SHEL",
+      "country": "United Kingdom",
+      "sector": "Energy",
+      "weight": 0.01127473,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2754383",
+      "name": "Royal Bank of Canada",
+      "ticker": "RY",
+      "country": "Canada",
+      "sector": "Financials",
+      "weight": 0.01117406,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:7103065",
+      "name": "Novartis AG",
+      "ticker": "NOVN",
+      "country": "Switzerland",
+      "sector": "Health Care",
+      "weight": 0.01077139,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:0989529",
+      "name": "AstraZeneca PLC",
+      "ticker": "AZN",
+      "country": "United Kingdom",
+      "sector": "Health Care",
+      "weight": 0.01036872,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:7123870",
+      "name": "Nestle SA",
+      "ticker": "NESN",
+      "country": "Switzerland",
+      "sector": "Consumer Staples",
+      "weight": 0.00966405,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5727973",
+      "name": "Siemens AG",
+      "ticker": "SIE",
+      "country": "Germany",
+      "sector": "Industrials",
+      "weight": 0.00926138,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6900643",
+      "name": "Toyota Motor Corp",
+      "ticker": "7203",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00906005,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4846288",
+      "name": "SAP SE",
+      "ticker": "SAP",
+      "country": "Germany",
+      "sector": "Information Technology",
+      "weight": 0.00885871,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6144690",
+      "name": "BHP GROUP LIMITED",
+      "ticker": "BHP.AX",
+      "country": "Australia",
+      "sector": "Materials",
+      "weight": 0.00885871,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5705946",
+      "name": "Banco Santander SA",
+      "ticker": "SAN",
+      "country": "Spain",
+      "sector": "Financials",
+      "weight": 0.00865738,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2897222",
+      "name": "Toronto-Dominion Bank/The",
+      "ticker": "TD",
+      "country": "Canada",
+      "sector": "Financials",
+      "weight": 0.00795271,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6895675",
+      "name": "Tokyo Electron Ltd",
+      "ticker": "8035",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00744937,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4834108",
+      "name": "Schneider Electric SE",
+      "ticker": "SU",
+      "country": "France",
+      "sector": "Industrials",
+      "weight": 0.00734871,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5231485",
+      "name": "Allianz SE",
+      "ticker": "ALV",
+      "country": "Germany",
+      "sector": "Financials",
+      "weight": 0.00734871,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BX865C7",
+      "name": "Shopify Inc",
+      "ticker": "SHOP",
+      "country": "Canada",
+      "sector": "Information Technology",
+      "weight": 0.00734871,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6215035",
+      "name": "COMMONWEALTH BANK OF AUSTRALIA.",
+      "ticker": "CBA.AX",
+      "country": "Australia",
+      "sector": "Financials",
+      "weight": 0.00724804,
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_CBA_ASB",
+      "issuer_name": "Commonwealth Bank / ASB"
+    },
+    {
+      "isin": "SEDOL:6563024",
+      "name": "Sumitomo Mitsui Financial Group Inc",
+      "ticker": "8316",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.00694604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6870490",
+      "name": "Advantest Corp",
+      "ticker": "6857",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00664404,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6429104",
+      "name": "Hitachi Ltd",
+      "ticker": "6501",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00654337,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6770620",
+      "name": "SoftBank Group Corp",
+      "ticker": "9984",
+      "country": "Japan",
+      "sector": "Communication Services",
+      "weight": 0.0064427,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5501906",
+      "name": "Banco Bilbao Vizcaya Argentaria SA",
+      "ticker": "BBVA",
+      "country": "Spain",
+      "sector": "Financials",
+      "weight": 0.0064427,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BQRRZ00",
+      "name": "Recruit Holdings Co Ltd",
+      "ticker": "6098",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.0061407,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BRJL176",
+      "name": "UBS Group AG",
+      "ticker": "UBSG",
+      "country": "Switzerland",
+      "sector": "Financials",
+      "weight": 0.00604003,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:7108899",
+      "name": "ABB Ltd",
+      "ticker": "ABBN",
+      "country": "Switzerland",
+      "sector": "Industrials",
+      "weight": 0.00593937,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6821506",
+      "name": "Sony Group Corp",
+      "ticker": "6758",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00593937,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B288C92",
+      "name": "Iberdrola SA",
+      "ticker": "IBE",
+      "country": "Spain",
+      "sector": "Utilities",
+      "weight": 0.0058387,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BYMXPS7",
+      "name": "UniCredit SpA",
+      "ticker": "UCG",
+      "country": "Italy",
+      "sector": "Financials",
+      "weight": 0.0058387,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6591014",
+      "name": "Mizuho Financial Group Inc",
+      "ticker": "8411",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.00573803,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BMGYJ02",
+      "name": "Kioxia Holdings Corp",
+      "ticker": "285A",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00543603,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1YW1V6",
+      "name": "Air Liquide SA",
+      "ticker": "AIRB",
+      "country": "France",
+      "sector": "Materials",
+      "weight": 0.00543603,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BVZK7T9",
+      "name": "Unilever PLC",
+      "ticker": "ULVR",
+      "country": "United Kingdom",
+      "sector": "Consumer Staples",
+      "weight": 0.00543603,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6175203",
+      "name": "DBS Group Holdings Ltd",
+      "ticker": "DBS",
+      "country": "Singapore",
+      "sector": "Financials",
+      "weight": 0.00513403,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BP6KMJ1",
+      "name": "Novo Nordisk A/S",
+      "ticker": "NOVOB",
+      "country": "Denmark",
+      "sector": "Health Care",
+      "weight": 0.00503336,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BMTVQK9",
+      "name": "Siemens Energy AG",
+      "ticker": "ENR",
+      "country": "Germany",
+      "sector": "Industrials",
+      "weight": 0.00493269,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2076009",
+      "name": "Bank of Montreal",
+      "ticker": "BMO",
+      "country": "Canada",
+      "sector": "Financials",
+      "weight": 0.00483203,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4076836",
+      "name": "Intesa Sanpaolo SpA",
+      "ticker": "ISP",
+      "country": "Italy",
+      "sector": "Financials",
+      "weight": 0.00473136,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BCRWZ18",
+      "name": "Cie Financiere Richemont SA",
+      "ticker": "CFR",
+      "country": "Switzerland",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00473136,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:0798059",
+      "name": "BP PLC",
+      "ticker": "BP/",
+      "country": "United Kingdom",
+      "sector": "Energy",
+      "weight": 0.00473136,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6596785",
+      "name": "Mitsubishi Corp",
+      "ticker": "8058",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00463069,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4061412",
+      "name": "LVMH Moet Hennessy Louis Vuitton SE",
+      "ticker": "MC",
+      "country": "France",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00463069,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2076281",
+      "name": "Bank of Nova Scotia/The",
+      "ticker": "BNS",
+      "country": "Canada",
+      "sector": "Financials",
+      "weight": 0.00453002,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:7309681",
+      "name": "BNP Paribas SA",
+      "ticker": "BNP",
+      "country": "France",
+      "sector": "Financials",
+      "weight": 0.00442936,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BZ57390",
+      "name": "ING Groep NV",
+      "ticker": "INGA",
+      "country": "Netherlands",
+      "sector": "Financials",
+      "weight": 0.00422802,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5983816",
+      "name": "Zurich Insurance Group AG",
+      "ticker": "ZURN",
+      "country": "Switzerland",
+      "sector": "Financials",
+      "weight": 0.00422802,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5842359",
+      "name": "Deutsche Telekom AG",
+      "ticker": "DTE",
+      "country": "Germany",
+      "sector": "Communication Services",
+      "weight": 0.00422802,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2466149",
+      "name": "Enbridge Inc",
+      "ticker": "ENB",
+      "country": "Canada",
+      "sector": "Energy",
+      "weight": 0.00412736,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2170525",
+      "name": "Canadian Imperial Bank of Commerce",
+      "ticker": "CM",
+      "country": "Canada",
+      "sector": "Financials",
+      "weight": 0.00412736,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:0718875",
+      "name": "RIO TINTO LIMITED",
+      "ticker": "RIO.AX",
+      "country": "Australia",
+      "sector": "Materials",
+      "weight": 0.00412736,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6490995",
+      "name": "Keyence Corp",
+      "ticker": "6861",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00412736,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6513126",
+      "name": "Tokio Marine Holdings Inc",
+      "ticker": "8766",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.00412736,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B71JBK1",
+      "name": "L'Oreal SA",
+      "ticker": "",
+      "country": "France",
+      "sector": "Consumer Staples",
+      "weight": 0.00402669,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6467803",
+      "name": "ITOCHU Corp",
+      "ticker": "8001",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00402669,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BN7SWP6",
+      "name": "GSK PLC",
+      "ticker": "GSK",
+      "country": "United Kingdom",
+      "sector": "Health Care",
+      "weight": 0.00402669,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2171573",
+      "name": "Canadian Natural Resources Ltd",
+      "ticker": "CNQ",
+      "country": "Canada",
+      "sector": "Energy",
+      "weight": 0.00402669,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B4TX8S1",
+      "name": "AIA Group Ltd",
+      "ticker": "1299",
+      "country": "Hong Kong",
+      "sector": "Financials",
+      "weight": 0.00402669,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6332439",
+      "name": "Fast Retailing Co Ltd",
+      "ticker": "9983",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00392602,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2009823",
+      "name": "Agnico Eagle Mines Ltd",
+      "ticker": "AEM",
+      "country": "Canada",
+      "sector": "Materials",
+      "weight": 0.00382535,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B0F9V20",
+      "name": "Oversea-Chinese Banking Corp Ltd",
+      "ticker": "OCBC",
+      "country": "Singapore",
+      "sector": "Financials",
+      "weight": 0.00382535,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6610403",
+      "name": "Murata Manufacturing Co Ltd",
+      "ticker": "6981",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00372469,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6597302",
+      "name": "Mitsui & Co Ltd",
+      "ticker": "8031",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00372469,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5671735",
+      "name": "Sanofi SA",
+      "ticker": "SAN",
+      "country": "France",
+      "sector": "Health Care",
+      "weight": 0.00362402,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5889505",
+      "name": "Infineon Technologies AG",
+      "ticker": "IFX",
+      "country": "Germany",
+      "sector": "Information Technology",
+      "weight": 0.00362402,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6624608",
+      "name": "NATIONAL AUSTRALIA BANK LIMITED",
+      "ticker": "NAB.AX",
+      "country": "Australia",
+      "sector": "Financials",
+      "weight": 0.00352335,
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_NAB_BNZ",
+      "issuer_name": "NAB / Bank of New Zealand"
+    },
+    {
+      "isin": "SEDOL:6076146",
+      "name": "Westpac Banking Corporation",
+      "ticker": "WBC.NZ",
+      "country": "Australia",
+      "sector": "Financials",
+      "weight": 0.00342268,
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_WBC",
+      "issuer_name": "Westpac Banking Group"
+    },
+    {
+      "isin": "SEDOL:0870612",
+      "name": "Lloyds Banking Group PLC",
+      "ticker": "LLOY",
+      "country": "United Kingdom",
+      "sector": "Financials",
+      "weight": 0.00342268,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:3134865",
+      "name": "Barclays PLC",
+      "ticker": "BARC",
+      "country": "United Kingdom",
+      "sector": "Financials",
+      "weight": 0.00332202,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6065586",
+      "name": "ANZ Group Holdings Limited",
+      "ticker": "ANZ.NZ",
+      "country": "Australia",
+      "sector": "Financials",
+      "weight": 0.00332202,
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_ANZ",
+      "issuer_name": "ANZ Group"
+    },
+    {
+      "isin": "SEDOL:B3NB1P2",
+      "name": "Suncor Energy Inc",
+      "ticker": "SU",
+      "country": "Canada",
+      "sector": "Energy",
+      "weight": 0.00322135,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:7088429",
+      "name": "AXA SA",
+      "ticker": "CS",
+      "country": "France",
+      "sector": "Financials",
+      "weight": 0.00322135,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BFZ1K46",
+      "name": "Spotify Technology SA",
+      "ticker": "SPOT",
+      "country": "United States",
+      "sector": "Communication Services",
+      "weight": 0.00312068,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BDR05C0",
+      "name": "National Grid PLC",
+      "ticker": "NG/",
+      "country": "United Kingdom",
+      "sector": "Utilities",
+      "weight": 0.00312068,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BMBQR09",
+      "name": "Canadian Pacific Kansas City Ltd",
+      "ticker": "CP",
+      "country": "Canada",
+      "sector": "Industrials",
+      "weight": 0.00312068,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:7144569",
+      "name": "Enel SpA",
+      "ticker": "ENEL",
+      "country": "Italy",
+      "sector": "Utilities",
+      "weight": 0.00302002,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BMV7PQ4",
+      "name": "Investor AB",
+      "ticker": "INVEB",
+      "country": "Sweden",
+      "sector": "Financials",
+      "weight": 0.00302002,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BM8PJY7",
+      "name": "NatWest Group PLC",
+      "ticker": "NWG",
+      "country": "United Kingdom",
+      "sector": "Financials",
+      "weight": 0.00302002,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5294121",
+      "name": "Muenchener Rueckversicherungs-Gesellschaft AG in Muenchen",
+      "ticker": "MUV2",
+      "country": "Germany",
+      "sector": "Financials",
+      "weight": 0.00302002,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2492519",
+      "name": "Manulife Financial Corp",
+      "ticker": "MFC",
+      "country": "Canada",
+      "sector": "Financials",
+      "weight": 0.00291935,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6804585",
+      "name": "Shin-Etsu Chemical Co Ltd",
+      "ticker": "4063",
+      "country": "Japan",
+      "sector": "Materials",
+      "weight": 0.00291935,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BYYHL23",
+      "name": "Anheuser-Busch InBev SA/NV",
+      "ticker": "ABI",
+      "country": "Belgium",
+      "sector": "Consumer Staples",
+      "weight": 0.00291935,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6572707",
+      "name": "Panasonic Holdings Corp",
+      "ticker": "6752",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00291935,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B4T3BW6",
+      "name": "GLENCORE PLC",
+      "ticker": "GLC.AX",
+      "country": "Australia",
+      "sector": "Materials",
+      "weight": 0.00281868,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BF13KN5",
+      "name": "Wheaton Precious Metals Corp",
+      "ticker": "WPM",
+      "country": "Canada",
+      "sector": "Materials",
+      "weight": 0.00281868,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5750355",
+      "name": "Deutsche Bank AG",
+      "ticker": "DBK",
+      "country": "Germany",
+      "sector": "Financials",
+      "weight": 0.00281868,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BP9DL90",
+      "name": "Industria de Diseno Textil SA",
+      "ticker": "ITX",
+      "country": "Spain",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00281868,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BFM0SV9",
+      "name": "Nordea Bank Abp",
+      "ticker": "NDA",
+      "country": "Finland",
+      "sector": "Financials",
+      "weight": 0.00281868,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BNM23Q1",
+      "name": "Barrick Mining Corp",
+      "ticker": "ABX",
+      "country": "Canada",
+      "sector": "Materials",
+      "weight": 0.00271801,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6597045",
+      "name": "Mitsubishi Electric Corp",
+      "ticker": "6503",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00271801,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2180632",
+      "name": "Canadian National Railway Co",
+      "ticker": "CNR",
+      "country": "Canada",
+      "sector": "Industrials",
+      "weight": 0.00271801,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BTK05J6",
+      "name": "Anglo American PLC",
+      "ticker": "AAL",
+      "country": "United Kingdom",
+      "sector": "Materials",
+      "weight": 0.00261735,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6185495",
+      "name": "CSL LIMITED",
+      "ticker": "CSL.AX",
+      "country": "Australia",
+      "sector": "Health Care",
+      "weight": 0.00251668,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:7021963",
+      "name": "Deutsche Boerse AG",
+      "ticker": "DB1",
+      "country": "Germany",
+      "sector": "Financials",
+      "weight": 0.00251668,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6948836",
+      "name": "WESFARMERS LIMITED",
+      "ticker": "WES.AX",
+      "country": "Australia",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00251668,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BJMY6G0",
+      "name": "TC Energy Corp",
+      "ticker": "TRP",
+      "country": "Canada",
+      "sector": "Energy",
+      "weight": 0.00251668,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BNHKYX4",
+      "name": "Argenx SE",
+      "ticker": "ARGX",
+      "country": "Belgium",
+      "sector": "Health Care",
+      "weight": 0.00251668,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1XH026",
+      "name": "Vinci SA",
+      "ticker": "DG",
+      "country": "France",
+      "sector": "Industrials",
+      "weight": 0.00241601,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6870445",
+      "name": "Takeda Pharmaceutical Co Ltd",
+      "ticker": "4502",
+      "country": "Japan",
+      "sector": "Health Care",
+      "weight": 0.00241601,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6639550",
+      "name": "Nintendo Co Ltd",
+      "ticker": "7974",
+      "country": "Japan",
+      "sector": "Communication Services",
+      "weight": 0.00241601,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6267359",
+      "name": "Hong Kong Exchanges & Clearing Ltd",
+      "ticker": "388",
+      "country": "Hong Kong",
+      "sector": "Financials",
+      "weight": 0.00241601,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4617859",
+      "name": "DHL AG",
+      "ticker": "DHL",
+      "country": "Germany",
+      "sector": "Industrials",
+      "weight": 0.00241601,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B28YTC2",
+      "name": "MACQUARIE GROUP LIMITED",
+      "ticker": "MQG.AX",
+      "country": "Australia",
+      "sector": "Financials",
+      "weight": 0.00241601,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B2B0DG9",
+      "name": "RELX PLC",
+      "ticker": "REL",
+      "country": "United Kingdom",
+      "sector": "Industrials",
+      "weight": 0.00241601,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6248990",
+      "name": "KDDI Corp",
+      "ticker": "9433",
+      "country": "Japan",
+      "sector": "Communication Services",
+      "weight": 0.00231535,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B5BSZB3",
+      "name": "Nebius Group NV",
+      "ticker": "NBIS",
+      "country": "United States",
+      "sector": "Information Technology",
+      "weight": 0.00231535,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6356707",
+      "name": "Fujikura Ltd",
+      "ticker": "5803",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00231535,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2077303",
+      "name": "National Bank of Canada",
+      "ticker": "NA",
+      "country": "Canada",
+      "sector": "Financials",
+      "weight": 0.00221468,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5902941",
+      "name": "Nokia Oyj",
+      "ticker": "NOKIA",
+      "country": "Finland",
+      "sector": "Information Technology",
+      "weight": 0.00221468,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6858946",
+      "name": "Sumitomo Corp",
+      "ticker": "8053",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00221468,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B283W97",
+      "name": "CaixaBank SA",
+      "ticker": "CABK",
+      "country": "Spain",
+      "sector": "Financials",
+      "weight": 0.00221468,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5253973",
+      "name": "Hermes International SCA",
+      "ticker": "RMS",
+      "country": "France",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00221468,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:0408284",
+      "name": "Standard Chartered PLC",
+      "ticker": "STAN",
+      "country": "United Kingdom",
+      "sector": "Financials",
+      "weight": 0.00221468,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BLDBN41",
+      "name": "Atlas Copco AB",
+      "ticker": "ATCOA",
+      "country": "Sweden",
+      "sector": "Industrials",
+      "weight": 0.00211401,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5966516",
+      "name": "Societe Generale SA",
+      "ticker": "GLE",
+      "country": "France",
+      "sector": "Financials",
+      "weight": 0.00211401,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1QH830",
+      "name": "Volvo AB",
+      "ticker": "VOLVB",
+      "country": "Sweden",
+      "sector": "Industrials",
+      "weight": 0.00211401,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6569464",
+      "name": "Marubeni Corp",
+      "ticker": "8002",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00211401,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5086577",
+      "name": "BASF SE",
+      "ticker": "BAS",
+      "country": "Germany",
+      "sector": "Materials",
+      "weight": 0.00211401,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6441506",
+      "name": "Hoya Corp",
+      "ticker": "7741",
+      "country": "Japan",
+      "sector": "Health Care",
+      "weight": 0.00211401,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4056719",
+      "name": "Generali",
+      "ticker": "G",
+      "country": "Italy",
+      "sector": "Financials",
+      "weight": 0.00201334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5165294",
+      "name": "ASM International NV",
+      "ticker": "ASM",
+      "country": "Netherlands",
+      "sector": "Information Technology",
+      "weight": 0.00201334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B545MG5",
+      "name": "Swiss Re AG",
+      "ticker": "SREN",
+      "country": "Switzerland",
+      "sector": "Financials",
+      "weight": 0.00201334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:7145056",
+      "name": "Eni SpA",
+      "ticker": "ENI",
+      "country": "Italy",
+      "sector": "Energy",
+      "weight": 0.00201334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B0C2CQ3",
+      "name": "Engie SA",
+      "ticker": "ENGI",
+      "country": "France",
+      "sector": "Utilities",
+      "weight": 0.00201334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BJDS7L3",
+      "name": "Prosus NV",
+      "ticker": "PRX",
+      "country": "Netherlands",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00201334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:7333378",
+      "name": "Lonza Group AG",
+      "ticker": "LONN",
+      "country": "Switzerland",
+      "sector": "Health Care",
+      "weight": 0.00201334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:7212477",
+      "name": "EssilorLuxottica SA",
+      "ticker": "EL",
+      "country": "France",
+      "sector": "Health Care",
+      "weight": 0.00201334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:0237400",
+      "name": "Diageo PLC",
+      "ticker": "DGE",
+      "country": "United Kingdom",
+      "sector": "Consumer Staples",
+      "weight": 0.00201334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6916781",
+      "name": "United Overseas Bank Ltd",
+      "ticker": "UOB",
+      "country": "Singapore",
+      "sector": "Financials",
+      "weight": 0.00201334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BD6G507",
+      "name": "Ferrari NV",
+      "ticker": "RACE",
+      "country": "Italy",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00191268,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B0SWJX3",
+      "name": "London Stock Exchange Group PLC",
+      "ticker": "LSEG",
+      "country": "United Kingdom",
+      "sector": "Financials",
+      "weight": 0.00191268,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6858708",
+      "name": "Sumitomo Electric Industries Ltd",
+      "ticker": "5802",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00191268,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4768962",
+      "name": "RWE AG",
+      "ticker": "RWE",
+      "country": "Germany",
+      "sector": "Utilities",
+      "weight": 0.00191268,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B29NF31",
+      "name": "Franco-Nevada Corp",
+      "ticker": "FNV",
+      "country": "Canada",
+      "sector": "Materials",
+      "weight": 0.00191268,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6496584",
+      "name": "Komatsu Ltd",
+      "ticker": "6301",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00191268,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BSCB6L9",
+      "name": "Celestica Inc",
+      "ticker": "CLS",
+      "country": "Canada",
+      "sector": "Information Technology",
+      "weight": 0.00191268,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6770620",
+      "name": "SoftBank Group Corp",
+      "ticker": "9984",
+      "country": "Japan",
+      "sector": "Communication Services",
+      "weight": 0.00181201,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6356945",
+      "name": "Fujitsu Ltd",
+      "ticker": "6702",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00181201,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6882172",
+      "name": "Teva Pharmaceutical Industries Ltd",
+      "ticker": "TEVA",
+      "country": "Israel",
+      "sector": "Health Care",
+      "weight": 0.00181201,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5289837",
+      "name": "Erste Group Bank AG",
+      "ticker": "EBS",
+      "country": "Austria",
+      "sector": "Financials",
+      "weight": 0.00181201,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B601QS4",
+      "name": "Daiichi Life Group Inc",
+      "ticker": "8750",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.00181201,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2566124",
+      "name": "Sun Life Financial Inc",
+      "ticker": "SLF",
+      "country": "Canada",
+      "sector": "Financials",
+      "weight": 0.00181201,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:0718875",
+      "name": "RIO TINTO LIMITED",
+      "ticker": "RIO.AX",
+      "country": "Australia",
+      "sector": "Materials",
+      "weight": 0.00181201,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B15C4L6",
+      "name": "Constellation Software Inc/Canada",
+      "ticker": "CSU",
+      "country": "Canada",
+      "sector": "Information Technology",
+      "weight": 0.00181201,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6661144",
+      "name": "ORIX Corp",
+      "ticker": "8591",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.00171134,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1W4V69",
+      "name": "Prysmian SpA",
+      "ticker": "PRY",
+      "country": "Italy",
+      "sector": "Industrials",
+      "weight": 0.00171134,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4942904",
+      "name": "E.ON SE",
+      "ticker": "EOAN",
+      "country": "Germany",
+      "sector": "Utilities",
+      "weight": 0.00171134,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1Y9TB3",
+      "name": "Danone SA",
+      "ticker": "BN",
+      "country": "France",
+      "sector": "Consumer Staples",
+      "weight": 0.00171134,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B11ZRK9",
+      "name": "Legrand SA",
+      "ticker": "LR",
+      "country": "France",
+      "sector": "Industrials",
+      "weight": 0.00171134,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BMGT167",
+      "name": "WOODSIDE ENERGY GROUP LTD",
+      "ticker": "WDS.AX",
+      "country": "Australia",
+      "sector": "Energy",
+      "weight": 0.00171134,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BSZBP53",
+      "name": "Reckitt Benckiser Group PLC",
+      "ticker": "RKT",
+      "country": "United Kingdom",
+      "sector": "Consumer Staples",
+      "weight": 0.00171134,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6435145",
+      "name": "Honda Motor Co Ltd",
+      "ticker": "7267",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00171134,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B2Q4CS1",
+      "name": "MS&AD Insurance Group Holdings Inc",
+      "ticker": "8725",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.00171134,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6635677",
+      "name": "Renesas Electronics Corp",
+      "ticker": "6723",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00171134,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6640400",
+      "name": "NEC Corp",
+      "ticker": "6701",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00171134,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B57FG04",
+      "name": "Cenovus Energy Inc",
+      "ticker": "CVE",
+      "country": "Canada",
+      "sector": "Energy",
+      "weight": 0.00171134,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BL56KN2",
+      "name": "Alimentation Couche-Tard Inc",
+      "ticker": "ATD",
+      "country": "Canada",
+      "sector": "Consumer Staples",
+      "weight": 0.00171134,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:7110753",
+      "name": "Holcim AG",
+      "ticker": "HOLN",
+      "country": "Switzerland",
+      "sector": "Materials",
+      "weight": 0.00161068,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BQPGVF6",
+      "name": "Arm Holdings plc ADR",
+      "ticker": "ARM",
+      "country": "United Kingdom",
+      "sector": "Information Technology",
+      "weight": 0.00161068,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1VQ252",
+      "name": "Sandvik AB",
+      "ticker": "SAND",
+      "country": "Sweden",
+      "sector": "Industrials",
+      "weight": 0.00161068,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:0790873",
+      "name": "SSE PLC",
+      "ticker": "SSE",
+      "country": "United Kingdom",
+      "sector": "Utilities",
+      "weight": 0.00161068,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BYT8165",
+      "name": "Japan Post Bank Co Ltd",
+      "ticker": "7182",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.00161068,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6456102",
+      "name": "Ibiden Co Ltd",
+      "ticker": "4062",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00161068,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BLGZ986",
+      "name": "Tesco PLC",
+      "ticker": "TSCO",
+      "country": "United Kingdom",
+      "sector": "Consumer Staples",
+      "weight": 0.00161068,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BYQFRK5",
+      "name": "Waste Connections Inc",
+      "ticker": "WCN",
+      "country": "Canada",
+      "sector": "Industrials",
+      "weight": 0.00161068,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B03FYZ4",
+      "name": "GOODMAN GROUP",
+      "ticker": "GMG.AX",
+      "country": "Australia",
+      "sector": "Real Estate",
+      "weight": 0.00161068,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5258246",
+      "name": "Subsea 7 SA",
+      "ticker": "SUBC",
+      "country": "Norway",
+      "sector": "Energy",
+      "weight": 0.00161068,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6421553",
+      "name": "Resona Holdings Inc",
+      "ticker": "8308",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.00151001,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5669354",
+      "name": "Repsol SA",
+      "ticker": "REP",
+      "country": "Spain",
+      "sector": "Energy",
+      "weight": 0.00151001,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4846523",
+      "name": "Swedbank AB",
+      "ticker": "SWEDA",
+      "country": "Sweden",
+      "sector": "Financials",
+      "weight": 0.00151001,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BLPLD38",
+      "name": "Sandoz Group AG",
+      "ticker": "SDZ",
+      "country": "Switzerland",
+      "sector": "Health Care",
+      "weight": 0.00151001,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B62G7K6",
+      "name": "Sompo Holdings Inc",
+      "ticker": "8630",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.00151001,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6869302",
+      "name": "TDK Corp",
+      "ticker": "6762",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00151001,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BRC2T72",
+      "name": "Galderma Group AG",
+      "ticker": "GALD",
+      "country": "Switzerland",
+      "sector": "Health Care",
+      "weight": 0.00151001,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4588825",
+      "name": "Danske Bank A/S",
+      "ticker": "DANSKE",
+      "country": "Denmark",
+      "sector": "Financials",
+      "weight": 0.00151001,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6270948",
+      "name": "Disco Corp",
+      "ticker": "6146",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00151001,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6356934",
+      "name": "FANUC Corp",
+      "ticker": "6954",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00151001,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6076425",
+      "name": "Bank Leumi Le-Israel BM",
+      "ticker": "LUMI",
+      "country": "Israel",
+      "sector": "Financials",
+      "weight": 0.00140934,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BF2DSG3",
+      "name": "Sika AG",
+      "ticker": "SIKA",
+      "country": "Switzerland",
+      "sector": "Materials",
+      "weight": 0.00140934,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BYPC1T4",
+      "name": "Assa Abloy AB",
+      "ticker": "ASSAB",
+      "country": "Sweden",
+      "sector": "Industrials",
+      "weight": 0.00140934,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:7380482",
+      "name": "Cie de Saint-Gobain SA",
+      "ticker": "SGO",
+      "country": "France",
+      "sector": "Industrials",
+      "weight": 0.00140934,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4813345",
+      "name": "Skandinaviska Enskilda Banken AB",
+      "ticker": "SEBA",
+      "country": "Sweden",
+      "sector": "Financials",
+      "weight": 0.00140934,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1WT5G2",
+      "name": "DSV A/S",
+      "ticker": "DSV",
+      "country": "Denmark",
+      "sector": "Industrials",
+      "weight": 0.00140934,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B4TP9G2",
+      "name": "Dollarama Inc",
+      "ticker": "DOL",
+      "country": "Canada",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00140934,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B5LTM93",
+      "name": "Otsuka Holdings Co Ltd",
+      "ticker": "4578",
+      "country": "Japan",
+      "sector": "Health Care",
+      "weight": 0.00140934,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5962343",
+      "name": "STMicroelectronics NV",
+      "ticker": "STMMI",
+      "country": "Italy",
+      "sector": "Information Technology",
+      "weight": 0.00140934,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BDRJLN0",
+      "name": "Nutrien Ltd",
+      "ticker": "NTR",
+      "country": "Canada",
+      "sector": "Materials",
+      "weight": 0.00140934,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B0J7D91",
+      "name": "Daiichi Sankyo Co Ltd",
+      "ticker": "4568",
+      "country": "Japan",
+      "sector": "Health Care",
+      "weight": 0.00140934,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6981239",
+      "name": "WOOLWORTHS GROUP LIMITED",
+      "ticker": "WOW.AX",
+      "country": "Australia",
+      "sector": "Consumer Staples",
+      "weight": 0.00140934,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6900580",
+      "name": "Toyota Tsusho Corp",
+      "ticker": "8015",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00130867,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2697701",
+      "name": "Power Corp of Canada",
+      "ticker": "POW",
+      "country": "Canada",
+      "sector": "Financials",
+      "weight": 0.00130867,
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_POWERCO",
+      "issuer_name": "Powerco"
+    },
+    {
+      "isin": "SEDOL:5980613",
+      "name": "Givaudan SA",
+      "ticker": "GIVN",
+      "country": "Switzerland",
+      "sector": "Materials",
+      "weight": 0.00130867,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6641373",
+      "name": "NTT Inc",
+      "ticker": "9432",
+      "country": "Japan",
+      "sector": "Communication Services",
+      "weight": 0.00130867,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4497749",
+      "name": "KBC Group NV",
+      "ticker": "KBC",
+      "country": "Belgium",
+      "sector": "Financials",
+      "weight": 0.00130867,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1YW440",
+      "name": "3i Group PLC",
+      "ticker": "III",
+      "country": "United Kingdom",
+      "sector": "Financials",
+      "weight": 0.00130867,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6075808",
+      "name": "Bank Hapoalim BM",
+      "ticker": "POLI",
+      "country": "Israel",
+      "sector": "Financials",
+      "weight": 0.00130867,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5529027",
+      "name": "Mercedes-Benz Group AG",
+      "ticker": "MBG",
+      "country": "Germany",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00130867,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BJT1GR5",
+      "name": "Alcon AG",
+      "ticker": "ALC",
+      "country": "Switzerland",
+      "sector": "Health Care",
+      "weight": 0.00130867,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BD0Q398",
+      "name": "Koninklijke Ahold Delhaize NV",
+      "ticker": "AD",
+      "country": "Netherlands",
+      "sector": "Consumer Staples",
+      "weight": 0.00130867,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:7133608",
+      "name": "Equinor ASA",
+      "ticker": "EQNR",
+      "country": "Norway",
+      "sector": "Energy",
+      "weight": 0.00130867,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6563024",
+      "name": "Sumitomo Mitsui Financial Group Inc",
+      "ticker": "8316",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.00130867,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BH4HKS3",
+      "name": "Vodafone Group PLC",
+      "ticker": "VOD",
+      "country": "United Kingdom",
+      "sector": "Communication Services",
+      "weight": 0.00130867,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:0709954",
+      "name": "Prudential PLC",
+      "ticker": "PRU",
+      "country": "United Kingdom",
+      "sector": "Financials",
+      "weight": 0.00130867,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B04YJV1",
+      "name": "Intact Financial Corp",
+      "ticker": "IFC",
+      "country": "Canada",
+      "sector": "Financials",
+      "weight": 0.00120801,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BD6K457",
+      "name": "Compass Group PLC",
+      "ticker": "CPG",
+      "country": "United Kingdom",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00120801,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2566351",
+      "name": "Fairfax Financial Holdings Ltd",
+      "ticker": "FFH",
+      "country": "Canada",
+      "sector": "Financials",
+      "weight": 0.00120801,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4031976",
+      "name": "adidas AG",
+      "ticker": "ADS",
+      "country": "Germany",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00120801,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:7437805",
+      "name": "Swiss Life Holding AG",
+      "ticker": "SLHN",
+      "country": "Switzerland",
+      "sector": "Financials",
+      "weight": 0.00120801,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5176177",
+      "name": "Orange SA",
+      "ticker": "ORA",
+      "country": "France",
+      "sector": "Communication Services",
+      "weight": 0.00120801,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BN4MYF5",
+      "name": "Vestas Wind Systems A/S",
+      "ticker": "VWS",
+      "country": "Denmark",
+      "sector": "Industrials",
+      "weight": 0.00120801,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BYQP136",
+      "name": "ABN AMRO BANK NV-CVA",
+      "ticker": "ABN",
+      "country": "Netherlands",
+      "sector": "Financials",
+      "weight": 0.00120801,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6499260",
+      "name": "Kyocera Corp",
+      "ticker": "6971",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00120801,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6010906",
+      "name": "Ajinomoto Co Inc",
+      "ticker": "2802",
+      "country": "Japan",
+      "sector": "Consumer Staples",
+      "weight": 0.00120801,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6643108",
+      "name": "Nomura Holdings Inc",
+      "ticker": "8604",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.00120801,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B19NLV4",
+      "name": "Experian PLC",
+      "ticker": "EXPN",
+      "country": "United Kingdom",
+      "sector": "Industrials",
+      "weight": 0.00120801,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B90LKT4",
+      "name": "Commerzbank AG",
+      "ticker": "CBK",
+      "country": "Germany",
+      "sector": "Financials",
+      "weight": 0.00120801,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6200882",
+      "name": "TRANSURBAN GROUP",
+      "ticker": "TCL.AX",
+      "country": "Australia",
+      "sector": "Industrials",
+      "weight": 0.00120801,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B03Z841",
+      "name": "Kinross Gold Corp",
+      "ticker": "K",
+      "country": "Canada",
+      "sector": "Materials",
+      "weight": 0.00120801,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BYPBS67",
+      "name": "ArcelorMittal SA",
+      "ticker": "MT",
+      "country": "Netherlands",
+      "sector": "Materials",
+      "weight": 0.00110734,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5596991",
+      "name": "UCB SA",
+      "ticker": "UCB",
+      "country": "Belgium",
+      "sector": "Health Care",
+      "weight": 0.00110734,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BZ1HM42",
+      "name": "Adyen NV",
+      "ticker": "ADYEN",
+      "country": "Netherlands",
+      "sector": "Financials",
+      "weight": 0.00110734,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6596729",
+      "name": "Mitsubishi Estate Co Ltd",
+      "ticker": "8802",
+      "country": "Japan",
+      "sector": "Real Estate",
+      "weight": 0.00110734,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BLDBN41",
+      "name": "Atlas Copco AB",
+      "ticker": "ATCOA",
+      "country": "Sweden",
+      "sector": "Industrials",
+      "weight": 0.00110734,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BPQY8M8",
+      "name": "Aviva PLC",
+      "ticker": "AV/",
+      "country": "United Kingdom",
+      "sector": "Financials",
+      "weight": 0.00110734,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BF0L353",
+      "name": "AIB Group PLC",
+      "ticker": "AIBG",
+      "country": "Ireland",
+      "sector": "Financials",
+      "weight": 0.00110734,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2347200",
+      "name": "Fortis Inc/Canada",
+      "ticker": "FTS",
+      "country": "Canada",
+      "sector": "Utilities",
+      "weight": 0.00110734,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6985383",
+      "name": "Astellas Pharma Inc",
+      "ticker": "4503",
+      "country": "Japan",
+      "sector": "Health Care",
+      "weight": 0.00110734,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6132101",
+      "name": "Bridgestone Corp",
+      "ticker": "5108",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00110734,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B0FS5D6",
+      "name": "Seven & i Holdings Co Ltd",
+      "ticker": "3382",
+      "country": "Japan",
+      "sector": "Consumer Staples",
+      "weight": 0.00110734,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B02PY11",
+      "name": "Singapore Telecommunications Ltd",
+      "ticker": "ST",
+      "country": "Singapore",
+      "sector": "Communication Services",
+      "weight": 0.00110734,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BNG7113",
+      "name": "DNB Bank ASA",
+      "ticker": "DNB",
+      "country": "Norway",
+      "sector": "Financials",
+      "weight": 0.00110734,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6356525",
+      "name": "FUJIFILM Holdings Corp",
+      "ticker": "4901",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00110734,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BPCPSD6",
+      "name": "DSM-Firmenich AG",
+      "ticker": "DSFIR",
+      "country": "Netherlands",
+      "sector": "Materials",
+      "weight": 0.00110734,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BPBPJ01",
+      "name": "Cie Generale des Etablissements Michelin SCA",
+      "ticker": "ML",
+      "country": "France",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00110734,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6320605",
+      "name": "Tower Semiconductor Ltd",
+      "ticker": "TSEM",
+      "country": "Israel",
+      "sector": "Information Technology",
+      "weight": 0.00110734,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5959378",
+      "name": "Telefonaktiebolaget LM Ericsson",
+      "ticker": "ERICB",
+      "country": "Sweden",
+      "sector": "Information Technology",
+      "weight": 0.00110734,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B4PT2P8",
+      "name": "Pembina Pipeline Corp",
+      "ticker": "PPL",
+      "country": "Canada",
+      "sector": "Energy",
+      "weight": 0.00110734,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BRS7CF0",
+      "name": "Ferrovial NV",
+      "ticker": "FER",
+      "country": "Spain",
+      "sector": "Industrials",
+      "weight": 0.00100667,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BYT8143",
+      "name": "Japan Post Holdings Co Ltd",
+      "ticker": "6178",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.00100667,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6597603",
+      "name": "Mitsui Fudosan Co Ltd",
+      "ticker": "8801",
+      "country": "Japan",
+      "sector": "Real Estate",
+      "weight": 0.00100667,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B3MSM28",
+      "name": "Amadeus IT Group SA",
+      "ticker": "AMS",
+      "country": "Spain",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00100667,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6196408",
+      "name": "Chugai Pharmaceutical Co Ltd",
+      "ticker": "4519",
+      "country": "Japan",
+      "sector": "Health Care",
+      "weight": 0.00100667,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6865504",
+      "name": "Suzuki Motor Corp",
+      "ticker": "7269",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00100667,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6172323",
+      "name": "Canon Inc",
+      "ticker": "7751",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00100667,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BTF8CF0",
+      "name": "Restaurant Brands International Inc",
+      "ticker": "QSR",
+      "country": "Canada",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00100667,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4380429",
+      "name": "Publicis Groupe SA",
+      "ticker": "PUB",
+      "country": "France",
+      "sector": "Communication Services",
+      "weight": 0.00100667,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6253983",
+      "name": "ARISTOCRAT LEISURE LIMITED",
+      "ticker": "ALL.AX",
+      "country": "Australia",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00100667,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6717456",
+      "name": "NORTHERN STAR RESOURCES LTD",
+      "ticker": "NST.AX",
+      "country": "Australia",
+      "sector": "Materials",
+      "weight": 0.00100667,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BMXX645",
+      "name": "Sampo Oyj",
+      "ticker": "SAMPO",
+      "country": "Finland",
+      "sector": "Financials",
+      "weight": 0.00100667,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6763965",
+      "name": "SMC Corp",
+      "ticker": "6273",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00100667,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6298542",
+      "name": "East Japan Railway Co",
+      "ticker": "9020",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00100667,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6715740",
+      "name": "QBE INSURANCE GROUP LIMITED",
+      "ticker": "QBE.AX",
+      "country": "Australia",
+      "sector": "Financials",
+      "weight": 0.00100667,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4116099",
+      "name": "BPER Banca SPA",
+      "ticker": "BPE",
+      "country": "Italy",
+      "sector": "Financials",
+      "weight": 0.00100667,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B627LW9",
+      "name": "ENEOS Holdings Inc",
+      "ticker": "5020",
+      "country": "Japan",
+      "sector": "Energy",
+      "weight": 0.00100667,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6536112",
+      "name": "BOC Hong Kong Holdings Ltd",
+      "ticker": "2388",
+      "country": "Hong Kong",
+      "sector": "Financials",
+      "weight": 0.00100667,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2521800",
+      "name": "Loblaw Cos Ltd",
+      "ticker": "L",
+      "country": "Canada",
+      "sector": "Consumer Staples",
+      "weight": 0.00100667,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BW9P816",
+      "name": "CK Hutchison Holdings Ltd",
+      "ticker": "1",
+      "country": "Hong Kong",
+      "sector": "Industrials",
+      "weight": 0.00100667,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B0JDQD4",
+      "name": "Bandai Namco Holdings Inc",
+      "ticker": "7832",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00100667,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B0190C7",
+      "name": "Techtronic Industries Co Ltd",
+      "ticker": "669",
+      "country": "Hong Kong",
+      "sector": "Industrials",
+      "weight": 0.00100667,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BNG8PQ9",
+      "name": "NN Group NV",
+      "ticker": "NN",
+      "country": "Netherlands",
+      "sector": "Financials",
+      "weight": 0.00100667,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6480048",
+      "name": "Aeon Co Ltd",
+      "ticker": "8267",
+      "country": "Japan",
+      "sector": "Consumer Staples",
+      "weight": 0.000906,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B09DHL9",
+      "name": "MTU Aero Engines AG",
+      "ticker": "MTX",
+      "country": "Germany",
+      "sector": "Industrials",
+      "weight": 0.000906,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6648891",
+      "name": "Oriental Land Co Ltd/Japan",
+      "ticker": "4661",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.000906,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B09M9D2",
+      "name": "Kone Oyj",
+      "ticker": "KNEBV",
+      "country": "Finland",
+      "sector": "Industrials",
+      "weight": 0.000906,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6642569",
+      "name": "Nippon Steel Corp",
+      "ticker": "5401",
+      "country": "Japan",
+      "sector": "Materials",
+      "weight": 0.000906,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BXDZ9Q1",
+      "name": "Svenska Handelsbanken AB",
+      "ticker": "SHBA",
+      "country": "Sweden",
+      "sector": "Financials",
+      "weight": 0.000906,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BP6VLQ4",
+      "name": "Daimler Truck Holding AG",
+      "ticker": "DTG",
+      "country": "Germany",
+      "sector": "Industrials",
+      "weight": 0.000906,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6183552",
+      "name": "Central Japan Railway Co",
+      "ticker": "9022",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.000906,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BHJYC05",
+      "name": "InterContinental Hotels Group PLC",
+      "ticker": "IHG",
+      "country": "United Kingdom",
+      "sector": "Consumer Discretionary",
+      "weight": 0.000906,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4595739",
+      "name": "Genmab A/S",
+      "ticker": "GMAB",
+      "country": "Denmark",
+      "sector": "Health Care",
+      "weight": 0.000906,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1WGG93",
+      "name": "Geberit AG",
+      "ticker": "GEBN",
+      "country": "Switzerland",
+      "sector": "Industrials",
+      "weight": 0.000906,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B798FW0",
+      "name": "Novonesis Novozymes B",
+      "ticker": "NSISB",
+      "country": "Denmark",
+      "sector": "Materials",
+      "weight": 0.000906,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6640381",
+      "name": "Denso Corp",
+      "ticker": "6902",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.000906,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1HHKD3",
+      "name": "AerCap Holdings NV",
+      "ticker": "AER",
+      "country": "United States",
+      "sector": "Industrials",
+      "weight": 0.000906,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:3208986",
+      "name": "Next PLC",
+      "ticker": "NXT",
+      "country": "United Kingdom",
+      "sector": "Consumer Discretionary",
+      "weight": 0.000906,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BYZWMR9",
+      "name": "VAT Group AG",
+      "ticker": "VACN",
+      "country": "Switzerland",
+      "sector": "Industrials",
+      "weight": 0.000906,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:7792559",
+      "name": "Heineken NV",
+      "ticker": "HEIA",
+      "country": "Netherlands",
+      "sector": "Consumer Staples",
+      "weight": 0.000906,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6885074",
+      "name": "Terumo Corp",
+      "ticker": "4543",
+      "country": "Japan",
+      "sector": "Health Care",
+      "weight": 0.000906,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BYWR0T5",
+      "name": "COLES GROUP LIMITED.",
+      "ticker": "COL.AX",
+      "country": "Australia",
+      "sector": "Consumer Staples",
+      "weight": 0.000906,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:0560399",
+      "name": "Legal & General Group PLC",
+      "ticker": "LGEN",
+      "country": "United Kingdom",
+      "sector": "Financials",
+      "weight": 0.000906,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BTMKJR0",
+      "name": "Aena SME SA",
+      "ticker": "AENA",
+      "country": "Spain",
+      "sector": "Industrials",
+      "weight": 0.000906,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BD1RP61",
+      "name": "Bank of Ireland Group PLC",
+      "ticker": "BIRG",
+      "country": "Ireland",
+      "sector": "Financials",
+      "weight": 0.000906,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6506267",
+      "name": "Lasertec Corp",
+      "ticker": "6920",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.000906,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6859927",
+      "name": "Sun Hung Kai Properties Ltd",
+      "ticker": "16",
+      "country": "Hong Kong",
+      "sector": "Real Estate",
+      "weight": 0.000906,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BNZFHC1",
+      "name": "Hexagon AB",
+      "ticker": "HEXAB",
+      "country": "Sweden",
+      "sector": "Information Technology",
+      "weight": 0.00080534,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B01FLQ6",
+      "name": "ACS Actividades de Construccion y Servicios SA",
+      "ticker": "ACS",
+      "country": "Spain",
+      "sector": "Industrials",
+      "weight": 0.00080534,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B10RB15",
+      "name": "Inpex Corp",
+      "ticker": "1605",
+      "country": "Japan",
+      "sector": "Energy",
+      "weight": 0.00080534,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5120679",
+      "name": "Heidelberg Materials AG",
+      "ticker": "HEI",
+      "country": "Germany",
+      "sector": "Materials",
+      "weight": 0.00080534,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2778844",
+      "name": "Merck & Co Inc",
+      "ticker": "MRK",
+      "country": "United States",
+      "sector": "Health Care",
+      "weight": 0.00080534,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6483809",
+      "name": "Kao Corp",
+      "ticker": "4452",
+      "country": "Japan",
+      "sector": "Consumer Staples",
+      "weight": 0.00080534,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5756029",
+      "name": "Bayerische Motoren Werke AG",
+      "ticker": "BMW",
+      "country": "Germany",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00080534,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6057378",
+      "name": "Asics Corp",
+      "ticker": "7936",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00080534,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BDCPN04",
+      "name": "Coca-Cola Europacific Partners PLC",
+      "ticker": "CCEP",
+      "country": "United Kingdom",
+      "sector": "Consumer Staples",
+      "weight": 0.00080534,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5986622",
+      "name": "Koninklijke Philips NV",
+      "ticker": "PHIA",
+      "country": "Netherlands",
+      "sector": "Health Care",
+      "weight": 0.00080534,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6776703",
+      "name": "SANTOS LIMITED",
+      "ticker": "STO.AX",
+      "country": "Australia",
+      "sector": "Energy",
+      "weight": 0.00080534,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BMBQHZ4",
+      "name": "SGS SA",
+      "ticker": "SGSN",
+      "country": "Switzerland",
+      "sector": "Industrials",
+      "weight": 0.00080534,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BN33PL2",
+      "name": "Bombardier Inc",
+      "ticker": "BBD/B",
+      "country": "Canada",
+      "sector": "Industrials",
+      "weight": 0.00080534,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5533976",
+      "name": "Swisscom AG",
+      "ticker": "SCMN",
+      "country": "Switzerland",
+      "sector": "Communication Services",
+      "weight": 0.00080534,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6858902",
+      "name": "Sumitomo Realty & Development Co Ltd",
+      "ticker": "8830",
+      "country": "Japan",
+      "sector": "Real Estate",
+      "weight": 0.00080534,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2669272",
+      "name": "Pan American Silver Corp",
+      "ticker": "PAAS",
+      "country": "Canada",
+      "sector": "Materials",
+      "weight": 0.00080534,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6086253",
+      "name": "FORTESCUE LTD",
+      "ticker": "FMG.AX",
+      "country": "Australia",
+      "sector": "Materials",
+      "weight": 0.00080534,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BYMD5K9",
+      "name": "Banco BPM SpA",
+      "ticker": "BAMI",
+      "country": "Italy",
+      "sector": "Financials",
+      "weight": 0.00080534,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B3X0F91",
+      "name": "EVOLUTION MINING LIMITED",
+      "ticker": "EVN.AX",
+      "country": "Australia",
+      "sector": "Materials",
+      "weight": 0.00080534,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BK6QWF0",
+      "name": "Helvetia Baloise Holding AG",
+      "ticker": "HBAN",
+      "country": "Switzerland",
+      "sector": "Financials",
+      "weight": 0.00080534,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6643960",
+      "name": "Nippon Yusen KK",
+      "ticker": "9101",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00080534,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6466985",
+      "name": "IHI Corp",
+      "ticker": "7013",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00080534,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2454241",
+      "name": "Imperial Oil Ltd",
+      "ticker": "IMO",
+      "country": "Canada",
+      "sector": "Energy",
+      "weight": 0.00080534,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4163437",
+      "name": "Capgemini SE",
+      "ticker": "CAP",
+      "country": "France",
+      "sector": "Information Technology",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6483489",
+      "name": "Kansai Electric Power Co Inc/The",
+      "ticker": "9503",
+      "country": "Japan",
+      "sector": "Utilities",
+      "weight": 0.00070467,
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_POWERCO",
+      "issuer_name": "Powerco"
+    },
+    {
+      "isin": "SEDOL:2347608",
+      "name": "First Quantum Minerals Ltd",
+      "ticker": "FM",
+      "country": "Canada",
+      "sector": "Materials",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BT7JGG0",
+      "name": "Fresenius SE & Co KGaA",
+      "ticker": "FRE",
+      "country": "Germany",
+      "sector": "Health Care",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1FJ0C0",
+      "name": "BRAMBLES LIMITED",
+      "ticker": "BXB.AX",
+      "country": "Australia",
+      "sector": "Industrials",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:7262610",
+      "name": "Credit Agricole SA",
+      "ticker": "ACA",
+      "country": "France",
+      "sector": "Financials",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6251028",
+      "name": "SCREEN Holdings Co Ltd",
+      "ticker": "7735",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5505072",
+      "name": "Kering SA",
+      "ticker": "KER",
+      "country": "France",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6497509",
+      "name": "Kubota Corp",
+      "ticker": "6326",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6805469",
+      "name": "Resonac Holdings Corp",
+      "ticker": "4004",
+      "country": "Japan",
+      "sector": "Materials",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:0405207",
+      "name": "Halma PLC",
+      "ticker": "HLMA",
+      "country": "United Kingdom",
+      "sector": "Information Technology",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4511809",
+      "name": "Hannover Rueck SE",
+      "ticker": "HNR1",
+      "country": "Germany",
+      "sector": "Financials",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:0045614",
+      "name": "Antofagasta PLC",
+      "ticker": "ANTO",
+      "country": "United Kingdom",
+      "sector": "Materials",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6357562",
+      "name": "Furukawa Electric Co Ltd",
+      "ticker": "5801",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4491235",
+      "name": "Kingspan Group PLC",
+      "ticker": "KRX",
+      "country": "Ireland",
+      "sector": "Industrials",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5650422",
+      "name": "Naturgy Energy Group SA",
+      "ticker": "NTGY",
+      "country": "Spain",
+      "sector": "Utilities",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6251363",
+      "name": "Daiwa House Industry Co Ltd",
+      "ticker": "1925",
+      "country": "Japan",
+      "sector": "Real Estate",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BPCPYH2",
+      "name": "Brookfield Asset Management Ltd",
+      "ticker": "BAM",
+      "country": "Canada",
+      "sector": "Financials",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6858849",
+      "name": "Sumitomo Metal Mining Co Ltd",
+      "ticker": "5713",
+      "country": "Japan",
+      "sector": "Materials",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BNZGVV1",
+      "name": "Universal Music Group NV",
+      "ticker": "UMG",
+      "country": "Netherlands",
+      "sector": "Communication Services",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BHR3R21",
+      "name": "WSP Global Inc",
+      "ticker": "WSP",
+      "country": "Canada",
+      "sector": "Industrials",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BMD58W3",
+      "name": "Epiroc AB",
+      "ticker": "EPIB",
+      "country": "Sweden",
+      "sector": "Industrials",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5497168",
+      "name": "VOLKSWAGEN AG-PREF",
+      "ticker": "VOW3",
+      "country": "Germany",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2384951",
+      "name": "Great-West Lifeco Inc",
+      "ticker": "GWO",
+      "country": "Canada",
+      "sector": "Financials",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:7332687",
+      "name": "Alfa Laval AB",
+      "ticker": "ALFA",
+      "country": "Sweden",
+      "sector": "Industrials",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2866857",
+      "name": "Lundin Mining Corp",
+      "ticker": "LUN",
+      "country": "Canada",
+      "sector": "Materials",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4103596",
+      "name": "EDP SA",
+      "ticker": "EDP",
+      "country": "Portugal",
+      "sector": "Utilities",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2554475",
+      "name": "Magna International Inc",
+      "ticker": "MG",
+      "country": "Canada",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B06YV46",
+      "name": "Neste Oyj",
+      "ticker": "NESTE",
+      "country": "Finland",
+      "sector": "Energy",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6251448",
+      "name": "Daiwa Securities Group Inc",
+      "ticker": "8601",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.00070467,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6640682",
+      "name": "NIDEC CORP",
+      "ticker": "6594",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B3QJ0H8",
+      "name": "Tourmaline Oil Corp",
+      "ticker": "TOU",
+      "country": "Canada",
+      "sector": "Energy",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BWSW5D9",
+      "name": "SOUTH32 LIMITED",
+      "ticker": "S32.AX",
+      "country": "Australia",
+      "sector": "Materials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6791591",
+      "name": "Secom Co Ltd",
+      "ticker": "9735",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6597584",
+      "name": "Mitsui OSK Lines Ltd",
+      "ticker": "9104",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BZ1GZ06",
+      "name": "BAWAG Group AG",
+      "ticker": "BG",
+      "country": "Austria",
+      "sector": "Financials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6097017",
+      "name": "CLP Holdings Ltd",
+      "ticker": "2",
+      "country": "Hong Kong",
+      "sector": "Utilities",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BD594Y4",
+      "name": "Siemens Healthineers AG",
+      "ticker": "SHL",
+      "country": "Germany",
+      "sector": "Health Care",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4525189",
+      "name": "Wartsila OYJ Abp",
+      "ticker": "WRT1V",
+      "country": "Finland",
+      "sector": "Industrials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6054409",
+      "name": "Asahi Group Holdings Ltd",
+      "ticker": "2502",
+      "country": "Japan",
+      "sector": "Consumer Staples",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6180412",
+      "name": "COMPUTERSHARE LIMITED.",
+      "ticker": "CPU.AX",
+      "country": "Australia",
+      "sector": "Industrials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B119QG0",
+      "name": "Partners Group Holding AG",
+      "ticker": "PGHN",
+      "country": "Switzerland",
+      "sector": "Financials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B5ZN1N8",
+      "name": "Segro PLC",
+      "ticker": "SGRO",
+      "country": "United Kingdom",
+      "sector": "Real Estate",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BNGN9Z1",
+      "name": "FinecoBank Banca Fineco SpA",
+      "ticker": "FBK",
+      "country": "Italy",
+      "sector": "Financials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BG0SCK9",
+      "name": "BE Semiconductor Industries NV",
+      "ticker": "BESI",
+      "country": "Netherlands",
+      "sector": "Information Technology",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4519579",
+      "name": "Kerry Group PLC",
+      "ticker": "KYGA",
+      "country": "Ireland",
+      "sector": "Consumer Staples",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BM8H5Y5",
+      "name": "Dassault Systemes SE",
+      "ticker": "DSY",
+      "country": "France",
+      "sector": "Information Technology",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6744294",
+      "name": "T&D Holdings Inc",
+      "ticker": "8795",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BNGHNG2",
+      "name": "Kokusai Electric Corp",
+      "ticker": "6525",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6743882",
+      "name": "Japan Exchange Group Inc",
+      "ticker": "8697",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B418WK4",
+      "name": "Whitecap Resources Inc",
+      "ticker": "WCP",
+      "country": "Canada",
+      "sector": "Energy",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5732524",
+      "name": "Telefonica SA",
+      "ticker": "TEF",
+      "country": "Spain",
+      "sector": "Communication Services",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6493745",
+      "name": "Kirin Holdings Co Ltd",
+      "ticker": "2503",
+      "country": "Japan",
+      "sector": "Consumer Staples",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6641801",
+      "name": "Nitto Denko Corp",
+      "ticker": "6988",
+      "country": "Japan",
+      "sector": "Materials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6340250",
+      "name": "Fisher & Paykel Healthcare Corporation Limited",
+      "ticker": "FPH.NZ",
+      "country": "New Zealand",
+      "sector": "Health Care",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5051252",
+      "name": "UPM-Kymmene Oyj",
+      "ticker": "UPM",
+      "country": "Finland",
+      "sector": "Materials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BF1K7P7",
+      "name": "Essity AB",
+      "ticker": "ESSITYB",
+      "country": "Sweden",
+      "sector": "Consumer Staples",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6585084",
+      "name": "SUNCORP GROUP LIMITED",
+      "ticker": "SUN.AX",
+      "country": "Australia",
+      "sector": "Financials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2650050",
+      "name": "Emera Inc",
+      "ticker": "EMA",
+      "country": "Canada",
+      "sector": "Utilities",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B01BN57",
+      "name": "Terna - Rete Elettrica Nazionale",
+      "ticker": "TRN",
+      "country": "Italy",
+      "sector": "Utilities",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BSTRB82",
+      "name": "Kongsberg Gruppen ASA",
+      "ticker": "KOG",
+      "country": "Norway",
+      "sector": "Industrials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BPYTZ57",
+      "name": "Boliden AB",
+      "ticker": "BOL",
+      "country": "Sweden",
+      "sector": "Materials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6804682",
+      "name": "Shionogi & Co Ltd",
+      "ticker": "4507",
+      "country": "Japan",
+      "sector": "Health Care",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6054603",
+      "name": "Asahi Kasei Corp",
+      "ticker": "3407",
+      "country": "Japan",
+      "sector": "Materials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6496681",
+      "name": "Konami Group Corp",
+      "ticker": "9766",
+      "country": "Japan",
+      "sector": "Communication Services",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2319414",
+      "name": "EQT HOLDINGS LIMITED",
+      "ticker": "EQT.AX",
+      "country": "Australia",
+      "sector": "Financials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BMJ6DW5",
+      "name": "Informa PLC",
+      "ticker": "INF",
+      "country": "United Kingdom",
+      "sector": "Communication Services",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6303866",
+      "name": "Singapore Exchange Ltd",
+      "ticker": "SGX",
+      "country": "Singapore",
+      "sector": "Financials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6758455",
+      "name": "Ryohin Keikaku Co Ltd",
+      "ticker": "7453",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6658801",
+      "name": "Olympus Corp",
+      "ticker": "7733",
+      "country": "Japan",
+      "sector": "Health Care",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:3091357",
+      "name": "BT Group PLC",
+      "ticker": "BT/A",
+      "country": "United Kingdom",
+      "sector": "Communication Services",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5271782",
+      "name": "Endesa SA",
+      "ticker": "ELE",
+      "country": "Spain",
+      "sector": "Utilities",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6356365",
+      "name": "Fuji Electric Co Ltd",
+      "ticker": "6504",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BX90C05",
+      "name": "Cellnex Telecom SA",
+      "ticker": "CLNX",
+      "country": "Spain",
+      "sector": "Communication Services",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BD97JW7",
+      "name": "Yokohama Financial Group Inc",
+      "ticker": "7186",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BBJPFY1",
+      "name": "VONOVIA SE",
+      "ticker": "VNA",
+      "country": "Germany",
+      "sector": "Real Estate",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B142S60",
+      "name": "Kuehne + Nagel International AG",
+      "ticker": "KNIN",
+      "country": "Switzerland",
+      "sector": "Industrials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6661768",
+      "name": "Osaka Gas Co Ltd",
+      "ticker": "9532",
+      "country": "Japan",
+      "sector": "Utilities",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6543770",
+      "name": "JX Advanced Metals Corp",
+      "ticker": "5016",
+      "country": "Japan",
+      "sector": "Materials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B39J2M4",
+      "name": "United Utilities Group PLC",
+      "ticker": "UU/",
+      "country": "United Kingdom",
+      "sector": "Utilities",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6250025",
+      "name": "Daifuku Co Ltd",
+      "ticker": "6383",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BMQ80V2",
+      "name": "IREN Ltd",
+      "ticker": "IREN",
+      "country": "United States",
+      "sector": "Information Technology",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6793906",
+      "name": "Sekisui House Ltd",
+      "ticker": "1928",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BKDT649",
+      "name": "GFL Environmental Inc",
+      "ticker": "GFL",
+      "country": "Canada",
+      "sector": "Industrials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:0182663",
+      "name": "Diploma PLC",
+      "ticker": "DPLM",
+      "country": "United Kingdom",
+      "sector": "Industrials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B7SF135",
+      "name": "Unipol Assicurazioni SpA",
+      "ticker": "UNI",
+      "country": "Italy",
+      "sector": "Financials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6451271",
+      "name": "Israel Discount Bank Ltd",
+      "ticker": "DSCT",
+      "country": "Israel",
+      "sector": "Financials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6481320",
+      "name": "Kajima Corp",
+      "ticker": "1812",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1FN8X9",
+      "name": "Metso Oyj",
+      "ticker": "METSO",
+      "country": "Finland",
+      "sector": "Industrials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6302700",
+      "name": "Ebara Corp",
+      "ticker": "6361",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BZ3DNP6",
+      "name": "Alamos Gold Inc",
+      "ticker": "AGI",
+      "country": "Canada",
+      "sector": "Materials",
+      "weight": 0.000604,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BQ759B3",
+      "name": "Phoenix Group PLC",
+      "ticker": "PHX",
+      "country": "United Arab Emirates",
+      "sector": "Information Technology",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6656407",
+      "name": "Obayashi Corp",
+      "ticker": "1802",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4682329",
+      "name": "Pernod Ricard SA",
+      "ticker": "RI",
+      "country": "France",
+      "sector": "Consumer Staples",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6484620",
+      "name": "Kawasaki Heavy Industries Ltd",
+      "ticker": "7012",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6870100",
+      "name": "Taisei Corp",
+      "ticker": "1801",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2583952",
+      "name": "Metro Inc/CN",
+      "ticker": "MRU",
+      "country": "Canada",
+      "sector": "Consumer Staples",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6195609",
+      "name": "Chubu Electric Power Co Inc",
+      "ticker": "9502",
+      "country": "Japan",
+      "sector": "Utilities",
+      "weight": 0.00050334,
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_POWERCO",
+      "issuer_name": "Powerco"
+    },
+    {
+      "isin": "SEDOL:6390921",
+      "name": "Nomura Research Institute Ltd",
+      "ticker": "4307",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6214861",
+      "name": "ORIGIN ENERGY LIMITED",
+      "ticker": "ORG.AX",
+      "country": "Australia",
+      "sector": "Utilities",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BYYN701",
+      "name": "Poste Italiane SpA",
+      "ticker": "PST",
+      "country": "Italy",
+      "sector": "Financials",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B94G471",
+      "name": "ICON PLC",
+      "ticker": "ICLR",
+      "country": "United States",
+      "sector": "Health Care",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6087289",
+      "name": "TELSTRA GROUP LIMITED",
+      "ticker": "TLS.AX",
+      "country": "Australia",
+      "sector": "Communication Services",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6043214",
+      "name": "Singapore Technologies Engineering Ltd",
+      "ticker": "STE",
+      "country": "Singapore",
+      "sector": "Industrials",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2897103",
+      "name": "Toromont Industries Ltd",
+      "ticker": "TIH",
+      "country": "Canada",
+      "sector": "Industrials",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:7251470",
+      "name": "Snam SpA",
+      "ticker": "SRG",
+      "country": "Italy",
+      "sector": "Utilities",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BKLNP13",
+      "name": "Equinox Gold Corp",
+      "ticker": "EQX",
+      "country": "Canada",
+      "sector": "Materials",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6271026",
+      "name": "INSURANCE AUSTRALIA GROUP LIMITED",
+      "ticker": "IAG.AX",
+      "country": "Australia",
+      "sector": "Financials",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B02J639",
+      "name": "Admiral Group PLC",
+      "ticker": "ADM",
+      "country": "United Kingdom",
+      "sector": "Financials",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B5M6XQ7",
+      "name": "International Consolidated Airlines Group SA",
+      "ticker": "IAG",
+      "country": "United Kingdom",
+      "sector": "Industrials",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BLZH0Z7",
+      "name": "SCENTRE GROUP",
+      "ticker": "SCG.AX",
+      "country": "Australia",
+      "sector": "Real Estate",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6190563",
+      "name": "Chiba Bank Ltd/The",
+      "ticker": "8331",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1VQ5C0",
+      "name": "Keppel Ltd",
+      "ticker": "KEP",
+      "country": "Singapore",
+      "sector": "Industrials",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BJ2ZH37",
+      "name": "iA Financial Corp Inc",
+      "ticker": "IAG",
+      "country": "Canada",
+      "sector": "Financials",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B11TCY0",
+      "name": "Schindler Holding AG",
+      "ticker": "SCHP",
+      "country": "Switzerland",
+      "sector": "Industrials",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BVFC8Q9",
+      "name": "Thomson Reuters Corp",
+      "ticker": "TRI",
+      "country": "Canada",
+      "sector": "Industrials",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:7108918",
+      "name": "Roche Holding AG",
+      "ticker": "RO",
+      "country": "Switzerland",
+      "sector": "Health Care",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BWXJHM8",
+      "name": "Ascendis Pharma A/S",
+      "ticker": "ASND",
+      "country": "United States",
+      "sector": "Health Care",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B0PB4M7",
+      "name": "Link REIT",
+      "ticker": "823",
+      "country": "Hong Kong",
+      "sector": "Real Estate",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BZCNN35",
+      "name": "Banco Comercial Portugues SA",
+      "ticker": "BCP",
+      "country": "Portugal",
+      "sector": "Financials",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6895448",
+      "name": "Tokyo Gas Co Ltd",
+      "ticker": "9531",
+      "country": "Japan",
+      "sector": "Utilities",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BL6K5J4",
+      "name": "Endeavour Mining PLC",
+      "ticker": "EDV",
+      "country": "United Kingdom",
+      "sector": "Materials",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6897143",
+      "name": "Toray Industries Inc",
+      "ticker": "3402",
+      "country": "Japan",
+      "sector": "Materials",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B86S2N0",
+      "name": "Ageas SA/NV",
+      "ticker": "AGS",
+      "country": "Belgium",
+      "sector": "Financials",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:3163836",
+      "name": "Intertek Group PLC",
+      "ticker": "ITRK",
+      "country": "United Kingdom",
+      "sector": "Industrials",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6534161",
+      "name": "Nova Ltd",
+      "ticker": "NVMI",
+      "country": "Israel",
+      "sector": "Information Technology",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "MANUAL:RCI.B",
+      "name": "Rogers Communications Inc B",
+      "ticker": "RCI.B",
+      "country": "Canada",
+      "sector": "Communication Services",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4169219",
+      "name": "Carlsberg AS",
+      "ticker": "CARLB",
+      "country": "Denmark",
+      "sector": "Consumer Staples",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B05BDX1",
+      "name": "Hudbay Minerals Inc",
+      "ticker": "HBM",
+      "country": "Canada",
+      "sector": "Materials",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5579550",
+      "name": "Fortum Oyj",
+      "ticker": "FORTUM",
+      "country": "Finland",
+      "sector": "Utilities",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6821807",
+      "name": "Washington H Soul Pattinson & Co Ltd",
+      "ticker": "SOL",
+      "country": "Australia",
+      "sector": "Financials",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6985264",
+      "name": "Yamaha Motor Co Ltd",
+      "ticker": "7272",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B8C3BL0",
+      "name": "Sage Group PLC/The",
+      "ticker": "SGE",
+      "country": "United Kingdom",
+      "sector": "Information Technology",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BYZQ077",
+      "name": "CK Asset Holdings Ltd",
+      "ticker": "1113",
+      "country": "Hong Kong",
+      "sector": "Real Estate",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4253048",
+      "name": "AP Moller - Maersk A/S",
+      "ticker": "MAERSKB",
+      "country": "Denmark",
+      "sector": "Industrials",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6916703",
+      "name": "Mizrahi Tefahot Bank Ltd",
+      "ticker": "MZTF",
+      "country": "Israel",
+      "sector": "Financials",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B43WJC5",
+      "name": "AltaGas Ltd",
+      "ticker": "ALA",
+      "country": "Canada",
+      "sector": "Utilities",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4651459",
+      "name": "OMV AG",
+      "ticker": "OMV",
+      "country": "Austria",
+      "sector": "Energy",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B9895B7",
+      "name": "Coca-Cola HBC AG",
+      "ticker": "CCH",
+      "country": "United Kingdom",
+      "sector": "Consumer Staples",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BYYXJY9",
+      "name": "Hydro One Ltd",
+      "ticker": "H",
+      "country": "Canada",
+      "sector": "Utilities",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BGLP232",
+      "name": "Moncler SpA",
+      "ticker": "MONC",
+      "country": "Italy",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:0922320",
+      "name": "Smith & Nephew PLC",
+      "ticker": "SN/",
+      "country": "United Kingdom",
+      "sector": "Health Care",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6420129",
+      "name": "CapitaLand Integrated Commercial Trust",
+      "ticker": "CICT",
+      "country": "Singapore",
+      "sector": "Real Estate",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B11HK39",
+      "name": "Norsk Hydro ASA",
+      "ticker": "NHY",
+      "country": "Norway",
+      "sector": "Materials",
+      "weight": 0.00050334,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2956662",
+      "name": "George Weston Ltd",
+      "ticker": "WN",
+      "country": "Canada",
+      "sector": "Consumer Staples",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1FH8J7",
+      "name": "Severn Trent PLC",
+      "ticker": "SVT",
+      "country": "United Kingdom",
+      "sector": "Utilities",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6309466",
+      "name": "SBI Holdings Inc",
+      "ticker": "8473",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BP38QJ6",
+      "name": "Shizuoka Financial Group Inc",
+      "ticker": "5831",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6472119",
+      "name": "Jardine Matheson Holdings Ltd",
+      "ticker": "JM",
+      "country": "Singapore",
+      "sector": "Industrials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6747204",
+      "name": "Rohm Co Ltd",
+      "ticker": "6963",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "MANUAL:BNTX",
+      "name": "BionTech SE",
+      "ticker": "BNTX",
+      "country": "Germany",
+      "sector": "Health Care",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1L95G3",
+      "name": "Aker BP ASA",
+      "ticker": "AKRBP",
+      "country": "Norway",
+      "sector": "Energy",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1FW751",
+      "name": "Galp Energia SGPS SA",
+      "ticker": "GALP",
+      "country": "Portugal",
+      "sector": "Energy",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BMX6JW3",
+      "name": "JFrog Ltd",
+      "ticker": "FROG",
+      "country": "United States",
+      "sector": "Information Technology",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B3SGMV5",
+      "name": "Keyera Corp",
+      "ticker": "KEY",
+      "country": "Canada",
+      "sector": "Energy",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2446646",
+      "name": "IAMGOLD Corp",
+      "ticker": "IMG",
+      "country": "Canada",
+      "sector": "Materials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6435327",
+      "name": "Power Assets Holdings Ltd",
+      "ticker": "6",
+      "country": "Hong Kong",
+      "sector": "Utilities",
+      "weight": 0.00040267,
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_POWERCO",
+      "issuer_name": "Powerco"
+    },
+    {
+      "isin": "SEDOL:4002121",
+      "name": "Bouygues SA",
+      "ticker": "EN",
+      "country": "France",
+      "sector": "Industrials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BH0VTS2",
+      "name": "Mebuki Financial Group Inc",
+      "ticker": "7167",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BF13K02",
+      "name": "SIGMA HEALTHCARE LIMITED",
+      "ticker": "SIG.AX",
+      "country": "Australia",
+      "sector": "Health Care",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1TK1Y8",
+      "name": "Fukuoka Financial Group Inc",
+      "ticker": "8354",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B17NY40",
+      "name": "Orion Oyj",
+      "ticker": "ORNBV",
+      "country": "Finland",
+      "sector": "Health Care",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6490809",
+      "name": "Kikkoman Corp",
+      "ticker": "2801",
+      "country": "Japan",
+      "sector": "Consumer Staples",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5978384",
+      "name": "Telia Co AB",
+      "ticker": "TELIA",
+      "country": "Sweden",
+      "sector": "Communication Services",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B0704T9",
+      "name": "Raiffeisen Bank International AG",
+      "ticker": "RBI",
+      "country": "Austria",
+      "sector": "Financials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B0JQTJ0",
+      "name": "Mitsubishi Chemical Group Corp",
+      "ticker": "4188",
+      "country": "Japan",
+      "sector": "Materials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B8KH5G7",
+      "name": "TMX Group Ltd",
+      "ticker": "X",
+      "country": "Canada",
+      "sector": "Financials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6136749",
+      "name": "Obic Co Ltd",
+      "ticker": "4684",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BGXQNP2",
+      "name": "Standard Life PLC",
+      "ticker": "SDLF",
+      "country": "United Kingdom",
+      "sector": "Financials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B082RF1",
+      "name": "Rentokil Initial PLC",
+      "ticker": "RTO",
+      "country": "United Kingdom",
+      "sector": "Industrials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2181334",
+      "name": "Check Point Software Technologies Ltd",
+      "ticker": "CHKP",
+      "country": "United States",
+      "sector": "Information Technology",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6436557",
+      "name": "Hong Kong & China Gas Co Ltd",
+      "ticker": "3",
+      "country": "Hong Kong",
+      "sector": "Utilities",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BRJNZ47",
+      "name": "AtkinsRealis Group Inc",
+      "ticker": "ATRL",
+      "country": "Canada",
+      "sector": "Industrials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1CC9H0",
+      "name": "Swedish Orphan Biovitrum AB",
+      "ticker": "SOBI",
+      "country": "Sweden",
+      "sector": "Health Care",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:7142091",
+      "name": "Skanska AB",
+      "ticker": "SKAB",
+      "country": "Sweden",
+      "sector": "Industrials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BNNF1C1",
+      "name": "APA GROUP",
+      "ticker": "APA.AX",
+      "country": "Australia",
+      "sector": "Utilities",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6642406",
+      "name": "MINEBEA MITSUMI Inc",
+      "ticker": "6479",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6767677",
+      "name": "Enlight Renewable Energy Ltd",
+      "ticker": "ENLT",
+      "country": "Israel",
+      "sector": "Utilities",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BYT16L4",
+      "name": "Orsted AS",
+      "ticker": "ORSTED",
+      "country": "Denmark",
+      "sector": "Utilities",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B02L486",
+      "name": "Mowi ASA",
+      "ticker": "MOWI",
+      "country": "Norway",
+      "sector": "Consumer Staples",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6173694",
+      "name": "Capcom Co Ltd",
+      "ticker": "9697",
+      "country": "Japan",
+      "sector": "Communication Services",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BDRXBF4",
+      "name": "TFI International Inc",
+      "ticker": "TFII",
+      "country": "Canada",
+      "sector": "Industrials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6533232",
+      "name": "BLUESCOPE STEEL LIMITED",
+      "ticker": "BSL.AX",
+      "country": "Australia",
+      "sector": "Materials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6269861",
+      "name": "Pan Pacific International Holdings Corp",
+      "ticker": "7532",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5962280",
+      "name": "Chocoladefabriken Lindt & Spruengli AG",
+      "ticker": "LISP",
+      "country": "Switzerland",
+      "sector": "Consumer Staples",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1Q3J35",
+      "name": "SKF AB",
+      "ticker": "SKFB",
+      "country": "Sweden",
+      "sector": "Industrials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6804820",
+      "name": "Shimano Inc",
+      "ticker": "7309",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6307200",
+      "name": "Eisai Co Ltd",
+      "ticker": "4523",
+      "country": "Japan",
+      "sector": "Health Care",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BMD8KX7",
+      "name": "Stellantis NV",
+      "ticker": "STLAM",
+      "country": "Italy",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6356406",
+      "name": "Subaru Corp",
+      "ticker": "7270",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BQKY081",
+      "name": "Wise Group PLC",
+      "ticker": "WISE",
+      "country": "United Kingdom",
+      "sector": "Financials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BMHVLR3",
+      "name": "Tenaris SA",
+      "ticker": "TEN",
+      "country": "Italy",
+      "sector": "Energy",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6619507",
+      "name": "NGK Corp",
+      "ticker": "5333",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6121176",
+      "name": "LYNAS RARE EARTHS LIMITED",
+      "ticker": "LYC.AX",
+      "country": "Australia",
+      "sector": "Materials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BLN8T44",
+      "name": "AddTech AB",
+      "ticker": "ADDTB",
+      "country": "Sweden",
+      "sector": "Industrials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "ASX:MPL",
+      "name": "MEDIBANK PRIVATE LIMITED",
+      "ticker": "MPL.AX",
+      "country": "Australia",
+      "sector": "Financials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4902384",
+      "name": "Trelleborg AB",
+      "ticker": "TRELB",
+      "country": "Sweden",
+      "sector": "Industrials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2833583",
+      "name": "First Majestic Silver Corp",
+      "ticker": "AG",
+      "country": "Canada",
+      "sector": "Materials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5962280",
+      "name": "Chocoladefabriken Lindt & Spruengli AG",
+      "ticker": "LISP",
+      "country": "Switzerland",
+      "sector": "Consumer Staples",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B97C733",
+      "name": "Tele2 AB",
+      "ticker": "TEL2B",
+      "country": "Sweden",
+      "sector": "Communication Services",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1VSK54",
+      "name": "Industrivarden AB",
+      "ticker": "INDUC",
+      "country": "Sweden",
+      "sector": "Financials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BMD58W3",
+      "name": "Epiroc AB",
+      "ticker": "EPIB",
+      "country": "Sweden",
+      "sector": "Industrials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B2368L5",
+      "name": "PLS GROUP LIMITED",
+      "ticker": "PLS.AX",
+      "country": "Australia",
+      "sector": "Materials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4253048",
+      "name": "AP Moller - Maersk A/S",
+      "ticker": "MAERSKB",
+      "country": "Denmark",
+      "sector": "Industrials",
+      "weight": 0.00040267,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1FF8P7",
+      "name": "Idemitsu Kosan Co Ltd",
+      "ticker": "5019",
+      "country": "Japan",
+      "sector": "Energy",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6957995",
+      "name": "West Japan Railway Co",
+      "ticker": "9021",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4852832",
+      "name": "Storebrand ASA",
+      "ticker": "STB",
+      "country": "Norway",
+      "sector": "Financials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4732495",
+      "name": "Telenor ASA",
+      "ticker": "TEL",
+      "country": "Norway",
+      "sector": "Communication Services",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5554041",
+      "name": "Securitas AB",
+      "ticker": "SECUB",
+      "country": "Sweden",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BMV4NR2",
+      "name": "Kyoto Financial Group Inc",
+      "ticker": "5844",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B033F22",
+      "name": "Centrica PLC",
+      "ticker": "CNA",
+      "country": "United Kingdom",
+      "sector": "Utilities",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6555805",
+      "name": "Makita Corp",
+      "ticker": "6586",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6084848",
+      "name": "LY Corp",
+      "ticker": "4689",
+      "country": "Japan",
+      "sector": "Communication Services",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6268976",
+      "name": "Mitsubishi HC Capital Inc",
+      "ticker": "8593",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6644800",
+      "name": "Nitori Holdings Co Ltd",
+      "ticker": "9843",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6400626",
+      "name": "Hachijuni Nagano Bank Ltd",
+      "ticker": "8359",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6805265",
+      "name": "Shiseido Co Ltd",
+      "ticker": "4911",
+      "country": "Japan",
+      "sector": "Consumer Staples",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6484686",
+      "name": "Kawasaki Kisen Kaisha Ltd",
+      "ticker": "9107",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6776349",
+      "name": "Sanrio Co Ltd",
+      "ticker": "8136",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6619604",
+      "name": "Niterra Co Ltd",
+      "ticker": "5334",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BKSHP63",
+      "name": "NIPPON EXPRESS HOLDINGS INC",
+      "ticker": "9147",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6811734",
+      "name": "Singapore Airlines Ltd",
+      "ticker": "SIA",
+      "country": "Singapore",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BDCG2C2",
+      "name": "Aritzia Inc",
+      "ticker": "ATZ",
+      "country": "Canada",
+      "sector": "Consumer Discretionary",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6659428",
+      "name": "Omron Corp",
+      "ticker": "6645",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6129222",
+      "name": "ASX LIMITED",
+      "ticker": "ASX.AX",
+      "country": "Australia",
+      "sector": "Financials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BJXSCH4",
+      "name": "Evolution AB",
+      "ticker": "EVO",
+      "country": "Sweden",
+      "sector": "Consumer Discretionary",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B8F0TD6",
+      "name": "Talanx AG",
+      "ticker": "TLX",
+      "country": "Germany",
+      "sector": "Financials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6870564",
+      "name": "Taiyo Yuden Co Ltd",
+      "ticker": "6976",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2254645",
+      "name": "Gildan Activewear Inc",
+      "ticker": "GIL",
+      "country": "Canada",
+      "sector": "Consumer Discretionary",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BKX3XG2",
+      "name": "Auckland International Airport Limited",
+      "ticker": "AIA.NZ",
+      "country": "New Zealand",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_AIA",
+      "issuer_name": "Auckland International Airport"
+    },
+    {
+      "isin": "SEDOL:B8FMRX8",
+      "name": "Coloplast A/S",
+      "ticker": "COLOB",
+      "country": "Denmark",
+      "sector": "Health Care",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6986041",
+      "name": "Yaskawa Electric Corp",
+      "ticker": "6506",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6250906",
+      "name": "Dai Nippon Printing Co Ltd",
+      "ticker": "7912",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6410700",
+      "name": "Harel Insurance Investments & Financial Services Ltd",
+      "ticker": "HARL",
+      "country": "Israel",
+      "sector": "Financials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6055208",
+      "name": "AGC Inc",
+      "ticker": "5201",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5107401",
+      "name": "Beiersdorf AG",
+      "ticker": "BEI",
+      "country": "Germany",
+      "sector": "Consumer Staples",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6897024",
+      "name": "TOPPAN Holdings Inc",
+      "ticker": "7911",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6640507",
+      "name": "Nippon Paint Holdings Co Ltd",
+      "ticker": "4612",
+      "country": "Japan",
+      "sector": "Materials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6434915",
+      "name": "Hongkong Land Holdings Ltd",
+      "ticker": "HKL",
+      "country": "Singapore",
+      "sector": "Real Estate",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BD2P9X9",
+      "name": "Knorr-Bremse AG",
+      "ticker": "KBX",
+      "country": "Germany",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6594143",
+      "name": "Sojitz Corp",
+      "ticker": "2768",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5258246",
+      "name": "Subsea 7 SA",
+      "ticker": "SUBC",
+      "country": "Norway",
+      "sector": "Energy",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6458001",
+      "name": "ORICA LIMITED",
+      "ticker": "ORI.AX",
+      "country": "Australia",
+      "sector": "Materials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BF1HPT8",
+      "name": "Food & Life Cos Ltd",
+      "ticker": "3563",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BNRQW72",
+      "name": "THE LOTTERY CORPORATION LIMITED",
+      "ticker": "TLC.AX",
+      "country": "Australia",
+      "sector": "Consumer Discretionary",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B2Q4CL4",
+      "name": "Isetan Mitsukoshi Holdings Ltd",
+      "ticker": "3099",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6465874",
+      "name": "Galaxy Entertainment Group Ltd",
+      "ticker": "27",
+      "country": "Hong Kong",
+      "sector": "Consumer Discretionary",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6010702",
+      "name": "Aisin Corp",
+      "ticker": "7259",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BP38QH4",
+      "name": "Iyogin Holdings Inc",
+      "ticker": "5830",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6640541",
+      "name": "Nippon Sanso Holdings Corp",
+      "ticker": "4091",
+      "country": "Japan",
+      "sector": "Materials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6911485",
+      "name": "Unicharm Corp",
+      "ticker": "8113",
+      "country": "Japan",
+      "sector": "Consumer Staples",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6563875",
+      "name": "CapitaLand Ascendas REIT",
+      "ticker": "CLAR",
+      "country": "Singapore",
+      "sector": "Real Estate",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B17KC69",
+      "name": "Wilmar International Ltd",
+      "ticker": "WIL",
+      "country": "Singapore",
+      "sector": "Consumer Staples",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6804400",
+      "name": "Shimizu Corp",
+      "ticker": "1803",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6459286",
+      "name": "Infratil Limited",
+      "ticker": "IFT.NZ",
+      "country": "New Zealand",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_IFT",
+      "issuer_name": "Infratil"
+    },
+    {
+      "isin": "SEDOL:B86SZR5",
+      "name": "ALS LIMITED",
+      "ticker": "ALQ.AX",
+      "country": "Australia",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6041995",
+      "name": "RAMSAY HEALTH CARE LIMITED",
+      "ticker": "RHC.AX",
+      "country": "Australia",
+      "sector": "Health Care",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6805317",
+      "name": "Hulic Co Ltd",
+      "ticker": "3003",
+      "country": "Japan",
+      "sector": "Real Estate",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B0M0C89",
+      "name": "SUMCO Corp",
+      "ticker": "3436",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6894898",
+      "name": "Tokyo Ohka Kogyo Co Ltd",
+      "ticker": "4186",
+      "country": "Japan",
+      "sector": "Materials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BM91201",
+      "name": "AMPOL LIMITED",
+      "ticker": "ALD.AX",
+      "country": "Australia",
+      "sector": "Energy",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6850856",
+      "name": "STOCKLAND",
+      "ticker": "SGP.AX",
+      "country": "Australia",
+      "sector": "Real Estate",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6146500",
+      "name": "Brother Industries Ltd",
+      "ticker": "6448",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BSD3B20",
+      "name": "Zijin Gold International Co Ltd",
+      "ticker": "2259",
+      "country": "Hong Kong",
+      "sector": "Materials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5108664",
+      "name": "HOCHTIEF AG",
+      "ticker": "HOT",
+      "country": "Germany",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6543792",
+      "name": "JFE Holdings Inc",
+      "ticker": "5411",
+      "country": "Japan",
+      "sector": "Materials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BL6K7K9",
+      "name": "Lifco AB",
+      "ticker": "LIFCOB",
+      "country": "Sweden",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:7751259",
+      "name": "Yara International ASA",
+      "ticker": "YAR",
+      "country": "Norway",
+      "sector": "Materials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6467104",
+      "name": "Isuzu Motors Ltd",
+      "ticker": "7202",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5002465",
+      "name": "Henkel AG & Co KGaA",
+      "ticker": "HEN",
+      "country": "Germany",
+      "sector": "Consumer Staples",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6739739",
+      "name": "SANDFIRE RESOURCES LIMITED",
+      "ticker": "SFR.AX",
+      "country": "Australia",
+      "sector": "Materials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BMHDM54",
+      "name": "Frontline PLC",
+      "ticker": "FRO",
+      "country": "Norway",
+      "sector": "Energy",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6641588",
+      "name": "Nissan Chemical Corp",
+      "ticker": "4021",
+      "country": "Japan",
+      "sector": "Materials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B60DQV3",
+      "name": "MEIJI Holdings Co Ltd",
+      "ticker": "2269",
+      "country": "Japan",
+      "sector": "Consumer Staples",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6660107",
+      "name": "Ono Pharmaceutical Co Ltd",
+      "ticker": "4528",
+      "country": "Japan",
+      "sector": "Health Care",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B63QM77",
+      "name": "Nexon Co Ltd",
+      "ticker": "3659",
+      "country": "Japan",
+      "sector": "Communication Services",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5687431",
+      "name": "H & M Hennes & Mauritz AB",
+      "ticker": "HMB",
+      "country": "Sweden",
+      "sector": "Consumer Discretionary",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B09M9F4",
+      "name": "Elia Group SA/NV",
+      "ticker": "ELI",
+      "country": "Belgium",
+      "sector": "Utilities",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1VQF42",
+      "name": "Orkla ASA",
+      "ticker": "ORK",
+      "country": "Norway",
+      "sector": "Consumer Staples",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BYP20B9",
+      "name": "BayCurrent Inc",
+      "ticker": "6532",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6986427",
+      "name": "Yokogawa Electric Corp",
+      "ticker": "6841",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6804369",
+      "name": "Shimadzu Corp",
+      "ticker": "7701",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B0LDBX7",
+      "name": "Indutrade AB",
+      "ticker": "INDT",
+      "country": "Sweden",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6200600",
+      "name": "Clal Insurance Enterprises Holdings Ltd",
+      "ticker": "CLIS",
+      "country": "Israel",
+      "sector": "Financials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "MANUAL:FUTU",
+      "name": "Futu Holdings Ltd ADR",
+      "ticker": "FUTU",
+      "country": "China",
+      "sector": "Financials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:0673123",
+      "name": "Associated British Foods PLC",
+      "ticker": "ABF",
+      "country": "United Kingdom",
+      "sector": "Consumer Staples",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B8P4LP4",
+      "name": "XERO LIMITED",
+      "ticker": "XRO.AX",
+      "country": "Australia",
+      "sector": "Information Technology",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6229597",
+      "name": "Rakuten Group Inc",
+      "ticker": "4755",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6396800",
+      "name": "Nippon Building Fund Inc",
+      "ticker": "8951",
+      "country": "Japan",
+      "sector": "Real Estate",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B2QPKJ1",
+      "name": "Fresnillo PLC",
+      "ticker": "FRES",
+      "country": "United Kingdom",
+      "sector": "Materials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:7635610",
+      "name": "EMS-Chemie Holding AG",
+      "ticker": "EMSN",
+      "country": "Switzerland",
+      "sector": "Materials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6290054",
+      "name": "MTR Corp Ltd",
+      "ticker": "66",
+      "country": "Hong Kong",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2112226",
+      "name": "Saputo Inc",
+      "ticker": "SAP",
+      "country": "Canada",
+      "sector": "Consumer Staples",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BYZ2QP5",
+      "name": "Sartorius Stedim Biotech",
+      "ticker": "DIM",
+      "country": "France",
+      "sector": "Health Care",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BP2NJ48",
+      "name": "Beijer Ref AB",
+      "ticker": "BEIJB",
+      "country": "Sweden",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6595179",
+      "name": "MISUMI Group Inc",
+      "ticker": "9962",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6793821",
+      "name": "Sekisui Chemical Co Ltd",
+      "ticker": "4204",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BN7BZM3",
+      "name": "Nibe Industrier AB",
+      "ticker": "NIBEB",
+      "country": "Sweden",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6821120",
+      "name": "SONIC HEALTHCARE LIMITED",
+      "ticker": "SHL.AX",
+      "country": "Australia",
+      "sector": "Health Care",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6895556",
+      "name": "Toho Holdings Co Ltd",
+      "ticker": "8129",
+      "country": "Japan",
+      "sector": "Health Care",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1VVGZ5",
+      "name": "Svenska Cellulosa AB SCA",
+      "ticker": "SCAB",
+      "country": "Sweden",
+      "sector": "Materials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6098032",
+      "name": "Bezeq The Israeli Telecommunication Corp Ltd",
+      "ticker": "BEZQ",
+      "country": "Israel",
+      "sector": "Communication Services",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5715774",
+      "name": "Ackermans & van Haaren NV",
+      "ticker": "ACKB",
+      "country": "Belgium",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6616508",
+      "name": "Seiko Epson Corp",
+      "ticker": "6724",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "ASX:VCX",
+      "name": "VICINITY CENTRES",
+      "ticker": "VCX.AX",
+      "country": "Australia",
+      "sector": "Real Estate",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BD73C40",
+      "name": "Ivanhoe Mines Ltd",
+      "ticker": "IVN",
+      "country": "Canada",
+      "sector": "Materials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6986461",
+      "name": "Yokohama Rubber Co Ltd/The",
+      "ticker": "5101",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6408664",
+      "name": "Hankyu Hanshin Holdings Inc",
+      "ticker": "9042",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B17ZL56",
+      "name": "MINERAL RESOURCES LIMITED",
+      "ticker": "MIN.AX",
+      "country": "Australia",
+      "sector": "Materials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6499806",
+      "name": "Kyushu Electric Power Co Inc",
+      "ticker": "9508",
+      "country": "Japan",
+      "sector": "Utilities",
+      "weight": 0.000302,
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_POWERCO",
+      "issuer_name": "Powerco"
+    },
+    {
+      "isin": "SEDOL:BXDZ972",
+      "name": "Tryg A/S",
+      "ticker": "TRYG",
+      "country": "Denmark",
+      "sector": "Financials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2715777",
+      "name": "Quebecor Inc",
+      "ticker": "QBR/B",
+      "country": "Canada",
+      "sector": "Communication Services",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6211798",
+      "name": "COCHLEAR LIMITED",
+      "ticker": "COH.AX",
+      "country": "Australia",
+      "sector": "Health Care",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6292782",
+      "name": "PRO MEDICUS LIMITED",
+      "ticker": "PME.AX",
+      "country": "Australia",
+      "sector": "Health Care",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B188TH2",
+      "name": "BCE Inc",
+      "ticker": "BCE",
+      "country": "Canada",
+      "sector": "Communication Services",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B17H3F6",
+      "name": "SSAB AB",
+      "ticker": "SSABB",
+      "country": "Sweden",
+      "sector": "Materials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6647133",
+      "name": "Nice Ltd",
+      "ticker": "NICE",
+      "country": "Israel",
+      "sector": "Information Technology",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BTKSSY6",
+      "name": "Lundin Gold Inc",
+      "ticker": "LUG",
+      "country": "Canada",
+      "sector": "Materials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BF0GWS4",
+      "name": "Wharf Real Estate Investment Co Ltd",
+      "ticker": "1997",
+      "country": "Hong Kong",
+      "sector": "Real Estate",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1WVF68",
+      "name": "ANDRITZ AG",
+      "ticker": "ANDR",
+      "country": "Austria",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6416322",
+      "name": "Hikari Tsushin Inc",
+      "ticker": "9435",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1VSK54",
+      "name": "Industrivarden AB",
+      "ticker": "INDUC",
+      "country": "Sweden",
+      "sector": "Financials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B15F6S6",
+      "name": "CHARTER HALL GROUP",
+      "ticker": "CHC.AX",
+      "country": "Australia",
+      "sector": "Real Estate",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4224992",
+      "name": "Lotus Bakeries NV",
+      "ticker": "LOTB",
+      "country": "Belgium",
+      "sector": "Consumer Staples",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6858560",
+      "name": "Sumitomo Chemical Co Ltd",
+      "ticker": "4005",
+      "country": "Japan",
+      "sector": "Materials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B11TCY0",
+      "name": "Schindler Holding AG",
+      "ticker": "SCHP",
+      "country": "Switzerland",
+      "sector": "Industrials",
+      "weight": 0.000302,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BN6PV62",
+      "name": "Technoprobe SpA",
+      "ticker": "TPRO",
+      "country": "Italy",
+      "sector": "Information Technology",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6365866",
+      "name": "GPT GROUP",
+      "ticker": "GPT.AX",
+      "country": "Australia",
+      "sector": "Real Estate",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6250508",
+      "name": "Daito Trust Construction Co Ltd",
+      "ticker": "1878",
+      "country": "Japan",
+      "sector": "Real Estate",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6738220",
+      "name": "Ricoh Co Ltd",
+      "ticker": "7752",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BN6JDH9",
+      "name": "Next Vision Stabilized Systems Ltd",
+      "ticker": "NXSN",
+      "country": "Israel",
+      "sector": "Information Technology",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6042608",
+      "name": "Zensho Holdings Co Ltd",
+      "ticker": "7550",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BYT8154",
+      "name": "Japan Post Insurance Co Ltd",
+      "ticker": "7181",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BYZR014",
+      "name": "Amundi SA",
+      "ticker": "AMUN",
+      "country": "France",
+      "sector": "Financials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:7097328",
+      "name": "Groupe Bruxelles Lambert NV",
+      "ticker": "GBLB",
+      "country": "Belgium",
+      "sector": "Financials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B02FBC1",
+      "name": "PERSEUS MINING LIMITED",
+      "ticker": "PRU.AX",
+      "country": "Australia",
+      "sector": "Materials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6899967",
+      "name": "Toyo Suisan Kaisha Ltd",
+      "ticker": "2875",
+      "country": "Japan",
+      "sector": "Consumer Staples",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BKY6H35",
+      "name": "Seibu Holdings Inc",
+      "ticker": "9024",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BW0BGZ3",
+      "name": "CAR GROUP LIMITED",
+      "ticker": "CAR.AX",
+      "country": "Australia",
+      "sector": "Communication Services",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B23G0X1",
+      "name": "GENESIS MINERALS LIMITED",
+      "ticker": "GMD.AX",
+      "country": "Australia",
+      "sector": "Materials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BYWP840",
+      "name": "Banca Mediolanum SpA",
+      "ticker": "BMED",
+      "country": "Italy",
+      "sector": "Financials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "BJN59B8",
+      "name": "Porsche AG Vz",
+      "ticker": "P911",
+      "country": "Germany",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6712611",
+      "name": "CODAN LIMITED",
+      "ticker": "CDA.AX",
+      "country": "Australia",
+      "sector": "Information Technology",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B249GC0",
+      "name": "MatsukiyoCocokara & Co",
+      "ticker": "3088",
+      "country": "Japan",
+      "sector": "Consumer Staples",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6302410",
+      "name": "TECHNOLOGY ONE LIMITED",
+      "ticker": "TNE.AX",
+      "country": "Australia",
+      "sector": "Information Technology",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B2Q4CR0",
+      "name": "TISI Inc",
+      "ticker": "3626",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6896548",
+      "name": "Tokyu Corp",
+      "ticker": "9005",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B5LMKP4",
+      "name": "NEXTDC LIMITED",
+      "ticker": "NXT.AX",
+      "country": "Australia",
+      "sector": "Information Technology",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6897466",
+      "name": "TOTO Ltd",
+      "ticker": "5332",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B249SN5",
+      "name": "Sony Financial Group Inc",
+      "ticker": "8729",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6895404",
+      "name": "Tokyo Electric Power Co Holdings Inc",
+      "ticker": "9501",
+      "country": "Japan",
+      "sector": "Utilities",
+      "weight": 0.00020133,
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_POWERCO",
+      "issuer_name": "Powerco"
+    },
+    {
+      "isin": "MANUAL:6823",
+      "name": "HKT Trust / HKT Ltd",
+      "ticker": "6823",
+      "country": "China",
+      "sector": "Communication Services",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6198578",
+      "name": "REA GROUP LTD",
+      "ticker": "REA.AX",
+      "country": "Australia",
+      "sector": "Communication Services",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6883807",
+      "name": "Sysmex Corp",
+      "ticker": "6869",
+      "country": "Japan",
+      "sector": "Health Care",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6492924",
+      "name": "Kinden Corp",
+      "ticker": "1944",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4943402",
+      "name": "voestalpine AG",
+      "ticker": "VOE",
+      "country": "Austria",
+      "sector": "Materials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6810429",
+      "name": "Sino Land Co Ltd",
+      "ticker": "83",
+      "country": "Hong Kong",
+      "sector": "Real Estate",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B5LTM93",
+      "name": "Otsuka Holdings Co Ltd",
+      "ticker": "4578",
+      "country": "Japan",
+      "sector": "Health Care",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6702623",
+      "name": "JB HI-FI LIMITED",
+      "ticker": "JBH.AX",
+      "country": "Australia",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6985112",
+      "name": "Yakult Honsha Co Ltd",
+      "ticker": "2267",
+      "country": "Japan",
+      "sector": "Consumer Staples",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6497963",
+      "name": "Kurita Water Industries Ltd",
+      "ticker": "6370",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6496023",
+      "name": "Kobe Steel Ltd",
+      "ticker": "5406",
+      "country": "Japan",
+      "sector": "Materials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6900289",
+      "name": "Tosoh Corp",
+      "ticker": "4042",
+      "country": "Japan",
+      "sector": "Materials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BR858V2",
+      "name": "SGH LIMITED",
+      "ticker": "SGH.AX",
+      "country": "Australia",
+      "sector": "Industrials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6022105",
+      "name": "Amada Co Ltd",
+      "ticker": "6113",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BYVS6J1",
+      "name": "CK Infrastructure Holdings Ltd",
+      "ticker": "1038",
+      "country": "Hong Kong",
+      "sector": "Utilities",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6125286",
+      "name": "Trend Micro Inc/Japan",
+      "ticker": "4704",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B4PH0C5",
+      "name": "Gjensidige Forsikring ASA",
+      "ticker": "GJF",
+      "country": "Norway",
+      "sector": "Financials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6397580",
+      "name": "Japan Real Estate Investment Corp",
+      "ticker": "8952",
+      "country": "Japan",
+      "sector": "Real Estate",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6597368",
+      "name": "Mitsui Chemicals Inc",
+      "ticker": "4183",
+      "country": "Japan",
+      "sector": "Materials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B019MQ5",
+      "name": "Asahi Intecc Co Ltd",
+      "ticker": "7747",
+      "country": "Japan",
+      "sector": "Health Care",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6161978",
+      "name": "MIRVAC GROUP",
+      "ticker": "MGR.AX",
+      "country": "Australia",
+      "sector": "Real Estate",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6429405",
+      "name": "Hitachi Construction Machinery Co Ltd",
+      "ticker": "6305",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6416281",
+      "name": "Dentsu Group Inc",
+      "ticker": "4324",
+      "country": "Japan",
+      "sector": "Communication Services",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6776781",
+      "name": "Sanwa Holdings Corp",
+      "ticker": "5929",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BZ8GX83",
+      "name": "WISETECH GLOBAL LIMITED",
+      "ticker": "WTC.AX",
+      "country": "Australia",
+      "sector": "Information Technology",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6309262",
+      "name": "Square Enix Holdings Co Ltd",
+      "ticker": "9684",
+      "country": "Japan",
+      "sector": "Communication Services",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6513342",
+      "name": "Japan Metropolitan Fund Invest",
+      "ticker": "8953",
+      "country": "Japan",
+      "sector": "Real Estate",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4661607",
+      "name": "Verbund AG",
+      "ticker": "VER",
+      "country": "Austria",
+      "sector": "Utilities",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BPLF0Y2",
+      "name": "Var Energi ASA",
+      "ticker": "VAR",
+      "country": "Norway",
+      "sector": "Energy",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6858861",
+      "name": "Sumitomo Forestry Co Ltd",
+      "ticker": "1911",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6596923",
+      "name": "Mitsubishi Gas Chemical Co Inc",
+      "ticker": "4182",
+      "country": "Japan",
+      "sector": "Materials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6858731",
+      "name": "Sumitomo Heavy Industries Ltd",
+      "ticker": "6302",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B40JTQ3",
+      "name": "SpareBank 1 Sor-Norge ASA",
+      "ticker": "SB1NO",
+      "country": "Norway",
+      "sector": "Financials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6710347",
+      "name": "QANTAS AIRWAYS LIMITED",
+      "ticker": "QAN.AX",
+      "country": "Australia",
+      "sector": "Industrials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6171494",
+      "name": "USS Co Ltd",
+      "ticker": "4732",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BQQD167",
+      "name": "Skylark Holdings Co Ltd",
+      "ticker": "3197",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B02K2M3",
+      "name": "M3 Inc",
+      "ticker": "2413",
+      "country": "Japan",
+      "sector": "Health Care",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6867748",
+      "name": "Swire Pacific Ltd",
+      "ticker": "19",
+      "country": "Hong Kong",
+      "sector": "Industrials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BNHXFJ6",
+      "name": "CapitaLand Investment Ltd/Singapore",
+      "ticker": "CLI",
+      "country": "Singapore",
+      "sector": "Real Estate",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6152529",
+      "name": "Contact Energy Limited",
+      "ticker": "CEN.NZ",
+      "country": "New Zealand",
+      "sector": "Utilities",
+      "weight": 0.00020133,
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_CEN",
+      "issuer_name": "Contact Energy"
+    },
+    {
+      "isin": "SEDOL:2469375",
+      "name": "IGM Financial Inc",
+      "ticker": "IGM",
+      "country": "Canada",
+      "sector": "Financials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BDC6LT2",
+      "name": "Tokyu Fudosan Holdings Corp",
+      "ticker": "3289",
+      "country": "Japan",
+      "sector": "Real Estate",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2367963",
+      "name": "Golar LNG Ltd",
+      "ticker": "GLNG",
+      "country": "United States",
+      "sector": "Energy",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BF8KKX9",
+      "name": "OPC Energy Ltd",
+      "ticker": "OPCE",
+      "country": "Israel",
+      "sector": "Utilities",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6420538",
+      "name": "Henderson Land Development Co Ltd",
+      "ticker": "12",
+      "country": "Hong Kong",
+      "sector": "Real Estate",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6776907",
+      "name": "Sapporo Breweries Ltd",
+      "ticker": "2501",
+      "country": "Japan",
+      "sector": "Consumer Staples",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6483586",
+      "name": "Kandenko Co Ltd",
+      "ticker": "1942",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B0WG737",
+      "name": "Camtek Ltd/Israel",
+      "ticker": "CAMT",
+      "country": "Israel",
+      "sector": "Information Technology",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BNDLH43",
+      "name": "Nordnet AB publ",
+      "ticker": "SAVE",
+      "country": "Sweden",
+      "sector": "Financials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6657701",
+      "name": "Oji Holdings Corp",
+      "ticker": "3861",
+      "country": "Japan",
+      "sector": "Materials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6405870",
+      "name": "Hamamatsu Photonics KK",
+      "ticker": "6965",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:2381093",
+      "name": "TELUS Corp",
+      "ticker": "T",
+      "country": "Canada",
+      "sector": "Communication Services",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1W5NW2",
+      "name": "Salmar ASA",
+      "ticker": "SALM",
+      "country": "Norway",
+      "sector": "Consumer Staples",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B39GNW2",
+      "name": "EDP Renewables SA",
+      "ticker": "EDPR",
+      "country": "Portugal",
+      "sector": "Utilities",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6900308",
+      "name": "Mazda Motor Corp",
+      "ticker": "7261",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6591809",
+      "name": "Credit Saison Co Ltd",
+      "ticker": "8253",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B5MN1W0",
+      "name": "Azrieli Group Ltd",
+      "ticker": "AZRG",
+      "country": "Israel",
+      "sector": "Real Estate",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6371863",
+      "name": "McDonald's Holdings Co Japan Ltd",
+      "ticker": "2702",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4820301",
+      "name": "Sofina SA",
+      "ticker": "SOF",
+      "country": "Belgium",
+      "sector": "Financials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6641760",
+      "name": "Nissin Foods Holdings Co Ltd",
+      "ticker": "2897",
+      "country": "Japan",
+      "sector": "Consumer Staples",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6428725",
+      "name": "Hirose Electric Co Ltd",
+      "ticker": "6806",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BN770J3",
+      "name": "Global-e Online Ltd",
+      "ticker": "GLBE",
+      "country": "United States",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B23TC12",
+      "name": "J Front Retailing Co Ltd",
+      "ticker": "3086",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BK5HCP4",
+      "name": "Tel Aviv Stock Exchange Ltd",
+      "ticker": "TASE",
+      "country": "Israel",
+      "sector": "Financials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6985543",
+      "name": "Azbil Corp",
+      "ticker": "6845",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B02Q328",
+      "name": "Electric Power Development Co Ltd",
+      "ticker": "9513",
+      "country": "Japan",
+      "sector": "Utilities",
+      "weight": 0.00020133,
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_POWERCO",
+      "issuer_name": "Powerco"
+    },
+    {
+      "isin": "SEDOL:B0BN7W8",
+      "name": "Financiere de Tubize SA",
+      "ticker": "TUB",
+      "country": "Belgium",
+      "sector": "Health Care",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6642860",
+      "name": "Nissan Motor Co Ltd",
+      "ticker": "7201",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BFFY885",
+      "name": "SG Holdings Co Ltd",
+      "ticker": "9143",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BWFD052",
+      "name": "Meridian Energy Limited",
+      "ticker": "MEL.NZ",
+      "country": "New Zealand",
+      "sector": "Utilities",
+      "weight": 0.00020133,
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_MEL",
+      "issuer_name": "Meridian Energy"
+    },
+    {
+      "isin": "SEDOL:6687247",
+      "name": "COMSYS Holdings Corp",
+      "ticker": "1721",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B08X163",
+      "name": "Sembcorp Industries Ltd",
+      "ticker": "SCI",
+      "country": "Singapore",
+      "sector": "Utilities",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BTXLW40",
+      "name": "GREATLAND RESOURCES LIMITED",
+      "ticker": "GGP.AX",
+      "country": "Australia",
+      "sector": "Materials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6509062",
+      "name": "Migdal Insurance & Financial Holdings Ltd",
+      "ticker": "MGDL",
+      "country": "Israel",
+      "sector": "Financials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BYSJJF4",
+      "name": "Nomura Real Estate Master Fund Inc",
+      "ticker": "3462",
+      "country": "Japan",
+      "sector": "Real Estate",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B2N78D0",
+      "name": "Mega Or Holdings Ltd",
+      "ticker": "MGOR",
+      "country": "Israel",
+      "sector": "Real Estate",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4247494",
+      "name": "D'ieteren Group",
+      "ticker": "DIE",
+      "country": "Belgium",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6640488",
+      "name": "NOF Corp",
+      "ticker": "4403",
+      "country": "Japan",
+      "sector": "Materials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6123815",
+      "name": "First International Bank Of Israel Ltd/The",
+      "ticker": "FIBI",
+      "country": "Israel",
+      "sector": "Financials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6577876",
+      "name": "Menora Mivtachim Holdings Ltd",
+      "ticker": "MMHD",
+      "country": "Israel",
+      "sector": "Financials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6985565",
+      "name": "Yamato Holdings Co Ltd",
+      "ticker": "9064",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B98BC67",
+      "name": "Nippon Prologis REIT Inc",
+      "ticker": "3283",
+      "country": "Japan",
+      "sector": "Real Estate",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6496324",
+      "name": "Koito Manufacturing Co Ltd",
+      "ticker": "7276",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00020133,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BBD7Q84",
+      "name": "Suntory Beverage & Food Ltd",
+      "ticker": "2587",
+      "country": "Japan",
+      "sector": "Consumer Staples",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BRPTWP9",
+      "name": "Rakuten Bank Ltd",
+      "ticker": "5838",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B3FF8W8",
+      "name": "Hoshizaki Corp",
+      "ticker": "6465",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1KZR22",
+      "name": "Big Shopping Centers Ltd",
+      "ticker": "BIG",
+      "country": "Israel",
+      "sector": "Real Estate",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BWVFKQ3",
+      "name": "Vend Marketplaces ASA",
+      "ticker": "VEND",
+      "country": "Norway",
+      "sector": "Communication Services",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BLC90J0",
+      "name": "ZIM Integrated Shipping Services Ltd",
+      "ticker": "ZIM",
+      "country": "United States",
+      "sector": "Industrials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BDQZF59",
+      "name": "Sagax AB",
+      "ticker": "SAGAD",
+      "country": "Sweden",
+      "sector": "Real Estate",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BNZKZY4",
+      "name": "Seatrium Ltd",
+      "ticker": "STM",
+      "country": "Singapore",
+      "sector": "Industrials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6499550",
+      "name": "Kyowa Kirin Co Ltd",
+      "ticker": "4151",
+      "country": "Japan",
+      "sector": "Health Care",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6985509",
+      "name": "Yamazaki Baking Co Ltd",
+      "ticker": "2212",
+      "country": "Japan",
+      "sector": "Consumer Staples",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6985446",
+      "name": "Yamato Kogyo Co Ltd",
+      "ticker": "5444",
+      "country": "Japan",
+      "sector": "Materials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B00ZG06",
+      "name": "Nordic Semiconductor ASA",
+      "ticker": "NOD",
+      "country": "Norway",
+      "sector": "Information Technology",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BD3D170",
+      "name": "Open House Group Co Ltd",
+      "ticker": "3288",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BWSRTS7",
+      "name": "The a2 Milk Company Limited",
+      "ticker": "ATM.NZ",
+      "country": "New Zealand",
+      "sector": "Consumer Staples",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B02R4D9",
+      "name": "Aker ASA",
+      "ticker": "AKER",
+      "country": "Norway",
+      "sector": "Industrials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6220501",
+      "name": "CyberAgent Inc",
+      "ticker": "4751",
+      "country": "Japan",
+      "sector": "Communication Services",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6414401",
+      "name": "Haseko Corp",
+      "ticker": "1808",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BZ404X1",
+      "name": "Investment AB Latour",
+      "ticker": "LATOB",
+      "country": "Sweden",
+      "sector": "Industrials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BPMRNZ9",
+      "name": "Fastighets AB Balder",
+      "ticker": "BALDB",
+      "country": "Sweden",
+      "sector": "Real Estate",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6570660",
+      "name": "Maruwa Co Ltd/Aichi",
+      "ticker": "5344",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BBT3PS9",
+      "name": "Plus500 Ltd",
+      "ticker": "PLUS",
+      "country": "United Kingdom",
+      "sector": "Financials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B14RJB7",
+      "name": "Kobe Bussan Co Ltd",
+      "ticker": "3038",
+      "country": "Japan",
+      "sector": "Consumer Staples",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6642321",
+      "name": "Nikon Corp",
+      "ticker": "7731",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B5B23W2",
+      "name": "Sands China Ltd",
+      "ticker": "1928",
+      "country": "Hong Kong",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6014908",
+      "name": "ANA Holdings Inc",
+      "ticker": "9202",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BKDRYJ4",
+      "name": "Airtel Africa PLC",
+      "ticker": "AAF",
+      "country": "United Kingdom",
+      "sector": "Communication Services",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B67C2G0",
+      "name": "Swire Properties Ltd",
+      "ticker": "1972",
+      "country": "Hong Kong",
+      "sector": "Real Estate",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6689533",
+      "name": "Kakaku.com Inc",
+      "ticker": "2371",
+      "country": "Japan",
+      "sector": "Communication Services",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1L3K60",
+      "name": "Paz Retail And Energy Ltd",
+      "ticker": "PAZ",
+      "country": "Israel",
+      "sector": "Energy",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6679794",
+      "name": "Tokyo Century Corp",
+      "ticker": "8439",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1GHR88",
+      "name": "MonotaRO Co Ltd",
+      "ticker": "3064",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6728801",
+      "name": "REECE LIMITED",
+      "ticker": "REH.AX",
+      "country": "Australia",
+      "sector": "Industrials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6916844",
+      "name": "UOL Group Ltd",
+      "ticker": "UOL",
+      "country": "Singapore",
+      "sector": "Real Estate",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6565310",
+      "name": "Melisron Ltd",
+      "ticker": "MLSR",
+      "country": "Israel",
+      "sector": "Real Estate",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B1CWJM5",
+      "name": "Nomura Real Estate Holdings Inc",
+      "ticker": "3231",
+      "country": "Japan",
+      "sector": "Real Estate",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B4R39F7",
+      "name": "Chow Tai Fook Jewellery Group Ltd",
+      "ticker": "1929",
+      "country": "Hong Kong",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B0MKZN5",
+      "name": "Tsuruha Holdings Inc",
+      "ticker": "3391",
+      "country": "Japan",
+      "sector": "Consumer Staples",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BVGH0K1",
+      "name": "Axfood AB",
+      "ticker": "AXFO",
+      "country": "Sweden",
+      "sector": "Consumer Staples",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B292RC1",
+      "name": "ZOZO Inc",
+      "ticker": "3092",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BFZCHN7",
+      "name": "Wix.com Ltd",
+      "ticker": "WIX",
+      "country": "United States",
+      "sector": "Information Technology",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B28DT41",
+      "name": "Strabag SE",
+      "ticker": "STR",
+      "country": "Austria",
+      "sector": "Industrials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BMHRYX8",
+      "name": "Monday.com Ltd",
+      "ticker": "MNDY",
+      "country": "United States",
+      "sector": "Information Technology",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6804035",
+      "name": "Shimamura Co Ltd",
+      "ticker": "8227",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B8BRV46",
+      "name": "Japan Airlines Co Ltd",
+      "ticker": "9201",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BDRTVP2",
+      "name": "Genting Singapore Ltd",
+      "ticker": "GENS",
+      "country": "Singapore",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B0BKSS2",
+      "name": "Vienna Insurance Group AG Wiener Versicherung Gruppe",
+      "ticker": "VIG",
+      "country": "Austria",
+      "sector": "Financials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B8W6K56",
+      "name": "Mercury NZ Limited",
+      "ticker": "MCY.NZ",
+      "country": "New Zealand",
+      "sector": "Utilities",
+      "weight": 0.00010067,
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_MCY",
+      "issuer_name": "Mercury NZ"
+    },
+    {
+      "isin": "SEDOL:BSY3S84",
+      "name": "Hafnia Ltd",
+      "ticker": "HAFNI",
+      "country": "Norway",
+      "sector": "Energy",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6197928",
+      "name": "City Developments Ltd",
+      "ticker": "CIT",
+      "country": "Singapore",
+      "sector": "Real Estate",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B182K93",
+      "name": "Protector Forsikring ASA",
+      "ticker": "PROT",
+      "country": "Norway",
+      "sector": "Financials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BQTY1X4",
+      "name": "Tokyo Metro Co Ltd",
+      "ticker": "9023",
+      "country": "Japan",
+      "sector": "Industrials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:4538002",
+      "name": "L E Lundbergforetagen AB",
+      "ticker": "LUNDB",
+      "country": "Sweden",
+      "sector": "Financials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6219640",
+      "name": "Delek Group Ltd",
+      "ticker": "DLEKG",
+      "country": "Israel",
+      "sector": "Energy",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BD6NYK1",
+      "name": "Star Bulk Carriers Corp",
+      "ticker": "SBLK",
+      "country": "United States",
+      "sector": "Industrials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B06CMQ9",
+      "name": "GMO Payment Gateway Inc",
+      "ticker": "3769",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6435576",
+      "name": "Wharf Holdings Ltd/The",
+      "ticker": "4",
+      "country": "Hong Kong",
+      "sector": "Real Estate",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BMFDP24",
+      "name": "Hoegh Autoliners ASA",
+      "ticker": "HAUTO",
+      "country": "Norway",
+      "sector": "Industrials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:5497168",
+      "name": "VOLKSWAGEN AG-PREF",
+      "ticker": "VOW3",
+      "country": "Germany",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6860543",
+      "name": "Shufersal Ltd",
+      "ticker": "SAE",
+      "country": "Israel",
+      "sector": "Consumer Staples",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BMHMVP4",
+      "name": "Doral Group Renewable Energy Resources Ltd",
+      "ticker": "DORL",
+      "country": "Israel",
+      "sector": "Utilities",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6160038",
+      "name": "EBOS Group Limited",
+      "ticker": "EBO.NZ",
+      "country": "New Zealand",
+      "sector": "Health Care",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6416980",
+      "name": "Mivne Real Estate KD Ltd",
+      "ticker": "MVNE",
+      "country": "Israel",
+      "sector": "Real Estate",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B5143W8",
+      "name": "Mapletree Pan Asia Commercial Trust",
+      "ticker": "MPACT",
+      "country": "Singapore",
+      "sector": "Real Estate",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6141680",
+      "name": "Oracle Corp Japan",
+      "ticker": "4716",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B17H3F6",
+      "name": "SSAB AB",
+      "ticker": "SSABB",
+      "country": "Sweden",
+      "sector": "Materials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6151292",
+      "name": "Shikun & Binui Ltd",
+      "ticker": "SKBN",
+      "country": "Israel",
+      "sector": "Industrials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BTF8CZ0",
+      "name": "Shapir Engineering and Industry Ltd",
+      "ticker": "SPEN",
+      "country": "Israel",
+      "sector": "Industrials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6632140",
+      "name": "El Al Israel Airlines Ltd",
+      "ticker": "ELAL",
+      "country": "Israel",
+      "sector": "Industrials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BPLXRG7",
+      "name": "TOMRA Systems ASA",
+      "ticker": "TOM",
+      "country": "Norway",
+      "sector": "Industrials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6304115",
+      "name": "Strauss Group Ltd",
+      "ticker": "STRS",
+      "country": "Israel",
+      "sector": "Consumer Staples",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BQWSKZ8",
+      "name": "DOF Group ASA",
+      "ticker": "DOFG",
+      "country": "Norway",
+      "sector": "Energy",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6881436",
+      "name": "Spark New Zealand Limited",
+      "ticker": "SPK.NZ",
+      "country": "New Zealand",
+      "sector": "Communication Services",
+      "weight": 0.00010067,
+      "asset_class": "equity",
+      "issuer_key": "ISSUER_SPK",
+      "issuer_name": "Spark New Zealand"
+    },
+    {
+      "isin": "SEDOL:BMB2257",
+      "name": "TPG TELECOM LIMITED.",
+      "ticker": "TPG.AX",
+      "country": "Australia",
+      "sector": "Communication Services",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BKF1H51",
+      "name": "Traton SE",
+      "ticker": "8TRA",
+      "country": "Germany",
+      "sector": "Industrials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B55WMQ5",
+      "name": "Wallenius Wilhelmsen ASA",
+      "ticker": "WAWI",
+      "country": "Norway",
+      "sector": "Industrials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6172453",
+      "name": "Canon Marketing Japan Inc",
+      "ticker": "8060",
+      "country": "Japan",
+      "sector": "Information Technology",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B469X43",
+      "name": "Energix-Renewable Energies Ltd",
+      "ticker": "ENRG",
+      "country": "Israel",
+      "sector": "Utilities",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BYZJV17",
+      "name": "BOC Aviation Ltd",
+      "ticker": "2588",
+      "country": "Hong Kong",
+      "sector": "Industrials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6292102",
+      "name": "ABC-Mart Inc",
+      "ticker": "2670",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "MANUAL:CDI",
+      "name": "Christian Dior SE",
+      "ticker": "CDI",
+      "country": "France",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B84LB45",
+      "name": "YANCOAL AUSTRALIA LIMITED",
+      "ticker": "YAL.AX",
+      "country": "Australia",
+      "sector": "Energy",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6339429",
+      "name": "FIBI Holdings Ltd",
+      "ticker": "FIBIH",
+      "country": "Israel",
+      "sector": "Financials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6747754",
+      "name": "Matrix IT Ltd",
+      "ticker": "MTRX",
+      "country": "Israel",
+      "sector": "Information Technology",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BG1YKN5",
+      "name": "Fattal Holdings 1998 Ltd",
+      "ticker": "FTAL",
+      "country": "Israel",
+      "sector": "Consumer Discretionary",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BN49G27",
+      "name": "AutoStore Holdings Ltd",
+      "ticker": "AUTO",
+      "country": "Norway",
+      "sector": "Industrials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B18MCB9",
+      "name": "Amot Investments Ltd",
+      "ticker": "AMOT",
+      "country": "Israel",
+      "sector": "Real Estate",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6298821",
+      "name": "Electra Ltd/Israel",
+      "ticker": "ELTR",
+      "country": "Israel",
+      "sector": "Industrials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "MANUAL:ALHE",
+      "name": "Aloni Hetz Properties",
+      "ticker": "ALHE",
+      "country": "isreal",
+      "sector": "Real Estate",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6049784",
+      "name": "Acom Co Ltd",
+      "ticker": "8572",
+      "country": "Japan",
+      "sector": "Financials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "MANUAL:CLBT",
+      "name": "Cellebrite DI Ltd.",
+      "ticker": "CLBT",
+      "country": "Isreal",
+      "sector": "Information Technology",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "BS491D8",
+      "name": "eToro Group Ltd",
+      "ticker": "ETOR",
+      "country": "Isreal",
+      "sector": "Financials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BMTS893",
+      "name": "OY Nofar Energy Ltd",
+      "ticker": "NOFR",
+      "country": "Israel",
+      "sector": "Utilities",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BQ0N7G5",
+      "name": "Brookfield Wealth Solutions Ltd",
+      "ticker": "BNT",
+      "country": "Canada",
+      "sector": "Financials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6867748",
+      "name": "Swire Pacific Ltd",
+      "ticker": "19",
+      "country": "Hong Kong",
+      "sector": "Industrials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6141248",
+      "name": "Meitav Investment House Ltd",
+      "ticker": "MTAV",
+      "country": "Israel",
+      "sector": "Financials",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:B02SX80",
+      "name": "YH Dimri Construction & Development Ltd",
+      "ticker": "DIMRI",
+      "country": "Israel",
+      "sector": "Real Estate",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:6894166",
+      "name": "TBS Holdings Inc",
+      "ticker": "9401",
+      "country": "Japan",
+      "sector": "Communication Services",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "SEDOL:BKDXJH5",
+      "name": "Budweiser Brewing Co APAC Ltd",
+      "ticker": "1876",
+      "country": "Hong Kong",
+      "sector": "Consumer Staples",
+      "weight": 0.00010067,
+      "asset_class": "equity"
+    },
+    {
+      "isin": "BOND:TECK_RESOURCES_LIMITED_SV",
+      "name": "Teck Resources Limited SV",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00130867,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:HENKEL_AG_CO_KGAA_NVTG",
+      "name": "Henkel AG & Co. KGaA Nvtg",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00050334,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:CGI_INC_SV",
+      "name": "CGI Inc. SV",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00050334,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:CCL_INDUSTRIES_INC_NV",
+      "name": "CCL Industries Inc. NV",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00040267,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:GRAB_HOLDINGS_LIMITED",
+      "name": "Grab Holdings Limited",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00040267,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:SARTORIUS_AG_NVTG",
+      "name": "Sartorius AG Nvtg",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.000302,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    }
+  ],
   "KERNEL_BALANCED": [
     {
       "isin": "US78464A7550",
