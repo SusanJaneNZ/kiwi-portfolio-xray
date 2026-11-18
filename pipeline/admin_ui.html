@@ -249,11 +249,54 @@
       margin-bottom: 12px;
     }
 
+    details.provider-group {
+      margin-bottom: 8px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(15, 23, 42, 0.4);
+      padding: 6px 10px;
+    }
+
+    details.provider-group>summary.provider-summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+      padding: 3px 2px;
+    }
+
+    details.provider-group>summary.provider-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.provider-group[open]>summary.provider-summary {
+      margin-bottom: 8px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+      padding-bottom: 6px;
+    }
+
     .provider-title {
       font-weight: 700;
       color: #a5b4fc;
-      margin-bottom: 4px;
+      margin-bottom: 0;
       font-family: monospace;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .provider-chevron {
+      color: var(--muted);
+      font-size: 10px;
+      transition: transform 0.15s;
+      display: inline-block;
+    }
+
+    details.provider-group:not([open]) .provider-chevron {
+      transform: rotate(-90deg);
     }
 
     .file-row {
@@ -360,14 +403,15 @@
     <div class="card header">
       <div>
         <h1>🥝 Kiwi Portfolio X-Ray — Local Admin Console</h1>
-        <p class="subtitle">Local-only tool (`127.0.0.1`) to stage fund manager filings &amp; master ETF CSVs, verify parsing, map companies,
+        <p class="subtitle">Local-only tool (`127.0.0.1`) to stage fund manager disclosures &amp; master ETF holdings files, verify parsing, map companies,
           and build `public/data/`.</p>
       </div>
       <div class="row-actions">
         <button class="btn btn-sm" onclick="setAllPanelsOpen(true)">Expand All</button>
         <button class="btn btn-sm" onclick="setAllPanelsOpen(false)">Collapse All</button>
         <button id="btn-dry-run" class="btn btn-primary" onclick="runPipeline(true)">▶ Run Dry-Run (--dry-run)</button>
-        <button id="btn-prod-build" class="btn btn-ok" onclick="runPipeline(false)">⚡ Publish Datasets (public/data/)</button>
+        <button id="btn-prod-build" class="btn btn-ok" onclick="runPipeline(false)">⚡ Publish Datasets
+          (public/data/)</button>
       </div>
     </div>
 
@@ -378,7 +422,7 @@
         <summary class="panel-summary">
           <div class="panel-title-wrap">
             <span class="panel-chevron">▼</span>
-            <h2>1. Stage &amp; Inspect Filings (Fund Managers &amp; Master ETF Issuers)</h2>
+            <h2>1. Stage Disclosures (Fund Managers &amp; Master ETF Issuers)</h2>
           </div>
         </summary>
         <div class="row-actions" style="margin-bottom: 8px;">
@@ -386,7 +430,8 @@
           <select id="provider-select" onchange="updateProviderSourceCallout()">
             <option value="smartshares">data/staging/smartshares/ (Smartshares NZX ETFs)</option>
             <option value="kernel">data/staging/kernel/ (Kernel Wealth Funds)</option>
-            <option value="fisher_funds">data/staging/fisher_funds/ (Fisher Funds KiwiSaver &amp; Managed Funds)</option>
+            <option value="fisher_funds">data/staging/fisher_funds/ (Fisher Funds KiwiSaver &amp; Managed Funds)
+            </option>
             <option value="vanguard">data/staging/vanguard/ (Vanguard Master ETFs)</option>
             <option value="ishares">data/staging/ishares/ (iShares Master ETFs)</option>
             <option value="spdr">data/staging/spdr/ (SPDR Master ETFs: SPEM, etc.)</option>
@@ -403,7 +448,18 @@
           <input type="file" id="csv-file-input" accept=".csv,.xlsx" multiple onchange="handleFileUpload(this.files)">
         </div>
 
-        <div id="staged-files-list" style="margin-top: 14px;">Loading staged files...</div>
+        <div
+          style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; margin-bottom: 8px;">
+          <span
+            style="font-weight: 600; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Staged
+            Issuers &amp; Directories</span>
+          <div class="row-actions">
+            <button class="btn btn-sm" onclick="setAllIssuersOpen(true)">Expand All</button>
+            <button class="btn btn-sm" onclick="setAllIssuersOpen(false)">Collapse All</button>
+          </div>
+        </div>
+
+        <div id="staged-files-list">Loading staged files...</div>
       </details>
 
       <!-- Adapter Parse Preview -->
@@ -414,9 +470,9 @@
             <h2>2. Adapter Parse Preview</h2>
           </div>
         </summary>
-        <p class="subtitle" style="margin-bottom: 10px;">Click <strong>Preview</strong> on any staged CSV to inspect
-          headers and verify Tier 1 parsing before running the pipeline.</p>
-        <div id="preview-pane" style="color: var(--muted);">Select a staged CSV file to preview its parsed rows.</div>
+        <p class="subtitle" style="margin-bottom: 10px;">Click <strong>Preview</strong> on any staged disclosure to parse
+          headers and preview constituent rows before running the pipeline.</p>
+        <div id="preview-pane" style="color: var(--muted);">Select a staged disclosure file to preview its parsed rows.</div>
       </details>
     </div>
 
@@ -466,12 +522,12 @@
         </div>
       </summary>
       <p class="subtitle" style="margin-bottom: 12px;">
-        Registered funds driving automated quarterly constituent downloads. Add new Kernel or Smartshares funds by code
+        Registered funds driving automated quarterly constituent downloads. Add new Kernel, Smartshares, or Fisher Funds by code
         or by pasting their Smart Investor URL.
       </p>
 
       <div class="row-actions" style="margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
-        <select id="catalog-add-provider" style="width: 140px;">
+        <select id="catalog-add-provider" title="Fund Manager" style="width: 140px;">
           <option value="Kernel">Kernel</option>
           <option value="Smartshares">Smartshares</option>
           <option value="Fisher Funds">Fisher Funds</option>
@@ -490,14 +546,15 @@
         style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
         <div style="display: flex; gap: 6px; flex-wrap: wrap;">
           <button class="btn btn-sm" onclick="filterCatalog('all')">All</button>
-          <button class="btn btn-sm" onclick="filterCatalog('awaiting')" id="cat-filter-awaiting">⏳ Awaiting Processing</button>
+          <button class="btn btn-sm" onclick="filterCatalog('awaiting')" id="cat-filter-awaiting">⏳ Awaiting
+            Processing</button>
           <button class="btn btn-sm" onclick="filterCatalog('Kernel')">Kernel</button>
           <button class="btn btn-sm" onclick="filterCatalog('Smartshares')">Smartshares</button>
           <button class="btn btn-sm" onclick="filterCatalog('Fisher Funds')">Fisher Funds</button>
         </div>
         <div style="position: relative;">
-          <input type="text" id="catalog-search" placeholder="Search catalogue..." style="width: 220px; padding-right: 24px;"
-            oninput="handleCatalogSearchInput()">
+          <input type="text" id="catalog-search" placeholder="Search catalogue..."
+            style="width: 220px; padding-right: 24px;" oninput="handleCatalogSearchInput()">
           <button id="catalog-search-clear" type="button" onclick="clearCatalogSearch()"
             style="position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--muted); cursor: pointer; display: none; font-size: 11px; padding: 2px;">✕</button>
         </div>
@@ -522,13 +579,16 @@
               CSV</button>
           </div>
         </summary>
-        <p class="subtitle" style="margin-bottom: 10px;">Unmatched or ambiguous company names from the latest dry-run. Click a
+        <p class="subtitle" style="margin-bottom: 10px;">Unmatched or ambiguous company names from the latest dry-run.
+          Click a
           suggested close match, search the Known Companies Register, or bulk-import CSV mappings into
-          <code>company_alias_map.json</code>.</p>
+          <code>company_alias_map.json</code>.
+        </p>
         <div id="bulk-import-box"
           style="display: none; margin-bottom: 12px; padding: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px;">
           <div style="font-size: 11px; color: var(--muted); margin-bottom: 6px;">Paste
-            <code>scope,companyName,isin</code> rows (header optional):</div>
+            <code>scope,companyName,isin</code> rows (header optional):
+          </div>
           <textarea id="bulk-csv-text" rows="5"
             style="width: 100%; background: var(--card); color: var(--text); border: 1px solid var(--border); border-radius: 6px; padding: 6px; font-family: monospace; font-size: 11px;"
             placeholder="Kernel:KERNEL_WORLD_EX_US,BionTech SE,US09075V1026"></textarea>
@@ -538,8 +598,9 @@
           </div>
         </div>
         <div class="row-actions" style="margin-bottom: 10px;">
-          <input type="text" id="sm-search-input" placeholder="Search Known Companies Register (company name, ticker, ISIN)..."
-            style="flex: 1;" oninput="searchSecurityMaster(this.value)">
+          <input type="text" id="sm-search-input"
+            placeholder="Search Known Companies Register (company name, ticker, ISIN)..." style="flex: 1;"
+            oninput="searchSecurityMaster(this.value)">
         </div>
         <div id="sm-search-results" style="margin-bottom: 12px;"></div>
         <div id="unresolved-list" style="color: var(--muted);">Run Dry-Run to check for unresolved holdings.</div>
@@ -554,7 +615,8 @@
           </div>
         </summary>
         <div class="row-actions" style="margin-bottom: 10px;">
-          <input type="text" id="manual-scope" placeholder="FundManager:FundCode (e.g. Kernel:KERNEL_NZ_50)" style="flex: 1;">
+          <input type="text" id="manual-scope" placeholder="FundManager:FundCode (e.g. Kernel:KERNEL_NZ_50)"
+            style="flex: 1;">
           <input type="text" id="manual-name" placeholder="Raw Company Name" style="flex: 1;">
           <input type="text" id="manual-isin" placeholder="Canonical ISIN" style="width: 135px;">
           <button class="btn btn-primary btn-sm" onclick="addManualAlias()">Save</button>
@@ -694,6 +756,14 @@
       const callout = document.getElementById('provider-source-callout');
       if (!select || !callout) return;
       const key = select.value;
+
+      // Expand the selected provider if it is in the staged files list
+      const issuerEl = document.querySelector(`details.provider-group[data-provider="${key}"]`);
+      if (issuerEl && !issuerEl.open) {
+        issuerEl.open = true;
+        if (typeof setIssuerOpen === 'function') setIssuerOpen(key, true);
+      }
+
       const src = PROVIDER_SOURCES[key];
       if (!src) {
         callout.innerHTML = '';
@@ -744,171 +814,226 @@
         btn.textContent = `⏳ Updating constituents...`;
       }
 
-        if (!catalogData || !catalogData.length) {
-          try {
-            const catRes = await api('/api/catalog');
-            catalogData = catRes.catalog || [];
-          } catch (_) { }
-        }
-
-        const targetFunds = (catalogData || []).filter(
-          c => (c.provider || '').toLowerCase() === provider.toLowerCase()
-        );
-
-        if (btn) btn.disabled = true;
-
-        let downloadedCount = 0;
-        let cachedCount = 0;
-        const failed = [];
-
+      if (!catalogData || !catalogData.length) {
         try {
-          if (targetFunds.length > 0) {
-            const total = targetFunds.length;
-            for (let i = 0; i < total; i++) {
-              const fund = targetFunds[i];
-              if (btn) {
-                btn.textContent = `⏳ [${i + 1}/${total}] ${escapeHtml(fund.fund_code)}...`;
-              }
-              try {
-                const res = await api('/api/pipeline/fetch', {
-                  method: 'POST',
-                  body: JSON.stringify({ fund_code: fund.fund_code }),
-                });
-                if (res.downloaded && res.downloaded.length) downloadedCount += res.downloaded.length;
-                if (res.cached && res.cached.length) cachedCount += res.cached.length;
-                if (res.failed && res.failed.length) failed.push(...res.failed);
-              } catch (err) {
-                failed.push({ code: fund.fund_code, fund_id: fund.fnd_code || '', message: err.message });
-              }
+          const catRes = await api('/api/catalog');
+          catalogData = catRes.catalog || [];
+        } catch (_) { }
+      }
+
+      const targetFunds = (catalogData || []).filter(
+        c => (c.provider || '').toLowerCase() === provider.toLowerCase()
+      );
+
+      if (btn) btn.disabled = true;
+
+      let downloadedCount = 0;
+      let cachedCount = 0;
+      const failed = [];
+
+      try {
+        if (targetFunds.length > 0) {
+          const total = targetFunds.length;
+          for (let i = 0; i < total; i++) {
+            const fund = targetFunds[i];
+            if (btn) {
+              btn.textContent = `⏳ [${i + 1}/${total}] ${escapeHtml(fund.fund_code)}...`;
             }
-          } else {
-            // Fallback batch fetch if catalog empty
-            if (btn) btn.textContent = `⏳ Updating constituents...`;
-            const res = await api('/api/pipeline/fetch', {
-              method: 'POST',
-              body: JSON.stringify({ providers: [provider] }),
-            });
-            downloadedCount = res.downloaded ? res.downloaded.length : 0;
-            cachedCount = res.cached ? res.cached.length : 0;
-            if (res.failed && res.failed.length) failed.push(...res.failed);
-          }
-
-          const failedCount = failed.length;
-
-          if (failedCount > 0) {
-            const failList = failed.map(f => `• ${f.code} (${f.fund_id}): ${f.message}`).join('\n');
-            console.warn('Disclose Register fetch errors:\n', failList);
-            if (downloadedCount > 0 || cachedCount > 0) {
-              showToast(`Update: ${downloadedCount} updated, ${cachedCount} cached (${failedCount} failed)`);
-            } else {
-              showToast(`⚠️ Update encountered ${failedCount} error(s) (check console)`);
+            try {
+              const res = await api('/api/pipeline/fetch', {
+                method: 'POST',
+                body: JSON.stringify({ fund_code: fund.fund_code }),
+              });
+              if (res.downloaded && res.downloaded.length) downloadedCount += res.downloaded.length;
+              if (res.cached && res.cached.length) cachedCount += res.cached.length;
+              if (res.failed && res.failed.length) failed.push(...res.failed);
+            } catch (err) {
+              failed.push({ code: fund.fund_code, fund_id: fund.fnd_code || '', message: err.message });
             }
-            alert(
-              `Disclose Register Synchronization Report for ${src.name || provider}:\n\n` +
-              `• Successfully downloaded: ${downloadedCount}\n` +
-              `• Already up-to-date: ${cachedCount}\n` +
-              `• Failed: ${failedCount}\n\n` +
-              `Failed endpoints:\n${failList}\n\n` +
-              `Note: Funds returning 404 indicate that their Disclose scheme registration code or quarterly filing is not yet available at the public endpoint.`
-            );
-          } else {
-            showToast(`Update complete: ${downloadedCount} updated, ${cachedCount} already up to date`);
           }
-          await loadStagedFiles();
-        } catch (err) {
-          alert('Update failed: ' + err.message);
-        } finally {
-          if (btn) {
-            btn.disabled = false;
-            btn.textContent = `⚡ ${originalLabel}`;
-          }
-        }
-      }
-      let unresolvedItemsState = [];
-      let savedAliasPairsState = [];
-      let stagedFilePairsState = [];
-      let feederCodesState = [];
-      let feederEntriesMapState = {};
-      let unconfiguredFeedersState = [];
-      let lastPreviewFeederState = null;
-      let focusedMapInputId = 'manual-isin';
-
-      function showToast(msg) {
-        const t = document.getElementById('toast');
-        t.textContent = msg;
-        t.style.display = 'block';
-        setTimeout(() => { t.style.display = 'none'; }, 3200);
-      }
-
-      function escapeHtml(str) {
-        return String(str ?? '')
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;');
-      }
-
-      async function api(url, options = {}) {
-        const res = await fetch(url, {
-          headers: { 'Content-Type': 'application/json' },
-          ...options,
-        });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || 'Request failed');
-        return data;
-      }
-
-      // Drag & Drop setup
-      const dropzone = document.getElementById('dropzone');
-      dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('dragover'); });
-      dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
-      dropzone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dropzone.classList.remove('dragover');
-        handleFileUpload(e.dataTransfer.files);
-      });
-
-      function readFileAsBase64(file) {
-        return new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = () => {
-            const res = String(reader.result || '');
-            const commaIdx = res.indexOf(',');
-            resolve(commaIdx >= 0 ? res.slice(commaIdx + 1) : res);
-          };
-          reader.onerror = () => reject(reader.error);
-          reader.readAsDataURL(file);
-        });
-      }
-
-      async function handleFileUpload(fileList) {
-        const provider = document.getElementById('provider-select').value;
-        for (const file of fileList) {
-          const content_base64 = await readFileAsBase64(file);
-          await api('/api/staging/upload', {
+        } else {
+          // Fallback batch fetch if catalog empty
+          if (btn) btn.textContent = `⏳ Updating constituents...`;
+          const res = await api('/api/pipeline/fetch', {
             method: 'POST',
-            body: JSON.stringify({ provider, filename: file.name, content_base64 }),
+            body: JSON.stringify({ providers: [provider] }),
           });
-          showToast(`Uploaded ${file.name} -> data/staging/${provider}/`);
+          downloadedCount = res.downloaded ? res.downloaded.length : 0;
+          cachedCount = res.cached ? res.cached.length : 0;
+          if (res.failed && res.failed.length) failed.push(...res.failed);
         }
-        document.getElementById('csv-file-input').value = '';
-        await loadStagedFiles();
-      }
 
-      async function loadStagedFiles() {
-        const data = await api('/api/staging');
-        const container = document.getElementById('staged-files-list');
-        stagedFilePairsState = [];
-        let html = '';
-        for (const [provider, files] of Object.entries(data.files)) {
-          html += `<div class="provider-group"><div class="provider-title">${escapeHtml(provider)}/ (${files.length})</div>`;
-          if (files.length === 0) {
-            html += `<div style="color: var(--muted); font-size: 11px; padding-left: 8px;">No CSV files staged</div>`;
+        const failedCount = failed.length;
+
+        if (failedCount > 0) {
+          const failList = failed.map(f => `• ${f.code} (${f.fund_id}): ${f.message}`).join('\n');
+          console.warn('Disclose Register fetch errors:\n', failList);
+          if (downloadedCount > 0 || cachedCount > 0) {
+            showToast(`Update: ${downloadedCount} updated, ${cachedCount} cached (${failedCount} failed)`);
           } else {
-            for (const f of files) {
-              const idx = stagedFilePairsState.push({ provider, filename: f.filename }) - 1;
-              const kb = (f.size_bytes / 1024).toFixed(1);
-              html += `
+            showToast(`⚠️ Update encountered ${failedCount} error(s) (check console)`);
+          }
+          alert(
+            `Disclose Register Synchronization Report for ${src.name || provider}:\n\n` +
+            `• Successfully downloaded: ${downloadedCount}\n` +
+            `• Already up-to-date: ${cachedCount}\n` +
+            `• Failed: ${failedCount}\n\n` +
+            `Failed endpoints:\n${failList}\n\n` +
+            `Note: Funds returning 404 indicate that their Disclose scheme registration code or quarterly disclosure is not yet available at the public endpoint.`
+          );
+        } else {
+          showToast(`Update complete: ${downloadedCount} updated, ${cachedCount} already up to date`);
+        }
+        await loadStagedFiles();
+      } catch (err) {
+        alert('Update failed: ' + err.message);
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = `⚡ ${originalLabel}`;
+        }
+      }
+    }
+    let unresolvedItemsState = [];
+    let savedAliasPairsState = [];
+    let stagedFilePairsState = [];
+    let feederCodesState = [];
+    let feederEntriesMapState = {};
+    let unconfiguredFeedersState = [];
+    let lastPreviewFeederState = null;
+    let focusedMapInputId = 'manual-isin';
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.style.display = 'block';
+      setTimeout(() => { t.style.display = 'none'; }, 3200);
+    }
+
+    function escapeHtml(str) {
+      return String(str ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    async function api(url, options = {}) {
+      const res = await fetch(url, {
+        headers: { 'Content-Type': 'application/json' },
+        ...options,
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Request failed');
+      return data;
+    }
+
+    // Drag & Drop setup
+    const dropzone = document.getElementById('dropzone');
+    dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('dragover'); });
+    dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+    dropzone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropzone.classList.remove('dragover');
+      handleFileUpload(e.dataTransfer.files);
+    });
+
+    function readFileAsBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const res = String(reader.result || '');
+          const commaIdx = res.indexOf(',');
+          resolve(commaIdx >= 0 ? res.slice(commaIdx + 1) : res);
+        };
+        reader.onerror = () => reject(reader.error);
+        reader.readAsDataURL(file);
+      });
+    }
+
+    const ISSUER_STATE_KEY = 'admin_ui_issuer_state_v1';
+
+    function getSavedIssuerState() {
+      try {
+        return JSON.parse(localStorage.getItem(ISSUER_STATE_KEY) || '{}') || {};
+      } catch (_) {
+        return {};
+      }
+    }
+
+    function setIssuerOpen(provider, isOpen) {
+      const state = getSavedIssuerState();
+      state[provider] = isOpen;
+      try {
+        localStorage.setItem(ISSUER_STATE_KEY, JSON.stringify(state));
+      } catch (_) { }
+    }
+
+    function onIssuerToggle(el, provider) {
+      if (!el || !provider) return;
+      setIssuerOpen(provider, el.open);
+    }
+
+    function setAllIssuersOpen(shouldOpen) {
+      const state = getSavedIssuerState();
+      document.querySelectorAll('details.provider-group').forEach((el) => {
+        el.open = shouldOpen;
+        const provider = el.dataset.provider;
+        if (provider) state[provider] = shouldOpen;
+      });
+      try {
+        localStorage.setItem(ISSUER_STATE_KEY, JSON.stringify(state));
+      } catch (_) { }
+    }
+
+    async function handleFileUpload(fileList) {
+      const provider = document.getElementById('provider-select').value;
+      for (const file of fileList) {
+        const content_base64 = await readFileAsBase64(file);
+        await api('/api/staging/upload', {
+          method: 'POST',
+          body: JSON.stringify({ provider, filename: file.name, content_base64 }),
+        });
+        showToast(`Uploaded ${file.name} -> data/staging/${provider}/`);
+      }
+      document.getElementById('csv-file-input').value = '';
+      setIssuerOpen(provider, true);
+      await loadStagedFiles();
+    }
+
+    async function loadStagedFiles() {
+      const data = await api('/api/staging');
+      const container = document.getElementById('staged-files-list');
+      stagedFilePairsState = [];
+      const savedIssuerState = getSavedIssuerState();
+      let html = '';
+      for (const [provider, files] of Object.entries(data.files)) {
+        let isOpen = true;
+        if (typeof savedIssuerState[provider] === 'boolean') {
+          isOpen = savedIssuerState[provider];
+        } else {
+          // Default: expand if there are staged files, collapse if empty
+          isOpen = files.length > 0;
+        }
+        const badgeClass = files.length > 0 ? 'badge-info' : '';
+        const badgeStyle = files.length === 0 ? 'background: rgba(148, 163, 184, 0.1); color: var(--muted); border: 1px solid rgba(148, 163, 184, 0.2);' : '';
+        html += `
+            <details class="provider-group" data-provider="${escapeHtml(provider)}" ${isOpen ? 'open' : ''} ontoggle="onIssuerToggle(this, '${escapeHtml(provider)}')">
+              <summary class="provider-summary">
+                <div class="provider-title">
+                  <span class="provider-chevron">▼</span>
+                  <span>${escapeHtml(provider)}/</span>
+                  <span class="badge ${badgeClass}" style="${badgeStyle}">${files.length} file${files.length === 1 ? '' : 's'}</span>
+                </div>
+              </summary>
+              <div class="provider-files" style="padding-top: 4px;">`;
+        if (files.length === 0) {
+          html += `<div style="color: var(--muted); font-size: 11px; padding: 6px 8px;">No files staged</div>`;
+        } else {
+          for (const f of files) {
+            const idx = stagedFilePairsState.push({ provider, filename: f.filename }) - 1;
+            const kb = (f.size_bytes / 1024).toFixed(1);
+            html += `
               <div class="file-row">
                 <div>
                   <span class="mono" style="font-weight: 600;">${escapeHtml(f.filename)}</span>
@@ -920,118 +1045,118 @@
                 </div>
               </div>
             `;
-            }
           }
-          html += `</div>`;
         }
-        container.innerHTML = html;
+        html += `</div></details>`;
       }
+      container.innerHTML = html;
+    }
 
-      function previewFileByIdx(idx) {
-        openPanel('panel-preview');
-        const pair = stagedFilePairsState[idx];
-        if (pair) previewFile(pair.provider, pair.filename);
-      }
+    function previewFileByIdx(idx) {
+      openPanel('panel-preview');
+      const pair = stagedFilePairsState[idx];
+      if (pair) previewFile(pair.provider, pair.filename);
+    }
 
-      function deleteFileByIdx(idx) {
-        const pair = stagedFilePairsState[idx];
-        if (pair) deleteFile(pair.provider, pair.filename);
-      }
+    function deleteFileByIdx(idx) {
+      const pair = stagedFilePairsState[idx];
+      if (pair) deleteFile(pair.provider, pair.filename);
+    }
 
-      async function deleteFile(provider, filename) {
-        if (!confirm(`Delete data/staging/${provider}/${filename}?`)) return;
-        await api('/api/staging/delete', {
-          method: 'POST',
-          body: JSON.stringify({ provider, filename }),
-        });
-        showToast(`Deleted ${provider}/${filename}`);
-        await loadStagedFiles();
-      }
+    async function deleteFile(provider, filename) {
+      if (!confirm(`Delete data/staging/${provider}/${filename}?`)) return;
+      await api('/api/staging/delete', {
+        method: 'POST',
+        body: JSON.stringify({ provider, filename }),
+      });
+      showToast(`Deleted ${provider}/${filename}`);
+      await loadStagedFiles();
+    }
 
-      async function previewFile(provider, filename) {
-        const pane = document.getElementById('preview-pane');
-        pane.innerHTML = 'Parsing...';
-        try {
-          const data = await api(`/api/staging/preview?provider=${encodeURIComponent(provider)}&filename=${encodeURIComponent(filename)}`);
-          const s = data.parse_summary || {};
-          const badgeClass = s.status === 'ok' ? 'badge-ok' : 'badge-warn';
-          let html = `
+    async function previewFile(provider, filename) {
+      const pane = document.getElementById('preview-pane');
+      pane.innerHTML = 'Parsing...';
+      try {
+        const data = await api(`/api/staging/preview?provider=${encodeURIComponent(provider)}&filename=${encodeURIComponent(filename)}`);
+        const s = data.parse_summary || {};
+        const badgeClass = s.status === 'ok' ? 'badge-ok' : 'badge-warn';
+        let html = `
           <div style="margin-bottom: 10px;">
             <span class="mono" style="font-weight: 700;">${escapeHtml(provider)}/${escapeHtml(filename)}</span>
             <span class="badge ${badgeClass}" style="margin-left: 6px;">${escapeHtml(s.adapter || 'Unknown')} : ${escapeHtml(s.status)}</span>
           </div>
         `;
-          if (s.fund_code) {
-            let useFeederBtn = '';
-            if (provider === 'smartshares') {
-              lastPreviewFeederState = {
-                code: s.fund_code,
-                name: s.fund_name || '',
-              };
-              useFeederBtn = ` <button class="btn btn-sm" style="margin-left: 8px;" onclick="prefillFeederFromPreview()">Use as Feeder</button>`;
-            }
-            html += `<div style="margin-bottom: 8px; font-size: 12px;">
+        if (s.fund_code) {
+          let useFeederBtn = '';
+          if (provider === 'smartshares') {
+            lastPreviewFeederState = {
+              code: s.fund_code,
+              name: s.fund_name || '',
+            };
+            useFeederBtn = ` <button class="btn btn-sm" style="margin-left: 8px;" onclick="prefillFeederFromPreview()">Use as Feeder</button>`;
+          }
+          html += `<div style="margin-bottom: 8px; font-size: 12px;">
             Fund: <strong class="mono">${escapeHtml(s.fund_code)}</strong> |
             As Of: <strong>${escapeHtml(s.effective_date)}</strong> |
             Cash: <strong>${((s.cash_ratio || 0) * 100).toFixed(2)}%</strong> |
             Parsed Rows: <strong>${s.parsed_count}</strong> |
             Equity Sum: <strong>${((s.total_equity_weight || 0) * 100).toFixed(2)}%</strong>${useFeederBtn}
           </div>`;
-          } else if (s.parsed_count !== undefined) {
-            html += `<div style="margin-bottom: 8px; font-size: 12px;">Parsed Rows: <strong>${s.parsed_count}</strong></div>`;
-          }
-          if (s.hint) {
-            html += `<div class="badge badge-warn" style="margin-bottom: 8px;">${escapeHtml(s.hint)}</div>`;
-          }
-          if (s.sample_rows && s.sample_rows.length > 0) {
-            const cols = Object.keys(s.sample_rows[0]);
-            html += `<table><thead><tr>${cols.map(c => `<th>${escapeHtml(c)}</th>`).join('')}</tr></thead><tbody>`;
-            for (const row of s.sample_rows) {
-              html += `<tr>${cols.map(c => `<td class="mono">${escapeHtml(row[c])}</td>`).join('')}</tr>`;
-            }
-            html += `</tbody></table>`;
-          }
-          html += `<h2 style="margin-top: 12px;">Raw CSV (First 10 Lines)</h2><pre>${escapeHtml((data.raw_lines || []).join('\n'))}</pre>`;
-          pane.innerHTML = html;
-        } catch (err) {
-          pane.innerHTML = `<span class="badge badge-err">${escapeHtml(err.message)}</span>`;
+        } else if (s.parsed_count !== undefined) {
+          html += `<div style="margin-bottom: 8px; font-size: 12px;">Parsed Rows: <strong>${s.parsed_count}</strong></div>`;
         }
+        if (s.hint) {
+          html += `<div class="badge badge-warn" style="margin-bottom: 8px;">${escapeHtml(s.hint)}</div>`;
+        }
+        if (s.sample_rows && s.sample_rows.length > 0) {
+          const cols = Object.keys(s.sample_rows[0]);
+          html += `<table><thead><tr>${cols.map(c => `<th>${escapeHtml(c)}</th>`).join('')}</tr></thead><tbody>`;
+          for (const row of s.sample_rows) {
+            html += `<tr>${cols.map(c => `<td class="mono">${escapeHtml(row[c])}</td>`).join('')}</tr>`;
+          }
+          html += `</tbody></table>`;
+        }
+        html += `<h2 style="margin-top: 12px;">Raw CSV (First 10 Lines)</h2><pre>${escapeHtml((data.raw_lines || []).join('\n'))}</pre>`;
+        pane.innerHTML = html;
+      } catch (err) {
+        pane.innerHTML = `<span class="badge badge-err">${escapeHtml(err.message)}</span>`;
+      }
+    }
+
+    let isPipelineRunning = false;
+
+    async function runPipeline(dryRun) {
+      if (isPipelineRunning) return;
+      isPipelineRunning = true;
+      const dryBtn = document.getElementById('btn-dry-run');
+      const prodBtn = document.getElementById('btn-prod-build');
+      if (dryBtn) {
+        dryBtn.disabled = true;
+        if (dryRun) dryBtn.textContent = '⏳ Running Dry-Run...';
+      }
+      if (prodBtn) {
+        prodBtn.disabled = true;
+        if (!dryRun) prodBtn.textContent = '⏳ Publishing Datasets...';
+      }
+      const reportPanel = document.getElementById('panel-report');
+      if (reportPanel && !reportPanel.open) {
+        reportPanel.open = true;
       }
 
-      let isPipelineRunning = false;
+      const container = document.getElementById('pipeline-report');
+      container.innerHTML = dryRun ? '⏳ Running dry-run validation...' : '⏳ Compiling and publishing JSON datasets...';
+      try {
+        const res = await api('/api/pipeline/run', {
+          method: 'POST',
+          body: JSON.stringify({ dry_run: dryRun }),
+        });
 
-      async function runPipeline(dryRun) {
-        if (isPipelineRunning) return;
-        isPipelineRunning = true;
-        const dryBtn = document.getElementById('btn-dry-run');
-        const prodBtn = document.getElementById('btn-prod-build');
-        if (dryBtn) {
-          dryBtn.disabled = true;
-          if (dryRun) dryBtn.textContent = '⏳ Running Dry-Run...';
-        }
-        if (prodBtn) {
-          prodBtn.disabled = true;
-          if (!dryRun) prodBtn.textContent = '⏳ Publishing Datasets...';
-        }
-        const reportPanel = document.getElementById('panel-report');
-        if (reportPanel && !reportPanel.open) {
-          reportPanel.open = true;
-        }
+        const sm = res.sec_master_summary || {};
+        const statusBadge = res.is_valid
+          ? `<span class="badge badge-ok">${dryRun ? 'DRY-RUN PASSED' : 'DATASETS PUBLISHED'}</span>`
+          : `<span class="badge badge-err">VALIDATION FAILED</span>`;
 
-        const container = document.getElementById('pipeline-report');
-        container.innerHTML = dryRun ? '⏳ Running dry-run validation...' : '⏳ Compiling and publishing JSON datasets...';
-        try {
-          const res = await api('/api/pipeline/run', {
-            method: 'POST',
-            body: JSON.stringify({ dry_run: dryRun }),
-          });
-
-          const sm = res.sec_master_summary || {};
-          const statusBadge = res.is_valid
-            ? `<span class="badge badge-ok">${dryRun ? 'DRY-RUN PASSED' : 'DATASETS PUBLISHED'}</span>`
-            : `<span class="badge badge-err">VALIDATION FAILED</span>`;
-
-          let html = `
+        let html = `
           <div style="margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
             ${statusBadge}
             <span>Known Companies Register: <strong>${sm.total_known_companies || sm.total_security_master_count || 0}</strong> (NZX: ${sm.nzx_count || 0}, ASX: ${sm.asx_count || 0}, Global VT: ${sm.vanguard_global_count || 0})</span>
@@ -1040,18 +1165,18 @@
           </div>
         `;
 
-          if (res.errors && res.errors.length > 0) {
-            html += `<div style="margin-bottom: 10px;">${res.errors.map(e => `<div class="badge badge-err" style="display:block; margin-bottom:4px;">${escapeHtml(e)}</div>`).join('')}</div>`;
-          }
-          if (res.warnings && res.warnings.length > 0) {
-            html += `<div style="margin-bottom: 10px;">${res.warnings.slice(0, 10).map(w => `<div class="badge badge-warn" style="display:block; margin-bottom:4px;">${escapeHtml(w)}</div>`).join('')}</div>`;
-          }
+        if (res.errors && res.errors.length > 0) {
+          html += `<div style="margin-bottom: 10px;">${res.errors.map(e => `<div class="badge badge-err" style="display:block; margin-bottom:4px;">${escapeHtml(e)}</div>`).join('')}</div>`;
+        }
+        if (res.warnings && res.warnings.length > 0) {
+          html += `<div style="margin-bottom: 10px;">${res.warnings.slice(0, 10).map(w => `<div class="badge badge-warn" style="display:block; margin-bottom:4px;">${escapeHtml(w)}</div>`).join('')}</div>`;
+        }
 
-          if (res.fund_summaries && res.fund_summaries.length > 0) {
-            html += `<table><thead><tr><th>Fund</th><th>Total Weight</th><th>Equities</th><th>Cash</th><th>Hedging</th><th>Constituents</th><th>Status</th></tr></thead><tbody>`;
-            for (const fs of res.fund_summaries) {
-              const ok = Math.abs(fs.total_weight - 1.0) <= 0.005;
-              html += `
+        if (res.fund_summaries && res.fund_summaries.length > 0) {
+          html += `<table><thead><tr><th>Fund</th><th>Total Weight</th><th>Equities</th><th>Cash</th><th>Hedging</th><th>Constituents</th><th>Status</th></tr></thead><tbody>`;
+          for (const fs of res.fund_summaries) {
+            const ok = Math.abs(fs.total_weight - 1.0) <= 0.005;
+            html += `
               <tr>
                 <td class="mono"><strong>${escapeHtml(fs.code)}</strong></td>
                 <td class="mono">${(fs.total_weight * 100).toFixed(2)}%</td>
@@ -1062,59 +1187,59 @@
                 <td><span class="badge ${ok ? 'badge-ok' : 'badge-err'}">${ok ? 'PASS' : 'FAIL'}</span></td>
               </tr>
             `;
-            }
-            html += `</tbody></table>`;
           }
+          html += `</tbody></table>`;
+        }
 
-          container.innerHTML = html;
-          renderUnresolved(res.unresolved_entries || []);
-          renderUnconfiguredFeeders(res.unconfigured_feeders || []);
-          if (dryRun) {
-            showToast(res.is_valid ? 'Dry-run validation passed' : 'Dry-run completed with errors');
-          } else if (res.files_written) {
-            showToast('Datasets successfully published to public/data/');
-          } else {
-            showToast('Validation failed — datasets were NOT published');
-          }
-        } catch (err) {
-          container.innerHTML = `<span class="badge badge-err">${escapeHtml(err.message)}</span>`;
-        } finally {
-          isPipelineRunning = false;
-          if (dryBtn) {
-            dryBtn.disabled = false;
-            dryBtn.textContent = '▶ Run Dry-Run (--dry-run)';
-          }
-          if (prodBtn) {
-            prodBtn.disabled = false;
-            prodBtn.textContent = '⚡ Publish Datasets (public/data/)';
-          }
+        container.innerHTML = html;
+        renderUnresolved(res.unresolved_entries || []);
+        renderUnconfiguredFeeders(res.unconfigured_feeders || []);
+        if (dryRun) {
+          showToast(res.is_valid ? 'Dry-run validation passed' : 'Dry-run completed with errors');
+        } else if (res.files_written) {
+          showToast('Datasets successfully published to public/data/');
+        } else {
+          showToast('Validation failed — datasets were NOT published');
+        }
+      } catch (err) {
+        container.innerHTML = `<span class="badge badge-err">${escapeHtml(err.message)}</span>`;
+      } finally {
+        isPipelineRunning = false;
+        if (dryBtn) {
+          dryBtn.disabled = false;
+          dryBtn.textContent = '▶ Run Dry-Run (--dry-run)';
+        }
+        if (prodBtn) {
+          prodBtn.disabled = false;
+          prodBtn.textContent = '⚡ Publish Datasets (public/data/)';
         }
       }
+    }
 
-      function renderUnresolved(items) {
-        const container = document.getElementById('unresolved-list');
-        const badge = document.getElementById('unresolved-count-badge');
-        unresolvedItemsState = items || [];
-        if (badge) {
-          badge.style.display = 'inline-block';
-          badge.className = `badge ${unresolvedItemsState.length === 0 ? 'badge-ok' : 'badge-warn'}`;
-          badge.textContent = `${unresolvedItemsState.length} remaining`;
-        }
-        if (!unresolvedItemsState.length) {
-          container.innerHTML = `<span class="badge badge-ok">0 unresolved items — all holdings mapped cleanly.</span>`;
-          return;
-        }
-        let html = '';
-        unresolvedItemsState.forEach((item, idx) => {
-          const scope = `${item.provider}:${item.fund_code}`;
-          const candidates = item.candidates || [];
-          let candHtml = '';
-          if (candidates.length > 0) {
-            candHtml = `<div style="margin: 6px 0; padding: 6px 8px; background: var(--card); border: 1px dashed var(--border); border-radius: 6px;">
+    function renderUnresolved(items) {
+      const container = document.getElementById('unresolved-list');
+      const badge = document.getElementById('unresolved-count-badge');
+      unresolvedItemsState = items || [];
+      if (badge) {
+        badge.style.display = 'inline-block';
+        badge.className = `badge ${unresolvedItemsState.length === 0 ? 'badge-ok' : 'badge-warn'}`;
+        badge.textContent = `${unresolvedItemsState.length} remaining`;
+      }
+      if (!unresolvedItemsState.length) {
+        container.innerHTML = `<span class="badge badge-ok">0 unresolved items — all holdings mapped cleanly.</span>`;
+        return;
+      }
+      let html = '';
+      unresolvedItemsState.forEach((item, idx) => {
+        const scope = `${item.provider}:${item.fund_code}`;
+        const candidates = item.candidates || [];
+        let candHtml = '';
+        if (candidates.length > 0) {
+          candHtml = `<div style="margin: 6px 0; padding: 6px 8px; background: var(--card); border: 1px dashed var(--border); border-radius: 6px;">
             <div style="font-size: 11px; color: var(--muted); margin-bottom: 4px;">Close matches in Known Companies Register:</div>`;
-            candidates.forEach((c, cIdx) => {
-              const pct = Math.round((c.score || 0) * 100);
-              candHtml += `
+          candidates.forEach((c, cIdx) => {
+            const pct = Math.round((c.score || 0) * 100);
+            candHtml += `
               <div style="display: flex; justify-content: space-between; align-items: center; gap: 6px; padding: 3px 0; font-size: 11px;">
                 <div>
                   <span class="badge badge-info">${pct}%</span>
@@ -1125,10 +1250,10 @@
                 <button class="btn btn-ok btn-sm" style="padding: 2px 8px; font-size: 11px;" onclick="mapCandidateForUnresolved(${idx}, ${cIdx})">Map to this</button>
               </div>
             `;
-            });
-            candHtml += `</div>`;
-          }
-          html += `
+          });
+          candHtml += `</div>`;
+        }
+        html += `
           <div class="file-row" style="flex-direction: column; align-items: stretch;">
             <div style="display: flex; justify-content: space-between;">
               <div>
@@ -1160,29 +1285,29 @@
             </div>
           </div>
         `;
-        });
-        container.innerHTML = html;
-        focusedMapInputId = 'map-isin-0';
+      });
+      container.innerHTML = html;
+      focusedMapInputId = 'map-isin-0';
+    }
+
+    let smSearchSeq = 0;
+
+    async function searchSecurityMaster(query) {
+      const seq = ++smSearchSeq;
+      const container = document.getElementById('sm-search-results');
+      if (!query.trim()) {
+        container.innerHTML = '';
+        return;
       }
-
-      let smSearchSeq = 0;
-
-      async function searchSecurityMaster(query) {
-        const seq = ++smSearchSeq;
-        const container = document.getElementById('sm-search-results');
-        if (!query.trim()) {
-          container.innerHTML = '';
-          return;
-        }
-        const data = await api(`/api/security-master?q=${encodeURIComponent(query)}`);
-        if (seq !== smSearchSeq) return;
-        if (!data.results.length) {
-          container.innerHTML = `<div style="font-size: 11px; color: var(--muted);">No matches in Known Companies Register.</div>`;
-          return;
-        }
-        let html = `<table><thead><tr><th>ISIN</th><th>Ticker</th><th>Name</th><th>Country</th><th></th></tr></thead><tbody>`;
-        for (const r of data.results) {
-          html += `
+      const data = await api(`/api/security-master?q=${encodeURIComponent(query)}`);
+      if (seq !== smSearchSeq) return;
+      if (!data.results.length) {
+        container.innerHTML = `<div style="font-size: 11px; color: var(--muted);">No matches in Known Companies Register.</div>`;
+        return;
+      }
+      let html = `<table><thead><tr><th>ISIN</th><th>Ticker</th><th>Name</th><th>Country</th><th></th></tr></thead><tbody>`;
+      for (const r of data.results) {
+        html += `
           <tr>
             <td class="mono">${escapeHtml(r.isin)}</td>
             <td class="mono">${escapeHtml(r.ticker)}</td>
@@ -1191,252 +1316,252 @@
             <td><button class="btn btn-sm" data-isin="${escapeHtml(r.isin)}" onclick="copyIsin(this.dataset.isin)">Use ISIN</button></td>
           </tr>
         `;
-        }
-        html += `</tbody></table>`;
-        container.innerHTML = html;
       }
+      html += `</tbody></table>`;
+      container.innerHTML = html;
+    }
 
-      function copyIsin(isin) {
-        const target = document.getElementById(focusedMapInputId) || document.getElementById('manual-isin');
-        if (target) target.value = isin;
-        navigator.clipboard?.writeText(isin);
-        showToast(`Filled ISIN ${isin}`);
+    function copyIsin(isin) {
+      const target = document.getElementById(focusedMapInputId) || document.getElementById('manual-isin');
+      if (target) target.value = isin;
+      navigator.clipboard?.writeText(isin);
+      showToast(`Filled ISIN ${isin}`);
+    }
+
+    async function saveAliasForUnresolved(idx) {
+      const item = unresolvedItemsState[idx];
+      if (!item) return;
+      const scope = `${item.provider}:${item.fund_code}`;
+      const isin = document.getElementById(`map-isin-${idx}`).value.trim();
+      if (!isin) {
+        alert('Enter an ISIN first (you can search above and click "Use ISIN").');
+        return;
       }
-
-      async function saveAliasForUnresolved(idx) {
-        const item = unresolvedItemsState[idx];
-        if (!item) return;
-        const scope = `${item.provider}:${item.fund_code}`;
-        const isin = document.getElementById(`map-isin-${idx}`).value.trim();
-        if (!isin) {
-          alert('Enter an ISIN first (you can search above and click "Use ISIN").');
-          return;
-        }
-        try {
-          await api('/api/aliases/set', {
-            method: 'POST',
-            body: JSON.stringify({ scope_key: scope, raw_name: item.raw_name, isin }),
-          });
-          showToast(`Mapped "${item.raw_name}" -> ${isin}`);
-          const aliases = await loadAliases();
-          pruneResolvedFromUnresolvedList(aliases);
-        } catch (err) {
-          alert(`Failed to save alias: ${err.message}`);
-        }
-      }
-
-      async function addManualAlias() {
-        const scope_key = document.getElementById('manual-scope').value.trim();
-        const raw_name = document.getElementById('manual-name').value.trim();
-        const isin = document.getElementById('manual-isin').value.trim();
-        try {
-          await api('/api/aliases/set', {
-            method: 'POST',
-            body: JSON.stringify({ scope_key, raw_name, isin }),
-          });
-          document.getElementById('manual-name').value = '';
-          document.getElementById('manual-isin').value = '';
-          showToast(`Saved alias ${raw_name} -> ${isin}`);
-          await loadAliases();
-        } catch (err) {
-          alert(`Failed to save alias: ${err.message}`);
-        }
-      }
-
-      async function deleteAliasByIdx(idx) {
-        const pair = savedAliasPairsState[idx];
-        if (!pair) return;
-        await api('/api/aliases/delete', {
+      try {
+        await api('/api/aliases/set', {
           method: 'POST',
-          body: JSON.stringify({ scope_key: pair.scope, raw_name: pair.name }),
+          body: JSON.stringify({ scope_key: scope, raw_name: item.raw_name, isin }),
         });
-        showToast(`Removed alias "${pair.name}"`);
+        showToast(`Mapped "${item.raw_name}" -> ${isin}`);
+        const aliases = await loadAliases();
+        pruneResolvedFromUnresolvedList(aliases);
+      } catch (err) {
+        alert(`Failed to save alias: ${err.message}`);
+      }
+    }
+
+    async function addManualAlias() {
+      const scope_key = document.getElementById('manual-scope').value.trim();
+      const raw_name = document.getElementById('manual-name').value.trim();
+      const isin = document.getElementById('manual-isin').value.trim();
+      try {
+        await api('/api/aliases/set', {
+          method: 'POST',
+          body: JSON.stringify({ scope_key, raw_name, isin }),
+        });
+        document.getElementById('manual-name').value = '';
+        document.getElementById('manual-isin').value = '';
+        showToast(`Saved alias ${raw_name} -> ${isin}`);
         await loadAliases();
+      } catch (err) {
+        alert(`Failed to save alias: ${err.message}`);
       }
+    }
 
-      async function mapCandidateForUnresolved(itemIdx, candIdx) {
-        const item = unresolvedItemsState[itemIdx];
-        const cand = item && item.candidates ? item.candidates[candIdx] : null;
-        if (!item || !cand) return;
-        const scope = `${item.provider}:${item.fund_code}`;
-        try {
-          await api('/api/aliases/set', {
-            method: 'POST',
-            body: JSON.stringify({ scope_key: scope, raw_name: item.raw_name, isin: cand.isin }),
-          });
-          showToast(`Mapped "${item.raw_name}" -> ${cand.isin}`);
-          const aliases = await loadAliases();
-          pruneResolvedFromUnresolvedList(aliases);
-        } catch (err) {
-          alert(`Failed to map candidate: ${err.message}`);
-        }
-      }
+    async function deleteAliasByIdx(idx) {
+      const pair = savedAliasPairsState[idx];
+      if (!pair) return;
+      await api('/api/aliases/delete', {
+        method: 'POST',
+        body: JSON.stringify({ scope_key: pair.scope, raw_name: pair.name }),
+      });
+      showToast(`Removed alias "${pair.name}"`);
+      await loadAliases();
+    }
 
-      function copyUnresolvedCsv() {
-        if (!unresolvedItemsState.length) {
-          showToast('No unresolved items to copy');
-          return;
-        }
-        const csvEscape = (v) => '"' + String(v || '').replace(/"/g, '""') + '"';
-        const lines = ['scope,companyName'];
-        for (const item of unresolvedItemsState) {
-          lines.push(`${item.provider}:${item.fund_code},${csvEscape(item.raw_name)}`);
-        }
-        const csv = lines.join('\n');
-        navigator.clipboard?.writeText(csv);
-        showToast(`Copied ${unresolvedItemsState.length} unresolved items as CSV`);
-      }
-
-      function toggleBulkImport() {
-        const box = document.getElementById('bulk-import-box');
-        box.style.display = box.style.display === 'none' ? 'block' : 'none';
-      }
-
-      async function bulkImportAliases() {
-        const csv_text = document.getElementById('bulk-csv-text').value;
-        try {
-          const res = await api('/api/aliases/bulk-set', {
-            method: 'POST',
-            body: JSON.stringify({ csv_text }),
-          });
-          document.getElementById('bulk-csv-text').value = '';
-          document.getElementById('bulk-import-box').style.display = 'none';
-          showToast(`Imported ${res.saved_count} alias mappings`);
-          const aliases = await loadAliases();
-          pruneResolvedFromUnresolvedList(aliases);
-        } catch (err) {
-          alert(`Bulk import failed: ${err.message}`);
-        }
-      }
-
-      async function fixAliasByIdx(pairIdx, candIdx) {
-        const pair = savedAliasPairsState[pairIdx];
-        const cand = pair && pair.candidates ? pair.candidates[candIdx] : null;
-        if (!pair || !cand) return;
-        try {
-          await api('/api/aliases/set', {
-            method: 'POST',
-            body: JSON.stringify({ scope_key: pair.scope, raw_name: pair.name, isin: cand.isin }),
-          });
-          showToast(`Updated "${pair.name}" -> ${cand.isin}`);
-          await loadAliases();
-        } catch (err) {
-          alert(`Failed to update alias: ${err.message}`);
-        }
-      }
-
-      function toggleElement(id) {
-        const el = document.getElementById(id);
-        if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
-      }
-
-      async function saveManualForUnresolved(idx) {
-        const item = unresolvedItemsState[idx];
-        if (!item) return;
-        const isin = document.getElementById(`manual-unres-isin-${idx}`).value.trim();
-        const ticker = document.getElementById(`manual-unres-ticker-${idx}`).value.trim();
-        const country = document.getElementById(`manual-unres-country-${idx}`).value.trim();
-        const sector = document.getElementById(`manual-unres-sector-${idx}`).value.trim();
-        if (!country || !sector) {
-          alert('Please enter a Country and select a GICS Sector.');
-          return;
-        }
-        try {
-          const res = await api('/api/manual-securities/set', {
-            method: 'POST',
-            body: JSON.stringify({
-              isin,
-              name: item.raw_name,
-              ticker,
-              country,
-              sector,
-              scope_key: `${item.provider}:${item.fund_code}`,
-              raw_name: item.raw_name,
-            }),
-          });
-          showToast(`Saved "${item.raw_name}" -> ${res.isin} (${country} / ${sector})`);
-          const aliases = await loadAliases();
-          pruneResolvedFromUnresolvedList(aliases);
-        } catch (err) {
-          alert(`Failed to save manual company metadata: ${err.message}`);
-        }
-      }
-
-      async function saveManualForAlias(idx) {
-        const pair = savedAliasPairsState[idx];
-        if (!pair) return;
-        const ticker = document.getElementById(`manual-alias-ticker-${idx}`).value.trim();
-        const country = document.getElementById(`manual-alias-country-${idx}`).value.trim();
-        const sector = document.getElementById(`manual-alias-sector-${idx}`).value.trim();
-        if (!country || !sector) {
-          alert('Please enter a Country and select a GICS Sector.');
-          return;
-        }
-        try {
-          await api('/api/manual-securities/set', {
-            method: 'POST',
-            body: JSON.stringify({
-              isin: pair.isin,
-              name: pair.name,
-              ticker,
-              country,
-              sector,
-            }),
-          });
-          showToast(`Updated "${pair.name}" (${country} / ${sector})`);
-          await loadAliases();
-        } catch (err) {
-          alert(`Failed to save manual company metadata: ${err.message}`);
-        }
-      }
-
-      function pruneResolvedFromUnresolvedList(aliasesMap) {
-        const aliases = aliasesMap || {};
-        const globalByName = {};
-        for (const scopeMap of Object.values(aliases)) {
-          if (!scopeMap || typeof scopeMap !== 'object') continue;
-          for (const [rawName, targetIsin] of Object.entries(scopeMap)) {
-            if (!(rawName in globalByName)) globalByName[rawName] = targetIsin;
-            else if (globalByName[rawName] !== targetIsin) globalByName[rawName] = null;
-          }
-        }
-        const remaining = unresolvedItemsState.filter((item) => {
-          const scope = `${item.provider}:${item.fund_code}`;
-          const exactMatch = aliases[scope] && aliases[scope][item.raw_name];
-          const sharedMatch = globalByName[item.raw_name];
-          return !(exactMatch || sharedMatch);
+    async function mapCandidateForUnresolved(itemIdx, candIdx) {
+      const item = unresolvedItemsState[itemIdx];
+      const cand = item && item.candidates ? item.candidates[candIdx] : null;
+      if (!item || !cand) return;
+      const scope = `${item.provider}:${item.fund_code}`;
+      try {
+        await api('/api/aliases/set', {
+          method: 'POST',
+          body: JSON.stringify({ scope_key: scope, raw_name: item.raw_name, isin: cand.isin }),
         });
-        renderUnresolved(remaining);
+        showToast(`Mapped "${item.raw_name}" -> ${cand.isin}`);
+        const aliases = await loadAliases();
+        pruneResolvedFromUnresolvedList(aliases);
+      } catch (err) {
+        alert(`Failed to map candidate: ${err.message}`);
       }
+    }
 
-      async function loadAliases() {
-        const data = await api('/api/aliases');
-        const container = document.getElementById('saved-aliases-list');
-        const countBadge = document.getElementById('aliases-count-badge');
-        savedAliasPairsState = [];
-        const auditMap = data.audit || {};
-        const entries = Object.entries(data.aliases || {});
-        const totalAliases = entries.reduce((acc, [, map]) => acc + Object.keys(map).length, 0);
-        if (countBadge) {
-          countBadge.style.display = 'inline-block';
-          countBadge.textContent = `${totalAliases} saved`;
+    function copyUnresolvedCsv() {
+      if (!unresolvedItemsState.length) {
+        showToast('No unresolved items to copy');
+        return;
+      }
+      const csvEscape = (v) => '"' + String(v || '').replace(/"/g, '""') + '"';
+      const lines = ['scope,companyName'];
+      for (const item of unresolvedItemsState) {
+        lines.push(`${item.provider}:${item.fund_code},${csvEscape(item.raw_name)}`);
+      }
+      const csv = lines.join('\n');
+      navigator.clipboard?.writeText(csv);
+      showToast(`Copied ${unresolvedItemsState.length} unresolved items as CSV`);
+    }
+
+    function toggleBulkImport() {
+      const box = document.getElementById('bulk-import-box');
+      box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    }
+
+    async function bulkImportAliases() {
+      const csv_text = document.getElementById('bulk-csv-text').value;
+      try {
+        const res = await api('/api/aliases/bulk-set', {
+          method: 'POST',
+          body: JSON.stringify({ csv_text }),
+        });
+        document.getElementById('bulk-csv-text').value = '';
+        document.getElementById('bulk-import-box').style.display = 'none';
+        showToast(`Imported ${res.saved_count} alias mappings`);
+        const aliases = await loadAliases();
+        pruneResolvedFromUnresolvedList(aliases);
+      } catch (err) {
+        alert(`Bulk import failed: ${err.message}`);
+      }
+    }
+
+    async function fixAliasByIdx(pairIdx, candIdx) {
+      const pair = savedAliasPairsState[pairIdx];
+      const cand = pair && pair.candidates ? pair.candidates[candIdx] : null;
+      if (!pair || !cand) return;
+      try {
+        await api('/api/aliases/set', {
+          method: 'POST',
+          body: JSON.stringify({ scope_key: pair.scope, raw_name: pair.name, isin: cand.isin }),
+        });
+        showToast(`Updated "${pair.name}" -> ${cand.isin}`);
+        await loadAliases();
+      } catch (err) {
+        alert(`Failed to update alias: ${err.message}`);
+      }
+    }
+
+    function toggleElement(id) {
+      const el = document.getElementById(id);
+      if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    }
+
+    async function saveManualForUnresolved(idx) {
+      const item = unresolvedItemsState[idx];
+      if (!item) return;
+      const isin = document.getElementById(`manual-unres-isin-${idx}`).value.trim();
+      const ticker = document.getElementById(`manual-unres-ticker-${idx}`).value.trim();
+      const country = document.getElementById(`manual-unres-country-${idx}`).value.trim();
+      const sector = document.getElementById(`manual-unres-sector-${idx}`).value.trim();
+      if (!country || !sector) {
+        alert('Please enter a Country and select a GICS Sector.');
+        return;
+      }
+      try {
+        const res = await api('/api/manual-securities/set', {
+          method: 'POST',
+          body: JSON.stringify({
+            isin,
+            name: item.raw_name,
+            ticker,
+            country,
+            sector,
+            scope_key: `${item.provider}:${item.fund_code}`,
+            raw_name: item.raw_name,
+          }),
+        });
+        showToast(`Saved "${item.raw_name}" -> ${res.isin} (${country} / ${sector})`);
+        const aliases = await loadAliases();
+        pruneResolvedFromUnresolvedList(aliases);
+      } catch (err) {
+        alert(`Failed to save manual company metadata: ${err.message}`);
+      }
+    }
+
+    async function saveManualForAlias(idx) {
+      const pair = savedAliasPairsState[idx];
+      if (!pair) return;
+      const ticker = document.getElementById(`manual-alias-ticker-${idx}`).value.trim();
+      const country = document.getElementById(`manual-alias-country-${idx}`).value.trim();
+      const sector = document.getElementById(`manual-alias-sector-${idx}`).value.trim();
+      if (!country || !sector) {
+        alert('Please enter a Country and select a GICS Sector.');
+        return;
+      }
+      try {
+        await api('/api/manual-securities/set', {
+          method: 'POST',
+          body: JSON.stringify({
+            isin: pair.isin,
+            name: pair.name,
+            ticker,
+            country,
+            sector,
+          }),
+        });
+        showToast(`Updated "${pair.name}" (${country} / ${sector})`);
+        await loadAliases();
+      } catch (err) {
+        alert(`Failed to save manual company metadata: ${err.message}`);
+      }
+    }
+
+    function pruneResolvedFromUnresolvedList(aliasesMap) {
+      const aliases = aliasesMap || {};
+      const globalByName = {};
+      for (const scopeMap of Object.values(aliases)) {
+        if (!scopeMap || typeof scopeMap !== 'object') continue;
+        for (const [rawName, targetIsin] of Object.entries(scopeMap)) {
+          if (!(rawName in globalByName)) globalByName[rawName] = targetIsin;
+          else if (globalByName[rawName] !== targetIsin) globalByName[rawName] = null;
         }
-        if (!entries.length) {
-          container.innerHTML = `<div style="color: var(--muted);">No custom aliases saved yet.</div>`;
-          return data.aliases || {};
-        }
-        let html = '';
-        for (const [scope, map] of entries) {
-          html += `<div class="provider-group"><div class="provider-title">${escapeHtml(scope)}</div>`;
-          for (const [name, isin] of Object.entries(map)) {
-            const info = (auditMap[scope] && auditMap[scope][name]) || null;
-            const candidates = (info && info.candidates) || [];
-            const idx = savedAliasPairsState.push({ scope, name, isin, candidates }) - 1;
-            let statusHtml = '';
-            if (info && info.in_security_master) {
-              statusHtml = `<div style="font-size: 11px; color: var(--muted);">✓ ${escapeHtml(info.sm_name || '')} • ${escapeHtml(info.country || '')}${info.sector ? ' • ' + escapeHtml(info.sector) : ''}</div>`;
-            } else if (info && info.in_security_master === false) {
-              statusHtml = `
+      }
+      const remaining = unresolvedItemsState.filter((item) => {
+        const scope = `${item.provider}:${item.fund_code}`;
+        const exactMatch = aliases[scope] && aliases[scope][item.raw_name];
+        const sharedMatch = globalByName[item.raw_name];
+        return !(exactMatch || sharedMatch);
+      });
+      renderUnresolved(remaining);
+    }
+
+    async function loadAliases() {
+      const data = await api('/api/aliases');
+      const container = document.getElementById('saved-aliases-list');
+      const countBadge = document.getElementById('aliases-count-badge');
+      savedAliasPairsState = [];
+      const auditMap = data.audit || {};
+      const entries = Object.entries(data.aliases || {});
+      const totalAliases = entries.reduce((acc, [, map]) => acc + Object.keys(map).length, 0);
+      if (countBadge) {
+        countBadge.style.display = 'inline-block';
+        countBadge.textContent = `${totalAliases} saved`;
+      }
+      if (!entries.length) {
+        container.innerHTML = `<div style="color: var(--muted);">No custom aliases saved yet.</div>`;
+        return data.aliases || {};
+      }
+      let html = '';
+      for (const [scope, map] of entries) {
+        html += `<div class="provider-group"><div class="provider-title">${escapeHtml(scope)}</div>`;
+        for (const [name, isin] of Object.entries(map)) {
+          const info = (auditMap[scope] && auditMap[scope][name]) || null;
+          const candidates = (info && info.candidates) || [];
+          const idx = savedAliasPairsState.push({ scope, name, isin, candidates }) - 1;
+          let statusHtml = '';
+          if (info && info.in_security_master) {
+            statusHtml = `<div style="font-size: 11px; color: var(--muted);">✓ ${escapeHtml(info.sm_name || '')} • ${escapeHtml(info.country || '')}${info.sector ? ' • ' + escapeHtml(info.sector) : ''}</div>`;
+          } else if (info && info.in_security_master === false) {
+            statusHtml = `
               <div style="font-size: 11px; color: var(--warn); display: flex; flex-wrap: wrap; align-items: center; gap: 6px;">
                 <span>⚠ Not in Known Companies Register (Country/Sector Unknown)</span>
                 <button class="btn btn-sm" style="padding: 2px 7px; font-size: 10px;" onclick="toggleElement('manual-alias-${idx}')">Set Country &amp; Sector</button>
@@ -1452,15 +1577,15 @@
                   <button class="btn btn-ok btn-sm" onclick="saveManualForAlias(${idx})">Save</button>
                 </div>
               </div>`;
-              if (candidates.length > 0) {
-                statusHtml += `<div style="display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px;">`;
-                candidates.forEach((c, cIdx) => {
-                  statusHtml += `<button class="btn btn-sm" style="padding: 2px 6px; font-size: 10px;" onclick="fixAliasByIdx(${idx}, ${cIdx})">Switch → ${escapeHtml(c.isin)} (${escapeHtml(c.name)})</button>`;
-                });
-                statusHtml += `</div>`;
-              }
+            if (candidates.length > 0) {
+              statusHtml += `<div style="display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px;">`;
+              candidates.forEach((c, cIdx) => {
+                statusHtml += `<button class="btn btn-sm" style="padding: 2px 6px; font-size: 10px;" onclick="fixAliasByIdx(${idx}, ${cIdx})">Switch → ${escapeHtml(c.isin)} (${escapeHtml(c.name)})</button>`;
+              });
+              statusHtml += `</div>`;
             }
-            html += `
+          }
+          html += `
             <div class="file-row">
               <div style="flex: 1;">
                 <div><strong>${escapeHtml(name)}</strong> → <span class="mono" style="color: ${info && info.in_security_master === false ? 'var(--warn)' : 'var(--ok)'};">${escapeHtml(isin)}</span></div>
@@ -1469,27 +1594,27 @@
               <button class="btn btn-sm btn-danger" onclick="deleteAliasByIdx(${idx})">Remove</button>
             </div>
           `;
-          }
-          html += `</div>`;
         }
-        container.innerHTML = html;
-        return data.aliases || {};
+        html += `</div>`;
       }
+      container.innerHTML = html;
+      return data.aliases || {};
+    }
 
-      function renderUnconfiguredFeeders(feeders) {
-        const container = document.getElementById('unconfigured-feeders-list');
-        const configuredKeys = new Set((feederCodesState || []).map((c) => (c || '').trim().toUpperCase()));
-        unconfiguredFeedersState = (feeders || []).filter(
-          (uf) => !configuredKeys.has((uf.fund_code || '').trim().toUpperCase())
-        );
-        if (!unconfiguredFeedersState.length) {
-          container.innerHTML = '';
-          return;
-        }
-        let html = `<div style="padding: 8px; border: 1px dashed var(--warn); border-radius: 6px; margin-bottom: 8px;">
+    function renderUnconfiguredFeeders(feeders) {
+      const container = document.getElementById('unconfigured-feeders-list');
+      const configuredKeys = new Set((feederCodesState || []).map((c) => (c || '').trim().toUpperCase()));
+      unconfiguredFeedersState = (feeders || []).filter(
+        (uf) => !configuredKeys.has((uf.fund_code || '').trim().toUpperCase())
+      );
+      if (!unconfiguredFeedersState.length) {
+        container.innerHTML = '';
+        return;
+      }
+      let html = `<div style="padding: 8px; border: 1px dashed var(--warn); border-radius: 6px; margin-bottom: 8px;">
         <div style="font-size: 11px; color: var(--warn); font-weight: 600; margin-bottom: 6px;">Detected Unconfigured Feeder Funds (${unconfiguredFeedersState.length}) — not sent to Equity Unresolved Mapper:</div>`;
-        unconfiguredFeedersState.forEach((uf, idx) => {
-          html += `
+      unconfiguredFeedersState.forEach((uf, idx) => {
+        html += `
           <div class="file-row" style="font-size: 11px;">
             <div>
               <strong class="mono">${escapeHtml(uf.fund_code)}</strong>
@@ -1499,109 +1624,109 @@
             <button class="btn btn-sm btn-primary" onclick="prefillUnconfiguredFeeder(${idx})">Configure Pairing</button>
           </div>
         `;
-        });
-        html += `</div>`;
-        container.innerHTML = html;
+      });
+      html += `</div>`;
+      container.innerHTML = html;
+    }
+
+    function prefillUnconfiguredFeeder(idx) {
+      const uf = unconfiguredFeedersState[idx];
+      if (!uf) return;
+      document.getElementById('feeder-code').value = uf.fund_code || '';
+      document.getElementById('feeder-name').value = uf.fund_name || '';
+      document.getElementById('feeder-master-provider').value = uf.suggested_provider || 'vanguard';
+      document.getElementById('feeder-master-ticker').focus();
+      showToast(`Prefilled ${uf.fund_code} — enter Master Ticker (e.g. VB / VO) & click Save Pairing`);
+    }
+
+    function prefillFeederFromPreview() {
+      if (!lastPreviewFeederState) return;
+      document.getElementById('feeder-code').value = lastPreviewFeederState.code || '';
+      if (lastPreviewFeederState.name) {
+        document.getElementById('feeder-name').value = lastPreviewFeederState.name;
       }
+      const target = document.getElementById(lastPreviewFeederState.name ? 'feeder-master-ticker' : 'feeder-name');
+      target.focus();
+      showToast(`Prefilled feeder code ${lastPreviewFeederState.code}`);
+    }
 
-      function prefillUnconfiguredFeeder(idx) {
-        const uf = unconfiguredFeedersState[idx];
-        if (!uf) return;
-        document.getElementById('feeder-code').value = uf.fund_code || '';
-        document.getElementById('feeder-name').value = uf.fund_name || '';
-        document.getElementById('feeder-master-provider').value = uf.suggested_provider || 'vanguard';
-        document.getElementById('feeder-master-ticker').focus();
-        showToast(`Prefilled ${uf.fund_code} — enter Master Ticker (e.g. VB / VO) & click Save Pairing`);
+    function editFeederByIdx(idx) {
+      const code = feederCodesState[idx];
+      const entry = code ? feederEntriesMapState[code] : null;
+      if (!code || !entry) return;
+      document.getElementById('feeder-code').value = code;
+      document.getElementById('feeder-name').value = entry.name || '';
+      document.getElementById('feeder-master-provider').value = entry.master_provider || 'vanguard';
+      document.getElementById('feeder-master-ticker').value = entry.master_ticker || '';
+      document.getElementById('feeder-name').focus();
+    }
+
+    async function saveFeederPairing() {
+      const feeder_code = document.getElementById('feeder-code').value.trim().toUpperCase();
+      const name = document.getElementById('feeder-name').value.trim();
+      const master_provider = document.getElementById('feeder-master-provider').value;
+      const master_ticker = document.getElementById('feeder-master-ticker').value.trim().toUpperCase();
+      if (!feeder_code || !name || !master_ticker) {
+        alert('Feeder Code, Fund Name, and Master Ticker are all required.');
+        return;
       }
+      await api('/api/feeders/set', {
+        method: 'POST',
+        body: JSON.stringify({ feeder_code, name, master_provider, master_ticker }),
+      });
+      document.getElementById('feeder-code').value = '';
+      document.getElementById('feeder-name').value = '';
+      document.getElementById('feeder-master-ticker').value = '';
+      showToast(`Saved feeder pairing ${feeder_code} -> ${master_provider}:${master_ticker}`);
 
-      function prefillFeederFromPreview() {
-        if (!lastPreviewFeederState) return;
-        document.getElementById('feeder-code').value = lastPreviewFeederState.code || '';
-        if (lastPreviewFeederState.name) {
-          document.getElementById('feeder-name').value = lastPreviewFeederState.name;
-        }
-        const target = document.getElementById(lastPreviewFeederState.name ? 'feeder-master-ticker' : 'feeder-name');
-        target.focus();
-        showToast(`Prefilled feeder code ${lastPreviewFeederState.code}`);
-      }
+      // Immediately prune the saved pairing from the unconfigured feeder funds list
+      unconfiguredFeedersState = (unconfiguredFeedersState || []).filter(
+        (uf) => (uf.fund_code || '').trim().toUpperCase() !== feeder_code
+      );
+      renderUnconfiguredFeeders(unconfiguredFeedersState);
 
-      function editFeederByIdx(idx) {
-        const code = feederCodesState[idx];
-        const entry = code ? feederEntriesMapState[code] : null;
-        if (!code || !entry) return;
-        document.getElementById('feeder-code').value = code;
-        document.getElementById('feeder-name').value = entry.name || '';
-        document.getElementById('feeder-master-provider').value = entry.master_provider || 'vanguard';
-        document.getElementById('feeder-master-ticker').value = entry.master_ticker || '';
-        document.getElementById('feeder-name').focus();
-      }
+      await loadFeeders();
+    }
 
-      async function saveFeederPairing() {
-        const feeder_code = document.getElementById('feeder-code').value.trim().toUpperCase();
-        const name = document.getElementById('feeder-name').value.trim();
-        const master_provider = document.getElementById('feeder-master-provider').value;
-        const master_ticker = document.getElementById('feeder-master-ticker').value.trim().toUpperCase();
-        if (!feeder_code || !name || !master_ticker) {
-          alert('Feeder Code, Fund Name, and Master Ticker are all required.');
-          return;
-        }
-        await api('/api/feeders/set', {
-          method: 'POST',
-          body: JSON.stringify({ feeder_code, name, master_provider, master_ticker }),
-        });
-        document.getElementById('feeder-code').value = '';
-        document.getElementById('feeder-name').value = '';
-        document.getElementById('feeder-master-ticker').value = '';
-        showToast(`Saved feeder pairing ${feeder_code} -> ${master_provider}:${master_ticker}`);
+    async function deleteFeederByIdx(idx) {
+      const code = feederCodesState[idx];
+      if (!code) return;
+      if (!confirm(`Remove feeder pairing ${code}?`)) return;
+      await api('/api/feeders/delete', {
+        method: 'POST',
+        body: JSON.stringify({ feeder_code: code }),
+      });
+      showToast(`Removed feeder pairing ${code}`);
+      await loadFeeders();
+    }
 
-        // Immediately prune the saved pairing from the unconfigured feeder funds list
-        unconfiguredFeedersState = (unconfiguredFeedersState || []).filter(
-          (uf) => (uf.fund_code || '').trim().toUpperCase() !== feeder_code
+    async function loadFeeders() {
+      const data = await api('/api/feeders');
+      const container = document.getElementById('feeder-pairings-list');
+      const feeders = data.feeders || {};
+      feederCodesState = Object.keys(feeders);
+      feederEntriesMapState = feeders;
+
+      // Prune any configured feeders from unconfiguredFeedersState
+      if (unconfiguredFeedersState && unconfiguredFeedersState.length) {
+        const configuredKeys = new Set(feederCodesState.map((c) => (c || '').trim().toUpperCase()));
+        const prevLen = unconfiguredFeedersState.length;
+        unconfiguredFeedersState = unconfiguredFeedersState.filter(
+          (uf) => !configuredKeys.has((uf.fund_code || '').trim().toUpperCase())
         );
-        renderUnconfiguredFeeders(unconfiguredFeedersState);
-
-        await loadFeeders();
+        if (unconfiguredFeedersState.length !== prevLen) {
+          renderUnconfiguredFeeders(unconfiguredFeedersState);
+        }
       }
 
-      async function deleteFeederByIdx(idx) {
-        const code = feederCodesState[idx];
-        if (!code) return;
-        if (!confirm(`Remove feeder pairing ${code}?`)) return;
-        await api('/api/feeders/delete', {
-          method: 'POST',
-          body: JSON.stringify({ feeder_code: code }),
-        });
-        showToast(`Removed feeder pairing ${code}`);
-        await loadFeeders();
+      if (!feederCodesState.length) {
+        container.innerHTML = `<div style="color: var(--muted);">No feeder pairings configured yet.</div>`;
+        return;
       }
-
-      async function loadFeeders() {
-        const data = await api('/api/feeders');
-        const container = document.getElementById('feeder-pairings-list');
-        const feeders = data.feeders || {};
-        feederCodesState = Object.keys(feeders);
-        feederEntriesMapState = feeders;
-
-        // Prune any configured feeders from unconfiguredFeedersState
-        if (unconfiguredFeedersState && unconfiguredFeedersState.length) {
-          const configuredKeys = new Set(feederCodesState.map((c) => (c || '').trim().toUpperCase()));
-          const prevLen = unconfiguredFeedersState.length;
-          unconfiguredFeedersState = unconfiguredFeedersState.filter(
-            (uf) => !configuredKeys.has((uf.fund_code || '').trim().toUpperCase())
-          );
-          if (unconfiguredFeedersState.length !== prevLen) {
-            renderUnconfiguredFeeders(unconfiguredFeedersState);
-          }
-        }
-
-        if (!feederCodesState.length) {
-          container.innerHTML = `<div style="color: var(--muted);">No feeder pairings configured yet.</div>`;
-          return;
-        }
-        let html = '';
-        feederCodesState.forEach((code, idx) => {
-          const entry = feeders[code] || {};
-          html += `
+      let html = '';
+      feederCodesState.forEach((code, idx) => {
+        const entry = feeders[code] || {};
+        html += `
           <div class="file-row">
             <div>
               <strong class="mono">${escapeHtml(code)}</strong>
@@ -1614,103 +1739,103 @@
             </div>
           </div>
         `;
-        });
-        container.innerHTML = html;
-      }
+      });
+      container.innerHTML = html;
+    }
 
-      // Managed Fund Catalogue state and handlers
-      let catalogData = [];
-      let currentCatalogFilter = 'all';
+    // Managed Fund Catalogue state and handlers
+    let catalogData = [];
+    let currentCatalogFilter = 'all';
 
-      async function loadCatalog() {
-        try {
-          const data = await api('/api/catalog');
-          catalogData = data.catalog || [];
-          renderCatalogList();
-        } catch (err) {
-          document.getElementById('catalog-list').innerHTML = `<div style="color: var(--err);">Failed to load catalogue: ${escapeHtml(err.message)}</div>`;
-        }
-      }
-
-      function filterCatalog(provider) {
-        currentCatalogFilter = provider;
+    async function loadCatalog() {
+      try {
+        const data = await api('/api/catalog');
+        catalogData = data.catalog || [];
         renderCatalogList();
+      } catch (err) {
+        document.getElementById('catalog-list').innerHTML = `<div style="color: var(--err);">Failed to load catalogue: ${escapeHtml(err.message)}</div>`;
+      }
+    }
+
+    function filterCatalog(provider) {
+      currentCatalogFilter = provider;
+      renderCatalogList();
+    }
+
+    function handleCatalogSearchInput() {
+      const val = document.getElementById('catalog-search')?.value || '';
+      const clearBtn = document.getElementById('catalog-search-clear');
+      if (clearBtn) clearBtn.style.display = val ? 'inline-block' : 'none';
+      renderCatalogList();
+    }
+
+    function clearCatalogSearch() {
+      const input = document.getElementById('catalog-search');
+      if (input) input.value = '';
+      const clearBtn = document.getElementById('catalog-search-clear');
+      if (clearBtn) clearBtn.style.display = 'none';
+      renderCatalogList();
+    }
+
+    function renderCatalogList() {
+      const container = document.getElementById('catalog-list');
+      const badge = document.getElementById('catalog-count-badge');
+      const awaitingFilterBtn = document.getElementById('cat-filter-awaiting');
+
+      const awaitingCount = catalogData.filter(c => c.status === 'AWAITING_PROCESSING' || !c.constituent_count).length;
+      if (badge) {
+        badge.textContent = `${catalogData.length} funds (${awaitingCount} awaiting processing)`;
+        badge.className = `badge ${awaitingCount > 0 ? 'badge-warn' : 'badge-ok'}`;
+      }
+      if (awaitingFilterBtn) {
+        awaitingFilterBtn.textContent = `⏳ Awaiting Processing (${awaitingCount})`;
       }
 
-      function handleCatalogSearchInput() {
-        const val = document.getElementById('catalog-search')?.value || '';
-        const clearBtn = document.getElementById('catalog-search-clear');
-        if (clearBtn) clearBtn.style.display = val ? 'inline-block' : 'none';
-        renderCatalogList();
+      const searchInput = (document.getElementById('catalog-search')?.value || '').trim().toLowerCase();
+
+      let filtered = [...catalogData];
+      if (currentCatalogFilter === 'awaiting') {
+        filtered = filtered.filter(c => c.status === 'AWAITING_PROCESSING' || !c.constituent_count);
+      } else if (currentCatalogFilter !== 'all') {
+        filtered = filtered.filter(c => (c.provider || '').toLowerCase() === currentCatalogFilter.toLowerCase());
+      }
+      if (searchInput) {
+        filtered = filtered.filter(c =>
+          (c.fund_code || '').toLowerCase().includes(searchInput) ||
+          (c.fund_name || '').toLowerCase().includes(searchInput) ||
+          (c.fnd_code || '').toLowerCase().includes(searchInput) ||
+          (c.effective_date || '').toLowerCase().includes(searchInput)
+        );
       }
 
-      function clearCatalogSearch() {
-        const input = document.getElementById('catalog-search');
-        if (input) input.value = '';
-        const clearBtn = document.getElementById('catalog-search-clear');
-        if (clearBtn) clearBtn.style.display = 'none';
-        renderCatalogList();
-      }
-
-      function renderCatalogList() {
-        const container = document.getElementById('catalog-list');
-        const badge = document.getElementById('catalog-count-badge');
-        const awaitingFilterBtn = document.getElementById('cat-filter-awaiting');
-
-        const awaitingCount = catalogData.filter(c => c.status === 'AWAITING_PROCESSING' || !c.constituent_count).length;
-        if (badge) {
-          badge.textContent = `${catalogData.length} funds (${awaitingCount} awaiting processing)`;
-          badge.className = `badge ${awaitingCount > 0 ? 'badge-warn' : 'badge-ok'}`;
+      // Sort: Awaiting processing first, then oldest As-Of date, then fund_code
+      filtered.sort((a, b) => {
+        const aAwaiting = (a.status === 'AWAITING_PROCESSING' || !a.constituent_count);
+        const bAwaiting = (b.status === 'AWAITING_PROCESSING' || !b.constituent_count);
+        if (aAwaiting !== bAwaiting) {
+          return aAwaiting ? -1 : 1;
         }
-        if (awaitingFilterBtn) {
-          awaitingFilterBtn.textContent = `⏳ Awaiting Processing (${awaitingCount})`;
-        }
-
-        const searchInput = (document.getElementById('catalog-search')?.value || '').trim().toLowerCase();
-
-        let filtered = [...catalogData];
-        if (currentCatalogFilter === 'awaiting') {
-          filtered = filtered.filter(c => c.status === 'AWAITING_PROCESSING' || !c.constituent_count);
-        } else if (currentCatalogFilter !== 'all') {
-          filtered = filtered.filter(c => (c.provider || '').toLowerCase() === currentCatalogFilter.toLowerCase());
-        }
-        if (searchInput) {
-          filtered = filtered.filter(c =>
-            (c.fund_code || '').toLowerCase().includes(searchInput) ||
-            (c.fund_name || '').toLowerCase().includes(searchInput) ||
-            (c.fnd_code || '').toLowerCase().includes(searchInput) ||
-            (c.effective_date || '').toLowerCase().includes(searchInput)
-          );
-        }
-
-        // Sort: Awaiting processing first, then oldest As-Of date, then fund_code
-        filtered.sort((a, b) => {
-          const aAwaiting = (a.status === 'AWAITING_PROCESSING' || !a.constituent_count);
-          const bAwaiting = (b.status === 'AWAITING_PROCESSING' || !b.constituent_count);
-          if (aAwaiting !== bAwaiting) {
-            return aAwaiting ? -1 : 1;
+        if (!aAwaiting && !bAwaiting) {
+          const dateA = a.effective_date || '';
+          const dateB = b.effective_date || '';
+          if (dateA !== dateB) {
+            return dateA.localeCompare(dateB);
           }
-          if (!aAwaiting && !bAwaiting) {
-            const dateA = a.effective_date || '';
-            const dateB = b.effective_date || '';
-            if (dateA !== dateB) {
-              return dateA.localeCompare(dateB);
-            }
-          }
-          return (a.fund_code || '').localeCompare(b.fund_code || '');
-        });
-
-        if (!filtered.length) {
-          container.innerHTML = `<div style="color: var(--muted); padding: 8px;">No matching funds found in catalogue.</div>`;
-          return;
         }
+        return (a.fund_code || '').localeCompare(b.fund_code || '');
+      });
 
-        let html = `<table>
+      if (!filtered.length) {
+        container.innerHTML = `<div style="color: var(--muted); padding: 8px;">No matching funds found in catalogue.</div>`;
+        return;
+      }
+
+      let html = `<table>
         <thead>
           <tr>
             <th>Status</th>
             <th>As Of Date</th>
-            <th>Provider</th>
+            <th>Fund Manager</th>
             <th>Fund Code</th>
             <th>Fund Name</th>
             <th style="text-align: right;">Constituents</th>
@@ -1722,34 +1847,34 @@
         </thead>
         <tbody>`;
 
-        filtered.forEach((c) => {
-          const isAwaiting = c.status === 'AWAITING_PROCESSING' || !c.constituent_count;
-          const statusBadge = isAwaiting
-            ? `<span class="badge badge-warn" style="font-size: 10px; font-weight: bold;">⏳ Awaiting Processing</span>`
-            : `<span class="badge badge-ok" style="font-size: 10px; font-weight: 500;">✔ Processed</span>`;
+      filtered.forEach((c) => {
+        const isAwaiting = c.status === 'AWAITING_PROCESSING' || !c.constituent_count;
+        const statusBadge = isAwaiting
+          ? `<span class="badge badge-warn" style="font-size: 10px; font-weight: bold;">⏳ Awaiting Processing</span>`
+          : `<span class="badge badge-ok" style="font-size: 10px; font-weight: 500;">✔ Processed</span>`;
 
-          let dateHtml = `<span style="color: var(--muted); font-size: 11px;">—</span>`;
-          if (!isAwaiting && c.effective_date) {
-            dateHtml = c.is_stale
-              ? `<span class="mono" style="color: var(--warn); font-weight: bold; font-size: 11px;" title="Disclosure older than 90 days">${escapeHtml(c.effective_date)} ⚠️</span>`
-              : `<span class="mono" style="color: var(--text); font-size: 11px;">${escapeHtml(c.effective_date)}</span>`;
-          }
+        let dateHtml = `<span style="color: var(--muted); font-size: 11px;">—</span>`;
+        if (!isAwaiting && c.effective_date) {
+          dateHtml = c.is_stale
+            ? `<span class="mono" style="color: var(--warn); font-weight: bold; font-size: 11px;" title="Disclosure older than 90 days">${escapeHtml(c.effective_date)} ⚠️</span>`
+            : `<span class="mono" style="color: var(--text); font-size: 11px;">${escapeHtml(c.effective_date)}</span>`;
+        }
 
-          const constituentsHtml = !isAwaiting && c.constituent_count
-            ? `<span class="mono" style="font-weight: 600;">${c.constituent_count.toLocaleString()}</span>`
-            : `<span style="color: var(--muted); font-size: 11px;">0</span>`;
+        const constituentsHtml = !isAwaiting && c.constituent_count
+          ? `<span class="mono" style="font-weight: 600;">${c.constituent_count.toLocaleString()}</span>`
+          : `<span style="color: var(--muted); font-size: 11px;">0</span>`;
 
-          const typeBadge = c.is_etf
-            ? `<span class="badge badge-info" style="font-size: 10px;">Listed ETF</span>`
-            : `<span class="badge badge-ok" style="font-size: 10px;">Unlisted Fund</span>`;
+        const typeBadge = c.is_etf
+          ? `<span class="badge badge-info" style="font-size: 10px;">Listed ETF</span>`
+          : `<span class="badge badge-ok" style="font-size: 10px;">Unlisted Fund</span>`;
 
-          const link = `https://www.smartinvestor.sorted.org.nz/kiwisaver-and-managed-funds/${encodeURIComponent(c.scheme_id)}/${encodeURIComponent(c.offer_id)}/${encodeURIComponent(c.fnd_code)}/`;
+        const link = `https://www.smartinvestor.sorted.org.nz/kiwisaver-and-managed-funds/${encodeURIComponent(c.scheme_id)}/${encodeURIComponent(c.offer_id)}/${encodeURIComponent(c.fnd_code)}/`;
 
-          const fetchBtn = isAwaiting
-            ? `<button class="btn btn-sm btn-primary" onclick="fetchCatalogFund('${escapeHtml(c.fund_code)}')" title="Download latest quarterly disclosure" style="margin-right: 4px;">📥 Fetch</button>`
-            : '';
+        const fetchBtn = isAwaiting
+          ? `<button class="btn btn-sm btn-primary" onclick="fetchCatalogFund('${escapeHtml(c.fund_code)}')" title="Download latest quarterly disclosure" style="margin-right: 4px;">📥 Fetch</button>`
+          : '';
 
-          html += `
+        html += `
           <tr>
             <td>${statusBadge}</td>
             <td>${dateHtml}</td>
@@ -1770,11 +1895,11 @@
             </td>
           </tr>
         `;
-        });
+      });
 
-        html += `</tbody></table>`;
-        container.innerHTML = html;
-      }
+      html += `</tbody></table>`;
+      container.innerHTML = html;
+    }
 
       async function fetchCatalogFund(fundCode) {
         showToast(`Fetching disclosure for ${fundCode}...`);
@@ -1789,7 +1914,7 @@
             alert(
               `❌ Fetch Failed for ${fail.code || fundCode}\n\n` +
               `• Fund ID: ${fail.fund_id || 'N/A'}\n` +
-              `• Provider: ${fail.provider || 'N/A'}\n` +
+              `• Fund Manager: ${fail.provider || 'N/A'}\n` +
               `• Message: ${fail.message}\n\n` +
               `Please check the server terminal output for full diagnostics and stack trace.`
             );
@@ -1808,98 +1933,98 @@
         }
       }
 
-      async function saveCatalogFund() {
-        const provider = document.getElementById('catalog-add-provider').value;
-        const fund_code = document.getElementById('catalog-add-code').value.trim();
-        const fund_name = document.getElementById('catalog-add-name').value.trim();
-        const fnd_code = document.getElementById('catalog-add-fnd').value.trim();
+    async function saveCatalogFund() {
+      const provider = document.getElementById('catalog-add-provider').value;
+      const fund_code = document.getElementById('catalog-add-code').value.trim();
+      const fund_name = document.getElementById('catalog-add-name').value.trim();
+      const fnd_code = document.getElementById('catalog-add-fnd').value.trim();
 
-        if (!fund_code) {
-          alert('Please enter a Fund Code (e.g. KERNEL_TOTAL_WORLD or USF)');
-          return;
-        }
-        if (!fnd_code) {
-          alert('Please enter an FND code (e.g. FND62001) or paste the Smart Investor fund URL');
-          return;
-        }
-
-        try {
-          const res = await api('/api/catalog/save', {
-            method: 'POST',
-            body: JSON.stringify({
-              provider,
-              fund_code,
-              fund_name,
-              fnd_code,
-            }),
-          });
-          if (res.ok) {
-            showToast(`Saved ${fund_code} to catalogue!`);
-            document.getElementById('catalog-add-code').value = '';
-            document.getElementById('catalog-add-name').value = '';
-            document.getElementById('catalog-add-fnd').value = '';
-            catalogData = res.catalog || [];
-            renderCatalogList();
-          }
-        } catch (err) {
-          alert(`Failed to save fund: ${err.message}`);
-        }
+      if (!fund_code) {
+        alert('Please enter a Fund Code (e.g. KERNEL_TOTAL_WORLD or USF)');
+        return;
+      }
+      if (!fnd_code) {
+        alert('Please enter an FND code (e.g. FND62001) or paste the Smart Investor fund URL');
+        return;
       }
 
-      async function deleteCatalogFund(fundCode) {
-        if (!confirm(`Are you sure you want to remove ${fundCode} from the Managed Fund Catalogue?`)) return;
-        try {
-          const res = await api('/api/catalog/delete', {
-            method: 'POST',
-            body: JSON.stringify({ fund_code: fundCode }),
-          });
-          if (res.ok) {
-            showToast(`Removed ${fundCode} from catalogue`);
-            catalogData = res.catalog || [];
-            renderCatalogList();
-          }
-        } catch (err) {
-          alert(`Failed to delete fund: ${err.message}`);
-        }
-      }
-
-      // Panel collapse/expand state (persisted in localStorage)
-      const PANEL_STATE_KEY = 'admin_ui_panel_state_v1';
-
-      function openPanel(panelId) {
-        const el = document.getElementById(panelId);
-        if (el && !el.open) el.open = true;
-      }
-
-      function setAllPanelsOpen(shouldOpen) {
-        const state = {};
-        document.querySelectorAll('details.card[data-panel]').forEach((el) => {
-          el.open = shouldOpen;
-          state[el.dataset.panel] = shouldOpen;
+      try {
+        const res = await api('/api/catalog/save', {
+          method: 'POST',
+          body: JSON.stringify({
+            provider,
+            fund_code,
+            fund_name,
+            fnd_code,
+          }),
         });
-        try { localStorage.setItem(PANEL_STATE_KEY, JSON.stringify(state)); } catch (_) { }
+        if (res.ok) {
+          showToast(`Saved ${fund_code} to catalogue!`);
+          document.getElementById('catalog-add-code').value = '';
+          document.getElementById('catalog-add-name').value = '';
+          document.getElementById('catalog-add-fnd').value = '';
+          catalogData = res.catalog || [];
+          renderCatalogList();
+        }
+      } catch (err) {
+        alert(`Failed to save fund: ${err.message}`);
       }
+    }
 
-      function initCollapsiblePanels() {
-        let saved = {};
-        try { saved = JSON.parse(localStorage.getItem(PANEL_STATE_KEY) || '{}') || {}; } catch (_) { }
-        document.querySelectorAll('details.card[data-panel]').forEach((el) => {
-          const key = el.dataset.panel;
-          if (typeof saved[key] === 'boolean') el.open = saved[key];
-          el.addEventListener('toggle', () => {
-            saved[key] = el.open;
-            try { localStorage.setItem(PANEL_STATE_KEY, JSON.stringify(saved)); } catch (_) { }
-          });
+    async function deleteCatalogFund(fundCode) {
+      if (!confirm(`Are you sure you want to remove ${fundCode} from the Managed Fund Catalogue?`)) return;
+      try {
+        const res = await api('/api/catalog/delete', {
+          method: 'POST',
+          body: JSON.stringify({ fund_code: fundCode }),
         });
+        if (res.ok) {
+          showToast(`Removed ${fundCode} from catalogue`);
+          catalogData = res.catalog || [];
+          renderCatalogList();
+        }
+      } catch (err) {
+        alert(`Failed to delete fund: ${err.message}`);
       }
+    }
 
-      // Initial load
-      initCollapsiblePanels();
-      updateProviderSourceCallout();
-      loadStagedFiles();
-      loadAliases();
-      loadFeeders();
-      loadCatalog();
+    // Panel collapse/expand state (persisted in localStorage)
+    const PANEL_STATE_KEY = 'admin_ui_panel_state_v1';
+
+    function openPanel(panelId) {
+      const el = document.getElementById(panelId);
+      if (el && !el.open) el.open = true;
+    }
+
+    function setAllPanelsOpen(shouldOpen) {
+      const state = {};
+      document.querySelectorAll('details.card[data-panel]').forEach((el) => {
+        el.open = shouldOpen;
+        state[el.dataset.panel] = shouldOpen;
+      });
+      try { localStorage.setItem(PANEL_STATE_KEY, JSON.stringify(state)); } catch (_) { }
+    }
+
+    function initCollapsiblePanels() {
+      let saved = {};
+      try { saved = JSON.parse(localStorage.getItem(PANEL_STATE_KEY) || '{}') || {}; } catch (_) { }
+      document.querySelectorAll('details.card[data-panel]').forEach((el) => {
+        const key = el.dataset.panel;
+        if (typeof saved[key] === 'boolean') el.open = saved[key];
+        el.addEventListener('toggle', () => {
+          saved[key] = el.open;
+          try { localStorage.setItem(PANEL_STATE_KEY, JSON.stringify(saved)); } catch (_) { }
+        });
+      });
+    }
+
+    // Initial load
+    initCollapsiblePanels();
+    updateProviderSourceCallout();
+    loadStagedFiles();
+    loadAliases();
+    loadFeeders();
+    loadCatalog();
   </script>
 </body>
 

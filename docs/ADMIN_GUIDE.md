@@ -21,7 +21,7 @@ This glossary defines the authoritative naming conventions for Kiwi Portfolio X-
 |---|---|---|
 | **Fund Manager** *(or Scheme Issuer)* | The New Zealand financial institution issuing and managing the fund for Kiwi investors. Files statutory quarterly disclosures on the Disclose Register. | Kernel Wealth, Smartshares, Fisher Funds, Simplicity, Milford. |
 | **Fund** | The investment product held by an investor. Can be a **Listed ETF** (traded on NZX) or an **Unlisted Managed Fund / KiwiSaver Scheme** (priced at NAV). | Smartshares US 500 (`USF`), Kernel S&P 500 (`KERNEL_SP_500_UNHEDGED`), Fisher Growth KiwiSaver. |
-| **Constituent Disclosure (`.xlsx`)** | The statutory quarterly portfolio filing published to Sorted Smart Investor under NZ law, containing asset names, percentages, cash, and receivables. | `KERNEL_GLOBAL_DIVIDEND_FND19302_2026-09-30.xlsx` |
+| **Constituent Disclosure (`.xlsx`)** | The statutory quarterly portfolio disclosure published to Sorted Smart Investor under NZ law, containing asset names, percentages, cash, and receivables. | `KERNEL_GLOBAL_DIVIDEND_FND19302_2026-09-30.xlsx` |
 | **Direct Holding** | An individual **Company share**, **Bond**, or **Cash deposit** held directly by the Fund Manager. | Infratil, Apple, Microsoft, Spark, NZ Government Bond, ANZ Cash. |
 | **Feeder Fund** *(Wrapper Fund)* | A New Zealand fund that does not buy individual stocks directly; instead, it invests **$\ge 75\%$** of its portfolio into a single overseas wholesale Master ETF. | Smartshares Total World (`TWF`, holding 99.8% Vanguard `VT`), Smartshares US 500 (`USF`, holding 99.8% Vanguard `VOO`). |
 | **Master ETF** *(Wholesale Target)* | The massive overseas ETF (issued by Vanguard US/AU, iShares / BlackRock, or State Street SPDR) that holds the actual thousands of underlying companies. | Vanguard Total World (`VT`), Vanguard S&P 500 (`VOO`), iShares Global ESG (`IWLD`), SPDR Portfolio Emerging Markets (`SPEM`). |
@@ -32,8 +32,8 @@ This glossary defines the authoritative naming conventions for Kiwi Portfolio X-
 
 > [!IMPORTANT]
 > ### Crucial Operational Distinction: Automated Ingestion vs. Manual Master ETF Maintenance
-> * **NZ Fund Constituent Disclosures (`.xlsx`):** **AUTOMATICALLY DOWNLOADED & UNWRAPPED.** The nightly GitHub Actions pipeline and the Admin UI crawler connect directly to the NZ Disclose Register / Sorted Smart Investor API. They download new filings, unwrap feeders, and compile constituents without administrator intervention.
-> * **Overseas Master ETFs (`.csv` from Vanguard, iShares & SPDR):** **NOT AUTOMATICALLY DOWNLOADED.** Because Vanguard (US/AU), iShares (BlackRock), and State Street SPDR are overseas issuers, their full constituent CSV files are **NOT** filed on the NZ Disclose Register. **The administrator must periodically monitor and update Master ETF CSVs manually:** download the latest holdings CSV from their product pages, drop them into `data/staging/vanguard/`, `data/staging/ishares/`, or `data/staging/spdr/` via the Admin Web UI, and click **`⚡ Publish Datasets (public/data/)`** (which validates filings, unwraps feeder holdings, and updates the public look-through datasets for the investor app).
+> * **NZ Fund Constituent Disclosures (`.xlsx`):** **AUTOMATICALLY DOWNLOADED & UNWRAPPED.** The nightly GitHub Actions pipeline and the Admin UI crawler connect directly to the NZ Disclose Register / Sorted Smart Investor API. They download new disclosures, unwrap feeders, and compile constituents without administrator intervention.
+> * **Overseas Master ETFs (`.csv` from Vanguard, iShares & SPDR):** **NOT AUTOMATICALLY DOWNLOADED.** Because Vanguard (US/AU), iShares (BlackRock), and State Street SPDR are overseas issuers, their full constituent CSV files are **NOT** disclosed on the NZ Disclose Register. **The administrator must periodically monitor and update Master ETF CSVs manually:** download the latest holdings CSV from their product pages, drop them into `data/staging/vanguard/`, `data/staging/ishares/`, or `data/staging/spdr/` via the Admin Web UI, and click **`⚡ Publish Datasets (public/data/)`** (which validates disclosures, unwraps feeder holdings, and updates the public look-through datasets for the investor app).
 
 ---
 
@@ -148,7 +148,7 @@ flowchart TD
     Check2 -- "Yes" --> CheckPair{"Is pairing configured in feeder_registry.json?"}
     CheckPair -- "No" --> ActionPair["Appears in 'Detected Unconfigured Feeder Funds'. Click 'Configure' & Save Pairing."]
     CheckPair -- "Yes" --> CheckMaster{"Is Master ETF file staged in data/staging/<master_provider>/?"}
-    CheckMaster -- "No" --> ActionMaster["Upload Master ETF file via Panel 1: Stage & Inspect Filings"]
+    CheckMaster -- "No" --> ActionMaster["Upload Master ETF file via Panel 1: Stage Disclosures"]
     CheckMaster -- "Yes" --> Check3
     Check2 -- "No (Direct Holdings)" --> Check3{"Stage 3: Run 'Dry Run' in Panel 3. Any unmapped companies or integrity errors?"}
     Check3 -- "Unmapped Companies" --> ActionAlias["Map company name to ISIN in Panel 6: Unresolved Company Holdings Mapper"]
@@ -158,7 +158,7 @@ flowchart TD
 
 ### Stage 1: Constituent Disclosure Download
 * **How to tell:** Look at the fund's row in **Panel 5: Managed Fund Catalogue**. Check if a disclosure file and date are listed. Also check if an `.xlsx` file exists in `data/staging/<manager>/`.
-* **Action:** Click the `📥 Fetch` button on that fund's row to download the latest statutory filing from Sorted Smart Investor. If the fetch succeeds, the file will be saved to `data/staging/` and displayed. If it fails (e.g. fund has no filing or network timeout), the error modal displays full debug details.
+* **Action:** Click the `📥 Fetch` button on that fund's row to download the latest statutory disclosure from Sorted Smart Investor. If the fetch succeeds, the file will be saved to `data/staging/` and displayed. If it fails (e.g. fund has no disclosure or network timeout), the error modal displays full debug details.
 
 ### Stage 2: Feeder Pairing & Master ETF Staging (Feeder Funds Only)
 * **How to tell:** 
@@ -167,7 +167,7 @@ flowchart TD
      `Feeder '<FUND_CODE>' disclosure staged, awaiting master ETF '<TICKER>' in data/staging/<provider>/`.
 * **Action:**
   1. If unconfigured: Click **Configure** in Panel 4, select the Master ETF Issuer (`Vanguard`, `iShares`, or `SPDR`), enter the Master Ticker (e.g. `SPEM`), and click **Save Pairing**.
-  2. If missing file: Download the holdings file from the issuer portal (e.g. SSGA SPEM or Vanguard VT) and drop/upload it into `data/staging/<provider>/` via **Panel 1: Stage & Inspect Filings**.
+  2. If missing file: Download the holdings file from the issuer portal (e.g. SSGA SPEM or Vanguard VT) and drop/upload it into `data/staging/<provider>/` via **Panel 1: Stage Disclosures**.
 
 ### Stage 3: Company Mapping & Dataset Publishing
 * **How to tell:** The `.xlsx` disclosure and any required Master ETF file are both staged, but running **Dry Run** reports `Unresolved: N` or integrity warnings.
@@ -209,7 +209,7 @@ You **only** need to configure a new feeder pairing if a Fund Manager introduces
 1. **Check the Feeder Fund's Disclosure:**
    In the Admin Console, preview the fund's Sorted `.xlsx` file to identify the underlying Master ETF it holds (e.g., `Vanguard Total World Stock ETF (VT)` or `SPDR Portfolio Emerging Markets ETF (SPEM)`).
 2. **Ensure Master ETF is Staged:**
-   Verify that the Master ETF's holdings file (CSV or XLSX) exists in `data/staging/vanguard/`, `data/staging/ishares/`, or `data/staging/spdr/`. If not, download it from Vanguard, BlackRock, or State Street and drop it into the staging folder via the Admin UI (**Panel 1: Stage & Inspect Filings**).
+   Verify that the Master ETF's holdings file (CSV or XLSX) exists in `data/staging/vanguard/`, `data/staging/ishares/`, or `data/staging/spdr/`. If not, download it from Vanguard, BlackRock, or State Street and drop it into the staging folder via the Admin UI (**Panel 1: Stage Disclosures**).
 3. **Register the Pairing:**
    In Admin Console **Panel 4: Feeder Fund Pairings**, enter:
    * **Feeder Code** (e.g. `TWH` or `KERNEL_EMERGING_MARKETS`)
