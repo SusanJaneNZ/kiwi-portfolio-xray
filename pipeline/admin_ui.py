@@ -233,8 +233,8 @@ class AdminService:
         )
         return SecurityMatcher(security_master=sm_data, alias_map=self.get_alias_map(), gics_mapping=gics_data)
 
-    def get_fund_catalog(self) -> list[dict[str, Any]]:
-        """Returns the list of managed funds from fund_catalog.json."""
+    def _read_raw_fund_catalog(self) -> list[dict[str, Any]]:
+        """Reads raw fund_catalog.json without dynamic runtime enrichment."""
         if not self.fund_catalog_path.exists():
             return []
         try:
@@ -243,10 +243,57 @@ class AdminService:
             logger.warning("Error reading %s: %s", self.fund_catalog_path, exc)
             return []
 
+    def get_fund_catalog(self) -> list[dict[str, Any]]:
+        """Returns the list of managed funds from fund_catalog.json enriched with As Of dates and processing status."""
+        catalog = self._read_raw_fund_catalog()
+        if not catalog:
+            return []
+
+        # Load public/data/funds_registry.json if present to discover constituent_count & effective_date
+        registry_path = self.repo_root / "public" / "data" / "funds_registry.json"
+        reg_map: dict[str, dict[str, Any]] = {}
+        if registry_path.exists():
+            try:
+                reg_list = json.loads(registry_path.read_text(encoding="utf-8"))
+                for r in reg_list:
+                    code = str(r.get("code", "")).strip().upper()
+                    if code:
+                        reg_map[code] = r
+            except Exception as exc:
+                logger.warning("Error reading %s: %s", registry_path, exc)
+
+        enriched: list[dict[str, Any]] = []
+        for entry in catalog:
+            item = dict(entry)
+            code = str(item.get("fund_code", "")).strip().upper()
+            reg_entry = reg_map.get(code)
+            if reg_entry and reg_entry.get("constituent_count", 0) > 0:
+                item["effective_date"] = reg_entry.get("effective_date", "")
+                item["constituent_count"] = reg_entry.get("constituent_count", 0)
+                item["is_stale"] = bool(reg_entry.get("is_stale", False))
+                item["status"] = "PROCESSED"
+            else:
+                item["effective_date"] = ""
+                item["constituent_count"] = 0
+                item["is_stale"] = False
+                item["status"] = "AWAITING_PROCESSING"
+            enriched.append(item)
+
+        # Sort: Awaiting processing first, then oldest As-Of date, then fund_code
+        def sort_key(x: dict[str, Any]) -> tuple[int, str, str]:
+            is_awaiting = (x.get("status") == "AWAITING_PROCESSING" or not x.get("effective_date"))
+            order = 0 if is_awaiting else 1
+            eff = str(x.get("effective_date", ""))
+            fcode = str(x.get("fund_code", ""))
+            return (order, eff, fcode)
+
+        enriched.sort(key=sort_key)
+        return enriched
+
     def save_fund_catalog_entry(self, entry: dict[str, Any]) -> list[dict[str, Any]]:
         """Adds or updates a fund in fund_catalog.json."""
         with self._lock:
-            catalog = self.get_fund_catalog()
+            catalog = self._read_raw_fund_catalog()
             fund_code = str(entry.get("fund_code", "")).strip().upper()
             if not fund_code:
                 raise ValueError("fund_code is required")
@@ -299,17 +346,17 @@ class AdminService:
             catalog.sort(key=lambda x: (x.get("provider", ""), x.get("fund_name", "")))
             self.fund_catalog_path.parent.mkdir(parents=True, exist_ok=True)
             self.fund_catalog_path.write_text(json.dumps(catalog, indent=2), encoding="utf-8")
-            return catalog
+            return self.get_fund_catalog()
 
     def delete_fund_catalog_entry(self, fund_code: str) -> list[dict[str, Any]]:
         """Deletes a fund entry from fund_catalog.json by its fund_code."""
         with self._lock:
-            catalog = self.get_fund_catalog()
+            catalog = self._read_raw_fund_catalog()
             fcode_clean = str(fund_code).strip().upper()
             catalog = [c for c in catalog if c.get("fund_code", "").upper() != fcode_clean]
             self.fund_catalog_path.parent.mkdir(parents=True, exist_ok=True)
             self.fund_catalog_path.write_text(json.dumps(catalog, indent=2), encoding="utf-8")
-            return catalog
+            return self.get_fund_catalog()
 
     def fetch_disclosures(
         self,

@@ -302,6 +302,9 @@ class TestAdminUI(unittest.TestCase):
                 self.assertEqual(entry["fnd_code"], "FND99999")
                 self.assertEqual(entry["scheme_id"], "SCH12697")
                 self.assertEqual(entry["offer_id"], "OFR12698")
+                self.assertEqual(entry["status"], "AWAITING_PROCESSING")
+                self.assertEqual(entry["constituent_count"], 0)
+                self.assertEqual(entry["effective_date"], "")
 
             # 3. POST /api/catalog/delete
             del_req = urllib.request.Request(

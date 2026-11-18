@@ -1,34 +1,62 @@
 # Administrator & Data Ingestion Guide: Kiwi Portfolio X-Ray
 
-This guide details the periodic operational procedures for sourcing fund disclosures, staging constituent CSVs, resolving mapping anomalies, and publishing static look-through datasets for the Kiwi Portfolio X-Ray.
+This guide details the operational procedures for sourcing fund disclosures, staging constituent files, unwrapping feeder funds, resolving unmapped companies, and publishing static look-through datasets for the Kiwi Portfolio X-Ray.
 
-Run locally using npm run build && npm run preview
-Or run the local Admin Console using:
+```bash
+# Run the local frontend preview
+npm run build && npm run preview
+
+# Run the local Admin Web Console
 python3 -m pipeline.admin_ui
-and then open http://127.0.0.1:8787 in a browser
+# Open http://127.0.0.1:8787 in your browser
+```
 
 ---
 
-## 1. Upstream Data Sources & Cadence Matrix
+## 1. System Concepts & Architecture Glossary
 
-The application relies on 5 primary source streams and 2 reference directories. All data is publicly accessible without paid commercial API subscriptions.
+This glossary defines the authoritative naming conventions for Kiwi Portfolio X-Ray. It eliminates ambiguous terms (such as "provider" or "security") across the documentation and administrative tooling.
 
-| Dataset / Source | Origin / Provider Portal | Staging Target Directory | Format & File Content | Frequency | Purpose |
-|---|---|---|---|---|---|
-| **Smartshares Direct & Feeder Funds** (`FNZ`, `MDZ`, `NZG`, `OZY`, `ASD`, `TWF`, `USF`, `EUF`, `APA`, `EMF`, `ESG`, `NZB`, `GBF`, `AGG`, etc.) | [Sorted Smart Investor](https://smartinvestor.sorted.org.nz) (Search fund → *Download the full portfolio holdings*) | `data/staging/smartshares/` | XLSX (`*.xlsx`): Asset name, % of fund net assets, Cash & payables | Semi-Annual / Quarterly | Direct NZX/ASX equities, fixed interest, and feeder wrapper cash/hedging buffers |
-| **Vanguard US Master ETFs** (`VT`, `VOO`, `VGK`, `VPL`, `VWO`, `VO`, `VB`) | [Vanguard US Advisor Portal](https://advisors.vanguard.com/investments/products/vt/vanguard-total-world-stock-etf) (*Holdings details* → *Export full holdings*) | `data/staging/vanguard/` | CSV (`Holdings_details_<TICKER_OR_FUND>.csv`): Ticker, Holdings/Name, % of funds, Sub-Industry, Country, SEDOL/CUSIP/ISIN | Monthly (around the 15th) | Underlying global equities for Smartshares feeder wrappers & Global Security Master |
-| **iShares (BlackRock) Master ETFs** (`IWLD`, `IVV`, `SAEU`, `SASU`) | [BlackRock Australia / US](https://www.blackrock.com/au/products/investment-funds) (Product Holdings CSV) | `data/staging/ishares/` | CSV (`<TICKER>_holdings.csv`): Ticker, Name, Sector, Location, Weight (%) | Monthly / Quarterly | Underlying global equities for Smartshares ESG wrappers |
-| **Kernel Wealth Index Funds** (Domestic, Global, Bond & Multi-Asset: `Kernel NZ 50`, `World Ex-US`, `Clean Energy`, `Global ESG`, `Dividend Aristocrats`, `Balanced`, `Conservative`) | [Sorted Smart Investor](https://smartinvestor.sorted.org.nz) (Search fund → *Download the full portfolio holdings*) | `data/staging/kernel/` | XLSX (`*.xlsx`): Asset name, % of fund net assets | Semi-Annual / Quarterly | Constituent holdings for unlisted NZ, AU, bond, and global index funds |
-| **BetaShares ASX ETFs** (e.g., `ASIA` — [Asia Technology Tigers ETF](https://www.betashares.com.au/fund/asia-technology-tigers-etf/)) | Product page on [betashares.com.au](https://www.betashares.com.au/fund/asia-technology-tigers-etf/) (*Holdings & allocation* → *Download CSV*) | `data/staging/betashares/` | CSV (`ASIA_Portfolio_Holdings.csv`): Fund metadata (`Fund ASX Code`, `Date`), Ticker, Name, Asset Class, Sector, Country, Weight (%) | Monthly / Quarterly | Look-through holdings for ASX-listed BetaShares ETFs (balances entered in NZD) |
-| **KiwiSaver & Domestic Managed Funds** (`Fisher Funds`, `Milford`, `Simplicity`, `Kernel`, `Generate`, `Booster`, `ANZ`, etc.) | [Sorted Smart Investor](https://smartinvestor.sorted.org.nz) (Search scheme → *Download the full portfolio holdings*) | `data/staging/<provider>/` or `data/staging/kiwisaver/` | XLSX (`*.xlsx`): Asset name, % of fund net assets, Cash & payables | Quarterly | Constituent holdings for KiwiSaver schemes and off-market managed funds; ingested dynamically via `GenericDomesticAdapter` |
-| **NZX Official Directory** | [NZX Main Board Table](https://www.nzx.com/markets/NZSX) *(maintained CSV — no bulk ISIN download on NZX website)* | `data/staging/directories/` | CSV (`nzx_directory.csv`): Rank, Ticker, Company Name, Country, Sector *(or NZX Code, Company Name, ISIN, GICS Sector)* | Quarterly / As needed | Canonical security master for NZX-listed equities (auto-enriched with Vanguard VT ISINs where available) |
-| **ASX Official Directory** | [ASX Listed Companies Directory](https://www.asx.com.au/markets/trade-our-cash-market/directory) (*"All ASX Listed Companies .csv"*) | `data/staging/directories/` | CSV (`ASXListedCompanies.csv`): Company name, ASX code, GICS industry group | Quarterly / As needed | Canonical security master for all ASX-listed equities |
+| Canonical Term | What It Means | Examples |
+|---|---|---|
+| **Fund Manager** *(or Scheme Issuer)* | The New Zealand financial institution issuing and managing the fund for Kiwi investors. Files statutory quarterly disclosures on the Disclose Register. | Kernel Wealth, Smartshares, Fisher Funds, Simplicity, Milford. |
+| **Fund** | The investment product held by an investor. Can be a **Listed ETF** (traded on NZX) or an **Unlisted Managed Fund / KiwiSaver Scheme** (priced at NAV). | Smartshares US 500 (`USF`), Kernel S&P 500 (`KERNEL_SP_500_UNHEDGED`), Fisher Growth KiwiSaver. |
+| **Constituent Disclosure (`.xlsx`)** | The statutory quarterly portfolio filing published to Sorted Smart Investor under NZ law, containing asset names, percentages, cash, and receivables. | `KERNEL_GLOBAL_DIVIDEND_FND19302_2026-09-30.xlsx` |
+| **Direct Holding** | An individual **Company share**, **Bond**, or **Cash deposit** held directly by the Fund Manager. | Infratil, Apple, Microsoft, Spark, NZ Government Bond, ANZ Cash. |
+| **Feeder Fund** *(Wrapper Fund)* | A New Zealand fund that does not buy individual stocks directly; instead, it invests **$\ge 75\%$** of its portfolio into a single overseas wholesale Master ETF. | Smartshares Total World (`TWF`, holding 99.8% Vanguard `VT`), Smartshares US 500 (`USF`, holding 99.8% Vanguard `VOO`). |
+| **Master ETF** *(Wholesale Target)* | The massive overseas ETF (issued by Vanguard US/AU or iShares / BlackRock) that holds the actual thousands of underlying companies. | Vanguard Total World (`VT`), Vanguard S&P 500 (`VOO`), iShares Global ESG (`IWLD`). |
+| **Feeder Unwrapping** | The pipeline process of replacing a single Feeder Fund line item with the Master ETF's thousands of underlying companies, scaled to the feeder's portfolio weight. | `TWF` $\rightarrow$ Vanguard `VT` $\rightarrow$ 9,800+ underlying global companies. |
+| **Minor Fund Holding** | A fund constituent holding that represents **$< 75\%$** of a portfolio (e.g. a multi-asset balanced fund allocating 5% to an emerging markets fund). Modeled by broad asset class rather than wholesale unwrapping. | 4% allocation to an international bond fund inside a balanced fund. |
+| **Known Companies Register** *(formerly Security Master)* | The master reference dictionary of ~12,000+ public companies globally, providing canonical ISIN, Ticker, Company Name, GICS Sector, and Country. | Built from: NZX Directory + ASX Directory + Vanguard Total World (`VT`) constituent export. |
+| **Manual Company Mapping** *(formerly Provider Alias Map)* | A mapping table (`provider_alias_map.json`) configured in the Admin UI that links non-standard company names or unlisted assets to their canonical ISIN in the Known Companies Register. | Mapping `"Arm Holdings plc ADR"` $\rightarrow$ `US0420682058`. |
+
+> [!IMPORTANT]
+> ### Crucial Operational Distinction: Automated Ingestion vs. Manual Master ETF Maintenance
+> * **NZ Fund Constituent Disclosures (`.xlsx`):** **AUTOMATICALLY DOWNLOADED & UNWRAPPED.** The nightly GitHub Actions pipeline and the Admin UI crawler connect directly to the NZ Disclose Register / Sorted Smart Investor API. They download new filings, unwrap feeders, and compile constituents without administrator intervention.
+> * **Overseas Master ETFs (`.csv` from Vanguard & iShares):** **NOT AUTOMATICALLY DOWNLOADED.** Because Vanguard (US/AU) and iShares (BlackRock) are overseas issuers, their full constituent CSV files are **NOT** filed on the NZ Disclose Register. **The administrator must periodically monitor and update Master ETF CSVs manually:** download the latest monthly holdings CSV from the Vanguard or iShares product pages, drop them into `data/staging/vanguard/` or `data/staging/ishares/` via the Admin Web UI, and trigger a compile.
 
 ---
 
-## 2. Ingestion Staging Directory Layout
+## 2. Upstream Data Sources & Cadence Matrix
 
-Place downloaded candidate files in the local staging folder matching the table above:
+The application relies on 5 source streams and 2 reference directories. All data is publicly accessible without paid commercial API subscriptions.
+
+| Dataset / Source | Source Portal | Staging Target Directory | Format & File Content | Frequency | Automation Level | Purpose |
+|---|---|---|---|---|---|---|
+| **Smartshares Direct & Feeder Funds** (`FNZ`, `MDZ`, `NZG`, `OZY`, `ASD`, `TWF`, `USF`, `EUF`, `APA`, `EMF`, `ESG`, `NZB`, `GBF`, `AGG`, etc.) | [Sorted Smart Investor](https://smartinvestor.sorted.org.nz) | `data/staging/smartshares/` | XLSX (`*.xlsx`): Asset name, % of fund net assets, Cash & payables | Quarterly / Semi-Annual | **Automated** (Nightly bot / Admin UI) | Direct NZX/ASX companies, fixed interest, and feeder wrapper cash/hedging ratios |
+| **Kernel Wealth Index Funds** (Domestic, Global, Bond & Multi-Asset: `Kernel NZ 50`, `World Ex-US`, `Clean Energy`, `Global ESG`, `Dividend Aristocrats`, `Balanced`, `Conservative`) | [Sorted Smart Investor](https://smartinvestor.sorted.org.nz) | `data/staging/kernel/` | XLSX (`*.xlsx`): Asset name, % of fund net assets, Cash & payables | Quarterly / Semi-Annual | **Automated** (Nightly bot / Admin UI) | Constituent company holdings for unlisted NZ, AU, bond, and global index funds |
+| **KiwiSaver & Domestic Managed Funds** (`Fisher Funds`, `Milford`, `Simplicity`, `Generate`, `Booster`, `ANZ`, etc.) | [Sorted Smart Investor](https://smartinvestor.sorted.org.nz) | `data/staging/<fund_manager>/` or `data/staging/kiwisaver/` | XLSX (`*.xlsx`): Asset name, % of fund net assets, Cash & payables | Quarterly | **Automated** (Nightly bot / Admin UI) | Constituent holdings for KiwiSaver schemes and off-market funds; ingested dynamically via `GenericDomesticAdapter` |
+| **Vanguard US Master ETFs** (`VT`, `VOO`, `VGK`, `VPL`, `VWO`, `VO`, `VB`) | [Vanguard US Advisor Portal](https://advisors.vanguard.com/investments/products/vt/vanguard-total-world-stock-etf) (*Holdings details* → *Export full holdings*) | `data/staging/vanguard/` | CSV (`Holdings_details_<TICKER_OR_FUND>.csv`): Ticker, Holdings/Name, % of funds, Sub-Industry, Country, SEDOL/CUSIP/ISIN | Monthly (around the 15th) | **Manual Admin Action Required** | Underlying global companies for Smartshares feeder wrappers & Known Companies Register |
+| **iShares (BlackRock) Master ETFs** (`IWLD`, `IVV`, `SAEU`, `SASU`) | [BlackRock Australia / US](https://www.blackrock.com/au/products/investment-funds) (Product Holdings CSV) | `data/staging/ishares/` | CSV (`<TICKER>_holdings.csv`): Ticker, Name, Sector, Location, Weight (%) | Monthly / Quarterly | **Manual Admin Action Required** | Underlying global companies for Smartshares ESG wrappers |
+| **BetaShares ASX ETFs** (e.g., `ASIA` — [Asia Technology Tigers ETF](https://www.betashares.com.au/fund/asia-technology-tigers-etf/)) | [betashares.com.au](https://www.betashares.com.au/fund/asia-technology-tigers-etf/) (*Holdings & allocation* → *Download CSV*) | `data/staging/betashares/` | CSV (`ASIA_Portfolio_Holdings.csv`): Ticker, Name, Asset Class, Sector, Country, Weight (%) | Monthly / Quarterly | Manual / Semi-Annual | Look-through holdings for ASX-listed BetaShares ETFs (balances entered in NZD) |
+| **NZX Official Directory** | [NZX Main Board Table](https://www.nzx.com/markets/NZSX) | `data/staging/directories/` | CSV (`nzx_directory.csv`): Rank, Ticker, Company Name, Country, Sector | Quarterly / As needed | Semi-Annual | Canonical directory for NZX-listed companies (auto-enriched with Vanguard VT ISINs where available) |
+| **ASX Official Directory** | [ASX Listed Companies Directory](https://www.asx.com.au/markets/trade-our-cash-market/directory) | `data/staging/directories/` | CSV (`ASXListedCompanies.csv`): Company name, ASX code, GICS industry group | Quarterly / As needed | Semi-Annual | Canonical directory for all ASX-listed companies |
+
+---
+
+## 3. Ingestion Staging Directory Layout
+
+Staged files are organized into subdirectories by Fund Manager or Master ETF Issuer:
 
 ```text
 data/
@@ -40,52 +68,53 @@ data/
     │   └── ASXListedCompanies.csv
     ├── fisher_funds/ (or kiwisaver/)
     │   └── GROWTH-FUND-FND555-Full-portfolio-holdings-30-September-2026.xlsx
-    ├── ishares/
+    ├── ishares/                        <-- Manual Admin Download from BlackRock
     │   └── IWLD_holdings.csv
-    ├── kernel/
+    ├── kernel/                         <-- Automated Download from Sorted Smart Investor
     │   └── KERNEL-WORLD-EX-US-FUND-FND58860-Full-portfolio-holdings-30-September-2026.xlsx
-    ├── simplicity/
+    ├── simplicity/                     <-- Automated Download from Sorted Smart Investor
     │   └── SIMPLICITY-GROWTH-FUND-FND1981-Full-portfolio-holdings.xlsx
-    ├── smartshares/
+    ├── smartshares/                    <-- Automated Download from Sorted Smart Investor
     │   ├── SMART-GLOBAL-ESG-ETF-FND14633-Full-portfolio-holdings-30-September-2026.xlsx
     │   └── SMART-NZ-TOP-50-ETF-Full-portfolio-holdings.xlsx
-    └── vanguard/
+    └── vanguard/                       <-- Manual Admin Download from Vanguard
         ├── Holdings_details_Total_World_Stock_ETF.csv
         └── Holdings_details_S&P_500_ETF.csv
 ```
 
 ---
 
-## 3. How Multi-Country Holdings in Funds (like Kernel) are Covered
+## 4. How Multi-Country Holdings (like Kernel & Simplicity) are Resolved
 
-A key design strength of the ingestion pipeline is that the upstream reference dataset (`security_master.json`) is **not** limited to New Zealand and Australia. 
+A key design feature of Kiwi Portfolio X-Ray is that the reference dataset (**Known Companies Register**) is **not** limited to New Zealand and Australia. 
 
-### Global Security Master Composition:
+### Known Companies Register Composition:
 1. **NZX Official Directory**: ~200 NZ-listed companies (ISIN, Name, Ticker, GICS Sector).
 2. **ASX Official Directory**: ~2,200 Australian-listed companies (ISIN, Name, Ticker, GICS Sector).
-3. **Vanguard Total World (`VT`) Master Directory**: **~9,840 global equities** spanning over 40 countries (including the US, UK, Japan, Germany, Switzerland, Taiwan, South Korea, China, Scandinavia, etc.), complete with verified 12-character ISINs, country ISO codes, and sector mappings.
+3. **Vanguard Total World (`VT`) Master Directory**: **~9,840 global companies** spanning over 40 countries (including the US, UK, Japan, Germany, Switzerland, Taiwan, South Korea, China, Scandinavia, etc.), complete with verified 12-character ISINs, country ISO codes, and sector mappings.
 
-### How Kernel's Global & Thematic Funds are Resolved:
-* When an unlisted fund like **Kernel S&P World Ex-U.S.**, **Kernel Global Clean Energy**, or **Kernel Global 100** publishes monthly holdings (e.g. Nestlé, ASML, Vestas Wind Systems, Orsted, Samsung, TSMC), their company names and tickers match against the **9,800+ global constituents** already indexed in `security_master.json`.
+### How Global & Thematic Funds are Resolved:
+* When an unlisted fund like **Kernel S&P World Ex-U.S.**, **Kernel Global Clean Energy**, or **Kernel Global 100** publishes quarterly holdings (e.g. Nestlé, ASML, Vestas Wind Systems, Orsted, Samsung, TSMC), their company names and tickers match against the **9,800+ global constituents** already indexed in the Known Companies Register.
 * **String Normalization**: Corporate legal suffixes (e.g., `A/S`, `AG`, `SA`, `NV`, `Oyj`, `PLC`, `Ltd`) are normalized before fuzzy matching.
-* **Residual / Niche Holdings**: If a specialized clean-energy stock is outside Vanguard VT or its name is reported with unusual punctuation by Kernel, the dry-run CLI flags it in `unresolved_entries.json`. The administrator maps it once in `provider_alias_map.json`, and it is permanently resolved for all future months.
-* **Bond & Multi-Asset / Balanced Funds**: Stage bond funds (`Smart NZB`, `Smart GBF`, `Smart AGG`, `Kernel NZ Bond`) and balanced/conservative funds (`Kernel Balanced`, `Kernel Conservative`, `Kernel High Growth`) into `data/staging/smartshares/` or `data/staging/kernel/` just like equity funds. Fixed-interest tranches and fund-held term deposits are classified row-by-row via [`bond_normalizer.py`](file:///mnt/c/Users/susan/wsl/kiwi-portfolio-xray/pipeline/enrichment/bond_normalizer.py) and rolled up by canonical institutional key ([`issuer_alias_map.json`](file:///mnt/c/Users/susan/wsl/kiwi-portfolio-xray/pipeline/enrichment/issuer_alias_map.json)) without generating false equity unresolved entries.
+* **Residual / Niche Holdings**: If a specialized company is outside Vanguard VT or its name is reported with unusual punctuation, the pipeline flags it in `unresolved_entries.json`. The administrator maps it once in `provider_alias_map.json` via the Admin Web UI, and it is permanently resolved for all future quarters.
+* **Bond & Multi-Asset Funds**: Fixed-interest tranches and bank term deposits are classified row-by-row via [`bond_normalizer.py`](file:///mnt/c/Users/susan/wsl/kiwi-portfolio-xray/pipeline/enrichment/bond_normalizer.py) and rolled up by institutional issuer ([`issuer_alias_map.json`](file:///mnt/c/Users/susan/wsl/kiwi-portfolio-xray/pipeline/enrichment/issuer_alias_map.json)) without generating false unresolved company entries.
 
 ---
 
-## 4. The Dry-Run Workflow (First-Time & Routine Runs)
+## 5. The Dry-Run Workflow (First-Time & Routine Runs)
 
-Before committing files or triggering production builds, always run the pipeline locally in **dry-run mode**—either via the Local Admin Web Console or the CLI:
+Before committing files or triggering production builds, always run the pipeline in **dry-run mode**—either via the Local Admin Web Console or the CLI:
 
-### Option A: Local Admin Web Console (Recommended for CSV Upload & Mapping)
+### Option A: Local Admin Web Console (Recommended)
 ```bash
 python3 -m pipeline.admin_ui
 ```
 Open `http://127.0.0.1:8787` in your browser to:
-* Drag-and-drop CSV files directly into `data/staging/<provider>/`
-* Preview raw CSV headers and test-parse rows with each Tier 1 adapter
-* Run `--dry-run` diagnostics and production builds (`public/data/`) with one click
-* Search the Global Security Master (`security_master.json`) and save unresolved holdings into `provider_alias_map.json`
+* **Managed Fund Catalogue**: Monitor all registered funds with real-time **Status (`⏳ Awaiting Processing` vs `✔ Processed`)**, **As Of Dates**, constituent counts, and one-click `📥 Fetch` actions. Unprocessed funds are automatically prioritized at the top, followed by oldest disclosure dates first.
+* **Filter & Search**: Quickly filter by `⏳ Awaiting Processing`, `Kernel`, or `Smartshares`, with instant search and one-click `✕` query clearing.
+* **Upload Master ETF CSVs**: Drag-and-drop downloaded Vanguard or iShares CSVs directly into `data/staging/vanguard/` or `data/staging/ishares/`.
+* **Resolve Companies**: Search the Known Companies Register and save unresolved company names into `provider_alias_map.json`.
+* **Execute Builds**: Run `--dry-run` diagnostics and production builds (`public/data/`) with one click.
 
 ### Option B: CLI Dry-Run
 ```bash
@@ -93,113 +122,78 @@ python3 -m pipeline.ingest --dry-run --staging-dir data/staging/
 ```
 
 ### What the Dry-Run Performs:
-1. **Schema Check**: Validates that all CSV headers match the expected columns defined in `pipeline/validate/schemas/`.
-2. **Master Bypass**: Ingests Vanguard and iShares master files directly, extracting canonical ISINs without running fuzzy matching.
-3. **Global Security Master Matching**: Matches Smartshares direct and Kernel (domestic + global) holdings against the 12,000-constituent global `security_master.json`.
-4. **Weight Sum Integrity**: Verifies that every fund's constituents sum to $100\% \pm 0.5\%$.
-5. **Diagnostics Report**: Outputs a summary directly to the terminal:
-   ```text
-   ================== INGESTION DRY-RUN REPORT ==================
-   [PASS] Schemas validated: 9 / 9 files
-   [PASS] Master ETF canonical bypass: VT (9,842), VOO (503)
-   [PASS] Feeder unwrapping: TWF -> VT, USF -> VOO
-   [PASS] Kernel Global Holdings matched against Global Master: 98.8%
-   [WARN] Unresolved holdings detected: 2 items
-          - Kernel Clean Energy: "Vestas Wind Systems A/S" (alias needed)
-          - Kernel NZ 50: "Chorus Ltd" (no ticker provided)
-   [PASS] Weight sum integrity: 100.0% across all 9 funds
-   ==============================================================
-   ```
+1. **Schema Check**: Validates that all CSV/XLSX headers match expected schemas.
+2. **Master ETF Bypass**: Ingests Vanguard and iShares master files directly, extracting canonical ISINs without fuzzy matching.
+3. **Feeder Unwrapping**: Unwraps all configured Feeder Funds (`TWF`, `USF`, etc.) into their Master ETF company constituents.
+4. **Known Companies Register Matching**: Matches direct Smartshares and Kernel holdings against the 12,000+ entry Known Companies Register.
+5. **Weight Sum Integrity**: Verifies that every fund's constituents sum to $100\% \pm 0.5\%$.
 
 ---
 
-## 5. Manual Mapping Resolution (`provider_alias_map.json`)
+## 6. Manual Company Mapping (`provider_alias_map.json`)
 
-If the dry-run reports unresolved holdings, the CLI outputs formatted JSON snippets ready to copy into `pipeline/enrichment/provider_alias_map.json`.
+If the dry-run reports unresolved company holdings, map them in the Admin Web UI (**Panel 3: Unresolved Holdings Mapper**) or directly in `pipeline/enrichment/provider_alias_map.json`:
 
-### Step-by-Step Resolution:
-1. Open [`pipeline/enrichment/provider_alias_map.json`](file:///mnt/c/Users/susan/wsl/kiwi-portfolio-xray/pipeline/enrichment/provider_alias_map.json).
-2. Add the alias mapping under the specific `Provider:Fund` key using the company's canonical 12-character ISIN:
-   ```json
-   {
-     "Kernel:NZ_50": {
-       "Chorus Ltd": "NZCNUE0001S2"
-     },
-     "Kernel:Clean_Energy": {
-       "Vestas Wind Systems A/S": "DK0061539921",
-       "Orsted A/S": "DK0060094928"
-     },
-     "Smartshares:FNZ": {
-       "FPH NZ": "NZFPHE0001S2"
-     }
-   }
-   ```
-3. Re-run the dry-run command (or click **Run Dry-Run** in the Admin Console):
-   ```bash
-   python3 -m pipeline.ingest --dry-run --staging-dir data/staging/
-   ```
-4. Confirm unresolved items are cleared or reduced to immaterial tail positions.
+```json
+{
+  "Kernel:KERNEL_NZ_50": {
+    "Chorus Ltd": "NZCNUE0001S2"
+  },
+  "Kernel:KERNEL_CLEAN_ENERGY": {
+    "Vestas Wind Systems A/S": "DK0061539921",
+    "Orsted A/S": "DK0060094928"
+  },
+  "Smartshares:FNZ": {
+    "FPH NZ": "NZFPHE0001S2"
+  }
+}
+```
 
 ---
 
-## 6. Configuring a New Feeder Pairing (`feeder_registry.json`)
+## 7. Configuring a New Feeder Fund Pairing (`feeder_registry.json`)
 
-Feeder funds (such as `TWF`, `USF`, `ESG`) hold a single underlying Vanguard or iShares master ETF plus a small NZD/AUD cash buffer and/or FX hedging contracts. Six Smartshares feeders (`TWF`, `USF`, `EUF`, `APA`, `EMF`, `ESG`) are pre-configured.
+### When is this needed?
+The 10 standard New Zealand feeder funds are already pre-configured (`TWF` $\rightarrow$ `VT`, `USF` $\rightarrow$ `VOO`, `EUF` $\rightarrow$ `VGK`, `APA` $\rightarrow$ `VPL`, `EMF` $\rightarrow$ `VWO`, `ESG` $\rightarrow$ `IWLD`, `USS` $\rightarrow$ `VB`, `USM` $\rightarrow$ `VO`, `USA` $\rightarrow$ `SASU`, `EUG` $\rightarrow$ `SAEU`).
 
-To add a new feeder fund pairing (for example, adding a hedged variant like `TWH` → `VT`, or `USM` / `BOT` → its underlying ETF):
+You **only** need to configure a new feeder pairing if a Fund Manager introduces a **new wrapper fund** that invests $\ge 75\%$ of its assets into an overseas Master ETF.
 
-1. **Inspect the Sorted `.xlsx` Holdings:**
-   Upload the fund's Sorted `.xlsx` into `data/staging/smartshares/` and click **Preview** in the Admin Console (`http://127.0.0.1:8787`) to confirm the single master ETF it holds (e.g., `Vanguard Total World Stock ETF (VT)` or `iShares Core S&P 500 ETF (IVV)`). You can click **Use as Feeder** in the preview header to prefill the **Feeder Code** in Panel 4.
-2. **Stage the Master ETF CSV:**
-   Download the master ETF's constituent CSV from Vanguard (`data/staging/vanguard/`) or BlackRock/iShares (`data/staging/ishares/`).
-3. **Add the Pairing in the Admin Console (Recommended):**
-   In Panel **4. Feeder Pairings (`feeder_registry.json`)** of the Admin Console (`http://127.0.0.1:8787`), fill in:
-   * **Feeder Code** (e.g., `TWH`)
-   * **Fund Name** (e.g., `Smart Total World (NZD Hedged) ETF`)
-   * **Master Provider** (`Vanguard` or `iShares`)
-   * **Master Ticker** (e.g., `VT` or `IVV`)
-   Then click **Save Pairing** (existing pairings can also be edited or removed directly from the list).
-
-   Alternatively, you can add the JSON entry manually to [`pipeline/feeder_registry.json`](file:///mnt/c/Users/susan/wsl/kiwi-portfolio-xray/pipeline/feeder_registry.json):
-   ```json
-   {
-     "TWH": {
-       "name": "Smart Total World (NZD Hedged) ETF",
-       "master_provider": "vanguard",
-       "master_ticker": "VT"
-     }
-   }
-   ```
-4. **Match the Feeder Code:**
-   Ensure the staged `.xlsx` filename includes the feeder code (e.g., `TWH_Full_portfolio_holdings.xlsx`) or matches an alias in `SMARTSHARES_NAME_HINTS` in [`smartshares_direct_adapter.py`](file:///mnt/c/Users/susan/wsl/kiwi-portfolio-xray/pipeline/adapters/smartshares_direct_adapter.py) so the pipeline pairs the wrapper's cash/hedging ratios with `feeder_registry.json`.
-5. **Verify Unwrapping:**
-   Run **Dry-Run** and confirm `[PASS] TWH` appears with `100.00%` total weight (`Equities + Cash + Hedging`) and the master ETF's constituent count.
+### Step-by-Step Procedure:
+1. **Check the Feeder Fund's Disclosure:**
+   In the Admin Console, preview the fund's Sorted `.xlsx` file to identify the underlying Master ETF it holds (e.g., `Vanguard Total World Stock ETF (VT)`).
+2. **Ensure Master ETF is Staged:**
+   Verify that the Master ETF's holdings CSV exists in `data/staging/vanguard/` or `data/staging/ishares/`. If not, download it from Vanguard or BlackRock and drop it into the staging folder.
+3. **Register the Pairing:**
+   In Admin Console **Panel 4: Feeder Fund Registry**, enter:
+   * **Feeder Code** (e.g. `TWH`)
+   * **Fund Name** (e.g. `Smart Total World (NZD Hedged) ETF`)
+   * **Master ETF Issuer** (`Vanguard` or `iShares`)
+   * **Master Ticker** (e.g. `VT`)
+   Click **Save Pairing**.
+4. **Run Dry-Run:**
+   Confirm that the Feeder Fund unwraps to 100% total weight and shows the Master ETF's underlying company constituents.
 
 ---
 
-## 7. Publishing to Production
+## 8. Publishing to Production
 
-Once the dry-run passes:
-1. Run the production compiler (or click **Build Production (public/data/)** in the Admin Console):
-   ```bash
-   python3 -m pipeline.ingest --staging-dir data/staging/
-   ```
-   This generates the optimized static assets in `public/data/`:
-   * `funds_registry.json`
-   * `constituents.json`
-   * `direct_equities.json`
-   * `unresolved_entries.json`
-2. Commit the updated `public/data/` static files, `feeder_registry.json`, and `provider_alias_map.json`:
-   ```bash
-   git add public/data/ pipeline/feeder_registry.json pipeline/enrichment/provider_alias_map.json
-   git commit -m "data: update fund constituent holdings"
-   git push origin main
-   ```
-3. GitHub Actions automatically executes `.github/workflows/deploy.yml` (building the site, and deploying to GitHub Pages once the repository is public).
+Once dry-run validation passes with zero critical errors:
+
+```bash
+# 1. Compile production datasets into public/data/
+python3 -m pipeline.ingest --staging-dir data/staging/ --output-dir public/data/
+
+# 2. Run test suites
+npm test
+python3 -m unittest discover -s pipeline/tests
+
+# 3. Build frontend bundle
+npm run build
+```
 
 ---
 
-## 8. Crowdsourced Issue Ingestion Bot & Automated CI/CD Workflows
+## 9. Crowdsourced Issue Ingestion Bot & Automated CI/CD Workflows
 
 To eliminate the manual bottleneck of administrators individually discovering, cataloging, and registering every KiwiSaver and off-market managed fund in New Zealand, the platform features a crowdsourced submission bot powered by GitHub Actions.
 
@@ -225,7 +219,7 @@ flowchart TD
    - Clicking this opens a pre-formatted GitHub issue on the repository with:
      - Issue Title: `[Fund Request] <Fund Name>`
      - Labels: `new-fund`
-     - Markdown bullet summary (`Fund Name`, `Provider`, `Fund Code`, `Smart Investor Link`, `Scheme ID`, `Offer ID`, `Fund ID`, `Is KiwiSaver`)
+     - Markdown bullet summary (`Fund Name`, `Fund Manager`, `Fund Code`, `Smart Investor Link`, `Scheme ID`, `Offer ID`, `Fund ID`, `Is KiwiSaver`)
      - An embedded, machine-readable JSON code block containing verified metadata.
    - *In the meantime, the user's browser immediately models the fund using the synthetic 80% Growth Equities / 20% Bonds look-through fallback so their portfolio balance and asset class split remain 100% accurate without waiting.*
 
@@ -287,7 +281,7 @@ GitHub sends automated email notifications to administrators when an Action fail
   3. The pipeline will retry the download, update `public/data/`, and push changes to `main`.
 
 #### Scenario 3: Unresolved Holdings or Schema Mismatch in a Newly Ingested Fund
-* **Symptom:** The ingestion pipeline succeeds, but `unresolved_entries.json` contains unmapped company names, or a provider uses non-standard column headers.
+* **Symptom:** The ingestion pipeline succeeds, but `unresolved_entries.json` contains unmapped company names, or a fund manager uses non-standard column headers.
 * **Resolution:**
   1. Pull the latest `main` branch locally: `git pull origin main`.
   2. Launch the local Admin Console:
@@ -295,7 +289,7 @@ GitHub sends automated email notifications to administrators when an Action fail
      python3 -m pipeline.admin_ui
      ```
   3. Open `http://127.0.0.1:8787` in your browser.
-  4. View the unresolved item in the table, search the Security Master for the company's canonical ISIN, and click **Save Alias**.
+  4. View the unresolved item in the table, search the Known Companies Register for the company's canonical ISIN, and click **Save Alias**.
   5. Click **Build Production (public/data/)**.
   6. Commit and push the updated alias map:
      ```bash

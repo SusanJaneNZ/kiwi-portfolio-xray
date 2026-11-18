@@ -485,13 +485,18 @@
 
       <div
         style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
-        <div style="display: flex; gap: 6px;">
+        <div style="display: flex; gap: 6px; flex-wrap: wrap;">
           <button class="btn btn-sm" onclick="filterCatalog('all')">All</button>
+          <button class="btn btn-sm" onclick="filterCatalog('awaiting')" id="cat-filter-awaiting">⏳ Awaiting Processing</button>
           <button class="btn btn-sm" onclick="filterCatalog('Kernel')">Kernel</button>
           <button class="btn btn-sm" onclick="filterCatalog('Smartshares')">Smartshares</button>
         </div>
-        <input type="text" id="catalog-search" placeholder="Search catalogue..." style="width: 220px;"
-          oninput="renderCatalogList()">
+        <div style="position: relative;">
+          <input type="text" id="catalog-search" placeholder="Search catalogue..." style="width: 220px; padding-right: 24px;"
+            oninput="handleCatalogSearchInput()">
+          <button id="catalog-search-clear" type="button" onclick="clearCatalogSearch()"
+            style="position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--muted); cursor: pointer; display: none; font-size: 11px; padding: 2px;">✕</button>
+        </div>
       </div>
 
       <div id="catalog-list" style="max-height: 380px; overflow-y: auto;">Loading catalogue...</div>
@@ -1587,24 +1592,68 @@
         renderCatalogList();
       }
 
+      function handleCatalogSearchInput() {
+        const val = document.getElementById('catalog-search')?.value || '';
+        const clearBtn = document.getElementById('catalog-search-clear');
+        if (clearBtn) clearBtn.style.display = val ? 'inline-block' : 'none';
+        renderCatalogList();
+      }
+
+      function clearCatalogSearch() {
+        const input = document.getElementById('catalog-search');
+        if (input) input.value = '';
+        const clearBtn = document.getElementById('catalog-search-clear');
+        if (clearBtn) clearBtn.style.display = 'none';
+        renderCatalogList();
+      }
+
       function renderCatalogList() {
         const container = document.getElementById('catalog-list');
         const badge = document.getElementById('catalog-count-badge');
-        if (badge) badge.textContent = `${catalogData.length} funds`;
+        const awaitingFilterBtn = document.getElementById('cat-filter-awaiting');
+
+        const awaitingCount = catalogData.filter(c => c.status === 'AWAITING_PROCESSING' || !c.constituent_count).length;
+        if (badge) {
+          badge.textContent = `${catalogData.length} funds (${awaitingCount} awaiting processing)`;
+          badge.className = `badge ${awaitingCount > 0 ? 'badge-warn' : 'badge-ok'}`;
+        }
+        if (awaitingFilterBtn) {
+          awaitingFilterBtn.textContent = `⏳ Awaiting Processing (${awaitingCount})`;
+        }
 
         const searchInput = (document.getElementById('catalog-search')?.value || '').trim().toLowerCase();
 
-        let filtered = catalogData;
-        if (currentCatalogFilter !== 'all') {
+        let filtered = [...catalogData];
+        if (currentCatalogFilter === 'awaiting') {
+          filtered = filtered.filter(c => c.status === 'AWAITING_PROCESSING' || !c.constituent_count);
+        } else if (currentCatalogFilter !== 'all') {
           filtered = filtered.filter(c => (c.provider || '').toLowerCase() === currentCatalogFilter.toLowerCase());
         }
         if (searchInput) {
           filtered = filtered.filter(c =>
             (c.fund_code || '').toLowerCase().includes(searchInput) ||
             (c.fund_name || '').toLowerCase().includes(searchInput) ||
-            (c.fnd_code || '').toLowerCase().includes(searchInput)
+            (c.fnd_code || '').toLowerCase().includes(searchInput) ||
+            (c.effective_date || '').toLowerCase().includes(searchInput)
           );
         }
+
+        // Sort: Awaiting processing first, then oldest As-Of date, then fund_code
+        filtered.sort((a, b) => {
+          const aAwaiting = (a.status === 'AWAITING_PROCESSING' || !a.constituent_count);
+          const bAwaiting = (b.status === 'AWAITING_PROCESSING' || !b.constituent_count);
+          if (aAwaiting !== bAwaiting) {
+            return aAwaiting ? -1 : 1;
+          }
+          if (!aAwaiting && !bAwaiting) {
+            const dateA = a.effective_date || '';
+            const dateB = b.effective_date || '';
+            if (dateA !== dateB) {
+              return dateA.localeCompare(dateB);
+            }
+          }
+          return (a.fund_code || '').localeCompare(b.fund_code || '');
+        });
 
         if (!filtered.length) {
           container.innerHTML = `<div style="color: var(--muted); padding: 8px;">No matching funds found in catalogue.</div>`;
@@ -1614,9 +1663,12 @@
         let html = `<table>
         <thead>
           <tr>
+            <th>Status</th>
+            <th>As Of Date</th>
             <th>Provider</th>
             <th>Fund Code</th>
             <th>Fund Name</th>
+            <th style="text-align: right;">Constituents</th>
             <th>Disclose FND Code</th>
             <th>Scheme / Offer</th>
             <th>Type</th>
@@ -1626,15 +1678,40 @@
         <tbody>`;
 
         filtered.forEach((c) => {
+          const isAwaiting = c.status === 'AWAITING_PROCESSING' || !c.constituent_count;
+          const statusBadge = isAwaiting
+            ? `<span class="badge badge-warn" style="font-size: 10px; font-weight: bold;">⏳ Awaiting Processing</span>`
+            : `<span class="badge badge-ok" style="font-size: 10px; font-weight: 500;">✔ Processed</span>`;
+
+          let dateHtml = `<span style="color: var(--muted); font-size: 11px;">—</span>`;
+          if (!isAwaiting && c.effective_date) {
+            dateHtml = c.is_stale
+              ? `<span class="mono" style="color: var(--warn); font-weight: bold; font-size: 11px;" title="Disclosure older than 90 days">${escapeHtml(c.effective_date)} ⚠️</span>`
+              : `<span class="mono" style="color: var(--text); font-size: 11px;">${escapeHtml(c.effective_date)}</span>`;
+          }
+
+          const constituentsHtml = !isAwaiting && c.constituent_count
+            ? `<span class="mono" style="font-weight: 600;">${c.constituent_count.toLocaleString()}</span>`
+            : `<span style="color: var(--muted); font-size: 11px;">0</span>`;
+
           const typeBadge = c.is_etf
             ? `<span class="badge badge-info" style="font-size: 10px;">Listed ETF</span>`
             : `<span class="badge badge-ok" style="font-size: 10px;">Unlisted Fund</span>`;
+
           const link = `https://www.smartinvestor.sorted.org.nz/kiwisaver-and-managed-funds/${encodeURIComponent(c.scheme_id)}/${encodeURIComponent(c.offer_id)}/${encodeURIComponent(c.fnd_code)}/`;
+
+          const fetchBtn = isAwaiting
+            ? `<button class="btn btn-sm btn-primary" onclick="fetchCatalogFund('${escapeHtml(c.fund_code)}')" title="Download latest quarterly disclosure" style="margin-right: 4px;">📥 Fetch</button>`
+            : '';
+
           html += `
           <tr>
+            <td>${statusBadge}</td>
+            <td>${dateHtml}</td>
             <td><strong>${escapeHtml(c.provider)}</strong></td>
             <td><code class="mono" style="color: var(--primary); font-weight: bold;">${escapeHtml(c.fund_code)}</code></td>
             <td>${escapeHtml(c.fund_name)}</td>
+            <td style="text-align: right;">${constituentsHtml}</td>
             <td>
               <a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; text-decoration: underline;" title="View on Smart Investor">
                 ${escapeHtml(c.fnd_code)} ↗
@@ -1642,7 +1719,8 @@
             </td>
             <td class="mono" style="color: var(--muted); font-size: 11px;">${escapeHtml(c.scheme_id)} / ${escapeHtml(c.offer_id)}</td>
             <td>${typeBadge}</td>
-            <td style="text-align: right;">
+            <td style="text-align: right; white-space: nowrap;">
+              ${fetchBtn}
               <button class="btn btn-sm btn-danger" onclick="deleteCatalogFund('${escapeHtml(c.fund_code)}')">Remove</button>
             </td>
           </tr>
@@ -1651,6 +1729,25 @@
 
         html += `</tbody></table>`;
         container.innerHTML = html;
+      }
+
+      async function fetchCatalogFund(fundCode) {
+        showToast(`Fetching disclosure for ${fundCode}...`);
+        try {
+          const res = await api('/api/pipeline/fetch', {
+            method: 'POST',
+            body: JSON.stringify({ fund_code: fundCode }),
+          });
+          if (res.failed && res.failed.length) {
+            showToast(`Fetch failed: ${res.failed[0].message}`);
+          } else {
+            showToast(`Downloaded ${fundCode}! Staged in data/staging.`);
+            await loadCatalog();
+            await loadStaging();
+          }
+        } catch (err) {
+          showToast(`Error fetching ${fundCode}: ${err.message}`);
+        }
       }
 
       async function saveCatalogFund() {

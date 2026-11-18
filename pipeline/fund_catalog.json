@@ -208,19 +208,19 @@
     "is_etf": false
   },
   {
-    "fund_code": "KERNEL_US_BOND",
-    "fund_name": "Kernel US Bond Fund",
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "fund_name": "Kernel S&P World Ex-U.S. Fund",
     "provider": "Kernel",
-    "fnd_code": "FND46941",
+    "fnd_code": "FND58860",
     "scheme_id": "SCH12697",
     "offer_id": "OFR12698",
     "is_etf": false
   },
   {
-    "fund_code": "KERNEL_WORLD_EX_US",
-    "fund_name": "Kernel S&P World Ex-U.S. Fund",
+    "fund_code": "KERNEL_US_BOND",
+    "fund_name": "Kernel US Bond Fund",
     "provider": "Kernel",
-    "fnd_code": "FND58860",
+    "fnd_code": "FND46941",
     "scheme_id": "SCH12697",
     "offer_id": "OFR12698",
     "is_etf": false
