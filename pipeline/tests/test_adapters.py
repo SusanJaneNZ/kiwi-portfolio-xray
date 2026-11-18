@@ -151,6 +151,9 @@ class TestAdapters(unittest.TestCase):
         self.assertEqual(smartshares._extract_code_from_filename("SMART-US-SMALL-CAP-ETF-FND1110-Full.xlsx"), "USS")
         self.assertEqual(smartshares._extract_code_from_filename("SMART-US-MID-CAP-ETF-FND1109-Full.xlsx"), "USM")
         self.assertEqual(smartshares._extract_code_from_filename("SMART-AUSTRALIAN-TOP-200-ETF-FND19355-Full.xlsx"), "AUS")
+        self.assertEqual(smartshares._extract_code_from_filename("SMART-S&P-NZX-NZ-GOVERNMENT-BOND-ETF-FND19357-Full-portfolio-holdings-30-September-2026.xlsx"), "NGB")
+        self.assertEqual(smartshares._extract_code_from_filename("SMART-S_P_NZX-NZ-GOVERNMENT-BOND-ETF-FND19357-Full-portfolio-holdings-31-December-2026.xlsx"), "NGB")
+        self.assertEqual(smartshares._extract_code_from_filename("NGB_FND19357_2027-03-31.xlsx"), "NGB")
 
     def test_ishares_skips_money_market_and_cash_derivatives(self):
         csv_text = (

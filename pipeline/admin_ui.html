@@ -1886,6 +1886,7 @@
               <a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; text-decoration: underline;" title="View on Smart Investor">
                 ${escapeHtml(c.fnd_code)} ↗
               </a>
+              ${c.holdings_url ? `<a href="${escapeHtml(c.holdings_url)}" target="_blank" rel="noopener noreferrer" style="color: var(--ok); text-decoration: none; margin-left: 5px;" title="Direct Disclosure URL (${escapeHtml(c.holdings_url)})">📄</a>` : ''}
             </td>
             <td class="mono" style="color: var(--muted); font-size: 11px;">${escapeHtml(c.scheme_id)} / ${escapeHtml(c.offer_id)}</td>
             <td>${typeBadge}</td>

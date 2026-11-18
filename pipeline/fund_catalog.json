@@ -529,7 +529,8 @@
     "fnd_code": "FND19357",
     "scheme_id": "SCH10752",
     "offer_id": "OFR10865",
-    "is_etf": true
+    "is_etf": true,
+    "holdings_url": "https://www.smartinvestor.sorted.org.nz/disclose-document/full-portfolio/FND19357/SMART-S&P/NZX-NZ-GOVERNMENT-BOND-ETF-FND19357-Full-portfolio-holdings-30-September-2026.xlsx"
   },
   {
     "fund_code": "TWH",

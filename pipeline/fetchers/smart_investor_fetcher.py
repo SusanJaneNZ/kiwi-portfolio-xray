@@ -346,10 +346,7 @@ class SmartInvestorFetcher:
         self._downloader = downloader or self._default_download
 
     def resolve_holdings_url(self, meta: DiscloseFundMeta) -> Optional[str]:
-        """Scrapes fund profile page to discover current live quarterly disclose document link."""
-        if meta.holdings_url and "disclose-document/full-portfolio" in meta.holdings_url:
-            return meta.holdings_url
-
+        """Scrapes fund profile page to discover current live quarterly disclose document link, falling back to static URL."""
         scheme = meta.scheme_id or ("SCH12697" if meta.provider.lower() == "kernel" else "SCH10752")
         offer = meta.offer_id or ("OFR12698" if meta.provider.lower() == "kernel" else "OFR10865")
         fnd = meta.fund_id.strip()
@@ -359,7 +356,7 @@ class SmartInvestorFetcher:
             content = self._downloader(page_url, self.user_agent)
             html_text = content.decode("utf-8", errors="replace")
             m = re.search(
-                r'href=[\"\']([^\"\']*disclose-document/full-portfolio/[^\"\']+\.xlsx)[\"\']',
+                r'href=[\"\']([^\"\']*disclose-document/full-portfolio/[^\"\']+\.xlsx(?:[^\s\"\'<>]*)?)[\"\']',
                 html_text,
                 re.IGNORECASE,
             )
@@ -370,6 +367,9 @@ class SmartInvestorFetcher:
                 return raw_link
         except Exception as exc:
             logger.debug("Failed to resolve live holdings link for %s: %s", meta.target_code, exc)
+
+        if meta.holdings_url and "disclose-document/full-portfolio" in meta.holdings_url:
+            return meta.holdings_url
         return None
 
     @staticmethod
