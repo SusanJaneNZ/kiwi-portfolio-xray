@@ -37,16 +37,18 @@ ALLOWED_PROVIDERS = {
     "smartshares",
     "vanguard",
     "ishares",
+    "spdr",
     "kernel",
     "betashares",
     "kiwisaver",
     "fisher_funds",
     "simplicity",
     "milford",
+    "booster",
     "custom",
 }
 
-ALLOWED_MASTER_PROVIDERS = {"vanguard", "ishares"}
+ALLOWED_MASTER_PROVIDERS = {"vanguard", "ishares", "spdr"}
 
 
 class AdminService:

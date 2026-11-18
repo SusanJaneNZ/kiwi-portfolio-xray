@@ -390,6 +390,7 @@
             <option value="fisher_funds">data/staging/fisher_funds/ (Fisher Funds KiwiSaver &amp; Managed Funds)</option>
             <option value="vanguard">data/staging/vanguard/ (Vanguard Master ETFs)</option>
             <option value="ishares">data/staging/ishares/ (iShares Master ETFs)</option>
+            <option value="spdr">data/staging/spdr/ (SPDR Master ETFs: SPEM, etc.)</option>
             <option value="betashares">data/staging/betashares/ (BetaShares ASX ETFs)</option>
             <option value="directories">data/staging/directories/ (NZX &amp; ASX Directories)</option>
           </select>
@@ -444,9 +445,10 @@
         <input type="text" id="feeder-code" placeholder="Feeder Code (e.g. TWH)" style="width: 150px;">
         <input type="text" id="feeder-name" placeholder="Fund Name (e.g. Smart Total World Hedged ETF)"
           style="flex: 1; min-width: 180px;">
-        <select id="feeder-master-provider" title="Master ETF Issuer (Vanguard or iShares)">
+        <select id="feeder-master-provider" title="Master ETF Issuer (Vanguard, iShares, or SPDR)">
           <option value="vanguard">Vanguard</option>
           <option value="ishares">iShares</option>
+          <option value="spdr">SPDR (State Street)</option>
         </select>
         <input type="text" id="feeder-master-ticker" placeholder="Master Ticker (e.g. VT)" style="width: 145px;">
         <button class="btn btn-primary btn-sm" onclick="saveFeederPairing()">Save Pairing</button>
@@ -662,6 +664,17 @@
           { label: 'iShares US Portal', url: 'https://www.ishares.com' },
         ],
         instructions: 'Search product ticker (e.g. IWLD) → Product page → Click "Download Holdings" (CSV).',
+        canAutoFetch: false,
+      },
+      spdr: {
+        name: 'SPDR (State Street) Master ETFs (SPEM, etc.)',
+        folder: 'data/staging/spdr/',
+        format: 'CSV (SPEM_holdings.csv or *.csv)',
+        links: [
+          { label: 'SPDR Portfolio Emerging Markets ETF (SPEM)', url: 'https://www.ssga.com/us/en/intermediary/etfs/spdr-portfolio-emerging-markets-etf-spem' },
+          { label: 'All State Street SPDR ETFs', url: 'https://www.ssga.com/us/en/intermediary/etfs' },
+        ],
+        instructions: 'Open product page (e.g. SPEM) → Scroll to "Holdings" → Click "Daily" or "Export" (CSV).',
         canAutoFetch: false,
       },
       directories: {
