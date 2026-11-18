@@ -109,7 +109,7 @@
     "raw_name": "AURINIA PHARMACEUTICALS",
     "raw_ticker": "AUPH",
     "weight": 0.0019,
-    "reason": "ambiguous_collision_spread_0.01",
+    "reason": "ambiguous_collision_spread_0.00",
     "suggested_snippet": {
       "Smartshares:HEAL_HOLDINGS": {
         "AURINIA PHARMACEUTICALS": "INSERT_CANONICAL_ISIN"
@@ -288,19 +288,6 @@
   {
     "provider": "Smartshares",
     "fund_code": "HEAL_HOLDINGS",
-    "raw_name": "SHANGHAI HENLIUS BIOTECH H",
-    "raw_ticker": "2696",
-    "weight": 0.0008,
-    "reason": "ambiguous_collision_spread_0.08",
-    "suggested_snippet": {
-      "Smartshares:HEAL_HOLDINGS": {
-        "SHANGHAI HENLIUS BIOTECH H": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Smartshares",
-    "fund_code": "HEAL_HOLDINGS",
     "raw_name": "SYNDAX PHARMACEUTICALS",
     "raw_ticker": "SNDX",
     "weight": 0.0008,
@@ -444,19 +431,6 @@
   {
     "provider": "Smartshares",
     "fund_code": "HEAL_HOLDINGS",
-    "raw_name": "LEPU BIOPHARMA LTD H",
-    "raw_ticker": "2157",
-    "weight": 0.0003,
-    "reason": "ambiguous_collision_spread_0.04",
-    "suggested_snippet": {
-      "Smartshares:HEAL_HOLDINGS": {
-        "LEPU BIOPHARMA LTD H": "INSERT_CANONICAL_ISIN"
-      }
-    }
-  },
-  {
-    "provider": "Smartshares",
-    "fund_code": "HEAL_HOLDINGS",
     "raw_name": "PROTHENA PLC",
     "raw_ticker": "PRTA",
     "weight": 0.0003,
@@ -525,7 +499,7 @@
     "raw_name": "EDITAS MEDICINE",
     "raw_ticker": "EDIT",
     "weight": 0.0002,
-    "reason": "ambiguous_collision_spread_0.15",
+    "reason": "ambiguous_collision_spread_0.10",
     "suggested_snippet": {
       "Smartshares:HEAL_HOLDINGS": {
         "EDITAS MEDICINE": "INSERT_CANONICAL_ISIN"

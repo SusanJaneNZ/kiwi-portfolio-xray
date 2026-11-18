@@ -102,7 +102,7 @@ class TestAssetClassifierAndBondPipeline(unittest.TestCase):
             (repo_copy / "pipeline" / "normalizer").mkdir(parents=True)
             (repo_copy / "pipeline" / "feeder_registry.json").write_text("{}", encoding="utf-8")
             (repo_copy / "pipeline" / "normalizer" / "gics_mapping.json").write_text("{}", encoding="utf-8")
-            (repo_copy / "pipeline" / "enrichment" / "provider_alias_map.json").write_text("{}", encoding="utf-8")
+            (repo_copy / "pipeline" / "enrichment" / "company_alias_map.json").write_text("{}", encoding="utf-8")
             (repo_copy / "pipeline" / "enrichment" / "issuer_alias_map.json").write_text(
                 Path("pipeline/enrichment/issuer_alias_map.json").read_text(encoding="utf-8"),
                 encoding="utf-8",

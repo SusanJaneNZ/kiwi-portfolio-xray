@@ -31,11 +31,11 @@ class TestAdminUI(unittest.TestCase):
             output_dir=self.output_dir,
         )
         # Isolate alias map, manual securities, and security master to temp dir so repo files stay untouched
-        self.service.alias_map_path = self.tmp_dir / "provider_alias_map.json"
-        shutil.copy(
-            REPO_ROOT / "pipeline" / "enrichment" / "provider_alias_map.json",
-            self.service.alias_map_path,
-        )
+        self.service.alias_map_path = self.tmp_dir / "company_alias_map.json"
+        src_alias = REPO_ROOT / "pipeline" / "enrichment" / "company_alias_map.json"
+        if not src_alias.exists():
+            src_alias = REPO_ROOT / "pipeline" / "enrichment" / "provider_alias_map.json"
+        shutil.copy(src_alias, self.service.alias_map_path)
         self.service.manual_securities_path = self.tmp_dir / "manual_securities.json"
         self.service.security_master_path = self.tmp_dir / "security_master.json"
         self.service.security_master_path.write_text(

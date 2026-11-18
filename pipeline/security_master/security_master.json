@@ -188,7 +188,7 @@
     "name": "SPDR Portfolio Emerging Markets ETF",
     "ticker": "SPEM",
     "country": "Global",
-    "sector": "Broad Market",
+    "sector": "Unclassified",
     "exchange": "MANUAL"
   },
   {
@@ -113916,5 +113916,3677 @@
     "exchange": "GLOBAL",
     "country": "United Kingdom",
     "sector": "Materials"
+  },
+  {
+    "isin": "SEDOL:2569286",
+    "name": "ICICI BANK LTD SPON ADR",
+    "ticker": "IBN",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B15VJF2",
+    "name": "LARSEN + TOUBRO GDR REG S",
+    "ticker": "LTOD",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B163GT0",
+    "name": "MAHINDRA + MAHINDRA SPON GDR",
+    "ticker": "MHID",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:2857334",
+    "name": "VALE SA SP ADR",
+    "ticker": "VALE",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:2616580",
+    "name": "PETROLEO BRASILEIRO SPON ADR",
+    "ticker": "PBR",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999RUBZ900",
+    "name": "RUSSIAN RUBLE",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "Russia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMBX7M2",
+    "name": "KE HOLDINGS INC ADR",
+    "ticker": "BEKE",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BYYDFN0",
+    "name": "ZTO EXPRESS CAYMAN INC ADR",
+    "ticker": "ZTO",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6292038",
+    "name": "ZENITRON CORPORATION",
+    "ticker": "3028",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6655040",
+    "name": "O.S.K. HOLDINGS BHD",
+    "ticker": "OSK",
+    "exchange": "GLOBAL",
+    "country": "Malaysia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:2210476",
+    "name": "CIA DE MINAS BUENAVENTUR ADR",
+    "ticker": "BVN",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BPXVYG8",
+    "name": "CUPID LTD",
+    "ticker": "CUPD",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999TWDZ900",
+    "name": "NEW TAIWAN DOLLAR",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BJ84772",
+    "name": "VISTA ENERGY SAB DE CV",
+    "ticker": "VIST",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B0CL646",
+    "name": "SILICON MOTION TECHNOL ADR",
+    "ticker": "SIMO",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMY3G88",
+    "name": "GULF DEVELOPMENT PCL NVDR",
+    "ticker": "GULF-R",
+    "exchange": "GLOBAL",
+    "country": "Thailand",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6439460",
+    "name": "HONG TAI ELECTRIC INDUSTRIAL",
+    "ticker": "1612",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BFZX9H8",
+    "name": "NIO INC   ADR",
+    "ticker": "NIO",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6432458",
+    "name": "DA LI DEVELOPMENT CO LTD",
+    "ticker": "6177",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6175344",
+    "name": "AUDIX CORP",
+    "ticker": "2459",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BD5CPP1",
+    "name": "MIDEA GROUP CO LTD A",
+    "ticker": "000333",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMCGP59",
+    "name": "BBB FOODS INC CLASS A",
+    "ticker": "TBBB",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B0742L9",
+    "name": "GUAN CHONG BHD",
+    "ticker": "GCB",
+    "exchange": "GLOBAL",
+    "country": "Malaysia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BG0NNS9",
+    "name": "LIN BIOSCIENCE LNC",
+    "ticker": "6696",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BM9JFL7",
+    "name": "BELITE BIO INC   ADR",
+    "ticker": "BLTE",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BDVPYQ8",
+    "name": "OLD MUTUAL LTD",
+    "ticker": "OMU",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:2207177",
+    "name": "SUZANO SA   SPON ADR",
+    "ticker": "SUZ",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B02PY88",
+    "name": "NEXCOM INTERNATIONAL CO LTD",
+    "ticker": "8234",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BD4CB76",
+    "name": "VIYASH SCIENTIFIC LTD",
+    "ticker": "VIYASH",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6139191",
+    "name": "BIOSTAR MICROTECH INTL CORP",
+    "ticker": "2399",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B134TC0",
+    "name": "NATIONAL CO FOR GLASS IN/THE",
+    "ticker": "2150",
+    "exchange": "GLOBAL",
+    "country": "Saudi Arabia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6430010",
+    "name": "HOCHENG CORP",
+    "ticker": "1810",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6825025",
+    "name": "SESODA CORP",
+    "ticker": "1708",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B133NS1",
+    "name": "SUSTAINED INFRASTRUCTURE HOL",
+    "ticker": "2190",
+    "exchange": "GLOBAL",
+    "country": "Saudi Arabia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BJLD2Y8",
+    "name": "OPERADORA DE SITES MEX  A 1",
+    "ticker": "SITES1 A-1",
+    "exchange": "GLOBAL",
+    "country": "Mexico",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6388379",
+    "name": "NATIONAL CENTRAL COOLING COMPA",
+    "ticker": "TABREED",
+    "exchange": "GLOBAL",
+    "country": "United Arab Emirates",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6614717",
+    "name": "NATIONAL INVESTMENTS CO",
+    "ticker": "NINV",
+    "exchange": "GLOBAL",
+    "country": "Kuwait",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BLCCHK9",
+    "name": "CENRA INC",
+    "ticker": "3716",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6878739",
+    "name": "TAIWAN FU HSING INDUSTRIAL",
+    "ticker": "9924",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6293901",
+    "name": "SINPHAR PHARMACEUTICAL CO",
+    "ticker": "1734",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6609627",
+    "name": "MAGNUM BHD",
+    "ticker": "MAGNUM",
+    "exchange": "GLOBAL",
+    "country": "Malaysia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6506160",
+    "name": "AEON CO (M) BHD",
+    "ticker": "AEON",
+    "exchange": "GLOBAL",
+    "country": "Malaysia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6708256",
+    "name": "TAIYEN BIOTECH CO LTD",
+    "ticker": "1737",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B39ZV58",
+    "name": "BASIC CHEMICAL INDUSTRIES",
+    "ticker": "1210",
+    "exchange": "GLOBAL",
+    "country": "Saudi Arabia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNR4ND9",
+    "name": "INLY MEDIA CO LTD A",
+    "ticker": "603598",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B0XGGY0",
+    "name": "TERNIUM SA SPONSORED ADR",
+    "ticker": "TX",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BYQ7XG9",
+    "name": "THYROCARE TECHNOLOGIES LTD",
+    "ticker": "THYROCAR",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6871772",
+    "name": "KERRY TJ LOGISTICS CO LTD",
+    "ticker": "2608",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNR4MC1",
+    "name": "CHONGQING BAIYA SANITARY P A",
+    "ticker": "003006",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BF2WW02",
+    "name": "LUMAX AUTO TECHNOLOGIES LTD",
+    "ticker": "LMAX",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BTDN8N7",
+    "name": "DIAMOND POWER INFRA LTD",
+    "ticker": "DIACABS",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQH7NB7",
+    "name": "WEBULL CORP",
+    "ticker": "BULL",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6876799",
+    "name": "TAISUN ENTERPRISE CO LTD",
+    "ticker": "1218",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BD3CVR7",
+    "name": "LESHA BANK LLC",
+    "ticker": "QFBQ",
+    "exchange": "GLOBAL",
+    "country": "Qatar",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B128GX3",
+    "name": "BATIC INVESTMENTS AND LOGIST",
+    "ticker": "BATIC",
+    "exchange": "GLOBAL",
+    "country": "Saudi Arabia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6652591",
+    "name": "AAYAN LEASING + INVESTMENT",
+    "ticker": "AAYAN",
+    "exchange": "GLOBAL",
+    "country": "Kuwait",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BRBTV78",
+    "name": "SHANGHAI OPM BIOSCIENCES C A",
+    "ticker": "688293",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BPT2CH2",
+    "name": "LLOYDS ENGINEERING WORKS LTD",
+    "ticker": "LLOYDSEN",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQWRJJ2",
+    "name": "HITGEN INC A",
+    "ticker": "688222",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BVY4606",
+    "name": "BLUESTONE JEWELLERY AND LIFE",
+    "ticker": "BLUESTON",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BTDQCG7",
+    "name": "QITIAN TECHNOLOGY GROUP C A",
+    "ticker": "300061",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999INRZ930",
+    "name": "INDIAN RUPEE",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B3VYR22",
+    "name": "GULF INSURANCE GROUP",
+    "ticker": "8250",
+    "exchange": "GLOBAL",
+    "country": "Saudi Arabia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BSZ8B89",
+    "name": "INNOCARE PHARMA LTD A",
+    "ticker": "688428",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B0Z7LP7",
+    "name": "VIMTA LABS LTD",
+    "ticker": "VL",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BD6QVC1",
+    "name": "GUANGDONG ORIENT ZIRCONIC  A",
+    "ticker": "002167",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:2454810",
+    "name": "INDUSTRIAS CH S.A.B. SER B",
+    "ticker": "ICHB",
+    "exchange": "GLOBAL",
+    "country": "Mexico",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BLD30P7",
+    "name": "D MARKET ELECTRONIC SERV ADR",
+    "ticker": "HEPS",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6580034",
+    "name": "BANK DANAMON INDONESIA TBK",
+    "ticker": "BDMN",
+    "exchange": "GLOBAL",
+    "country": "Indonesia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B128FB4",
+    "name": "FITAIHI HOLDING GROUP",
+    "ticker": "4180",
+    "exchange": "GLOBAL",
+    "country": "Saudi Arabia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B62VHN4",
+    "name": "STL TECHNOLOGY CO LTD",
+    "ticker": "4931",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMBKL76",
+    "name": "RLX TECHNOLOGY INC ADR",
+    "ticker": "RLX",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BTMNQB2",
+    "name": "GRUPO AEROMEXICO SAB DE CV",
+    "ticker": "AERO",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNB7GC4",
+    "name": "UMM AL QURA CEMENT CO",
+    "ticker": "3005",
+    "exchange": "GLOBAL",
+    "country": "Saudi Arabia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B02J0P9",
+    "name": "USINAS SIDERURG MINAS SP ADR",
+    "ticker": "USNZY",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BHQPS14",
+    "name": "CHEMPARTNER PHARMATECH CO A",
+    "ticker": "300149",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQYL196",
+    "name": "KEXING BIOPHARRM CO LTD A",
+    "ticker": "688136",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BYW5QR9",
+    "name": "CHINA TESTING + CERTIFICAT A",
+    "ticker": "603060",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6613327",
+    "name": "MYSON CENTURY INC",
+    "ticker": "5314",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999CLPZ920",
+    "name": "CHILEAN PESO",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "Chile",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B11W6D6",
+    "name": "ASHAPURA MINECHEM LTD FOREIG",
+    "ticker": "ASMN",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B29Y7G1",
+    "name": "AL KHALEEJ TRAINING AND EDUC",
+    "ticker": "4290",
+    "exchange": "GLOBAL",
+    "country": "Saudi Arabia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHPM57",
+    "name": "FRONTIER BIOTECHNOLOGIES I A",
+    "ticker": "688221",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6525789",
+    "name": "FDC LTD",
+    "ticker": "FDCLT",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B126TB6",
+    "name": "HIMAX TECHNOLOGIES INC ADR",
+    "ticker": "HIMX",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BKF0BP6",
+    "name": "GRADE UPON TECHNOLOGY CORP",
+    "ticker": "6739",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQ7YGB9",
+    "name": "QUALITY POWER ELECTRICAL EQU",
+    "ticker": "QPOWER",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B128GY4",
+    "name": "SAUDI PUBLIC TRANSPORT CO",
+    "ticker": "4040",
+    "exchange": "GLOBAL",
+    "country": "Saudi Arabia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B04GC30",
+    "name": "GOODLUCK INDIA LTD",
+    "ticker": "GLIN",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BVP8P00",
+    "name": "SUZHOU SEPAX TECHNOLOGIES  A",
+    "ticker": "688758",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B7C6V89",
+    "name": "PPC LTD",
+    "ticker": "PPC",
+    "exchange": "GLOBAL",
+    "country": "South Africa",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMGS410",
+    "name": "ABU DHABI PORTS CO PJSC",
+    "ticker": "ADPORTS",
+    "exchange": "GLOBAL",
+    "country": "United Arab Emirates",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQS9486",
+    "name": "STRUCTURE THERAPEUTICS INC",
+    "ticker": "GPCR",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMW7723",
+    "name": "SHANGHAI INNOSTAR BIO TECH A",
+    "ticker": "688710",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BVPGMZ8",
+    "name": "TOURISM FINANCE CORP INDIA",
+    "ticker": "TFCI",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BLBLMG8",
+    "name": "MINISO GROUP HOLDING LTD ADR",
+    "ticker": "MNSO",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BK71G07",
+    "name": "NANHUA FUTURES CO LTD A",
+    "ticker": "603093",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B038VD0",
+    "name": "WHEELS INDIA LTD",
+    "ticker": "WHL",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BJP55X0",
+    "name": "BETTERWARE DE MEXICO SAPI DE",
+    "ticker": "BWMX",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BRVVY97",
+    "name": "PARAS DEFENCE + SPACE TECHNO",
+    "ticker": "PARAS",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BD6QVD2",
+    "name": "XIAMEN ANNE CORP  A",
+    "ticker": "002235",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQ0H466",
+    "name": "WUHAN HUAKANG CENTURY CLEA A",
+    "ticker": "301235",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6697202",
+    "name": "IBASE TECHNOLOGY INC",
+    "ticker": "8050",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMX9K07",
+    "name": "LEGEND BIOTECH CORP ADR",
+    "ticker": "LEGN",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHPNV0",
+    "name": "BEIJING SUN NOVO PHARMACEU A",
+    "ticker": "688621",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHPMZ7",
+    "name": "CHENGDU OLYMVAX BIOPHARMAC A",
+    "ticker": "688319",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BD203Z4",
+    "name": "LUX INDUSTRIES LTD",
+    "ticker": "LUX",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B241789",
+    "name": "MANNAI CORPORATION QPSC",
+    "ticker": "MCCS",
+    "exchange": "GLOBAL",
+    "country": "Qatar",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999MXNZ920",
+    "name": "MEXICAN PESO (NEW)",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "Mexico",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHSQQ5",
+    "name": "R+G PHARMASTUDIES CO LTD A",
+    "ticker": "301333",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BRSD270",
+    "name": "WUXI HONGSHENG HEAT EXCHAN A",
+    "ticker": "603090",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BHL0YB6",
+    "name": "SHANGHAI FENGYUZHU CULTURE A",
+    "ticker": "603466",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6696812",
+    "name": "TRUELIGHT CORP",
+    "ticker": "3234",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNFXCN1",
+    "name": "BAAN HOLDING GROUP CO",
+    "ticker": "1820",
+    "exchange": "GLOBAL",
+    "country": "Saudi Arabia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6360560",
+    "name": "SHIH WEI NAVIGATION CO LTD",
+    "ticker": "5608",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BRWKBJ2",
+    "name": "ENVIRO INFRA ENGINEERS LTD",
+    "ticker": "EIEL",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6867340",
+    "name": "SML MAHINDRA LTD",
+    "ticker": "SMLMAH",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6148205",
+    "name": "QATAR NAVIGATION",
+    "ticker": "QNNS",
+    "exchange": "GLOBAL",
+    "country": "Qatar",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQ0H358",
+    "name": "SICHUAN SHUDAO EQUIPMENT T A",
+    "ticker": "300540",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B1377Y7",
+    "name": "SAUDI ADVANCED INDUSTRIES",
+    "ticker": "2120",
+    "exchange": "GLOBAL",
+    "country": "Saudi Arabia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQYKSR0",
+    "name": "GUANGDONG QUNXING TOYS A",
+    "ticker": "002575",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQ0J688",
+    "name": "ACTER TECHNOLOGY INTEGRATI A",
+    "ticker": "603163",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BF2DZD9",
+    "name": "ANHUI TRANSPORT CONSULTING A",
+    "ticker": "603357",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNZJJN8",
+    "name": "LIANYOU METALS CO LTD",
+    "ticker": "7610",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B137XF0",
+    "name": "NAMA CHEMICALS CO",
+    "ticker": "2210",
+    "exchange": "GLOBAL",
+    "country": "Saudi Arabia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B1CFJN5",
+    "name": "QATARI INVESTORS GROUP",
+    "ticker": "QIGD",
+    "exchange": "GLOBAL",
+    "country": "Qatar",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BV980T0",
+    "name": "SHADOWFAX TECHNOLOGIES LTD",
+    "ticker": "SHADOWF",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BP91MG8",
+    "name": "SUZHOU SLAC PRECISION EQUI A",
+    "ticker": "300382",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BVW1PQ8",
+    "name": "MOSCHIP TECHNOLOGIES LTD",
+    "ticker": "MOSCHIP",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BSMR3C7",
+    "name": "KRN HEAT EXCHANGER AND REFRI",
+    "ticker": "KRN",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6949312",
+    "name": "WEI CHUAN FOODS",
+    "ticker": "1201",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6358372",
+    "name": "FWUSOW INDUSTRY CO LTD",
+    "ticker": "1219",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BS2FSV5",
+    "name": "BIOCYTOGEN PHARMACEUTICALS A",
+    "ticker": "688796",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999MYRZ920",
+    "name": "MALAYSIAN RINGGIT",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "Malaysia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQ0H400",
+    "name": "SHANDONG LINUO PHARMACEUTICA",
+    "ticker": "301188",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B1X5Y51",
+    "name": "WAHA CAPITAL PJSC",
+    "ticker": "WAHA",
+    "exchange": "GLOBAL",
+    "country": "United Arab Emirates",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BR0W0D7",
+    "name": "GRESGYING DIGITAL ENERGY T A",
+    "ticker": "600212",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BFYN140",
+    "name": "SOLARA ACTIVE PHARMA SCIENCES",
+    "ticker": "SOLARA",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6080040",
+    "name": "MEDICARE GROUP",
+    "ticker": "MCGS",
+    "exchange": "GLOBAL",
+    "country": "Qatar",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BV0VV62",
+    "name": "IOL CHEMICALS AND PHARMA LTD",
+    "ticker": "ICP",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMV7N82",
+    "name": "STEEL STRIPS WHEELS LTD",
+    "ticker": "SSW",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQWRJF8",
+    "name": "SHOUYAO HOLDINGS BEIJING C A",
+    "ticker": "688197",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BR0ZLQ6",
+    "name": "UNISOUND AI TECHNOLOGY CO  H",
+    "ticker": "9678",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BPGZXB5",
+    "name": "XP INC   BDR",
+    "ticker": "XPBR31",
+    "exchange": "GLOBAL",
+    "country": "Brazil",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BWXS480",
+    "name": "BALU FORGE INDUSTRIES LTD",
+    "ticker": "BALUFORG",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BND9RF8",
+    "name": "GEMPHARMATECH CO LTD A",
+    "ticker": "688046",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHP6W2",
+    "name": "BEIJING ORIENTAL JICHENG C A",
+    "ticker": "002819",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BD6QWJ5",
+    "name": "WUXI LEAD INTELLIGENT EQUI A",
+    "ticker": "300450",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6293570",
+    "name": "MOREPEN LABORATORIES LTD",
+    "ticker": "MORE",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B5VJ8Z1",
+    "name": "ESHRAQ INVESTMENTS PJSC",
+    "ticker": "ESHRAQ",
+    "exchange": "GLOBAL",
+    "country": "United Arab Emirates",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6930338",
+    "name": "VST INDUSTRIES LTD",
+    "ticker": "VST",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHPP92",
+    "name": "QINGDAO NOVELBEAM TECHNOLO A",
+    "ticker": "688677",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BL64H23",
+    "name": "EVER OHMS TECHNOLOGY CO LTD",
+    "ticker": "6834",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BFF1YX3",
+    "name": "ZHEJIANG DAYUAN PUMPS INDU A",
+    "ticker": "603757",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BM9VMH8",
+    "name": "INOX INDIA LTD",
+    "ticker": "INOXINDI",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQ0J763",
+    "name": "JIAXING ZMAX OPTECH CO LTD A",
+    "ticker": "688307",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNKCKW8",
+    "name": "ATRENEW INC",
+    "ticker": "RERE",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNR4MZ4",
+    "name": "GUANGLIAN AVIATION INDUSTR A",
+    "ticker": "300900",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BRBHJL2",
+    "name": "AVANTEL LTD",
+    "ticker": "AVTS",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BP8Q7M5",
+    "name": "SKIPPER LTD",
+    "ticker": "SKIPPER",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6325097",
+    "name": "MAN INDUSTRIES (INDIA) LTD",
+    "ticker": "MAN",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B24F8T9",
+    "name": "DEYAAR DEVELOPMENT PJSC",
+    "ticker": "DEYAAR",
+    "exchange": "GLOBAL",
+    "country": "United Arab Emirates",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQ0J7M9",
+    "name": "XI AN ACTIONPOWER ELECTRIC A",
+    "ticker": "688719",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMDJ6L0",
+    "name": "FINEOTEX CHEMICAL LTD",
+    "ticker": "FTXC",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMYSK69",
+    "name": "TRANSRAIL LIGHTING LTD",
+    "ticker": "TRANSRAI",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BJ7GLF5",
+    "name": "ASIA METAL INDUSTRIES LNC",
+    "ticker": "6727",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHPRV8",
+    "name": "ZHEJIANG SONGYUAN AUTOMOTI A",
+    "ticker": "300893",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6068411",
+    "name": "ABOITIZ EQUITY VENTURES INC",
+    "ticker": "AEV",
+    "exchange": "GLOBAL",
+    "country": "Philippines",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B128FC5",
+    "name": "AL JOUF AGRICULTURE DEVELOPM",
+    "ticker": "6070",
+    "exchange": "GLOBAL",
+    "country": "Saudi Arabia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6147105",
+    "name": "ALLIANCE GLOBAL GROUP INC",
+    "ticker": "AGI",
+    "exchange": "GLOBAL",
+    "country": "Philippines",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BFYN1M8",
+    "name": "DERAYAH REIT",
+    "ticker": "4339",
+    "exchange": "GLOBAL",
+    "country": "Saudi Arabia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BF5CJ19",
+    "name": "INTEGRATED HOLDING CO KCSC",
+    "ticker": "INTEGRATED",
+    "exchange": "GLOBAL",
+    "country": "Kuwait",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999THBZ910",
+    "name": "THAILAND BAHT",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "Thailand",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQYL1H4",
+    "name": "WETOWN ELECTRIC GROUP CO L A",
+    "ticker": "688226",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHPS04",
+    "name": "NINGBO HENGSHUAI CO LTD A",
+    "ticker": "300969",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQ3RQ90",
+    "name": "HUNAN KAIMEITE GASES CO A",
+    "ticker": "002549",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B19NQH5",
+    "name": "AFG INTERNATIONAL CO",
+    "ticker": "4240",
+    "exchange": "GLOBAL",
+    "country": "Saudi Arabia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNLYJD7",
+    "name": "VTEX  CLASS A",
+    "ticker": "VTEX",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHNFT6",
+    "name": "INFOTMIC CO LTD A",
+    "ticker": "000670",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BD580C1",
+    "name": "SHENZHEN COSHIP ELECTRONIC A",
+    "ticker": "002052",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQV11X3",
+    "name": "REFEX INDUSTRIES LTD",
+    "ticker": "REFX",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BFB4S90",
+    "name": "GETEIN BIOTECH INC A",
+    "ticker": "603387",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNDKPG8",
+    "name": "SHENZHEN INJOINIC TECHNOLO A",
+    "ticker": "688209",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6431701",
+    "name": "APAC OPTO ELECTRONICS INC",
+    "ticker": "4908",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQ849K8",
+    "name": "BLUE JET HEALTHCARE LTD",
+    "ticker": "BLUEJET",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMCTCN5",
+    "name": "LANDMARK CARS LTD",
+    "ticker": "LANDMARK",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BYXBL71",
+    "name": "CHIN HIN GROUP BHD",
+    "ticker": "CHINHIN",
+    "exchange": "GLOBAL",
+    "country": "Malaysia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B29H4P8",
+    "name": "AEON CREDIT SERVICE M BHD",
+    "ticker": "AEONCR",
+    "exchange": "GLOBAL",
+    "country": "Malaysia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BVMWHP4",
+    "name": "PONDY OXIDES + CHEMICAL LTD",
+    "ticker": "POCL",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6351865",
+    "name": "DIGITAL CHINA HOLDINGS LTD",
+    "ticker": "861",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNQMPN8",
+    "name": "RENEW ENERGY GLOBAL PLC A",
+    "ticker": "RNW",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BK717K4",
+    "name": "DONGGUAN YUTONG OPTICAL TE A",
+    "ticker": "300790",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BVMVC90",
+    "name": "KWALITY WALL S INDIA LTD",
+    "ticker": "KWIL",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BXP3SR7",
+    "name": "INTER + CO INC",
+    "ticker": "INBR34",
+    "exchange": "GLOBAL",
+    "country": "Brazil",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B1VWWZ0",
+    "name": "WALAA COOPERATIVE INSURANCE",
+    "ticker": "8060",
+    "exchange": "GLOBAL",
+    "country": "Saudi Arabia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B0PWPG1",
+    "name": "AL MAZAYA HOLDING CO",
+    "ticker": "MAZAYA",
+    "exchange": "GLOBAL",
+    "country": "Kuwait",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BV2DW30",
+    "name": "BUTONG GROUP",
+    "ticker": "6090",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6704878",
+    "name": "PRAKASH INDUSTRIES LTD",
+    "ticker": "PKI",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BD760Q7",
+    "name": "SHANGHAI COOLTECH POWER CO A",
+    "ticker": "300153",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BD5M131",
+    "name": "GUANGDONG CHJ INDUSTRY CO A",
+    "ticker": "002345",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B7Y0CM0",
+    "name": "ORISSA MINERALS DEVELOPMENT",
+    "ticker": "ORISSAMINE",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B137VW3",
+    "name": "ALUJAIN CORP",
+    "ticker": "2170",
+    "exchange": "GLOBAL",
+    "country": "Saudi Arabia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BP9QBT9",
+    "name": "VICTORY GIANT TECHNOLOGY H H",
+    "ticker": "2476",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BRDVR41",
+    "name": "NINGBO ENERGY GROUP CO LTD A",
+    "ticker": "600982",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B504TB0",
+    "name": "DIAN SWASTATIKA SENTOSA TBK",
+    "ticker": "DSSA",
+    "exchange": "GLOBAL",
+    "country": "Indonesia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMGS120",
+    "name": "KUNSHAN HUGUANG AUTO HARNE A",
+    "ticker": "605333",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BD5M1K8",
+    "name": "SUNRISE GROUP CO LTD A",
+    "ticker": "002752",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BFY8HB4",
+    "name": "FOCUS LIGHTINGS CO LTD A",
+    "ticker": "300708",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BHRV3M7",
+    "name": "WANGNENG ENVIRONMENT CO LT A",
+    "ticker": "002034",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNSMZ69",
+    "name": "CE INFO SYSTEMS LTD",
+    "ticker": "MAPMYIND",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BD5LXG5",
+    "name": "KYLAND TECHNOLOGY CO LTD A",
+    "ticker": "300353",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BRRGTB3",
+    "name": "WAAREE RENEWABLE TECHNOLOGIE",
+    "ticker": "WAREERTL",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BVZKXF7",
+    "name": "VIKRAM SOLAR LTD",
+    "ticker": "VIKRAMSO",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BCDNPV5",
+    "name": "INTELLIEPI INC",
+    "ticker": "4971",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BD5LRJ6",
+    "name": "YINBANG CLAD MATERIAL CO L A",
+    "ticker": "300337",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNZFHP4",
+    "name": "LEPU BIOPHARMA CO LTD H",
+    "ticker": "2157",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B1VWWT4",
+    "name": "MEDITERRANEAN + GULF INSURAN",
+    "ticker": "8030",
+    "exchange": "GLOBAL",
+    "country": "Saudi Arabia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BRDWHL1",
+    "name": "RAYMOND REALTY LTD",
+    "ticker": "RAYMONDR",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BR0W178",
+    "name": "HOB BIOTECH GROUP SUZHOU C A",
+    "ticker": "688656",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6104337",
+    "name": "PRISM JOHNSON LTD",
+    "ticker": "PRSMJ",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BTZH978",
+    "name": "INNOSTAR SERVICE INC",
+    "ticker": "7828",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B3LQVN7",
+    "name": "TAIMIDE TECH INC",
+    "ticker": "3645",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQYKSW5",
+    "name": "SHENZHEN AMPRON TECHNOLOGY A",
+    "ticker": "301413",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6152206",
+    "name": "TAINAN ENTERPRISES CO LTD",
+    "ticker": "1473",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6726913",
+    "name": "ANALOG INTEGRATIONS CORP",
+    "ticker": "6291",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BRJG4V6",
+    "name": "PEGBIO CO LTD H",
+    "ticker": "2565",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMTCWG0",
+    "name": "DONGGUAN EONTEC CO LTD A",
+    "ticker": "300328",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B4N6ZM9",
+    "name": "SURYA SEMESTA INTERNUSA PT",
+    "ticker": "SSIA",
+    "exchange": "GLOBAL",
+    "country": "Indonesia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B01TK83",
+    "name": "PROGATE GROUP CORPORATION",
+    "ticker": "8227",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B00YYR6",
+    "name": "BAJAJ HINDUSTHAN SUGAR LTD",
+    "ticker": "BJH",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BX58WZ8",
+    "name": "METIS TECHBIO CO LTD H",
+    "ticker": "7666",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMYD6Y4",
+    "name": "AL SEER MARINE SUPPLIES + EQ",
+    "ticker": "ASM",
+    "exchange": "GLOBAL",
+    "country": "United Arab Emirates",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMQC6Q1",
+    "name": "JACOBIO PHARMACEUTICALS GROU",
+    "ticker": "1167",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6503235",
+    "name": "HEAVY ENGINEERING AND SHIP B",
+    "ticker": "SHIP",
+    "exchange": "GLOBAL",
+    "country": "Kuwait",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BXP3SH7",
+    "name": "AVENUESAI LTD",
+    "ticker": "CCAVENUE",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQTYGN9",
+    "name": "NANJING LEADS BIOLABS CO L H",
+    "ticker": "9887",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BLH1TK5",
+    "name": "HUUUGE INC",
+    "ticker": "HUG",
+    "exchange": "GLOBAL",
+    "country": "Poland",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6388380",
+    "name": "UNION PROPERTIES PJSC",
+    "ticker": "UPP",
+    "exchange": "GLOBAL",
+    "country": "United Arab Emirates",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BS99Y12",
+    "name": "EMS LTD",
+    "ticker": "EMSLIMIT",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BJTL675",
+    "name": "UP FINTECH HOLDING LTD   ADR",
+    "ticker": "TIGR",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMY5866",
+    "name": "YALLA GROUP LTD",
+    "ticker": "YALA",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BV4H360",
+    "name": "QUANTGROUP HD LTD",
+    "ticker": "2685",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BK4XYM4",
+    "name": "CLIENT SERVICE INTERNATION A",
+    "ticker": "300663",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B133WP1",
+    "name": "TABUK CEMENT CO",
+    "ticker": "3090",
+    "exchange": "GLOBAL",
+    "country": "Saudi Arabia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHPH85",
+    "name": "FUJIAN MINDONG ELECTRIC PW A",
+    "ticker": "000993",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHNCC8",
+    "name": "SHENZHEN QINGYI PHOTOMASK  A",
+    "ticker": "688138",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B39NJF8",
+    "name": "CHANDRA ASRI PACIFIC TBK PT",
+    "ticker": "TPIA",
+    "exchange": "GLOBAL",
+    "country": "Indonesia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6290849",
+    "name": "DYNAMATIC TECHNO FOREIGN",
+    "ticker": "DYTC",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999CNYZ910",
+    "name": "YUAN RENMINBI",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BFY8GT5",
+    "name": "AOSHIKANG TECHNOLOGY CO LT A",
+    "ticker": "002913",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQ3RQW3",
+    "name": "ACROBIOSYSTEMS CO LTD A",
+    "ticker": "301080",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BF3S3D9",
+    "name": "HUA MEDICINE",
+    "ticker": "2552",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQWRK33",
+    "name": "JILIN OLED MATERIAL TECH C A",
+    "ticker": "688378",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BJBL0L5",
+    "name": "VIVA BIOTECH HOLDINGS",
+    "ticker": "1873",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6344832",
+    "name": "SHUAA CAPITAL PSC",
+    "ticker": "SHUAA",
+    "exchange": "GLOBAL",
+    "country": "United Arab Emirates",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B3QYPH8",
+    "name": "AIC INC",
+    "ticker": "3693",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BKLJK94",
+    "name": "SHANGHAI HENLIUS BIOTECH I H",
+    "ticker": "2696",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BD5M2P0",
+    "name": "ZHEJIANG SHIBAO CO LTD A",
+    "ticker": "002703",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B2PFFZ3",
+    "name": "SANDUR MANGANESE + IRON ORE",
+    "ticker": "SANDUMA",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B292TZ8",
+    "name": "RELIGARE ENTERPRISES LTD",
+    "ticker": "RELIGARE",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6418889",
+    "name": "FERTILISERS + CHEM TRAVANCR",
+    "ticker": "FCT",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BF5K6W3",
+    "name": "PANTAI INDAH KAPUK DUA TBK P",
+    "ticker": "PANI",
+    "exchange": "GLOBAL",
+    "country": "Indonesia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BHQK875",
+    "name": "JONES TECH PLC A",
+    "ticker": "300684",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BD9FVN6",
+    "name": "INDO COUNT INDUSTRIES LTD",
+    "ticker": "ICNT",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B68ZXW1",
+    "name": "CHIEFTEK PRECISION CO LTD",
+    "ticker": "1597",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BHXGX71",
+    "name": "CARYSIL LTD",
+    "ticker": "CARYSIL",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B1RDDD2",
+    "name": "TECHNOCRAFT INDUSTRIES INDIA",
+    "ticker": "TIIL",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BTXZ190",
+    "name": "VEDANTA IRON AND STEEL LTD",
+    "ticker": "VISL",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6152693",
+    "name": "HINDUSTAN OIL EXPLORATION CO",
+    "ticker": "HOE",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BN95XV8",
+    "name": "LAEKNA INC",
+    "ticker": "2105",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMFDGL0",
+    "name": "TAIWAN PURITIC CORP",
+    "ticker": "6826",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHPQF5",
+    "name": "MEIG SMART TECH CO LTD  A",
+    "ticker": "002881",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6163446",
+    "name": "VENKY S (INDIA) LTD",
+    "ticker": "WH",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BRS77M2",
+    "name": "CHONGQING MILLISON TECHNOL A",
+    "ticker": "301307",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BL549T5",
+    "name": "SANGHVI MOVERS LTD",
+    "ticker": "SGM",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BRDZPZ0",
+    "name": "JPP HOLDING CO LTD",
+    "ticker": "5284",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNC1SC9",
+    "name": "REDTAPE LTD/INDIA",
+    "ticker": "REDTAPE",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMW9BX8",
+    "name": "ANTENGENE CORP LTD",
+    "ticker": "6996",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQWR9X6",
+    "name": "NANCAL TECHNOLOGY C0 LTD A",
+    "ticker": "603859",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B8DQ8Z1",
+    "name": "CITY CEMENT CO",
+    "ticker": "3003",
+    "exchange": "GLOBAL",
+    "country": "Saudi Arabia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHPNQ5",
+    "name": "WUXI ETEK MICROELECTRONICS A",
+    "ticker": "688601",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMF7PC6",
+    "name": "BEIJING HOTGEN BIOTECH CO  A",
+    "ticker": "688068",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHPNN2",
+    "name": "CHIPSEA TECHNOLOGIES SHENZ A",
+    "ticker": "688595",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BD5LRY1",
+    "name": "CHANGCHUN UP OPTOTECH CO A",
+    "ticker": "002338",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B7689B0",
+    "name": "RATTANINDIA ENTERPRISES LTD",
+    "ticker": "RATI",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMF7MG9",
+    "name": "HAINAN HAIQI TRANSPORTATIO A",
+    "ticker": "603069",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B037FM4",
+    "name": "ALCOR MICRO CORP",
+    "ticker": "8054",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B0X8XY5",
+    "name": "TWOWAY COMMUNICATION INC",
+    "ticker": "8045",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BLB3F10",
+    "name": "HEFEI JIANGHANG AIRCRAFT E A",
+    "ticker": "688586",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BL6CQL9",
+    "name": "CHINA LEADSHINE TECHNOLOGY A",
+    "ticker": "002979",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BF02YN1",
+    "name": "NEXA RESOURCES SA",
+    "ticker": "NEXA",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6520502",
+    "name": "AL ARABI GROUP HOLDING CO",
+    "ticker": "AGHC",
+    "exchange": "GLOBAL",
+    "country": "Kuwait",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BWY5F65",
+    "name": "SAUDI CO FOR HARDWARE LLC",
+    "ticker": "4008",
+    "exchange": "GLOBAL",
+    "country": "Saudi Arabia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BFLTDL2",
+    "name": "ASCLETIS PHARMA INC",
+    "ticker": "1672",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B96RL59",
+    "name": "REPCO HOME FINANCE LTD",
+    "ticker": "REPCO",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6632612",
+    "name": "UNITED ALLOY TECH CO",
+    "ticker": "3162",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQ3RQM3",
+    "name": "XI AN SINOFUSE ELECTRIC CO A",
+    "ticker": "301031",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999IDRZ940",
+    "name": "INDONESIAN RUPIAH",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "Indonesia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHPN98",
+    "name": "WUXI CHIPOWN MICRO ELECTRO A",
+    "ticker": "688508",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6325291",
+    "name": "SUNFLAG IRON + STEEL CO LTD",
+    "ticker": "SUNF",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999USDZ920",
+    "name": "US DOLLAR",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999PHPZ980",
+    "name": "PHILIPPINE PESO",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "Philippines",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B019W10",
+    "name": "SHENMAO TECHNOLOGY INC",
+    "ticker": "3305",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B8HNYQ1",
+    "name": "DATASONIC GROUP BHD",
+    "ticker": "DATASONI",
+    "exchange": "GLOBAL",
+    "country": "Malaysia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMQ63N9",
+    "name": "CHINA SUNTIEN GREEN ENERGY A",
+    "ticker": "600956",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMVLMK9",
+    "name": "AGORA INC ADR",
+    "ticker": "API",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHNCK6",
+    "name": "HALO MICROELECTRONICS CO L A",
+    "ticker": "688173",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHPMW4",
+    "name": "KEDE NUMERICAL CONTROL CO  A",
+    "ticker": "688305",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BPNVWS6",
+    "name": "VENUS PIPES + TUBES LTD",
+    "ticker": "VENUSPIP",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BR2QH03",
+    "name": "BARITO RENEWABLES ENERGY TBK",
+    "ticker": "BREN",
+    "exchange": "GLOBAL",
+    "country": "Indonesia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999HKDZ990",
+    "name": "HONG KONG DOLLAR",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHPCM4",
+    "name": "DONGHUA TESTING TECHNOLOGY A",
+    "ticker": "300354",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6693932",
+    "name": "REGIONAL CONTAINER LINES FOR",
+    "ticker": "RCL-F",
+    "exchange": "GLOBAL",
+    "country": "Thailand",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BKF09F2",
+    "name": "APCOTEX INDUSTRIES LTD",
+    "ticker": "APCO",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BJVQH75",
+    "name": "HEMISPHERE PROPERTIES INDIA",
+    "ticker": "HEMIPROP",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B60CZW4",
+    "name": "HERFY FOOD SERVICES CO",
+    "ticker": "6002",
+    "exchange": "GLOBAL",
+    "country": "Saudi Arabia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BF2B3K6",
+    "name": "DISHMAN CARBOGEN AMCIS LTD",
+    "ticker": "DCAL",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMGS164",
+    "name": "ZHEJIANG SUNRIVER CULTURE  A",
+    "ticker": "600576",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHNC62",
+    "name": "SIGLENT TECHNOLOGIES CO LT A",
+    "ticker": "688112",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B18YT14",
+    "name": "FIEM INDUSTRIES LTD",
+    "ticker": "FIEM",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMCM6Y3",
+    "name": "VEEDOL CORPORATION LTD",
+    "ticker": "VEEDOL",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B00LTK5",
+    "name": "AMLAK FINANCE",
+    "ticker": "AMLAK",
+    "exchange": "GLOBAL",
+    "country": "United Arab Emirates",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMF7MP8",
+    "name": "ZHEJIANG SUNOREN SOLAR TECHN",
+    "ticker": "603105",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BD5CQ70",
+    "name": "DONGJIANG ENVIRONMENTAL CO A",
+    "ticker": "002672",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHNCY0",
+    "name": "QINGDAO YUNLU ADVANCED MAT A",
+    "ticker": "688190",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BRS77F5",
+    "name": "GEMAC ENGINEERING MACHINER A",
+    "ticker": "301048",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6312345",
+    "name": "JAIN IRRIGATION SYSTEMS LTD",
+    "ticker": "JI",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQY2KJ2",
+    "name": "SHARDA CROPCHEM LTD",
+    "ticker": "SHCR",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B06D3R0",
+    "name": "SHIVALIK BIMETAL CONTROLS",
+    "ticker": "SBC",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BT6M5F2",
+    "name": "JTL INDUSTRIES LTD",
+    "ticker": "JTLIND",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B0TLX93",
+    "name": "AGI GREENPAC LTD",
+    "ticker": "AGIG",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6706636",
+    "name": "RAS AL KHAIMAH CERAMICS PJSC",
+    "ticker": "RAKCEC",
+    "exchange": "GLOBAL",
+    "country": "United Arab Emirates",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHSND1",
+    "name": "SANHE TONGFEI REFRIGERATI A",
+    "ticker": "300990",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BN2R225",
+    "name": "SOLUSI SINERGI DIGITAL TBK P",
+    "ticker": "WIFI",
+    "exchange": "GLOBAL",
+    "country": "Indonesia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BYYT5H2",
+    "name": "BRAVE C+H SUPPLY CO LTD",
+    "ticker": "6538",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6101963",
+    "name": "BAOTEK INDUSTRIAL MATERIALS",
+    "ticker": "5340",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6412609",
+    "name": "ADVANCED INFO SERVICE NVDR",
+    "ticker": "ADVANC",
+    "exchange": "GLOBAL",
+    "country": "Thailand",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999COPZ990",
+    "name": "COLOMBIAN PESO",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "Colombia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BD3GH93",
+    "name": "RIYAD REIT FUND",
+    "ticker": "4330",
+    "exchange": "GLOBAL",
+    "country": "Saudi Arabia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B2RJPM0",
+    "name": "BUMI SERPONG DAMAI PT",
+    "ticker": "BSDE",
+    "exchange": "GLOBAL",
+    "country": "Indonesia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6312356",
+    "name": "EASTERN COMMUNICATIONS CO B",
+    "ticker": "900941",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BF4QKQ4",
+    "name": "INGENTEC CORP",
+    "ticker": "4768",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMGS4T8",
+    "name": "YUTONG HEAVY INDUSTRIES CO A",
+    "ticker": "600817",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMF7PR1",
+    "name": "SHANGHAI SANYOU MEDICAL CO A",
+    "ticker": "688085",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BD5M2H2",
+    "name": "TIANYU DIGITAL TECHNOLOGY A",
+    "ticker": "002354",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BKM64B4",
+    "name": "BALADNA",
+    "ticker": "BLDN",
+    "exchange": "GLOBAL",
+    "country": "Qatar",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BD761F3",
+    "name": "JIANGSU OLIVE SENSORS HIGH A",
+    "ticker": "300507",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHPCS0",
+    "name": "ZHENGZHOU GL TECH CO LTD A",
+    "ticker": "300480",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B65WP52",
+    "name": "SUNPLUS INNOVATION TECHNOLOG",
+    "ticker": "5236",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMH6V56",
+    "name": "IMMUNEONCO BIOPHARMACEUTIC H",
+    "ticker": "1541",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BM9WRL0",
+    "name": "VISCO VISION INC",
+    "ticker": "6782",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B842290",
+    "name": "BOMBAY DYEING + MFG CO LTD",
+    "ticker": "BD",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6441885",
+    "name": "HUA ENG WIRE + CABLE CO LTD",
+    "ticker": "1608",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHSQN2",
+    "name": "WCON ELECTRONICS CO LTD",
+    "ticker": "301328",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B73DV67",
+    "name": "NAJRAN CEMENT CO",
+    "ticker": "3002",
+    "exchange": "GLOBAL",
+    "country": "Saudi Arabia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BKS7GN7",
+    "name": "SICHUAN GOLD CO LTD A",
+    "ticker": "001337",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMW2GQ5",
+    "name": "BRILLIAN NETWORK + AUTOMATIO",
+    "ticker": "6788",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQ1LDD7",
+    "name": "BURJEEL HOLDINGS PLC",
+    "ticker": "BURJEEL",
+    "exchange": "GLOBAL",
+    "country": "United Arab Emirates",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B05MGY6",
+    "name": "UNISEM (M) BERHAD",
+    "ticker": "UNISEM",
+    "exchange": "GLOBAL",
+    "country": "Malaysia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMYWCS7",
+    "name": "GHITHA HOLDING PJSC",
+    "ticker": "GHITHA",
+    "exchange": "GLOBAL",
+    "country": "United Arab Emirates",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BFY8HM5",
+    "name": "ZHEJIANG MEIDA INDUSTRIAL A",
+    "ticker": "002677",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHPMB3",
+    "name": "GUIZHOU AVIATION TECHNICAL A",
+    "ticker": "688239",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BGPKDM9",
+    "name": "EVER SUPREME BIO TECH CO LTD",
+    "ticker": "6712",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B4WNC97",
+    "name": "UDE CORP",
+    "ticker": "3689",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BKF9D57",
+    "name": "AFYA LTD CLASS A",
+    "ticker": "AFYA",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMF7Q45",
+    "name": "HENAN ANCAI HI TECH CO A",
+    "ticker": "600207",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMB1384",
+    "name": "SHANDONG BOAN BIOTECH H",
+    "ticker": "6955",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHPNB0",
+    "name": "SHENZHEN UNITED WINNERS LA A",
+    "ticker": "688518",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6325592",
+    "name": "IFB INDUSTRIES LTD",
+    "ticker": "IFBI",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BKRRKY7",
+    "name": "NOVABRIDGE BIOSCIENCES",
+    "ticker": "NBP",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHPNR6",
+    "name": "HANGZHOU ALLTEST BIOTECH  A",
+    "ticker": "688606",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6568041",
+    "name": "EPISIL PRECISION INC",
+    "ticker": "3016",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMF7NB1",
+    "name": "JIANGSU HONGTIAN TECHNOLO A",
+    "ticker": "603800",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B00PT41",
+    "name": "ASIX ELECTRONICS CORPORATION",
+    "ticker": "3169",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BGBVJZ1",
+    "name": "GALAXY SOFTWARE SERVICES COR",
+    "ticker": "6752",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6354143",
+    "name": "EXCELSIOR MEDICAL CO LTD",
+    "ticker": "4104",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999PLNZ980",
+    "name": "POLISH ZLOTY",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "Poland",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BK71FN3",
+    "name": "CITIC PRESS CORP A",
+    "ticker": "300788",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BYMPHM1",
+    "name": "PLAYWAY SA",
+    "ticker": "PLW",
+    "exchange": "GLOBAL",
+    "country": "Poland",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BKDX3D9",
+    "name": "VACTRONICS TECHNOLOGIES INC",
+    "ticker": "6742",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999BRLZ970",
+    "name": "BRAZILIAN REAL",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "Brazil",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BLC7SY5",
+    "name": "WENZHOU YIHUA CONNECTOR CO A",
+    "ticker": "002897",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BF2HB11",
+    "name": "SOHU.COM LTD ADR",
+    "ticker": "SOHU",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6289427",
+    "name": "KIRLOSKAR FERROUS INDUS LTD",
+    "ticker": "KKF",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B2RHXS6",
+    "name": "MAITHAN ALLOYS LTD",
+    "ticker": "MAIT",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BKPNSC1",
+    "name": "J+V ENERGY TECHNOLOGY CO LTD",
+    "ticker": "6869",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BZ0D1R7",
+    "name": "CHONGQING GAS GROUP CORP L A",
+    "ticker": "600917",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B1MJYK9",
+    "name": "EMSTEEL BUILDING MATERIALS",
+    "ticker": "EMSTEEL",
+    "exchange": "GLOBAL",
+    "country": "United Arab Emirates",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQSB1R0",
+    "name": "ZHIHU INC  ADR",
+    "ticker": "ZH",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BN770W6",
+    "name": "SURYODAY SMALL FINANCE BANK",
+    "ticker": "SURYODAY",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BYYMWJ2",
+    "name": "HANDA PHARMACEUTICALS INC",
+    "ticker": "6620",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHPRH4",
+    "name": "WUXI DK ELECTRONIC MATERIA A",
+    "ticker": "300842",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B28QTZ1",
+    "name": "LEADTREND TECHNOLOGY CORP",
+    "ticker": "3588",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B91ZFY5",
+    "name": "ZCZL INDUSTRIAL TECHNOLOGY H",
+    "ticker": "564",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B4MV0G4",
+    "name": "AKFEN GAYRIMENKUL YATIRIM OR",
+    "ticker": "AKFGY",
+    "exchange": "GLOBAL",
+    "country": "Turkey",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BYW5N67",
+    "name": "BEIJING CHANGJIU LOGISTICS A",
+    "ticker": "603569",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BZ0PGY5",
+    "name": "MEZZAN HOLDING CO KSCC",
+    "ticker": "MEZZAN",
+    "exchange": "GLOBAL",
+    "country": "Kuwait",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQ3RQD4",
+    "name": "QINGDAO TIANNENG HEAVY IND A",
+    "ticker": "300569",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHPQC2",
+    "name": "GUANGDONG HOSHION ALUMINIU A",
+    "ticker": "002824",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999SARZ950",
+    "name": "SAUDI RIYAL",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "Saudi Arabia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B3NX3B8",
+    "name": "TAIWAN TAXI CO LTD",
+    "ticker": "2640",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BS71517",
+    "name": "U CONSUMER FINANCE",
+    "ticker": "VALU",
+    "exchange": "GLOBAL",
+    "country": "Egypt",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BD5M249",
+    "name": "BENGANG STEEL PLATES CO A",
+    "ticker": "000761",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMGSH11",
+    "name": "BEIJING TIEKE SHOUGANG RAI A",
+    "ticker": "688569",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B5MDP39",
+    "name": "NOAH HOLDINGS LTD SPON ADS",
+    "ticker": "NOAH",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B41DGH4",
+    "name": "ERIS TECHNOLOGY CORP",
+    "ticker": "3675",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BKSH831",
+    "name": "EPIGRAL LTD",
+    "ticker": "EPIGRAL",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6122243",
+    "name": "TAIWAN NAVIGATION CO LTD",
+    "ticker": "2617",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6729503",
+    "name": "PACIFIC HOSPITAL SUPPLY CO",
+    "ticker": "4126",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQ3RQF6",
+    "name": "JIANGSU ANKURA INTELLIGENT A",
+    "ticker": "300617",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHSNM0",
+    "name": "HANGZHOU BIO SINCERITY PHA A",
+    "ticker": "301096",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BK717B5",
+    "name": "BEIJING ZHIDEMAI TECHNOLOG A",
+    "ticker": "300785",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999GBPZ940",
+    "name": "POUND STERLING",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "United Kingdom",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHPQJ9",
+    "name": "EAGLERISE ELECTRIC + ELECT A",
+    "ticker": "002922",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B01TR82",
+    "name": "NIIT LTD",
+    "ticker": "NIIT",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHPRZ2",
+    "name": "SHENZHEN BSC TECHNOLOGY CO A",
+    "ticker": "300951",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B60VRV4",
+    "name": "CHAMPION MICROELECTRONIC COR",
+    "ticker": "3257",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BF4QKP3",
+    "name": "GROUP UP INDUSTRIAL CO LTD",
+    "ticker": "6664",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNKLJ40",
+    "name": "MORIMATSU INTERNATIONAL HOLD",
+    "ticker": "2155",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "USACI2XGH190",
+    "name": "YTL POWER INT WARRANTS",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "Malaysia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999AEDZ910",
+    "name": "UAE DIRHAM",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "United Arab Emirates",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6744573",
+    "name": "INTEGRATED SERVICE TECHNOLOG",
+    "ticker": "3289",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BP6SF96",
+    "name": "EMUDHRA LTD",
+    "ticker": "EMUDHRA",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999KWDZ990",
+    "name": "KUWAITI DINAR",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "Kuwait",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999TRYZ900",
+    "name": "TURKISH LIRA",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "Turkey",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNHNCW8",
+    "name": "JIANGSU CAI QIN TECHNOLOGY A",
+    "ticker": "688182",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BN4KB14",
+    "name": "LUFAX HOLDING LTD ADR",
+    "ticker": "LU",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B3K8LL2",
+    "name": "ANEL ELEKTRIK PROJE TAAHHUT",
+    "ticker": "ANELE",
+    "exchange": "GLOBAL",
+    "country": "Turkey",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999QARZ990",
+    "name": "QATARI RIAL",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "Qatar",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQWRB41",
+    "name": "SHANGHAI GEOHARBOUR CONSTR A",
+    "ticker": "605598",
+    "exchange": "GLOBAL",
+    "country": "China",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B1W5173",
+    "name": "RESPONSIVE INDUSTRIES LTD",
+    "ticker": "RESP",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999SGDZ900",
+    "name": "SINGAPORE DOLLAR",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "Singapore",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BNDXK51",
+    "name": "PSS CO LTD",
+    "ticker": "6914",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "USACI2XGDV70",
+    "name": "YTL CORP BHD WARRANT",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "Malaysia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BS55LP7",
+    "name": "GUAN CHONG BHD",
+    "ticker": "GCB-WC",
+    "exchange": "GLOBAL",
+    "country": "Malaysia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BVBQZ19",
+    "name": "ABU DHABI ISLAMIC BANK PJSC",
+    "ticker": "ADIBRI26",
+    "exchange": "GLOBAL",
+    "country": "United Arab Emirates",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999HUFZ930",
+    "name": "HUNGARIAN FORINT",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "Hungary",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999ZARZ990",
+    "name": "SOUTH AFRICAN RAND",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "South Africa",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BT8PQH8",
+    "name": "DAGANG NEXCHANGE BHD",
+    "ticker": "DNEX-WE",
+    "exchange": "GLOBAL",
+    "country": "Malaysia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BZCNM61",
+    "name": "ICARES MEDICUS INC",
+    "ticker": "6612",
+    "exchange": "GLOBAL",
+    "country": "Taiwan",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BTLN2L5",
+    "name": "DATASONIC GROUP BHD",
+    "ticker": "DATASONIC-WB",
+    "exchange": "GLOBAL",
+    "country": "Malaysia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:6726388",
+    "name": "OPTO CIRCUITS INDIA LTD",
+    "ticker": "OPTOCIRCUI",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999CZKZ980",
+    "name": "CZECH KORUNA",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "Czech Republic",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BPBS8Z8",
+    "name": "PREMIER EXPLOSIVES LTD",
+    "ticker": "PRE",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BWH9GG1",
+    "name": "AL AHLI BANK OF KUWAIT KSCP",
+    "ticker": "ABK126",
+    "exchange": "GLOBAL",
+    "country": "Kuwait",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999EURZ940",
+    "name": "EURO CURRENCY",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "Europe",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B73BGD3",
+    "name": "PTT GLOBAL CHEMICAL PCL NVDR",
+    "ticker": "PTTGC",
+    "exchange": "GLOBAL",
+    "country": "Thailand",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "US999EGPZ940",
+    "name": "EGYPTIAN POUND",
+    "ticker": "",
+    "exchange": "GLOBAL",
+    "country": "Egypt",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BTZJL45",
+    "name": "TOP GLOVE CORP BHD",
+    "ticker": "TOPGLOV-WA",
+    "exchange": "GLOBAL",
+    "country": "Malaysia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BRDXZ10",
+    "name": "VL E GOVERNANCE + IT SOLUTIO",
+    "ticker": "VLEGOV",
+    "exchange": "GLOBAL",
+    "country": "India",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BV0TZ64",
+    "name": "SUPERMAX CORP BHD",
+    "ticker": "SUPERMX-WA",
+    "exchange": "GLOBAL",
+    "country": "Malaysia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BLB3KB5",
+    "name": "MIG HOLDINGS SA",
+    "ticker": "MIG",
+    "exchange": "GLOBAL",
+    "country": "Europe",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BMWH994",
+    "name": "INDOSTERLING TECHNOMEDIA TBK",
+    "ticker": "TECH",
+    "exchange": "GLOBAL",
+    "country": "Indonesia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BFBFBK5",
+    "name": "ADITYA BIRLA CAPITAL LTD GDR",
+    "ticker": "ADIT",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BQ72J03",
+    "name": "DIANA SHIPPING INC",
+    "ticker": "DSX.WS",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:B0MLBG3",
+    "name": "INVEST BANK",
+    "ticker": "INB",
+    "exchange": "GLOBAL",
+    "country": "United Arab Emirates",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BFY8JB8",
+    "name": "POLLUX PROPERTIES INDONESIA",
+    "ticker": "POLL",
+    "exchange": "GLOBAL",
+    "country": "Indonesia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BLB1ZW5",
+    "name": "GDEX BHD",
+    "ticker": "GDEX-WC",
+    "exchange": "GLOBAL",
+    "country": "Malaysia",
+    "sector": "Unclassified"
+  },
+  {
+    "isin": "SEDOL:BVMHG74",
+    "name": "ALL ENERGY + UTILITI FOREIGN",
+    "ticker": "AE/F",
+    "exchange": "GLOBAL",
+    "country": "Thailand",
+    "sector": "Unclassified"
   }
 ]

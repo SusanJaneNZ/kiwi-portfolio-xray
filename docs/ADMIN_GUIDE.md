@@ -27,19 +27,19 @@ This glossary defines the authoritative naming conventions for Kiwi Portfolio X-
 | **Master ETF** *(Wholesale Target)* | The massive overseas ETF (issued by Vanguard US/AU, iShares / BlackRock, or State Street SPDR) that holds the actual thousands of underlying companies. | Vanguard Total World (`VT`), Vanguard S&P 500 (`VOO`), iShares Global ESG (`IWLD`), SPDR Portfolio Emerging Markets (`SPEM`). |
 | **Feeder Unwrapping** | The pipeline process of replacing a single Feeder Fund line item with the Master ETF's thousands of underlying companies, scaled to the feeder's portfolio weight. | `TWF` $\rightarrow$ Vanguard `VT` $\rightarrow$ 9,800+ underlying global companies; `KERNEL_EMERGING_MARKETS` $\rightarrow$ SPDR `SPEM` $\rightarrow$ 3,000+ emerging market companies. |
 | **Minor Fund Holding** | A fund constituent holding that represents **$< 75\%$** of a portfolio (e.g. a multi-asset balanced fund allocating 5% to an emerging markets fund). Modeled by broad asset class rather than wholesale unwrapping. | 4% allocation to an international bond fund inside a balanced fund. |
-| **Known Companies Register** *(formerly Security Master)* | The master reference dictionary of ~12,000+ public companies globally, providing canonical ISIN, Ticker, Company Name, GICS Sector, and Country. | Built from: NZX Directory + ASX Directory + Vanguard Total World (`VT`) constituent export. |
-| **Manual Company Mapping** *(formerly Provider Alias Map)* | A mapping table (`provider_alias_map.json`) configured in the Admin UI that links non-standard company names or unlisted assets to their canonical ISIN in the Known Companies Register. | Mapping `"Arm Holdings plc ADR"` $\rightarrow$ `US0420682058`. |
+| **Known Companies Register** *(formerly Security Master)* | The master reference dictionary of ~14,600+ public companies globally, providing canonical ISIN, Ticker, Company Name, GICS Sector, and Country. | Built from: NZX Directory + ASX Directory + Vanguard Total World (`VT`) + SPDR (`SPEM`) + iShares (`IWLD`). |
+| **Manual Company Mapping** *(formerly Provider Alias Map)* | A mapping table (`company_alias_map.json`) configured in the Admin UI that links non-standard company names or unlisted assets to their canonical ISIN in the Known Companies Register. | Mapping `"Arm Holdings plc ADR"` $\rightarrow$ `US0420682058`. |
 
 > [!IMPORTANT]
 > ### Crucial Operational Distinction: Automated Ingestion vs. Manual Master ETF Maintenance
 > * **NZ Fund Constituent Disclosures (`.xlsx`):** **AUTOMATICALLY DOWNLOADED & UNWRAPPED.** The nightly GitHub Actions pipeline and the Admin UI crawler connect directly to the NZ Disclose Register / Sorted Smart Investor API. They download new filings, unwrap feeders, and compile constituents without administrator intervention.
-> * **Overseas Master ETFs (`.csv` from Vanguard, iShares & SPDR):** **NOT AUTOMATICALLY DOWNLOADED.** Because Vanguard (US/AU), iShares (BlackRock), and State Street SPDR are overseas issuers, their full constituent CSV files are **NOT** filed on the NZ Disclose Register. **The administrator must periodically monitor and update Master ETF CSVs manually:** download the latest holdings CSV from their product pages, drop them into `data/staging/vanguard/`, `data/staging/ishares/`, or `data/staging/spdr/` via the Admin Web UI, and click **`⚡ Build Production (public/data/)`** (which unwraps the holdings and publishes the updated datasets for the investor app).
+> * **Overseas Master ETFs (`.csv` from Vanguard, iShares & SPDR):** **NOT AUTOMATICALLY DOWNLOADED.** Because Vanguard (US/AU), iShares (BlackRock), and State Street SPDR are overseas issuers, their full constituent CSV files are **NOT** filed on the NZ Disclose Register. **The administrator must periodically monitor and update Master ETF CSVs manually:** download the latest holdings CSV from their product pages, drop them into `data/staging/vanguard/`, `data/staging/ishares/`, or `data/staging/spdr/` via the Admin Web UI, and click **`⚡ Publish Datasets (public/data/)`** (which validates filings, unwraps feeder holdings, and updates the public look-through datasets for the investor app).
 
 ---
 
-## 2. Upstream Data Sources & Cadence Matrix
+## 2. Upstream Data Sources & Update Frequency
 
-The application relies on 5 source streams and 2 reference directories. All data is publicly accessible without paid commercial API subscriptions.
+The application relies on 7 source streams and 2 reference directories. All data is publicly accessible without paid commercial API subscriptions.
 
 | Dataset / Source | Source Portal | Staging Target Directory | Format & File Content | Frequency | Automation Level | Purpose |
 |---|---|---|---|---|---|---|
@@ -87,7 +87,7 @@ data/
 
 ---
 
-## 4. How Multi-Country Holdings (like Kernel & Simplicity) are Resolved
+## 4. How Multi-Country Holdings (like Kernel & Simplicity) are Mapped & Unwrapped
 
 A key design feature of Kiwi Portfolio X-Ray is that the reference dataset (**Known Companies Register**) is **not** limited to New Zealand and Australia. 
 
@@ -97,11 +97,11 @@ A key design feature of Kiwi Portfolio X-Ray is that the reference dataset (**Kn
 3. **Vanguard Total World (`VT`) Master Directory**: **~9,840 global companies** spanning over 40 countries (including the US, UK, Japan, Germany, Switzerland, Taiwan, South Korea, China, Scandinavia, etc.), complete with verified SEDOL/ISINs, country ISO codes, and sector mappings.
 4. **SPDR & iShares Master ETFs** (`SPEM`, `IWLD`, etc.): Automatically contributes any missing emerging market and overseas companies with verified SEDOLs, local tickers, and countries (expanding the Known Companies Register to **14,680+ companies**). Priority is strictly maintained so Vanguard VT's verified GICS sectors always prevail on overlapping holdings.
 
-### How Global & Thematic Funds are Resolved:
-* When an unlisted fund like **Kernel S&P World Ex-U.S.**, **Kernel Global Clean Energy**, or **Kernel Global 100** publishes quarterly holdings (e.g. Nestlé, ASML, Vestas Wind Systems, Orsted, Samsung, TSMC), their company names and tickers match against the **9,800+ global constituents** already indexed in the Known Companies Register.
-* **String Normalization**: Corporate legal suffixes (e.g., `A/S`, `AG`, `SA`, `NV`, `Oyj`, `PLC`, `Ltd`) are normalized before fuzzy matching.
-* **Residual / Niche Holdings**: If a specialized company is outside Vanguard VT or its name is reported with unusual punctuation, the pipeline flags it in `unresolved_entries.json`. The administrator maps it once in `provider_alias_map.json` via the Admin Web UI, and it is permanently resolved for all future quarters.
-* **Bond & Multi-Asset Funds**: Fixed-interest tranches and bank term deposits are classified row-by-row via [`bond_normalizer.py`](file:///mnt/c/Users/susan/wsl/kiwi-portfolio-xray/pipeline/enrichment/bond_normalizer.py) and rolled up by institutional issuer ([`issuer_alias_map.json`](file:///mnt/c/Users/susan/wsl/kiwi-portfolio-xray/pipeline/enrichment/issuer_alias_map.json)) without generating false unresolved company entries.
+### How Multi-Country Equities are Mapped:
+* **Direct Matching**: When an unlisted fund like **Kernel S&P World Ex-U.S.**, **Kernel Global Clean Energy**, or **Kernel Global 100** publishes quarterly holdings (e.g. Nestlé, ASML, Vestas Wind Systems, Orsted, Samsung, TSMC), their company names and tickers are mapped directly against the **14,680+ global companies** in the Known Companies Register.
+* **String Normalization**: Corporate legal suffixes (e.g., `A/S`, `AG`, `SA`, `NV`, `Oyj`, `PLC`, `Ltd`) are stripped before matching so formatting differences do not prevent a match.
+* **Unmapped Holdings**: If a company is outside the Known Companies Register or its name is reported with unusual punctuation, the pipeline flags it in `unresolved_entries.json`. The administrator maps it once in `company_alias_map.json` via the Admin Web UI, and it is permanently mapped for all future quarters.
+* **Bonds, Term Deposits & Cash Holdings**: Direct fixed-interest bonds, bank term deposits, and cash accounts are classified row-by-row via [`bond_normalizer.py`](file:///mnt/c/Users/susan/wsl/kiwi-portfolio-xray/pipeline/enrichment/bond_normalizer.py) and rolled up by institutional issuer ([`issuer_alias_map.json`](file:///mnt/c/Users/susan/wsl/kiwi-portfolio-xray/pipeline/enrichment/issuer_alias_map.json)) without generating false unmapped company entries.
 
 ---
 
@@ -114,11 +114,11 @@ Before committing files or triggering production builds, always run the pipeline
 python3 -m pipeline.admin_ui
 ```
 Open `http://127.0.0.1:8787` in your browser to:
-* **Managed Fund Catalogue**: Monitor all registered funds with real-time **Status (`⏳ Awaiting Processing` vs `✔ Processed`)**, **As Of Dates**, constituent counts, and one-click `📥 Fetch` actions. Unprocessed funds are automatically prioritized at the top, followed by oldest disclosure dates first.
+* **Managed Fund Catalogue (Panel 5)**: Monitor all registered funds with real-time **Status (`⏳ Awaiting Processing` vs `✔ Processed`)**, **As Of Dates**, constituent counts, and one-click `📥 Fetch` actions. Unprocessed funds are automatically prioritized at the top, followed by oldest disclosure dates first.
 * **Filter & Search**: Quickly filter by `⏳ Awaiting Processing`, `Kernel`, or `Smartshares`, with instant search and one-click `✕` query clearing.
-* **Upload Master ETF CSVs**: Drag-and-drop downloaded Vanguard or iShares CSVs directly into `data/staging/vanguard/` or `data/staging/ishares/`.
-* **Resolve Companies**: Search the Known Companies Register and save unresolved company names into `provider_alias_map.json`.
-* **Execute Builds**: Run `--dry-run` diagnostics and production builds (`public/data/`) with one click.
+* **Stage Master ETF Files (Panel 1)**: Drag-and-drop downloaded Vanguard, iShares, or SPDR files directly into `data/staging/vanguard/`, `data/staging/ishares/`, or `data/staging/spdr/`.
+* **Map Unmapped Companies (Panel 6)**: Search the Known Companies Register and save company mappings into `company_alias_map.json`.
+* **Publish Datasets (Header / Panel 3)**: Run `--dry-run` diagnostics and publish production datasets (`public/data/`) with one click via **⚡ Publish Datasets (public/data/)**.
 
 ### Option B: CLI Dry-Run
 ```bash
@@ -129,57 +129,57 @@ python3 -m pipeline.ingest --dry-run --staging-dir data/staging/
 1. **Schema Check**: Validates that all CSV/XLSX headers match expected schemas.
 2. **Master ETF Bypass**: Ingests Vanguard, iShares, and SPDR master files directly, extracting canonical ISINs without fuzzy matching.
 3. **Feeder Unwrapping**: Unwraps all configured Feeder Funds (`TWF`, `USF`, etc.) into their Master ETF company constituents.
-4. **Known Companies Register Matching**: Matches direct Smartshares and Kernel holdings against the 12,000+ entry Known Companies Register.
+4. **Known Companies Register Matching**: Matches direct Smartshares and Kernel holdings against the 14,600+ entry Known Companies Register.
 5. **Weight Sum Integrity**: Verifies that every fund's constituents sum to $100\% \pm 0.5\%$.
 
 ---
 
 ## 6. Diagnosing "Awaiting Processing" Funds: The 3-Stage Diagnostic Checklist
 
-When a fund in **Panel 1 (Managed Fund Catalogue)** shows the badge `⏳ Awaiting Processing` (or constituent count is `0`), it means the fund's constituents have not yet been compiled into `public/data/funds_registry.json`.
+When a fund in **Panel 5 (Managed Fund Catalogue)** shows the badge `⏳ Awaiting Processing` (or constituent count is `0`), it means the fund's constituents have not yet been compiled into `public/data/funds_registry.json`.
 
 Use this diagnostic flow to pinpoint the exact stage where the fund is waiting:
 
 ```mermaid
 flowchart TD
     Start["Fund shows '⏳ Awaiting Processing'"] --> Check1{"Stage 1: Is quarterly .xlsx disclosure staged in data/staging/<manager>/?"}
-    Check1 -- "No" --> Action1["Click '📥 Fetch' in Panel 1 or drop .xlsx into staging/"]
+    Check1 -- "No" --> Action1["Click '📥 Fetch' in Panel 5 or drop .xlsx into staging/"]
     Check1 -- "Yes" --> Check2{"Stage 2: Is the fund a Feeder Fund (holds ≥ 75% overseas ETF)?"}
     Check2 -- "Yes" --> CheckPair{"Is pairing configured in feeder_registry.json?"}
     CheckPair -- "No" --> ActionPair["Appears in 'Detected Unconfigured Feeder Funds'. Click 'Configure' & Save Pairing."]
-    CheckPair -- "Yes" --> CheckMaster{"Is Master ETF CSV staged in data/staging/<master_provider>/?"}
-    CheckMaster -- "No" --> ActionMaster["Upload Master ETF CSV via Panel 2: Upload ETF Constituent CSV"]
+    CheckPair -- "Yes" --> CheckMaster{"Is Master ETF file staged in data/staging/<master_provider>/?"}
+    CheckMaster -- "No" --> ActionMaster["Upload Master ETF file via Panel 1: Stage & Inspect Filings"]
     CheckMaster -- "Yes" --> Check3
-    Check2 -- "No (Direct Holdings)" --> Check3{"Stage 3: Run 'Dry Run' in Panel 5. Any unresolved companies or integrity errors?"}
-    Check3 -- "Unresolved Holdings" --> ActionAlias["Map company name to ISIN in Panel 6: Unresolved Equities Mapper"]
-    Check3 -- "Clean Validation" --> ActionCompile["Click 'Build Production (public/data/)' in Panel 5"]
+    Check2 -- "No (Direct Holdings)" --> Check3{"Stage 3: Run 'Dry Run' in Panel 3. Any unmapped companies or integrity errors?"}
+    Check3 -- "Unmapped Companies" --> ActionAlias["Map company name to ISIN in Panel 6: Unresolved Company Holdings Mapper"]
+    Check3 -- "Clean Validation" --> ActionCompile["Click '⚡ Publish Datasets (public/data/)' in header or Panel 3"]
     ActionCompile --> Done["✔ Processed (Constituent count > 0)"]
 ```
 
 ### Stage 1: Constituent Disclosure Download
-* **How to tell:** Look at the fund's row in **Panel 1: Managed Fund Catalogue**. Check if a disclosure file and date are listed. Also check if an `.xlsx` file exists in `data/staging/<manager>/`.
+* **How to tell:** Look at the fund's row in **Panel 5: Managed Fund Catalogue**. Check if a disclosure file and date are listed. Also check if an `.xlsx` file exists in `data/staging/<manager>/`.
 * **Action:** Click the `📥 Fetch` button on that fund's row to download the latest statutory filing from Sorted Smart Investor. If the fetch succeeds, the file will be saved to `data/staging/` and displayed. If it fails (e.g. fund has no filing or network timeout), the error modal displays full debug details.
 
 ### Stage 2: Feeder Pairing & Master ETF Staging (Feeder Funds Only)
 * **How to tell:** 
-  1. **Unconfigured Feeder:** If the fund holds $\ge 75\%$ of an overseas ETF and has not been paired, it will appear in the amber warning box: **Panel 3: Detected Unconfigured Feeder Funds**.
-  2. **Missing Master ETF CSV:** If the fund is paired in `feeder_registry.json` but the corresponding CSV (e.g. `SPEM_holdings.csv` or `VT.csv`) is missing from `data/staging/spdr/`, `data/staging/vanguard/`, or `data/staging/ishares/`, running **Dry Run** will output:
+  1. **Unconfigured Feeder:** If the fund holds $\ge 75\%$ of an overseas ETF and has not been paired, it will appear in the amber warning box in **Panel 4: Feeder Fund Pairings**.
+  2. **Missing Master ETF File:** If the fund is paired in `feeder_registry.json` but the corresponding CSV/XLSX (e.g. `SPEM_holdings.csv` or `VT.csv`) is missing from `data/staging/spdr/`, `data/staging/vanguard/`, or `data/staging/ishares/`, running **Dry Run** will output:
      `Feeder '<FUND_CODE>' disclosure staged, awaiting master ETF '<TICKER>' in data/staging/<provider>/`.
 * **Action:**
-  1. If unconfigured: Click **Configure**, select the Master ETF Provider (`vanguard`, `ishares`, or `spdr`), enter the Ticker (e.g. `SPEM`), and click **Save Pairing**.
-  2. If missing CSV: Download the holdings CSV from the issuer portal (e.g. SSGA SPEM or Vanguard VT) and upload it via **Panel 2: Upload ETF Constituent CSV**.
+  1. If unconfigured: Click **Configure** in Panel 4, select the Master ETF Issuer (`Vanguard`, `iShares`, or `SPDR`), enter the Master Ticker (e.g. `SPEM`), and click **Save Pairing**.
+  2. If missing file: Download the holdings file from the issuer portal (e.g. SSGA SPEM or Vanguard VT) and drop/upload it into `data/staging/<provider>/` via **Panel 1: Stage & Inspect Filings**.
 
-### Stage 3: Company Mapping & Pipeline Compilation
-* **How to tell:** The `.xlsx` disclosure and any required Master ETF CSV are both staged, but running **Dry Run** reports `Unresolved: N` or integrity warnings.
+### Stage 3: Company Mapping & Dataset Publishing
+* **How to tell:** The `.xlsx` disclosure and any required Master ETF file are both staged, but running **Dry Run** reports `Unresolved: N` or integrity warnings.
 * **Action:**
-  1. Open **Panel 6: Unresolved Equities Mapper**. Search for the unmapped holding name in the Known Companies Register, select its canonical ISIN, and click **Save Alias**.
-  2. Once all holdings are resolved, click **Build Production (public/data/)**. The compiler writes look-through records to `public/data/`, the constituent count becomes $> 0$, and the fund's badge updates to `✔ Processed`.
+  1. Open **Panel 6: Unresolved Company Holdings Mapper**. Search for the unmapped holding name in the Known Companies Register, select its canonical ISIN, and click **Save Alias** (which persists the mapping in `company_alias_map.json`).
+  2. Once all direct holdings are mapped, click **⚡ Publish Datasets (public/data/)**. The pipeline validates, unwraps feeder holdings, and writes the published look-through records to `public/data/`. The constituent count becomes $> 0$, and the fund's badge updates to `✔ Processed`.
 
 ---
 
-## 7. Manual Company Mapping (`provider_alias_map.json`)
+## 7. Manual Company Mapping (`company_alias_map.json`)
 
-If the dry-run reports unresolved company holdings, map them in the Admin Web UI (**Panel 3: Unresolved Holdings Mapper**) or directly in `pipeline/enrichment/provider_alias_map.json`:
+If the dry-run reports unmapped company holdings, map them in the Admin Web UI (**Panel 6: Unmapped Companies**) or directly in `pipeline/enrichment/company_alias_map.json`:
 
 ```json
 {
@@ -209,9 +209,9 @@ You **only** need to configure a new feeder pairing if a Fund Manager introduces
 1. **Check the Feeder Fund's Disclosure:**
    In the Admin Console, preview the fund's Sorted `.xlsx` file to identify the underlying Master ETF it holds (e.g., `Vanguard Total World Stock ETF (VT)` or `SPDR Portfolio Emerging Markets ETF (SPEM)`).
 2. **Ensure Master ETF is Staged:**
-   Verify that the Master ETF's holdings CSV exists in `data/staging/vanguard/`, `data/staging/ishares/`, or `data/staging/spdr/`. If not, download it from Vanguard, BlackRock, or State Street and drop it into the staging folder via the Admin UI.
+   Verify that the Master ETF's holdings file (CSV or XLSX) exists in `data/staging/vanguard/`, `data/staging/ishares/`, or `data/staging/spdr/`. If not, download it from Vanguard, BlackRock, or State Street and drop it into the staging folder via the Admin UI (**Panel 1: Stage & Inspect Filings**).
 3. **Register the Pairing:**
-   In Admin Console **Panel 4: Feeder Fund Registry**, enter:
+   In Admin Console **Panel 4: Feeder Fund Pairings**, enter:
    * **Feeder Code** (e.g. `TWH` or `KERNEL_EMERGING_MARKETS`)
    * **Fund Name** (e.g. `Smart Total World (NZD Hedged) ETF` or `Kernel Emerging Markets`)
    * **Master ETF Issuer** (`Vanguard`, `iShares`, or `SPDR`)
@@ -227,7 +227,7 @@ You **only** need to configure a new feeder pairing if a Fund Manager introduces
 Once dry-run validation passes with zero critical errors:
 
 ```bash
-# 1. Compile production datasets into public/data/
+# 1. Validate and publish production datasets into public/data/
 python3 -m pipeline.ingest --staging-dir data/staging/ --output-dir public/data/
 
 # 2. Run test suites
@@ -327,7 +327,7 @@ GitHub sends automated email notifications to administrators when an Action fail
   2. Once the upstream site is back online, navigate to **Actions** → **Nightly Data Ingestion Pipeline** → click **Run workflow** (`workflow_dispatch`).
   3. The pipeline will retry the download, update `public/data/`, and push changes to `main`.
 
-#### Scenario 3: Unresolved Holdings or Schema Mismatch in a Newly Ingested Fund
+#### Scenario 3: Unmapped Holdings or Schema Mismatch in a Newly Ingested Fund
 * **Symptom:** The ingestion pipeline succeeds, but `unresolved_entries.json` contains unmapped company names, or a fund manager uses non-standard column headers.
 * **Resolution:**
   1. Pull the latest `main` branch locally: `git pull origin main`.
@@ -336,12 +336,12 @@ GitHub sends automated email notifications to administrators when an Action fail
      python3 -m pipeline.admin_ui
      ```
   3. Open `http://127.0.0.1:8787` in your browser.
-  4. View the unresolved item in the table, search the Known Companies Register for the company's canonical ISIN, and click **Save Alias**.
-  5. Click **Build Production (public/data/)**.
+  4. View the unmapped item in **Panel 6: Unmapped Companies**, search the Known Companies Register for the company's canonical ISIN, and click **Save Alias**.
+  5. Click **⚡ Publish Datasets (public/data/)**.
   6. Commit and push the updated alias map:
      ```bash
-     git add pipeline/enrichment/provider_alias_map.json public/data/
-     git commit -m "fix(mapping): resolve holding alias for <fund_code>"
+     git add pipeline/enrichment/company_alias_map.json public/data/
+     git commit -m "fix(mapping): add company alias for <fund_code>"
      git push origin main
      ```
 

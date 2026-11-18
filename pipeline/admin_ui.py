@@ -58,7 +58,9 @@ class AdminService:
         self.repo_root = repo_root
         self.staging_dir = staging_dir or (repo_root / "data" / "staging")
         self.output_dir = output_dir or (repo_root / "public" / "data")
-        self.alias_map_path = repo_root / "pipeline" / "enrichment" / "provider_alias_map.json"
+        alias_candidate = repo_root / "pipeline" / "enrichment" / "company_alias_map.json"
+        legacy_candidate = repo_root / "pipeline" / "enrichment" / "provider_alias_map.json"
+        self.alias_map_path = alias_candidate if alias_candidate.exists() else (legacy_candidate if legacy_candidate.exists() else alias_candidate)
         self.manual_securities_path = repo_root / "pipeline" / "enrichment" / "manual_securities.json"
         self.security_master_path = repo_root / "pipeline" / "security_master" / "security_master.json"
         self.gics_mapping_path = repo_root / "pipeline" / "normalizer" / "gics_mapping.json"

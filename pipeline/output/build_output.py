@@ -52,7 +52,9 @@ class PipelineCompiler:
         self.repo_root = repo_root
 
         self.security_master_path = repo_root / "pipeline" / "security_master" / "security_master.json"
-        self.alias_map_path = repo_root / "pipeline" / "enrichment" / "provider_alias_map.json"
+        alias_candidate = repo_root / "pipeline" / "enrichment" / "company_alias_map.json"
+        legacy_candidate = repo_root / "pipeline" / "enrichment" / "provider_alias_map.json"
+        self.alias_map_path = alias_candidate if alias_candidate.exists() else (legacy_candidate if legacy_candidate.exists() else alias_candidate)
         self.manual_securities_path = repo_root / "pipeline" / "enrichment" / "manual_securities.json"
         self.issuer_alias_path = repo_root / "pipeline" / "enrichment" / "issuer_alias_map.json"
         self.gics_mapping_path = repo_root / "pipeline" / "normalizer" / "gics_mapping.json"
