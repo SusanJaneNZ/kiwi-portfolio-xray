@@ -1,19 +1,5 @@
 [
   {
-    "code": "FISHER_KIWISAVER_GROWTH",
-    "name": "Fisher Funds KiwiSaver Growth Fund",
-    "provider": "Fisher Funds",
-    "effective_date": "2026-09-30",
-    "cash_ratio": 0.035,
-    "hedging_ratio": 0.0,
-    "constituent_count": 0,
-    "asset_class": "mixed",
-    "cadence": "quarterly",
-    "is_stale": false,
-    "isKiwiSaver": true,
-    "smartInvestorUrl": "https://www.smartinvestor.sorted.org.nz/kiwisaver-and-managed-funds/SCH10713/OFR10715/FND555/"
-  },
-  {
     "code": "ASP",
     "name": "Smart Australian Property Etf",
     "provider": "Smartshares",
@@ -350,6 +336,18 @@
     "is_stale": false
   },
   {
+    "code": "ASIA",
+    "name": "Betashares Asia Technology Tigers ETF",
+    "provider": "BetaShares",
+    "effective_date": "2026-11-10",
+    "cash_ratio": 0.002725,
+    "hedging_ratio": 0.0,
+    "constituent_count": 50,
+    "asset_class": "equity",
+    "cadence": "monthly",
+    "is_stale": false
+  },
+  {
     "code": "KERNEL_BALANCED",
     "name": "Kernel Balanced Fund",
     "provider": "Kernel",
@@ -598,18 +596,6 @@
     "hedging_ratio": 0.0,
     "constituent_count": 1,
     "asset_class": "fixed_interest",
-    "cadence": "monthly",
-    "is_stale": false
-  },
-  {
-    "code": "ASIA",
-    "name": "Betashares Asia Technology Tigers ETF",
-    "provider": "BetaShares",
-    "effective_date": "2026-11-10",
-    "cash_ratio": 0.002725,
-    "hedging_ratio": 0.0,
-    "constituent_count": 50,
-    "asset_class": "equity",
     "cadence": "monthly",
     "is_stale": false
   }

@@ -824,7 +824,7 @@ Please add this fund to \`pipeline/fund_catalog.json\` so it is ingested into th
                         ? 'Mixed (80% Equity / 20% Bonds)'
                         : 'Growth Equities'}
                     </span>
-                    {fund.effective_date && (
+                    {fund.effective_date && fund.constituent_count > 0 && (
                       <>
                         <span>·</span>
                         <span className="text-slate-500">As Of {fund.effective_date}</span>
