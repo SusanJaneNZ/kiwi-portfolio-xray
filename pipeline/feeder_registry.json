@@ -103,5 +103,15 @@
     "name": "Smart Us Large Growth Etf",
     "master_provider": "vanguard",
     "master_ticker": "VUG"
+  },
+  "UST": {
+    "name": "Smart Us Technology (Nzd Hedged) Etf",
+    "master_provider": "ishares",
+    "master_ticker": "IUIT"
+  },
+  "USV": {
+    "name": "Smart Us Large Value Etf",
+    "master_provider": "vanguard",
+    "master_ticker": "VTV"
   }
 }

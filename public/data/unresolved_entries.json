@@ -1,1 +1,600 @@
-[]
+[
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "GRAIL INC",
+    "raw_ticker": "GRAL",
+    "weight": 0.0043,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "GRAIL INC": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "CAREDX",
+    "raw_ticker": "CDNA",
+    "weight": 0.0035,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "CAREDX": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "VIRIDIAN THERAPEUTICS ORS",
+    "raw_ticker": "VRDN",
+    "weight": 0.0033,
+    "reason": "ambiguous_collision_spread_0.05",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "VIRIDIAN THERAPEUTICS ORS": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "RELAY THERAPEUTICS",
+    "raw_ticker": "RLAY",
+    "weight": 0.0028,
+    "reason": "ambiguous_collision_spread_0.01",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "RELAY THERAPEUTICS": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "AXOGEN",
+    "raw_ticker": "AXGN",
+    "weight": 0.0027,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "AXOGEN": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "IDEAYA BIOSCIENCES",
+    "raw_ticker": "IDYA",
+    "weight": 0.0027,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "IDEAYA BIOSCIENCES": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "ABCELLERA BIOLOGICS",
+    "raw_ticker": "ABCL",
+    "weight": 0.0026,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "ABCELLERA BIOLOGICS": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "IMMUNOME",
+    "raw_ticker": "IMNM",
+    "weight": 0.002,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "IMMUNOME": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "AURINIA PHARMACEUTICALS",
+    "raw_ticker": "AUPH",
+    "weight": 0.0019,
+    "reason": "ambiguous_collision_spread_0.01",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "AURINIA PHARMACEUTICALS": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "GLIN_HOLDINGS",
+    "raw_name": "KYUDEN HOLDINGS",
+    "raw_ticker": "642A",
+    "weight": 0.001845,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Smartshares:GLIN_HOLDINGS": {
+        "KYUDEN HOLDINGS": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "STOKE THERAPEUTICS",
+    "raw_ticker": "STOK",
+    "weight": 0.0016,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "STOKE THERAPEUTICS": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "UROGEN PHARMA",
+    "raw_ticker": "URGN",
+    "weight": 0.0014,
+    "reason": "ambiguous_collision_spread_0.00",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "UROGEN PHARMA": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "JINHAI MEDICAL TECHNOLOGY LTD",
+    "raw_ticker": "2225",
+    "weight": 0.0013,
+    "reason": "ambiguous_collision_spread_0.07",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "JINHAI MEDICAL TECHNOLOGY LTD": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "ZYMEWORKS",
+    "raw_ticker": "ZYME",
+    "weight": 0.0012,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "ZYMEWORKS": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "MEDINCELL SA",
+    "raw_ticker": "MEDCL",
+    "weight": 0.0011,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "MEDINCELL SA": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "ABSCI CORP",
+    "raw_ticker": "ABSI",
+    "weight": 0.0011,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "ABSCI CORP": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "CASTLE BIOSCIENCES",
+    "raw_ticker": "CSTL",
+    "weight": 0.001,
+    "reason": "ambiguous_collision_spread_0.00",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "CASTLE BIOSCIENCES": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "ANAPTYSBIO",
+    "raw_ticker": "ANAB",
+    "weight": 0.001,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "ANAPTYSBIO": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "TAYSHA GENE THERAPIES",
+    "raw_ticker": "TSHA",
+    "weight": 0.001,
+    "reason": "ambiguous_collision_spread_0.07",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "TAYSHA GENE THERAPIES": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "NANOBIOTIX SA",
+    "raw_ticker": "NANO",
+    "weight": 0.0009,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "NANOBIOTIX SA": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "MARAVAI LIFESCIENCES HOLDINGS CLAS",
+    "raw_ticker": "MRVI",
+    "weight": 0.0009,
+    "reason": "ambiguous_collision_spread_0.00",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "MARAVAI LIFESCIENCES HOLDINGS CLAS": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "PHARMING GROUP",
+    "raw_ticker": "PHARM",
+    "weight": 0.0009,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "PHARMING GROUP": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "SHANGHAI HENLIUS BIOTECH H",
+    "raw_ticker": "2696",
+    "weight": 0.0008,
+    "reason": "ambiguous_collision_spread_0.08",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "SHANGHAI HENLIUS BIOTECH H": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "SYNDAX PHARMACEUTICALS",
+    "raw_ticker": "SNDX",
+    "weight": 0.0008,
+    "reason": "ambiguous_collision_spread_0.04",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "SYNDAX PHARMACEUTICALS": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "DYNAVOX GROUP",
+    "raw_ticker": "DYVOX",
+    "weight": 0.0007,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "DYNAVOX GROUP": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "CYTEK BIOSCIENCES",
+    "raw_ticker": "CTKB",
+    "weight": 0.0007,
+    "reason": "ambiguous_collision_spread_0.00",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "CYTEK BIOSCIENCES": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "KURA ONCOLOGY",
+    "raw_ticker": "KURA",
+    "weight": 0.0006,
+    "reason": "ambiguous_collision_spread_0.08",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "KURA ONCOLOGY": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "MYRIAD GENETICS",
+    "raw_ticker": "MYGN",
+    "weight": 0.0006,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "MYRIAD GENETICS": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "JANUX THERAPEUTICS",
+    "raw_ticker": "JANX",
+    "weight": 0.0005,
+    "reason": "ambiguous_collision_spread_0.00",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "JANUX THERAPEUTICS": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "VALNEVA",
+    "raw_ticker": "VLA",
+    "weight": 0.0005,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "VALNEVA": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "ARVINAS",
+    "raw_ticker": "ARVN",
+    "weight": 0.0005,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "ARVINAS": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "ALUMIS",
+    "raw_ticker": "ALMS",
+    "weight": 0.0004,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "ALUMIS": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "BRAINSWAY LTD",
+    "raw_ticker": "BWAY",
+    "weight": 0.0004,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "BRAINSWAY LTD": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "REGENXBIO",
+    "raw_ticker": "RGNX",
+    "weight": 0.0004,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "REGENXBIO": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "LEPU BIOPHARMA LTD H",
+    "raw_ticker": "2157",
+    "weight": 0.0003,
+    "reason": "ambiguous_collision_spread_0.04",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "LEPU BIOPHARMA LTD H": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "PROTHENA PLC",
+    "raw_ticker": "PRTA",
+    "weight": 0.0003,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "PROTHENA PLC": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "VITALHUB CORP",
+    "raw_ticker": "VHI",
+    "weight": 0.0002,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "VITALHUB CORP": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "ORASURE TECHNOLOGIES INC",
+    "raw_ticker": "OSUR",
+    "weight": 0.0002,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "ORASURE TECHNOLOGIES INC": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "VANDA PHARMACEUTICALS INC",
+    "raw_ticker": "VNDA",
+    "weight": 0.0002,
+    "reason": "ambiguous_collision_spread_0.03",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "VANDA PHARMACEUTICALS INC": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "STANDARD BIOTOOLS",
+    "raw_ticker": "LAB",
+    "weight": 0.0002,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "STANDARD BIOTOOLS": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "EDITAS MEDICINE",
+    "raw_ticker": "EDIT",
+    "weight": 0.0002,
+    "reason": "ambiguous_collision_spread_0.15",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "EDITAS MEDICINE": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "LYELL IMMUNOPHARMA",
+    "raw_ticker": "LYEL",
+    "weight": 0.0002,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "LYELL IMMUNOPHARMA": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "ADC THERAPEUTICS LTD",
+    "raw_ticker": "ADCT",
+    "weight": 0.0001,
+    "reason": "ambiguous_collision_spread_0.00",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "ADC THERAPEUTICS LTD": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "SUTRO BIOPHARMA INC",
+    "raw_ticker": "STRO",
+    "weight": 0.0001,
+    "reason": "ambiguous_collision_spread_0.01",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "SUTRO BIOPHARMA INC": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "FATE THERAPEUTICS INC",
+    "raw_ticker": "FATE",
+    "weight": 0.0001,
+    "reason": "ambiguous_collision_spread_0.03",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "FATE THERAPEUTICS INC": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Smartshares",
+    "fund_code": "HEAL_HOLDINGS",
+    "raw_name": "MACROGENICS INC",
+    "raw_ticker": "MGNX",
+    "weight": 0.0001,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Smartshares:HEAL_HOLDINGS": {
+        "MACROGENICS INC": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  }
+]

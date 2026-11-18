@@ -110974,14 +110974,6 @@
     "sector": "Industrials"
   },
   {
-    "isin": "SEDOL:BQ732F2",
-    "name": "Cerebras Systems Inc",
-    "ticker": "CBRS",
-    "exchange": "GLOBAL",
-    "country": "United States",
-    "sector": "Information Technology"
-  },
-  {
     "isin": "SEDOL:BSZBFJ7",
     "name": "Venture Global Inc",
     "ticker": "VG",
@@ -110996,6 +110988,22 @@
     "exchange": "GLOBAL",
     "country": "United States",
     "sector": "Industrials"
+  },
+  {
+    "isin": "SEDOL:BQ732F2",
+    "name": "Cerebras Systems Inc",
+    "ticker": "CBRS",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Information Technology"
+  },
+  {
+    "isin": "SEDOL:BQBG6P5",
+    "name": "ABIOMED INC-CVR",
+    "ticker": "2223637D",
+    "exchange": "GLOBAL",
+    "country": "United States",
+    "sector": "Health Care"
   },
   {
     "isin": "SEDOL:BD8DJ71",
@@ -112862,12 +112870,12 @@
     "sector": "Health Care"
   },
   {
-    "isin": "SEDOL:BQBG6P5",
-    "name": "ABIOMED INC-CVR",
-    "ticker": "2223637D",
+    "isin": "SEDOL:C0C06F3",
+    "name": "Vylor Inc",
+    "ticker": "VYLR",
     "exchange": "GLOBAL",
     "country": "United States",
-    "sector": "Health Care"
+    "sector": "Consumer Staples"
   },
   {
     "isin": "VANG:JGGI",
