@@ -134,7 +134,9 @@ export const KiwiSaverPanel: React.FC<KiwiSaverPanelProps> = ({
   onUpdateState,
 }) => {
   const [filterQuery, setFilterQuery] = useState('');
-  const [heldOnly, setHeldOnly] = useState(false);
+  const [userToggledHeldOnly, setUserToggledHeldOnly] = useState<boolean | null>(null);
+  const isPortfolioEntered = totalPortfolioNZD > 0;
+  const heldOnly = isPortfolioEntered ? (userToggledHeldOnly ?? true) : false;
   const [showAddForm, setShowAddForm] = useState(false);
 
   // Form states for adding custom/KiwiSaver fund
@@ -362,6 +364,9 @@ Please add this fund to \`pipeline/fund_catalog.json\` so it is ingested into th
       // Reset form
       setCustomBalance('');
       setShowAddForm(false);
+      if (numBalance <= 0) {
+        setUserToggledHeldOnly(false);
+      }
 
       if (andSubmit) {
         handleSubmitForIngestion(newFund);
@@ -427,7 +432,7 @@ Please add this fund to \`pipeline/fund_catalog.json\` so it is ingested into th
               <input
                 type="checkbox"
                 checked={heldOnly}
-                onChange={(e) => setHeldOnly(e.target.checked)}
+                onChange={(e) => setUserToggledHeldOnly(e.target.checked)}
                 className="rounded border-slate-700 bg-slate-950 text-indigo-600 focus:ring-indigo-500"
               />
               <span>Held only</span>
@@ -605,13 +610,30 @@ Please add this fund to \`pipeline/fund_catalog.json\` so it is ingested into th
             <div className="space-y-2 text-xs max-h-[380px] overflow-y-auto pr-1">
               {filteredFunds.length === 0 ? (
                 <div className="text-center py-6 text-slate-500 bg-slate-950/40 rounded-xl border border-slate-800/60">
-                  <p className="text-slate-400 mb-1">No KiwiSaver or custom funds found.</p>
-                  <button
-                    onClick={() => setShowAddForm(true)}
-                    className="text-xs text-indigo-400 hover:text-indigo-300 underline underline-offset-2"
-                  >
-                    Add your KiwiSaver scheme (e.g. Fisher Funds Growth)
-                  </button>
+                  <p className="text-slate-400 mb-1">
+                    {heldOnly ? 'No KiwiSaver or custom funds currently held.' : 'No KiwiSaver or custom funds found.'}
+                  </p>
+                  <div className="flex items-center justify-center gap-3 mt-1">
+                    {heldOnly && (
+                      <>
+                        <button
+                          type="button"
+                          onClick={() => setUserToggledHeldOnly(false)}
+                          className="text-xs text-indigo-400 hover:text-indigo-300 underline underline-offset-2"
+                        >
+                          Browse all schemes
+                        </button>
+                        <span className="text-slate-600">·</span>
+                      </>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => setShowAddForm(true)}
+                      className="text-xs text-indigo-400 hover:text-indigo-300 underline underline-offset-2"
+                    >
+                      ➕ Add KiwiSaver fund
+                    </button>
+                  </div>
                 </div>
               ) : (
                 filteredFunds.map((fund) => {

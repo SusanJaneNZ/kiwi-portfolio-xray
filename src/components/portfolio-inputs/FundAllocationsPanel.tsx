@@ -21,7 +21,9 @@ export const FundAllocationsPanel: React.FC<FundAllocationsPanelProps> = ({
   onUpdateState,
 }) => {
   const [fundFilter, setFundFilter] = useState('');
-  const [heldOnly, setHeldOnly] = useState(false);
+  const [userToggledHeldOnly, setUserToggledHeldOnly] = useState<boolean | null>(null);
+  const isPortfolioEntered = totalPortfolioNZD > 0;
+  const heldOnly = isPortfolioEntered ? (userToggledHeldOnly ?? true) : false;
 
   const availableBuckets = useMemo(() => {
     return portfolioState.buckets.length > 0 ? portfolioState.buckets : DEFAULT_STARTER_BUCKETS;
@@ -108,8 +110,8 @@ export const FundAllocationsPanel: React.FC<FundAllocationsPanelProps> = ({
           <input
             type="checkbox"
             checked={heldOnly}
-            onChange={(e) => setHeldOnly(e.target.checked)}
-            className="rounded border-slate-700 bg-slate-950 text-indigo-600"
+            onChange={(e) => setUserToggledHeldOnly(e.target.checked)}
+            className="rounded border-slate-700 bg-slate-950 text-indigo-600 focus:ring-indigo-500"
           />
           <span>Held only</span>
         </label>
@@ -117,7 +119,20 @@ export const FundAllocationsPanel: React.FC<FundAllocationsPanelProps> = ({
 
       <div className="space-y-2 text-xs max-h-[380px] overflow-y-auto pr-1">
         {sortedFilteredFunds.length === 0 ? (
-          <div className="text-center py-4 text-slate-500">No funds match current filter.</div>
+          <div className="text-center py-6 text-slate-500 bg-slate-950/40 rounded-xl border border-slate-800/60">
+            <p className="text-slate-400 mb-1">
+              {heldOnly ? 'No unlisted index funds currently held.' : 'No funds match current filter.'}
+            </p>
+            {heldOnly && (
+              <button
+                type="button"
+                onClick={() => setUserToggledHeldOnly(false)}
+                className="text-xs text-indigo-400 hover:text-indigo-300 underline underline-offset-2"
+              >
+                Browse all unlisted index funds
+              </button>
+            )}
+          </div>
         ) : (
           sortedFilteredFunds.map((fund) => {
             const balance = portfolioState.fundBalances[fund.code] || 0;
