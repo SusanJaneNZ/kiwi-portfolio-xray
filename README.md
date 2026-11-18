@@ -1,17 +1,21 @@
 # Kiwi Portfolio X-Ray
 
-A static, browser-based portfolio look-through analyzer hosted on GitHub Pages for New Zealand retail investors holding portfolios across NZX Smartshares ETFs, Kernel unlisted index funds, bank term deposits, and direct NZX/ASX shares.
+A static, browser-based portfolio look-through analyzer hosted on GitHub Pages for New Zealand retail investors holding portfolios across KiwiSaver schemes, unlisted managed funds, NZX Smartshares ETFs, bank term deposits, and direct NZX/ASX shares.
 
 ## Documentation
 
 * **Technical Design Document:** [docs/designs/kiwi-portfolio-xray.md](docs/designs/kiwi-portfolio-xray.md)
+* **KiwiSaver & Crowdsourced Ingestion Spec:** [docs/designs/kiwisaver-custom-funds-and-crowdsourced-ingestion.md](docs/designs/kiwisaver-custom-funds-and-crowdsourced-ingestion.md)
 * **Asset Split, Bond Funds & Bucket Rebalancer Spec:** [docs/designs/asset-split-bonds-tds.md](docs/designs/asset-split-bonds-tds.md)
+* **Phase 1 & Phase 2 Ingestion Spec:** [docs/designs/phase1-fixed-interest-phase2-automated-pipeline.md](docs/designs/phase1-fixed-interest-phase2-automated-pipeline.md)
 * **Design Sitemap:** [docs/designs/SITEMAP.md](docs/designs/SITEMAP.md)
 * **Administrator & Ingestion Guide:** [docs/ADMIN_GUIDE.md](docs/ADMIN_GUIDE.md)
 * **Initial Concept Brief:** [concepts_brief.md](concepts_brief.md)
 
 ## Key Capabilities
 
+* **Unified 3-Tier Input Architecture:** Streamlined portfolio entry across 1) Direct Shares & Listed ETFs (units × market price), 2) Managed Funds & KiwiSaver in NZD (dollar balances), and 3) Fixed Interest & Cash (term deposits, bonds, cash).
+* **KiwiSaver & Managed Fund Crowdsourcing:** Live URL validation for Sorted Smart Investor links (`SCH.../OFR.../FND...`) with instant 80/20 synthetic fallback and 1-click submission to an automated GitHub Actions ingestion bot.
 * **Recursive Feeder Fund Unwrapping:** Unpacks feeder funds (e.g. Smartshares `TWF`, `USF`, `EUF`, `APA`, `ESG`, `EMF`) to their underlying master ETF holdings (Vanguard `VT`, `VOO`, `VGK`, `VPL`, iShares `IWLD`).
 * **Multi-Fund Aggregation:** Consolidates overlapping company equities across multiple funds and managers using ISO 6166 ISIN canonical keys.
 * **Direct NZX / ASX Holdings & Live FX:** Incorporates direct shareholdings (e.g. Mercury, Fisher & Paykel Healthcare, BHP, CSL) with per-holding NZD/AUD currency selection and automatic live AUD/NZD rate lookup with manual override.

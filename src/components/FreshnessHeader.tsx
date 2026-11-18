@@ -77,6 +77,10 @@ export const FreshnessHeader: React.FC<FreshnessHeaderProps> = ({
             <span className="text-slate-400">Holdings As Of:</span>
             {envelope.minEffectiveDate === 'N/A' ? (
               <span className="font-medium text-slate-400">No active fund dates</span>
+            ) : envelope.minEffectiveDate === envelope.maxEffectiveDate ? (
+              <span className="font-medium text-amber-300">
+                {envelope.minEffectiveDate}
+              </span>
             ) : (
               <>
                 <span className="font-medium text-amber-300">
