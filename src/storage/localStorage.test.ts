@@ -584,5 +584,60 @@ export const storageTestCases: Array<[string, () => void]> = [
       assertEq(imported.cashflowSettings, undefined, "cashflowSettings undefined for legacy payload");
     },
   ],
+  [
+    "normalizePortfolioState and export/import round-trip customFunds and KiwiSaver metadata",
+    () => {
+      const stateWithCustom: UserPortfolioState = {
+        version: 2,
+        timestamp: "2026-11-18T10:00:00Z",
+        audNzdRate: 1.10,
+        fundBalances: { FISHER_GROWTH: 50000 },
+        directHoldings: [],
+        fixedInterest: [],
+        cashDeposits: [],
+        buckets: [],
+        bucketAssignments: {},
+        customFunds: [
+          {
+            code: "FISHER_GROWTH",
+            name: "Fisher Funds KiwiSaver Growth",
+            provider: "Fisher Funds",
+            effective_date: "2026-09-30",
+            cash_ratio: 0.035,
+            hedging_ratio: 0,
+            constituent_count: 0,
+            asset_class: "mixed",
+            isKiwiSaver: true,
+            smartInvestorUrl:
+              "https://www.smartinvestor.sorted.org.nz/kiwisaver-and-managed-funds/SCH10713/OFR10715/FND555/",
+          },
+        ],
+      };
+
+      const normalized = normalizePortfolioState(stateWithCustom);
+      assertTrue(Boolean(normalized), "normalized state is non-null");
+      if (!normalized) return;
+      assertTrue(normalized.customFunds !== undefined, "customFunds preserved in normalized state");
+      assertEq(normalized.customFunds!.length, 1, "has 1 custom fund");
+      assertEq(normalized.customFunds![0].code, "FISHER_GROWTH", "fund code matches");
+      assertEq(normalized.customFunds![0].isKiwiSaver, true, "isKiwiSaver flag preserved");
+      assertEq(
+        normalized.customFunds![0].smartInvestorUrl,
+        "https://www.smartinvestor.sorted.org.nz/kiwisaver-and-managed-funds/SCH10713/OFR10715/FND555/",
+        "smartInvestorUrl preserved"
+      );
+
+      const jsonStr = exportPortfolioJSON(normalized);
+      assertTrue(jsonStr.includes('"customFunds"'), "exported JSON contains customFunds");
+      assertTrue(jsonStr.includes('"isKiwiSaver": true'), "exported JSON contains isKiwiSaver");
+
+      const reimported = importPortfolioJSON(jsonStr);
+      assertTrue(reimported.customFunds !== undefined, "reimported has customFunds");
+      assertEq(reimported.customFunds!.length, 1, "reimported length matches");
+      assertEq(reimported.customFunds![0].code, "FISHER_GROWTH", "reimported code matches");
+      assertEq(reimported.customFunds![0].isKiwiSaver, true, "reimported isKiwiSaver matches");
+      assertEq(reimported.customFunds![0].asset_class, "mixed", "reimported asset_class matches");
+    },
+  ],
 ];
 

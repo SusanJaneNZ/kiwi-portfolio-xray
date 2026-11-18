@@ -574,6 +574,7 @@ export function serializePortfolioPayload(state: UserPortfolioState): Record<str
     cashDeposits: state.fixedInterest || state.cashDeposits,
     buckets: state.buckets,
     bucketAssignments: state.bucketAssignments,
+    ...(state.customFunds && state.customFunds.length > 0 ? { customFunds: state.customFunds } : {}),
     ...(state.cashflowSettings ? { cashflowSettings: state.cashflowSettings } : {}),
     ...(state.pirRate !== undefined ? { pirRate: state.pirRate } : {}),
   };

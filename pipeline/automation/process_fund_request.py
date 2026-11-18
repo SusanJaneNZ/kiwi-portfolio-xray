@@ -71,6 +71,11 @@ def extract_metadata_from_text(title: str, body: str) -> dict[str, Any]:
             meta["fund_code"] = m_code.group(1).strip().upper()
             continue
 
+        m_kiwi = re.match(r"^[\*\-]?\s*\*?\*?Is KiwiSaver:\*?\*?\s*(.+)$", line_clean, re.I)
+        if m_kiwi:
+            meta["is_kiwisaver"] = m_kiwi.group(1).strip().lower() in {"true", "yes", "1"}
+            continue
+
     # Fallback provider detection
     name = meta.get("fund_name", "")
     if "provider" not in meta:
@@ -88,7 +93,8 @@ def extract_metadata_from_text(title: str, body: str) -> dict[str, Any]:
 
     meta["fund_code"] = re.sub(r"[^A-Z0-9_]", "_", meta["fund_code"].upper())
     meta.setdefault("is_etf", False)
-    meta.setdefault("is_kiwisaver", True)
+    if "is_kiwisaver" not in meta:
+        meta["is_kiwisaver"] = "kiwi" in (name + " " + title).lower()
 
     return meta
 
@@ -111,10 +117,18 @@ def update_catalog_file(catalog_path: Path, new_entry: dict[str, Any]) -> tuple[
     else:
         catalog = []
 
+    provider_raw = str(new_entry.get("provider", "KiwiSaver")).strip()
+    if provider_raw.upper() in {"ANZ", "ASB", "BNZ", "AMP", "ACC"}:
+        clean_provider = provider_raw.upper()
+    elif any(c.isupper() for c in provider_raw[1:]):
+        clean_provider = provider_raw
+    else:
+        clean_provider = provider_raw.title()
+
     clean_item = {
         "fund_code": fund_code,
         "fund_name": new_entry.get("fund_name", fund_code.replace("_", " ").title()),
-        "provider": new_entry.get("provider", "KiwiSaver").title(),
+        "provider": clean_provider,
         "fnd_code": fnd_code,
         "scheme_id": new_entry.get("scheme_id", "SCH10713"),
         "offer_id": new_entry.get("offer_id", "OFR10715"),

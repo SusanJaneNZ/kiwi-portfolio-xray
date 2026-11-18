@@ -55,6 +55,38 @@ Please add this KiwiSaver fund to Kiwi Portfolio X-Ray!
         self.assertEqual(meta["scheme_id"], "SCH10713")
         self.assertEqual(meta["offer_id"], "OFR10715")
 
+    def test_extract_metadata_non_kiwisaver_managed_fund(self):
+        title = "[Fund Request] Milford Trans-Tasman Equity Fund"
+        body = """
+### Fund Submission
+
+- **Fund Name:** Milford Trans-Tasman Equity Fund
+- **Provider:** Milford
+- **Fund Code:** MILFORD_TRANS_TASMAN
+- **Is KiwiSaver:** No
+- **Smart Investor Link:** https://www.smartinvestor.sorted.org.nz/kiwisaver-and-managed-funds/SCH10001/OFR10002/FND9999/
+        """
+        meta = extract_metadata_from_text(title, body)
+        self.assertEqual(meta["fund_name"], "Milford Trans-Tasman Equity Fund")
+        self.assertEqual(meta["provider"], "Milford")
+        self.assertEqual(meta["fund_code"], "MILFORD_TRANS_TASMAN")
+        self.assertEqual(meta["fnd_code"], "FND9999")
+        self.assertFalse(meta["is_kiwisaver"])
+
+    def test_provider_acronym_preserved(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            catalog_file = Path(tmp_dir) / "fund_catalog.json"
+            entry = {
+                "fund_code": "ANZ_GROWTH",
+                "fund_name": "ANZ Growth Fund",
+                "provider": "ANZ",
+                "fnd_code": "FND888",
+            }
+            success, msg = update_catalog_file(catalog_file, entry)
+            self.assertTrue(success)
+            data = json.loads(catalog_file.read_text(encoding="utf-8"))
+            self.assertEqual(data[0]["provider"], "ANZ")
+
     def test_update_catalog_file(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             catalog_file = Path(tmp_dir) / "fund_catalog.json"
