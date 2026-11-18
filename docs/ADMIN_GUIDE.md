@@ -33,7 +33,7 @@ This glossary defines the authoritative naming conventions for Kiwi Portfolio X-
 > [!IMPORTANT]
 > ### Crucial Operational Distinction: Automated Ingestion vs. Manual Master ETF Maintenance
 > * **NZ Fund Constituent Disclosures (`.xlsx`):** **AUTOMATICALLY DOWNLOADED & UNWRAPPED.** The nightly GitHub Actions pipeline and the Admin UI crawler connect directly to the NZ Disclose Register / Sorted Smart Investor API. They download new filings, unwrap feeders, and compile constituents without administrator intervention.
-> * **Overseas Master ETFs (`.csv` from Vanguard, iShares & SPDR):** **NOT AUTOMATICALLY DOWNLOADED.** Because Vanguard (US/AU), iShares (BlackRock), and State Street SPDR are overseas issuers, their full constituent CSV files are **NOT** filed on the NZ Disclose Register. **The administrator must periodically monitor and update Master ETF CSVs manually:** download the latest holdings CSV from their product pages, drop them into `data/staging/vanguard/`, `data/staging/ishares/`, or `data/staging/spdr/` via the Admin Web UI, and trigger a compile.
+> * **Overseas Master ETFs (`.csv` from Vanguard, iShares & SPDR):** **NOT AUTOMATICALLY DOWNLOADED.** Because Vanguard (US/AU), iShares (BlackRock), and State Street SPDR are overseas issuers, their full constituent CSV files are **NOT** filed on the NZ Disclose Register. **The administrator must periodically monitor and update Master ETF CSVs manually:** download the latest holdings CSV from their product pages, drop them into `data/staging/vanguard/`, `data/staging/ishares/`, or `data/staging/spdr/` via the Admin Web UI, and click **`⚡ Build Production (public/data/)`** (which unwraps the holdings and publishes the updated datasets for the investor app).
 
 ---
 
@@ -94,7 +94,8 @@ A key design feature of Kiwi Portfolio X-Ray is that the reference dataset (**Kn
 ### Known Companies Register Composition:
 1. **NZX Official Directory**: ~200 NZ-listed companies (ISIN, Name, Ticker, GICS Sector).
 2. **ASX Official Directory**: ~2,200 Australian-listed companies (ISIN, Name, Ticker, GICS Sector).
-3. **Vanguard Total World (`VT`) Master Directory**: **~9,840 global companies** spanning over 40 countries (including the US, UK, Japan, Germany, Switzerland, Taiwan, South Korea, China, Scandinavia, etc.), complete with verified 12-character ISINs, country ISO codes, and sector mappings.
+3. **Vanguard Total World (`VT`) Master Directory**: **~9,840 global companies** spanning over 40 countries (including the US, UK, Japan, Germany, Switzerland, Taiwan, South Korea, China, Scandinavia, etc.), complete with verified SEDOL/ISINs, country ISO codes, and sector mappings.
+4. **SPDR & iShares Master ETFs** (`SPEM`, `IWLD`, etc.): Automatically contributes any missing emerging market and overseas companies with verified SEDOLs, local tickers, and countries (expanding the Known Companies Register to **14,680+ companies**). Priority is strictly maintained so Vanguard VT's verified GICS sectors always prevail on overlapping holdings.
 
 ### How Global & Thematic Funds are Resolved:
 * When an unlisted fund like **Kernel S&P World Ex-U.S.**, **Kernel Global Clean Energy**, or **Kernel Global 100** publishes quarterly holdings (e.g. Nestlé, ASML, Vestas Wind Systems, Orsted, Samsung, TSMC), their company names and tickers match against the **9,800+ global constituents** already indexed in the Known Companies Register.

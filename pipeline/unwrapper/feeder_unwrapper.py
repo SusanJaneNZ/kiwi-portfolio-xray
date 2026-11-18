@@ -80,10 +80,15 @@ class FeederUnwrapper:
             norm_country = normalize_country(h.country or "", default="Global")
 
             resolved_isin = h.isin
-            if not resolved_isin and self.matcher is not None:
+            if self.matcher is not None:
                 m = self.matcher.match(name=h.name, ticker=h.ticker)
-                if m.matched and m.isin:
-                    resolved_isin = m.isin
+                if m.matched:
+                    if not resolved_isin and m.isin:
+                        resolved_isin = m.isin
+                    if norm_sector in {"Unclassified", "-", "", "Unknown"} and m.sector:
+                        norm_sector = m.sector
+                    if norm_country in {"Global", "Unknown", ""} and m.country:
+                        norm_country = m.country
 
             unwrapped_constituents.append({
                 "isin": resolved_isin or f"SYNTH_{h.ticker or h.name}",
@@ -95,10 +100,16 @@ class FeederUnwrapper:
                 "asset_class": "equity",
             })
 
+        provider = "Smartshares"
+        if feeder_code.startswith("KERNEL_"):
+            provider = "Kernel"
+        elif feeder_info.get("provider"):
+            provider = feeder_info["provider"]
+
         return UnwrappedFund(
             fund_code=feeder_code,
             fund_name=feeder_name,
-            provider="Smartshares",
+            provider=provider,
             effective_date=effective_date,
             cash_ratio=round(cash_ratio, 6),
             hedging_ratio=round(hedging_ratio, 6),

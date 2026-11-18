@@ -250,7 +250,7 @@ def _enrich_local_isins_from_global(local_records: list[dict], global_records: l
     """Replaces synthetic exchange IDs (e.g. ASX:BHP, NZX:FPH) with canonical ISINs from Vanguard VT when matched."""
     by_norm_name: dict[str, str] = {}
     for g in global_records:
-        isin = g.get("isin", "").strip()
+        isin = (g.get("isin") or "").strip()
         if not isin or isin.startswith("ASX:") or isin.startswith("NZX:") or isin.startswith("VANG:"):
             continue
         norm = normalize_company_name(g.get("name", ""))
@@ -258,7 +258,7 @@ def _enrich_local_isins_from_global(local_records: list[dict], global_records: l
             by_norm_name[norm] = isin
 
     for rec in local_records:
-        isin = rec.get("isin", "")
+        isin = (rec.get("isin") or "").strip()
         if isin.startswith("ASX:") or isin.startswith("NZX:"):
             norm = normalize_company_name(rec.get("name", ""))
             if norm in by_norm_name:
@@ -372,20 +372,72 @@ def compile_security_master(
         for vf in vanguard_files:
             vanguard_records.extend(parse_vanguard_global_directory(vf, gics_mapping))
 
-    # Enrich ASX/NZX records with canonical ISINs from Vanguard VT before deduplicating
-    _enrich_local_isins_from_global(nzx_records, vanguard_records)
-    _enrich_local_isins_from_global(asx_records, vanguard_records)
+    # 4. Parse all SPDR Global files (e.g. SPEM)
+    spdr_dir = staging_dir / "spdr"
+    spdr_records: list[dict] = []
+    if spdr_dir.exists():
+        from pipeline.adapters.spdr_adapter import SPDRAdapter
+        spdr_adapter = SPDRAdapter()
+        for sf in sorted(spdr_dir.iterdir()):
+            if sf.is_file() and spdr_adapter.can_handle(sf):
+                try:
+                    res = spdr_adapter.parse(sf)
+                    for h in res.holdings:
+                        if not h.isin and not h.name:
+                            continue
+                        sector = _normalize_sector(h.sector or "", gics_lower)
+                        country = normalize_country(h.country or "", default="Global")
+                        spdr_records.append({
+                            "isin": h.isin,
+                            "name": h.name,
+                            "ticker": h.ticker or "",
+                            "exchange": "GLOBAL",
+                            "country": country,
+                            "sector": sector,
+                        })
+                except Exception:
+                    pass
 
-    # Merge into Global Security Master, deduplicated by ISIN (Priority: Manual Overrides > NZX > ASX > Vanguard Global)
+    # 5. Parse all iShares Global files (e.g. IWLD)
+    ishares_dir = staging_dir / "ishares"
+    ishares_records: list[dict] = []
+    if ishares_dir.exists():
+        from pipeline.adapters.ishares_adapter import ISharesAdapter
+        ishares_adapter = ISharesAdapter()
+        for ifile in sorted(ishares_dir.iterdir()):
+            if ifile.is_file() and ishares_adapter.can_handle(ifile):
+                try:
+                    res = ishares_adapter.parse(ifile)
+                    for h in res.holdings:
+                        if not h.isin and not h.name:
+                            continue
+                        sector = _normalize_sector(h.sector or "", gics_lower)
+                        country = normalize_country(h.country or "", default="Global")
+                        ishares_records.append({
+                            "isin": h.isin,
+                            "name": h.name,
+                            "ticker": h.ticker or "",
+                            "exchange": "GLOBAL",
+                            "country": country,
+                            "sector": sector,
+                        })
+                except Exception:
+                    pass
+
+    # Enrich ASX/NZX records with canonical ISINs from global directories before deduplicating
+    all_global_records = vanguard_records + spdr_records + ishares_records
+    _enrich_local_isins_from_global(nzx_records, all_global_records)
+    _enrich_local_isins_from_global(asx_records, all_global_records)
+
+    # Merge into Global Security Master, deduplicated by ISIN (Priority: Manual Overrides > NZX > ASX > Vanguard Global > SPDR > iShares)
     seen_isins: set[str] = set()
     global_master: list[dict] = []
 
-    for rec in manual_records + nzx_records + asx_records + vanguard_records:
-        isin = rec.get("isin", "").strip()
-        if isin and isin in seen_isins:
+    for rec in manual_records + nzx_records + asx_records + vanguard_records + spdr_records + ishares_records:
+        isin = (rec.get("isin") or "").strip()
+        if not isin or isin in seen_isins:
             continue
-        if isin:
-            seen_isins.add(isin)
+        seen_isins.add(isin)
         global_master.append(rec)
 
     # Extract direct equities (NZX and ASX) deduplicated by (exchange, ticker) so dual-listed stocks remain selectable on both exchanges
@@ -408,6 +460,8 @@ def compile_security_master(
         "nzx_count": len(nzx_records),
         "asx_count": len(asx_records),
         "vanguard_global_count": len(vanguard_records),
+        "spdr_global_count": len(spdr_records),
+        "ishares_global_count": len(ishares_records),
         "_security_master_data": global_master,
         "_direct_equities_data": direct_equities,
     }

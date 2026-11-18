@@ -8,6 +8,7 @@ from pipeline.adapters.betashares_adapter import BetasharesAdapter
 from pipeline.adapters.ishares_adapter import ISharesAdapter
 from pipeline.adapters.kernel_adapter import KernelAdapter
 from pipeline.adapters.smartshares_direct_adapter import SmartsharesDirectAdapter
+from pipeline.adapters.spdr_adapter import SPDRAdapter
 from pipeline.adapters.vanguard_adapter import VanguardAdapter
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
@@ -193,6 +194,50 @@ class TestAdapters(unittest.TestCase):
             self.assertEqual(len(res.holdings), 3)
             tsmc = next(h for h in res.holdings if "Taiwan Semiconductor" in h.name)
             self.assertAlmostEqual(tsmc.weight, 0.105, places=4)
+
+    def test_spdr_adapter(self):
+        csv_text = (
+            "Fund Name:,State Street® SPDR® Portfolio Emerging Markets ETF\n"
+            "Ticker Symbol:,SPEM\n"
+            "Holdings:,As of 16-Nov-2026\n"
+            "Name,Ticker,Identifier,SEDOL,Weight,Sector,Shares Held,Local Currency\n"
+            "TAIWAN SEMICONDUCTOR MANUFAC,2330,688910900,6889106,13.71,-,32672912,TWD\n"
+            "TENCENT HOLDINGS LTD,700,BMMV2K903,BMMV2K8,2.60,-,8369994,HKD\n"
+            "USD CASH,-,-,-,0.50,-,500000,USD\n"
+            "MSCI EMGMKT DEC26,MESZ6,ADI2VCHN0,-,-0.01,-,5000,USD\n"
+            "State Street Global Advisors (SSGA) is now State Street Investment Management.\n"
+        )
+        adapter = SPDRAdapter()
+        with tempfile.TemporaryDirectory() as tmp:
+            spdr_dir = Path(tmp) / "spdr"
+            spdr_dir.mkdir()
+            p = spdr_dir / "holdings-daily-us-en-spem.csv"
+            p.write_text(csv_text, encoding="utf-8")
+            self.assertTrue(adapter.can_handle(p))
+            res = adapter.parse(p)
+            self.assertEqual(res.fund_code, "SPEM")
+            self.assertEqual(res.provider, "SPDR")
+            self.assertEqual(res.effective_date, "2026-11-16")
+            self.assertTrue(res.is_master)
+            # Cash & negative derivatives skipped -> 2 equity holdings
+            self.assertEqual(len(res.holdings), 2)
+            self.assertAlmostEqual(sum(h.weight for h in res.holdings), 1.0, places=4)
+            tsmc = res.holdings[0]
+            self.assertEqual(tsmc.name, "TAIWAN SEMICONDUCTOR MANUFAC")
+            self.assertEqual(tsmc.country, "Taiwan")
+            self.assertEqual(tsmc.isin, "SEDOL:6889106")
+
+    def test_spdr_live_staged_spem(self):
+        staged_file = STAGING_DIR / "spdr" / "holdings-daily-us-en-spem.xlsx"
+        if not staged_file.exists():
+            return
+        adapter = SPDRAdapter()
+        self.assertTrue(adapter.can_handle(staged_file))
+        res = adapter.parse(staged_file)
+        self.assertEqual(res.fund_code, "SPEM")
+        self.assertEqual(res.provider, "SPDR")
+        self.assertGreater(len(res.holdings), 2500)
+        self.assertAlmostEqual(sum(h.weight for h in res.holdings), 1.0, places=4)
 
 
 if __name__ == "__main__":

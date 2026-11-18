@@ -367,8 +367,7 @@
         <button class="btn btn-sm" onclick="setAllPanelsOpen(true)">Expand All</button>
         <button class="btn btn-sm" onclick="setAllPanelsOpen(false)">Collapse All</button>
         <button id="btn-dry-run" class="btn btn-primary" onclick="runPipeline(true)">▶ Run Dry-Run (--dry-run)</button>
-        <button id="btn-prod-build" class="btn btn-ok" onclick="runPipeline(false)">⚡ Build Production
-          (public/data/)</button>
+        <button id="btn-prod-build" class="btn btn-ok" onclick="runPipeline(false)">⚡ Publish Datasets (public/data/)</button>
       </div>
     </div>
 
@@ -1012,7 +1011,7 @@
         }
         if (prodBtn) {
           prodBtn.disabled = true;
-          if (!dryRun) prodBtn.textContent = '⏳ Building Production...';
+          if (!dryRun) prodBtn.textContent = '⏳ Publishing Datasets...';
         }
         const reportPanel = document.getElementById('panel-report');
         if (reportPanel && !reportPanel.open) {
@@ -1020,7 +1019,7 @@
         }
 
         const container = document.getElementById('pipeline-report');
-        container.innerHTML = dryRun ? '⏳ Running dry-run validation...' : '⏳ Compiling production JSON assets...';
+        container.innerHTML = dryRun ? '⏳ Running dry-run validation...' : '⏳ Compiling and publishing JSON datasets...';
         try {
           const res = await api('/api/pipeline/run', {
             method: 'POST',
@@ -1029,7 +1028,7 @@
 
           const sm = res.sec_master_summary || {};
           const statusBadge = res.is_valid
-            ? `<span class="badge badge-ok">${dryRun ? 'DRY-RUN PASSED' : 'PRODUCTION BUILD SUCCESS'}</span>`
+            ? `<span class="badge badge-ok">${dryRun ? 'DRY-RUN PASSED' : 'DATASETS PUBLISHED'}</span>`
             : `<span class="badge badge-err">VALIDATION FAILED</span>`;
 
           let html = `
@@ -1073,9 +1072,9 @@
           if (dryRun) {
             showToast(res.is_valid ? 'Dry-run validation passed' : 'Dry-run completed with errors');
           } else if (res.files_written) {
-            showToast('Production files written to public/data/');
+            showToast('Datasets successfully published to public/data/');
           } else {
-            showToast('Validation failed — production files were NOT written');
+            showToast('Validation failed — datasets were NOT published');
           }
         } catch (err) {
           container.innerHTML = `<span class="badge badge-err">${escapeHtml(err.message)}</span>`;
@@ -1087,7 +1086,7 @@
           }
           if (prodBtn) {
             prodBtn.disabled = false;
-            prodBtn.textContent = '⚡ Build Production (public/data/)';
+            prodBtn.textContent = '⚡ Publish Datasets (public/data/)';
           }
         }
       }

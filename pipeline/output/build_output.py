@@ -94,14 +94,14 @@ class PipelineCompiler:
         for item in direct_equities_data:
             self._stamp_issuer(item, classifier)
 
-        # 2. Parse Master ETFs (Vanguard & iShares)
+        # 2. Parse Master ETFs (Vanguard, iShares, SPDR)
         master_funds: dict[str, Any] = {}
         build_errors: list[dict[str, Any]] = []
         extra_warnings: list[str] = []
 
-        for provider in ("vanguard", "ishares"):
+        for provider in ("vanguard", "ishares", "spdr"):
             adapter = PROVIDER_ADAPTERS[provider]()
-            for f in iter_staged_files(self.staging_dir, provider, extensions=(".csv",)):
+            for f in iter_staged_files(self.staging_dir, provider, extensions=(".csv", ".xlsx")):
                 if adapter.can_handle(f):
                     try:
                         res = adapter.parse(f)
@@ -122,49 +122,68 @@ class PipelineCompiler:
         with open(self.feeder_registry_path, "r", encoding="utf-8") as f:
             feeder_registry = json.load(f)
 
-        # 3. Ingest Smartshares staged files (Direct Funds and Sorted Feeder wrappers)
-        smartshares_adapter = PROVIDER_ADAPTERS["smartshares"]()
+        # 3. Ingest domestic & scheme disclosures (Smartshares, Kernel, BetaShares, Fisher Funds, KiwiSaver, etc.)
+        catalog_entries: list[dict] = []
+        if self.fund_catalog_path.exists():
+            try:
+                catalog_entries = json.loads(self.fund_catalog_path.read_text(encoding="utf-8"))
+            except Exception:
+                pass
+
+        known_direct_providers = {"vanguard", "ishares", "spdr", "directories"}
+        fund_providers: list[str] = ["smartshares"]
+        if self.staging_dir.exists():
+            for p in sorted(self.staging_dir.iterdir()):
+                if p.is_dir() and p.name.lower() not in known_direct_providers and p.name.lower() != "smartshares":
+                    fund_providers.append(p.name.lower())
+
         all_unwrapped_funds: list[UnwrappedFund] = []
         all_unresolved_entries: list[dict] = []
         unconfigured_feeders: list[dict] = []
 
-        for f in iter_staged_files(self.staging_dir, "smartshares"):
-            if smartshares_adapter.can_handle(f):
-                try:
-                    res = smartshares_adapter.parse(f)
-                    if res.fund_code in feeder_registry:
-                        feeder_disc_map[res.fund_code] = FeederWrapperDisclosure(
-                            feeder_code=res.fund_code,
-                            feeder_name=res.fund_name,
-                            master_ticker=feeder_registry[res.fund_code].get("master_ticker", ""),
-                            master_allocation=sum(h.weight for h in res.holdings),
-                            cash_ratio=res.cash_ratio,
-                            hedging_ratio=res.hedging_ratio,
-                            effective_date=res.effective_date,
-                        )
-                    else:
-                        detected_feeder = self._detect_unconfigured_feeder(res, classifier)
-                        if detected_feeder:
-                            unconfigured_feeders.append(detected_feeder)
-                            extra_warnings.append(
-                                f"Feeder fund '{res.fund_code}' holds '{detected_feeder['master_holding_name']}' "
-                                f"({detected_feeder['master_weight'] * 100:.1f}%) — add a Feeder Pairing in the Feeder Pairings panel and stage its master ETF CSV to unwrap."
+        for provider in fund_providers:
+            adapter = (
+                PROVIDER_ADAPTERS[provider]()
+                if provider in PROVIDER_ADAPTERS
+                else GenericDomesticAdapter(provider, catalog_entries)
+            )
+            for f in iter_staged_files(self.staging_dir, provider):
+                if adapter.can_handle(f):
+                    try:
+                        res = adapter.parse(f)
+                        if res.fund_code in feeder_registry:
+                            feeder_disc_map[res.fund_code] = FeederWrapperDisclosure(
+                                feeder_code=res.fund_code,
+                                feeder_name=res.fund_name,
+                                master_ticker=feeder_registry[res.fund_code].get("master_ticker", ""),
+                                master_allocation=sum(h.weight for h in res.holdings),
+                                cash_ratio=res.cash_ratio,
+                                hedging_ratio=res.hedging_ratio,
+                                effective_date=res.effective_date,
                             )
                         else:
-                            unwrapped = self._enrich_domestic_fund(res, matcher, classifier, all_unresolved_entries)
-                            all_unwrapped_funds.append(unwrapped)
-                except Exception as exc:
-                    build_errors.append({
-                        "file": str(f),
-                        "filename": f.name,
-                        "provider": "smartshares",
-                        "error": str(exc),
-                    })
-                    extra_warnings.append(
-                        f"[CIRCUIT BREAKER] Corrupt/unparseable file skipped in 'smartshares': {f.name} ({exc})"
-                    )
+                            detected_feeder = self._detect_unconfigured_feeder(res, classifier)
+                            if detected_feeder:
+                                unconfigured_feeders.append(detected_feeder)
+                                extra_warnings.append(
+                                    f"Feeder fund '{res.fund_code}' holds '{detected_feeder['master_holding_name']}' "
+                                    f"({detected_feeder['master_weight'] * 100:.1f}%) — add a Feeder Pairing in the Feeder Pairings panel and stage its master ETF CSV to unwrap."
+                                )
+                            else:
+                                unwrapped = self._enrich_domestic_fund(res, matcher, classifier, all_unresolved_entries)
+                                all_unwrapped_funds.append(unwrapped)
+                    except Exception as exc:
+                        build_errors.append({
+                            "file": str(f),
+                            "filename": f.name,
+                            "provider": provider,
+                            "error": str(exc),
+                        })
+                        extra_warnings.append(
+                            f"[CIRCUIT BREAKER] Corrupt/unparseable file skipped in '{provider}': {f.name} ({exc})"
+                        )
 
-        # 5. Unwrap Feeders using FeederUnwrapper
+        # 4. Unwrap Feeders using FeederUnwrapper
         unwrapper = FeederUnwrapper(self.feeder_registry_path, gics_mapping=gics_mapping, matcher=matcher)
 
         for feeder_code, info in feeder_registry.items():
@@ -194,44 +213,6 @@ class PipelineCompiler:
                 extra_warnings.append(
                     f"[CIRCUIT BREAKER] Failed to unwrap feeder '{feeder_code}' -> '{master_ticker}': {exc}"
                 )
-
-        # 6. Ingest domestic & KiwiSaver disclosures (Kernel, BetaShares, Fisher Funds, KiwiSaver, etc.)
-        catalog_entries: list[dict] = []
-        if self.fund_catalog_path.exists():
-            try:
-                catalog_entries = json.loads(self.fund_catalog_path.read_text(encoding="utf-8"))
-            except Exception:
-                pass
-
-        known_direct_providers = {"vanguard", "ishares", "smartshares", "directories"}
-        domestic_providers: set[str] = {"kernel", "betashares"}
-        if self.staging_dir.exists():
-            for p in self.staging_dir.iterdir():
-                if p.is_dir() and p.name.lower() not in known_direct_providers:
-                    domestic_providers.add(p.name.lower())
-
-        for provider in sorted(domestic_providers):
-            adapter = (
-                PROVIDER_ADAPTERS[provider]()
-                if provider in PROVIDER_ADAPTERS
-                else GenericDomesticAdapter(provider, catalog_entries)
-            )
-            for f in iter_staged_files(self.staging_dir, provider):
-                if adapter.can_handle(f):
-                    try:
-                        res = adapter.parse(f)
-                        unwrapped = self._enrich_domestic_fund(res, matcher, classifier, all_unresolved_entries)
-                        all_unwrapped_funds.append(unwrapped)
-                    except Exception as exc:
-                        build_errors.append({
-                            "file": str(f),
-                            "filename": f.name,
-                            "provider": provider,
-                            "error": str(exc),
-                        })
-                        extra_warnings.append(
-                            f"[CIRCUIT BREAKER] Corrupt/unparseable file skipped in '{provider}': {f.name} ({exc})"
-                        )
 
         # 7. Construct Funds Registry & Constituents Map (reject duplicate fund codes)
         funds_registry: list[dict] = []
@@ -327,7 +308,14 @@ class PipelineCompiler:
             return None
 
         lower = top.name.lower()
-        suggested_provider = "vanguard" if "vanguard" in lower else ("ishares" if "ishares" in lower or "blackrock" in lower else "vanguard")
+        if "spdr" in lower or "state street" in lower:
+            suggested_provider = "spdr"
+        elif "ishares" in lower or "blackrock" in lower:
+            suggested_provider = "ishares"
+        elif "vanguard" in lower:
+            suggested_provider = "vanguard"
+        else:
+            suggested_provider = "vanguard"
         return {
             "fund_code": fund_res.fund_code,
             "fund_name": fund_res.fund_name,

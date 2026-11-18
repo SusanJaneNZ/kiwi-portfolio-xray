@@ -132,11 +132,11 @@ class SecurityMatcher:
         self.by_token: dict[str, list[dict]] = {}
 
         for sec in security_master:
-            isin = sec.get("isin", "").strip()
+            isin = (sec.get("isin") or "").strip()
             if isin:
                 self.by_isin[isin] = sec
 
-            ticker = sec.get("ticker", "").strip().upper()
+            ticker = (sec.get("ticker") or "").strip().upper()
             if ticker:
                 self.by_ticker.setdefault(ticker, []).append(sec)
                 if ":" in ticker:
@@ -144,7 +144,7 @@ class SecurityMatcher:
                 if "." in ticker:
                     self.by_ticker.setdefault(ticker.split(".")[0], []).append(sec)
 
-            clean_name = normalize_company_name(sec.get("name", ""))
+            clean_name = normalize_company_name(sec.get("name") or "")
             if clean_name:
                 self.by_clean_name.setdefault(clean_name, []).append(sec)
                 for tok in get_stem_tokens(clean_name):

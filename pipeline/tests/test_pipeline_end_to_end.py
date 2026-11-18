@@ -119,6 +119,70 @@ class TestPipelineEndToEnd(unittest.TestCase):
             self.assertFalse((output_dir / "funds_registry.json").exists())
             self.assertFalse(compiler.security_master_path.exists())
 
+    def test_spdr_kernel_feeder_unwrapping(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            staging_dir = tmp_path / "staging"
+            output_dir = tmp_path / "public_data"
+
+            for sub in ["directories", "spdr", "kernel"]:
+                (staging_dir / sub).mkdir(parents=True, exist_ok=True)
+
+            (staging_dir / "directories" / "nzx_directory.csv").write_text(
+                "Rank,Ticker,Company Name,Country,Sector\n"
+                "1,FPH,Fisher & Paykel Healthcare Corporation Limited,New Zealand,Healthcare\n",
+                encoding="utf-8",
+            )
+            (staging_dir / "directories" / "ASXListedCompanies.csv").write_text(
+                "Company name,ASX code,GICS industry group\n"
+                '"BHP GROUP LIMITED","BHP","Materials"\n',
+                encoding="utf-8",
+            )
+            # Master ETF SPEM
+            (staging_dir / "spdr" / "holdings-daily-us-en-spem.csv").write_text(
+                "Fund Name:,State Street® SPDR® Portfolio Emerging Markets ETF\n"
+                "Ticker Symbol:,SPEM\n"
+                "Holdings:,As of 16-Nov-2026\n"
+                "Name,Ticker,Identifier,SEDOL,Weight,Sector,Shares Held,Local Currency\n"
+                "TAIWAN SEMICONDUCTOR MANUFAC,2330,688910900,6889106,80.00,-,1000,TWD\n"
+                "TENCENT HOLDINGS LTD,700,BMMV2K903,BMMV2K8,20.00,-,500,HKD\n"
+                "State Street Global Advisors disclaimer\n",
+                encoding="utf-8",
+            )
+            # Kernel Emerging Markets feeder fund disclosure
+            (staging_dir / "kernel" / "KERNEL_EMERGING_MARKETS_FND52049_2026-09-30.csv").write_text(
+                "Asset name,% of fund net assets\n"
+                "SPDR Portfolio Emerging Markets ETF,99.9\n"
+                "New Zealand Dollar,0.1\n",
+                encoding="utf-8",
+            )
+
+            compiler = PipelineCompiler(
+                staging_dir=staging_dir,
+                output_dir=output_dir,
+                repo_root=REPO_ROOT,
+            )
+            compiler.security_master_path = tmp_path / "security_master.json"
+
+            report, summary = compiler.compile(dry_run=False)
+
+            self.assertTrue(report.is_valid, f"Validation errors: {report.errors}")
+            self.assertEqual(len(report.errors), 0)
+            self.assertEqual(summary.get("total_funds_compiled"), 1)
+
+            # Check unwrapped constituents
+            import json
+            with open(output_dir / "constituents.json", "r", encoding="utf-8") as f:
+                constituents = json.load(f)
+
+            self.assertIn("KERNEL_EMERGING_MARKETS", constituents)
+            kem_constituents = constituents["KERNEL_EMERGING_MARKETS"]
+            self.assertEqual(len(kem_constituents), 2)
+            self.assertEqual(kem_constituents[0]["name"], "TAIWAN SEMICONDUCTOR MANUFAC")
+            self.assertAlmostEqual(kem_constituents[0]["weight"], 0.7992, places=4)
+            self.assertEqual(kem_constituents[1]["name"], "TENCENT HOLDINGS LTD")
+            self.assertAlmostEqual(kem_constituents[1]["weight"], 0.1998, places=4)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -95,6 +95,10 @@ def main() -> int:
     print(f"       - NZX Companies:       {sec_summary.get('nzx_count', 0)}")
     print(f"       - ASX Companies:       {sec_summary.get('asx_count', 0)}")
     print(f"       - Vanguard Global VT:  {sec_summary.get('vanguard_global_count', 0)}")
+    if sec_summary.get('spdr_global_count'):
+        print(f"       - SPDR Global Master:  {sec_summary.get('spdr_global_count', 0)}")
+    if sec_summary.get('ishares_global_count'):
+        print(f"       - iShares Global Master: {sec_summary.get('ishares_global_count', 0)}")
     print(f"       - Direct Equities Extracted: {sec_summary.get('direct_equities_count', 0)}")
     print(f"[PASS] Total Funds Compiled: {summary.get('total_funds_compiled', 0)}")
 

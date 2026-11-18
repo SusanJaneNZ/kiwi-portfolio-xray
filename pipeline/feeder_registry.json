@@ -113,5 +113,10 @@
     "name": "Smart Us Large Value Etf",
     "master_provider": "vanguard",
     "master_ticker": "VTV"
+  },
+  "KERNEL_EMERGING_MARKETS": {
+    "name": "Kernel Emerging Markets Fund",
+    "master_provider": "spdr",
+    "master_ticker": "SPEM"
   }
 }

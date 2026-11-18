@@ -8,11 +8,13 @@ from pipeline.adapters.betashares_adapter import BetasharesAdapter
 from pipeline.adapters.ishares_adapter import ISharesAdapter
 from pipeline.adapters.kernel_adapter import KernelAdapter
 from pipeline.adapters.smartshares_direct_adapter import SmartsharesDirectAdapter
+from pipeline.adapters.spdr_adapter import SPDRAdapter
 from pipeline.adapters.vanguard_adapter import VanguardAdapter
 
 PROVIDER_ADAPTERS: dict[str, type[BaseAdapter]] = {
     "vanguard": VanguardAdapter,
     "ishares": ISharesAdapter,
+    "spdr": SPDRAdapter,
     "smartshares": SmartsharesDirectAdapter,
     "kernel": KernelAdapter,
     "betashares": BetasharesAdapter,
@@ -40,6 +42,7 @@ __all__ = [
     "FundExtractionResult",
     "VanguardAdapter",
     "ISharesAdapter",
+    "SPDRAdapter",
     "SmartsharesDirectAdapter",
     "KernelAdapter",
     "BetasharesAdapter",
