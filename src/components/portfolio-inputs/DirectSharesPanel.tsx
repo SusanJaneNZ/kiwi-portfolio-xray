@@ -697,16 +697,32 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
           {/* Add New Holding Form */}
           <div className="pt-2 relative">
             <div className="flex gap-2 flex-wrap sm:flex-nowrap">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => {
-                  setSearchQuery(e.target.value);
-                  setSelectedEquity(null);
-                }}
-                placeholder="Search share or listed ETF e.g. CEN, FPH, USF, BHP..."
-                className="flex-1 bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 min-w-[200px]"
-              />
+              <div className="relative flex-1 min-w-[200px]">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    setSelectedEquity(null);
+                  }}
+                  placeholder="Search share or listed ETF e.g. CEN, FPH, USF, BHP..."
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-3 pr-8 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+                />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSearchQuery('');
+                      setSelectedEquity(null);
+                    }}
+                    title="Clear search"
+                    aria-label="Clear search"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white p-0.5 rounded hover:bg-slate-800 transition-colors text-xs"
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
 
               {selectedEquity && (
                 <>

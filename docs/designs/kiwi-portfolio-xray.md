@@ -423,7 +423,7 @@ When the user enters their fund balances, the calculation engine computes the po
 * **Freshness Spread:** The delta in days between the newest and oldest held fund disclosures.
 
 #### C. User Interface Freshness Indicators
-* **Global Header Badge:** Displays the consolidated portfolio as-of range (e.g., *"Holdings As Of: 30 Sep 2026 – 31 Oct 2026"*).
+* **Global Header Badge:** Displays the consolidated portfolio as-of range (e.g., *"Fund Constituents Current As Of: 30 Sep 2026 – 31 Oct 2026"*).
 * **Fund Allocation Table:** Includes an "As Of" date column adjacent to each fund input, with a visual stale indicator if an individual fund's data exceeds 90 days.
 * **Company Look-Through Breakdown:** In the expanded row showing contributing funds for a specific company, each fund line item displays its respective constituent reporting date so the user can verify data alignment.
 
@@ -494,7 +494,7 @@ When the user enters their fund balances, the calculation engine computes the po
 
 ### 2. Multi-Cadence Disclosure Lag & Freshness Discrepancies
 * **Risk**: Smartshares statutory filings on the Disclose Register update quarterly/semi-annually, whereas Vanguard master ETF CSVs update monthly. Aggregating holdings across divergent dates may introduce timing skew during periods of heavy index rebalancing.
-* **Mitigation**: The system explicitly tracks `effective_date` per fund in `funds_registry.json`. The UI prominently displays a global freshness range badge (e.g., *"Holdings As Of: 30 Sep 2026 – 31 Oct 2026"*), per-fund "As Of" dates, and flags any fund exceeding 90 days with a stale badge.
+* **Mitigation**: The system explicitly tracks `effective_date` per fund in `funds_registry.json`. The UI prominently displays a global freshness range badge (e.g., *"Fund Constituents Current As Of: 30 Sep 2026 – 31 Oct 2026"*), per-fund "As Of" dates, and flags any fund exceeding 90 days with a stale badge.
 
 ### 3. Client-Side Memory, Mobile Scaling, & DOM Virtualization
 * **Risk**: Parsing large JSON datasets and rendering thousands of company rows in browser DOM can exhaust device memory and cause UI freezing or crashes on mobile devices.

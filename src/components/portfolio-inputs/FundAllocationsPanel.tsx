@@ -96,6 +96,14 @@ const PRESET_FUNDS: PresetFund[] = [
     isKiwiSaver: false,
   },
   {
+    code: 'KERNEL_WORLD_EX_US',
+    name: 'Kernel S&P World Ex-U.S. Fund',
+    provider: 'Kernel',
+    assetClass: 'equity',
+    isKiwiSaver: false,
+    url: 'https://www.smartinvestor.sorted.org.nz/kiwisaver-and-managed-funds/SCH12697/OFR12698/FND58860/',
+  },
+  {
     code: 'MILFORD_TRANS_TASMAN',
     name: 'Milford Trans-Tasman Equity Fund',
     provider: 'Milford',
@@ -454,13 +462,26 @@ Please add this fund to \`pipeline/fund_catalog.json\` so it is ingested into th
       {/* Control Bar: Filters & Actions */}
       <div className="flex flex-wrap items-center justify-between gap-2.5 mb-3 text-xs">
         <div className="flex-1 min-w-[240px] flex items-center gap-2">
-          <input
-            type="text"
-            value={filterQuery}
-            onChange={(e) => setFilterQuery(e.target.value)}
-            placeholder="Search code, scheme, or provider (e.g. Kernel, Fisher)..."
-            className="flex-1 bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
-          />
+          <div className="relative flex-1">
+            <input
+              type="text"
+              value={filterQuery}
+              onChange={(e) => setFilterQuery(e.target.value)}
+              placeholder="Search code, scheme, or provider (e.g. Kernel, Fisher)..."
+              className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-2.5 pr-8 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+            />
+            {filterQuery && (
+              <button
+                type="button"
+                onClick={() => setFilterQuery('')}
+                title="Clear search"
+                aria-label="Clear search"
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white p-0.5 rounded hover:bg-slate-800 transition-colors text-xs"
+              >
+                ✕
+              </button>
+            )}
+          </div>
 
           {/* Type filter pills */}
           <div className="inline-flex rounded-lg border border-slate-800 bg-slate-950 p-0.5 text-[11px]">
@@ -811,10 +832,11 @@ Please add this fund to \`pipeline/fund_catalog.json\` so it is ingested into th
                     )}
                     {fund.constituent_count === 0 && (
                       <span
-                        className="text-[10px] bg-slate-900 text-sky-400 border border-sky-800/40 px-1 rounded"
-                        title="Holding constituents not yet ingested into local registry. Modeled using synthetic asset allocation."
+                        className="text-[10px] bg-sky-950/70 text-sky-300 border border-sky-800/60 px-1.5 py-0.5 rounded flex items-center gap-1 font-medium"
+                        title="Holding constituents not yet compiled into public data. Modeled using synthetic asset allocation."
                       >
-                        Synthetic Look-Through
+                        <span>⏳</span>
+                        <span>Awaiting constituent processing</span>
                       </span>
                     )}
                   </div>

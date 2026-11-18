@@ -217,6 +217,15 @@
     "is_etf": false
   },
   {
+    "fund_code": "KERNEL_WORLD_EX_US",
+    "fund_name": "Kernel S&P World Ex-U.S. Fund",
+    "provider": "Kernel",
+    "fnd_code": "FND58860",
+    "scheme_id": "SCH12697",
+    "offer_id": "OFR12698",
+    "is_etf": false
+  },
+  {
     "fund_code": "APA",
     "fund_name": "Smart Asia Pacific ETF",
     "provider": "Smartshares",
