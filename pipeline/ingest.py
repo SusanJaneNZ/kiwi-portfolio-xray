@@ -90,10 +90,11 @@ def main() -> int:
         return 1
 
     sec_summary = summary.get("sec_master_summary", {})
-    print(f"[PASS] Global Security Master Compiled: {sec_summary.get('total_security_master_count', 0)} total equities")
-    print(f"       - NZX Equities:        {sec_summary.get('nzx_count', 0)}")
-    print(f"       - ASX Equities:        {sec_summary.get('asx_count', 0)}")
-    print(f"       - Vanguard Global:     {sec_summary.get('vanguard_global_count', 0)}")
+    total_companies = sec_summary.get("total_known_companies", sec_summary.get("total_security_master_count", 0))
+    print(f"[PASS] Known Companies Register Compiled: {total_companies} total companies")
+    print(f"       - NZX Companies:       {sec_summary.get('nzx_count', 0)}")
+    print(f"       - ASX Companies:       {sec_summary.get('asx_count', 0)}")
+    print(f"       - Vanguard Global VT:  {sec_summary.get('vanguard_global_count', 0)}")
     print(f"       - Direct Equities Extracted: {sec_summary.get('direct_equities_count', 0)}")
     print(f"[PASS] Total Funds Compiled: {summary.get('total_funds_compiled', 0)}")
 

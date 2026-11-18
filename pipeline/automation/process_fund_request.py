@@ -22,6 +22,8 @@ def extract_metadata_from_text(title: str, body: str) -> dict[str, Any]:
             parsed = json.loads(json_match.group(1))
             if isinstance(parsed, dict):
                 meta.update(parsed)
+                if "fund_manager" in parsed and "provider" not in parsed:
+                    meta["provider"] = parsed["fund_manager"]
         except Exception:
             pass
 
@@ -61,7 +63,7 @@ def extract_metadata_from_text(title: str, body: str) -> dict[str, Any]:
             meta["fund_name"] = m_name.group(1).strip()
             continue
 
-        m_prov = re.match(r"^[\*\-]?\s*\*?\*?Provider:\*?\*?\s*(.+)$", line_clean, re.I)
+        m_prov = re.match(r"^[\*\-]?\s*\*?\*?(?:Provider|Fund\s+Manager|Manager):\*?\*?\s*(.+)$", line_clean, re.I)
         if m_prov:
             meta["provider"] = m_prov.group(1).strip()
             continue

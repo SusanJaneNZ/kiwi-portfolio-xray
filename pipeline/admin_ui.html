@@ -360,7 +360,7 @@
     <div class="card header">
       <div>
         <h1>🥝 Kiwi Portfolio X-Ray — Local Admin Console</h1>
-        <p class="subtitle">Local-only tool (`127.0.0.1`) to stage provider CSVs, verify adapter parsing, map aliases,
+        <p class="subtitle">Local-only tool (`127.0.0.1`) to stage fund manager filings &amp; master ETF CSVs, verify parsing, map companies,
           and build `public/data/`.</p>
       </div>
       <div class="row-actions">
@@ -379,18 +379,18 @@
         <summary class="panel-summary">
           <div class="panel-title-wrap">
             <span class="panel-chevron">▼</span>
-            <h2>1. Stage &amp; Inspect Provider CSVs</h2>
+            <h2>1. Stage &amp; Inspect Filings (Fund Managers &amp; Master ETF Issuers)</h2>
           </div>
         </summary>
         <div class="row-actions" style="margin-bottom: 8px;">
-          <label for="provider-select" style="color: var(--muted);">Target directory:</label>
+          <label for="provider-select" style="color: var(--muted);">Target Staging Directory:</label>
           <select id="provider-select" onchange="updateProviderSourceCallout()">
-            <option value="smartshares">data/staging/smartshares/</option>
-            <option value="kernel">data/staging/kernel/</option>
-            <option value="vanguard">data/staging/vanguard/</option>
-            <option value="ishares">data/staging/ishares/</option>
-            <option value="betashares">data/staging/betashares/</option>
-            <option value="directories">data/staging/directories/</option>
+            <option value="smartshares">data/staging/smartshares/ (Smartshares NZX ETFs)</option>
+            <option value="kernel">data/staging/kernel/ (Kernel Wealth Funds)</option>
+            <option value="vanguard">data/staging/vanguard/ (Vanguard Master ETFs)</option>
+            <option value="ishares">data/staging/ishares/ (iShares Master ETFs)</option>
+            <option value="betashares">data/staging/betashares/ (BetaShares ASX ETFs)</option>
+            <option value="directories">data/staging/directories/ (NZX &amp; ASX Directories)</option>
           </select>
         </div>
 
@@ -428,7 +428,7 @@
         </div>
       </summary>
       <div id="pipeline-report" style="color: var(--muted);">Click <strong>Run Dry-Run</strong> above to validate all
-        staged CSVs, weights, and Global Security Master matching.</div>
+        staged files, weights, and Known Companies Register matching.</div>
     </details>
 
     <!-- FEEDER PAIRINGS -->
@@ -436,14 +436,14 @@
       <summary class="panel-summary">
         <div class="panel-title-wrap">
           <span class="panel-chevron">▼</span>
-          <h2>4. Feeder Pairings (feeder_registry.json)</h2>
+          <h2>4. Feeder Fund Pairings (feeder_registry.json)</h2>
         </div>
       </summary>
       <div class="row-actions" style="margin-bottom: 10px; flex-wrap: wrap;">
         <input type="text" id="feeder-code" placeholder="Feeder Code (e.g. TWH)" style="width: 150px;">
         <input type="text" id="feeder-name" placeholder="Fund Name (e.g. Smart Total World Hedged ETF)"
           style="flex: 1; min-width: 180px;">
-        <select id="feeder-master-provider">
+        <select id="feeder-master-provider" title="Master ETF Issuer (Vanguard or iShares)">
           <option value="vanguard">Vanguard</option>
           <option value="ishares">iShares</option>
         </select>
@@ -508,7 +508,7 @@
         <summary class="panel-summary">
           <div class="panel-title-wrap">
             <span class="panel-chevron">▼</span>
-            <h2>6. Unresolved Holdings Mapper</h2>
+            <h2>6. Unresolved Company Holdings Mapper</h2>
             <span id="unresolved-count-badge" class="badge badge-info" style="display: none;"></span>
           </div>
           <div class="row-actions" onclick="event.stopPropagation();">
@@ -518,8 +518,8 @@
               CSV</button>
           </div>
         </summary>
-        <p class="subtitle" style="margin-bottom: 10px;">Unmatched or ambiguous names from the latest dry-run. Click a
-          suggested close match, search the Security Master, or bulk-import CSV mappings into
+        <p class="subtitle" style="margin-bottom: 10px;">Unmatched or ambiguous company names from the latest dry-run. Click a
+          suggested close match, search the Known Companies Register, or bulk-import CSV mappings into
           <code>provider_alias_map.json</code>.</p>
         <div id="bulk-import-box"
           style="display: none; margin-bottom: 12px; padding: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px;">
@@ -534,7 +534,7 @@
           </div>
         </div>
         <div class="row-actions" style="margin-bottom: 10px;">
-          <input type="text" id="sm-search-input" placeholder="Search Security Master (company, ticker, ISIN)..."
+          <input type="text" id="sm-search-input" placeholder="Search Known Companies Register (company name, ticker, ISIN)..."
             style="flex: 1;" oninput="searchSecurityMaster(this.value)">
         </div>
         <div id="sm-search-results" style="margin-bottom: 12px;"></div>
@@ -545,13 +545,13 @@
         <summary class="panel-summary">
           <div class="panel-title-wrap">
             <span class="panel-chevron">▼</span>
-            <h2>6. Saved Aliases (provider_alias_map.json)</h2>
+            <h2>7. Saved Company Aliases (provider_alias_map.json)</h2>
             <span id="aliases-count-badge" class="badge badge-info" style="display: none;"></span>
           </div>
         </summary>
         <div class="row-actions" style="margin-bottom: 10px;">
-          <input type="text" id="manual-scope" placeholder="Provider:Fund (e.g. Kernel:KERNEL_NZ_50)" style="flex: 1;">
-          <input type="text" id="manual-name" placeholder="Raw Name" style="flex: 1;">
+          <input type="text" id="manual-scope" placeholder="FundManager:FundCode (e.g. Kernel:KERNEL_NZ_50)" style="flex: 1;">
+          <input type="text" id="manual-name" placeholder="Raw Company Name" style="flex: 1;">
           <input type="text" id="manual-isin" placeholder="Canonical ISIN" style="width: 135px;">
           <button class="btn btn-primary btn-sm" onclick="addManualAlias()">Save</button>
         </div>
@@ -655,7 +655,7 @@
         canAutoFetch: false,
       },
       directories: {
-        name: 'Official Security Master Directories (ASX & NZX)',
+        name: 'Official Company Directories (ASX & NZX)',
         folder: 'data/staging/directories/',
         format: 'CSV (ASXListedCompanies.csv / nzx_directory.csv)',
         links: [
@@ -1012,7 +1012,7 @@
           let html = `
           <div style="margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
             ${statusBadge}
-            <span>Security Master: <strong>${sm.total_security_master_count || 0}</strong> (NZX: ${sm.nzx_count || 0}, ASX: ${sm.asx_count || 0}, Global: ${sm.vanguard_global_count || 0})</span>
+            <span>Known Companies Register: <strong>${sm.total_known_companies || sm.total_security_master_count || 0}</strong> (NZX: ${sm.nzx_count || 0}, ASX: ${sm.asx_count || 0}, Global VT: ${sm.vanguard_global_count || 0})</span>
             <span>Direct Equities: <strong>${sm.direct_equities_count || 0}</strong></span>
             <span>Unresolved: <strong>${res.total_unresolved_entries || 0}</strong></span>
           </div>
@@ -1089,7 +1089,7 @@
           let candHtml = '';
           if (candidates.length > 0) {
             candHtml = `<div style="margin: 6px 0; padding: 6px 8px; background: var(--card); border: 1px dashed var(--border); border-radius: 6px;">
-            <div style="font-size: 11px; color: var(--muted); margin-bottom: 4px;">Close matches in <code>security_master.json</code>:</div>`;
+            <div style="font-size: 11px; color: var(--muted); margin-bottom: 4px;">Close matches in Known Companies Register:</div>`;
             candidates.forEach((c, cIdx) => {
               const pct = Math.round((c.score || 0) * 100);
               candHtml += `
@@ -1155,7 +1155,7 @@
         const data = await api(`/api/security-master?q=${encodeURIComponent(query)}`);
         if (seq !== smSearchSeq) return;
         if (!data.results.length) {
-          container.innerHTML = `<div style="font-size: 11px; color: var(--muted);">No matches in security_master.json.</div>`;
+          container.innerHTML = `<div style="font-size: 11px; color: var(--muted);">No matches in Known Companies Register.</div>`;
           return;
         }
         let html = `<table><thead><tr><th>ISIN</th><th>Ticker</th><th>Name</th><th>Country</th><th></th></tr></thead><tbody>`;
@@ -1416,7 +1416,7 @@
             } else if (info && info.in_security_master === false) {
               statusHtml = `
               <div style="font-size: 11px; color: var(--warn); display: flex; flex-wrap: wrap; align-items: center; gap: 6px;">
-                <span>⚠ Not in security_master.json (Country/Sector Unknown)</span>
+                <span>⚠ Not in Known Companies Register (Country/Sector Unknown)</span>
                 <button class="btn btn-sm" style="padding: 2px 7px; font-size: 10px;" onclick="toggleElement('manual-alias-${idx}')">Set Country &amp; Sector</button>
               </div>
               <div id="manual-alias-${idx}" style="display: none; margin-top: 6px; padding: 8px; background: var(--card-alt); border: 1px solid var(--border); border-radius: 6px;">

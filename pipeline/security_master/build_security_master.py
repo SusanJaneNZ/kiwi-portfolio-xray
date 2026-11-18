@@ -402,6 +402,7 @@ def compile_security_master(
         atomic_write_json(output_direct_path, direct_equities)
 
     return {
+        "total_known_companies": len(global_master),
         "total_security_master_count": len(global_master),
         "direct_equities_count": len(direct_equities),
         "nzx_count": len(nzx_records),
@@ -410,3 +411,7 @@ def compile_security_master(
         "_security_master_data": global_master,
         "_direct_equities_data": direct_equities,
     }
+
+
+# Canonical alias matching the architecture glossary
+compile_company_register = compile_security_master

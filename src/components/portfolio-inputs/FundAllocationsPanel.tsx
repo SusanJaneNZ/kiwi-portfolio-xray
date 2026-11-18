@@ -325,7 +325,7 @@ export const FundAllocationsPanel: React.FC<FundAllocationsPanelProps> = ({
 Please add this fund to \`pipeline/fund_catalog.json\` so it is ingested into the global look-through catalogue.
 
 - **Fund Name:** ${fund.name}
-- **Provider:** ${fund.provider}
+- **Fund Manager:** ${fund.provider}
 - **Fund Code:** ${fund.code}
 - **Smart Investor Link:** ${fund.smartInvestorUrl || 'N/A'}
 - **Scheme ID:** ${val.schemeId || 'N/A'}
@@ -338,6 +338,7 @@ Please add this fund to \`pipeline/fund_catalog.json\` so it is ingested into th
 {
   "fund_code": "${fund.code}",
   "fund_name": "${fund.name}",
+  "fund_manager": "${fund.provider}",
   "provider": "${fund.provider}",
   "fnd_code": "${val.fundId || ''}",
   "scheme_id": "${val.schemeId || ''}",
@@ -467,7 +468,7 @@ Please add this fund to \`pipeline/fund_catalog.json\` so it is ingested into th
               type="text"
               value={filterQuery}
               onChange={(e) => setFilterQuery(e.target.value)}
-              placeholder="Search code, scheme, or provider (e.g. Kernel, Fisher)..."
+              placeholder="Search code, scheme, or fund manager (e.g. Kernel, Fisher)..."
               className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-2.5 pr-8 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
             />
             {filterQuery && (
@@ -609,7 +610,7 @@ Please add this fund to \`pipeline/fund_catalog.json\` so it is ingested into th
             </div>
 
             <div>
-              <label className="block text-[11px] text-slate-400 mb-1">Provider</label>
+              <label className="block text-[11px] text-slate-400 mb-1">Fund Manager (Issuer)</label>
               <input
                 type="text"
                 value={customProvider}

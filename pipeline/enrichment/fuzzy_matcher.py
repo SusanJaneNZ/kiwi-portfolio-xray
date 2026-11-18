@@ -350,3 +350,7 @@ class SecurityMatcher:
             candidate_spread=spread,
             reason=reason,
         )
+
+
+# Canonical alias matching the architecture glossary
+CompanyMatcher = SecurityMatcher

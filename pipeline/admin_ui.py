@@ -654,6 +654,12 @@ class AdminService:
                 atomic_write_json(self.feeder_registry_path, registry)
             return registry
 
+    # Canonical aliases matching the architecture glossary
+    search_company_register = search_security_master
+    get_custom_companies = get_manual_securities
+    set_custom_company = set_manual_security
+    add_custom_company = set_manual_security
+
 
 def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
     """Creates a request handler class bound to the provided AdminService."""
@@ -703,11 +709,11 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                     self._send_json(service.preview_staged_file(provider, filename))
                 elif path == "/api/aliases":
                     self._send_json({"aliases": service.get_alias_map(), "audit": service.audit_aliases()})
-                elif path == "/api/manual-securities":
+                elif path in {"/api/manual-securities", "/api/custom-companies"}:
                     self._send_json({"manual_securities": service.get_manual_securities()})
                 elif path == "/api/feeders":
                     self._send_json({"feeders": service.get_feeder_registry()})
-                elif path == "/api/security-master":
+                elif path in {"/api/security-master", "/api/company-register"}:
                     q = qs.get("q", [""])[0]
                     self._send_json({"results": service.search_security_master(q)})
                 elif path == "/api/catalog":
