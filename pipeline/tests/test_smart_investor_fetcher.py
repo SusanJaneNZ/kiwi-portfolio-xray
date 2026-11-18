@@ -301,6 +301,76 @@ class TestSmartInvestorFetcher(unittest.TestCase):
         self.assertIsNotNone(link)
         self.assertIn("disclose-document/full-portfolio/FND15841", link)
 
+    def test_load_catalog_normalizes_provider_and_constructs_holdings_url(self) -> None:
+        """Catalog loader converts provider names with spaces to underscores and defaults direct API endpoints."""
+        from pipeline.fetchers.smart_investor_fetcher import load_catalog
+        import json
+
+        custom_catalog = self.staging_dir / "custom_catalog.json"
+        data = [
+            {
+                "fund_code": "FISHER_GROWTH",
+                "fund_name": "Fisher Funds KiwiSaver Growth Fund",
+                "provider": "Fisher Funds",
+                "fnd_code": "FND555",
+            }
+        ]
+        custom_catalog.write_text(json.dumps(data), encoding="utf-8")
+
+        metas = load_catalog(custom_catalog)
+        self.assertEqual(len(metas), 1)
+        self.assertEqual(metas[0].provider, "fisher_funds")
+        self.assertEqual(metas[0].holdings_url, "https://smartinvestor.sorted.org.nz/api/funds/FND555/holdings.xlsx")
+        self.assertEqual(metas[0].manager_name, "Fisher Funds Management Limited")
+
+    def test_fetch_fund_error_includes_url_and_diagnostics(self) -> None:
+        """When download fails and no cached file exists, error includes code, fund ID, URL and exception info."""
+        meta = DiscloseFundMeta(
+            fund_id="FND99999",
+            scheme_id="SCH10713",
+            manager_name="Test Manager",
+            fund_name="Test Fund",
+            holdings_url="https://mock.test/api/funds/FND99999/holdings.xlsx",
+            filing_date="2026-09-30",
+            target_code="TEST_FAIL_FUND",
+            provider="test_provider",
+        )
+
+        def mock_downloader(url: str, ua: str) -> bytes:
+            raise ConnectionResetError("Connection refused by test mock")
+
+        fetcher = SmartInvestorFetcher(staging_dir=self.staging_dir, downloader=mock_downloader)
+        ok, msg, path = fetcher.fetch_fund(meta, force=True)
+        self.assertFalse(ok)
+        self.assertIsNone(path)
+        self.assertIn("TEST_FAIL_FUND", msg)
+        self.assertIn("FND99999", msg)
+        self.assertIn("https://mock.test/api/funds/FND99999/holdings.xlsx", msg)
+        self.assertIn("ConnectionResetError", msg)
+
+    def test_find_existing_staged_file_matches_space_and_underscore_folders(self) -> None:
+        """_find_existing_staged_file locates files in both underscored and spaced provider directories."""
+        provider_dir = self.staging_dir / "fisher_funds"
+        provider_dir.mkdir(parents=True, exist_ok=True)
+        test_file = provider_dir / "FISHER_KIWISAVER_GROWTH_FND555_2026-09-30.xlsx"
+        test_file.write_bytes(b"PK\x03\x04" + (b"\x00" * 2000))
+
+        meta = DiscloseFundMeta(
+            fund_id="FND555",
+            scheme_id="SCH10713",
+            manager_name="Fisher Funds",
+            fund_name="Fisher Growth",
+            holdings_url="",
+            filing_date="2026-09-30",
+            target_code="FISHER_KIWISAVER_GROWTH",
+            provider="fisher funds",  # with space
+        )
+
+        fetcher = SmartInvestorFetcher(staging_dir=self.staging_dir)
+        found = fetcher._find_existing_staged_file(meta)
+        self.assertIsNotNone(found)
+        self.assertEqual(found, test_file)
+
 
 if __name__ == "__main__":
     unittest.main()

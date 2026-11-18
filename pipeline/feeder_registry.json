@@ -48,5 +48,60 @@
     "name": "Smart Europe Esg Etf",
     "master_provider": "ishares",
     "master_ticker": "SAEU"
+  },
+  "BOT": {
+    "name": "Smart Automation And Robotics Etf",
+    "master_provider": "ishares",
+    "master_ticker": "RBOT"
+  },
+  "BTC": {
+    "name": "Smart Bitcoin Etf",
+    "master_provider": "ishares",
+    "master_ticker": "IBIT"
+  },
+  "EMG": {
+    "name": "Smart Emerging Markets Esg Etf",
+    "master_provider": "ishares",
+    "master_ticker": "SAEM"
+  },
+  "GLD": {
+    "name": "Smart Gold Etf",
+    "master_provider": "ishares",
+    "master_ticker": "IAU"
+  },
+  "GPR": {
+    "name": "Smart Global Property Etf",
+    "master_provider": "ishares",
+    "master_ticker": "GLPR"
+  },
+  "HLT": {
+    "name": "Smart Healthcare Innovation Etf",
+    "master_provider": "ishares",
+    "master_ticker": "HEAL"
+  },
+  "INF": {
+    "name": "Smart Global Infrastructure Etf",
+    "master_provider": "ishares",
+    "master_ticker": "GLIN"
+  },
+  "JPG": {
+    "name": "Smart Japan Esg Etf",
+    "master_provider": "ishares",
+    "master_ticker": "SAJP"
+  },
+  "TWH": {
+    "name": "Smart Total World (Nzd Hedged) Etf",
+    "master_provider": "vanguard",
+    "master_ticker": "VT"
+  },
+  "USE": {
+    "name": "Smart Us 500 (Nzd Hedged) Etf",
+    "master_provider": "vanguard",
+    "master_ticker": "VOO"
+  },
+  "USG": {
+    "name": "Smart Us Large Growth Etf",
+    "master_provider": "vanguard",
+    "master_ticker": "VUG"
   }
 }

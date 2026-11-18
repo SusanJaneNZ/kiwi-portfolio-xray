@@ -49,17 +49,40 @@ def load_catalog(catalog_path: Path | None = None) -> list[DiscloseFundMeta]:
         data = json.loads(path.read_text(encoding="utf-8"))
         metas = []
         for item in data:
-            provider = str(item.get("provider", "kernel")).strip().lower()
+            raw_provider = str(item.get("provider", "kernel")).strip()
+            # Normalize provider to match staging directory conventions (e.g. "Fisher Funds" -> "fisher_funds")
+            provider = re.sub(r"[\s\-]+", "_", raw_provider.lower())
             scheme_id = item.get("scheme_id") or ("SCH12697" if provider == "kernel" else "SCH10752")
             offer_id = item.get("offer_id") or ("OFR12698" if provider == "kernel" else "OFR10865")
-            manager = item.get("manager_name") or ("Kernel Wealth Limited" if provider == "kernel" else "Smartshares Limited")
+            manager = item.get("manager_name")
+            if not manager:
+                if "kernel" in provider:
+                    manager = "Kernel Wealth Limited"
+                elif "fisher" in provider:
+                    manager = "Fisher Funds Management Limited"
+                elif "smartshares" in provider:
+                    manager = "Smartshares Limited"
+                elif "simplicity" in provider:
+                    manager = "Simplicity NZ Limited"
+                elif "milford" in provider:
+                    manager = "Milford Funds Limited"
+                elif "booster" in provider:
+                    manager = "Booster Investment Management Limited"
+                else:
+                    manager = raw_provider
+
+            fnd_code = str(item.get("fnd_code") or item.get("fund_id", "")).strip()
+            holdings_url = str(item.get("holdings_url", "")).strip()
+            if not holdings_url and fnd_code:
+                holdings_url = f"https://smartinvestor.sorted.org.nz/api/funds/{fnd_code}/holdings.xlsx"
+
             metas.append(
                 DiscloseFundMeta(
-                    fund_id=item.get("fnd_code") or item.get("fund_id", ""),
+                    fund_id=fnd_code,
                     scheme_id=scheme_id,
                     manager_name=manager,
                     fund_name=item.get("fund_name", ""),
-                    holdings_url=item.get("holdings_url", ""),
+                    holdings_url=holdings_url,
                     filing_date=item.get("filing_date", "2026-09-30"),
                     target_code=item.get("fund_code") or item.get("target_code", ""),
                     provider=provider,
@@ -389,7 +412,8 @@ class SmartInvestorFetcher:
         clean_fnd = self.sanitize_filename(meta.fund_id)
         # Standardized naming convention compatible with sorted_parser
         filename = f"{clean_code}_{clean_fnd}_{clean_date}.xlsx"
-        return self.staging_dir / meta.provider / filename
+        provider_dir = re.sub(r"[\s\-]+", "_", meta.provider.strip().lower())
+        return self.staging_dir / provider_dir / filename
 
     def fetch_fund(
         self,
@@ -421,7 +445,14 @@ class SmartInvestorFetcher:
                 content = self._downloader(download_url, self.user_agent)
             except Exception as exc:
                 last_exc = exc
-                logger.debug("Initial fetch for %s from %s failed: %s", meta.target_code, download_url, exc)
+                logger.error(
+                    "Direct download failed for %s (%s) from URL '%s': %s",
+                    meta.target_code,
+                    meta.fund_id,
+                    download_url,
+                    exc,
+                    exc_info=True,
+                )
                 content = None
 
         if content is None:
@@ -433,24 +464,44 @@ class SmartInvestorFetcher:
                     last_exc = None
                 except Exception as exc:
                     last_exc = exc
-                    logger.warning("Failed to fetch %s from resolved URL %s: %s", meta.target_code, resolved, exc)
+                    logger.error(
+                        "Download from resolved URL '%s' failed for %s (%s): %s",
+                        resolved,
+                        meta.target_code,
+                        meta.fund_id,
+                        exc,
+                        exc_info=True,
+                    )
                     content = None
 
         if content is None:
             fallback = self._find_existing_staged_file(meta)
             if fallback:
-                return True, f"Remote download failed ({last_exc}), fell back to existing staged file", fallback
-            err_detail = f": {last_exc}" if last_exc else f": could not fetch {meta.target_code} ({meta.fund_id})"
-            return False, f"Remote download failed{err_detail}", None
+                logger.info(
+                    "Remote download failed (%s), fell back to existing staged file %s",
+                    last_exc,
+                    fallback.name,
+                )
+                return True, f"Remote download failed ({last_exc}), fell back to existing staged file ({fallback.name})", fallback
+            err_detail = f": {type(last_exc).__name__}: {last_exc}" if last_exc else f": could not resolve valid endpoint for {meta.target_code} ({meta.fund_id})"
+            msg = f"Remote download failed for {meta.target_code} ({meta.fund_id}) [URL: {download_url or 'None'}]{err_detail}"
+            logger.error(msg)
+            return False, msg, None
 
         # 3. Validate content
         is_valid, reason = self.validate_content(content)
         if not is_valid:
-            logger.warning("Invalid payload for %s: %s", meta.target_code, reason)
+            logger.warning(
+                "Invalid payload for %s (%s) from %s: %s",
+                meta.target_code,
+                meta.fund_id,
+                download_url,
+                reason,
+            )
             fallback = self._find_existing_staged_file(meta)
             if fallback:
-                return True, f"Remote payload invalid ({reason}), retained existing file", fallback
-            return False, f"Invalid payload: {reason}", None
+                return True, f"Remote payload invalid ({reason}), retained existing file ({fallback.name})", fallback
+            return False, f"Invalid payload for {meta.target_code} ({meta.fund_id}) from {download_url}: {reason}", None
 
         # 4. Atomic write: write to .tmp, then replace target
         tmp_path = target_path.with_suffix(".tmp")
@@ -507,25 +558,41 @@ class SmartInvestorFetcher:
         return results
 
     def _find_existing_staged_file(self, meta: DiscloseFundMeta) -> Optional[Path]:
-        """Checks if a matching file already exists in the provider's staging directory."""
-        provider_dir = self.staging_dir / meta.provider
-        if not provider_dir.exists():
+        """Checks if a matching file already exists in the provider's staging directory or related folders."""
+        if not self.staging_dir.exists():
             return None
+
+        norm_prov = re.sub(r"[\s\-]+", "_", meta.provider.strip().lower())
+        candidate_dirs: list[Path] = [self.staging_dir / norm_prov]
+        if norm_prov != meta.provider:
+            candidate_dirs.append(self.staging_dir / meta.provider)
+            candidate_dirs.append(self.staging_dir / meta.provider.replace("_", " "))
+
+        # Also fallback to any existing subdirectory in staging_dir
+        for p in self.staging_dir.iterdir():
+            if p.is_dir() and p not in candidate_dirs:
+                candidate_dirs.append(p)
 
         # Look for fund_id or target_code in filenames
         target_upper = meta.target_code.upper()
         fnd_upper = meta.fund_id.upper()
 
-        for f in provider_dir.iterdir():
-            if not f.is_file() or f.suffix.lower() not in {".xlsx", ".csv"}:
+        for provider_dir in candidate_dirs:
+            if not provider_dir.exists() or not provider_dir.is_dir():
                 continue
-            name_upper = f.name.upper()
-            matches_fnd = fnd_upper in name_upper
-            # Word/token boundary check so "AUS" does not match "AUSTRALIAN", and "DIV" does not match "DIVIDEND"
-            matches_target = bool(re.search(rf"(?:^|[_\-\s]){re.escape(target_upper)}(?:[_\-\s.]|$)", name_upper))
-            if matches_fnd or matches_target:
-                if f.stat().st_size >= 1024:
-                    return f
+            for f in provider_dir.iterdir():
+                if not f.is_file() or f.suffix.lower() not in {".xlsx", ".csv"}:
+                    continue
+                name_upper = f.name.upper()
+                matches_fnd = bool(fnd_upper and fnd_upper in name_upper)
+                # Word/token boundary check so "AUS" does not match "AUSTRALIAN", and "DIV" does not match "DIVIDEND"
+                matches_target = bool(
+                    target_upper
+                    and re.search(rf"(?:^|[_\-\s]){re.escape(target_upper)}(?:[_\-\s.]|$)", name_upper)
+                )
+                if matches_fnd or matches_target:
+                    if f.stat().st_size >= 1024:
+                        return f
         return None
 
     def _default_download(self, url: str, user_agent: str) -> bytes:

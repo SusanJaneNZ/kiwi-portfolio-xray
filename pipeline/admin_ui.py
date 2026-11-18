@@ -10,6 +10,7 @@ import json
 import re
 import sys
 import threading
+import traceback
 from datetime import datetime, timezone
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -86,7 +87,10 @@ class AdminService:
         content_base64: str = "",
     ) -> dict[str, Any]:
         """Saves an uploaded CSV or XLSX file to data/staging/<provider>/<filename>."""
-        if provider not in ALLOWED_PROVIDERS:
+        norm_prov = re.sub(r"[\s\-]+", "_", str(provider).strip().lower())
+        if norm_prov in ALLOWED_PROVIDERS:
+            provider = norm_prov
+        elif provider not in ALLOWED_PROVIDERS:
             raise ValueError(f"Invalid provider directory '{provider}'. Must be one of {sorted(ALLOWED_PROVIDERS)}.")
 
         safe_name = Path(filename).name.strip()
@@ -110,7 +114,10 @@ class AdminService:
 
     def delete_staged_file(self, provider: str, filename: str) -> bool:
         """Deletes a CSV/XLSX file from data/staging/<provider>/<filename>."""
-        if provider not in ALLOWED_PROVIDERS:
+        norm_prov = re.sub(r"[\s\-]+", "_", str(provider).strip().lower())
+        if norm_prov in ALLOWED_PROVIDERS:
+            provider = norm_prov
+        elif provider not in ALLOWED_PROVIDERS:
             raise ValueError(f"Invalid provider directory '{provider}'.")
 
         safe_name = Path(filename).name.strip()
@@ -122,7 +129,10 @@ class AdminService:
 
     def preview_staged_file(self, provider: str, filename: str) -> dict[str, Any]:
         """Previews raw file lines (CSV or XLSX) and tests parsing with the matching Tier 1 adapter."""
-        if provider not in ALLOWED_PROVIDERS:
+        norm_prov = re.sub(r"[\s\-]+", "_", str(provider).strip().lower())
+        if norm_prov in ALLOWED_PROVIDERS:
+            provider = norm_prov
+        elif provider not in ALLOWED_PROVIDERS:
             raise ValueError(f"Invalid provider directory '{provider}'.")
 
         safe_name = Path(filename).name.strip()
@@ -371,12 +381,22 @@ class AdminService:
             clean_code = str(fund_code).strip().upper()
             target = next((m for m in fetcher.catalog if m.target_code.upper() == clean_code), None)
             if not target:
+                err_msg = f"Fund code '{clean_code}' not found in catalogue"
+                sys.stderr.write(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] [AdminUI ERROR] {err_msg}\n")
+                sys.stderr.flush()
                 return {
                     "downloaded": [],
                     "cached": [],
-                    "failed": [{"code": clean_code, "message": f"Fund code '{clean_code}' not found in catalogue", "fund_id": ""}],
+                    "failed": [{"code": clean_code, "message": err_msg, "fund_id": ""}],
                     "success": False,
                 }
+
+            sys.stderr.write(
+                f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] [AdminUI] Fetching disclosure for {clean_code} "
+                f"(Fund ID: {target.fund_id}, Provider: {target.provider}, URL: {target.holdings_url}, Force: {force})...\n"
+            )
+            sys.stderr.flush()
+
             success, message, path = fetcher.fetch_fund(target, force=force)
             entry = {
                 "code": target.target_code,
@@ -385,6 +405,16 @@ class AdminService:
                 "message": message,
                 "path": str(path) if path else None,
             }
+            if not success:
+                sys.stderr.write(
+                    f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] [AdminUI ERROR] Fetch failed for {clean_code}: {message}\n"
+                )
+            else:
+                sys.stderr.write(
+                    f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] [AdminUI] Fetch completed for {clean_code}: {message} (staged: {path})\n"
+                )
+            sys.stderr.flush()
+
             return {
                 "downloaded": [entry] if success and ("cached" not in message and "existing" not in message) else [],
                 "cached": [entry] if success and ("cached" in message or "existing" in message) else [],
@@ -392,7 +422,19 @@ class AdminService:
                 "success": success,
                 "total_catalog": len(fetcher.catalog),
             }
-        return fetcher.fetch_all(providers=providers, force=force)
+
+        sys.stderr.write(
+            f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] [AdminUI] Batch disclosure fetch initiated: providers={providers}, force={force}\n"
+        )
+        sys.stderr.flush()
+        results = fetcher.fetch_all(providers=providers, force=force)
+        if results.get("failed"):
+            for f in results["failed"]:
+                sys.stderr.write(
+                    f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] [AdminUI ERROR] Batch fetch item failed: {f.get('code')} ({f.get('fund_id')}): {f.get('message')}\n"
+                )
+            sys.stderr.flush()
+        return results
 
     def run_pipeline(self, dry_run: bool = True) -> dict[str, Any]:
         """Executes PipelineCompiler in dry-run or production build mode."""
@@ -667,8 +709,12 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
 
     class AdminHTTPHandler(BaseHTTPRequestHandler):
         def log_message(self, format: str, *args: Any) -> None:
-            # Keep terminal output concise
-            pass
+            sys.stderr.write(
+                f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] [AdminUI] {self.address_string()} - "
+                + (format % args)
+                + "\n"
+            )
+            sys.stderr.flush()
 
         def _send_json(self, payload: Any, status: int = HTTPStatus.OK) -> None:
             body = json.dumps(payload).encode("utf-8")
@@ -775,9 +821,14 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                 else:
                     self._send_json({"error": "Not found"}, status=HTTPStatus.NOT_FOUND)
             except FileNotFoundError as exc:
+                sys.stderr.write(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] [AdminUI 404] {self.path}: {exc}\n")
+                sys.stderr.flush()
                 self._send_json({"error": str(exc)}, status=HTTPStatus.NOT_FOUND)
             except Exception as exc:
-                self._send_json({"error": str(exc)}, status=HTTPStatus.BAD_REQUEST)
+                sys.stderr.write(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] [AdminUI ERROR] GET {self.path}: {exc}\n")
+                traceback.print_exc(file=sys.stderr)
+                sys.stderr.flush()
+                self._send_json({"error": str(exc), "traceback": traceback.format_exc()}, status=HTTPStatus.INTERNAL_SERVER_ERROR)
 
         def do_POST(self) -> None:
             parsed = urlparse(self.path)
@@ -907,7 +958,10 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                 else:
                     self._send_json({"error": "Not found"}, status=HTTPStatus.NOT_FOUND)
             except Exception as exc:
-                self._send_json({"error": str(exc)}, status=HTTPStatus.BAD_REQUEST)
+                sys.stderr.write(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] [AdminUI ERROR] POST {self.path}: {exc}\n")
+                traceback.print_exc(file=sys.stderr)
+                sys.stderr.flush()
+                self._send_json({"error": str(exc), "traceback": traceback.format_exc()}, status=HTTPStatus.INTERNAL_SERVER_ERROR)
 
     return AdminHTTPHandler
 

@@ -387,6 +387,7 @@
           <select id="provider-select" onchange="updateProviderSourceCallout()">
             <option value="smartshares">data/staging/smartshares/ (Smartshares NZX ETFs)</option>
             <option value="kernel">data/staging/kernel/ (Kernel Wealth Funds)</option>
+            <option value="fisher_funds">data/staging/fisher_funds/ (Fisher Funds KiwiSaver &amp; Managed Funds)</option>
             <option value="vanguard">data/staging/vanguard/ (Vanguard Master ETFs)</option>
             <option value="ishares">data/staging/ishares/ (iShares Master ETFs)</option>
             <option value="betashares">data/staging/betashares/ (BetaShares ASX ETFs)</option>
@@ -472,6 +473,7 @@
         <select id="catalog-add-provider" style="width: 140px;">
           <option value="Kernel">Kernel</option>
           <option value="Smartshares">Smartshares</option>
+          <option value="Fisher Funds">Fisher Funds</option>
         </select>
         <input type="text" id="catalog-add-code" placeholder="Fund Code (e.g. KERNEL_TOTAL_WORLD, USF)"
           style="width: 220px;">
@@ -490,6 +492,7 @@
           <button class="btn btn-sm" onclick="filterCatalog('awaiting')" id="cat-filter-awaiting">⏳ Awaiting Processing</button>
           <button class="btn btn-sm" onclick="filterCatalog('Kernel')">Kernel</button>
           <button class="btn btn-sm" onclick="filterCatalog('Smartshares')">Smartshares</button>
+          <button class="btn btn-sm" onclick="filterCatalog('Fisher Funds')">Fisher Funds</button>
         </div>
         <div style="position: relative;">
           <input type="text" id="catalog-search" placeholder="Search catalogue..." style="width: 220px; padding-right: 24px;"
@@ -618,6 +621,13 @@
         folder: 'data/staging/kernel/',
         format: 'Automated Disclose Register Feed',
         buttonLabel: 'Update Kernel Fund Constituents',
+        canAutoFetch: true,
+      },
+      fisher_funds: {
+        name: 'Fisher Funds KiwiSaver & Managed Funds (Growth, Balanced, etc.)',
+        folder: 'data/staging/fisher_funds/',
+        format: 'Automated Disclose Register Feed',
+        buttonLabel: 'Update Fisher Funds Constituents',
         canAutoFetch: true,
       },
       vanguard: {
@@ -1456,7 +1466,10 @@
 
       function renderUnconfiguredFeeders(feeders) {
         const container = document.getElementById('unconfigured-feeders-list');
-        unconfiguredFeedersState = feeders || [];
+        const configuredKeys = new Set((feederCodesState || []).map((c) => (c || '').trim().toUpperCase()));
+        unconfiguredFeedersState = (feeders || []).filter(
+          (uf) => !configuredKeys.has((uf.fund_code || '').trim().toUpperCase())
+        );
         if (!unconfiguredFeedersState.length) {
           container.innerHTML = '';
           return;
@@ -1528,6 +1541,13 @@
         document.getElementById('feeder-name').value = '';
         document.getElementById('feeder-master-ticker').value = '';
         showToast(`Saved feeder pairing ${feeder_code} -> ${master_provider}:${master_ticker}`);
+
+        // Immediately prune the saved pairing from the unconfigured feeder funds list
+        unconfiguredFeedersState = (unconfiguredFeedersState || []).filter(
+          (uf) => (uf.fund_code || '').trim().toUpperCase() !== feeder_code
+        );
+        renderUnconfiguredFeeders(unconfiguredFeedersState);
+
         await loadFeeders();
       }
 
@@ -1549,6 +1569,19 @@
         const feeders = data.feeders || {};
         feederCodesState = Object.keys(feeders);
         feederEntriesMapState = feeders;
+
+        // Prune any configured feeders from unconfiguredFeedersState
+        if (unconfiguredFeedersState && unconfiguredFeedersState.length) {
+          const configuredKeys = new Set(feederCodesState.map((c) => (c || '').trim().toUpperCase()));
+          const prevLen = unconfiguredFeedersState.length;
+          unconfiguredFeedersState = unconfiguredFeedersState.filter(
+            (uf) => !configuredKeys.has((uf.fund_code || '').trim().toUpperCase())
+          );
+          if (unconfiguredFeedersState.length !== prevLen) {
+            renderUnconfiguredFeeders(unconfiguredFeedersState);
+          }
+        }
+
         if (!feederCodesState.length) {
           container.innerHTML = `<div style="color: var(--muted);">No feeder pairings configured yet.</div>`;
           return;
@@ -1739,13 +1772,26 @@
             body: JSON.stringify({ fund_code: fundCode }),
           });
           if (res.failed && res.failed.length) {
-            showToast(`Fetch failed: ${res.failed[0].message}`);
+            const fail = res.failed[0];
+            console.error('[ADMIN UI] Fetch disclosure failed for', fundCode, fail);
+            alert(
+              `❌ Fetch Failed for ${fail.code || fundCode}\n\n` +
+              `• Fund ID: ${fail.fund_id || 'N/A'}\n` +
+              `• Provider: ${fail.provider || 'N/A'}\n` +
+              `• Message: ${fail.message}\n\n` +
+              `Please check the server terminal output for full diagnostics and stack trace.`
+            );
+            showToast(`Fetch failed: ${fail.message}`);
           } else {
-            showToast(`Downloaded ${fundCode}! Staged in data/staging.`);
+            const okItem = (res.downloaded && res.downloaded[0]) || (res.cached && res.cached[0]);
+            const msg = okItem ? okItem.message : 'Successfully synchronized';
+            showToast(`✔ ${fundCode}: ${msg}`);
             await loadCatalog();
-            await loadStaging();
+            await loadStagedFiles();
           }
         } catch (err) {
+          console.error('[ADMIN UI] Network/server error fetching disclosure for', fundCode, err);
+          alert(`❌ Fetch Error for ${fundCode}:\n\n${err.message}\n\nPlease check server logs.`);
           showToast(`Error fetching ${fundCode}: ${err.message}`);
         }
       }
