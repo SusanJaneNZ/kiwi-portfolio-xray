@@ -38,6 +38,11 @@ ALLOWED_PROVIDERS = {
     "ishares",
     "kernel",
     "betashares",
+    "kiwisaver",
+    "fisher_funds",
+    "simplicity",
+    "milford",
+    "custom",
 }
 
 ALLOWED_MASTER_PROVIDERS = {"vanguard", "ishares"}
@@ -247,8 +252,8 @@ class AdminService:
                 raise ValueError("fund_code is required")
 
             provider = str(entry.get("provider", "Kernel")).strip().title()
-            if provider.lower() not in {"kernel", "smartshares", "simplicity"}:
-                raise ValueError("Provider must be Kernel, Smartshares, or Simplicity")
+            if not provider:
+                provider = "KiwiSaver"
 
             fnd_raw = str(entry.get("fnd_code", "")).strip()
             scheme_id = str(entry.get("scheme_id", "")).strip().upper()
@@ -272,6 +277,7 @@ class AdminService:
 
             fund_name = str(entry.get("fund_name", "")).strip() or fund_code.replace("_", " ").title()
             is_etf = bool(entry.get("is_etf", provider.lower() == "smartshares"))
+            is_kiwisaver = bool(entry.get("is_kiwisaver", "kiwi" in provider.lower() or "kiwi" in fund_code.lower()))
 
             clean_entry = {
                 "fund_code": fund_code,
@@ -281,6 +287,7 @@ class AdminService:
                 "scheme_id": scheme_id,
                 "offer_id": offer_id,
                 "is_etf": is_etf,
+                "is_kiwisaver": is_kiwisaver,
             }
 
             idx = next((i for i, c in enumerate(catalog) if c.get("fund_code", "").upper() == fund_code), None)

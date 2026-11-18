@@ -8,6 +8,8 @@ from pathlib import Path
 from typing import Any, Optional
 
 from pipeline.adapters import PROVIDER_ADAPTERS, iter_staged_files
+from pipeline.adapters.base import BaseAdapter, FundExtractionResult
+from pipeline.adapters.sorted_parser import parse_nz_fund_file
 from pipeline.enrichment.bond_normalizer import AssetClassifier
 from pipeline.enrichment.fuzzy_matcher import SecurityMatcher
 from pipeline.security_master.build_security_master import (
@@ -17,6 +19,28 @@ from pipeline.security_master.build_security_master import (
 )
 from pipeline.unwrapper.feeder_unwrapper import FeederUnwrapper, FeederWrapperDisclosure, UnwrappedFund
 from pipeline.validate.schema_validator import SchemaValidator, ValidationReport
+
+
+class GenericDomesticAdapter(BaseAdapter):
+    """Fallback adapter for arbitrary NZ KiwiSaver and managed funds in Sorted xlsx/csv format."""
+
+    def __init__(self, provider_name: str = "KiwiSaver", catalog: list[dict] | None = None):
+        self.provider_name = provider_name
+        self.catalog = catalog or []
+
+    def can_handle(self, file_path: Path) -> bool:
+        return file_path.suffix.lower() in {".csv", ".xlsx"}
+
+    def parse(self, file_path: Path) -> FundExtractionResult:
+        stem = file_path.stem
+        fund_code = stem.split("_FND")[0] if "_FND" in stem else stem
+        fund_name = fund_code.replace("_", " ").title()
+        for cat in self.catalog:
+            if cat.get("fund_code", "").upper() == fund_code.upper() or cat.get("fnd_code", "").upper() in stem.upper():
+                fund_code = cat.get("fund_code", fund_code)
+                fund_name = cat.get("fund_name", fund_name)
+                break
+        return parse_nz_fund_file(file_path, fund_code, fund_name, self.provider_name.replace("_", " ").title())
 
 
 class PipelineCompiler:
@@ -33,6 +57,7 @@ class PipelineCompiler:
         self.issuer_alias_path = repo_root / "pipeline" / "enrichment" / "issuer_alias_map.json"
         self.gics_mapping_path = repo_root / "pipeline" / "normalizer" / "gics_mapping.json"
         self.feeder_registry_path = repo_root / "pipeline" / "feeder_registry.json"
+        self.fund_catalog_path = repo_root / "pipeline" / "fund_catalog.json"
         self.logs_dir = repo_root / "pipeline" / "logs"
 
     def compile(self, dry_run: bool = False, force: bool = False) -> tuple[ValidationReport, dict[str, Any]]:
@@ -170,9 +195,27 @@ class PipelineCompiler:
                     f"[CIRCUIT BREAKER] Failed to unwrap feeder '{feeder_code}' -> '{master_ticker}': {exc}"
                 )
 
-        # 6. Ingest Kernel & BetaShares disclosures and enrich
-        for provider in ("kernel", "betashares"):
-            adapter = PROVIDER_ADAPTERS[provider]()
+        # 6. Ingest domestic & KiwiSaver disclosures (Kernel, BetaShares, Fisher Funds, KiwiSaver, etc.)
+        catalog_entries: list[dict] = []
+        if self.fund_catalog_path.exists():
+            try:
+                catalog_entries = json.loads(self.fund_catalog_path.read_text(encoding="utf-8"))
+            except Exception:
+                pass
+
+        known_direct_providers = {"vanguard", "ishares", "smartshares", "directories"}
+        domestic_providers: set[str] = {"kernel", "betashares"}
+        if self.staging_dir.exists():
+            for p in self.staging_dir.iterdir():
+                if p.is_dir() and p.name.lower() not in known_direct_providers:
+                    domestic_providers.add(p.name.lower())
+
+        for provider in sorted(domestic_providers):
+            adapter = (
+                PROVIDER_ADAPTERS[provider]()
+                if provider in PROVIDER_ADAPTERS
+                else GenericDomesticAdapter(provider, catalog_entries)
+            )
             for f in iter_staged_files(self.staging_dir, provider):
                 if adapter.can_handle(f):
                     try:

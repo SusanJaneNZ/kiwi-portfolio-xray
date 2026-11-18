@@ -4,6 +4,7 @@ on:
   schedule:
     - cron: '0 6 1 * *' # 6:00 UTC on the 1st of each month
   workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: write
@@ -32,7 +33,7 @@ jobs:
 
       - name: Run Ingestion Pipeline
         run: |
-          python -m pipeline.ingest --staging-dir data/staging --output-dir public/data
+          python -m pipeline.ingest --fetch --staging-dir data/staging --output-dir public/data
 
       - name: Commit and Push Updated Datasets
         run: |

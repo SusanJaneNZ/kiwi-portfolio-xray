@@ -1,0 +1,66 @@
+name: Process Crowdsourced Fund Requests
+
+on:
+  issues:
+    types: [opened, labeled]
+
+permissions:
+  contents: write
+  issues: write
+  actions: write
+
+jobs:
+  process-request:
+    if: contains(github.event.issue.labels.*.name, 'new-fund') || startsWith(github.event.issue.title, '[Fund Request]')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Process Fund Request
+        id: process_fund
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          python pipeline/automation/process_fund_request.py
+
+      - name: Commit and Push Updated Catalog
+        id: git_commit
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "Kiwi-Portfolio-Bot [CI/CD]"
+          git add pipeline/fund_catalog.json
+          if git diff --staged --quiet; then
+            echo "No catalog changes needed (already up to date)."
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            git commit -m "chore(catalog): add fund from issue #${{ github.event.issue.number }} [skip ci]"
+            git push
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Comment and Close Issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUM: ${{ github.event.issue.number }}
+        run: |
+          gh issue comment "$ISSUE_NUM" --body "🎉 **Fund Successfully Registered!**
+
+          This fund has been validated and added to \`pipeline/fund_catalog.json\`.
+          The ingestion pipeline will download its official Disclose Register spreadsheet and compile it into the global look-through catalogue.
+
+          Thank you for contributing to Kiwi Portfolio X-Ray!"
+          gh issue close "$ISSUE_NUM" --reason "completed"
+
+      - name: Trigger Ingestion Pipeline
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Triggering upstream ingestion pipeline..."
+          gh workflow run ingest.yml || echo "Could not trigger ingest.yml automatically; will run on schedule."
