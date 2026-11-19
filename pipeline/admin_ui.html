@@ -354,13 +354,17 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
+      max-width: 520px;
       background: #1e293b;
       border: 1px solid var(--primary);
-      padding: 10px 16px;
+      padding: 10px 14px;
       border-radius: 10px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
       display: none;
       z-index: 100;
+      user-select: text;
+      -webkit-user-select: text;
+      cursor: text;
     }
 
     .modal-overlay {
@@ -709,7 +713,12 @@
     </div>
   </div>
 
-  <div id="toast" class="toast"></div>
+  <div id="toast" class="toast">
+    <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;">
+      <span id="toast-text" style="flex: 1; user-select: text; -webkit-user-select: text; cursor: text; white-space: pre-wrap; word-break: break-word;"></span>
+      <button type="button" onclick="hideToast()" style="background: none; border: none; color: var(--muted); cursor: pointer; font-size: 14px; line-height: 1; padding: 0 4px;" title="Dismiss message">✕</button>
+    </div>
+  </div>
 
   <div id="alert-modal" class="modal-overlay" style="display: none;" onclick="if (event.target === this) closeAlertModal()">
     <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="alert-modal-title">
@@ -718,17 +727,17 @@
           <span id="alert-modal-icon">ℹ️</span>
           <span id="alert-modal-heading">Notice</span>
         </h3>
-        <button class="btn btn-secondary btn-sm" onclick="closeAlertModal()" title="Close" style="padding: 2px 8px; font-size: 14px; line-height: 1;">✕</button>
+        <button class="btn btn-secondary btn-sm" onclick="closeAlertModal()" title="Dismiss" style="padding: 2px 8px; font-size: 14px; line-height: 1;">✕</button>
       </div>
       <div class="modal-body">
         <pre id="alert-modal-text" style="white-space: pre-wrap; word-break: break-word; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; line-height: 1.5; margin: 0; user-select: text; -webkit-user-select: text; cursor: text; background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border); padding: 12px; border-radius: 6px; max-height: 60vh; overflow-y: auto; color: var(--text);"></pre>
       </div>
       <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 14px;">
-        <button id="alert-modal-copy-btn" class="btn btn-primary btn-sm" onclick="copyAlertModalText()">
+        <button id="alert-modal-copy-btn" class="btn btn-primary btn-sm" onclick="copyAlertModalText()" style="display: none;">
           📋 Copy Text
         </button>
         <button class="btn btn-secondary btn-sm" onclick="closeAlertModal()">
-          Close
+          Dismiss
         </button>
       </div>
     </div>
@@ -889,23 +898,29 @@
         let statusHtml = '';
         if (hasFailures) {
           statusHtml = `
-            <div style="background: rgba(244, 63, 94, 0.15); border: 1px solid var(--err); border-radius: 6px; padding: 8px 12px; color: #fecdd3; margin-top: 8px;">
-              <div style="font-weight: 600; display: flex; align-items: center; gap: 6px;">
-                <span>⚠️</span>
-                <span>Disclose Fetch Incomplete: ${prev.failedCount} fund(s) failed</span>
+            <div style="background: rgba(244, 63, 94, 0.15); border: 1px solid var(--err); border-radius: 6px; padding: 8px 12px; color: #fecdd3; margin-top: 8px; user-select: text; -webkit-user-select: text; cursor: text;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="font-weight: 600; display: flex; align-items: center; gap: 6px;">
+                  <span>⚠️</span>
+                  <span>Disclose Fetch Incomplete: ${prev.failedCount} fund(s) failed</span>
+                </div>
+                <button type="button" onclick="this.closest('div[style*=\\'border\\']').style.display='none'" style="background:none; border:none; color:#fecdd3; cursor:pointer; font-size:13px; padding:0 4px;" title="Dismiss message">✕</button>
               </div>
-              <div style="margin: 6px 0; font-size: 11.5px; line-height: 1.5;">
+              <div style="margin: 6px 0; font-size: 11.5px; line-height: 1.5; user-select: text; -webkit-user-select: text; cursor: text;">
                 ${prev.failed.map(f => `<div>• <strong>${escapeHtml(f.code)}</strong> (${escapeHtml(f.fund_id)}): <span style="color: #fca5a5;">${escapeHtml(f.message)}</span></div>`).join('')}
               </div>
-              <div style="font-size: 11px; color: #cbd5e1; border-top: 1px solid rgba(244, 63, 94, 0.3); padding-top: 4px; margin-top: 4px;">
+              <div style="font-size: 11px; color: #cbd5e1; border-top: 1px solid rgba(244, 63, 94, 0.3); padding-top: 4px; margin-top: 4px; user-select: text; -webkit-user-select: text; cursor: text;">
                 These funds remain in <em>Awaiting Disclosure File</em> status because Sorted Smart Investor returned 404. You can provide direct override URLs in Panel 5 (Catalogue).
               </div>
             </div>
           `;
         } else if (prev && prev.failedCount === 0) {
           statusHtml = `
-            <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid var(--ok); border-radius: 6px; padding: 6px 10px; color: #a7f3d0; margin-top: 8px;">
-              ✔ All ${prev.downloadedCount + prev.cachedCount} funds successfully synchronized with Disclose Register.
+            <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid var(--ok); border-radius: 6px; padding: 6px 10px; color: #a7f3d0; margin-top: 8px; user-select: text; -webkit-user-select: text; cursor: text;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span>✔ All ${prev.downloadedCount + prev.cachedCount} funds successfully synchronized with Disclose Register.</span>
+                <button type="button" onclick="this.closest('div[style*=\\'border\\']').style.display='none'" style="background:none; border:none; color:#a7f3d0; cursor:pointer; font-size:13px; padding:0 4px;" title="Dismiss message">✕</button>
+              </div>
             </div>
           `;
         }
@@ -1026,15 +1041,18 @@
 
           if (statusDiv) {
             statusDiv.innerHTML = `
-              <div style="background: rgba(244, 63, 94, 0.15); border: 1px solid var(--err); border-radius: 6px; padding: 8px 12px; color: #fecdd3; margin-top: 8px;">
-                <div style="font-weight: 600; display: flex; align-items: center; gap: 6px;">
-                  <span>⚠️</span>
-                  <span>Disclose Fetch Incomplete: ${failedCount} fund(s) failed to download</span>
+              <div style="background: rgba(244, 63, 94, 0.15); border: 1px solid var(--err); border-radius: 6px; padding: 8px 12px; color: #fecdd3; margin-top: 8px; user-select: text; -webkit-user-select: text; cursor: text;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <div style="font-weight: 600; display: flex; align-items: center; gap: 6px;">
+                    <span>⚠️</span>
+                    <span>Disclose Fetch Incomplete: ${failedCount} fund(s) failed to download</span>
+                  </div>
+                  <button type="button" onclick="this.closest('div[style*=\\'border\\']').style.display='none'" style="background:none; border:none; color:#fecdd3; cursor:pointer; font-size:13px; padding:0 4px;" title="Dismiss message">✕</button>
                 </div>
-                <div style="margin: 6px 0; font-size: 11.5px; line-height: 1.5;">
+                <div style="margin: 6px 0; font-size: 11.5px; line-height: 1.5; user-select: text; -webkit-user-select: text; cursor: text;">
                   ${failed.map(f => `<div>• <strong>${escapeHtml(f.code)}</strong> (${escapeHtml(f.fund_id)}): <span style="color: #fca5a5;">${escapeHtml(f.message)}</span></div>`).join('')}
                 </div>
-                <div style="font-size: 11px; color: #cbd5e1; border-top: 1px solid rgba(244, 63, 94, 0.3); padding-top: 4px; margin-top: 4px;">
+                <div style="font-size: 11px; color: #cbd5e1; border-top: 1px solid rgba(244, 63, 94, 0.3); padding-top: 4px; margin-top: 4px; user-select: text; -webkit-user-select: text; cursor: text;">
                   These funds remain in <em>Awaiting Disclosure File</em> status because Sorted Smart Investor returned 404 (no published quarterly holdings file at that endpoint). You can provide direct override URLs in Panel 5 (Catalogue).
                 </div>
               </div>
@@ -1058,8 +1076,11 @@
           showToast(`✔ All ${downloadedCount + cachedCount} funds up to date (${downloadedCount} downloaded, ${cachedCount} already on disk)`, 'ok');
           if (statusDiv) {
             statusDiv.innerHTML = `
-              <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid var(--ok); border-radius: 6px; padding: 6px 10px; color: #a7f3d0; margin-top: 8px;">
-                ✔ All ${downloadedCount + cachedCount} funds successfully synchronized with Disclose Register.
+              <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid var(--ok); border-radius: 6px; padding: 6px 10px; color: #a7f3d0; margin-top: 8px; user-select: text; -webkit-user-select: text; cursor: text;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span>✔ All ${downloadedCount + cachedCount} funds successfully synchronized with Disclose Register.</span>
+                  <button type="button" onclick="this.closest('div[style*=\\'border\\']').style.display='none'" style="background:none; border:none; color:#a7f3d0; cursor:pointer; font-size:13px; padding:0 4px;" title="Dismiss message">✕</button>
+                </div>
               </div>
             `;
           }
@@ -1092,8 +1113,13 @@
 
     function showToast(msg, type = 'info') {
       const t = document.getElementById('toast');
+      const textElem = document.getElementById('toast-text');
       if (!t) return;
-      t.textContent = msg;
+      if (textElem) {
+        textElem.textContent = msg;
+      } else {
+        t.textContent = msg;
+      }
       t.style.display = 'block';
       if (type === 'warn') {
         t.style.borderColor = 'var(--warn)';
@@ -1108,9 +1134,12 @@
         t.style.borderColor = 'var(--primary)';
         t.style.color = 'var(--text)';
       }
-      setTimeout(() => {
-        if (t) t.style.display = 'none';
-      }, 4000);
+      // Info messages stay on screen until dismissed by clicking ✕ (no auto-disappear timer)
+    }
+
+    function hideToast() {
+      const t = document.getElementById('toast');
+      if (t) t.style.display = 'none';
     }
 
     let alertModalTextCache = '';
@@ -2162,14 +2191,12 @@
           const tooltip = failedFundInfo
             ? `Download failed: ${failedFundInfo.message}. Click Edit to set direct URL.`
             : (c.action_tooltip || `Go to ${target} to perform required action`);
-          const failNotice = failedFundInfo ? `<span class="badge badge-err" style="font-size: 9px; margin-left: 4px;" title="${escapeHtml(failedFundInfo.message)}">Disclose 404</span>` : '';
-
           statusBadge = `<button type="button" class="badge badge-warn status-action-link"
             onclick="handleStatusAction('${escapeHtml(c.fund_code)}', '${escapeHtml(sub)}', '${escapeHtml(target)}', '${escapeHtml(param)}', '${escapeHtml(c.fund_name)}')"
             title="${escapeHtml(tooltip)}">
             <span>⏳ ${escapeHtml(label)}</span>
             <span style="font-size: 9px; opacity: 0.85;">↗</span>
-          </button>${failNotice}`;
+          </button>`;
         } else {
           statusBadge = `<span class="badge badge-ok" style="font-size: 10px; font-weight: 500;">✔ Processed</span>`;
         }
@@ -2192,7 +2219,7 @@
         const link = `https://www.smartinvestor.sorted.org.nz/kiwisaver-and-managed-funds/${encodeURIComponent(c.scheme_id)}/${encodeURIComponent(c.offer_id)}/${encodeURIComponent(c.fnd_code)}/`;
 
         const fetchBtn = isAwaiting
-          ? `<button class="btn btn-sm ${failedFundInfo ? 'btn-warn' : 'btn-primary'}" onclick="fetchCatalogFund('${escapeHtml(c.fund_code)}')" title="${failedFundInfo ? 'Last download failed: ' + escapeHtml(failedFundInfo.message) + '. Click to retry or Edit to set direct URL' : 'Download latest quarterly disclosure'}" style="margin-right: 4px;">${failedFundInfo ? '⚠️ Retry' : '📥 Fetch'}</button>`
+          ? `<button class="btn btn-sm btn-primary" onclick="fetchCatalogFund('${escapeHtml(c.fund_code)}')" title="${failedFundInfo ? 'Download failed: ' + escapeHtml(failedFundInfo.message) + '. Click to retry or Edit to set direct URL' : 'Download latest quarterly disclosure'}" style="margin-right: 4px;">📥 Fetch</button>`
           : '';
 
         html += `
