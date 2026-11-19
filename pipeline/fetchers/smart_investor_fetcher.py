@@ -441,38 +441,41 @@ class SmartInvestorFetcher:
         download_url = meta.holdings_url
         content = None
         last_exc: Optional[Exception] = None
+        urls_attempted: list[str] = []
 
         if download_url:
+            urls_attempted.append(download_url)
+            logger.info("Attempting direct download for %s (%s) from URL: %s", meta.target_code, meta.fund_id, download_url)
             try:
                 content = self._downloader(download_url, self.user_agent)
             except Exception as exc:
                 last_exc = exc
-                logger.error(
+                logger.warning(
                     "Direct download failed for %s (%s) from URL '%s': %s",
                     meta.target_code,
                     meta.fund_id,
                     download_url,
                     exc,
-                    exc_info=True,
                 )
                 content = None
 
         if content is None:
             resolved = self.resolve_holdings_url(meta)
             if resolved and resolved != download_url:
+                urls_attempted.append(resolved)
+                logger.info("Attempting download from resolved live URL for %s (%s): %s", meta.target_code, meta.fund_id, resolved)
                 try:
                     content = self._downloader(resolved, self.user_agent)
                     download_url = resolved
                     last_exc = None
                 except Exception as exc:
                     last_exc = exc
-                    logger.error(
+                    logger.warning(
                         "Download from resolved URL '%s' failed for %s (%s): %s",
                         resolved,
                         meta.target_code,
                         meta.fund_id,
                         exc,
-                        exc_info=True,
                     )
                     content = None
 
@@ -486,7 +489,8 @@ class SmartInvestorFetcher:
                 )
                 return True, f"Remote download failed ({last_exc}), fell back to existing staged file ({fallback.name})", fallback
             err_detail = f": {type(last_exc).__name__}: {last_exc}" if last_exc else f": could not resolve valid endpoint for {meta.target_code} ({meta.fund_id})"
-            msg = f"Remote download failed for {meta.target_code} ({meta.fund_id}) [URL: {download_url or 'None'}]{err_detail}"
+            attempted_str = " | ".join(urls_attempted) if urls_attempted else (download_url or "None")
+            msg = f"Remote download failed for {meta.target_code} ({meta.fund_id}) [URL: {attempted_str}]{err_detail}"
             logger.error(msg)
             return False, msg, None
 
@@ -545,6 +549,7 @@ class SmartInvestorFetcher:
                 "code": meta.target_code,
                 "fund_id": meta.fund_id,
                 "provider": meta.provider,
+                "url": meta.holdings_url,
                 "message": message,
                 "path": str(path) if path else None,
             }

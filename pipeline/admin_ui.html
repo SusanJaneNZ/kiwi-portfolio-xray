@@ -352,6 +352,46 @@
       z-index: 100;
     }
 
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(2px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 16px;
+    }
+
+    .modal-content {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      max-width: 720px;
+      width: 100%;
+      padding: 18px;
+      animation: modalFadeIn 0.15s ease-out;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.97); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
     .row-actions {
       display: flex;
       gap: 6px;
@@ -659,6 +699,29 @@
   </div>
 
   <div id="toast" class="toast"></div>
+
+  <div id="alert-modal" class="modal-overlay" style="display: none;" onclick="if (event.target === this) closeAlertModal()">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="alert-modal-title">
+      <div class="modal-header">
+        <h3 id="alert-modal-title" style="margin: 0; font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+          <span id="alert-modal-icon">ℹ️</span>
+          <span id="alert-modal-heading">Notice</span>
+        </h3>
+        <button class="btn btn-secondary btn-sm" onclick="closeAlertModal()" title="Close" style="padding: 2px 8px; font-size: 14px; line-height: 1;">✕</button>
+      </div>
+      <div class="modal-body">
+        <pre id="alert-modal-text" style="white-space: pre-wrap; word-break: break-word; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; line-height: 1.5; margin: 0; user-select: text; -webkit-user-select: text; cursor: text; background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border); padding: 12px; border-radius: 6px; max-height: 60vh; overflow-y: auto; color: var(--text);"></pre>
+      </div>
+      <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 14px;">
+        <button id="alert-modal-copy-btn" class="btn btn-primary btn-sm" onclick="copyAlertModalText()">
+          📋 Copy Text
+        </button>
+        <button class="btn btn-secondary btn-sm" onclick="closeAlertModal()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
   <datalist id="country-presets">
     <option value="United States"></option>
     <option value="United Kingdom"></option>
@@ -898,7 +961,10 @@
         const failedCount = failed.length;
 
         if (failedCount > 0) {
-          const failList = failed.map(f => `• ${f.code} (${f.fund_id}): ${f.message}`).join('\n');
+          const failList = failed.map(f => {
+            const urlInfo = f.url ? `\n  Target URL: ${f.url}` : '';
+            return `• ${f.code} (${f.fund_id}): ${f.message}${urlInfo}`;
+          }).join('\n\n');
           console.warn('Disclose Register fetch errors:\n', failList);
           if (downloadedCount > 0 || cachedCount > 0) {
             showToast(`Update: ${downloadedCount} updated, ${cachedCount} cached (${failedCount} failed)`);
@@ -917,6 +983,7 @@
           showToast(`Update complete: ${downloadedCount} updated, ${cachedCount} already up to date`);
         }
         await loadStagedFiles();
+        await loadCatalog();
       } catch (err) {
         alert('Update failed: ' + err.message);
       } finally {
@@ -940,6 +1007,101 @@
       t.textContent = msg;
       t.style.display = 'block';
       setTimeout(() => { t.style.display = 'none'; }, 3200);
+    }
+
+    let alertModalTextCache = '';
+
+    function showAlertModal(titleOrMsg, maybeMsg) {
+      let title = 'Notice';
+      let message = '';
+      let icon = 'ℹ️';
+
+      if (maybeMsg !== undefined) {
+        title = titleOrMsg;
+        message = String(maybeMsg);
+      } else {
+        message = String(titleOrMsg);
+        if (message.startsWith('❌') || message.toLowerCase().includes('failed') || message.toLowerCase().includes('error')) {
+          title = 'Error Report';
+          icon = '❌';
+        } else if (message.startsWith('⚠️') || message.toLowerCase().includes('warning')) {
+          title = 'Warning';
+          icon = '⚠️';
+        } else if (message.includes('Synchronization Report')) {
+          title = 'Synchronization Report';
+          icon = '📋';
+        }
+      }
+
+      if (title.startsWith('❌')) { icon = '❌'; title = title.replace(/^❌\s*/, ''); }
+      else if (title.startsWith('⚠️')) { icon = '⚠️'; title = title.replace(/^⚠️\s*/, ''); }
+      else if (title.startsWith('✔')) { icon = '✔'; title = title.replace(/^✔\s*/, ''); }
+
+      alertModalTextCache = message;
+      const modal = document.getElementById('alert-modal');
+      const titleElem = document.getElementById('alert-modal-heading');
+      const iconElem = document.getElementById('alert-modal-icon');
+      const textElem = document.getElementById('alert-modal-text');
+      const copyBtn = document.getElementById('alert-modal-copy-btn');
+
+      if (modal && textElem) {
+        if (titleElem) titleElem.textContent = title;
+        if (iconElem) iconElem.textContent = icon;
+        textElem.textContent = message;
+        if (copyBtn) {
+          copyBtn.textContent = '📋 Copy Text';
+        }
+        modal.style.display = 'flex';
+      } else {
+        if (typeof window !== 'undefined' && window._nativeAlert) {
+          window._nativeAlert(message);
+        } else {
+          console.log(message);
+        }
+      }
+    }
+
+    function closeAlertModal() {
+      const modal = document.getElementById('alert-modal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    async function copyAlertModalText() {
+      const copyBtn = document.getElementById('alert-modal-copy-btn');
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(alertModalTextCache);
+        } else {
+          const textElem = document.getElementById('alert-modal-text');
+          const range = document.createRange();
+          range.selectNodeContents(textElem);
+          const sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+          document.execCommand('copy');
+        }
+        if (copyBtn) {
+          copyBtn.textContent = '✅ Copied!';
+          setTimeout(() => {
+            if (copyBtn) copyBtn.textContent = '📋 Copy Text';
+          }, 2000);
+        }
+      } catch (e) {
+        console.error('Failed to copy text', e);
+        if (copyBtn) copyBtn.textContent = '⚠️ Copy failed';
+      }
+    }
+
+    if (typeof window !== 'undefined') {
+      window._nativeAlert = window.alert;
+      window.alert = function(msg) {
+        showAlertModal('Notice', msg);
+      };
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeAlertModal();
+        }
+      });
     }
 
     function escapeHtml(str) {
@@ -2030,6 +2192,7 @@
               `❌ Fetch Failed for ${fail.code || fundCode}\n\n` +
               `• Fund ID: ${fail.fund_id || 'N/A'}\n` +
               `• Fund Manager: ${fail.provider || 'N/A'}\n` +
+              `• Target URL: ${fail.url || 'N/A'}\n` +
               `• Message: ${fail.message}\n\n` +
               `Please check the server terminal output for full diagnostics and stack trace.`
             );

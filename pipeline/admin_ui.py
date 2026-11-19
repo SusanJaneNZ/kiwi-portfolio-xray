@@ -568,6 +568,7 @@ class AdminService:
                 "code": target.target_code,
                 "fund_id": target.fund_id,
                 "provider": target.provider,
+                "url": target.holdings_url,
                 "message": message,
                 "path": str(path) if path else None,
             }

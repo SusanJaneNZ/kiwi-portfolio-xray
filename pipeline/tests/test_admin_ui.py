@@ -410,6 +410,20 @@ class TestAdminUI(unittest.TestCase):
                 f"JavaScript syntax error in admin_ui.html <script> tag #{idx}:\n{proc.stderr}",
             )
 
+    def test_admin_ui_copyable_alert_modal_elements(self):
+        """Verifies that admin_ui.html contains the copyable alert modal structure and JS hooks."""
+        html_path = REPO_ROOT / "pipeline" / "admin_ui.html"
+        content = html_path.read_text(encoding="utf-8")
+        self.assertIn('id="alert-modal"', content)
+        self.assertIn('id="alert-modal-text"', content)
+        self.assertIn('id="alert-modal-copy-btn"', content)
+        self.assertIn("user-select: text", content)
+        self.assertIn("copyAlertModalText()", content)
+        self.assertIn("function showAlertModal", content)
+        self.assertIn("function closeAlertModal", content)
+        self.assertIn("function copyAlertModalText", content)
+        self.assertIn("window.alert = function", content)
+
 
 if __name__ == "__main__":
     unittest.main()
