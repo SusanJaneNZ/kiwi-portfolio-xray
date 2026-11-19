@@ -352,6 +352,7 @@ class SmartInvestorFetcher:
         fnd = meta.fund_id.strip()
 
         page_url = f"https://www.smartinvestor.sorted.org.nz/kiwisaver-and-managed-funds/{scheme}/{offer}/{fnd}/"
+        logger.info("Scraping fund profile page for %s (%s) at URL: %s", meta.target_code, meta.fund_id, page_url)
         try:
             content = self._downloader(page_url, self.user_agent)
             html_text = content.decode("utf-8", errors="replace")
@@ -364,9 +365,10 @@ class SmartInvestorFetcher:
                 raw_link = html_lib.unescape(m.group(1))
                 if raw_link.startswith("/"):
                     raw_link = f"https://www.smartinvestor.sorted.org.nz{raw_link}"
+                logger.info("Discovered live disclosure link for %s (%s): %s", meta.target_code, meta.fund_id, raw_link)
                 return raw_link
         except Exception as exc:
-            logger.debug("Failed to resolve live holdings link for %s: %s", meta.target_code, exc)
+            logger.info("Profile page scrape failed for %s (%s) at '%s': %s", meta.target_code, meta.fund_id, page_url, exc)
 
         if meta.holdings_url and "disclose-document/full-portfolio" in meta.holdings_url:
             return meta.holdings_url

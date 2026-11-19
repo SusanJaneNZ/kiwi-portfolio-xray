@@ -490,12 +490,14 @@ class AdminService:
             is_etf = bool(entry.get("is_etf", provider.lower() == "smartshares"))
             is_kiwisaver = bool(entry.get("is_kiwisaver", "kiwi" in provider.lower() or "kiwi" in fund_code.lower()))
 
-            holdings_url = str(entry.get("holdings_url", "")).strip()
-            if not holdings_url and ("http://" in fnd_raw or "https://" in fnd_raw) and fnd_raw.endswith(".xlsx"):
-                holdings_url = fnd_raw
-            if not holdings_url:
-                existing_entry = next((c for c in catalog if c.get("fund_code", "").upper() == fund_code), None)
-                if existing_entry and existing_entry.get("holdings_url"):
+            existing_entry = next((c for c in catalog if c.get("fund_code", "").upper() == fund_code), None)
+            if "holdings_url" in entry:
+                holdings_url = str(entry.get("holdings_url", "")).strip()
+            else:
+                holdings_url = ""
+                if ("http://" in fnd_raw or "https://" in fnd_raw) and fnd_raw.endswith(".xlsx"):
+                    holdings_url = fnd_raw
+                elif existing_entry and existing_entry.get("holdings_url"):
                     holdings_url = existing_entry["holdings_url"]
 
             clean_entry: dict[str, Any] = {

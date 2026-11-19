@@ -562,14 +562,18 @@
           <option value="Smartshares">Smartshares</option>
           <option value="Fisher Funds">Fisher Funds</option>
         </select>
-        <input type="text" id="catalog-add-code" placeholder="Fund Code (e.g. KERNEL_TOTAL_WORLD, USF)"
+        <input type="text" id="catalog-add-code" placeholder="Fund Code (e.g. KERNEL_TOTAL_WORLD, NGB)"
           style="width: 220px;">
-        <input type="text" id="catalog-add-name" placeholder="Fund Name (e.g. Kernel Total World Fund)"
+        <input type="text" id="catalog-add-name" placeholder="Fund Name (e.g. Smart S&P/NZX NZ Government Bond ETF)"
           style="flex: 1; min-width: 200px;">
         <input type="text" id="catalog-add-fnd"
-          placeholder="FND Code or Smart Investor URL (e.g. FND62001 or https://...)"
-          style="flex: 1; min-width: 260px;">
-        <button class="btn btn-primary btn-sm" onclick="saveCatalogFund()">➕ Add Fund to Catalogue</button>
+          placeholder="FND Code or Smart Investor URL (e.g. FND19357 or https://...)"
+          style="flex: 1; min-width: 240px;">
+        <input type="text" id="catalog-add-url"
+          placeholder="Direct Disclosure URL (optional override, e.g. https://.../holdings.xlsx)"
+          style="flex: 1.5; min-width: 300px;">
+        <button id="catalog-save-btn" class="btn btn-primary btn-sm" onclick="saveCatalogFund()">➕ Add Fund to Catalogue</button>
+        <button id="catalog-cancel-btn" class="btn btn-sm" onclick="cancelCatalogEdit()" style="display: none;">Cancel</button>
       </div>
 
       <div
@@ -1027,6 +1031,7 @@
       document.getElementById('csv-file-input').value = '';
       setIssuerOpen(provider, true);
       await loadStagedFiles();
+      await loadCatalog();
     }
 
     async function loadStagedFiles() {
@@ -1099,6 +1104,7 @@
       });
       showToast(`Deleted ${provider}/${filename}`);
       await loadStagedFiles();
+      await loadCatalog();
     }
 
     async function previewFile(provider, filename) {
@@ -1229,6 +1235,7 @@
         } else {
           showToast('Validation failed — datasets were NOT published');
         }
+        await loadCatalog();
       } catch (err) {
         container.innerHTML = `<span class="badge badge-err">${escapeHtml(err.message)}</span>`;
       } finally {
@@ -1714,6 +1721,7 @@
       renderUnconfiguredFeeders(unconfiguredFeedersState);
 
       await loadFeeders();
+      await loadCatalog();
     }
 
     async function deleteFeederByIdx(idx) {
@@ -1726,6 +1734,7 @@
       });
       showToast(`Removed feeder pairing ${code}`);
       await loadFeeders();
+      await loadCatalog();
     }
 
     async function loadFeeders() {
@@ -1933,6 +1942,7 @@
             <td>${typeBadge}</td>
             <td style="text-align: right; white-space: nowrap;">
               ${fetchBtn}
+              <button class="btn btn-sm" onclick="editCatalogFund('${escapeHtml(c.fund_code)}')" title="Edit Fund metadata and Direct Disclosure URL">Edit</button>
               <button class="btn btn-sm btn-danger" onclick="deleteCatalogFund('${escapeHtml(c.fund_code)}')">Remove</button>
             </td>
           </tr>
@@ -2043,13 +2053,14 @@
       const fund_code = document.getElementById('catalog-add-code').value.trim();
       const fund_name = document.getElementById('catalog-add-name').value.trim();
       const fnd_code = document.getElementById('catalog-add-fnd').value.trim();
+      const holdings_url = document.getElementById('catalog-add-url')?.value.trim() || '';
 
       if (!fund_code) {
-        alert('Please enter a Fund Code (e.g. KERNEL_TOTAL_WORLD or USF)');
+        alert('Please enter a Fund Code (e.g. KERNEL_TOTAL_WORLD, NGB)');
         return;
       }
       if (!fnd_code) {
-        alert('Please enter an FND code (e.g. FND62001) or paste the Smart Investor fund URL');
+        alert('Please enter an FND code (e.g. FND19357) or paste the Smart Investor fund URL');
         return;
       }
 
@@ -2061,19 +2072,52 @@
             fund_code,
             fund_name,
             fnd_code,
+            holdings_url,
           }),
         });
         if (res.ok) {
           showToast(`Saved ${fund_code} to catalogue!`);
-          document.getElementById('catalog-add-code').value = '';
-          document.getElementById('catalog-add-name').value = '';
-          document.getElementById('catalog-add-fnd').value = '';
+          cancelCatalogEdit();
           catalogData = res.catalog || [];
           renderCatalogList();
         }
       } catch (err) {
         alert(`Failed to save fund: ${err.message}`);
       }
+    }
+
+    function editCatalogFund(fundCode) {
+      const fund = catalogData.find(c => c.fund_code === fundCode);
+      if (!fund) return;
+      document.getElementById('catalog-add-provider').value = fund.provider || 'Smartshares';
+      document.getElementById('catalog-add-code').value = fund.fund_code || '';
+      document.getElementById('catalog-add-name').value = fund.fund_name || '';
+      document.getElementById('catalog-add-fnd').value = fund.fnd_code || '';
+      const urlInput = document.getElementById('catalog-add-url');
+      if (urlInput) urlInput.value = fund.holdings_url || '';
+
+      const saveBtn = document.getElementById('catalog-save-btn');
+      if (saveBtn) saveBtn.textContent = `💾 Save Changes (${fundCode})`;
+      const cancelBtn = document.getElementById('catalog-cancel-btn');
+      if (cancelBtn) cancelBtn.style.display = 'inline-block';
+
+      if (urlInput) {
+        urlInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        urlInput.focus();
+      }
+      showToast(`Editing ${fundCode}. Update fields and click Save Changes.`);
+    }
+
+    function cancelCatalogEdit() {
+      document.getElementById('catalog-add-code').value = '';
+      document.getElementById('catalog-add-name').value = '';
+      document.getElementById('catalog-add-fnd').value = '';
+      const urlInput = document.getElementById('catalog-add-url');
+      if (urlInput) urlInput.value = '';
+      const saveBtn = document.getElementById('catalog-save-btn');
+      if (saveBtn) saveBtn.textContent = '➕ Add Fund to Catalogue';
+      const cancelBtn = document.getElementById('catalog-cancel-btn');
+      if (cancelBtn) cancelBtn.style.display = 'none';
     }
 
     async function deleteCatalogFund(fundCode) {

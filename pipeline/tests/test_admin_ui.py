@@ -289,6 +289,7 @@ class TestAdminUI(unittest.TestCase):
                     "fund_name": "Kernel Test New Fund",
                     "provider": "Kernel",
                     "fnd_code": "https://smartinvestor.sorted.org.nz/kiwisaver-and-managed-funds/SCH12697/OFR12698/FND99999/",
+                    "holdings_url": "https://example.com/custom_holdings.xlsx",
                 }).encode("utf-8"),
                 headers={"Content-Type": "application/json"},
                 method="POST",
@@ -302,6 +303,7 @@ class TestAdminUI(unittest.TestCase):
                 self.assertEqual(entry["fnd_code"], "FND99999")
                 self.assertEqual(entry["scheme_id"], "SCH12697")
                 self.assertEqual(entry["offer_id"], "OFR12698")
+                self.assertEqual(entry["holdings_url"], "https://example.com/custom_holdings.xlsx")
                 self.assertEqual(entry["status"], "AWAITING_PROCESSING")
                 self.assertEqual(entry["constituent_count"], 0)
                 self.assertEqual(entry["effective_date"], "")
