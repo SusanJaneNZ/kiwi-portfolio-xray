@@ -52,8 +52,7 @@
     "fnd_code": "FND43021",
     "scheme_id": "SCH12697",
     "offer_id": "OFR12698",
-    "is_etf": false,
-    "holdings_url": "https://www.smartinvestor.sorted.org.nz/disclose-document/full-portfolio/FND43021/KERNEL-GLOBAL-ESG-FUND-FND43021-Full-portfolio-holdings-30-September-2026.xlsx"
+    "is_etf": false
   },
   {
     "fund_code": "KERNEL_GLOBAL_INFRASTRUCTURE_HEDGED",
@@ -71,8 +70,7 @@
     "fnd_code": "FND19301",
     "scheme_id": "SCH12697",
     "offer_id": "OFR12698",
-    "is_etf": false,
-    "holdings_url": "https://www.smartinvestor.sorted.org.nz/disclose-document/full-portfolio/FND19301/KERNEL-GLOBAL-INFRASTRUCTURE-FUND-FND19301-Full-portfolio-holdings-30-September-2026.xlsx"
+    "is_etf": false
   },
   {
     "fund_code": "KERNEL_GLOBAL_PROPERTY_HEDGED",
@@ -533,7 +531,7 @@
     "scheme_id": "SCH10752",
     "offer_id": "OFR10865",
     "is_etf": true,
-    "holdings_url": "https://www.smartinvestor.sorted.org.nz/disclose-document/full-portfolio/FND19357/SMART-S&P/NZX-NZ-GOVERNMENT-BOND-ETF-FND19357-Full-portfolio-holdings-30-September-2026.xlsx"
+    "is_kiwisaver": false
   },
   {
     "fund_code": "TWH",
