@@ -302,11 +302,11 @@ class TestSmartInvestorFetcher(unittest.TestCase):
         self.assertIn("disclose-document/full-portfolio/FND15841", link)
 
     def test_get_url_variants_handles_slash_in_fund_name(self) -> None:
-        """get_url_variants encodes slashes and special characters in disclose document filenames."""
+        """get_url_variants handles slashes in disclose document filenames by stripping and encoding."""
         raw_url = "https://www.smartinvestor.sorted.org.nz/disclose-document/full-portfolio/FND19357/SMART-S&P/NZX-NZ-GOVERNMENT-BOND-ETF-FND19357-Full-portfolio-holdings-30-September-2026.xlsx"
         variants = SmartInvestorFetcher.get_url_variants(raw_url)
         self.assertIn(
-            "https://www.smartinvestor.sorted.org.nz/disclose-document/full-portfolio/FND19357/SMART-S&P%2FNZX-NZ-GOVERNMENT-BOND-ETF-FND19357-Full-portfolio-holdings-30-September-2026.xlsx",
+            "https://www.smartinvestor.sorted.org.nz/disclose-document/full-portfolio/FND19357/SMART-S&PNZX-NZ-GOVERNMENT-BOND-ETF-FND19357-Full-portfolio-holdings-30-September-2026.xlsx",
             variants,
         )
         self.assertIn(

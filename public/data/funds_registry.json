@@ -72,6 +72,18 @@
     "is_stale": false
   },
   {
+    "code": "NGB",
+    "name": "Smart S&P/Nzx Nz Government Bond Etf",
+    "provider": "Smartshares",
+    "effective_date": "2026-09-30",
+    "cash_ratio": 0.0009,
+    "hedging_ratio": 0.0,
+    "constituent_count": 1,
+    "asset_class": "fixed_interest",
+    "cadence": "monthly",
+    "is_stale": false
+  },
+  {
     "code": "NZC",
     "name": "Smart Nz Cash Etf",
     "provider": "Smartshares",
@@ -80,6 +92,30 @@
     "hedging_ratio": 0.0,
     "constituent_count": 35,
     "asset_class": "fixed_interest",
+    "cadence": "monthly",
+    "is_stale": false
+  },
+  {
+    "code": "NZG",
+    "name": "Smart S&P/Nzx 50 Etf",
+    "provider": "Smartshares",
+    "effective_date": "2026-09-30",
+    "cash_ratio": 0.0072,
+    "hedging_ratio": 0.0,
+    "constituent_count": 50,
+    "asset_class": "equity",
+    "cadence": "monthly",
+    "is_stale": false
+  },
+  {
+    "code": "NZT",
+    "name": "Smart S&P/Nzx 20 Etf",
+    "provider": "Smartshares",
+    "effective_date": "2026-09-30",
+    "cash_ratio": 0.0009,
+    "hedging_ratio": 0.0,
+    "constituent_count": 20,
+    "asset_class": "equity",
     "cadence": "monthly",
     "is_stale": false
   },
@@ -336,6 +372,18 @@
     "is_stale": false
   },
   {
+    "code": "KERNEL_GLOBAL_ESG",
+    "name": "Kernel Global Esg Fund",
+    "provider": "Kernel",
+    "effective_date": "2026-09-30",
+    "cash_ratio": 0.0,
+    "hedging_ratio": 0.0,
+    "constituent_count": 443,
+    "asset_class": "mixed",
+    "cadence": "monthly",
+    "is_stale": false
+  },
+  {
     "code": "KERNEL_GLOBAL_ESG_HEDGED",
     "name": "Kernel Global Esg (Nzd Hedged) Fund",
     "provider": "Kernel",
@@ -344,6 +392,18 @@
     "hedging_ratio": 0.0,
     "constituent_count": 443,
     "asset_class": "mixed",
+    "cadence": "monthly",
+    "is_stale": false
+  },
+  {
+    "code": "KERNEL_GLOBAL_INFRASTRUCTURE",
+    "name": "Kernel Global Infrastructure Fund",
+    "provider": "Kernel",
+    "effective_date": "2026-09-30",
+    "cash_ratio": 0.0,
+    "hedging_ratio": 0.0,
+    "constituent_count": 104,
+    "asset_class": "equity",
     "cadence": "monthly",
     "is_stale": false
   },

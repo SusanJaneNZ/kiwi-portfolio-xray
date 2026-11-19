@@ -386,10 +386,13 @@ class SmartInvestorFetcher:
         base, filename = m.groups()
         variants: list[str] = []
         if "/" in filename:
-            # 1. Encode '/' as '%2F'
+            # 1. Stripping the slash (Smart Investor publishes HTML with '/' but hosts files with slash stripped: S&P/NZX -> S&PNZX)
+            v_stripped = base + filename.replace("/", "")
+            variants.append(v_stripped)
+            # 2. Encode '/' as '%2F'
             v_slash = base + filename.replace("/", "%2F")
             variants.append(v_slash)
-            # 2. Fully quote filename characters
+            # 3. Fully quote filename characters
             v_quoted = base + quote(filename, safe="")
             if v_quoted not in variants:
                 variants.append(v_quoted)
