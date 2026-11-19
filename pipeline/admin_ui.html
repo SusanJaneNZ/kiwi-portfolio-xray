@@ -141,6 +141,17 @@
       border-color: var(--err);
     }
 
+    .btn-warn {
+      background: #b45309;
+      border-color: var(--warn);
+      color: #fff;
+    }
+
+    .btn-warn:hover:not(:disabled) {
+      background: var(--warn);
+      color: #000;
+    }
+
     .btn-sm {
       padding: 4px 8px;
       font-size: 11px;
@@ -846,6 +857,9 @@
       },
     };
 
+    let catalogData = [];
+    const lastAutoFetchResults = {};
+
     function updateProviderSourceCallout() {
       const select = document.getElementById('provider-select');
       const callout = document.getElementById('provider-source-callout');
@@ -867,6 +881,35 @@
 
       if (src.canAutoFetch) {
         const btnLabel = src.buttonLabel || 'Update Constituents';
+        const prev = lastAutoFetchResults[key.toLowerCase()];
+        const hasFailures = prev && prev.failedCount > 0;
+        const btnClass = hasFailures ? 'btn-warn' : 'btn-ok';
+        const btnText = hasFailures ? `⚠️ Retry ${btnLabel} (${prev.failedCount} failed)` : `⚡ ${btnLabel}`;
+
+        let statusHtml = '';
+        if (hasFailures) {
+          statusHtml = `
+            <div style="background: rgba(244, 63, 94, 0.15); border: 1px solid var(--err); border-radius: 6px; padding: 8px 12px; color: #fecdd3; margin-top: 8px;">
+              <div style="font-weight: 600; display: flex; align-items: center; gap: 6px;">
+                <span>⚠️</span>
+                <span>Disclose Fetch Incomplete: ${prev.failedCount} fund(s) failed</span>
+              </div>
+              <div style="margin: 6px 0; font-size: 11.5px; line-height: 1.5;">
+                ${prev.failed.map(f => `<div>• <strong>${escapeHtml(f.code)}</strong> (${escapeHtml(f.fund_id)}): <span style="color: #fca5a5;">${escapeHtml(f.message)}</span></div>`).join('')}
+              </div>
+              <div style="font-size: 11px; color: #cbd5e1; border-top: 1px solid rgba(244, 63, 94, 0.3); padding-top: 4px; margin-top: 4px;">
+                These funds remain in <em>Awaiting Disclosure File</em> status because Sorted Smart Investor returned 404. You can provide direct override URLs in Panel 5 (Catalogue).
+              </div>
+            </div>
+          `;
+        } else if (prev && prev.failedCount === 0) {
+          statusHtml = `
+            <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid var(--ok); border-radius: 6px; padding: 6px 10px; color: #a7f3d0; margin-top: 8px;">
+              ✔ All ${prev.downloadedCount + prev.cachedCount} funds successfully synchronized with Disclose Register.
+            </div>
+          `;
+        }
+
         callout.innerHTML = `
           <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap;">
             <div>
@@ -876,8 +919,9 @@
           </div>
           <div style="margin-top: 8px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
             <span style="color: var(--muted); font-size: 11.5px;">Pulls official quarterly constituent disclosures directly from the Disclose Register:</span>
-            <button id="btn-auto-fetch" class="btn btn-sm btn-ok" onclick="handleAutoFetch('${key}')">⚡ ${escapeHtml(btnLabel)}</button>
+            <button id="btn-auto-fetch" class="btn btn-sm ${btnClass}" onclick="handleAutoFetch('${key}')">${btnText}</button>
           </div>
+          <div id="autofetch-status-${key}" style="margin-top: 6px; font-size: 11.5px;">${statusHtml}</div>
         `;
         return;
       }
@@ -924,6 +968,7 @@
 
       let downloadedCount = 0;
       let cachedCount = 0;
+      let failedCount = 0;
       const failed = [];
 
       try {
@@ -958,7 +1003,17 @@
           if (res.failed && res.failed.length) failed.push(...res.failed);
         }
 
-        const failedCount = failed.length;
+        failedCount = failed.length;
+
+        // Save into lastAutoFetchResults so state persists across tab/callout renders
+        lastAutoFetchResults[provider.toLowerCase()] = {
+          failedCount,
+          failed,
+          downloadedCount,
+          cachedCount,
+        };
+
+        const statusDiv = document.getElementById(`autofetch-status-${provider}`);
 
         if (failedCount > 0) {
           const failList = failed.map(f => {
@@ -966,30 +1021,63 @@
             return `• ${f.code} (${f.fund_id}): ${f.message}${urlInfo}`;
           }).join('\n\n');
           console.warn('Disclose Register fetch errors:\n', failList);
-          if (downloadedCount > 0 || cachedCount > 0) {
-            showToast(`Update: ${downloadedCount} updated, ${cachedCount} cached (${failedCount} failed)`);
-          } else {
-            showToast(`⚠️ Update encountered ${failedCount} error(s) (check console)`);
+
+          showToast(`⚠️ Sync Incomplete: ${failedCount} fund(s) failed (${cachedCount} up-to-date, ${downloadedCount} updated)`, 'warn');
+
+          if (statusDiv) {
+            statusDiv.innerHTML = `
+              <div style="background: rgba(244, 63, 94, 0.15); border: 1px solid var(--err); border-radius: 6px; padding: 8px 12px; color: #fecdd3; margin-top: 8px;">
+                <div style="font-weight: 600; display: flex; align-items: center; gap: 6px;">
+                  <span>⚠️</span>
+                  <span>Disclose Fetch Incomplete: ${failedCount} fund(s) failed to download</span>
+                </div>
+                <div style="margin: 6px 0; font-size: 11.5px; line-height: 1.5;">
+                  ${failed.map(f => `<div>• <strong>${escapeHtml(f.code)}</strong> (${escapeHtml(f.fund_id)}): <span style="color: #fca5a5;">${escapeHtml(f.message)}</span></div>`).join('')}
+                </div>
+                <div style="font-size: 11px; color: #cbd5e1; border-top: 1px solid rgba(244, 63, 94, 0.3); padding-top: 4px; margin-top: 4px;">
+                  These funds remain in <em>Awaiting Disclosure File</em> status because Sorted Smart Investor returned 404 (no published quarterly holdings file at that endpoint). You can provide direct override URLs in Panel 5 (Catalogue).
+                </div>
+              </div>
+            `;
           }
-          alert(
-            `Disclose Register Synchronization Report for ${src.name || provider}:\n\n` +
-            `• Successfully downloaded: ${downloadedCount}\n` +
-            `• Already up-to-date: ${cachedCount}\n` +
-            `• Failed: ${failedCount}\n\n` +
-            `Failed endpoints:\n${failList}\n\n` +
-            `Note: Funds returning 404 indicate that their Disclose scheme registration code or quarterly disclosure is not yet available at the public endpoint.`
+
+          showAlertModal(
+            `⚠️ Disclose Sync Incomplete (${failedCount} Failed)`,
+            `Disclose Register Synchronization Incomplete for ${src.name || provider}:\n\n` +
+            `❌ FAILED ENDPOINTS (${failedCount}):\n` +
+            `${failList}\n\n` +
+            `These funds did NOT download and remain in "Awaiting Disclosure File" status.\n` +
+            `(HTTP 404 means Sorted Smart Investor does not host a quarterly disclosure file at this endpoint).\n\n` +
+            `────────────────────────────────────────\n` +
+            `STATUS OF OTHER FUNDS:\n` +
+            `• Already up-to-date on disk: ${cachedCount}\n` +
+            `• Newly downloaded: ${downloadedCount}\n\n` +
+            `💡 Tip: Use Panel 5 (Catalogue) to click "Edit" and enter a direct disclosure URL for any failed fund.`
           );
         } else {
-          showToast(`Update complete: ${downloadedCount} updated, ${cachedCount} already up to date`);
+          showToast(`✔ All ${downloadedCount + cachedCount} funds up to date (${downloadedCount} downloaded, ${cachedCount} already on disk)`, 'ok');
+          if (statusDiv) {
+            statusDiv.innerHTML = `
+              <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid var(--ok); border-radius: 6px; padding: 6px 10px; color: #a7f3d0; margin-top: 8px;">
+                ✔ All ${downloadedCount + cachedCount} funds successfully synchronized with Disclose Register.
+              </div>
+            `;
+          }
         }
         await loadStagedFiles();
         await loadCatalog();
       } catch (err) {
-        alert('Update failed: ' + err.message);
+        showAlertModal('Update Failed', 'Update failed: ' + err.message);
       } finally {
         if (btn) {
           btn.disabled = false;
-          btn.textContent = `⚡ ${originalLabel}`;
+          if (failedCount > 0) {
+            btn.className = 'btn btn-sm btn-warn';
+            btn.textContent = `⚠️ Retry ${originalLabel} (${failedCount} failed)`;
+          } else {
+            btn.className = 'btn btn-sm btn-ok';
+            btn.textContent = `⚡ ${originalLabel}`;
+          }
         }
       }
     }
@@ -1002,11 +1090,27 @@
     let lastPreviewFeederState = null;
     let focusedMapInputId = 'manual-isin';
 
-    function showToast(msg) {
+    function showToast(msg, type = 'info') {
       const t = document.getElementById('toast');
+      if (!t) return;
       t.textContent = msg;
       t.style.display = 'block';
-      setTimeout(() => { t.style.display = 'none'; }, 3200);
+      if (type === 'warn') {
+        t.style.borderColor = 'var(--warn)';
+        t.style.color = '#fef08a';
+      } else if (type === 'err' || type === 'error') {
+        t.style.borderColor = 'var(--err)';
+        t.style.color = '#fecdd3';
+      } else if (type === 'ok') {
+        t.style.borderColor = 'var(--ok)';
+        t.style.color = '#a7f3d0';
+      } else {
+        t.style.borderColor = 'var(--primary)';
+        t.style.color = 'var(--text)';
+      }
+      setTimeout(() => {
+        if (t) t.style.display = 'none';
+      }, 4000);
     }
 
     let alertModalTextCache = '';
@@ -1943,7 +2047,6 @@
     }
 
     // Managed Fund Catalogue state and handlers
-    let catalogData = [];
     let currentCatalogFilter = 'all';
 
     async function loadCatalog() {
@@ -2048,19 +2151,25 @@
 
       filtered.forEach((c) => {
         const isAwaiting = c.status === 'AWAITING_PROCESSING' || !c.constituent_count;
+        const failedFundInfo = lastAutoFetchResults[(c.provider || '').toLowerCase()]?.failed?.find(f => f.code === c.fund_code);
+
         let statusBadge;
         if (isAwaiting) {
           const sub = c.sub_status || 'AWAITING_DISCLOSURE';
           const label = c.status_label || 'Awaiting Processing';
           const target = c.target_panel || 'panel-staging';
           const param = c.target_param || '';
-          const tooltip = c.action_tooltip || `Go to ${target} to perform required action`;
+          const tooltip = failedFundInfo
+            ? `Download failed: ${failedFundInfo.message}. Click Edit to set direct URL.`
+            : (c.action_tooltip || `Go to ${target} to perform required action`);
+          const failNotice = failedFundInfo ? `<span class="badge badge-err" style="font-size: 9px; margin-left: 4px;" title="${escapeHtml(failedFundInfo.message)}">Disclose 404</span>` : '';
+
           statusBadge = `<button type="button" class="badge badge-warn status-action-link"
             onclick="handleStatusAction('${escapeHtml(c.fund_code)}', '${escapeHtml(sub)}', '${escapeHtml(target)}', '${escapeHtml(param)}', '${escapeHtml(c.fund_name)}')"
             title="${escapeHtml(tooltip)}">
             <span>⏳ ${escapeHtml(label)}</span>
             <span style="font-size: 9px; opacity: 0.85;">↗</span>
-          </button>`;
+          </button>${failNotice}`;
         } else {
           statusBadge = `<span class="badge badge-ok" style="font-size: 10px; font-weight: 500;">✔ Processed</span>`;
         }
@@ -2083,7 +2192,7 @@
         const link = `https://www.smartinvestor.sorted.org.nz/kiwisaver-and-managed-funds/${encodeURIComponent(c.scheme_id)}/${encodeURIComponent(c.offer_id)}/${encodeURIComponent(c.fnd_code)}/`;
 
         const fetchBtn = isAwaiting
-          ? `<button class="btn btn-sm btn-primary" onclick="fetchCatalogFund('${escapeHtml(c.fund_code)}')" title="Download latest quarterly disclosure" style="margin-right: 4px;">📥 Fetch</button>`
+          ? `<button class="btn btn-sm ${failedFundInfo ? 'btn-warn' : 'btn-primary'}" onclick="fetchCatalogFund('${escapeHtml(c.fund_code)}')" title="${failedFundInfo ? 'Last download failed: ' + escapeHtml(failedFundInfo.message) + '. Click to retry or Edit to set direct URL' : 'Download latest quarterly disclosure'}" style="margin-right: 4px;">${failedFundInfo ? '⚠️ Retry' : '📥 Fetch'}</button>`
           : '';
 
         html += `
@@ -2188,26 +2297,48 @@
           if (res.failed && res.failed.length) {
             const fail = res.failed[0];
             console.error('[ADMIN UI] Fetch disclosure failed for', fundCode, fail);
-            alert(
+
+            const provKey = (fail.provider || '').toLowerCase();
+            if (provKey) {
+              if (!lastAutoFetchResults[provKey]) {
+                lastAutoFetchResults[provKey] = { failed: [], failedCount: 0, downloadedCount: 0, cachedCount: 0 };
+              }
+              const existingIdx = lastAutoFetchResults[provKey].failed.findIndex(f => f.code === fundCode);
+              if (existingIdx >= 0) lastAutoFetchResults[provKey].failed[existingIdx] = fail;
+              else lastAutoFetchResults[provKey].failed.push(fail);
+              lastAutoFetchResults[provKey].failedCount = lastAutoFetchResults[provKey].failed.length;
+            }
+
+            showAlertModal(
+              `❌ Fetch Failed: ${fail.code || fundCode}`,
               `❌ Fetch Failed for ${fail.code || fundCode}\n\n` +
               `• Fund ID: ${fail.fund_id || 'N/A'}\n` +
               `• Fund Manager: ${fail.provider || 'N/A'}\n` +
               `• Target URL: ${fail.url || 'N/A'}\n` +
-              `• Message: ${fail.message}\n\n` +
-              `Please check the server terminal output for full diagnostics and stack trace.`
+              `• Error: ${fail.message}\n\n` +
+              `This fund remains in "Awaiting Disclosure File" status because the Disclose endpoint returned 404 (file not found).\n\n` +
+              `To resolve:\n` +
+              `Click "Edit" on this row and enter a direct disclosure link (or quarterly spreadsheet URL) into the Direct Disclosure URL field.`
             );
-            showToast(`Fetch failed: ${fail.message}`);
+            showToast(`⚠️ Fetch failed for ${fundCode}: ${fail.message}`, 'err');
+            renderCatalogTable();
           } else {
             const okItem = (res.downloaded && res.downloaded[0]) || (res.cached && res.cached[0]);
             const msg = okItem ? okItem.message : 'Successfully synchronized';
-            showToast(`✔ ${fundCode}: ${msg}`);
+            showToast(`✔ ${fundCode}: ${msg}`, 'ok');
+            for (const key of Object.keys(lastAutoFetchResults)) {
+              if (lastAutoFetchResults[key]?.failed) {
+                lastAutoFetchResults[key].failed = lastAutoFetchResults[key].failed.filter(f => f.code !== fundCode);
+                lastAutoFetchResults[key].failedCount = lastAutoFetchResults[key].failed.length;
+              }
+            }
             await loadCatalog();
             await loadStagedFiles();
           }
         } catch (err) {
           console.error('[ADMIN UI] Network/server error fetching disclosure for', fundCode, err);
-          alert(`❌ Fetch Error for ${fundCode}:\n\n${err.message}\n\nPlease check server logs.`);
-          showToast(`Error fetching ${fundCode}: ${err.message}`);
+          showAlertModal(`❌ Fetch Error: ${fundCode}`, `❌ Network error fetching ${fundCode}:\n\n${err.message}`);
+          showToast(`❌ Error fetching ${fundCode}: ${err.message}`, 'err');
         }
       }
 
