@@ -48,6 +48,18 @@
     "is_stale": false
   },
   {
+    "code": "GLD",
+    "name": "Smart Gold Etf",
+    "provider": "Smartshares",
+    "effective_date": "2026-09-30",
+    "cash_ratio": 0.0004,
+    "hedging_ratio": 0.0,
+    "constituent_count": 1,
+    "asset_class": "equity",
+    "cadence": "monthly",
+    "is_stale": false
+  },
+  {
     "code": "GLIN_HOLDINGS",
     "name": "Smartshares GLIN_HOLDINGS ETF",
     "provider": "Smartshares",
@@ -572,6 +584,18 @@
     "hedging_ratio": 0.0,
     "constituent_count": 1,
     "asset_class": "fixed_interest",
+    "cadence": "monthly",
+    "is_stale": false
+  },
+  {
+    "code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "name": "Growth Fund",
+    "provider": "Simplicity",
+    "effective_date": "2026-09-30",
+    "cash_ratio": 0.0244,
+    "hedging_ratio": 0.0,
+    "constituent_count": 1048,
+    "asset_class": "mixed",
     "cadence": "monthly",
     "is_stale": false
   },

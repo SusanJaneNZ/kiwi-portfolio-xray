@@ -31,6 +31,7 @@ from pipeline.security_master.build_security_master import (
     parse_asx_directory,
     parse_nzx_directory,
 )
+from pipeline.fetchers.smart_investor_fetcher import get_default_scheme_offer
 
 ALLOWED_PROVIDERS = {
     "directories",
@@ -478,17 +479,27 @@ class AdminService:
             if not fnd_code:
                 raise ValueError("A valid FND code (e.g. FND15841) or Smart Investor URL is required")
 
+            combined_text = f"{fnd_raw} {entry.get('holdings_url', '')}"
+            default_sch, default_ofr = get_default_scheme_offer(provider)
             if not scheme_id:
-                sch_m = re.search(r"(SCH\d+)", fnd_raw, re.IGNORECASE)
-                scheme_id = sch_m.group(1).upper() if sch_m else ("SCH12697" if provider.lower() == "kernel" else "SCH10752")
+                sch_m = re.search(r"(SCH\d+)", combined_text, re.IGNORECASE)
+                scheme_id = sch_m.group(1).upper() if sch_m else default_sch
 
             if not offer_id:
-                ofr_m = re.search(r"(OFR\d+)", fnd_raw, re.IGNORECASE)
-                offer_id = ofr_m.group(1).upper() if ofr_m else ("OFR12698" if provider.lower() == "kernel" else "OFR10865")
+                ofr_m = re.search(r"(OFR\d+)", combined_text, re.IGNORECASE)
+                offer_id = ofr_m.group(1).upper() if ofr_m else default_ofr
 
             fund_name = str(entry.get("fund_name", "")).strip() or fund_code.replace("_", " ").title()
-            is_etf = bool(entry.get("is_etf", provider.lower() == "smartshares"))
-            is_kiwisaver = bool(entry.get("is_kiwisaver", "kiwi" in provider.lower() or "kiwi" in fund_code.lower()))
+            norm_prov = re.sub(r"[\s\-]+", "_", provider.lower())
+            is_etf = bool(entry.get("is_etf", norm_prov == "smartshares"))
+            is_kiwisaver = bool(
+                entry.get(
+                    "is_kiwisaver",
+                    "kiwi" in provider.lower()
+                    or "kiwi" in fund_code.lower()
+                    or norm_prov in {"simplicity", "fisher_funds", "milford", "generate", "booster", "anz", "asb", "westpac", "bnz"}
+                )
+            )
 
             existing_entry = next((c for c in catalog if c.get("fund_code", "").upper() == fund_code), None)
             if "holdings_url" in entry:

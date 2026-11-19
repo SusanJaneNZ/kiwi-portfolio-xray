@@ -516,6 +516,7 @@
           <select id="provider-select" onchange="updateProviderSourceCallout()">
             <option value="smartshares">data/staging/smartshares/ (Smartshares NZX ETFs)</option>
             <option value="kernel">data/staging/kernel/ (Kernel Wealth Funds)</option>
+            <option value="simplicity">data/staging/simplicity/ (Simplicity KiwiSaver &amp; Investment Funds)</option>
             <option value="fisher_funds">data/staging/fisher_funds/ (Fisher Funds KiwiSaver &amp; Managed Funds)
             </option>
             <option value="vanguard">data/staging/vanguard/ (Vanguard Master ETFs)</option>
@@ -613,9 +614,17 @@
 
       <div class="row-actions" style="margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
         <select id="catalog-add-provider" title="Fund Manager" style="width: 140px;">
+          <option value="Simplicity">Simplicity</option>
           <option value="Kernel">Kernel</option>
           <option value="Smartshares">Smartshares</option>
           <option value="Fisher Funds">Fisher Funds</option>
+          <option value="Milford">Milford</option>
+          <option value="Generate">Generate</option>
+          <option value="Booster">Booster</option>
+          <option value="ANZ">ANZ</option>
+          <option value="ASB">ASB</option>
+          <option value="Westpac">Westpac</option>
+          <option value="BNZ">BNZ</option>
         </select>
         <input type="text" id="catalog-add-code" placeholder="Fund Code (e.g. KERNEL_TOTAL_WORLD, NGB)"
           style="width: 220px;">
@@ -637,6 +646,7 @@
           <button class="btn btn-sm" onclick="filterCatalog('all')">All</button>
           <button class="btn btn-sm" onclick="filterCatalog('awaiting')" id="cat-filter-awaiting">⏳ Awaiting
             Processing</button>
+          <button class="btn btn-sm" onclick="filterCatalog('Simplicity')">Simplicity</button>
           <button class="btn btn-sm" onclick="filterCatalog('Kernel')">Kernel</button>
           <button class="btn btn-sm" onclick="filterCatalog('Smartshares')">Smartshares</button>
           <button class="btn btn-sm" onclick="filterCatalog('Fisher Funds')">Fisher Funds</button>
@@ -799,6 +809,13 @@
         folder: 'data/staging/kernel/',
         format: 'Automated Disclose Register Feed',
         buttonLabel: 'Update Kernel Fund Constituents',
+        canAutoFetch: true,
+      },
+      simplicity: {
+        name: 'Simplicity KiwiSaver & Investment Funds',
+        folder: 'data/staging/simplicity/',
+        format: 'Automated Disclose Register Feed',
+        buttonLabel: 'Update Simplicity Fund Constituents',
         canAutoFetch: true,
       },
       fisher_funds: {

@@ -19,6 +19,40 @@ logger = logging.getLogger(__name__)
 
 DEFAULT_USER_AGENT = "KiwiPortfolioXRay/1.0 (Retirement Portfolio Look-Through; +https://github.com/SusanJaneNZ/kiwi-portfolio-xray)"
 
+MONTH_MAP = {
+    "january": "01",
+    "february": "02",
+    "march": "03",
+    "april": "04",
+    "may": "05",
+    "june": "06",
+    "july": "07",
+    "august": "08",
+    "september": "09",
+    "october": "10",
+    "november": "11",
+    "december": "12",
+}
+
+
+def extract_date_from_text(text: str) -> Optional[str]:
+    """Extracts standardized YYYY-MM-DD from URLs or filenames."""
+    if not text:
+        return None
+    # 1. ISO YYYY-MM-DD (e.g. 2026-09-30)
+    m1 = re.search(r"(\d{4})[-_](\d{2})[-_](\d{2})", text)
+    if m1:
+        return f"{m1.group(1)}-{m1.group(2)}-{m1.group(3)}"
+    # 2. DD-Month-YYYY (e.g. 30-September-2026 or 30September2026)
+    m2 = re.search(r"(\d{1,2})[-_ ]*([a-zA-Z]+)[-_ ]*(\d{4})", text)
+    if m2:
+        day = int(m2.group(1))
+        mon_str = m2.group(2).lower()
+        year = m2.group(3)
+        if mon_str in MONTH_MAP:
+            return f"{year}-{MONTH_MAP[mon_str]}-{day:02d}"
+    return None
+
 
 @dataclass(frozen=True)
 class DiscloseFundMeta:
@@ -34,6 +68,32 @@ class DiscloseFundMeta:
     provider: str            # "smartshares" | "kernel" | "simplicity"
     offer_id: str = ""       # e.g., "OFR12698"
     is_etf: bool = False
+
+
+# Default Scheme and Offer IDs for well-known NZ KiwiSaver and retail fund managers
+KNOWN_PROVIDER_SCHEMES: dict[str, tuple[str, str]] = {
+    "kernel": ("SCH12697", "OFR12698"),
+    "smartshares": ("SCH10752", "OFR10865"),
+    "simplicity": ("SCH11598", "OFR11634"),
+    "fisher_funds": ("SCH10647", "OFR10672"),
+    "fisher": ("SCH10647", "OFR10672"),
+    "milford": ("SCH10769", "OFR10787"),
+    "generate": ("SCH10398", "OFR10405"),
+    "booster": ("SCH10360", "OFR10361"),
+    "anz": ("SCH10323", "OFR10324"),
+    "asb": ("SCH10260", "OFR10261"),
+    "westpac": ("SCH10784", "OFR10801"),
+    "bnz": ("SCH10387", "OFR10391"),
+}
+
+
+def get_default_scheme_offer(provider: str) -> tuple[str, str]:
+    """Returns the default (scheme_id, offer_id) pair for a given provider or generic fallback."""
+    norm = re.sub(r"[\s\-]+", "_", provider.strip().lower())
+    for k, v in KNOWN_PROVIDER_SCHEMES.items():
+        if k in norm or norm in k:
+            return v
+    return ("SCH10752", "OFR10865")
 
 
 def get_default_catalog_path() -> Path:
@@ -53,8 +113,9 @@ def load_catalog(catalog_path: Path | None = None) -> list[DiscloseFundMeta]:
             raw_provider = str(item.get("provider", "kernel")).strip()
             # Normalize provider to match staging directory conventions (e.g. "Fisher Funds" -> "fisher_funds")
             provider = re.sub(r"[\s\-]+", "_", raw_provider.lower())
-            scheme_id = item.get("scheme_id") or ("SCH12697" if provider == "kernel" else "SCH10752")
-            offer_id = item.get("offer_id") or ("OFR12698" if provider == "kernel" else "OFR10865")
+            default_sch, default_ofr = get_default_scheme_offer(provider)
+            scheme_id = item.get("scheme_id") or default_sch
+            offer_id = item.get("offer_id") or default_ofr
             manager = item.get("manager_name")
             if not manager:
                 if "kernel" in provider:
@@ -348,8 +409,9 @@ class SmartInvestorFetcher:
 
     def resolve_holdings_url(self, meta: DiscloseFundMeta) -> Optional[str]:
         """Scrapes fund profile page to discover current live quarterly disclose document link, falling back to static URL."""
-        scheme = meta.scheme_id or ("SCH12697" if meta.provider.lower() == "kernel" else "SCH10752")
-        offer = meta.offer_id or ("OFR12698" if meta.provider.lower() == "kernel" else "OFR10865")
+        default_sch, default_ofr = get_default_scheme_offer(meta.provider)
+        scheme = meta.scheme_id or default_sch
+        offer = meta.offer_id or default_ofr
         fnd = meta.fund_id.strip()
 
         page_url = f"https://www.smartinvestor.sorted.org.nz/kiwisaver-and-managed-funds/{scheme}/{offer}/{fnd}/"
@@ -433,10 +495,11 @@ class SmartInvestorFetcher:
 
         return False, "Payload does not match ZIP/XLSX or tabular CSV structure"
 
-    def get_target_path(self, meta: DiscloseFundMeta) -> Path:
+    def get_target_path(self, meta: DiscloseFundMeta, filing_date: Optional[str] = None) -> Path:
         """Returns the canonical staging file path for a fund disclosure."""
         clean_code = self.sanitize_filename(meta.target_code)
-        clean_date = self.sanitize_filename(meta.filing_date)
+        date_to_use = filing_date or meta.filing_date or "2026-09-30"
+        clean_date = self.sanitize_filename(date_to_use)
         clean_fnd = self.sanitize_filename(meta.fund_id)
         # Standardized naming convention compatible with sorted_parser
         filename = f"{clean_code}_{clean_fnd}_{clean_date}.xlsx"
@@ -448,23 +511,40 @@ class SmartInvestorFetcher:
         meta: DiscloseFundMeta,
         force: bool = False,
     ) -> tuple[bool, str, Optional[Path]]:
-        """Downloads a single fund disclosure with atomic write and safety checks."""
-        target_path = self.get_target_path(meta)
-        target_path.parent.mkdir(parents=True, exist_ok=True)
+        """Downloads a single fund disclosure with atomic write, automatic quarterly rollover, and safety checks."""
+        # Check existing staged files
+        existing_matches = self._find_all_staged_files(meta)
+        latest_existing = existing_matches[0] if existing_matches else None
+        latest_staged_date = extract_date_from_text(latest_existing.name) if latest_existing else None
 
-        # 1. Skip if already cached on disk and force is not set
-        if target_path.exists() and not force:
-            if target_path.stat().st_size >= 1024:
-                return True, f"Already cached on disk ({target_path.name})", target_path
-
-        # Also check if existing legacy file exists for this fund code in staging
-        if not force:
-            existing_match = self._find_existing_staged_file(meta)
-            if existing_match:
-                return True, f"Found existing staged file ({existing_match.name})", existing_match
-
-        # 2. Download from remote URL (with automatic live resolution fallback)
+        # 1. Determine remote date and candidate URLs
         download_url = meta.holdings_url
+        resolved_live_url: Optional[str] = None
+        remote_url_date = extract_date_from_text(download_url) if download_url else None
+
+        # Only check live profile page if we already have an existing file on disk and need to compare quarter dates
+        if latest_existing and not force and not remote_url_date:
+            if not download_url or "api/funds" in download_url or "sorted.org.nz" in download_url:
+                resolved_live_url = self.resolve_holdings_url(meta)
+                if resolved_live_url:
+                    remote_url_date = extract_date_from_text(resolved_live_url)
+
+        # 2. Check if local staged file is already up to date (when force=False)
+        if latest_existing and not force:
+            if remote_url_date and latest_staged_date:
+                if latest_staged_date >= remote_url_date:
+                    return True, f"Already up-to-date ({latest_existing.name})", latest_existing
+                else:
+                    logger.info(
+                        "Newer quarterly disclosure detected for %s (%s > %s). Proceeding to download.",
+                        meta.target_code,
+                        remote_url_date,
+                        latest_staged_date,
+                    )
+            elif not remote_url_date and latest_existing.stat().st_size >= 1024:
+                return True, f"Found existing staged file ({latest_existing.name})", latest_existing
+
+        # 3. Download from remote URL candidates
         content = None
         last_exc: Optional[Exception] = None
         urls_attempted: list[str] = []
@@ -490,7 +570,7 @@ class SmartInvestorFetcher:
                     content = None
 
         if content is None:
-            resolved = self.resolve_holdings_url(meta)
+            resolved = resolved_live_url or self.resolve_holdings_url(meta)
             if resolved:
                 for rurl in self.get_url_variants(resolved):
                     if rurl in urls_attempted:
@@ -513,6 +593,39 @@ class SmartInvestorFetcher:
                         )
                         content = None
 
+        if content is None and meta.fund_id:
+            clean_fnd = meta.fund_id.strip().upper()
+            slugs: list[str] = []
+            if meta.fund_name:
+                name_clean = re.sub(r"[^A-Za-z0-9]+", "-", meta.fund_name.strip()).strip("-").upper()
+                if name_clean:
+                    slugs.append(name_clean)
+                short_name = re.sub(r"^(SIMPLICITY|SMART|KERNEL|FISHER[\s_]+FUNDS)[\s_]+", "", meta.fund_name.strip(), flags=re.IGNORECASE).strip()
+                short_clean = re.sub(r"[^A-Za-z0-9]+", "-", short_name).strip("-").upper()
+                if short_clean and short_clean not in slugs:
+                    slugs.append(short_clean)
+            candidate_dates = ["30-September-2026", "30-June-2026", "31-March-2026", "31-December-2025"]
+            for slug in slugs:
+                for qdate in candidate_dates:
+                    durl = f"https://www.smartinvestor.sorted.org.nz/disclose-document/full-portfolio/{clean_fnd}/{slug}-{clean_fnd}-Full-portfolio-holdings-{qdate}.xlsx"
+                    for vurl in self.get_url_variants(durl):
+                        if vurl in urls_attempted:
+                            continue
+                        urls_attempted.append(vurl)
+                        logger.info("Attempting download from derived candidate URL for %s (%s): %s", meta.target_code, meta.fund_id, vurl)
+                        try:
+                            content = self._downloader(vurl, self.user_agent)
+                            download_url = vurl
+                            last_exc = None
+                            break
+                        except Exception as exc:
+                            last_exc = exc
+                            content = None
+                    if content is not None:
+                        break
+                if content is not None:
+                    break
+
         if content is None:
             fallback = self._find_existing_staged_file(meta)
             if fallback:
@@ -528,7 +641,7 @@ class SmartInvestorFetcher:
             logger.error(msg)
             return False, msg, None
 
-        # 3. Validate content
+        # 4. Validate content
         is_valid, reason = self.validate_content(content)
         if not is_valid:
             logger.warning(
@@ -543,7 +656,17 @@ class SmartInvestorFetcher:
                 return True, f"Remote payload invalid ({reason}), retained existing file ({fallback.name})", fallback
             return False, f"Invalid payload for {meta.target_code} ({meta.fund_id}) from {download_url}: {reason}", None
 
-        # 4. Atomic write: write to .tmp, then replace target
+        # 5. Determine target file path based on effective filing date
+        effective_date = (
+            extract_date_from_text(download_url)
+            or remote_url_date
+            or meta.filing_date
+            or "2026-09-30"
+        )
+        target_path = self.get_target_path(meta, filing_date=effective_date)
+        target_path.parent.mkdir(parents=True, exist_ok=True)
+
+        # 6. Atomic write: write to .tmp, then replace target
         tmp_path = target_path.with_suffix(".tmp")
         try:
             with open(tmp_path, "wb") as f:
@@ -553,6 +676,16 @@ class SmartInvestorFetcher:
             if tmp_path.exists():
                 tmp_path.unlink(missing_ok=True)
             return False, f"Failed to commit file to disk: {exc}", None
+
+        # 7. Clean up older/superseded disclosure files for this fund
+        target_resolved = target_path.resolve()
+        for old_file in self._find_all_staged_files(meta):
+            try:
+                if old_file.resolve() != target_resolved:
+                    old_file.unlink(missing_ok=True)
+                    logger.info("Removed superseded disclosure file: %s (replaced by %s)", old_file.name, target_path.name)
+            except Exception as exc:
+                logger.warning("Could not remove superseded file %s: %s", old_file.name, exc)
 
         if self.delay_seconds > 0:
             time.sleep(self.delay_seconds)
@@ -565,7 +698,11 @@ class SmartInvestorFetcher:
         force: bool = False,
     ) -> dict[str, Any]:
         """Fetches disclosures for all funds matching the specified providers."""
-        target_providers = {p.strip().lower() for p in providers} if providers else None
+        target_providers = (
+            {re.sub(r"[\s\-]+", "_", p.strip().lower()) for p in providers}
+            if providers
+            else None
+        )
 
         results: dict[str, Any] = {
             "downloaded": [],
@@ -575,7 +712,8 @@ class SmartInvestorFetcher:
         }
 
         for meta in self.catalog:
-            if target_providers and meta.provider.lower() not in target_providers:
+            meta_prov = re.sub(r"[\s\-]+", "_", meta.provider.lower())
+            if target_providers and meta_prov not in target_providers:
                 continue
 
             success, message, path = self.fetch_fund(meta, force=force)
@@ -598,10 +736,10 @@ class SmartInvestorFetcher:
         results["success"] = len(results["failed"]) == 0
         return results
 
-    def _find_existing_staged_file(self, meta: DiscloseFundMeta) -> Optional[Path]:
-        """Checks if a matching file already exists in the provider's staging directory or related folders."""
+    def _find_all_staged_files(self, meta: DiscloseFundMeta) -> list[Path]:
+        """Finds all matching staged files for this fund, sorted newest first by date."""
         if not self.staging_dir.exists():
-            return None
+            return []
 
         norm_prov = re.sub(r"[\s\-]+", "_", meta.provider.strip().lower())
         candidate_dirs: list[Path] = [self.staging_dir / norm_prov]
@@ -614,9 +752,9 @@ class SmartInvestorFetcher:
             if p.is_dir() and p not in candidate_dirs:
                 candidate_dirs.append(p)
 
-        # Look for fund_id or target_code in filenames
         target_upper = meta.target_code.upper()
         fnd_upper = meta.fund_id.upper()
+        matches: list[Path] = []
 
         for provider_dir in candidate_dirs:
             if not provider_dir.exists() or not provider_dir.is_dir():
@@ -631,21 +769,33 @@ class SmartInvestorFetcher:
                 if fnd_upper and file_fnds:
                     if fnd_upper in file_fnds:
                         if f.stat().st_size >= 1024:
-                            return f
+                            matches.append(f)
                     # Disqualify: this file belongs to a different FND code (e.g. hedged variant)
                     continue
 
                 if fnd_upper and fnd_upper in name_upper:
                     if f.stat().st_size >= 1024:
-                        return f
+                        matches.append(f)
+                    continue
 
                 # Word/token boundary check for target_code (only if file has no conflicting FND code)
                 if not file_fnds and target_upper:
                     pattern = rf"(?:^|[_\-\s]){re.escape(target_upper)}(?:[_\-\s.]|$)"
                     if re.search(pattern, name_upper):
                         if f.stat().st_size >= 1024:
-                            return f
-        return None
+                            matches.append(f)
+
+        def sort_key(p: Path) -> tuple[str, str]:
+            d = extract_date_from_text(p.name) or "0000-00-00"
+            return (d, p.name)
+
+        matches.sort(key=sort_key, reverse=True)
+        return matches
+
+    def _find_existing_staged_file(self, meta: DiscloseFundMeta) -> Optional[Path]:
+        """Checks if a matching file already exists in the provider's staging directory, returning the newest."""
+        files = self._find_all_staged_files(meta)
+        return files[0] if files else None
 
     def _default_download(self, url: str, user_agent: str) -> bytes:
         """Standard HTTP GET using urllib with user-agent and timeout."""

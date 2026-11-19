@@ -1,15 +1,5 @@
 [
   {
-    "fund_code": "FISHER_KIWISAVER_GROWTH",
-    "fund_name": "Fisher Funds KiwiSaver Growth Fund",
-    "provider": "Fisher Funds",
-    "fnd_code": "FND555",
-    "scheme_id": "SCH10713",
-    "offer_id": "OFR10715",
-    "is_etf": false,
-    "is_kiwisaver": true
-  },
-  {
     "fund_code": "KERNEL_BALANCED",
     "fund_name": "Kernel Balanced Fund",
     "provider": "Kernel",
@@ -225,6 +215,17 @@
     "scheme_id": "SCH12697",
     "offer_id": "OFR12698",
     "is_etf": false
+  },
+  {
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "fund_name": "Simplicity KiwiSaver Growth Fund",
+    "provider": "Simplicity",
+    "fnd_code": "FND697",
+    "scheme_id": "SCH11598",
+    "offer_id": "OFR11634",
+    "holdings_url": "https://www.smartinvestor.sorted.org.nz/disclose-document/full-portfolio/FND697/GROWTH-FUND-FND697-Full-portfolio-holdings-30-September-2026.xlsx",
+    "is_etf": false,
+    "is_kiwisaver": true
   },
   {
     "fund_code": "APA",

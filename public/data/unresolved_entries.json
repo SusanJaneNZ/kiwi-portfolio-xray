@@ -1,5 +1,96 @@
 [
   {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Simplicity Living Ltd Ordinary Shares",
+    "raw_ticker": "",
+    "weight": 0.074991,
+    "reason": "ambiguous_collision_spread_0.04",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Simplicity Living Ltd Ordinary Shares": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Debtors",
+    "raw_ticker": "",
+    "weight": 0.020107,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Debtors": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Tesla Motors Inc",
+    "raw_ticker": "",
+    "weight": 0.010156,
+    "reason": "ambiguous_collision_spread_0.08",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Tesla Motors Inc": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Eli Lilly and Company",
+    "raw_ticker": "",
+    "weight": 0.008002,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Eli Lilly and Company": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "IVX Capital Call",
+    "raw_ticker": "",
+    "weight": 0.006155,
+    "reason": "ambiguous_collision_spread_0.10",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "IVX Capital Call": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "BZLNZ NFIX3FRA + 58 11/05/2029",
+    "raw_ticker": "",
+    "weight": 0.004719,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "BZLNZ NFIX3FRA + 58 11/05/2029": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "KIWI Float 13/06/2028",
+    "raw_ticker": "",
+    "weight": 0.004719,
+    "reason": "ambiguous_collision_spread_0.04",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "KIWI Float 13/06/2028": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
     "provider": "Smartshares",
     "fund_code": "HEAL_HOLDINGS",
     "raw_name": "GRAIL INC",
@@ -39,6 +130,32 @@
     }
   },
   {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "KIWI NFIX3FRA + 65 15/03/2028",
+    "raw_ticker": "",
+    "weight": 0.002872,
+    "reason": "ambiguous_collision_spread_0.03",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "KIWI NFIX3FRA + 65 15/03/2028": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "RABOBK NFIX3FRA + 25 17/08/2027",
+    "raw_ticker": "",
+    "weight": 0.002872,
+    "reason": "ambiguous_collision_spread_0.01",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "RABOBK NFIX3FRA + 25 17/08/2027": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
     "provider": "Smartshares",
     "fund_code": "HEAL_HOLDINGS",
     "raw_name": "RELAY THERAPEUTICS",
@@ -48,6 +165,32 @@
     "suggested_snippet": {
       "Smartshares:HEAL_HOLDINGS": {
         "RELAY THERAPEUTICS": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Procter and Gamble CO/THE",
+    "raw_ticker": "",
+    "weight": 0.00277,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Procter and Gamble CO/THE": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Goodman NZ Ltd. & Goodman Property Services Ltd.",
+    "raw_ticker": "",
+    "weight": 0.00277,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Goodman NZ Ltd. & Goodman Property Services Ltd.": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -78,6 +221,19 @@
     }
   },
   {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "ASBBNK NFIX3FRA + 58 30/04/2029",
+    "raw_ticker": "",
+    "weight": 0.002667,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "ASBBNK NFIX3FRA + 58 30/04/2029": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
     "provider": "Smartshares",
     "fund_code": "HEAL_HOLDINGS",
     "raw_name": "ABCELLERA BIOLOGICS",
@@ -87,6 +243,32 @@
     "suggested_snippet": {
       "Smartshares:HEAL_HOLDINGS": {
         "ABCELLERA BIOLOGICS": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Icehouse Ventures Growth Fund II LP",
+    "raw_ticker": "",
+    "weight": 0.002154,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Icehouse Ventures Growth Fund II LP": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "KLA-Tencor Corp",
+    "raw_ticker": "",
+    "weight": 0.002052,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "KLA-Tencor Corp": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -130,6 +312,32 @@
     }
   },
   {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Reliable Foundations LTD",
+    "raw_ticker": "",
+    "weight": 0.001744,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Reliable Foundations LTD": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Data Torque Ltd",
+    "raw_ticker": "",
+    "weight": 0.001641,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Data Torque Ltd": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
     "provider": "Smartshares",
     "fund_code": "HEAL_HOLDINGS",
     "raw_name": "STOKE THERAPEUTICS",
@@ -143,6 +351,19 @@
     }
   },
   {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Tax Traders Limited",
+    "raw_ticker": "",
+    "weight": 0.001539,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Tax Traders Limited": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
     "provider": "Smartshares",
     "fund_code": "HEAL_HOLDINGS",
     "raw_name": "UROGEN PHARMA",
@@ -152,6 +373,32 @@
     "suggested_snippet": {
       "Smartshares:HEAL_HOLDINGS": {
         "UROGEN PHARMA": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Stabicraft Marine Limited",
+    "raw_ticker": "",
+    "weight": 0.001334,
+    "reason": "ambiguous_collision_spread_0.07",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Stabicraft Marine Limited": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Dell Inc",
+    "raw_ticker": "",
+    "weight": 0.001334,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Dell Inc": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -182,6 +429,45 @@
     }
   },
   {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "AUCKCN NFIX3FRA + 53 04/10/2027",
+    "raw_ticker": "",
+    "weight": 0.001128,
+    "reason": "ambiguous_collision_spread_0.03",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "AUCKCN NFIX3FRA + 53 04/10/2027": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "RABOBK NFIX3FRA + 57 20/02/2029",
+    "raw_ticker": "",
+    "weight": 0.001128,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "RABOBK NFIX3FRA + 57 20/02/2029": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Elim Education Impact Inv Trust",
+    "raw_ticker": "",
+    "weight": 0.001128,
+    "reason": "ambiguous_collision_spread_0.01",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Elim Education Impact Inv Trust": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
     "provider": "Smartshares",
     "fund_code": "HEAL_HOLDINGS",
     "raw_name": "MEDINCELL SA",
@@ -204,6 +490,58 @@
     "suggested_snippet": {
       "Smartshares:HEAL_HOLDINGS": {
         "ABSCI CORP": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "RABOBK NFIX3FRA + 74 19/06/2028",
+    "raw_ticker": "",
+    "weight": 0.001026,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "RABOBK NFIX3FRA + 74 19/06/2028": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "UDC Endeavour Auto ABS Trust",
+    "raw_ticker": "",
+    "weight": 0.001026,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "UDC Endeavour Auto ABS Trust": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Newmont Mining Corp",
+    "raw_ticker": "",
+    "weight": 0.001026,
+    "reason": "ambiguous_collision_spread_0.01",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Newmont Mining Corp": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "TPNZ FLOAT 31/07/2028",
+    "raw_ticker": "",
+    "weight": 0.001026,
+    "reason": "ambiguous_collision_spread_0.01",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "TPNZ FLOAT 31/07/2028": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -247,6 +585,32 @@
     }
   },
   {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Indi 2025 - 1",
+    "raw_ticker": "",
+    "weight": 0.000923,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Indi 2025 - 1": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Tuhua Ventures II Fund",
+    "raw_ticker": "",
+    "weight": 0.000923,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Tuhua Ventures II Fund": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
     "provider": "Smartshares",
     "fund_code": "HEAL_HOLDINGS",
     "raw_name": "NANOBIOTIX SA",
@@ -286,6 +650,71 @@
     }
   },
   {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "TOYOTA NFIX3FRA + 48 28/09/2029",
+    "raw_ticker": "",
+    "weight": 0.000821,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "TOYOTA NFIX3FRA + 48 28/09/2029": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Freeport - McMoran Copper",
+    "raw_ticker": "",
+    "weight": 0.000821,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Freeport - McMoran Copper": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "RABOBK NFIX3FRA + 80 12/08/2026",
+    "raw_ticker": "",
+    "weight": 0.000821,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "RABOBK NFIX3FRA + 80 12/08/2026": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Bridgewest Venture Fund 1 LP",
+    "raw_ticker": "",
+    "weight": 0.000821,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Bridgewest Venture Fund 1 LP": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Adobe Systems Inc",
+    "raw_ticker": "",
+    "weight": 0.000821,
+    "reason": "ambiguous_collision_spread_0.05",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Adobe Systems Inc": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
     "provider": "Smartshares",
     "fund_code": "HEAL_HOLDINGS",
     "raw_name": "SYNDAX PHARMACEUTICALS",
@@ -295,6 +724,19 @@
     "suggested_snippet": {
       "Smartshares:HEAL_HOLDINGS": {
         "SYNDAX PHARMACEUTICALS": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "PNC Financial Services Group I",
+    "raw_ticker": "",
+    "weight": 0.000718,
+    "reason": "ambiguous_collision_spread_0.09",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "PNC Financial Services Group I": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -325,6 +767,45 @@
     }
   },
   {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "UDC Endeavour ABS Trust",
+    "raw_ticker": "",
+    "weight": 0.000616,
+    "reason": "ambiguous_collision_spread_0.01",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "UDC Endeavour ABS Trust": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Muenchener Rueckversicherungs-",
+    "raw_ticker": "",
+    "weight": 0.000616,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Muenchener Rueckversicherungs-": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "FPQC 2026-1 A",
+    "raw_ticker": "",
+    "weight": 0.000616,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "FPQC 2026-1 A": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
     "provider": "Smartshares",
     "fund_code": "HEAL_HOLDINGS",
     "raw_name": "KURA ONCOLOGY",
@@ -347,6 +828,71 @@
     "suggested_snippet": {
       "Smartshares:HEAL_HOLDINGS": {
         "MYRIAD GENETICS": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Inditex",
+    "raw_ticker": "",
+    "weight": 0.000513,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Inditex": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "MTFNZ M25 A",
+    "raw_ticker": "",
+    "weight": 0.000513,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "MTFNZ M25 A": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "HCA Holdings Inc",
+    "raw_ticker": "",
+    "weight": 0.000513,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "HCA Holdings Inc": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Deutsche Post AG",
+    "raw_ticker": "",
+    "weight": 0.000513,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Deutsche Post AG": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Arthur J Gallagagh & Co",
+    "raw_ticker": "",
+    "weight": 0.000513,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Arthur J Gallagagh & Co": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -390,6 +936,123 @@
     }
   },
   {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "AVNZP NFIX1BID + 115 15/06/2035",
+    "raw_ticker": "",
+    "weight": 0.00041,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "AVNZP NFIX1BID + 115 15/06/2035": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Nippon Telegraph & Telephone C",
+    "raw_ticker": "",
+    "weight": 0.00041,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Nippon Telegraph & Telephone C": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Quantifi Photonics Ltd \u2013 USD ORDINARY SHARES",
+    "raw_ticker": "",
+    "weight": 0.00041,
+    "reason": "ambiguous_collision_spread_0.01",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Quantifi Photonics Ltd \u2013 USD ORDINARY SHARES": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "UDCAU 2025-2 A",
+    "raw_ticker": "",
+    "weight": 0.00041,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "UDCAU 2025-2 A": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Assicurazioni Generali",
+    "raw_ticker": "",
+    "weight": 0.00041,
+    "reason": "ambiguous_collision_spread_0.10",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Assicurazioni Generali": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Microstrategy Inc",
+    "raw_ticker": "",
+    "weight": 0.00041,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Microstrategy Inc": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Becton Dickinson and Co",
+    "raw_ticker": "",
+    "weight": 0.00041,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Becton Dickinson and Co": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Nu Holdings Ltd",
+    "raw_ticker": "",
+    "weight": 0.00041,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Nu Holdings Ltd": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Wabtec Corp",
+    "raw_ticker": "",
+    "weight": 0.00041,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Wabtec Corp": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
     "provider": "Smartshares",
     "fund_code": "HEAL_HOLDINGS",
     "raw_name": "ALUMIS",
@@ -429,6 +1092,97 @@
     }
   },
   {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Ferguson PLC",
+    "raw_ticker": "",
+    "weight": 0.000308,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Ferguson PLC": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Pure Storage Inc",
+    "raw_ticker": "",
+    "weight": 0.000308,
+    "reason": "ambiguous_collision_spread_0.04",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Pure Storage Inc": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Interactive Brokers Group Inc-CL A",
+    "raw_ticker": "",
+    "weight": 0.000308,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Interactive Brokers Group Inc-CL A": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "American International Group I",
+    "raw_ticker": "",
+    "weight": 0.000308,
+    "reason": "ambiguous_collision_spread_0.14",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "American International Group I": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Roper Industries Inc",
+    "raw_ticker": "",
+    "weight": 0.000308,
+    "reason": "ambiguous_collision_spread_0.00",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Roper Industries Inc": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "AUCKCN NFIX3FRA + 60 26/06/2028",
+    "raw_ticker": "",
+    "weight": 0.000308,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "AUCKCN NFIX3FRA + 60 26/06/2028": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "FPQC 2025-1 A Mtge",
+    "raw_ticker": "",
+    "weight": 0.000308,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "FPQC 2025-1 A Mtge": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
     "provider": "Smartshares",
     "fund_code": "HEAL_HOLDINGS",
     "raw_name": "PROTHENA PLC",
@@ -438,6 +1192,214 @@
     "suggested_snippet": {
       "Smartshares:HEAL_HOLDINGS": {
         "PROTHENA PLC": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Cboe Holdings Inc",
+    "raw_ticker": "",
+    "weight": 0.000205,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Cboe Holdings Inc": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "ABN AMRO Group NV",
+    "raw_ticker": "",
+    "weight": 0.000205,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "ABN AMRO Group NV": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Hewlett-Packard Co",
+    "raw_ticker": "",
+    "weight": 0.000205,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Hewlett-Packard Co": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "CHURC NFIX3FRA + 60 15/10/2027",
+    "raw_ticker": "",
+    "weight": 0.000205,
+    "reason": "ambiguous_collision_spread_0.08",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "CHURC NFIX3FRA + 60 15/10/2027": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "LNZCC 2018-1 A 22/061/2036",
+    "raw_ticker": "",
+    "weight": 0.000205,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "LNZCC 2018-1 A 22/061/2036": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "DNB ASA",
+    "raw_ticker": "",
+    "weight": 0.000205,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "DNB ASA": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Ericsson LM-B SHS",
+    "raw_ticker": "",
+    "weight": 0.000205,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Ericsson LM-B SHS": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Michelin (CGDE)",
+    "raw_ticker": "",
+    "weight": 0.000205,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Michelin (CGDE)": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Zoom Video Communications-A",
+    "raw_ticker": "",
+    "weight": 0.000205,
+    "reason": "ambiguous_collision_spread_0.05",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Zoom Video Communications-A": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Chugai",
+    "raw_ticker": "",
+    "weight": 0.000205,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Chugai": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Novozymes A/S",
+    "raw_ticker": "",
+    "weight": 0.000205,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Novozymes A/S": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "TURNS 2025-1 A",
+    "raw_ticker": "",
+    "weight": 0.000205,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "TURNS 2025-1 A": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Oriental Land Co Ltd",
+    "raw_ticker": "",
+    "weight": 0.000205,
+    "reason": "ambiguous_collision_spread_0.07",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Oriental Land Co Ltd": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "HeidelbergCement AG",
+    "raw_ticker": "",
+    "weight": 0.000205,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "HeidelbergCement AG": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Reliance Steel & Aluminum Co",
+    "raw_ticker": "",
+    "weight": 0.000205,
+    "reason": "ambiguous_collision_spread_0.03",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Reliance Steel & Aluminum Co": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "XPO Logistics Inc",
+    "raw_ticker": "",
+    "weight": 0.000205,
+    "reason": "ambiguous_collision_spread_0.09",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "XPO Logistics Inc": "INSERT_CANONICAL_ISIN"
       }
     }
   },
@@ -516,6 +1478,2281 @@
     "suggested_snippet": {
       "Smartshares:HEAL_HOLDINGS": {
         "LYELL IMMUNOPHARMA": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Julius Baer Gruppe AG",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Julius Baer Gruppe AG": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Fortescue Metals Group Ltd",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.05",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Fortescue Metals Group Ltd": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "FPIT 2024-1 A Mtge",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.06",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "FPIT 2024-1 A Mtge": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Du Pont De Nemours",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Du Pont De Nemours": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Bunge Ltd",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Bunge Ltd": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Coca-Cola European Partners PLC",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Coca-Cola European Partners PLC": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Everest Re Group Ltd",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.07",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Everest Re Group Ltd": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Essity Aktiebolag-B",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Essity Aktiebolag-B": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Kuehne und Nagel International AG",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.12",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Kuehne und Nagel International AG": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Unipol Gruppo SpA",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Unipol Gruppo SpA": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Axa Equitable Holdings Inc",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Axa Equitable Holdings Inc": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Mid-America Apartment Comm",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Mid-America Apartment Comm": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Schindler Holding-Part Cert",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Schindler Holding-Part Cert": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Link Real Estate Investment Trust",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Link Real Estate Investment Trust": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Coca-Cola Hbc Ag-Cdi",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Coca-Cola Hbc Ag-Cdi": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "McCormick  & Co- Non VTG Shrs",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "McCormick  & Co- Non VTG Shrs": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "AVANZ NFIX1BID + 120 15/05/2057",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "AVANZ NFIX1BID + 120 15/05/2057": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "SFGNZ 2025-1 A Mtge",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "SFGNZ 2025-1 A Mtge": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Northland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.13",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Northland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Nelson",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.15",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Nelson": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Otago",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Otago": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "UKT 4 ? 03/07/28 Corp",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "UKT 4 ? 03/07/28 Corp": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Aisin Seiki Co Ltd",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.07",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Aisin Seiki Co Ltd": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "United Continental Holdings Inc",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.01",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "United Continental Holdings Inc": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Canterbury",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.09",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Canterbury": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Canterbury",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.09",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Canterbury": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Yahoo Japan Corp",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.00",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Yahoo Japan Corp": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "NZDUSD Maturing 03/11/2026 (104102)",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "NZDUSD Maturing 03/11/2026 (104102)": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Don Quijote Holdings Co Ltd",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Don Quijote Holdings Co Ltd": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "CCL Industries Inc",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.02",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "CCL Industries Inc": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Otago",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Otago": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "FRGV         11/25/30",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "FRGV         11/25/30": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Sartorius AG-Vorzug",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.12",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Sartorius AG-Vorzug": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "UKT 4 22/05/29",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "UKT 4 22/05/29": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Northland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.13",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Northland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "MTFNZ N24 Mtge A",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "MTFNZ N24 Mtge A": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Canterbury",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.09",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Canterbury": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Canterbury",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.09",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Canterbury": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Northland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.13",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Northland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Hennes & Mauritz AB",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Hennes & Mauritz AB": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "UKT 4 22/10/31",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "UKT 4 22/10/31": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "FRGV         11/25/29",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "FRGV         11/25/29": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Manawatu-Wanganui",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.13",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Manawatu-Wanganui": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Taranaki",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Taranaki": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Bay of Plenty",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.07",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Bay of Plenty": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Bay of Plenty",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.07",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Bay of Plenty": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Canterbury",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.09",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Canterbury": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Waikato",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.09",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Waikato": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Northland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.13",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Northland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Canterbury",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.09",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Canterbury": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Waikato",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.09",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Waikato": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Taiyo Nippon Sanso Corp",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.09",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Taiyo Nippon Sanso Corp": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Bay of Plenty",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.07",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Bay of Plenty": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Canterbury",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.09",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Canterbury": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Otago",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Otago": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Canterbury",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.09",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Canterbury": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Northland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.13",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Northland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Otago",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Otago": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Otago",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Otago": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Bay of Plenty",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.07",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Bay of Plenty": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Bay of Plenty",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.07",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Bay of Plenty": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Waikato",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.09",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Waikato": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Bay of Plenty",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.07",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Bay of Plenty": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Canterbury",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.09",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Canterbury": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "G2 MB0872",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "no_candidates_above_70",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "G2 MB0872": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Wellington",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.11",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Wellington": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Northland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.13",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Northland": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Canterbury",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "ambiguous_collision_spread_0.09",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Canterbury": "INSERT_CANONICAL_ISIN"
+      }
+    }
+  },
+  {
+    "provider": "Simplicity",
+    "fund_code": "SIMPLICITY_KIWISAVER_GROWTH",
+    "raw_name": "Loan secured over residential property in Auckland",
+    "raw_ticker": "",
+    "weight": 0.000103,
+    "reason": "score_below_90",
+    "suggested_snippet": {
+      "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+        "Loan secured over residential property in Auckland": "INSERT_CANONICAL_ISIN"
       }
     }
   },

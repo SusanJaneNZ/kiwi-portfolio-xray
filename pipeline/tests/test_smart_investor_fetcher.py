@@ -385,6 +385,48 @@ class TestSmartInvestorFetcher(unittest.TestCase):
         self.assertIsNotNone(found)
         self.assertEqual(found, test_file)
 
+    def test_fetch_fund_replaces_older_quarter_and_cleans_up(self) -> None:
+        """When a newer quarterly filing is discovered, fetch_fund downloads it and removes the superseded file."""
+        provider_dir = self.staging_dir / "kernel"
+        provider_dir.mkdir(parents=True, exist_ok=True)
+        old_file = provider_dir / "KERNEL_TEST_FND99999_2026-09-30.xlsx"
+        old_file.write_bytes(b"PK\x03\x04" + (b"\x00" * 2000))
+
+        mock_payload = b"PK\x03\x04" + (b"\x09" * 3000)
+        mock_html = b"""
+        <html>
+          <body>
+            <a href="https://www.smartinvestor.sorted.org.nz/disclose-document/full-portfolio/FND99999/KERNEL-TEST-FND99999-Full-portfolio-holdings-31-December-2026.xlsx">Download</a>
+          </body>
+        </html>
+        """
+
+        def mock_downloader(url: str, ua: str) -> bytes:
+            if "kiwisaver-and-managed-funds" in url:
+                return mock_html
+            return mock_payload
+
+        meta = DiscloseFundMeta(
+            fund_id="FND99999",
+            scheme_id="SCH12697",
+            manager_name="Kernel Wealth",
+            fund_name="Kernel Test Fund",
+            holdings_url="https://smartinvestor.sorted.org.nz/api/funds/FND99999/holdings.xlsx",
+            filing_date="2026-09-30",
+            target_code="KERNEL_TEST",
+            provider="kernel",
+        )
+
+        fetcher = SmartInvestorFetcher(staging_dir=self.staging_dir, downloader=mock_downloader)
+        success, msg, new_path = fetcher.fetch_fund(meta, force=False)
+
+        self.assertTrue(success)
+        self.assertIsNotNone(new_path)
+        self.assertTrue(new_path.name.endswith("2026-12-31.xlsx"))
+        self.assertTrue(new_path.exists())
+        # Verify old file was cleanly removed
+        self.assertFalse(old_file.exists())
+
 
 if __name__ == "__main__":
     unittest.main()
