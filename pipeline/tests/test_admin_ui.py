@@ -336,6 +336,53 @@ class TestAdminUI(unittest.TestCase):
             server.shutdown()
             server.server_close()
 
+    def test_catalog_granular_awaiting_statuses(self):
+        """Verifies that get_fund_catalog assigns granular sub_status and target_panel to awaiting funds."""
+        catalog = self.service.get_fund_catalog()
+        self.assertGreater(len(catalog), 0)
+
+        # Inspect awaiting items
+        awaiting = [c for c in catalog if c["status"] == "AWAITING_PROCESSING"]
+        self.assertGreater(len(awaiting), 0)
+
+        for item in awaiting:
+            self.assertIn("sub_status", item)
+            self.assertIn("status_label", item)
+            self.assertIn("target_panel", item)
+            self.assertIn(
+                item["sub_status"],
+                {
+                    "AWAITING_DISCLOSURE",
+                    "AWAITING_MASTER_MAPPING",
+                    "AWAITING_MASTER_DISCLOSURE",
+                    "AWAITING_MASTER_PUBLISH",
+                    "AWAITING_PUBLISH",
+                    "AWAITING_COMPANY_MAPPING",
+                },
+            )
+            self.assertTrue(item["status_label"].startswith("Awaiting "))
+            self.assertIn(
+                item["target_panel"],
+                {"panel-staging", "panel-feeders", "panel-diagnostics", "panel-unresolved"},
+            )
+
+        # Check GLD specifically: feeder mapped to ishares:IAU, IAU missing from staging
+        gld_entry = next((c for c in catalog if c["fund_code"] == "GLD"), None)
+        if gld_entry:
+            self.assertEqual(gld_entry["status"], "AWAITING_PROCESSING")
+            self.assertEqual(gld_entry["sub_status"], "AWAITING_MASTER_DISCLOSURE")
+            self.assertEqual(gld_entry["status_label"], "Awaiting Master Fund Disclosure File")
+            self.assertEqual(gld_entry["target_panel"], "panel-staging")
+            self.assertEqual(gld_entry["target_param"], "ishares")
+
+        # Check an un-staged fund like FISHER_KIWISAVER_GROWTH or NGB
+        ngb_entry = next((c for c in catalog if c["fund_code"] == "NGB"), None)
+        if ngb_entry:
+            self.assertEqual(ngb_entry["status"], "AWAITING_PROCESSING")
+            self.assertEqual(ngb_entry["sub_status"], "AWAITING_DISCLOSURE")
+            self.assertEqual(ngb_entry["status_label"], "Awaiting Disclosure File")
+            self.assertEqual(ngb_entry["target_panel"], "panel-staging")
+
     def test_admin_ui_html_syntax_and_script_validity(self):
         """Verifies that admin_ui.html exists and all embedded <script> tags contain valid JavaScript with no syntax errors or duplicate declarations."""
         html_path = REPO_ROOT / "pipeline" / "admin_ui.html"

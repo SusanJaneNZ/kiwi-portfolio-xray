@@ -67,6 +67,7 @@ class AdminService:
         self.feeder_registry_path = repo_root / "pipeline" / "feeder_registry.json"
         self.fund_catalog_path = repo_root / "pipeline" / "fund_catalog.json"
         self._lock = threading.Lock()
+        self._last_unconfigured_feeders: set[str] = set()
 
     def list_staged_files(self) -> dict[str, list[dict[str, Any]]]:
         """Lists all CSV and XLSX files currently staged under each provider folder."""
@@ -257,8 +258,107 @@ class AdminService:
             logger.warning("Error reading %s: %s", self.fund_catalog_path, exc)
             return []
 
+    def _index_staged_files(self) -> list[str]:
+        """Collects filenames of all staged files across all directories in staging_dir."""
+        filenames: list[str] = []
+        if self.staging_dir.exists():
+            for p in self.staging_dir.glob("*/*"):
+                if p.is_file() and p.suffix.lower() in {".csv", ".xlsx"}:
+                    filenames.append(p.name.upper())
+        return filenames
+
+    def _has_staged_disclosure(self, item: dict[str, Any], filenames: list[str]) -> bool:
+        """Determines whether a statutory disclosure file exists in staging for this fund."""
+        fnd = str(item.get("fnd_code", "")).strip().upper()
+        code = str(item.get("fund_code", "")).strip().upper()
+
+        # 1. Authoritative FND code check (Disclose Register standard)
+        if fnd and any(fnd in fn for fn in filenames):
+            return True
+
+        # 2. Token match for fund_code (avoiding collision with files carrying another FND code)
+        for fn in filenames:
+            file_fnds = re.findall(r"FND\d+", fn)
+            if file_fnds and fnd and all(ff != fnd for ff in file_fnds):
+                continue
+            pattern = rf"(^|[^A-Z0-9]){re.escape(code)}([^A-Z0-9]|$)"
+            if re.search(pattern, fn):
+                return True
+
+        return False
+
+    def _get_staged_master_tickers(self) -> dict[str, set[str]]:
+        """Discovers staged master ETF tickers in vanguard, ishares, and spdr directories."""
+        result: dict[str, set[str]] = {"vanguard": set(), "ishares": set(), "spdr": set()}
+
+        # Vanguard
+        vg_dir = self.staging_dir / "vanguard"
+        if vg_dir.exists():
+            try:
+                from pipeline.adapters.vanguard_adapter import VanguardAdapter
+                v_ad = VanguardAdapter()
+                for f in vg_dir.glob("*.csv"):
+                    ticker = v_ad._extract_ticker_from_text(f.name)
+                    if not ticker:
+                        try:
+                            lines = f.read_text(encoding="utf-8", errors="ignore").splitlines()[:15]
+                            for l in lines:
+                                ticker = v_ad._extract_ticker_from_text(l)
+                                if ticker:
+                                    break
+                        except Exception:
+                            pass
+                    if ticker:
+                        result["vanguard"].add(ticker.upper())
+            except Exception as exc:
+                logger.warning("Error indexing vanguard staged files: %s", exc)
+
+        # iShares
+        is_dir = self.staging_dir / "ishares"
+        if is_dir.exists():
+            try:
+                from pipeline.adapters.ishares_adapter import ISharesAdapter
+                i_ad = ISharesAdapter()
+                for f in is_dir.glob("*.csv"):
+                    ticker = i_ad._extract_ticker_from_filename(f.name)
+                    if ticker:
+                        result["ishares"].add(ticker.upper())
+            except Exception as exc:
+                logger.warning("Error indexing ishares staged files: %s", exc)
+
+        # SPDR
+        sp_dir = self.staging_dir / "spdr"
+        if sp_dir.exists():
+            try:
+                from pipeline.adapters.spdr_adapter import SPDRAdapter
+                s_ad = SPDRAdapter()
+                for f in sp_dir.glob("*.xlsx"):
+                    ticker = s_ad._extract_ticker(f.name)
+                    if ticker:
+                        result["spdr"].add(ticker.upper())
+            except Exception as exc:
+                logger.warning("Error indexing spdr staged files: %s", exc)
+
+        return result
+
+    def _get_unresolved_fund_codes(self) -> set[str]:
+        """Loads fund codes with unresolved company holdings blocking compilation."""
+        unres_path = self.repo_root / "public" / "data" / "unresolved_entries.json"
+        if not unres_path.exists():
+            return set()
+        try:
+            entries = json.loads(unres_path.read_text(encoding="utf-8"))
+            codes: set[str] = set()
+            for e in entries:
+                fcode = str(e.get("fund_code", "")).strip().upper()
+                if fcode:
+                    codes.add(fcode)
+            return codes
+        except Exception:
+            return set()
+
     def get_fund_catalog(self) -> list[dict[str, Any]]:
-        """Returns the list of managed funds from fund_catalog.json enriched with As Of dates and processing status."""
+        """Returns the list of managed funds from fund_catalog.json enriched with As Of dates, processing status, and granular diagnostic steps."""
         catalog = self._read_raw_fund_catalog()
         if not catalog:
             return []
@@ -276,21 +376,83 @@ class AdminService:
             except Exception as exc:
                 logger.warning("Error reading %s: %s", registry_path, exc)
 
+        feeder_registry = self.get_feeder_registry()
+        staged_masters = self._get_staged_master_tickers()
+        staged_files = self._index_staged_files()
+        unresolved_funds = self._get_unresolved_fund_codes()
+
         enriched: list[dict[str, Any]] = []
         for entry in catalog:
             item = dict(entry)
             code = str(item.get("fund_code", "")).strip().upper()
+            provider_norm = str(item.get("provider", "smartshares")).strip().lower().replace(" ", "_")
             reg_entry = reg_map.get(code)
             if reg_entry and reg_entry.get("constituent_count", 0) > 0:
                 item["effective_date"] = reg_entry.get("effective_date", "")
                 item["constituent_count"] = reg_entry.get("constituent_count", 0)
                 item["is_stale"] = bool(reg_entry.get("is_stale", False))
                 item["status"] = "PROCESSED"
+                item["sub_status"] = "PROCESSED"
+                item["status_label"] = "Processed"
+                item["target_panel"] = "panel-catalog"
+                item["target_param"] = ""
+                item["action_tooltip"] = "Fund constituents published and verified"
             else:
                 item["effective_date"] = ""
                 item["constituent_count"] = 0
                 item["is_stale"] = False
                 item["status"] = "AWAITING_PROCESSING"
+
+                has_file = self._has_staged_disclosure(item, staged_files)
+                feeder_info = feeder_registry.get(code)
+                is_unconf_feeder = code in self._last_unconfigured_feeders
+
+                if not has_file:
+                    item["sub_status"] = "AWAITING_DISCLOSURE"
+                    item["status_label"] = "Awaiting Disclosure File"
+                    item["target_panel"] = "panel-staging"
+                    item["target_param"] = provider_norm
+                    item["action_tooltip"] = f"Download or stage disclosure file for {code} in Panel 1"
+                elif not feeder_info and is_unconf_feeder:
+                    item["sub_status"] = "AWAITING_MASTER_MAPPING"
+                    item["status_label"] = "Awaiting Master Fund Mapping"
+                    item["target_panel"] = "panel-feeders"
+                    item["target_param"] = code
+                    item["action_tooltip"] = f"Pair feeder fund {code} with Master ETF in Panel 4"
+                elif feeder_info:
+                    master_prov = str(feeder_info.get("master_provider", "vanguard")).strip().lower()
+                    master_tick = str(feeder_info.get("master_ticker", "")).strip().upper()
+                    has_master_file = master_tick in staged_masters.get(master_prov, set())
+                    if not has_master_file:
+                        item["sub_status"] = "AWAITING_MASTER_DISCLOSURE"
+                        item["status_label"] = "Awaiting Master Fund Disclosure File"
+                        item["target_panel"] = "panel-staging"
+                        item["target_param"] = master_prov
+                        item["action_tooltip"] = f"Upload {master_tick} disclosure to data/staging/{master_prov}/ in Panel 1"
+                    elif code in unresolved_funds:
+                        item["sub_status"] = "AWAITING_COMPANY_MAPPING"
+                        item["status_label"] = "Awaiting Company Mapping"
+                        item["target_panel"] = "panel-unresolved"
+                        item["target_param"] = code
+                        item["action_tooltip"] = f"Map unresolved constituent companies for {code} in Panel 6"
+                    else:
+                        item["sub_status"] = "AWAITING_MASTER_PUBLISH"
+                        item["status_label"] = "Awaiting Master Fund Publish"
+                        item["target_panel"] = "panel-diagnostics"
+                        item["target_param"] = ""
+                        item["action_tooltip"] = f"Disclosures ready: click to run Publish Datasets in Panel 3"
+                elif code in unresolved_funds:
+                    item["sub_status"] = "AWAITING_COMPANY_MAPPING"
+                    item["status_label"] = "Awaiting Company Mapping"
+                    item["target_panel"] = "panel-unresolved"
+                    item["target_param"] = code
+                    item["action_tooltip"] = f"Map unresolved constituent companies for {code} in Panel 6"
+                else:
+                    item["sub_status"] = "AWAITING_PUBLISH"
+                    item["status_label"] = "Awaiting Publish"
+                    item["target_panel"] = "panel-diagnostics"
+                    item["target_param"] = ""
+                    item["action_tooltip"] = f"Disclosure staged: click to run Publish Datasets in Panel 3"
             enriched.append(item)
 
         # Sort: Awaiting processing first, then oldest As-Of date, then fund_code
@@ -458,6 +620,12 @@ class AdminService:
             repo_root=self.repo_root,
         )
         report, summary = compiler.compile(dry_run=dry_run)
+        unconf = summary.get("unconfigured_feeders", [])
+        self._last_unconfigured_feeders = {
+            str(f.get("fund_code", "")).strip().upper()
+            for f in unconf
+            if isinstance(f, dict) and f.get("fund_code")
+        }
         sm_data = summary.pop("_security_master_data", None)
         unresolved = summary.get("unresolved_entries", [])
         if unresolved:

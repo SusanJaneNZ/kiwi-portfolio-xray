@@ -210,6 +210,34 @@
       border: 1px solid rgba(99, 102, 241, 0.3);
     }
 
+    .status-action-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 6px;
+      font-size: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      background: rgba(245, 158, 11, 0.12);
+      color: #fbbf24;
+      border-radius: 4px;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 3px;
+      transition: all 0.15s ease-in-out;
+      font-family: inherit;
+    }
+
+    .status-action-link:hover {
+      text-decoration: underline;
+      text-decoration-style: solid;
+      background: rgba(245, 158, 11, 0.22);
+      border-color: #f59e0b;
+      color: #fef08a;
+      transform: translateY(-1px);
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -425,6 +453,9 @@
             <h2>1. Stage Disclosures (Fund Managers &amp; Master ETF Issuers)</h2>
           </div>
         </summary>
+        <p class="subtitle" style="margin-bottom: 10px;">
+          Physical files stored on disk in <code>data/staging/</code>. Displays disclosures downloaded automatically via the Catalogue (Panel 5), as well as manually staged overseas Master ETFs (Vanguard, SPDR, iShares) and reference directories.
+        </p>
         <div class="row-actions" style="margin-bottom: 8px;">
           <label for="provider-select" style="color: var(--muted);">Target Staging Directory:</label>
           <select id="provider-select" onchange="updateProviderSourceCallout()">
@@ -522,8 +553,7 @@
         </div>
       </summary>
       <p class="subtitle" style="margin-bottom: 12px;">
-        Registered funds driving automated quarterly constituent downloads. Add new Kernel, Smartshares, or Fisher Funds by code
-        or by pasting their Smart Investor URL.
+        Configuration registry (<code>fund_catalog.json</code>) tracking official NZ funds. Clicking <strong>📥 Fetch</strong> downloads that fund's statutory disclosure directly into the staging folders above (Panel 1).
       </p>
 
       <div class="row-actions" style="margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
@@ -1849,9 +1879,22 @@
 
       filtered.forEach((c) => {
         const isAwaiting = c.status === 'AWAITING_PROCESSING' || !c.constituent_count;
-        const statusBadge = isAwaiting
-          ? `<span class="badge badge-warn" style="font-size: 10px; font-weight: bold;">⏳ Awaiting Processing</span>`
-          : `<span class="badge badge-ok" style="font-size: 10px; font-weight: 500;">✔ Processed</span>`;
+        let statusBadge;
+        if (isAwaiting) {
+          const sub = c.sub_status || 'AWAITING_DISCLOSURE';
+          const label = c.status_label || 'Awaiting Processing';
+          const target = c.target_panel || 'panel-staging';
+          const param = c.target_param || '';
+          const tooltip = c.action_tooltip || `Go to ${target} to perform required action`;
+          statusBadge = `<button type="button" class="badge badge-warn status-action-link"
+            onclick="handleStatusAction('${escapeHtml(c.fund_code)}', '${escapeHtml(sub)}', '${escapeHtml(target)}', '${escapeHtml(param)}', '${escapeHtml(c.fund_name)}')"
+            title="${escapeHtml(tooltip)}">
+            <span>⏳ ${escapeHtml(label)}</span>
+            <span style="font-size: 9px; opacity: 0.85;">↗</span>
+          </button>`;
+        } else {
+          statusBadge = `<span class="badge badge-ok" style="font-size: 10px; font-weight: 500;">✔ Processed</span>`;
+        }
 
         let dateHtml = `<span style="color: var(--muted); font-size: 11px;">—</span>`;
         if (!isAwaiting && c.effective_date) {
@@ -1900,6 +1943,69 @@
 
       html += `</tbody></table>`;
       container.innerHTML = html;
+    }
+
+    function handleStatusAction(fundCode, subStatus, targetPanelId, targetParam, fundName) {
+      openPanel(targetPanelId);
+      const panel = document.getElementById(targetPanelId);
+      if (panel) {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        panel.style.transition = 'box-shadow 0.3s ease';
+        panel.style.boxShadow = '0 0 0 2px var(--primary), 0 4px 12px rgba(56, 189, 248, 0.25)';
+        setTimeout(() => { panel.style.boxShadow = ''; }, 2200);
+      }
+
+      if (subStatus === 'AWAITING_DISCLOSURE') {
+        const provSelect = document.getElementById('provider-select');
+        if (provSelect && targetParam) {
+          const normParam = targetParam.toLowerCase().replace(/[\s\-]+/g, '_');
+          if (Array.from(provSelect.options).some(o => o.value === normParam)) {
+            provSelect.value = normParam;
+            if (typeof updateProviderSourceCallout === 'function') {
+              updateProviderSourceCallout();
+            }
+          }
+        }
+        showToast(`Opened Panel 1: Stage or Fetch statutory disclosure file for ${fundCode}`);
+      } else if (subStatus === 'AWAITING_MASTER_MAPPING') {
+        const feederCodeInput = document.getElementById('feeder-code');
+        const feederNameInput = document.getElementById('feeder-name');
+        const tickerInput = document.getElementById('feeder-master-ticker');
+        if (feederCodeInput) feederCodeInput.value = fundCode;
+        if (feederNameInput && fundName) feederNameInput.value = fundName;
+        if (tickerInput) {
+          tickerInput.focus();
+          tickerInput.select();
+        }
+        showToast(`Opened Panel 4: Map Feeder Fund ${fundCode} to its Master ETF`);
+      } else if (subStatus === 'AWAITING_MASTER_DISCLOSURE') {
+        const provSelect = document.getElementById('provider-select');
+        if (provSelect && targetParam) {
+          const normParam = targetParam.toLowerCase().replace(/[\s\-]+/g, '_');
+          if (Array.from(provSelect.options).some(o => o.value === normParam)) {
+            provSelect.value = normParam;
+            if (typeof updateProviderSourceCallout === 'function') {
+              updateProviderSourceCallout();
+            }
+          }
+        }
+        showToast(`Opened Panel 1: Stage Master ETF disclosure (${targetParam}) for ${fundCode}`);
+      } else if (subStatus === 'AWAITING_COMPANY_MAPPING') {
+        const searchInput = document.getElementById('sm-search-input') || document.getElementById('alias-search');
+        if (searchInput) {
+          searchInput.value = fundCode;
+          searchInput.dispatchEvent(new Event('input'));
+        }
+        showToast(`Opened Panel 6: Map unresolved constituent companies for ${fundCode}`);
+      } else if (subStatus === 'AWAITING_PUBLISH' || subStatus === 'AWAITING_MASTER_PUBLISH') {
+        const buildBtn = document.getElementById('btn-prod-build') || document.getElementById('btn-dry-run');
+        if (buildBtn) {
+          buildBtn.style.transition = 'all 0.3s ease';
+          buildBtn.style.boxShadow = '0 0 0 3px var(--ok), 0 0 16px rgba(34, 197, 94, 0.4)';
+          setTimeout(() => { buildBtn.style.boxShadow = ''; }, 2500);
+        }
+        showToast(`Opened Panel 3: Ready to Publish Datasets for ${fundCode}`);
+      }
     }
 
       async function fetchCatalogFund(fundCode) {

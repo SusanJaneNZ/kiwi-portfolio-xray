@@ -134,25 +134,34 @@ python3 -m pipeline.ingest --dry-run --staging-dir data/staging/
 
 ---
 
-## 6. Diagnosing "Awaiting Processing" Funds: The 3-Stage Diagnostic Checklist
+## 6. Diagnosing Awaiting Funds: Step-by-Step Interactive Badges
 
-When a fund in **Panel 5 (Managed Fund Catalogue)** shows the badge `⏳ Awaiting Processing` (or constituent count is `0`), it means the fund's constituents have not yet been compiled into `public/data/funds_registry.json`.
+In **Panel 5 (Managed Fund Catalogue)**, each awaiting fund displays a specific, interactive status link pointing directly to the panel where that action is taken:
 
-Use this diagnostic flow to pinpoint the exact stage where the fund is waiting:
+| Status Badge Link | Meaning | Click Action / Target Panel |
+| :--- | :--- | :--- |
+| `⏳ Awaiting Disclosure File ↗` | Statutory `.xlsx` quarterly file is missing from `data/staging/` | Opens **Panel 1: Stage Disclosures**, selects the fund manager's folder, and prompts upload or `📥 Fetch` |
+| `⏳ Awaiting Master Fund Mapping ↗` | Fund holds $\ge 75\%$ overseas ETF but is not yet mapped | Opens **Panel 4: Feeder Fund Pairings**, pre-filling Feeder Code and Fund Name for immediate ticker entry |
+| `⏳ Awaiting Master Fund Disclosure File ↗` | Feeder fund is mapped, but the Master ETF holdings file (e.g. `IAU`, `VT`, `SPEM`) is missing | Opens **Panel 1: Stage Disclosures**, auto-selecting the Master ETF issuer folder (`vanguard`, `ishares`, or `spdr`) |
+| `⏳ Awaiting Company Mapping ↗` | Disclosures staged, but unmapped company holding names block compilation | Opens **Panel 6: Unresolved Company Holdings Mapper**, filtering to that fund's unmapped holdings |
+| `⏳ Awaiting Master Fund Publish ↗` | Feeder and Master ETF disclosures are both staged and ready | Opens **Panel 3: Pipeline Dry-Run & Publishing Diagnostics**, pulsing the **⚡ Publish Datasets** button |
+| `⏳ Awaiting Publish ↗` | Domestic disclosures are staged and ready | Opens **Panel 3: Pipeline Dry-Run & Publishing Diagnostics**, pulsing the **⚡ Publish Datasets** button |
 
 ```mermaid
 flowchart TD
-    Start["Fund shows '⏳ Awaiting Processing'"] --> Check1{"Stage 1: Is quarterly .xlsx disclosure staged in data/staging/<manager>/?"}
-    Check1 -- "No" --> Action1["Click '📥 Fetch' in Panel 5 or drop .xlsx into staging/"]
-    Check1 -- "Yes" --> Check2{"Stage 2: Is the fund a Feeder Fund (holds ≥ 75% overseas ETF)?"}
-    Check2 -- "Yes" --> CheckPair{"Is pairing configured in feeder_registry.json?"}
-    CheckPair -- "No" --> ActionPair["Appears in 'Detected Unconfigured Feeder Funds'. Click 'Configure' & Save Pairing."]
-    CheckPair -- "Yes" --> CheckMaster{"Is Master ETF file staged in data/staging/<master_provider>/?"}
-    CheckMaster -- "No" --> ActionMaster["Upload Master ETF file via Panel 1: Stage Disclosures"]
-    CheckMaster -- "Yes" --> Check3
-    Check2 -- "No (Direct Holdings)" --> Check3{"Stage 3: Run 'Dry Run' in Panel 3. Any unmapped companies or integrity errors?"}
-    Check3 -- "Unmapped Companies" --> ActionAlias["Map company name to ISIN in Panel 6: Unresolved Company Holdings Mapper"]
-    Check3 -- "Clean Validation" --> ActionCompile["Click '⚡ Publish Datasets (public/data/)' in header or Panel 3"]
+    Start["Fund in Catalogue (Panel 5)"] --> CheckFile{"Is statutory disclosure file staged in data/staging/<manager>/?"}
+    CheckFile -- "No" --> Badge1["'⏳ Awaiting Disclosure File ↗' (Click to open Panel 1 / Fetch)"]
+    CheckFile -- "Yes" --> CheckFeeder{"Is the fund a Feeder Fund (holds ≥ 75% overseas ETF)?"}
+    CheckFeeder -- "Yes" --> CheckPair{"Is pairing configured in feeder_registry.json?"}
+    CheckPair -- "No" --> Badge2["'⏳ Awaiting Master Fund Mapping ↗' (Click to pre-fill Panel 4)"]
+    CheckPair -- "Yes" --> CheckMasterFile{"Is Master ETF file staged in data/staging/<master_provider>/?"}
+    CheckMasterFile -- "No" --> Badge3["'⏳ Awaiting Master Fund Disclosure File ↗' (Click to open Panel 1)"]
+    CheckMasterFile -- "Yes" --> CheckUnresolved
+    CheckFeeder -- "No (Direct Holdings)" --> CheckUnresolved{"Are there unmapped constituent companies in unresolved_entries.json?"}
+    CheckUnresolved -- "Yes" --> Badge4["'⏳ Awaiting Company Mapping ↗' (Click to filter Panel 6)"]
+    CheckUnresolved -- "No (Feeder)" --> Badge5["'⏳ Awaiting Master Fund Publish ↗' (Click to pulse Publish in Panel 3)"]
+    CheckUnresolved -- "No (Direct)" --> Badge6["'⏳ Awaiting Publish ↗' (Click to pulse Publish in Panel 3)"]
+    Badge5 & Badge6 --> ActionCompile["⚡ Publish Datasets (public/data/)"]
     ActionCompile --> Done["✔ Processed (Constituent count > 0)"]
 ```
 
