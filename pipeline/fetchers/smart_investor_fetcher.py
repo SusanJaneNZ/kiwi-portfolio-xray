@@ -12,6 +12,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Optional, Sequence
 from urllib.error import HTTPError, URLError
+from urllib.parse import quote
 from urllib.request import Request, urlopen
 
 logger = logging.getLogger(__name__)
@@ -375,6 +376,28 @@ class SmartInvestorFetcher:
         return None
 
     @staticmethod
+    def get_url_variants(url: str) -> list[str]:
+        """Expands URL variants for disclose documents when filename contains special characters like '/'."""
+        if not url:
+            return []
+        m = re.match(r"^(https?://[^/]+/disclose-document/full-portfolio/[^/]+/)(.+)$", url)
+        if not m:
+            return [url]
+        base, filename = m.groups()
+        variants: list[str] = []
+        if "/" in filename:
+            # 1. Encode '/' as '%2F'
+            v_slash = base + filename.replace("/", "%2F")
+            variants.append(v_slash)
+            # 2. Fully quote filename characters
+            v_quoted = base + quote(filename, safe="")
+            if v_quoted not in variants:
+                variants.append(v_quoted)
+        if url not in variants:
+            variants.append(url)
+        return variants
+
+    @staticmethod
     def sanitize_filename(name: str) -> str:
         """Sanitizes strings for cross-platform safe file paths."""
         return re.sub(r"[^a-zA-Z0-9_\-]", "_", name)
@@ -444,40 +467,48 @@ class SmartInvestorFetcher:
         urls_attempted: list[str] = []
 
         if download_url:
-            urls_attempted.append(download_url)
-            logger.info("Attempting direct download for %s (%s) from URL: %s", meta.target_code, meta.fund_id, download_url)
-            try:
-                content = self._downloader(download_url, self.user_agent)
-            except Exception as exc:
-                last_exc = exc
-                logger.warning(
-                    "Direct download failed for %s (%s) from URL '%s': %s",
-                    meta.target_code,
-                    meta.fund_id,
-                    download_url,
-                    exc,
-                )
-                content = None
-
-        if content is None:
-            resolved = self.resolve_holdings_url(meta)
-            if resolved and resolved != download_url:
-                urls_attempted.append(resolved)
-                logger.info("Attempting download from resolved live URL for %s (%s): %s", meta.target_code, meta.fund_id, resolved)
+            for curl in self.get_url_variants(download_url):
+                urls_attempted.append(curl)
+                logger.info("Attempting direct download for %s (%s) from URL: %s", meta.target_code, meta.fund_id, curl)
                 try:
-                    content = self._downloader(resolved, self.user_agent)
-                    download_url = resolved
+                    content = self._downloader(curl, self.user_agent)
+                    download_url = curl
                     last_exc = None
+                    break
                 except Exception as exc:
                     last_exc = exc
                     logger.warning(
-                        "Download from resolved URL '%s' failed for %s (%s): %s",
-                        resolved,
+                        "Direct download failed for %s (%s) from URL '%s': %s",
                         meta.target_code,
                         meta.fund_id,
+                        curl,
                         exc,
                     )
                     content = None
+
+        if content is None:
+            resolved = self.resolve_holdings_url(meta)
+            if resolved:
+                for rurl in self.get_url_variants(resolved):
+                    if rurl in urls_attempted:
+                        continue
+                    urls_attempted.append(rurl)
+                    logger.info("Attempting download from resolved live URL for %s (%s): %s", meta.target_code, meta.fund_id, rurl)
+                    try:
+                        content = self._downloader(rurl, self.user_agent)
+                        download_url = rurl
+                        last_exc = None
+                        break
+                    except Exception as exc:
+                        last_exc = exc
+                        logger.warning(
+                            "Download from resolved URL '%s' failed for %s (%s): %s",
+                            rurl,
+                            meta.target_code,
+                            meta.fund_id,
+                            exc,
+                        )
+                        content = None
 
         if content is None:
             fallback = self._find_existing_staged_file(meta)

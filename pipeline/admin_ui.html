@@ -2189,7 +2189,7 @@
           const target = c.target_panel || 'panel-staging';
           const param = c.target_param || '';
           const tooltip = failedFundInfo
-            ? `Download failed: ${failedFundInfo.message}. Click Edit to set direct URL.`
+            ? `Download failed for ${c.fund_code}. Click to view details or Edit to set direct URL.`
             : (c.action_tooltip || `Go to ${target} to perform required action`);
           statusBadge = `<button type="button" class="badge badge-warn status-action-link"
             onclick="handleStatusAction('${escapeHtml(c.fund_code)}', '${escapeHtml(sub)}', '${escapeHtml(target)}', '${escapeHtml(param)}', '${escapeHtml(c.fund_name)}')"
@@ -2217,9 +2217,10 @@
           : `<span class="badge badge-ok" style="font-size: 10px;">Unlisted Fund</span>`;
 
         const link = `https://www.smartinvestor.sorted.org.nz/kiwisaver-and-managed-funds/${encodeURIComponent(c.scheme_id)}/${encodeURIComponent(c.offer_id)}/${encodeURIComponent(c.fnd_code)}/`;
+        const downloadUrl = c.holdings_url || (c.fnd_code ? `https://smartinvestor.sorted.org.nz/api/funds/${c.fnd_code}/holdings.xlsx` : link);
 
         const fetchBtn = isAwaiting
-          ? `<button class="btn btn-sm btn-primary" onclick="fetchCatalogFund('${escapeHtml(c.fund_code)}')" title="${failedFundInfo ? 'Download failed: ' + escapeHtml(failedFundInfo.message) + '. Click to retry or Edit to set direct URL' : 'Download latest quarterly disclosure'}" style="margin-right: 4px;">📥 Fetch</button>`
+          ? `<button class="btn btn-sm btn-primary" onclick="fetchCatalogFund('${escapeHtml(c.fund_code)}')" title="Download URL: ${escapeHtml(downloadUrl)}" style="margin-right: 4px;">📥 Fetch</button>`
           : '';
 
         html += `
@@ -2348,7 +2349,7 @@
               `Click "Edit" on this row and enter a direct disclosure link (or quarterly spreadsheet URL) into the Direct Disclosure URL field.`
             );
             showToast(`⚠️ Fetch failed for ${fundCode}: ${fail.message}`, 'err');
-            renderCatalogTable();
+            renderCatalogList();
           } else {
             const okItem = (res.downloaded && res.downloaded[0]) || (res.cached && res.cached[0]);
             const msg = okItem ? okItem.message : 'Successfully synchronized';

@@ -301,6 +301,20 @@ class TestSmartInvestorFetcher(unittest.TestCase):
         self.assertIsNotNone(link)
         self.assertIn("disclose-document/full-portfolio/FND15841", link)
 
+    def test_get_url_variants_handles_slash_in_fund_name(self) -> None:
+        """get_url_variants encodes slashes and special characters in disclose document filenames."""
+        raw_url = "https://www.smartinvestor.sorted.org.nz/disclose-document/full-portfolio/FND19357/SMART-S&P/NZX-NZ-GOVERNMENT-BOND-ETF-FND19357-Full-portfolio-holdings-30-September-2026.xlsx"
+        variants = SmartInvestorFetcher.get_url_variants(raw_url)
+        self.assertIn(
+            "https://www.smartinvestor.sorted.org.nz/disclose-document/full-portfolio/FND19357/SMART-S&P%2FNZX-NZ-GOVERNMENT-BOND-ETF-FND19357-Full-portfolio-holdings-30-September-2026.xlsx",
+            variants,
+        )
+        self.assertIn(
+            "https://www.smartinvestor.sorted.org.nz/disclose-document/full-portfolio/FND19357/SMART-S%26P%2FNZX-NZ-GOVERNMENT-BOND-ETF-FND19357-Full-portfolio-holdings-30-September-2026.xlsx",
+            variants,
+        )
+        self.assertEqual(variants[-1], raw_url)
+
     def test_load_catalog_normalizes_provider_and_constructs_holdings_url(self) -> None:
         """Catalog loader converts provider names with spaces to underscores and defaults direct API endpoints."""
         from pipeline.fetchers.smart_investor_fetcher import load_catalog
