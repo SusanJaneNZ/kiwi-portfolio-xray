@@ -367,22 +367,21 @@ class TestAdminUI(unittest.TestCase):
                 {"panel-staging", "panel-feeders", "panel-diagnostics"},
             )
 
-        # Check GLD specifically: feeder mapped to ishares:IAU, IAU missing from staging
+        # Check GLD: direct commodity fund with staged disclosure, ready to publish
         gld_entry = next((c for c in catalog if c["fund_code"] == "GLD"), None)
         if gld_entry:
             self.assertEqual(gld_entry["status"], "AWAITING_PROCESSING")
-            self.assertEqual(gld_entry["sub_status"], "AWAITING_MASTER_DISCLOSURE")
-            self.assertEqual(gld_entry["status_label"], "Awaiting Master Fund Disclosure File")
-            self.assertEqual(gld_entry["target_panel"], "panel-staging")
-            self.assertEqual(gld_entry["target_param"], "ishares")
+            self.assertEqual(gld_entry["sub_status"], "AWAITING_PUBLISH")
+            self.assertEqual(gld_entry["status_label"], "Awaiting Publish")
+            self.assertEqual(gld_entry["target_panel"], "panel-diagnostics")
 
-        # Check an un-staged fund like FISHER_KIWISAVER_GROWTH or NGB
-        ngb_entry = next((c for c in catalog if c["fund_code"] == "NGB"), None)
-        if ngb_entry:
-            self.assertEqual(ngb_entry["status"], "AWAITING_PROCESSING")
-            self.assertEqual(ngb_entry["sub_status"], "AWAITING_DISCLOSURE")
-            self.assertEqual(ngb_entry["status_label"], "Awaiting Disclosure File")
-            self.assertEqual(ngb_entry["target_panel"], "panel-staging")
+        # Check an un-staged fund like FISHER_KIWISAVER_GROWTH
+        fkg_entry = next((c for c in catalog if c["fund_code"] == "FISHER_KIWISAVER_GROWTH"), None)
+        if fkg_entry:
+            self.assertEqual(fkg_entry["status"], "AWAITING_PROCESSING")
+            self.assertEqual(fkg_entry["sub_status"], "AWAITING_DISCLOSURE")
+            self.assertEqual(fkg_entry["status_label"], "Awaiting Disclosure File")
+            self.assertEqual(fkg_entry["target_panel"], "panel-staging")
 
     def test_admin_ui_html_syntax_and_script_validity(self):
         """Verifies that admin_ui.html exists and all embedded <script> tags contain valid JavaScript with no syntax errors or duplicate declarations."""

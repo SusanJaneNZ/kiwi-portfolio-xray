@@ -308,6 +308,9 @@ class PipelineCompiler:
             return None
         if not re.search(r"\b(?:etf|ucits|index\s+fund|vanguard|ishares|spdr)\b", top.name, re.IGNORECASE):
             return None
+        # Physical commodity trusts (e.g. gold, silver, bitcoin) hold physical assets, not corporate equities
+        if re.search(r"\b(?:gold|silver|commodity|physical|bullion)\b", top.name, re.IGNORECASE):
+            return None
 
         lower = top.name.lower()
         if "spdr" in lower or "state street" in lower:

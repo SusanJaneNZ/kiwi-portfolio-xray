@@ -1,5 +1,13 @@
 [
   {
+    "isin": "US4642851053",
+    "name": "iShares Gold Trust (Physical Gold)",
+    "ticker": "IAU",
+    "country": "Global",
+    "sector": "Commodities",
+    "exchange": "MANUAL"
+  },
+  {
     "isin": "US8522341036",
     "name": "Block Inc",
     "ticker": "SQ",

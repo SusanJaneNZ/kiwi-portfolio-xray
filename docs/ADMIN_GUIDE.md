@@ -13,39 +13,25 @@ python3 -m pipeline.admin_ui
 
 ---
 
-## 1. System Concepts & Architecture Glossary
+## 1. Operational Overview: Automated Ingestion vs. Manual Master ETF Maintenance
 
-This glossary defines the authoritative naming conventions for Kiwi Portfolio X-Ray. It eliminates ambiguous terms (such as "provider" or "security") across the documentation and administrative tooling.
+Kiwi Portfolio X-Ray divides portfolio data ingestion into two distinct operational flows:
 
-| Canonical Term | What It Means | Examples |
-|---|---|---|
-| **Fund Manager** *(or Scheme Issuer)* | The New Zealand financial institution issuing and managing the fund for Kiwi investors. Files statutory quarterly disclosures on the Disclose Register. | Kernel Wealth, Smartshares, Fisher Funds, Simplicity, Milford. |
-| **Fund** | The investment product held by an investor. Can be a **Listed ETF** (traded on NZX) or an **Unlisted Managed Fund / KiwiSaver Scheme** (priced at NAV). | Smartshares US 500 (`USF`), Kernel S&P 500 (`KERNEL_SP_500_UNHEDGED`), Fisher Growth KiwiSaver. |
-| **Constituent Disclosure (`.xlsx`)** | The statutory quarterly portfolio disclosure published to Sorted Smart Investor under NZ law, containing asset names, percentages, cash, and receivables. | `KERNEL_GLOBAL_DIVIDEND_FND19302_2026-09-30.xlsx` |
-| **Direct Holding** | An individual **Company share**, **Bond**, or **Cash deposit** held directly by the Fund Manager. | Infratil, Apple, Microsoft, Spark, NZ Government Bond, ANZ Cash. |
-| **Feeder Fund** *(Wrapper Fund)* | A New Zealand fund that does not buy individual stocks directly; instead, it invests **$\ge 75\%$** of its portfolio into a single overseas wholesale Master ETF. | Smartshares Total World (`TWF`, holding 99.8% Vanguard `VT`), Smartshares US 500 (`USF`, holding 99.8% Vanguard `VOO`). |
-| **Master ETF** *(Wholesale Target)* | The massive overseas ETF (issued by Vanguard US/AU, iShares / BlackRock, or State Street SPDR) that holds the actual thousands of underlying companies. | Vanguard Total World (`VT`), Vanguard S&P 500 (`VOO`), iShares Global ESG (`IWLD`), SPDR Portfolio Emerging Markets (`SPEM`). |
-| **Feeder Unwrapping** | The pipeline process of replacing a single Feeder Fund line item with the Master ETF's thousands of underlying companies, scaled to the feeder's portfolio weight. | `TWF` $\rightarrow$ Vanguard `VT` $\rightarrow$ 9,800+ underlying global companies; `KERNEL_EMERGING_MARKETS` $\rightarrow$ SPDR `SPEM` $\rightarrow$ 3,000+ emerging market companies. |
-| **Minor Fund Holding** | A fund constituent holding that represents **$< 75\%$** of a portfolio (e.g. a multi-asset balanced fund allocating 5% to an emerging markets fund). Modeled by broad asset class rather than wholesale unwrapping. | 4% allocation to an international bond fund inside a balanced fund. |
-| **Known Companies Register** *(formerly Security Master)* | The master reference dictionary of ~14,600+ public companies globally, providing canonical ISIN, Ticker, Company Name, GICS Sector, and Country. | Built from: NZX Directory + ASX Directory + Vanguard Total World (`VT`) + SPDR (`SPEM`) + iShares (`IWLD`). |
-| **Manual Company Mapping** *(formerly Provider Alias Map)* | A mapping table (`company_alias_map.json`) configured in the Admin UI that links non-standard company names or unlisted assets to their canonical ISIN in the Known Companies Register. | Mapping `"Arm Holdings plc ADR"` $\rightarrow$ `US0420682058`. |
+* **NZ Fund Constituent Disclosures (`.xlsx`) — Automated Ingestion:**  
+  Statutory quarterly portfolio filings for New Zealand funds (Smartshares ETFs, Kernel Wealth index funds, and KiwiSaver / managed schemes like Fisher Funds, Milford, Simplicity) are **automatically discovered, downloaded, and unwrapped** via the NZ Disclose Register / Sorted Smart Investor API. The nightly GitHub Actions pipeline and Admin Web Console handle these without manual intervention.
 
-> [!IMPORTANT]
-> ### Crucial Operational Distinction: Automated Ingestion vs. Manual Master ETF Maintenance
-> * **NZ Fund Constituent Disclosures (`.xlsx`):** **AUTOMATICALLY DOWNLOADED & UNWRAPPED.** The nightly GitHub Actions pipeline and the Admin UI crawler connect directly to the NZ Disclose Register / Sorted Smart Investor API. They download new disclosures, unwrap feeders, and compile constituents without administrator intervention.
-> * **Overseas Master ETFs (`.csv` from Vanguard, iShares & SPDR):** **NOT AUTOMATICALLY DOWNLOADED.** Because Vanguard (US/AU), iShares (BlackRock), and State Street SPDR are overseas issuers, their full constituent CSV files are **NOT** disclosed on the NZ Disclose Register. **The administrator must periodically monitor and update Master ETF CSVs manually:** download the latest holdings CSV from their product pages, drop them into `data/staging/vanguard/`, `data/staging/ishares/`, or `data/staging/spdr/` via the Admin Web UI, and click **`⚡ Publish Datasets (public/data/)`** (which validates disclosures, unwraps feeder holdings, and updates the public look-through datasets for the investor app).
+* **Overseas Master ETFs (`.csv`) — Manual Periodic Maintenance:**  
+  Overseas wholesale ETFs issued by Vanguard (US/AU), iShares (BlackRock), and State Street SPDR are not filed on the NZ Disclose Register. When overseas issuers update their holdings, an administrator periodically downloads the latest CSV from their respective portals, drops it into the staging directory (`data/staging/vanguard/`, `data/staging/ishares/`, or `data/staging/spdr/`) via the Admin Web UI, and clicks **`⚡ Publish Datasets (public/data/)`** to unwrap all dependent feeder funds.
 
 ---
 
 ## 2. Upstream Data Sources & Update Frequency
 
-The application relies on 7 source streams and 2 reference directories. All data is publicly accessible without paid commercial API subscriptions.
+The application relies on 5 source streams and 2 reference directories. All data is publicly accessible without paid commercial API subscriptions.
 
 | Dataset / Source | Source Portal | Staging Target Directory | Format & File Content | Frequency | Automation Level | Purpose |
 |---|---|---|---|---|---|---|
-| **Smartshares Direct & Feeder Funds** (`FNZ`, `MDZ`, `NZG`, `OZY`, `ASD`, `TWF`, `USF`, `EUF`, `APA`, `EMF`, `ESG`, `NZB`, `GBF`, `AGG`, etc.) | [Sorted Smart Investor](https://smartinvestor.sorted.org.nz) | `data/staging/smartshares/` | XLSX (`*.xlsx`): Asset name, % of fund net assets, Cash & payables | Quarterly / Semi-Annual | **Automated** (Nightly bot / Admin UI) | Direct NZX/ASX companies, fixed interest, and feeder wrapper cash/hedging ratios |
-| **Kernel Wealth Index Funds** (Domestic, Global, Bond & Multi-Asset: `Kernel NZ 50`, `World Ex-US`, `Clean Energy`, `Global ESG`, `Dividend Aristocrats`, `Balanced`, `Conservative`) | [Sorted Smart Investor](https://smartinvestor.sorted.org.nz) | `data/staging/kernel/` | XLSX (`*.xlsx`): Asset name, % of fund net assets, Cash & payables | Quarterly / Semi-Annual | **Automated** (Nightly bot / Admin UI) | Constituent company holdings for unlisted NZ, AU, bond, and global index funds |
-| **KiwiSaver & Domestic Managed Funds** (`Fisher Funds`, `Milford`, `Simplicity`, `Generate`, `Booster`, `ANZ`, etc.) | [Sorted Smart Investor](https://smartinvestor.sorted.org.nz) | `data/staging/<fund_manager>/` or `data/staging/kiwisaver/` | XLSX (`*.xlsx`): Asset name, % of fund net assets, Cash & payables | Quarterly | **Automated** (Nightly bot / Admin UI) | Constituent holdings for KiwiSaver schemes and off-market funds; ingested dynamically via `GenericDomesticAdapter` |
+| **NZ Statutory Fund Disclosures**<br>• **Smartshares ETFs & Feeder Funds** (`FNZ`, `NZG`, `TWF`, `USF`, `NGB`, etc.)<br>• **Kernel Wealth Index Funds** (`Kernel NZ 50`, `World Ex-US`, `Global ESG`, etc.)<br>• **KiwiSaver & Managed Funds** (`Fisher Funds`, `Milford`, `Simplicity`, `Generate`, `Booster`, `ANZ`, etc.) | [Sorted Smart Investor](https://smartinvestor.sorted.org.nz)<br>*(Disclose Register)* | `data/staging/smartshares/`<br>`data/staging/kernel/`<br>`data/staging/<manager>/` | XLSX (`*.xlsx`): Statutory asset names, % of net assets, Cash & payables | Quarterly / Semi-Annual | **Automated**<br>(Nightly bot / Admin UI `📥 Fetch`) | Official statutory quarterly portfolio holdings for all domestic funds, ETFs, and KiwiSaver schemes; ingested and parsed automatically |
 | **Vanguard US Master ETFs** (`VT`, `VOO`, `VGK`, `VPL`, `VWO`, `VO`, `VB`) | [Vanguard US Advisor Portal](https://advisors.vanguard.com/investments/products/vt/vanguard-total-world-stock-etf) (*Holdings details* → *Export full holdings*) | `data/staging/vanguard/` | CSV (`Holdings_details_<TICKER_OR_FUND>.csv`): Ticker, Holdings/Name, % of funds, Sub-Industry, Country, SEDOL/CUSIP/ISIN | Monthly (around the 15th) | **Manual Admin Action Required** | Underlying global companies for Smartshares feeder wrappers & Known Companies Register |
 | **iShares (BlackRock) Master ETFs** (`IWLD`, `IVV`, `SAEU`, `SASU`) | [BlackRock Australia / US](https://www.blackrock.com/au/products/investment-funds) (Product Holdings CSV) | `data/staging/ishares/` | CSV (`<TICKER>_holdings.csv`): Ticker, Name, Sector, Location, Weight (%) | Monthly / Quarterly | **Manual Admin Action Required** | Underlying global companies for Smartshares ESG wrappers |
 | **SPDR (State Street) Master ETFs** (e.g., `SPEM` — SPDR Portfolio Emerging Markets ETF) | [State Street Global Advisors (SSGA) SPEM Portal](https://www.ssga.com/us/en/intermediary/etfs/state-street-spdr-portfolio-emerging-markets-etf-spem) (*Holdings* → *Daily / Export Holdings CSV*) | `data/staging/spdr/` | CSV (`SPEM_holdings.csv`): Ticker, Name, Weight, Sector, Country | Monthly / Quarterly | **Manual Admin Action Required** | Underlying global emerging markets companies for Kernel Emerging Markets feeder wrapper |
@@ -361,4 +347,23 @@ GitHub sends automated email notifications to administrators when an Action fail
   1. The bot action includes `git pull --rebase` before pushing. If an edge-case rebase conflict occurs:
   2. Re-trigger the failed workflow from the GitHub Actions run page by clicking **Re-run all jobs**.
   3. The action will fetch the fresh `main` branch and cleanly append the entry.
+
+---
+
+## 11. System Concepts & Architecture Glossary
+
+This glossary defines the authoritative naming conventions for Kiwi Portfolio X-Ray, establishing a clear reference for all terminology across the documentation and administrative tooling:
+
+| Canonical Term | What It Means | Examples |
+|---|---|---|
+| **Fund Manager** *(or Scheme Issuer)* | The New Zealand financial institution issuing and managing the fund for Kiwi investors. Files statutory quarterly disclosures on the Disclose Register. | Kernel Wealth, Smartshares, Fisher Funds, Simplicity, Milford. |
+| **Fund** | The investment product held by an investor. Can be a **Listed ETF** (traded on NZX) or an **Unlisted Managed Fund / KiwiSaver Scheme** (priced at NAV). | Smartshares US 500 (`USF`), Kernel S&P 500 (`KERNEL_SP_500_UNHEDGED`), Fisher Growth KiwiSaver. |
+| **Constituent Disclosure (`.xlsx`)** | The statutory quarterly portfolio disclosure published to Sorted Smart Investor under NZ law, containing asset names, percentages, cash, and receivables. | `KERNEL_GLOBAL_DIVIDEND_FND19302_2026-09-30.xlsx` |
+| **Direct Holding** | An individual **Company share**, **Bond**, or **Cash deposit** held directly by the Fund Manager. | Infratil, Apple, Microsoft, Spark, NZ Government Bond, ANZ Cash. |
+| **Feeder Fund** *(Wrapper Fund)* | A New Zealand fund that does not buy individual stocks directly; instead, it invests **$\ge 75\%$** of its portfolio into a single overseas wholesale Master ETF. | Smartshares Total World (`TWF`, holding 99.8% Vanguard `VT`), Smartshares US 500 (`USF`, holding 99.8% Vanguard `VOO`). |
+| **Master ETF** *(Wholesale Target)* | The massive overseas ETF (issued by Vanguard US/AU, iShares / BlackRock, or State Street SPDR) that holds the actual thousands of underlying companies. | Vanguard Total World (`VT`), Vanguard S&P 500 (`VOO`), iShares Global ESG (`IWLD`), SPDR Portfolio Emerging Markets (`SPEM`). |
+| **Feeder Unwrapping** | The pipeline process of replacing a single Feeder Fund line item with the Master ETF's thousands of underlying companies, scaled to the feeder's portfolio weight. | `TWF` $\rightarrow$ Vanguard `VT` $\rightarrow$ 9,800+ underlying global companies; `KERNEL_EMERGING_MARKETS` $\rightarrow$ SPDR `SPEM` $\rightarrow$ 3,000+ emerging market companies. |
+| **Minor Fund Holding** | A fund constituent holding that represents **$< 75\%$** of a portfolio (e.g. a multi-asset balanced fund allocating 5% to an emerging markets fund). Modeled by broad asset class rather than wholesale unwrapping. | 4% allocation to an international bond fund inside a balanced fund. |
+| **Known Companies Register** *(formerly Security Master)* | The master reference dictionary of ~14,600+ public companies globally, providing canonical ISIN, Ticker, Company Name, GICS Sector, and Country. | Built from: NZX Directory + ASX Directory + Vanguard Total World (`VT`) + SPDR (`SPEM`) + iShares (`IWLD`). |
+| **Manual Company Mapping** *(formerly Provider Alias Map)* | A mapping table (`company_alias_map.json`) configured in the Admin UI that links non-standard company names or unlisted assets to their canonical ISIN in the Known Companies Register. | Mapping `"Arm Holdings plc ADR"` $\rightarrow$ `US0420682058`. |
 

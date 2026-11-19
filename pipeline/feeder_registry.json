@@ -64,11 +64,6 @@
     "master_provider": "ishares",
     "master_ticker": "SAEM"
   },
-  "GLD": {
-    "name": "Smart Gold Etf",
-    "master_provider": "ishares",
-    "master_ticker": "IAU"
-  },
   "GPR": {
     "name": "Smart Global Property Etf",
     "master_provider": "ishares",
