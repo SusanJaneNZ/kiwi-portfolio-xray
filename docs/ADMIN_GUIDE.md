@@ -143,9 +143,11 @@ In **Panel 5 (Managed Fund Catalogue)**, each awaiting fund displays a specific,
 | `⏳ Awaiting Disclosure File ↗` | Statutory `.xlsx` quarterly file is missing from `data/staging/` | Opens **Panel 1: Stage Disclosures**, selects the fund manager's folder, and prompts upload or `📥 Fetch` |
 | `⏳ Awaiting Master Fund Mapping ↗` | Fund holds $\ge 75\%$ overseas ETF but is not yet mapped | Opens **Panel 4: Feeder Fund Pairings**, pre-filling Feeder Code and Fund Name for immediate ticker entry |
 | `⏳ Awaiting Master Fund Disclosure File ↗` | Feeder fund is mapped, but the Master ETF holdings file (e.g. `IAU`, `VT`, `SPEM`) is missing | Opens **Panel 1: Stage Disclosures**, auto-selecting the Master ETF issuer folder (`vanguard`, `ishares`, or `spdr`) |
-| `⏳ Awaiting Company Mapping ↗` | Disclosures staged, but unmapped company holding names block compilation | Opens **Panel 6: Unresolved Company Holdings Mapper**, filtering to that fund's unmapped holdings |
 | `⏳ Awaiting Master Fund Publish ↗` | Feeder and Master ETF disclosures are both staged and ready | Opens **Panel 3: Pipeline Dry-Run & Publishing Diagnostics**, pulsing the **⚡ Publish Datasets** button |
 | `⏳ Awaiting Publish ↗` | Domestic disclosures are staged and ready | Opens **Panel 3: Pipeline Dry-Run & Publishing Diagnostics**, pulsing the **⚡ Publish Datasets** button |
+
+> [!NOTE]
+> **Non-Blocking Build Philosophy**: Unmapped constituent companies **never block compilation or dataset publishing**. Any holding not yet linked in the Known Companies Register automatically falls into country `"Unknown"` and sector `"Unclassified"` with its full statutory weight intact. The fund compiles and publishes immediately. **Panel 6 (Unresolved Company Holdings Mapper)** serves as an optional refinement queue for administrators to link unknown entities to canonical ISINs over time without impeding fund releases.
 
 ```mermaid
 flowchart TD
@@ -156,13 +158,11 @@ flowchart TD
     CheckPair -- "No" --> Badge2["'⏳ Awaiting Master Fund Mapping ↗' (Click to pre-fill Panel 4)"]
     CheckPair -- "Yes" --> CheckMasterFile{"Is Master ETF file staged in data/staging/<master_provider>/?"}
     CheckMasterFile -- "No" --> Badge3["'⏳ Awaiting Master Fund Disclosure File ↗' (Click to open Panel 1)"]
-    CheckMasterFile -- "Yes" --> CheckUnresolved
-    CheckFeeder -- "No (Direct Holdings)" --> CheckUnresolved{"Are there unmapped constituent companies in unresolved_entries.json?"}
-    CheckUnresolved -- "Yes" --> Badge4["'⏳ Awaiting Company Mapping ↗' (Click to filter Panel 6)"]
-    CheckUnresolved -- "No (Feeder)" --> Badge5["'⏳ Awaiting Master Fund Publish ↗' (Click to pulse Publish in Panel 3)"]
-    CheckUnresolved -- "No (Direct)" --> Badge6["'⏳ Awaiting Publish ↗' (Click to pulse Publish in Panel 3)"]
-    Badge5 & Badge6 --> ActionCompile["⚡ Publish Datasets (public/data/)"]
+    CheckMasterFile -- "Yes" --> Badge4["'⏳ Awaiting Master Fund Publish ↗' (Click to pulse Publish in Panel 3)"]
+    CheckFeeder -- "No (Direct Holdings)" --> Badge5["'⏳ Awaiting Publish ↗' (Click to pulse Publish in Panel 3)"]
+    Badge4 & Badge5 --> ActionCompile["⚡ Publish Datasets (public/data/)"]
     ActionCompile --> Done["✔ Processed (Constituent count > 0)"]
+    Done -.-> OptionalEnrich["Optional: Refine unmapped entities in Panel 6 (Defaults to Unknown / Unclassified)"]
 ```
 
 ### Stage 1: Constituent Disclosure Download
@@ -178,11 +178,11 @@ flowchart TD
   1. If unconfigured: Click **Configure** in Panel 4, select the Master ETF Issuer (`Vanguard`, `iShares`, or `SPDR`), enter the Master Ticker (e.g. `SPEM`), and click **Save Pairing**.
   2. If missing file: Download the holdings file from the issuer portal (e.g. SSGA SPEM or Vanguard VT) and drop/upload it into `data/staging/<provider>/` via **Panel 1: Stage Disclosures**.
 
-### Stage 3: Company Mapping & Dataset Publishing
-* **How to tell:** The `.xlsx` disclosure and any required Master ETF file are both staged, but running **Dry Run** reports `Unresolved: N` or integrity warnings.
+### Stage 3: Dataset Publishing & Optional Post-Publish Enrichment
+* **How to tell:** The `.xlsx` disclosure and any required Master ETF file are both staged. The fund displays `⏳ Awaiting Publish ↗` or `⏳ Awaiting Master Fund Publish ↗`.
 * **Action:**
-  1. Open **Panel 6: Unresolved Company Holdings Mapper**. Search for the unmapped holding name in the Known Companies Register, select its canonical ISIN, and click **Save Alias** (which persists the mapping in `company_alias_map.json`).
-  2. Once all direct holdings are mapped, click **⚡ Publish Datasets (public/data/)**. The pipeline validates, unwraps feeder holdings, and writes the published look-through records to `public/data/`. The constituent count becomes $> 0$, and the fund's badge updates to `✔ Processed`.
+  1. Click the status badge or **⚡ Publish Datasets (public/data/)** in header / Panel 3. The pipeline validates, unwraps feeder holdings, and writes the published look-through records to `public/data/`. The constituent count becomes $> 0$, and the fund's badge updates to `✔ Processed`.
+  2. Any unmapped companies automatically fall into country `"Unknown"` and sector `"Unclassified"`. To improve classification granularity whenever time permits, open **Panel 6: Unresolved Company Holdings Mapper**, search the Known Companies Register, and click **Save Alias** to persist the mapping in `company_alias_map.json`. Subsequent publications will pick up the new aliases.
 
 ---
 

@@ -609,10 +609,8 @@
               CSV</button>
           </div>
         </summary>
-        <p class="subtitle" style="margin-bottom: 10px;">Unmatched or ambiguous company names from the latest dry-run.
-          Click a
-          suggested close match, search the Known Companies Register, or bulk-import CSV mappings into
-          <code>company_alias_map.json</code>.
+        <p class="subtitle" style="margin-bottom: 10px;">
+          Unmatched company names from the latest compilation. Unmapped companies <strong>do not block the build</strong> — they safely fall into "Unknown" country and "Unclassified" sector. Use this panel to optionally enrich them with canonical ISINs into <code>company_alias_map.json</code> to improve sector and geographic coverage.
         </p>
         <div id="bulk-import-box"
           style="display: none; margin-bottom: 12px; padding: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px;">

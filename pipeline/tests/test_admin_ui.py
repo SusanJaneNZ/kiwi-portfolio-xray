@@ -357,13 +357,12 @@ class TestAdminUI(unittest.TestCase):
                     "AWAITING_MASTER_DISCLOSURE",
                     "AWAITING_MASTER_PUBLISH",
                     "AWAITING_PUBLISH",
-                    "AWAITING_COMPANY_MAPPING",
                 },
             )
             self.assertTrue(item["status_label"].startswith("Awaiting "))
             self.assertIn(
                 item["target_panel"],
-                {"panel-staging", "panel-feeders", "panel-diagnostics", "panel-unresolved"},
+                {"panel-staging", "panel-feeders", "panel-diagnostics"},
             )
 
         # Check GLD specifically: feeder mapped to ishares:IAU, IAU missing from staging

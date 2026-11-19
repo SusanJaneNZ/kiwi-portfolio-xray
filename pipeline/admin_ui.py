@@ -342,7 +342,7 @@ class AdminService:
         return result
 
     def _get_unresolved_fund_codes(self) -> set[str]:
-        """Loads fund codes with unresolved company holdings blocking compilation."""
+        """Loads fund codes with unmapped company holdings from unresolved_entries.json."""
         unres_path = self.repo_root / "public" / "data" / "unresolved_entries.json"
         if not unres_path.exists():
             return set()
@@ -429,24 +429,12 @@ class AdminService:
                         item["target_panel"] = "panel-staging"
                         item["target_param"] = master_prov
                         item["action_tooltip"] = f"Upload {master_tick} disclosure to data/staging/{master_prov}/ in Panel 1"
-                    elif code in unresolved_funds:
-                        item["sub_status"] = "AWAITING_COMPANY_MAPPING"
-                        item["status_label"] = "Awaiting Company Mapping"
-                        item["target_panel"] = "panel-unresolved"
-                        item["target_param"] = code
-                        item["action_tooltip"] = f"Map unresolved constituent companies for {code} in Panel 6"
                     else:
                         item["sub_status"] = "AWAITING_MASTER_PUBLISH"
                         item["status_label"] = "Awaiting Master Fund Publish"
                         item["target_panel"] = "panel-diagnostics"
                         item["target_param"] = ""
                         item["action_tooltip"] = f"Disclosures ready: click to run Publish Datasets in Panel 3"
-                elif code in unresolved_funds:
-                    item["sub_status"] = "AWAITING_COMPANY_MAPPING"
-                    item["status_label"] = "Awaiting Company Mapping"
-                    item["target_panel"] = "panel-unresolved"
-                    item["target_param"] = code
-                    item["action_tooltip"] = f"Map unresolved constituent companies for {code} in Panel 6"
                 else:
                     item["sub_status"] = "AWAITING_PUBLISH"
                     item["status_label"] = "Awaiting Publish"
