@@ -591,15 +591,26 @@ class SmartInvestorFetcher:
                 if not f.is_file() or f.suffix.lower() not in {".xlsx", ".csv"}:
                     continue
                 name_upper = f.name.upper()
-                matches_fnd = bool(fnd_upper and fnd_upper in name_upper)
-                # Word/token boundary check so "AUS" does not match "AUSTRALIAN", and "DIV" does not match "DIVIDEND"
-                matches_target = bool(
-                    target_upper
-                    and re.search(rf"(?:^|[_\-\s]){re.escape(target_upper)}(?:[_\-\s.]|$)", name_upper)
-                )
-                if matches_fnd or matches_target:
+                file_fnds = re.findall(r"FND\d+", name_upper)
+
+                # Strict FND check: if the file has an FND code, it MUST match the fund's FND code
+                if fnd_upper and file_fnds:
+                    if fnd_upper in file_fnds:
+                        if f.stat().st_size >= 1024:
+                            return f
+                    # Disqualify: this file belongs to a different FND code (e.g. hedged variant)
+                    continue
+
+                if fnd_upper and fnd_upper in name_upper:
                     if f.stat().st_size >= 1024:
                         return f
+
+                # Word/token boundary check for target_code (only if file has no conflicting FND code)
+                if not file_fnds and target_upper:
+                    pattern = rf"(?:^|[_\-\s]){re.escape(target_upper)}(?:[_\-\s.]|$)"
+                    if re.search(pattern, name_upper):
+                        if f.stat().st_size >= 1024:
+                            return f
         return None
 
     def _default_download(self, url: str, user_agent: str) -> bytes:
