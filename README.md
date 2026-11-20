@@ -1,27 +1,37 @@
 # Kiwi Portfolio X-Ray
 
-A static, browser-based portfolio look-through analyzer hosted on GitHub Pages for New Zealand retail investors holding portfolios across KiwiSaver schemes, unlisted managed funds, NZX Smartshares ETFs, bank term deposits, and direct NZX/ASX shares.
+A static, browser-based portfolio look-through analyzer for New Zealand retail investors holding portfolios across KiwiSaver schemes, unlisted managed funds, NZX/ASX ETFs, direct shares, bonds, and bank term deposits.
 
-## Documentation
+**Live App:** https://susanjanenz.github.io/kiwi-portfolio-xray/
 
-* **Technical Design Document:** [docs/designs/kiwi-portfolio-xray.md](docs/designs/kiwi-portfolio-xray.md)
-* **KiwiSaver & Crowdsourced Ingestion Spec:** [docs/designs/kiwisaver-custom-funds-and-crowdsourced-ingestion.md](docs/designs/kiwisaver-custom-funds-and-crowdsourced-ingestion.md)
-* **Asset Split, Bond Funds & Bucket Rebalancer Spec:** [docs/designs/asset-split-bonds-tds.md](docs/designs/asset-split-bonds-tds.md)
-* **Phase 1 & Phase 2 Ingestion Spec:** [docs/designs/phase1-fixed-interest-phase2-automated-pipeline.md](docs/designs/phase1-fixed-interest-phase2-automated-pipeline.md)
-* **Design Sitemap:** [docs/designs/SITEMAP.md](docs/designs/SITEMAP.md)
-* **Administrator & Ingestion Guide:** [docs/ADMIN_GUIDE.md](docs/ADMIN_GUIDE.md)
-* **Initial Concept Brief:** [concepts_brief.md](concepts_brief.md)
+> [!WARNING]
+> **Disclaimer — Not Financial or Tax Advice**
+>
+> Kiwi Portfolio X-Ray is an independent, educational personal project provided **"as is"** without warranty of any kind. Nothing in this application or repository constitutes financial, investment, legal, or tax advice (including NZ PIE, RWT, PIR, imputation credit, or FIF tax calculations).
+>
+> - Fund holdings and constituent weights are compiled from publicly available periodic filings (such as the NZ Companies Office Disclose Register / Sorted Smart Investor and overseas ETF issuer disclosures) and may lag current holdings, omit minor positions, or contain mapping/classification approximations.
+> - Always verify holdings, prices, and tax obligations against official fund documents, your broker, Inland Revenue (IRD), or a licensed financial adviser before making investment or tax decisions.
+
+## Privacy & Zero Backend
+
+All portfolio numbers you enter stay **100% in your browser** (`localStorage` / IndexedDB, with optional JSON/CSV export). There is no backend server, no user accounts, and no tracking or analytics.
 
 ## Key Capabilities
 
-* **Unified 3-Tier Input Architecture:** Streamlined portfolio entry across 1) Direct Shares & Listed ETFs (units × market price), 2) Managed Funds & KiwiSaver in NZD (dollar balances), and 3) Fixed Interest & Cash (term deposits, bonds, cash).
-* **KiwiSaver & Managed Fund Crowdsourcing:** Live URL validation for Sorted Smart Investor links (`SCH.../OFR.../FND...`) with instant 80/20 synthetic fallback and 1-click submission to an automated GitHub Actions ingestion bot.
-* **Recursive Feeder Fund Unwrapping:** Unpacks feeder funds (e.g. Smartshares `TWF`, `USF`, `EUF`, `APA`, `ESG`, `EMF`) to their underlying master ETF holdings (Vanguard `VT`, `VOO`, `VGK`, `VPL`, iShares `IWLD`).
-* **Multi-Fund Aggregation:** Consolidates overlapping company equities across multiple funds and managers using ISO 6166 ISIN canonical keys.
-* **Direct NZX / ASX Holdings & Live FX:** Incorporates direct shareholdings (e.g. Mercury, Fisher & Paykel Healthcare, BHP, CSL) with per-holding NZD/AUD currency selection and automatic live AUD/NZD rate lookup with manual override.
-* **Asset Class Split & Multi-Asset Funds:** Decomposes bond and balanced/conservative funds row-by-row into true underlying Equities, Fixed Interest, Term Deposits, and Cash reserves, rendering a 5-segment Asset Split bar and Growth vs. Defensive ratio.
-* **Cross-Asset Institutional Concentration:** Rolls up combined exposure across equities, bonds, and bank deposits by institution (e.g., ANZ, ASB, Westpac).
-* **Semi-Annual Bucket Rebalancer:** User-defined portfolio buckets (e.g., Term Deposits, High Dividend Yield, Growth) with minimum-turnover withdrawal planning and exact cent buy/sell rebalancing.
-* **Continuous Background Persistence:** All holdings, term deposits, and buckets automatically persist to a local repo backup file (`portfolio_backup.json`, git-ignored), browser `localStorage`, and IndexedDB, with automated safety backups created before destructive operations.
-* **GICS Sector Normalization:** Standardizes disparate provider taxonomies into the 11 GICS Level 1 sectors.
-* **Zero Backend:** Runs entirely client-side on GitHub Pages with local browser storage and JSON/CSV export/import.
+* **3-Tier Portfolio Input:** Track (1) Exchange-traded shares & listed ETFs (units × price), (2) Managed funds & KiwiSaver in NZD, and (3) Fixed interest & cash (bonds, PIE/RWT term deposits, cash).
+* **Recursive Feeder Fund Unwrapping:** Unpacks NZ feeder ETFs (e.g. Smartshares `TWF`, `USF`, `ESG`, `EMF`, Kernel Emerging Markets) into their underlying Vanguard, iShares, and SPDR holdings.
+* **Cross-Fund Look-Through & Asset Split:** Aggregates overlapping company, sector (GICS), country, and bank/issuer exposure across funds and direct holdings, and splits multi-asset funds into true Equities, Fixed Interest, Term Deposits, and Cash.
+* **Retirement Cashflow & Bucket Rebalancer:** Models forward dividend/interest income (with NZ PIR / RWT tax estimates) and minimum-turnover withdrawal rebalancing across user-defined buckets.
+* **Crowdsourced Fund Requests:** Paste a Sorted Smart Investor URL for an unlisted NZ fund to model it immediately with a fallback split and optionally submit a GitHub Issue for automated ingestion.
+
+## Local Development
+
+```bash
+npm install
+npm run dev
+```
+
+## Documentation
+
+* **Administrator & Ingestion Guide:** [docs/ADMIN_GUIDE.md](docs/ADMIN_GUIDE.md)
+* **Architecture & Design Docs:** [docs/designs/SITEMAP.md](docs/designs/SITEMAP.md)

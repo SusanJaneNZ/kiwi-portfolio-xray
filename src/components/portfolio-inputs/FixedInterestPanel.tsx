@@ -9,6 +9,7 @@ import {
   PaymentFrequency,
   UserPortfolioState,
 } from '../../types/portfolio';
+import { formatNZD } from '../../utils/format';
 
 const NZ_BANK_PRESETS = [
   'ANZ',
@@ -403,10 +404,11 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
       }
       headerRight={
         <span className="text-xs text-amber-400 font-mono">
+          {formatNZD(fixedInterestSumNZD)} (
           {totalPortfolioNZD > 0
             ? ((fixedInterestSumNZD / totalPortfolioNZD) * 100).toFixed(1)
             : 0}
-          % of portfolio
+          % of portfolio)
         </span>
       }
     >

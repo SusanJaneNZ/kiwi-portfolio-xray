@@ -413,7 +413,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
       }
       headerRight={
         <span className="text-xs text-emerald-400 font-mono">
-          {totalPortfolioNZD > 0 ? ((directSumNZD / totalPortfolioNZD) * 100).toFixed(1) : 0}% of portfolio
+          {formatNZD(directSumNZD)} ({totalPortfolioNZD > 0 ? ((directSumNZD / totalPortfolioNZD) * 100).toFixed(1) : 0}% of portfolio)
         </span>
       }
     >

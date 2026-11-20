@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { CollapsiblePanel } from '../CollapsiblePanel';
 import { BucketSelect } from './BucketSelect';
 import { DEFAULT_STARTER_BUCKETS, FundAssetClass, FundMetadata, UserPortfolioState } from '../../types/portfolio';
+import { formatNZD } from '../../utils/format';
 import { ParsedSmartInvestorUrl, parseAndValidateFundUrl } from '../../utils/fundUrl';
 
 export type { ParsedSmartInvestorUrl };
@@ -423,7 +424,7 @@ Please add this fund to \`pipeline/fund_catalog.json\` so it is ingested into th
       }
       headerRight={
         <span className="text-xs text-sky-400 font-mono">
-          {totalPortfolioNZD > 0 ? ((fundSumNZD / totalPortfolioNZD) * 100).toFixed(1) : 0}% of portfolio
+          {formatNZD(fundSumNZD)} ({totalPortfolioNZD > 0 ? ((fundSumNZD / totalPortfolioNZD) * 100).toFixed(1) : 0}% of portfolio)
         </span>
       }
     >
