@@ -292,7 +292,7 @@ Administrators can monitor all automated workflows in GitHub Actions (`https://g
    - **Process Crowdsourced Fund Requests** (`.github/workflows/fund-request-bot.yml`): Runs on `[Fund Request]` / `new-fund` issues (~15–30s). Opens a catalog PR.
    - **Upstream Ingestion & Data Compilation** (`.github/workflows/ingest.yml`): Runs monthly (1st of each month at `06:00 UTC`) or manually (~1–3 min). Opens a data PR.
    - **Daily End-of-Day Price Refresh** (`.github/workflows/prices.yml`): Runs Mon–Fri at `07:00 UTC` (~30s). Publishes `prices.json` directly to the `prices-data` branch (zero PRs).
-   - **Deploy Kiwi Portfolio X-Ray to GitHub Pages** (`.github/workflows/deploy.yml`): Runs `verify` on PRs to `main`, and `build-and-deploy` on pushes to `main`.
+   - **Deploy Kiwi Portfolio X-Ray to GitHub Pages** (`.github/workflows/deploy.yml`): Runs `verify` on PRs to `main`, and `build-and-deploy` on pushes to `main` (ignores `docs/**` and `README.md`).
 
 2. **Tracking User Fund Requests:**
    - Navigate to the **Issues** tab (`/issues?q=label%3Anew-fund`) and **Pull Requests** tab.

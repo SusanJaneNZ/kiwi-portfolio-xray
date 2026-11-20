@@ -79,6 +79,32 @@ class AdminService:
             result[provider] = files
         return result
 
+    def get_feature_flags(self) -> dict[str, bool]:
+        """Reads public/data/features.json with safe defaults."""
+        defaults: dict[str, bool] = {"indexReplicator": False}
+        features_path = self.output_dir / "features.json"
+        if features_path.exists():
+            try:
+                loaded = json.loads(features_path.read_text(encoding="utf-8"))
+                if isinstance(loaded, dict):
+                    for key in defaults:
+                        if key in loaded:
+                            defaults[key] = bool(loaded[key])
+            except Exception:
+                pass
+        return defaults
+
+    def set_feature_flag(self, key: str, enabled: bool) -> dict[str, bool]:
+        """Updates a known feature flag in public/data/features.json."""
+        flags = self.get_feature_flags()
+        if key not in flags:
+            raise ValueError(f"Unknown feature flag '{key}'. Allowed: {sorted(flags.keys())}")
+        flags[key] = bool(enabled)
+        self.output_dir.mkdir(parents=True, exist_ok=True)
+        features_path = self.output_dir / "features.json"
+        features_path.write_text(json.dumps(flags, indent=2) + "\n", encoding="utf-8")
+        return flags
+
     def save_staged_file(
         self,
         provider: str,
@@ -927,6 +953,8 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                     self.wfile.write(content)
                 elif path == "/api/config":
                     self._send_json({"providers": get_provider_config()})
+                elif path == "/api/features":
+                    self._send_json({"features": service.get_feature_flags()})
                 elif path == "/api/staging":
                     self._send_json({"files": service.list_staged_files()})
                 elif path == "/api/staging/preview":
@@ -1042,6 +1070,12 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                 elif path == "/api/catalog/delete":
                     catalog = service.delete_fund_catalog_entry(data.get("fund_code", ""))
                     self._send_json({"ok": True, "catalog": catalog})
+                elif path == "/api/features":
+                    flags = service.set_feature_flag(
+                        key=str(data.get("key", "")),
+                        enabled=bool(data.get("enabled", False)),
+                    )
+                    self._send_json({"ok": True, "features": flags})
                 elif path == "/api/aliases/set":
                     aliases = service.set_alias_mapping(
                         scope_key=data.get("scope_key", ""),

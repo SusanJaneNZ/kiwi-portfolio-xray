@@ -263,4 +263,45 @@ test.describe('Kiwi Portfolio X-Ray — Live Portfolio UI E2E', () => {
 
     expect(pageErrors, `Uncaught page errors: ${pageErrors.join('; ')}`).toEqual([]);
   });
+
+  test('3. DIY Direct Index Rebalancer respects feature flag and renders DIV & ASD when enabled', async ({
+    page,
+  }) => {
+    const pageErrors: string[] = [];
+    page.on('pageerror', (err) => pageErrors.push(err.message));
+
+    // When disabled in features.json (default), panel stays hidden
+    await page.goto('/');
+    await expect(page.getByText('Kiwi Portfolio X-Ray').first()).toBeVisible({ timeout: 15_000 });
+    await expect(page.locator('button', { hasText: /DIY Direct Index Rebalancer/i })).toHaveCount(0);
+
+    // When enabled via features.json, panel renders and functions cleanly
+    await page.route('**/data/features.json*', async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ indexReplicator: true }),
+      });
+    });
+    await page.reload();
+    await expect(page.getByText('Kiwi Portfolio X-Ray').first()).toBeVisible({ timeout: 15_000 });
+
+    // Expand DIY Direct Index Rebalancer panel (below Bucket Rebalancer)
+    const replicatorHeader = page.locator('button', { hasText: /DIY Direct Index Rebalancer/i });
+    await expect(replicatorHeader).toBeVisible();
+    await replicatorHeader.click();
+
+    // Verify DIV model loads with breakeven cards, Actual $ Held column & NZ Imputation badge
+    await expect(page.getByText('Annual Passive Fee Drag')).toBeVisible();
+    await expect(page.getByText('Breakeven Payoff Time')).toBeVisible();
+    await expect(page.getByText('Actual $ Held')).toBeVisible();
+    await expect(page.getByText('NZ Imputation Credits · Zero FIF').first()).toBeVisible();
+
+    // Switch Target Index to ASD and verify Trans-Tasman FIF Exempt badge appears
+    const indexSelect = page.locator('select').filter({ hasText: 'Smartshares NZ Dividend ETF (DIV)' });
+    await indexSelect.selectOption('ASD');
+    await expect(page.getByText('Trans-Tasman FIF Exempt (ASX)').first()).toBeVisible();
+
+    expect(pageErrors, `Uncaught page errors: ${pageErrors.join('; ')}`).toEqual([]);
+  });
 });
