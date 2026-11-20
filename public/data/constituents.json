@@ -3828,3084 +3828,6 @@
       "asset_class": "equity"
     }
   ],
-  "GLIN_HOLDINGS": [
-    {
-      "isin": "SEDOL:BTMKJR0",
-      "name": "Aena SME SA",
-      "ticker": "AENA",
-      "country": "Spain",
-      "sector": "Industrials",
-      "weight": 0.05214605,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6200882",
-      "name": "TRANSURBAN GROUP",
-      "ticker": "TCL.AX",
-      "country": "Australia",
-      "sector": "Industrials",
-      "weight": 0.05020392,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2328915",
-      "name": "NextEra Energy Inc",
-      "ticker": "NEE",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.04884444,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2914734",
-      "name": "Union Pacific Corp",
-      "ticker": "UNP",
-      "country": "United States",
-      "sector": "Industrials",
-      "weight": 0.03961934,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2829601",
-      "name": "Southern Co/The",
-      "ticker": "SO",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.03321033,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B7VD3F2",
-      "name": "Duke Energy Corp",
-      "ticker": "DUK",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.03097689,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2466149",
-      "name": "Enbridge Inc",
-      "ticker": "ENB",
-      "country": "Canada",
-      "sector": "Energy",
-      "weight": 0.02651,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BDR05C0",
-      "name": "National Grid PLC",
-      "ticker": "NG/",
-      "country": "United Kingdom",
-      "sector": "Utilities",
-      "weight": 0.02583026,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BKX3XG2",
-      "name": "Auckland International Airport Limited",
-      "ticker": "AIA.NZ",
-      "country": "New Zealand",
-      "sector": "Industrials",
-      "weight": 0.02281997,
-      "asset_class": "equity",
-      "issuer_key": "ISSUER_AIA",
-      "issuer_name": "Auckland International Airport"
-    },
-    {
-      "isin": "SEDOL:B7FBFL2",
-      "name": "American Tower Corp",
-      "ticker": "AMT",
-      "country": "United States",
-      "sector": "Real Estate",
-      "weight": 0.02233443,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2026242",
-      "name": "American Electric Power Co Inc",
-      "ticker": "AEP",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.02146048,
-      "asset_class": "equity",
-      "issuer_key": "ISSUER_POWERCO",
-      "issuer_name": "Powerco"
-    },
-    {
-      "isin": "SEDOL:2160753",
-      "name": "CSX Corp",
-      "ticker": "CSX",
-      "country": "United States",
-      "sector": "Industrials",
-      "weight": 0.02126627,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2967181",
-      "name": "Williams Cos Inc/The",
-      "ticker": "WMB",
-      "country": "United States",
-      "sector": "Energy",
-      "weight": 0.02078073,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BMBQR09",
-      "name": "Canadian Pacific Kansas City Ltd",
-      "ticker": "CP",
-      "country": "Canada",
-      "sector": "Industrials",
-      "weight": 0.01854729,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2542049",
-      "name": "Dominion Energy Inc",
-      "ticker": "D",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.01815887,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BJMY6G0",
-      "name": "TC Energy Corp",
-      "ticker": "TRP",
-      "country": "Canada",
-      "sector": "Energy",
-      "weight": 0.01689648,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2641894",
-      "name": "Norfolk Southern Corp",
-      "ticker": "NSC",
-      "country": "United States",
-      "sector": "Industrials",
-      "weight": 0.01631385,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2654364",
-      "name": "Cheniere Energy Inc",
-      "ticker": "LNG",
-      "country": "United States",
-      "sector": "Energy",
-      "weight": 0.01611963,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2138158",
-      "name": "Sempra",
-      "ticker": "SRE",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.0156341,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2317087",
-      "name": "Entergy Corp",
-      "ticker": "ETR",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.0156341,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B55PZY3",
-      "name": "Targa Resources Corp",
-      "ticker": "TRGP",
-      "country": "United States",
-      "sector": "Energy",
-      "weight": 0.0156341,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2614807",
-      "name": "Xcel Energy Inc",
-      "ticker": "XEL",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.01543989,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B3NQ4P8",
-      "name": "Kinder Morgan Inc",
-      "ticker": "KMI",
-      "country": "United States",
-      "sector": "Energy",
-      "weight": 0.01534279,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2180632",
-      "name": "Canadian National Railway Co",
-      "ticker": "CNR",
-      "country": "Canada",
-      "sector": "Industrials",
-      "weight": 0.01514857,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2670519",
-      "name": "Exelon Corp",
-      "ticker": "EXC",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.01446883,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B164FY1",
-      "name": "Aeroports de Paris SA",
-      "ticker": "ADP",
-      "country": "France",
-      "sector": "Industrials",
-      "weight": 0.01417751,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BWJJFW8",
-      "name": "ONEOK Inc",
-      "ticker": "OKE",
-      "country": "United States",
-      "sector": "Energy",
-      "weight": 0.0139833,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BYQ8481",
-      "name": "Flughafen Zurich AG",
-      "ticker": "FHZN",
-      "country": "Switzerland",
-      "sector": "Industrials",
-      "weight": 0.0139833,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2216850",
-      "name": "Consolidated Edison Inc",
-      "ticker": "ED",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.01369198,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BYY8XK8",
-      "name": "WEC Energy Group Inc",
-      "ticker": "WEC",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.01165275,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2707677",
-      "name": "Public Service Enterprise Group Inc",
-      "ticker": "PEG",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.01155564,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2050832",
-      "name": "Ameren Corp",
-      "ticker": "AEE",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00961352,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BTGQCX1",
-      "name": "Crown Castle Inc",
-      "ticker": "CCI",
-      "country": "United States",
-      "sector": "Real Estate",
-      "weight": 0.00961352,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2347200",
-      "name": "Fortis Inc/Canada",
-      "ticker": "FTS",
-      "country": "Canada",
-      "sector": "Utilities",
-      "weight": 0.00922509,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B2R3PV1",
-      "name": "American Water Works Co Inc",
-      "ticker": "AWK",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00912799,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2689560",
-      "name": "PG&E Corp",
-      "ticker": "PCG",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00912799,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2315359",
-      "name": "Atmos Energy Corp",
-      "ticker": "ATO",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00883667,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BVVN4Q8",
-      "name": "Eversource Energy",
-      "ticker": "ES",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00835114,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2680905",
-      "name": "PPL Corp",
-      "ticker": "PPL",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00815692,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2440637",
-      "name": "CenterPoint Energy Inc",
-      "ticker": "CNP",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00805982,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2100920",
-      "name": "FirstEnergy Corp",
-      "ticker": "FE",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00796271,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:7107551",
-      "name": "Fraport AG Frankfurt Airport Services Worldwide",
-      "ticker": "FRA",
-      "country": "Germany",
-      "sector": "Industrials",
-      "weight": 0.0077685,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B4PT2P8",
-      "name": "Pembina Pipeline Corp",
-      "ticker": "PPL",
-      "country": "Canada",
-      "sector": "Energy",
-      "weight": 0.00728297,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2829515",
-      "name": "Edison International",
-      "ticker": "EIX",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00718586,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2219224",
-      "name": "CMS Energy Corp",
-      "ticker": "CMS",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00670033,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2645409",
-      "name": "NiSource Inc",
-      "ticker": "NI",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00660322,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BFMXGR0",
-      "name": "Evergy Inc",
-      "ticker": "EVRG",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.0062148,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6298542",
-      "name": "East Japan Railway Co",
-      "ticker": "9020",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.00602059,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2973821",
-      "name": "Alliant Energy Corp",
-      "ticker": "LNT",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00572927,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6183552",
-      "name": "Central Japan Railway Co",
-      "ticker": "9022",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.00524374,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6483489",
-      "name": "Kansai Electric Power Co Inc/The",
-      "ticker": "9503",
-      "country": "Japan",
-      "sector": "Utilities",
-      "weight": 0.00514663,
-      "asset_class": "equity",
-      "issuer_key": "ISSUER_POWERCO",
-      "issuer_name": "Powerco"
-    },
-    {
-      "isin": "SEDOL:6097017",
-      "name": "CLP Holdings Ltd",
-      "ticker": "2",
-      "country": "Hong Kong",
-      "sector": "Utilities",
-      "weight": 0.00504952,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:5650422",
-      "name": "Naturgy Energy Group SA",
-      "ticker": "NTGY",
-      "country": "Spain",
-      "sector": "Utilities",
-      "weight": 0.00504952,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BZ6TS23",
-      "name": "SBA Communications Corp",
-      "ticker": "SBAC",
-      "country": "United States",
-      "sector": "Real Estate",
-      "weight": 0.00495242,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2650050",
-      "name": "Emera Inc",
-      "ticker": "EMA",
-      "country": "Canada",
-      "sector": "Utilities",
-      "weight": 0.00485531,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B39J2M4",
-      "name": "United Utilities Group PLC",
-      "ticker": "UU/",
-      "country": "United Kingdom",
-      "sector": "Utilities",
-      "weight": 0.0046611,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B01BN57",
-      "name": "Terna - Rete Elettrica Nazionale",
-      "ticker": "TRN",
-      "country": "Italy",
-      "sector": "Utilities",
-      "weight": 0.0046611,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:0345217",
-      "name": "Firstgroup PLC",
-      "ticker": "FGP",
-      "country": "United Kingdom",
-      "sector": "Industrials",
-      "weight": 0.00456399,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BX90C05",
-      "name": "Cellnex Telecom SA",
-      "ticker": "CLNX",
-      "country": "Spain",
-      "sector": "Communication Services",
-      "weight": 0.00427267,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6895448",
-      "name": "Tokyo Gas Co Ltd",
-      "ticker": "9531",
-      "country": "Japan",
-      "sector": "Utilities",
-      "weight": 0.00407846,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BLCF3J9",
-      "name": "Essential Utilities Inc",
-      "ticker": "WTRG",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00398136,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BYYXJY9",
-      "name": "Hydro One Ltd",
-      "ticker": "H",
-      "country": "Canada",
-      "sector": "Utilities",
-      "weight": 0.00388425,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6661768",
-      "name": "Osaka Gas Co Ltd",
-      "ticker": "9532",
-      "country": "Japan",
-      "sector": "Utilities",
-      "weight": 0.00388425,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2048804",
-      "name": "Pinnacle West Capital Corp",
-      "ticker": "PNW",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00388425,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B1FH8J7",
-      "name": "Severn Trent PLC",
-      "ticker": "SVT",
-      "country": "United Kingdom",
-      "sector": "Utilities",
-      "weight": 0.00359293,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6435327",
-      "name": "Power Assets Holdings Ltd",
-      "ticker": "6",
-      "country": "Hong Kong",
-      "sector": "Utilities",
-      "weight": 0.00359293,
-      "asset_class": "equity",
-      "issuer_key": "ISSUER_POWERCO",
-      "issuer_name": "Powerco"
-    },
-    {
-      "isin": "ASX:HZN",
-      "name": "HORIZON OIL LIMITED",
-      "ticker": "HZN.AX",
-      "country": "Australia",
-      "sector": "Energy",
-      "weight": 0.00359293,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:7251470",
-      "name": "Snam SpA",
-      "ticker": "SRG",
-      "country": "Italy",
-      "sector": "Utilities",
-      "weight": 0.00359293,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6195609",
-      "name": "Chubu Electric Power Co Inc",
-      "ticker": "9502",
-      "country": "Japan",
-      "sector": "Utilities",
-      "weight": 0.00349582,
-      "asset_class": "equity",
-      "issuer_key": "ISSUER_POWERCO",
-      "issuer_name": "Powerco"
-    },
-    {
-      "isin": "SEDOL:BZ03TZ1",
-      "name": "ATLAS ARTERIA",
-      "ticker": "ALX.AX",
-      "country": "Australia",
-      "sector": "Industrials",
-      "weight": 0.00339872,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2657802",
-      "name": "OGE Energy Corp",
-      "ticker": "OGE",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00320451,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6436557",
-      "name": "Hong Kong & China Gas Co Ltd",
-      "ticker": "3",
-      "country": "Hong Kong",
-      "sector": "Utilities",
-      "weight": 0.00320451,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BPYS8N3",
-      "name": "Athens International Airport SA",
-      "ticker": "AIA",
-      "country": "Greece",
-      "sector": "Industrials",
-      "weight": 0.00301029,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B56ZM74",
-      "name": "Hutchison Port Holdings Trust",
-      "ticker": "HPHT",
-      "country": "Singapore",
-      "sector": "Industrials",
-      "weight": 0.00301029,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B033F22",
-      "name": "Centrica PLC",
-      "ticker": "CNA",
-      "country": "United Kingdom",
-      "sector": "Utilities",
-      "weight": 0.00291319,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2296937",
-      "name": "IDACORP Inc",
-      "ticker": "IDA",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00252476,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BNNF1C1",
-      "name": "APA GROUP",
-      "ticker": "APA.AX",
-      "country": "Australia",
-      "sector": "Utilities",
-      "weight": 0.00242766,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:7268298",
-      "name": "Public Power Corp SA",
-      "ticker": "PPC",
-      "country": "Greece",
-      "sector": "Utilities",
-      "weight": 0.00223344,
-      "asset_class": "equity",
-      "issuer_key": "ISSUER_POWERCO",
-      "issuer_name": "Powerco"
-    },
-    {
-      "isin": "SEDOL:2831888",
-      "name": "Southwest Gas Holdings Inc",
-      "ticker": "SWX",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00203923,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B09M9F4",
-      "name": "Elia Group SA/NV",
-      "ticker": "ELI",
-      "country": "Belgium",
-      "sector": "Utilities",
-      "weight": 0.00203923,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2946243",
-      "name": "Viasat Inc",
-      "ticker": "VSAT",
-      "country": "United States",
-      "sector": "Information Technology",
-      "weight": 0.00203923,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BD2Z8S7",
-      "name": "Italgas SpA",
-      "ticker": "IG",
-      "country": "Italy",
-      "sector": "Utilities",
-      "weight": 0.00194212,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2707826",
-      "name": "TXNM Energy Inc",
-      "ticker": "TXNM",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00194212,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_642A",
-      "name": "KYUDEN HOLDINGS",
-      "ticker": "642A",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00184502,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BYVS6J1",
-      "name": "CK Infrastructure Holdings Ltd",
-      "ticker": "1038",
-      "country": "Hong Kong",
-      "sector": "Utilities",
-      "weight": 0.00174791,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BMZMBC3",
-      "name": "South Bow Corp",
-      "ticker": "SOBO",
-      "country": "Canada",
-      "sector": "Energy",
-      "weight": 0.00174791,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2630513",
-      "name": "New Jersey Resources Corp",
-      "ticker": "NJR",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00174791,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B125XQ6",
-      "name": "Portland General Electric Co",
-      "ticker": "POR",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00165081,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BJ0KXV4",
-      "name": "ONE Gas Inc",
-      "ticker": "OGS",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00165081,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BYXJQG9",
-      "name": "Spire Inc",
-      "ticker": "SR",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.0015537,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BSQLM28",
-      "name": "Brookfield Infrastructure Corp",
-      "ticker": "BIPC",
-      "country": "Canada",
-      "sector": "Utilities",
-      "weight": 0.0015537,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6290054",
-      "name": "MTR Corp Ltd",
-      "ticker": "66",
-      "country": "Hong Kong",
-      "sector": "Industrials",
-      "weight": 0.00145659,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B292JQ9",
-      "name": "Getlink SE",
-      "ticker": "GET",
-      "country": "France",
-      "sector": "Industrials",
-      "weight": 0.00135949,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B51BMR7",
-      "name": "Algonquin Power & Utilities Corp",
-      "ticker": "AQN",
-      "country": "Canada",
-      "sector": "Utilities",
-      "weight": 0.00135949,
-      "asset_class": "equity",
-      "issuer_key": "ISSUER_POWERCO",
-      "issuer_name": "Powerco"
-    },
-    {
-      "isin": "SEDOL:2547323",
-      "name": "MDU Resources Group Inc",
-      "ticker": "MDU",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00126238,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6895404",
-      "name": "Tokyo Electric Power Co Holdings Inc",
-      "ticker": "9501",
-      "country": "Japan",
-      "sector": "Utilities",
-      "weight": 0.00116527,
-      "asset_class": "equity",
-      "issuer_key": "ISSUER_POWERCO",
-      "issuer_name": "Powerco"
-    },
-    {
-      "isin": "SEDOL:6895266",
-      "name": "Tohoku Electric Power Co Inc",
-      "ticker": "9506",
-      "country": "Japan",
-      "sector": "Utilities",
-      "weight": 0.00116527,
-      "asset_class": "equity",
-      "issuer_key": "ISSUER_POWERCO",
-      "issuer_name": "Powerco"
-    },
-    {
-      "isin": "SEDOL:BD6FXN3",
-      "name": "Redeia Corp SA",
-      "ticker": "RED",
-      "country": "Spain",
-      "sector": "Utilities",
-      "weight": 0.00116527,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6495730",
-      "name": "Korea Electric Power Corp",
-      "ticker": "015760",
-      "country": "South Korea",
-      "sector": "Utilities",
-      "weight": 0.00106817,
-      "asset_class": "equity",
-      "issuer_key": "ISSUER_POWERCO",
-      "issuer_name": "Powerco"
-    },
-    {
-      "isin": "SEDOL:BRJMM32",
-      "name": "Globalstar Inc",
-      "ticker": "GSAT",
-      "country": "United States",
-      "sector": "Communication Services",
-      "weight": 0.00106817,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B2QH310",
-      "name": "Iridium Communications Inc",
-      "ticker": "IRDM",
-      "country": "United States",
-      "sector": "Communication Services",
-      "weight": 0.00106817,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2267171",
-      "name": "American States Water Co",
-      "ticker": "AWR",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00106817,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2942605",
-      "name": "Avista Corp",
-      "ticker": "AVA",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00106817,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2190750",
-      "name": "Chesapeake Utilities Corp",
-      "ticker": "CPK",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00106817,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B87CVM3",
-      "name": "AURIZON HOLDINGS LIMITED",
-      "ticker": "AZJ.AX",
-      "country": "Australia",
-      "sector": "Industrials",
-      "weight": 0.00097106,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2165383",
-      "name": "California Water Service Group",
-      "ticker": "CWT",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00097106,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2554163",
-      "name": "MGE Energy Inc",
-      "ticker": "MGEE",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00097106,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BNNTLN4",
-      "name": "Pennon Group PLC",
-      "ticker": "PNN",
-      "country": "United Kingdom",
-      "sector": "Utilities",
-      "weight": 0.00097106,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:7383072",
-      "name": "Enagas SA",
-      "ticker": "ENG",
-      "country": "Spain",
-      "sector": "Utilities",
-      "weight": 0.00087396,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:7648629",
-      "name": "Piraeus Port Authority SA",
-      "ticker": "PPA",
-      "country": "Greece",
-      "sector": "Industrials",
-      "weight": 0.00087396,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BJVQC70",
-      "name": "Helios Towers PLC",
-      "ticker": "HTWS",
-      "country": "United Kingdom",
-      "sector": "Communication Services",
-      "weight": 0.00077685,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6895222",
-      "name": "Toho Gas Co Ltd",
-      "ticker": "9533",
-      "country": "Japan",
-      "sector": "Utilities",
-      "weight": 0.00067974,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BFNR303",
-      "name": "Northwest Natural Holding Co",
-      "ticker": "NWN",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00067974,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6195900",
-      "name": "Chugoku Electric Power Co Inc/The",
-      "ticker": "9504",
-      "country": "Japan",
-      "sector": "Utilities",
-      "weight": 0.00067974,
-      "asset_class": "equity",
-      "issuer_key": "ISSUER_POWERCO",
-      "issuer_name": "Powerco"
-    },
-    {
-      "isin": "SEDOL:2811932",
-      "name": "H2O America",
-      "ticker": "HTO",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00067974,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6804347",
-      "name": "Shikoku Electric Power Co Inc",
-      "ticker": "9507",
-      "country": "Japan",
-      "sector": "Utilities",
-      "weight": 0.00058264,
-      "asset_class": "equity",
-      "issuer_key": "ISSUER_POWERCO",
-      "issuer_name": "Powerco"
-    },
-    {
-      "isin": "SEDOL:BQTY1X4",
-      "name": "Tokyo Metro Co Ltd",
-      "ticker": "9023",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.00058264,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BF5GLW6",
-      "name": "NETLINK NBN TRUST",
-      "ticker": "NETLINK",
-      "country": "Singapore",
-      "sector": "Communication Services",
-      "weight": 0.00048553,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BZ0P4R4",
-      "name": "Infrastrutture Wireless Italiane SpA",
-      "ticker": "INW",
-      "country": "Italy",
-      "sector": "Communication Services",
-      "weight": 0.00048553,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B54F6S5",
-      "name": "Chorus Limited",
-      "ticker": "CNU.NZ",
-      "country": "New Zealand",
-      "sector": "Communication Services",
-      "weight": 0.00048553,
-      "asset_class": "equity",
-      "issuer_key": "ISSUER_CNU",
-      "issuer_name": "Chorus"
-    },
-    {
-      "isin": "SEDOL:B233HR5",
-      "name": "REN - Redes Energeticas Nacionais SGPS SA",
-      "ticker": "RENE",
-      "country": "Portugal",
-      "sector": "Utilities",
-      "weight": 0.00048553,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B00ZQQ2",
-      "name": "SES",
-      "ticker": "SESG",
-      "country": "France",
-      "sector": "Communication Services",
-      "weight": 0.00048553,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2415204",
-      "name": "Hawaiian Electric Industries Inc",
-      "ticker": "HE",
-      "country": "United States",
-      "sector": "Utilities",
-      "weight": 0.00048553,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6431325",
-      "name": "Hokkaido Electric Power Co Inc",
-      "ticker": "9509",
-      "country": "Japan",
-      "sector": "Utilities",
-      "weight": 0.00038842,
-      "asset_class": "equity",
-      "issuer_key": "ISSUER_POWERCO",
-      "issuer_name": "Powerco"
-    },
-    {
-      "isin": "SEDOL:6433127",
-      "name": "Hokuriku Electric Power Co",
-      "ticker": "9505",
-      "country": "Japan",
-      "sector": "Utilities",
-      "weight": 0.00038842,
-      "asset_class": "equity",
-      "issuer_key": "ISSUER_POWERCO",
-      "issuer_name": "Powerco"
-    },
-    {
-      "isin": "SEDOL:7788967",
-      "name": "Jungfraubahn Holding AG",
-      "ticker": "JFN",
-      "country": "Switzerland",
-      "sector": "Industrials",
-      "weight": 0.00038842,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:4295374",
-      "name": "EVN AG",
-      "ticker": "EVN",
-      "country": "Austria",
-      "sector": "Utilities",
-      "weight": 0.00038842,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6182076",
-      "name": "Korea Gas Corp",
-      "ticker": "036460",
-      "country": "South Korea",
-      "sector": "Utilities",
-      "weight": 0.00029132,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BYW5KK0",
-      "name": "Holding Co ADMIE IPTO SA",
-      "ticker": "ADMIE",
-      "country": "Greece",
-      "sector": "Utilities",
-      "weight": 0.00029132,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:0879471",
-      "name": "Telecom Plus PLC",
-      "ticker": "TEP",
-      "country": "United Kingdom",
-      "sector": "Utilities",
-      "weight": 0.00029132,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BYPC6V1",
-      "name": "SUPERLOOP LIMITED",
-      "ticker": "SLC.AX",
-      "country": "Australia",
-      "sector": "Communication Services",
-      "weight": 0.00019421,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6767826",
-      "name": "Saibu Gas Holdings Co Ltd",
-      "ticker": "9536",
-      "country": "Japan",
-      "sector": "Utilities",
-      "weight": 0.00019421,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:5860191",
-      "name": "Athens Water Supply & Sewage Co SA",
-      "ticker": "EYDAP",
-      "country": "Greece",
-      "sector": "Utilities",
-      "weight": 0.00019421,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:4205351",
-      "name": "Ellaktor SA",
-      "ticker": "ELLAKTOR",
-      "country": "Greece",
-      "sector": "Industrials",
-      "weight": 0.00019421,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B0H0BC1",
-      "name": "Vector Limited",
-      "ticker": "VCT.NZ",
-      "country": "New Zealand",
-      "sector": "Utilities",
-      "weight": 0.00019421,
-      "asset_class": "equity",
-      "issuer_key": "ISSUER_VCT",
-      "issuer_name": "Vector"
-    },
-    {
-      "isin": "SEDOL:6431347",
-      "name": "Hokkaido Gas Co Ltd",
-      "ticker": "9534",
-      "country": "Japan",
-      "sector": "Utilities",
-      "weight": 0.00019421,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B0M7KJ7",
-      "name": "Eutelsat Communications SACA",
-      "ticker": "ETL",
-      "country": "France",
-      "sector": "Communication Services",
-      "weight": 9.711e-05,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6419956",
-      "name": "Shizuoka Gas Co Ltd",
-      "ticker": "9543",
-      "country": "Japan",
-      "sector": "Utilities",
-      "weight": 9.711e-05,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6771054",
-      "name": "Samchully Co Ltd",
-      "ticker": "004690",
-      "country": "South Korea",
-      "sector": "Utilities",
-      "weight": 9.711e-05,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6658050",
-      "name": "Okinawa Electric Power Co Inc/The",
-      "ticker": "9511",
-      "country": "Japan",
-      "sector": "Utilities",
-      "weight": 9.711e-05,
-      "asset_class": "equity",
-      "issuer_key": "ISSUER_POWERCO",
-      "issuer_name": "Powerco"
-    },
-    {
-      "isin": "SEDOL:BSM8WL2",
-      "name": "RAI Way SpA",
-      "ticker": "RWAY",
-      "country": "Italy",
-      "sector": "Communication Services",
-      "weight": 9.711e-05,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BH4TD79",
-      "name": "K&O Energy Group Inc",
-      "ticker": "1663",
-      "country": "Japan",
-      "sector": "Utilities",
-      "weight": 9.711e-05,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "BOND:AST_SPACEMOBILE",
-      "name": "AST SPACEMOBILE",
-      "ticker": "",
-      "country": "Global",
-      "sector": "Corporate / Other",
-      "weight": 0.00184502,
-      "asset_class": "fixed_interest",
-      "tranche_count": 1
-    }
-  ],
-  "HEAL_HOLDINGS": [
-    {
-      "isin": "SEDOL:BGSXTS3",
-      "name": "Moderna Inc",
-      "ticker": "MRNA",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0542,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:4595739",
-      "name": "Genmab A/S",
-      "ticker": "GMAB",
-      "country": "Denmark",
-      "sector": "Health Care",
-      "weight": 0.0251,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B0C5YV1",
-      "name": "Celltrion Inc",
-      "ticker": "068270",
-      "country": "South Korea",
-      "sector": "Health Care",
-      "weight": 0.0172,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BDR73G1",
-      "name": "IQVIA Holdings Inc",
-      "ticker": "IQV",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0171,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2305844",
-      "name": "Revvity Inc",
-      "ticker": "RVTY",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0167,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2604336",
-      "name": "Charles River Laboratories International Inc",
-      "ticker": "CRL",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0162,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2023607",
-      "name": "Amgen Inc",
-      "ticker": "AMGN",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0161,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2369174",
-      "name": "Gilead Sciences Inc",
-      "ticker": "GILD",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0161,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BMW4NZ9",
-      "name": "Roivant Sciences Ltd",
-      "ticker": "ROIV",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.016,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B92SR70",
-      "name": "AbbVie Inc",
-      "ticker": "ABBV",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0157,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BYQRG48",
-      "name": "Natera Inc",
-      "ticker": "NTRA",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0156,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:7333378",
-      "name": "Lonza Group AG",
-      "ticker": "LONN",
-      "country": "Switzerland",
-      "sector": "Health Care",
-      "weight": 0.0155,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BDCBC61",
-      "name": "Medpace Holdings Inc",
-      "ticker": "MEDP",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0154,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2520153",
-      "name": "Agilent Technologies Inc",
-      "ticker": "A",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0154,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2576941",
-      "name": "Exelixis Inc",
-      "ticker": "EXEL",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0152,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2455965",
-      "name": "Biogen Inc",
-      "ticker": "BIIB",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0152,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BTN1Y11",
-      "name": "Medtronic PLC",
-      "ticker": "MDT",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0151,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2613990",
-      "name": "Illumina Inc",
-      "ticker": "ILMN",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0149,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2250870",
-      "name": "Danaher Corp",
-      "ticker": "DHR",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0147,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2567116",
-      "name": "Edwards Lifesciences Corp",
-      "ticker": "EW",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0147,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2778844",
-      "name": "Merck & Co Inc",
-      "ticker": "MRK",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0145,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2475833",
-      "name": "Johnson & Johnson",
-      "ticker": "JNJ",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0143,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2002305",
-      "name": "Abbott Laboratories",
-      "ticker": "ABT",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0142,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6804682",
-      "name": "Shionogi & Co Ltd",
-      "ticker": "4507",
-      "country": "Japan",
-      "sector": "Health Care",
-      "weight": 0.0141,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BTMJD19",
-      "name": "Roche Holding AG",
-      "ticker": "ROP",
-      "country": "Switzerland",
-      "sector": "Health Care",
-      "weight": 0.0138,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2684703",
-      "name": "Pfizer Inc",
-      "ticker": "PFE",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0135,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2126335",
-      "name": "Bristol-Myers Squibb Co",
-      "ticker": "BMY",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0134,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BFXC911",
-      "name": "Guardant Health Inc",
-      "ticker": "GH",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0133,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BNHKYX4",
-      "name": "Argenx SE",
-      "ticker": "ARGX",
-      "country": "Belgium",
-      "sector": "Health Care",
-      "weight": 0.0133,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:7103065",
-      "name": "Novartis AG",
-      "ticker": "NOVN",
-      "country": "Switzerland",
-      "sector": "Health Care",
-      "weight": 0.0131,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:5596991",
-      "name": "UCB SA",
-      "ticker": "UCB",
-      "country": "Belgium",
-      "sector": "Health Care",
-      "weight": 0.0129,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BYNJCV6",
-      "name": "Samsung Biologics Co Ltd",
-      "ticker": "207940",
-      "country": "South Korea",
-      "sector": "Health Care",
-      "weight": 0.0128,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B0796X4",
-      "name": "Dexcom Inc",
-      "ticker": "DXCM",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0126,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B4Q5ZN4",
-      "name": "Jazz Pharmaceuticals PLC",
-      "ticker": "JAZZ",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0125,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2871301",
-      "name": "Intuitive Surgical Inc",
-      "ticker": "ISRG",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0123,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2623911",
-      "name": "Neurocrine Biosciences Inc",
-      "ticker": "NBIX",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0121,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6117982",
-      "name": "GlaxoSmithKline Pharmaceuticals Ltd",
-      "ticker": "GLXO",
-      "country": "India",
-      "sector": "Health Care",
-      "weight": 0.012,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2975098",
-      "name": "Halozyme Therapeutics Inc",
-      "ticker": "HALO",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0114,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BSHZ3Q0",
-      "name": "Bio-Techne Corp",
-      "ticker": "TECH",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0114,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2113434",
-      "name": "Boston Scientific Corp",
-      "ticker": "BSX",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0107,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BV6JKC9",
-      "name": "QIAGEN NV",
-      "ticker": "QIA",
-      "country": "Germany",
-      "sector": "Health Care",
-      "weight": 0.0103,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B1XGNW4",
-      "name": "Insulet Corp",
-      "ticker": "PODD",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0101,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6307200",
-      "name": "Eisai Co Ltd",
-      "ticker": "4523",
-      "country": "Japan",
-      "sector": "Health Care",
-      "weight": 0.0097,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B828K63",
-      "name": "TG Therapeutics Inc",
-      "ticker": "TGTX",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0087,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2731654",
-      "name": "Repligen Corp",
-      "ticker": "RGEN",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0086,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6804369",
-      "name": "Shimadzu Corp",
-      "ticker": "7701",
-      "country": "Japan",
-      "sector": "Information Technology",
-      "weight": 0.0083,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B3P6D26",
-      "name": "Alkermes PLC",
-      "ticker": "ALKS",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0078,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6292782",
-      "name": "PRO MEDICUS LIMITED",
-      "ticker": "PME.AX",
-      "country": "Australia",
-      "sector": "Health Care",
-      "weight": 0.0077,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6883807",
-      "name": "Sysmex Corp",
-      "ticker": "6869",
-      "country": "Japan",
-      "sector": "Health Care",
-      "weight": 0.007,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BF2YWG4",
-      "name": "Rhythm Pharmaceuticals Inc",
-      "ticker": "RYTM",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0067,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B0R7JF1",
-      "name": "Ipsen SA",
-      "ticker": "IPN",
-      "country": "France",
-      "sector": "Health Care",
-      "weight": 0.0067,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BP8S8J5",
-      "name": "Lantheus Holdings Inc",
-      "ticker": "LNTH",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0066,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B019MQ5",
-      "name": "Asahi Intecc Co Ltd",
-      "ticker": "7747",
-      "country": "Japan",
-      "sector": "Health Care",
-      "weight": 0.0063,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BYQBFJ8",
-      "name": "Arrowhead Pharmaceuticals Inc",
-      "ticker": "ARWR",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0062,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2501578",
-      "name": "Ligand Pharmaceuticals Inc",
-      "ticker": "LGND",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0061,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BGKG6G7",
-      "name": "Twist Bioscience Corp",
-      "ticker": "TWST",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0061,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BRBCSP4",
-      "name": "CG oncology Inc",
-      "ticker": "CGON",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.006,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BYZR4X4",
-      "name": "Axsome Therapeutics Inc",
-      "ticker": "AXSM",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0055,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BYMT0J1",
-      "name": "LivaNova PLC",
-      "ticker": "LIVN",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0051,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B17VCN9",
-      "name": "PTC Therapeutics Inc",
-      "ticker": "PTCT",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0051,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BF0LBX7",
-      "name": "BioMerieux",
-      "ticker": "BIM",
-      "country": "France",
-      "sector": "Health Care",
-      "weight": 0.0049,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BN4J951",
-      "name": "Dianthus Therapeutics Inc",
-      "ticker": "DNTH",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0049,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BJ5FZ74",
-      "name": "Adaptive Biotechnologies Corp",
-      "ticker": "ADPT",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0044,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BRXB0C0",
-      "name": "Kiniksa Pharmaceuticals International Plc",
-      "ticker": "KNSA",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0044,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_GRAL",
-      "name": "GRAIL INC",
-      "ticker": "GRAL",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0043,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:7110902",
-      "name": "Tecan Group AG",
-      "ticker": "TECN",
-      "country": "Switzerland",
-      "sector": "Health Care",
-      "weight": 0.0038,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BPXZ192",
-      "name": "Sichuan Kelun-Biotech Biopharmaceutical Co Ltd",
-      "ticker": "6990",
-      "country": "Hong Kong",
-      "sector": "Health Care",
-      "weight": 0.0038,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BRJ3GY4",
-      "name": "Xenon Pharmaceuticals Inc",
-      "ticker": "XENE",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0038,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_CDNA",
-      "name": "CAREDX",
-      "ticker": "CDNA",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0035,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2018669",
-      "name": "Maximus Inc",
-      "ticker": "MMS",
-      "country": "United States",
-      "sector": "Information Technology",
-      "weight": 0.0034,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BQHNQ38",
-      "name": "WuXi XDC Cayman Inc",
-      "ticker": "2268",
-      "country": "Hong Kong",
-      "sector": "Health Care",
-      "weight": 0.0034,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BVBM904",
-      "name": "Siegfried Holding AG",
-      "ticker": "SFZN",
-      "country": "Switzerland",
-      "sector": "Health Care",
-      "weight": 0.0033,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_VRDN",
-      "name": "VIRIDIAN THERAPEUTICS ORS",
-      "ticker": "VRDN",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0033,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B9NSBM2",
-      "name": "ADMA Biologics Inc",
-      "ticker": "ADMA",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0032,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BT18HP9",
-      "name": "Caris Life Sciences Inc",
-      "ticker": "CAI",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0029,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BMXVKB4",
-      "name": "Bachem Holding AG",
-      "ticker": "BANB",
-      "country": "Switzerland",
-      "sector": "Health Care",
-      "weight": 0.0029,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:5564619",
-      "name": "Bavarian Nordic A/S",
-      "ticker": "BAVA",
-      "country": "Denmark",
-      "sector": "Health Care",
-      "weight": 0.0028,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BF0DMK7",
-      "name": "Iovance Biotherapeutics Inc",
-      "ticker": "IOVA",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0028,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_RLAY",
-      "name": "RELAY THERAPEUTICS",
-      "ticker": "RLAY",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0028,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B0C8KV2",
-      "name": "AtriCure Inc",
-      "ticker": "ATRC",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0028,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_AXGN",
-      "name": "AXOGEN",
-      "ticker": "AXGN",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0027,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_IDYA",
-      "name": "IDEAYA BIOSCIENCES",
-      "ticker": "IDYA",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0027,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2347277",
-      "name": "CorVel Corp",
-      "ticker": "CRVL",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0026,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_ABCL",
-      "name": "ABCELLERA BIOLOGICS",
-      "ticker": "ABCL",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0026,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2630085",
-      "name": "Neogen Corp",
-      "ticker": "NEOG",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0024,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2713317",
-      "name": "ACADIA Pharmaceuticals Inc",
-      "ticker": "ACAD",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0024,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B0M42T2",
-      "name": "Elekta AB",
-      "ticker": "EKTAB",
-      "country": "Sweden",
-      "sector": "Health Care",
-      "weight": 0.0024,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BLF9YV7",
-      "name": "SK Biopharmaceuticals Co Ltd",
-      "ticker": "326030",
-      "country": "South Korea",
-      "sector": "Health Care",
-      "weight": 0.0023,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B0SDJB4",
-      "name": "Zealand Pharma A/S",
-      "ticker": "ZEAL",
-      "country": "Denmark",
-      "sector": "Health Care",
-      "weight": 0.0022,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BNSP0B8",
-      "name": "ImmunityBio Inc",
-      "ticker": "IBRX",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0022,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6470544",
-      "name": "Jeol Ltd",
-      "ticker": "6951",
-      "country": "Japan",
-      "sector": "Information Technology",
-      "weight": 0.0021,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BYVQYS0",
-      "name": "International Workplace Group PLC",
-      "ticker": "IWG",
-      "country": "United Kingdom",
-      "sector": "Real Estate",
-      "weight": 0.002,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B04LVF0",
-      "name": "NEUREN PHARMACEUTICALS LIMITED",
-      "ticker": "NEU.AX",
-      "country": "Australia",
-      "sector": "Health Care",
-      "weight": 0.002,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_IMNM",
-      "name": "IMMUNOME",
-      "ticker": "IMNM",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.002,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BFTWZY0",
-      "name": "Veracyte Inc",
-      "ticker": "VCYT",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0019,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2100362",
-      "name": "BioCryst Pharmaceuticals Inc",
-      "ticker": "BCRX",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0019,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BRXYZ57",
-      "name": "Fortrea Holdings Inc",
-      "ticker": "FTRE",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0019,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_AUPH",
-      "name": "AURINIA PHARMACEUTICALS",
-      "ticker": "AUPH",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0019,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B1KBGS9",
-      "name": "Chemometec A/S",
-      "ticker": "CHEMM",
-      "country": "Denmark",
-      "sector": "Health Care",
-      "weight": 0.0018,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B234WN9",
-      "name": "DiaSorin SpA",
-      "ticker": "DIA",
-      "country": "Italy",
-      "sector": "Health Care",
-      "weight": 0.0018,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BKV28S8",
-      "name": "Schrodinger Inc/United States",
-      "ticker": "SDGR",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0017,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BKSGZN7",
-      "name": "Harmony Biosciences Holdings Inc",
-      "ticker": "HRMY",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0017,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_STOK",
-      "name": "STOKE THERAPEUTICS",
-      "ticker": "STOK",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0016,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B8DPDT7",
-      "name": "Sarepta Therapeutics Inc",
-      "ticker": "SRPT",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0016,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BP6S8Z3",
-      "name": "Oxford Nanopore Technologies PLC",
-      "ticker": "ONT",
-      "country": "United Kingdom",
-      "sector": "Health Care",
-      "weight": 0.0016,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BDZT9Y9",
-      "name": "Arcus Biosciences Inc",
-      "ticker": "RCUS",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0015,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BMV9P26",
-      "name": "Jiangsu Hengrui Pharmaceuticals Co Ltd",
-      "ticker": "1276",
-      "country": "Hong Kong",
-      "sector": "Health Care",
-      "weight": 0.0014,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_URGN",
-      "name": "UROGEN PHARMA",
-      "ticker": "URGN",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0014,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BX3SQS1",
-      "name": "Astrana Health Inc",
-      "ticker": "ASTH",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0013,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_2225",
-      "name": "JINHAI MEDICAL TECHNOLOGY LTD",
-      "ticker": "2225",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0013,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BK4PZ38",
-      "name": "Vir Biotechnology Inc",
-      "ticker": "VIR",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0013,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BJDQXG4",
-      "name": "Novavax Inc",
-      "ticker": "NVAX",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0013,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BM9GT61",
-      "name": "Certara Inc",
-      "ticker": "CERT",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0013,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BF3W461",
-      "name": "Tandem Diabetes Care Inc",
-      "ticker": "TNDM",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0013,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BH3Q8S7",
-      "name": "ABLBio Inc",
-      "ticker": "298380",
-      "country": "South Korea",
-      "sector": "Health Care",
-      "weight": 0.0012,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B07Q2V5",
-      "name": "Lakefront Biotherapeutics NV",
-      "ticker": "LKFT",
-      "country": "Netherlands",
-      "sector": "Health Care",
-      "weight": 0.0012,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_ZYME",
-      "name": "ZYMEWORKS",
-      "ticker": "ZYME",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0012,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BYSS4X4",
-      "name": "Novocure Ltd",
-      "ticker": "NVCR",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0012,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_MEDCL",
-      "name": "MEDINCELL SA",
-      "ticker": "MEDCL",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0011,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BNDRF25",
-      "name": "Dottikon Es Holding AG",
-      "ticker": "DESN",
-      "country": "Switzerland",
-      "sector": "Health Care",
-      "weight": 0.0011,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_ABSI",
-      "name": "ABSCI CORP",
-      "ticker": "ABSI",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0011,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BQFH9G6",
-      "name": "D&D PharmaTech Inc",
-      "ticker": "347850",
-      "country": "South Korea",
-      "sector": "Health Care",
-      "weight": 0.0011,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B1P70H9",
-      "name": "United Laboratories International Holdings Ltd/The",
-      "ticker": "3933",
-      "country": "Hong Kong",
-      "sector": "Health Care",
-      "weight": 0.001,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BMW2GT8",
-      "name": "Pharma Mar SA",
-      "ticker": "PHM",
-      "country": "Spain",
-      "sector": "Health Care",
-      "weight": 0.001,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_CSTL",
-      "name": "CASTLE BIOSCIENCES",
-      "ticker": "CSTL",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.001,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_ANAB",
-      "name": "ANAPTYSBIO",
-      "ticker": "ANAB",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.001,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B1L3VL2",
-      "name": "Oscotec Inc",
-      "ticker": "039200",
-      "country": "South Korea",
-      "sector": "Health Care",
-      "weight": 0.001,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:2248693",
-      "name": "Integra LifeSciences Holdings Corp",
-      "ticker": "IART",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.001,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_TSHA",
-      "name": "TAYSHA GENE THERAPIES",
-      "ticker": "TSHA",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.001,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_NANO",
-      "name": "NANOBIOTIX SA",
-      "ticker": "NANO",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0009,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_MRVI",
-      "name": "MARAVAI LIFESCIENCES HOLDINGS CLAS",
-      "ticker": "MRVI",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0009,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BNHWNV1",
-      "name": "Voronoi Inc",
-      "ticker": "310210",
-      "country": "South Korea",
-      "sector": "Health Care",
-      "weight": 0.0009,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_PHARM",
-      "name": "PHARMING GROUP",
-      "ticker": "PHARM",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0009,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BN4GWL9",
-      "name": "HBM Holdings Ltd",
-      "ticker": "2142",
-      "country": "Hong Kong",
-      "sector": "Health Care",
-      "weight": 0.0009,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BF0YK62",
-      "name": "Idorsia Ltd",
-      "ticker": "IDIA",
-      "country": "Switzerland",
-      "sector": "Health Care",
-      "weight": 0.0009,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BKLJK94",
-      "name": "SHANGHAI HENLIUS BIOTECH I H",
-      "ticker": "2696",
-      "country": "China",
-      "sector": "Unclassified",
-      "weight": 0.0008,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BMG75K3",
-      "name": "SK Bioscience Co Ltd",
-      "ticker": "302440",
-      "country": "South Korea",
-      "sector": "Health Care",
-      "weight": 0.0008,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:5689857",
-      "name": "Eckert & Ziegler SE",
-      "ticker": "EUZ",
-      "country": "Germany",
-      "sector": "Health Care",
-      "weight": 0.0008,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BNRKTL7",
-      "name": "Lunit Inc",
-      "ticker": "328130",
-      "country": "South Korea",
-      "sector": "Health Care",
-      "weight": 0.0008,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BNC0LN8",
-      "name": "PolyPeptide Group AG",
-      "ticker": "PPGN",
-      "country": "Switzerland",
-      "sector": "Health Care",
-      "weight": 0.0008,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_SNDX",
-      "name": "SYNDAX PHARMACEUTICALS",
-      "ticker": "SNDX",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0008,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BTMJD19",
-      "name": "Roche Holding AG",
-      "ticker": "ROP",
-      "country": "Switzerland",
-      "sector": "Health Care",
-      "weight": 0.0008,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_DYVOX",
-      "name": "DYNAVOX GROUP",
-      "ticker": "DYVOX",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0007,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BD0M3Q3",
-      "name": "ST Pharm Co Ltd",
-      "ticker": "237690",
-      "country": "South Korea",
-      "sector": "Health Care",
-      "weight": 0.0007,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BM9VY27",
-      "name": "QuidelOrtho Corp",
-      "ticker": "QDEL",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0007,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_CTKB",
-      "name": "CYTEK BIOSCIENCES",
-      "ticker": "CTKB",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0007,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "VANG:OXB",
-      "name": "Oxford Biomedica PLC",
-      "ticker": "OXB",
-      "country": "United Kingdom",
-      "sector": "Health Care",
-      "weight": 0.0006,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6093491",
-      "name": "Japan Lifeline Co Ltd",
-      "ticker": "7575",
-      "country": "Japan",
-      "sector": "Health Care",
-      "weight": 0.0006,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B679Q36",
-      "name": "Seegene Inc",
-      "ticker": "096530",
-      "country": "South Korea",
-      "sector": "Health Care",
-      "weight": 0.0006,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B3X26D8",
-      "name": "Pacira BioSciences Inc",
-      "ticker": "PCRX",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0006,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_KURA",
-      "name": "KURA ONCOLOGY",
-      "ticker": "KURA",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0006,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BMZC7F8",
-      "name": "Hangzhou Tigermed Consulting Co Ltd",
-      "ticker": "3347",
-      "country": "Hong Kong",
-      "sector": "Health Care",
-      "weight": 0.0006,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_MYGN",
-      "name": "MYRIAD GENETICS",
-      "ticker": "MYGN",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0006,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_JANX",
-      "name": "JANUX THERAPEUTICS",
-      "ticker": "JANX",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0005,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B898BV8",
-      "name": "Xvivo Perfusion AB",
-      "ticker": "XVIVO",
-      "country": "Sweden",
-      "sector": "Health Care",
-      "weight": 0.0005,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B72ZBG4",
-      "name": "Supernus Pharmaceuticals Inc",
-      "ticker": "SUPN",
-      "country": "United States",
-      "sector": "Health Care",
-      "weight": 0.0005,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:5811917",
-      "name": "Evotec SE",
-      "ticker": "EVT",
-      "country": "Germany",
-      "sector": "Health Care",
-      "weight": 0.0005,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_VLA",
-      "name": "VALNEVA",
-      "ticker": "VLA",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0005,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_ARVN",
-      "name": "ARVINAS",
-      "ticker": "ARVN",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0005,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_ALMS",
-      "name": "ALUMIS",
-      "ticker": "ALMS",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0004,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BMDHDB3",
-      "name": "PHC Holdings Corp",
-      "ticker": "6523",
-      "country": "Japan",
-      "sector": "Health Care",
-      "weight": 0.0004,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_BWAY",
-      "name": "BRAINSWAY LTD",
-      "ticker": "BWAY",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0004,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6307114",
-      "name": "Eiken Chemical Co Ltd",
-      "ticker": "4549",
-      "country": "Japan",
-      "sector": "Health Care",
-      "weight": 0.0004,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_RGNX",
-      "name": "REGENXBIO",
-      "ticker": "RGNX",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0004,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BNZFHP4",
-      "name": "LEPU BIOPHARMA CO LTD H",
-      "ticker": "2157",
-      "country": "China",
-      "sector": "Unclassified",
-      "weight": 0.0003,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BG6DZJ8",
-      "name": "Shanghai Junshi Biosciences Co Ltd",
-      "ticker": "1877",
-      "country": "Hong Kong",
-      "sector": "Health Care",
-      "weight": 0.0003,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_PRTA",
-      "name": "PROTHENA PLC",
-      "ticker": "PRTA",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0003,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BMZQSP7",
-      "name": "Gubra A/S",
-      "ticker": "GUBRA",
-      "country": "Denmark",
-      "sector": "Health Care",
-      "weight": 0.0003,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_VHI",
-      "name": "VITALHUB CORP",
-      "ticker": "VHI",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0002,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_OSUR",
-      "name": "ORASURE TECHNOLOGIES INC",
-      "ticker": "OSUR",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0002,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_VNDA",
-      "name": "VANDA PHARMACEUTICALS INC",
-      "ticker": "VNDA",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0002,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_LAB",
-      "name": "STANDARD BIOTOOLS",
-      "ticker": "LAB",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0002,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_EDIT",
-      "name": "EDITAS MEDICINE",
-      "ticker": "EDIT",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0002,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_LYEL",
-      "name": "LYELL IMMUNOPHARMA",
-      "ticker": "LYEL",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0002,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_ADCT",
-      "name": "ADC THERAPEUTICS LTD",
-      "ticker": "ADCT",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0001,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_STRO",
-      "name": "SUTRO BIOPHARMA INC",
-      "ticker": "STRO",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0001,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_FATE",
-      "name": "FATE THERAPEUTICS INC",
-      "ticker": "FATE",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0001,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_MGNX",
-      "name": "MACROGENICS INC",
-      "ticker": "MGNX",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.0001,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "BOND:ORION",
-      "name": "ORION",
-      "ticker": "",
-      "country": "Global",
-      "sector": "Corporate / Other",
-      "weight": 0.0125,
-      "asset_class": "fixed_interest",
-      "tranche_count": 1
-    },
-    {
-      "isin": "BOND:SARTORIUS_AG",
-      "name": "SARTORIUS AG",
-      "ticker": "",
-      "country": "Global",
-      "sector": "Corporate / Other",
-      "weight": 0.0081,
-      "asset_class": "fixed_interest",
-      "tranche_count": 1
-    },
-    {
-      "isin": "BOND:BIO_RAD_LABORATORIES",
-      "name": "BIO RAD LABORATORIES",
-      "ticker": "",
-      "country": "Global",
-      "sector": "Corporate / Other",
-      "weight": 0.0073,
-      "asset_class": "fixed_interest",
-      "tranche_count": 1
-    },
-    {
-      "isin": "BOND:TEMPUS_AI",
-      "name": "TEMPUS AI",
-      "ticker": "",
-      "country": "Global",
-      "sector": "Corporate / Other",
-      "weight": 0.007,
-      "asset_class": "fixed_interest",
-      "tranche_count": 1
-    },
-    {
-      "isin": "BOND:10X_GENOMICS",
-      "name": "10X GENOMICS",
-      "ticker": "",
-      "country": "Global",
-      "sector": "Corporate / Other",
-      "weight": 0.0064,
-      "asset_class": "fixed_interest",
-      "tranche_count": 1
-    },
-    {
-      "isin": "BOND:SECTRA",
-      "name": "SECTRA",
-      "ticker": "",
-      "country": "Global",
-      "sector": "Corporate / Other",
-      "weight": 0.0047,
-      "asset_class": "fixed_interest",
-      "tranche_count": 1
-    },
-    {
-      "isin": "BOND:H_LUNDBECK",
-      "name": "H. LUNDBECK",
-      "ticker": "",
-      "country": "Global",
-      "sector": "Corporate / Other",
-      "weight": 0.0025,
-      "asset_class": "fixed_interest",
-      "tranche_count": 1
-    },
-    {
-      "isin": "BOND:RECURSION_PHARMACEUTICALS",
-      "name": "RECURSION PHARMACEUTICALS",
-      "ticker": "",
-      "country": "Global",
-      "sector": "Corporate / Other",
-      "weight": 0.0016,
-      "asset_class": "fixed_interest",
-      "tranche_count": 1
-    },
-    {
-      "isin": "BOND:BIOARCTIC",
-      "name": "BIOARCTIC",
-      "ticker": "",
-      "country": "Global",
-      "sector": "Corporate / Other",
-      "weight": 0.0013,
-      "asset_class": "fixed_interest",
-      "tranche_count": 1
-    },
-    {
-      "isin": "BOND:GENEDX_HOLDINGS",
-      "name": "GENEDX HOLDINGS",
-      "ticker": "",
-      "country": "Global",
-      "sector": "Corporate / Other",
-      "weight": 0.0012,
-      "asset_class": "fixed_interest",
-      "tranche_count": 1
-    },
-    {
-      "isin": "BOND:SHANGHAI_MICROPORT_MEDBOT",
-      "name": "SHANGHAI MICROPORT MEDBOT",
-      "ticker": "",
-      "country": "Global",
-      "sector": "Corporate / Other",
-      "weight": 0.001,
-      "asset_class": "fixed_interest",
-      "tranche_count": 1
-    },
-    {
-      "isin": "BOND:NUVATION_BIO",
-      "name": "NUVATION BIO",
-      "ticker": "",
-      "country": "Global",
-      "sector": "Corporate / Other",
-      "weight": 0.001,
-      "asset_class": "fixed_interest",
-      "tranche_count": 1
-    },
-    {
-      "isin": "BOND:RAYSEARCH_LABORATORIES",
-      "name": "RAYSEARCH LABORATORIES",
-      "ticker": "",
-      "country": "Global",
-      "sector": "Corporate / Other",
-      "weight": 0.0005,
-      "asset_class": "fixed_interest",
-      "tranche_count": 1
-    },
-    {
-      "isin": "BOND:EVOLENT_HEALTH",
-      "name": "EVOLENT HEALTH",
-      "ticker": "",
-      "country": "Global",
-      "sector": "Corporate / Other",
-      "weight": 0.0005,
-      "asset_class": "fixed_interest",
-      "tranche_count": 1
-    },
-    {
-      "isin": "BOND:JOINN_LABORATORIES_CHINA",
-      "name": "JOINN LABORATORIES (CHINA",
-      "ticker": "",
-      "country": "Global",
-      "sector": "Corporate / Other",
-      "weight": 0.0003,
-      "asset_class": "fixed_interest",
-      "tranche_count": 1
-    }
-  ],
   "NGB": [
     {
       "isin": "BOND:ISSUER_NZ_GOVT",
@@ -7994,1376 +4916,6 @@
       "country": "New Zealand",
       "sector": "Real Estate",
       "weight": 0.01410282,
-      "asset_class": "equity"
-    }
-  ],
-  "SAJP_HOLDINGS": [
-    {
-      "isin": "SEDOL:6335171",
-      "name": "Mitsubishi UFJ Financial Group Inc",
-      "ticker": "8306",
-      "country": "Japan",
-      "sector": "Financials",
-      "weight": 0.0487,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6900643",
-      "name": "Toyota Motor Corp",
-      "ticker": "7203",
-      "country": "Japan",
-      "sector": "Consumer Discretionary",
-      "weight": 0.0435,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6821506",
-      "name": "Sony Group Corp",
-      "ticker": "6758",
-      "country": "Japan",
-      "sector": "Consumer Discretionary",
-      "weight": 0.0336,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6563024",
-      "name": "Sumitomo Mitsui Financial Group Inc",
-      "ticker": "8316",
-      "country": "Japan",
-      "sector": "Financials",
-      "weight": 0.0317,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BQRRZ00",
-      "name": "Recruit Holdings Co Ltd",
-      "ticker": "6098",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0307,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6429104",
-      "name": "Hitachi Ltd",
-      "ticker": "6501",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0289,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6870490",
-      "name": "Advantest Corp",
-      "ticker": "6857",
-      "country": "Japan",
-      "sector": "Information Technology",
-      "weight": 0.0266,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6895675",
-      "name": "Tokyo Electron Ltd",
-      "ticker": "8035",
-      "country": "Japan",
-      "sector": "Information Technology",
-      "weight": 0.0261,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6591014",
-      "name": "Mizuho Financial Group Inc",
-      "ticker": "8411",
-      "country": "Japan",
-      "sector": "Financials",
-      "weight": 0.0256,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6596785",
-      "name": "Mitsubishi Corp",
-      "ticker": "8058",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0219,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6513126",
-      "name": "Tokio Marine Holdings Inc",
-      "ticker": "8766",
-      "country": "Japan",
-      "sector": "Financials",
-      "weight": 0.0215,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6332439",
-      "name": "Fast Retailing Co Ltd",
-      "ticker": "9983",
-      "country": "Japan",
-      "sector": "Consumer Discretionary",
-      "weight": 0.0205,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6490995",
-      "name": "Keyence Corp",
-      "ticker": "6861",
-      "country": "Japan",
-      "sector": "Information Technology",
-      "weight": 0.0185,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6467803",
-      "name": "ITOCHU Corp",
-      "ticker": "8001",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0177,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6770620",
-      "name": "SoftBank Group Corp",
-      "ticker": "9984",
-      "country": "Japan",
-      "sector": "Communication Services",
-      "weight": 0.0169,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6597302",
-      "name": "Mitsui & Co Ltd",
-      "ticker": "8031",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.016,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6870445",
-      "name": "Takeda Pharmaceutical Co Ltd",
-      "ticker": "4502",
-      "country": "Japan",
-      "sector": "Health Care",
-      "weight": 0.0148,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6639550",
-      "name": "Nintendo Co Ltd",
-      "ticker": "7974",
-      "country": "Japan",
-      "sector": "Communication Services",
-      "weight": 0.013,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BMGYJ02",
-      "name": "Kioxia Holdings Corp",
-      "ticker": "285A",
-      "country": "Japan",
-      "sector": "Information Technology",
-      "weight": 0.0129,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6804585",
-      "name": "Shin-Etsu Chemical Co Ltd",
-      "ticker": "4063",
-      "country": "Japan",
-      "sector": "Materials",
-      "weight": 0.0123,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6597045",
-      "name": "Mitsubishi Electric Corp",
-      "ticker": "6503",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0118,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6248990",
-      "name": "KDDI Corp",
-      "ticker": "9433",
-      "country": "Japan",
-      "sector": "Communication Services",
-      "weight": 0.0115,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6610403",
-      "name": "Murata Manufacturing Co Ltd",
-      "ticker": "6981",
-      "country": "Japan",
-      "sector": "Information Technology",
-      "weight": 0.0105,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6441506",
-      "name": "Hoya Corp",
-      "ticker": "7741",
-      "country": "Japan",
-      "sector": "Health Care",
-      "weight": 0.0105,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6572707",
-      "name": "Panasonic Holdings Corp",
-      "ticker": "6752",
-      "country": "Japan",
-      "sector": "Consumer Discretionary",
-      "weight": 0.0095,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6569464",
-      "name": "Marubeni Corp",
-      "ticker": "8002",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0095,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6770620",
-      "name": "SoftBank Group Corp",
-      "ticker": "9984",
-      "country": "Japan",
-      "sector": "Communication Services",
-      "weight": 0.0094,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6858946",
-      "name": "Sumitomo Corp",
-      "ticker": "8053",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0094,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6435145",
-      "name": "Honda Motor Co Ltd",
-      "ticker": "7267",
-      "country": "Japan",
-      "sector": "Consumer Discretionary",
-      "weight": 0.0089,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B601QS4",
-      "name": "Daiichi Life Group Inc",
-      "ticker": "8750",
-      "country": "Japan",
-      "sector": "Financials",
-      "weight": 0.0085,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B2Q4CS1",
-      "name": "MS&AD Insurance Group Holdings Inc",
-      "ticker": "8725",
-      "country": "Japan",
-      "sector": "Financials",
-      "weight": 0.0085,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6356945",
-      "name": "Fujitsu Ltd",
-      "ticker": "6702",
-      "country": "Japan",
-      "sector": "Information Technology",
-      "weight": 0.008,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B62G7K6",
-      "name": "Sompo Holdings Inc",
-      "ticker": "8630",
-      "country": "Japan",
-      "sector": "Financials",
-      "weight": 0.008,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6661144",
-      "name": "ORIX Corp",
-      "ticker": "8591",
-      "country": "Japan",
-      "sector": "Financials",
-      "weight": 0.0079,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6250724",
-      "name": "Daikin Industries Ltd",
-      "ticker": "6367",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0079,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BYT8165",
-      "name": "Japan Post Bank Co Ltd",
-      "ticker": "7182",
-      "country": "Japan",
-      "sector": "Financials",
-      "weight": 0.0076,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6640400",
-      "name": "NEC Corp",
-      "ticker": "6701",
-      "country": "Japan",
-      "sector": "Information Technology",
-      "weight": 0.0071,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B5LTM93",
-      "name": "Otsuka Holdings Co Ltd",
-      "ticker": "4578",
-      "country": "Japan",
-      "sector": "Health Care",
-      "weight": 0.007,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6496584",
-      "name": "Komatsu Ltd",
-      "ticker": "6301",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.007,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6641373",
-      "name": "NTT Inc",
-      "ticker": "9432",
-      "country": "Japan",
-      "sector": "Communication Services",
-      "weight": 0.0068,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6356934",
-      "name": "FANUC Corp",
-      "ticker": "6954",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0067,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6196408",
-      "name": "Chugai Pharmaceutical Co Ltd",
-      "ticker": "4519",
-      "country": "Japan",
-      "sector": "Health Care",
-      "weight": 0.0067,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B0J7D91",
-      "name": "Daiichi Sankyo Co Ltd",
-      "ticker": "4568",
-      "country": "Japan",
-      "sector": "Health Care",
-      "weight": 0.0064,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6985383",
-      "name": "Astellas Pharma Inc",
-      "ticker": "4503",
-      "country": "Japan",
-      "sector": "Health Care",
-      "weight": 0.0063,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6635677",
-      "name": "Renesas Electronics Corp",
-      "ticker": "6723",
-      "country": "Japan",
-      "sector": "Information Technology",
-      "weight": 0.0063,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6132101",
-      "name": "Bridgestone Corp",
-      "ticker": "5108",
-      "country": "Japan",
-      "sector": "Consumer Discretionary",
-      "weight": 0.0063,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6421553",
-      "name": "Resona Holdings Inc",
-      "ticker": "8308",
-      "country": "Japan",
-      "sector": "Financials",
-      "weight": 0.0062,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6643108",
-      "name": "Nomura Holdings Inc",
-      "ticker": "8604",
-      "country": "Japan",
-      "sector": "Financials",
-      "weight": 0.006,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6431897",
-      "name": "Sumitomo Mitsui Trust Group Inc",
-      "ticker": "8309",
-      "country": "Japan",
-      "sector": "Financials",
-      "weight": 0.006,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6596729",
-      "name": "Mitsubishi Estate Co Ltd",
-      "ticker": "8802",
-      "country": "Japan",
-      "sector": "Real Estate",
-      "weight": 0.0057,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6648891",
-      "name": "Oriental Land Co Ltd/Japan",
-      "ticker": "4661",
-      "country": "Japan",
-      "sector": "Consumer Discretionary",
-      "weight": 0.0056,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6900580",
-      "name": "Toyota Tsusho Corp",
-      "ticker": "8015",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0056,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6869302",
-      "name": "TDK Corp",
-      "ticker": "6762",
-      "country": "Japan",
-      "sector": "Information Technology",
-      "weight": 0.0056,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6356525",
-      "name": "FUJIFILM Holdings Corp",
-      "ticker": "4901",
-      "country": "Japan",
-      "sector": "Information Technology",
-      "weight": 0.0055,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6356707",
-      "name": "Fujikura Ltd",
-      "ticker": "5803",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0054,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6597603",
-      "name": "Mitsui Fudosan Co Ltd",
-      "ticker": "8801",
-      "country": "Japan",
-      "sector": "Real Estate",
-      "weight": 0.0054,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6298542",
-      "name": "East Japan Railway Co",
-      "ticker": "9020",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0054,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6172323",
-      "name": "Canon Inc",
-      "ticker": "7751",
-      "country": "Japan",
-      "sector": "Information Technology",
-      "weight": 0.0052,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6270948",
-      "name": "Disco Corp",
-      "ticker": "6146",
-      "country": "Japan",
-      "sector": "Information Technology",
-      "weight": 0.0051,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BYT8143",
-      "name": "Japan Post Holdings Co Ltd",
-      "ticker": "6178",
-      "country": "Japan",
-      "sector": "Financials",
-      "weight": 0.005,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6483809",
-      "name": "Kao Corp",
-      "ticker": "4452",
-      "country": "Japan",
-      "sector": "Consumer Staples",
-      "weight": 0.0049,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6010906",
-      "name": "Ajinomoto Co Inc",
-      "ticker": "2802",
-      "country": "Japan",
-      "sector": "Consumer Staples",
-      "weight": 0.0047,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B0JDQD4",
-      "name": "Bandai Namco Holdings Inc",
-      "ticker": "7832",
-      "country": "Japan",
-      "sector": "Consumer Discretionary",
-      "weight": 0.0047,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6183552",
-      "name": "Central Japan Railway Co",
-      "ticker": "9022",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0046,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6642569",
-      "name": "Nippon Steel Corp",
-      "ticker": "5401",
-      "country": "Japan",
-      "sector": "Materials",
-      "weight": 0.0045,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6499260",
-      "name": "Kyocera Corp",
-      "ticker": "6971",
-      "country": "Japan",
-      "sector": "Information Technology",
-      "weight": 0.0045,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6885074",
-      "name": "Terumo Corp",
-      "ticker": "4543",
-      "country": "Japan",
-      "sector": "Health Care",
-      "weight": 0.0044,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6763965",
-      "name": "SMC Corp",
-      "ticker": "6273",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0044,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6057378",
-      "name": "Asics Corp",
-      "ticker": "7936",
-      "country": "Japan",
-      "sector": "Consumer Discretionary",
-      "weight": 0.0041,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6496681",
-      "name": "Konami Group Corp",
-      "ticker": "9766",
-      "country": "Japan",
-      "sector": "Communication Services",
-      "weight": 0.0039,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6480048",
-      "name": "Aeon Co Ltd",
-      "ticker": "8267",
-      "country": "Japan",
-      "sector": "Consumer Staples",
-      "weight": 0.0038,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6791591",
-      "name": "Secom Co Ltd",
-      "ticker": "9735",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0038,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6251363",
-      "name": "Daiwa House Industry Co Ltd",
-      "ticker": "1925",
-      "country": "Japan",
-      "sector": "Real Estate",
-      "weight": 0.0036,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6456102",
-      "name": "Ibiden Co Ltd",
-      "ticker": "4062",
-      "country": "Japan",
-      "sector": "Information Technology",
-      "weight": 0.0035,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6054409",
-      "name": "Asahi Group Holdings Ltd",
-      "ticker": "2502",
-      "country": "Japan",
-      "sector": "Consumer Staples",
-      "weight": 0.0035,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6643960",
-      "name": "Nippon Yusen KK",
-      "ticker": "9101",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0034,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6758455",
-      "name": "Ryohin Keikaku Co Ltd",
-      "ticker": "7453",
-      "country": "Japan",
-      "sector": "Consumer Discretionary",
-      "weight": 0.0034,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6493745",
-      "name": "Kirin Holdings Co Ltd",
-      "ticker": "2503",
-      "country": "Japan",
-      "sector": "Consumer Staples",
-      "weight": 0.0033,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6804682",
-      "name": "Shionogi & Co Ltd",
-      "ticker": "4507",
-      "country": "Japan",
-      "sector": "Health Care",
-      "weight": 0.0033,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6506267",
-      "name": "Lasertec Corp",
-      "ticker": "6920",
-      "country": "Japan",
-      "sector": "Information Technology",
-      "weight": 0.0033,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6805469",
-      "name": "Resonac Holdings Corp",
-      "ticker": "4004",
-      "country": "Japan",
-      "sector": "Materials",
-      "weight": 0.0032,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6641801",
-      "name": "Nitto Denko Corp",
-      "ticker": "6988",
-      "country": "Japan",
-      "sector": "Materials",
-      "weight": 0.0032,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6466985",
-      "name": "IHI Corp",
-      "ticker": "7013",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.003,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6497509",
-      "name": "Kubota Corp",
-      "ticker": "6326",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.003,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6251448",
-      "name": "Daiwa Securities Group Inc",
-      "ticker": "8601",
-      "country": "Japan",
-      "sector": "Financials",
-      "weight": 0.003,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6597584",
-      "name": "Mitsui OSK Lines Ltd",
-      "ticker": "9104",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.003,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6390921",
-      "name": "Nomura Research Institute Ltd",
-      "ticker": "4307",
-      "country": "Japan",
-      "sector": "Information Technology",
-      "weight": 0.003,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6744294",
-      "name": "T&D Holdings Inc",
-      "ticker": "8795",
-      "country": "Japan",
-      "sector": "Financials",
-      "weight": 0.003,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6656407",
-      "name": "Obayashi Corp",
-      "ticker": "1802",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0029,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6858902",
-      "name": "Sumitomo Realty & Development Co Ltd",
-      "ticker": "8830",
-      "country": "Japan",
-      "sector": "Real Estate",
-      "weight": 0.0029,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6793906",
-      "name": "Sekisui House Ltd",
-      "ticker": "1928",
-      "country": "Japan",
-      "sector": "Consumer Discretionary",
-      "weight": 0.0029,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6743882",
-      "name": "Japan Exchange Group Inc",
-      "ticker": "8697",
-      "country": "Japan",
-      "sector": "Financials",
-      "weight": 0.0028,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6136749",
-      "name": "Obic Co Ltd",
-      "ticker": "4684",
-      "country": "Japan",
-      "sector": "Information Technology",
-      "weight": 0.0027,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6895448",
-      "name": "Tokyo Gas Co Ltd",
-      "ticker": "9531",
-      "country": "Japan",
-      "sector": "Utilities",
-      "weight": 0.0027,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6054603",
-      "name": "Asahi Kasei Corp",
-      "ticker": "3407",
-      "country": "Japan",
-      "sector": "Materials",
-      "weight": 0.0026,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6481320",
-      "name": "Kajima Corp",
-      "ticker": "1812",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0026,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6661768",
-      "name": "Osaka Gas Co Ltd",
-      "ticker": "9532",
-      "country": "Japan",
-      "sector": "Utilities",
-      "weight": 0.0026,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6658801",
-      "name": "Olympus Corp",
-      "ticker": "7733",
-      "country": "Japan",
-      "sector": "Health Care",
-      "weight": 0.0025,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6897143",
-      "name": "Toray Industries Inc",
-      "ticker": "3402",
-      "country": "Japan",
-      "sector": "Materials",
-      "weight": 0.0023,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6870100",
-      "name": "Taisei Corp",
-      "ticker": "1801",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0023,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BD97JW7",
-      "name": "Yokohama Financial Group Inc",
-      "ticker": "7186",
-      "country": "Japan",
-      "sector": "Financials",
-      "weight": 0.0022,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6858849",
-      "name": "Sumitomo Metal Mining Co Ltd",
-      "ticker": "5713",
-      "country": "Japan",
-      "sector": "Materials",
-      "weight": 0.0022,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6805265",
-      "name": "Shiseido Co Ltd",
-      "ticker": "4911",
-      "country": "Japan",
-      "sector": "Consumer Staples",
-      "weight": 0.0022,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6985264",
-      "name": "Yamaha Motor Co Ltd",
-      "ticker": "7272",
-      "country": "Japan",
-      "sector": "Consumer Discretionary",
-      "weight": 0.0021,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6302700",
-      "name": "Ebara Corp",
-      "ticker": "6361",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0021,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6269861",
-      "name": "Pan Pacific International Holdings Corp",
-      "ticker": "7532",
-      "country": "Japan",
-      "sector": "Consumer Discretionary",
-      "weight": 0.0021,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6804820",
-      "name": "Shimano Inc",
-      "ticker": "7309",
-      "country": "Japan",
-      "sector": "Consumer Discretionary",
-      "weight": 0.002,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6309466",
-      "name": "SBI Holdings Inc",
-      "ticker": "8473",
-      "country": "Japan",
-      "sector": "Financials",
-      "weight": 0.002,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6356406",
-      "name": "Subaru Corp",
-      "ticker": "7270",
-      "country": "Japan",
-      "sector": "Consumer Discretionary",
-      "weight": 0.002,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6640682",
-      "name": "NIDEC CORP",
-      "ticker": "6594",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0019,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6644800",
-      "name": "Nitori Holdings Co Ltd",
-      "ticker": "9843",
-      "country": "Japan",
-      "sector": "Consumer Discretionary",
-      "weight": 0.0019,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6250025",
-      "name": "Daifuku Co Ltd",
-      "ticker": "6383",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0019,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6084848",
-      "name": "LY Corp",
-      "ticker": "4689",
-      "country": "Japan",
-      "sector": "Communication Services",
-      "weight": 0.0019,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6190563",
-      "name": "Chiba Bank Ltd/The",
-      "ticker": "8331",
-      "country": "Japan",
-      "sector": "Financials",
-      "weight": 0.0019,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6640507",
-      "name": "Nippon Paint Holdings Co Ltd",
-      "ticker": "4612",
-      "country": "Japan",
-      "sector": "Materials",
-      "weight": 0.0019,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6307200",
-      "name": "Eisai Co Ltd",
-      "ticker": "4523",
-      "country": "Japan",
-      "sector": "Health Care",
-      "weight": 0.0018,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6957995",
-      "name": "West Japan Railway Co",
-      "ticker": "9021",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0018,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6357562",
-      "name": "Furukawa Electric Co Ltd",
-      "ticker": "5801",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0017,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6042608",
-      "name": "Zensho Holdings Co Ltd",
-      "ticker": "7550",
-      "country": "Japan",
-      "sector": "Consumer Discretionary",
-      "weight": 0.0017,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B0JQTJ0",
-      "name": "Mitsubishi Chemical Group Corp",
-      "ticker": "4188",
-      "country": "Japan",
-      "sector": "Materials",
-      "weight": 0.0017,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6911485",
-      "name": "Unicharm Corp",
-      "ticker": "8113",
-      "country": "Japan",
-      "sector": "Consumer Staples",
-      "weight": 0.0017,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BNGHNG2",
-      "name": "Kokusai Electric Corp",
-      "ticker": "6525",
-      "country": "Japan",
-      "sector": "Information Technology",
-      "weight": 0.0017,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6543770",
-      "name": "JX Advanced Metals Corp",
-      "ticker": "5016",
-      "country": "Japan",
-      "sector": "Materials",
-      "weight": 0.0017,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6173694",
-      "name": "Capcom Co Ltd",
-      "ticker": "9697",
-      "country": "Japan",
-      "sector": "Communication Services",
-      "weight": 0.0016,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6251028",
-      "name": "SCREEN Holdings Co Ltd",
-      "ticker": "7735",
-      "country": "Japan",
-      "sector": "Information Technology",
-      "weight": 0.0016,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6490809",
-      "name": "Kikkoman Corp",
-      "ticker": "2801",
-      "country": "Japan",
-      "sector": "Consumer Staples",
-      "weight": 0.0016,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6555805",
-      "name": "Makita Corp",
-      "ticker": "6586",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0016,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6408664",
-      "name": "Hankyu Hanshin Holdings Inc",
-      "ticker": "9042",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0016,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6268976",
-      "name": "Mitsubishi HC Capital Inc",
-      "ticker": "8593",
-      "country": "Japan",
-      "sector": "Financials",
-      "weight": 0.0015,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6804400",
-      "name": "Shimizu Corp",
-      "ticker": "1803",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0015,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6484686",
-      "name": "Kawasaki Kisen Kaisha Ltd",
-      "ticker": "9107",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0015,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6776349",
-      "name": "Sanrio Co Ltd",
-      "ticker": "8136",
-      "country": "Japan",
-      "sector": "Consumer Discretionary",
-      "weight": 0.0014,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6640541",
-      "name": "Nippon Sanso Holdings Corp",
-      "ticker": "4091",
-      "country": "Japan",
-      "sector": "Materials",
-      "weight": 0.0014,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BYT8154",
-      "name": "Japan Post Insurance Co Ltd",
-      "ticker": "7181",
-      "country": "Japan",
-      "sector": "Financials",
-      "weight": 0.0013,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6250906",
-      "name": "Dai Nippon Printing Co Ltd",
-      "ticker": "7912",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0013,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6642406",
-      "name": "MINEBEA MITSUMI Inc",
-      "ticker": "6479",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0013,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6250508",
-      "name": "Daito Trust Construction Co Ltd",
-      "ticker": "1878",
-      "country": "Japan",
-      "sector": "Real Estate",
-      "weight": 0.0013,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6895556",
-      "name": "Toho Holdings Co Ltd",
-      "ticker": "8129",
-      "country": "Japan",
-      "sector": "Health Care",
-      "weight": 0.0013,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6986427",
-      "name": "Yokogawa Electric Corp",
-      "ticker": "6841",
-      "country": "Japan",
-      "sector": "Information Technology",
-      "weight": 0.0013,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B63QM77",
-      "name": "Nexon Co Ltd",
-      "ticker": "3659",
-      "country": "Japan",
-      "sector": "Communication Services",
-      "weight": 0.0013,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6396800",
-      "name": "Nippon Building Fund Inc",
-      "ticker": "8951",
-      "country": "Japan",
-      "sector": "Real Estate",
-      "weight": 0.0012,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6805317",
-      "name": "Hulic Co Ltd",
-      "ticker": "3003",
-      "country": "Japan",
-      "sector": "Real Estate",
-      "weight": 0.0012,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6055208",
-      "name": "AGC Inc",
-      "ticker": "5201",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0012,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6229597",
-      "name": "Rakuten Group Inc",
-      "ticker": "4755",
-      "country": "Japan",
-      "sector": "Consumer Discretionary",
-      "weight": 0.0012,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:B5LTM93",
-      "name": "Otsuka Holdings Co Ltd",
-      "ticker": "4578",
-      "country": "Japan",
-      "sector": "Health Care",
-      "weight": 0.0012,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6897024",
-      "name": "TOPPAN Holdings Inc",
-      "ticker": "7911",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0011,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6597346",
-      "name": "Mitsui Kinzoku Co Ltd",
-      "ticker": "5706",
-      "country": "Japan",
-      "sector": "Materials",
-      "weight": 0.001,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6416322",
-      "name": "Hikari Tsushin Inc",
-      "ticker": "9435",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0009,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:BBD7Q84",
-      "name": "Suntory Beverage & Food Ltd",
-      "ticker": "2587",
-      "country": "Japan",
-      "sector": "Consumer Staples",
-      "weight": 0.0009,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6642860",
-      "name": "Nissan Motor Co Ltd",
-      "ticker": "7201",
-      "country": "Japan",
-      "sector": "Consumer Discretionary",
-      "weight": 0.0009,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6499550",
-      "name": "Kyowa Kirin Co Ltd",
-      "ticker": "4151",
-      "country": "Japan",
-      "sector": "Health Care",
-      "weight": 0.0008,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "SEDOL:6014908",
-      "name": "ANA Holdings Inc",
-      "ticker": "9202",
-      "country": "Japan",
-      "sector": "Industrials",
-      "weight": 0.0007,
       "asset_class": "equity"
     }
   ],
@@ -17271,9 +12823,9 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SEDOL:BMBQR09",
-      "name": "Canadian Pacific Kansas City Ltd",
-      "ticker": "CP",
+      "isin": "SEDOL:2180632",
+      "name": "Canadian National Railway Co",
+      "ticker": "CNR",
       "country": "Canada",
       "sector": "Industrials",
       "weight": 0.00312068,
@@ -18335,9 +13887,9 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SEDOL:6641373",
-      "name": "NTT Inc",
-      "ticker": "9432",
+      "isin": "SEDOL:6644060",
+      "name": "Nippon Television Holdings Inc",
+      "ticker": "9404",
       "country": "Japan",
       "sector": "Communication Services",
       "weight": 0.00130867,
@@ -20418,9 +15970,9 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SEDOL:7108918",
+      "isin": "SEDOL:BTMJD19",
       "name": "Roche Holding AG",
-      "ticker": "RO",
+      "ticker": "ROP",
       "country": "Switzerland",
       "sector": "Health Care",
       "weight": 0.00050334,
@@ -69374,15 +64926,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_5",
-      "name": "Debtors",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.020107,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:2000019",
       "name": "Amazon.com Inc",
       "ticker": "AMZN",
@@ -69432,11 +64975,11 @@
       "issuer_name": "Auckland International Airport"
     },
     {
-      "isin": "UNRESOLVED_13",
-      "name": "Tesla Motors Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B616C79",
+      "name": "Tesla Inc",
+      "ticker": "TSLA",
+      "country": "United States",
+      "sector": "Consumer Discretionary",
       "weight": 0.01015609,
       "asset_class": "equity"
     },
@@ -69470,11 +65013,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_17",
-      "name": "Eli Lilly and Company",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2516152",
+      "name": "Eli Lilly & Co",
+      "ticker": "LLY",
+      "country": "United States",
+      "sector": "Health Care",
       "weight": 0.00800177,
       "asset_class": "equity"
     },
@@ -69496,15 +65039,6 @@
       "country": "United States",
       "sector": "Financials",
       "weight": 0.00707849,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_20",
-      "name": "IVX Capital Call",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00615521,
       "asset_class": "equity"
     },
     {
@@ -69552,24 +65086,6 @@
       "country": "United States",
       "sector": "Health Care",
       "weight": 0.00512934,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_27",
-      "name": "BZLNZ NFIX3FRA + 58 11/05/2029",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00471899,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_28",
-      "name": "KIWI Float 13/06/2028",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00471899,
       "asset_class": "equity"
     },
     {
@@ -69685,24 +65201,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_46",
-      "name": "KIWI NFIX3FRA + 65 15/03/2028",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00287243,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_47",
-      "name": "RABOBK NFIX3FRA + 25 17/08/2027",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00287243,
-      "asset_class": "equity"
-    },
-    {
       "isin": "NZX:POT",
       "name": "Port of Tauranga Limited",
       "ticker": "POT.NZ",
@@ -69755,15 +65253,6 @@
       "ticker": "UNH",
       "country": "United States",
       "sector": "Health Care",
-      "weight": 0.00266726,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_55",
-      "name": "ASBBNK NFIX3FRA + 58 30/04/2029",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00266726,
       "asset_class": "equity"
     },
@@ -70411,29 +65900,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_147",
-      "name": "AUCKCN NFIX3FRA + 53 04/10/2027",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00112845,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:2250870",
       "name": "Danaher Corp",
       "ticker": "DHR",
       "country": "United States",
       "sector": "Health Care",
-      "weight": 0.00112845,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_149",
-      "name": "RABOBK NFIX3FRA + 57 20/02/2029",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00112845,
       "asset_class": "equity"
     },
@@ -70519,29 +65990,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_162",
-      "name": "RABOBK NFIX3FRA + 74 19/06/2028",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00102587,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:2931034",
       "name": "Vertex Pharmaceuticals Inc",
       "ticker": "VRTX",
       "country": "United States",
       "sector": "Health Care",
-      "weight": 0.00102587,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_165",
-      "name": "UDC Endeavour Auto ABS Trust",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00102587,
       "asset_class": "equity"
     },
@@ -70611,15 +66064,6 @@
     {
       "isin": "UNRESOLVED_173",
       "name": "Newmont Mining Corp",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00102587,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_174",
-      "name": "TPNZ FLOAT 31/07/2028",
       "ticker": "",
       "country": "Unknown",
       "sector": "Unclassified",
@@ -70816,15 +66260,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_202",
-      "name": "TOYOTA NFIX3FRA + 48 28/09/2029",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00082069,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:2065308",
       "name": "Automatic Data Processing Inc",
       "ticker": "ADP",
@@ -70893,15 +66328,6 @@
       "ticker": "BNY",
       "country": "United States",
       "sector": "Financials",
-      "weight": 0.00082069,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_211",
-      "name": "RABOBK NFIX3FRA + 80 12/08/2026",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00082069,
       "asset_class": "equity"
     },
@@ -71362,15 +66788,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_271",
-      "name": "UDC Endeavour ABS Trust",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00061552,
-      "asset_class": "equity"
-    },
-    {
       "isin": "UNRESOLVED_272",
       "name": "Muenchener Rueckversicherungs-",
       "ticker": "",
@@ -71506,11 +66923,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_294",
-      "name": "Inditex",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BP9DL90",
+      "name": "Industria de Diseno Textil SA",
+      "ticker": "ITX",
+      "country": "Spain",
+      "sector": "Consumer Discretionary",
       "weight": 0.00051293,
       "asset_class": "equity"
     },
@@ -71556,15 +66973,6 @@
       "ticker": "MQG.AX",
       "country": "Australia",
       "sector": "Financials",
-      "weight": 0.00051293,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_301",
-      "name": "MTFNZ M25 A",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00051293,
       "asset_class": "equity"
     },
@@ -71877,15 +67285,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_336",
-      "name": "AVNZP NFIX1BID + 115 15/06/2035",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00041035,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:2795393",
       "name": "Cencora Inc",
       "ticker": "COR",
@@ -71958,33 +67357,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_345",
-      "name": "Nippon Telegraph & Telephone C",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00041035,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_346",
-      "name": "Quantifi Photonics Ltd \u2013 USD ORDINARY SHARES",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00041035,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_348",
-      "name": "UDCAU 2025-2 A",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00041035,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:2026361",
       "name": "Aflac Inc",
       "ticker": "AFL",
@@ -72039,11 +67411,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_357",
-      "name": "Assicurazioni Generali",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:4056719",
+      "name": "Generali",
+      "ticker": "G",
+      "country": "Italy",
+      "sector": "Financials",
       "weight": 0.00041035,
       "asset_class": "equity"
     },
@@ -72102,15 +67474,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_364",
-      "name": "Microstrategy Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00041035,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:2724193",
       "name": "Realty Income Corp",
       "ticker": "O",
@@ -72143,15 +67506,6 @@
       "ticker": "CPG",
       "country": "United Kingdom",
       "sector": "Consumer Discretionary",
-      "weight": 0.00041035,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_369",
-      "name": "Becton Dickinson and Co",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00041035,
       "asset_class": "equity"
     },
@@ -72237,15 +67591,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_379",
-      "name": "Nu Holdings Ltd",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00041035,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:BN44JF6",
       "name": "Apollo Global Management Inc",
       "ticker": "APO",
@@ -72273,11 +67618,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_383",
-      "name": "Wabtec Corp",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2955733",
+      "name": "Westinghouse Air Brake Technologies Corp",
+      "ticker": "WAB",
+      "country": "United States",
+      "sector": "Industrials",
       "weight": 0.00041035,
       "asset_class": "equity"
     },
@@ -72444,15 +67789,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_402",
-      "name": "Ferguson PLC",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00030776,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:BK4N0D7",
       "name": "Carrier Global Corp",
       "ticker": "CARR",
@@ -72593,15 +67929,6 @@
       "ticker": "NTAP",
       "country": "United States",
       "sector": "Information Technology",
-      "weight": 0.00030776,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_421",
-      "name": "Pure Storage Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00030776,
       "asset_class": "equity"
     },
@@ -72768,15 +68095,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_442",
-      "name": "Interactive Brokers Group Inc-CL A",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00030776,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:B8K6ZD1",
       "name": "Workday Inc",
       "ticker": "WDAY",
@@ -72885,15 +68203,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_457",
-      "name": "American International Group I",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00030776,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:B15C4L6",
       "name": "Constellation Software Inc/Canada",
       "ticker": "CSU",
@@ -72957,15 +68266,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_466",
-      "name": "Roper Industries Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00030776,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:6356934",
       "name": "FANUC Corp",
       "ticker": "6954",
@@ -72980,24 +68280,6 @@
       "ticker": "8630",
       "country": "Japan",
       "sector": "Financials",
-      "weight": 0.00030776,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_469",
-      "name": "AUCKCN NFIX3FRA + 60 26/06/2028",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00030776,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_470",
-      "name": "FPQC 2025-1 A Mtge",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00030776,
       "asset_class": "equity"
     },
@@ -73409,15 +68691,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_521",
-      "name": "Cboe Holdings Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00020517,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:2807061",
       "name": "Centene Corp",
       "ticker": "CNC",
@@ -73477,15 +68750,6 @@
       "ticker": "GEHC",
       "country": "United States",
       "sector": "Health Care",
-      "weight": 0.00020517,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_529",
-      "name": "ABN AMRO Group NV",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00020517,
       "asset_class": "equity"
     },
@@ -73589,24 +68853,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_541",
-      "name": "Hewlett-Packard Co",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00020517,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_542",
-      "name": "CHURC NFIX3FRA + 60 15/10/2027",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00020517,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:BYPBS67",
       "name": "ArcelorMittal SA",
       "ticker": "MT",
@@ -73621,15 +68867,6 @@
       "ticker": "UCB",
       "country": "Belgium",
       "sector": "Health Care",
-      "weight": 0.00020517,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_545",
-      "name": "LNZCC 2018-1 A 22/061/2036",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00020517,
       "asset_class": "equity"
     },
@@ -73666,15 +68903,6 @@
       "ticker": "EXR",
       "country": "United States",
       "sector": "Real Estate",
-      "weight": 0.00020517,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_550",
-      "name": "DNB ASA",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00020517,
       "asset_class": "equity"
     },
@@ -73886,15 +69114,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_574",
-      "name": "Ericsson LM-B SHS",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00020517,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:BYT8143",
       "name": "Japan Post Holdings Co Ltd",
       "ticker": "6178",
@@ -74039,15 +69258,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_592",
-      "name": "Michelin (CGDE)",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00020517,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:6715740",
       "name": "QBE INSURANCE GROUP LIMITED",
       "ticker": "QBE.AX",
@@ -74116,15 +69326,6 @@
       "ticker": "8801",
       "country": "Japan",
       "sector": "Real Estate",
-      "weight": 0.00020517,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_601",
-      "name": "Zoom Video Communications-A",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00020517,
       "asset_class": "equity"
     },
@@ -74224,15 +69425,6 @@
       "ticker": "HSY",
       "country": "United States",
       "sector": "Consumer Staples",
-      "weight": 0.00020517,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_613",
-      "name": "Chugai",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00020517,
       "asset_class": "equity"
     },
@@ -74368,15 +69560,6 @@
       "ticker": "CPNG",
       "country": "United States",
       "sector": "Consumer Discretionary",
-      "weight": 0.00020517,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_629",
-      "name": "Novozymes A/S",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00020517,
       "asset_class": "equity"
     },
@@ -74588,15 +69771,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_654",
-      "name": "TURNS 2025-1 A",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00020517,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:BNZFHC1",
       "name": "Hexagon AB",
       "ticker": "HEXAB",
@@ -74669,11 +69843,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_663",
-      "name": "Oriental Land Co Ltd",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6648891",
+      "name": "Oriental Land Co Ltd/Japan",
+      "ticker": "4661",
+      "country": "Japan",
+      "sector": "Consumer Discretionary",
       "weight": 0.00020517,
       "asset_class": "equity"
     },
@@ -74710,15 +69884,6 @@
       "ticker": "SOFI",
       "country": "United States",
       "sector": "Financials",
-      "weight": 0.00020517,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_669",
-      "name": "HeidelbergCement AG",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00020517,
       "asset_class": "equity"
     },
@@ -74800,24 +69965,6 @@
       "ticker": "6920",
       "country": "Japan",
       "sector": "Information Technology",
-      "weight": 0.00020517,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_679",
-      "name": "Reliance Steel & Aluminum Co",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00020517,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_680",
-      "name": "XPO Logistics Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00020517,
       "asset_class": "equity"
     },
@@ -74921,15 +70068,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_692",
-      "name": "Julius Baer Gruppe AG",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:B1VP7R6",
       "name": "Broadridge Financial Solutions Inc",
       "ticker": "BR",
@@ -74948,20 +70086,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_695",
-      "name": "Fortescue Metals Group Ltd",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_696",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:6086253",
+      "name": "FORTESCUE LTD",
+      "ticker": "FMG.AX",
+      "country": "Australia",
+      "sector": "Materials",
       "weight": 0.00010259,
       "asset_class": "equity"
     },
@@ -75007,24 +70136,6 @@
       "ticker": "KER",
       "country": "France",
       "sector": "Consumer Discretionary",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_702",
-      "name": "FPIT 2024-1 A Mtge",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_703",
-      "name": "Du Pont De Nemours",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00010259,
       "asset_class": "equity"
     },
@@ -75155,11 +70266,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_718",
-      "name": "Bunge Ltd",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BQ6BPG9",
+      "name": "Bunge Global SA",
+      "ticker": "BG",
+      "country": "United States",
+      "sector": "Consumer Staples",
       "weight": 0.00010259,
       "asset_class": "equity"
     },
@@ -75286,15 +70397,6 @@
       "ticker": "JBHT",
       "country": "United States",
       "sector": "Industrials",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_739",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00010259,
       "asset_class": "equity"
     },
@@ -75488,24 +70590,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_767",
-      "name": "Coca-Cola European Partners PLC",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_768",
-      "name": "Everest Re Group Ltd",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:6585084",
       "name": "SUNCORP GROUP LIMITED",
       "ticker": "SUN.AX",
@@ -75542,15 +70626,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_773",
-      "name": "Essity Aktiebolag-B",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:2073022",
       "name": "Ball Corp",
       "ticker": "BALL",
@@ -75574,24 +70649,6 @@
       "ticker": "TRN",
       "country": "Italy",
       "sector": "Utilities",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_777",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_778",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00010259,
       "asset_class": "equity"
     },
@@ -75713,24 +70770,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_793",
-      "name": "Kuehne und Nagel International AG",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_795",
-      "name": "Unipol Gruppo SpA",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:B826YT8",
       "name": "WP Carey Inc",
       "ticker": "WPC",
@@ -75776,15 +70815,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_801",
-      "name": "Axa Equitable Holdings Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:BX90C05",
       "name": "Cellnex Telecom SA",
       "ticker": "CLNX",
@@ -75817,15 +70847,6 @@
       "ticker": "SUI",
       "country": "United States",
       "sector": "Real Estate",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_807",
-      "name": "Mid-America Apartment Comm",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00010259,
       "asset_class": "equity"
     },
@@ -76154,33 +71175,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_853",
-      "name": "Schindler Holding-Part Cert",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_854",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_855",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:BSPHGN6",
       "name": "Lamar Advertising Co",
       "ticker": "LAMR",
@@ -76190,29 +71184,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_857",
-      "name": "Link Real Estate Investment Trust",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:BQ7ZV06",
       "name": "Straumann Holding AG",
       "ticker": "STMN",
       "country": "Switzerland",
       "sector": "Health Care",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_862",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00010259,
       "asset_class": "equity"
     },
@@ -76231,24 +71207,6 @@
       "ticker": "GEN",
       "country": "United States",
       "sector": "Information Technology",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_866",
-      "name": "Coca-Cola Hbc Ag-Cdi",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_867",
-      "name": "McCormick  & Co- Non VTG Shrs",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00010259,
       "asset_class": "equity"
     },
@@ -76276,24 +71234,6 @@
       "ticker": "AZRG",
       "country": "Israel",
       "sector": "Real Estate",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_871",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_872",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00010259,
       "asset_class": "equity"
     },
@@ -76370,33 +71310,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_883",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_884",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_886",
-      "name": "AVANZ NFIX1BID + 120 15/05/2057",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:BPMQ7X2",
       "name": "Annaly Capital Management Inc",
       "ticker": "NLY",
@@ -76451,29 +71364,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_895",
-      "name": "SFGNZ 2025-1 A Mtge",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:BQPDXR3",
       "name": "Cooper Cos Inc/The",
       "ticker": "COO",
       "country": "United States",
       "sector": "Health Care",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_897",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00010259,
       "asset_class": "equity"
     },
@@ -76501,42 +71396,6 @@
       "ticker": "TELIA",
       "country": "Sweden",
       "sector": "Communication Services",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_906",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_907",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_908",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_909",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00010259,
       "asset_class": "equity"
     },
@@ -76582,51 +71441,6 @@
       "ticker": "GRAB",
       "country": "United States",
       "sector": "Industrials",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_924",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_925",
-      "name": "Loan secured over residential property in Northland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_926",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_927",
-      "name": "Loan secured over residential property in Nelson",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_928",
-      "name": "Loan secured over residential property in Otago",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00010259,
       "asset_class": "equity"
     },
@@ -76685,51 +71499,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_956",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_957",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_958",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_959",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_960",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:B02L486",
       "name": "Mowi ASA",
       "ticker": "MOWI",
@@ -76766,33 +71535,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_973",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_974",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_975",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:0922320",
       "name": "Smith & Nephew PLC",
       "ticker": "SN/",
@@ -76820,60 +71562,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_983",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_984",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_985",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_986",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_987",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_989",
-      "name": "UKT 4 ? 03/07/28 Corp",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:B8FMRX8",
       "name": "Coloplast A/S",
       "ticker": "COLOB",
@@ -76883,74 +71571,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_995",
-      "name": "Aisin Seiki Co Ltd",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:5962280",
       "name": "Chocoladefabriken Lindt & Spruengli AG",
       "ticker": "LISP",
       "country": "Switzerland",
       "sector": "Consumer Staples",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_999",
-      "name": "United Continental Holdings Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1002",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1003",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1004",
-      "name": "Loan secured over residential property in Canterbury",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1005",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1006",
-      "name": "Loan secured over residential property in Canterbury",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00010259,
       "asset_class": "equity"
     },
@@ -76982,65 +71607,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_1016",
-      "name": "Yahoo Japan Corp",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1018",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1019",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1020",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1021",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:6420129",
       "name": "CapitaLand Integrated Commercial Trust",
       "ticker": "CICT",
       "country": "Singapore",
       "sector": "Real Estate",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1026",
-      "name": "NZDUSD Maturing 03/11/2026 (104102)",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00010259,
       "asset_class": "equity"
     },
@@ -77054,29 +71625,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_1033",
-      "name": "Don Quijote Holdings Co Ltd",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:6290054",
       "name": "MTR Corp Ltd",
       "ticker": "66",
       "country": "Hong Kong",
       "sector": "Industrials",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1036",
-      "name": "CCL Industries Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00010259,
       "asset_class": "equity"
     },
@@ -77099,60 +71652,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_1041",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1042",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1043",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1044",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1045",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1046",
-      "name": "Loan secured over residential property in Otago",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:BMTX0G9",
       "name": "Corebridge Financial Inc",
       "ticker": "CRBG",
@@ -77167,96 +71666,6 @@
       "ticker": "TEL",
       "country": "Norway",
       "sector": "Communication Services",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1065",
-      "name": "FRGV         11/25/30",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1067",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1068",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1069",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1070",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1071",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1072",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1073",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1074",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1077",
-      "name": "Sartorius AG-Vorzug",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00010259,
       "asset_class": "equity"
     },
@@ -77297,78 +71706,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_1093",
-      "name": "UKT 4 22/05/29",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1096",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1097",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1098",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1099",
-      "name": "Loan secured over residential property in Northland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1100",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1101",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1102",
-      "name": "MTFNZ N24 Mtge A",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:5002465",
       "name": "Henkel AG & Co KGaA",
       "ticker": "HEN",
@@ -77387,119 +71724,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_1117",
-      "name": "Loan secured over residential property in Canterbury",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1118",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1119",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1120",
-      "name": "Loan secured over residential property in Canterbury",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1121",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1122",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1123",
-      "name": "Loan secured over residential property in Northland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1124",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1125",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1126",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1129",
-      "name": "Hennes & Mauritz AB",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:6268976",
       "name": "Mitsubishi HC Capital Inc",
       "ticker": "8593",
       "country": "Japan",
       "sector": "Financials",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1131",
-      "name": "UKT 4 22/10/31",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00010259,
       "asset_class": "equity"
     },
@@ -77518,96 +71747,6 @@
       "ticker": "WISE",
       "country": "United Kingdom",
       "sector": "Financials",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1136",
-      "name": "FRGV         11/25/29",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1140",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1141",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1142",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1143",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1144",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1145",
-      "name": "Loan secured over residential property in Manawatu-Wanganui",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1146",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1147",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1148",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00010259,
       "asset_class": "equity"
     },
@@ -77635,330 +71774,6 @@
       "ticker": "8113",
       "country": "Japan",
       "sector": "Consumer Staples",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1157",
-      "name": "Loan secured over residential property in Taranaki",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1158",
-      "name": "Loan secured over residential property in Bay of Plenty",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1159",
-      "name": "Loan secured over residential property in Bay of Plenty",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1160",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1161",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1162",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1163",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1164",
-      "name": "Loan secured over residential property in Canterbury",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1165",
-      "name": "Loan secured over residential property in Waikato",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1166",
-      "name": "Loan secured over residential property in Northland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1167",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1168",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1169",
-      "name": "Loan secured over residential property in Canterbury",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1170",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1171",
-      "name": "Loan secured over residential property in Waikato",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1172",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1179",
-      "name": "Taiyo Nippon Sanso Corp",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1181",
-      "name": "Loan secured over residential property in Bay of Plenty",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1182",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1183",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1184",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1185",
-      "name": "Loan secured over residential property in Canterbury",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1186",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1187",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1188",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1189",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1190",
-      "name": "Loan secured over residential property in Otago",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1191",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1192",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1193",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1194",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1195",
-      "name": "Loan secured over residential property in Canterbury",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1196",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1197",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1198",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1199",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00010259,
       "asset_class": "equity"
     },
@@ -78035,168 +71850,6 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_1217",
-      "name": "Loan secured over residential property in Northland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1218",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1219",
-      "name": "Loan secured over residential property in Otago",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1220",
-      "name": "Loan secured over residential property in Otago",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1221",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1222",
-      "name": "Loan secured over residential property in Bay of Plenty",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1223",
-      "name": "Loan secured over residential property in Bay of Plenty",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1224",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1225",
-      "name": "Loan secured over residential property in Waikato",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1226",
-      "name": "Loan secured over residential property in Bay of Plenty",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1227",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1228",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1229",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1230",
-      "name": "Loan secured over residential property in Canterbury",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1231",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1232",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1233",
-      "name": "Loan secured over residential property in Wellington",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1234",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
       "isin": "SEDOL:B188TH2",
       "name": "BCE Inc",
       "ticker": "BCE",
@@ -78211,15 +71864,6 @@
       "ticker": "TRYG",
       "country": "Denmark",
       "sector": "Financials",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1243",
-      "name": "G2 MB0872",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00010259,
       "asset_class": "equity"
     },
@@ -78260,57 +71904,12 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_1253",
-      "name": "Loan secured over residential property in Wellington",
+      "isin": "OTHER:MINOR_UNMAPPED",
+      "name": "Other / Minor Unmapped Holdings (53 items <0.05%)",
       "ticker": "",
-      "country": "Unknown",
+      "country": "Global",
       "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1254",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1255",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1256",
-      "name": "Loan secured over residential property in Northland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1257",
-      "name": "Loan secured over residential property in Canterbury",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_1258",
-      "name": "Loan secured over residential property in Auckland",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00010259,
+      "weight": 0.00974574,
       "asset_class": "equity"
     },
     {
@@ -78332,6 +71931,26 @@
       "weight": 0.00492416,
       "asset_class": "fixed_interest",
       "tranche_count": 1
+    },
+    {
+      "isin": "BOND:BZLNZ",
+      "name": "BZLNZ",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00471899,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:KIWI",
+      "name": "KIWI",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00759142,
+      "asset_class": "fixed_interest",
+      "tranche_count": 2
     },
     {
       "isin": "BOND:HOUSNZ",
@@ -78388,6 +72007,26 @@
       "tranche_count": 2
     },
     {
+      "isin": "BOND:RABOBK",
+      "name": "RABOBK",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00656555,
+      "asset_class": "fixed_interest",
+      "tranche_count": 5
+    },
+    {
+      "isin": "BOND:ASBBNK",
+      "name": "ASBBNK",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.0030776,
+      "asset_class": "fixed_interest",
+      "tranche_count": 2
+    },
+    {
       "isin": "BOND:HOUNZ",
       "name": "HOUNZ",
       "ticker": "",
@@ -78403,9 +72042,9 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00215432,
+      "weight": 0.00359054,
       "asset_class": "fixed_interest",
-      "tranche_count": 1
+      "tranche_count": 3
     },
     {
       "isin": "BOND:KBN",
@@ -78538,12 +72177,42 @@
       "tranche_count": 1
     },
     {
+      "isin": "BOND:UDC_ENDEAVOUR_AUTO_TRUST",
+      "name": "UDC Endeavour Auto Trust",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00102587,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:TPNZ",
+      "name": "TPNZ",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00102587,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
       "isin": "BOND:ASIA",
       "name": "ASIA",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
       "weight": 0.00123104,
+      "asset_class": "fixed_interest",
+      "tranche_count": 2
+    },
+    {
+      "isin": "BOND:TOYOTA",
+      "name": "TOYOTA",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00143621,
       "asset_class": "fixed_interest",
       "tranche_count": 2
     },
@@ -78556,16 +72225,6 @@
       "weight": 0.00082069,
       "asset_class": "fixed_interest",
       "tranche_count": 2
-    },
-    {
-      "isin": "BOND:RABOBK_NFIX3FRA",
-      "name": "RABOBK NFIX3FRA +",
-      "ticker": "",
-      "country": "Global",
-      "sector": "Corporate / Other",
-      "weight": 0.00071811,
-      "asset_class": "fixed_interest",
-      "tranche_count": 1
     },
     {
       "isin": "BOND:IFC",
@@ -78603,13 +72262,23 @@
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
+      "weight": 0.00082069,
+      "asset_class": "fixed_interest",
+      "tranche_count": 2
+    },
+    {
+      "isin": "BOND:COMCAST_CORP",
+      "name": "Comcast Corp \u2013",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
       "weight": 0.00061552,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
     {
-      "isin": "BOND:COMCAST_CORP",
-      "name": "Comcast Corp \u2013",
+      "isin": "BOND:UDC_ENDEAVOUR_TRUST",
+      "name": "UDC Endeavour Trust",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -78628,18 +72297,18 @@
       "tranche_count": 1
     },
     {
-      "isin": "BOND:TOYOTA",
-      "name": "TOYOTA",
+      "isin": "BOND:MTFNZ_M25_A",
+      "name": "MTFNZ M25 A",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
-      "weight": 0.00061552,
+      "weight": 0.00051293,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
     {
-      "isin": "BOND:ASBBNK",
-      "name": "ASBBNK",
+      "isin": "BOND:AVNZP",
+      "name": "AVNZP",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -78668,12 +72337,42 @@
       "tranche_count": 1
     },
     {
+      "isin": "BOND:FPQC_1_A_MTGE",
+      "name": "FPQC -1 A Mtge",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00030776,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
       "isin": "BOND:LIBERTY_MEDIA_CORP",
       "name": "Liberty Media Corp",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
       "weight": 0.00020517,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:NZ_RESIDENTIAL_MORTGAGES",
+      "name": "NZ Residential Mortgages",
+      "ticker": "",
+      "country": "New Zealand",
+      "sector": "Corporate / Other",
+      "weight": 0.01446473,
+      "asset_class": "fixed_interest",
+      "tranche_count": 141
+    },
+    {
+      "isin": "BOND:FPIT_1_A_MTGE",
+      "name": "FPIT -1 A Mtge",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00010259,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },
@@ -78710,6 +72409,26 @@
     {
       "isin": "BOND:FOX_CORP",
       "name": "Fox Corp",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00010259,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:AVANZ",
+      "name": "AVANZ",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00010259,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:SFGNZ_1_A_MTGE",
+      "name": "SFGNZ -1 A Mtge",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -78760,6 +72479,16 @@
     {
       "isin": "BOND:NIPTT",
       "name": "NIPTT",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00010259,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:MTFNZ_N24_MTGE_A",
+      "name": "MTFNZ N24 Mtge A",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -78844,6 +72573,15 @@
       "sector": "Term Deposit",
       "weight": 0.00184656,
       "asset_class": "term_deposit"
+    },
+    {
+      "isin": "ACCOUNTING:RECEIVABLES_PAYABLES",
+      "name": "Receivables, Payables & Capital Calls",
+      "ticker": "",
+      "country": "New Zealand",
+      "sector": "Corporate / Other",
+      "weight": 0.02626221,
+      "asset_class": "fixed_interest"
     }
   ],
   "TWF": [
@@ -269472,7 +263210,7 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SYNTH_NSIS B",
+      "isin": "SEDOL:B798FW0",
       "name": "NOVOZYMES B",
       "ticker": "NSIS B",
       "country": "Denmark",
@@ -269697,7 +263435,7 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SYNTH_BMW",
+      "isin": "SEDOL:5756029",
       "name": "BMW",
       "ticker": "BMW",
       "country": "Germany",
@@ -270102,7 +263840,7 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SYNTH_GIB.A",
+      "isin": "SEDOL:BJ2L575",
       "name": "CGI INC CLASS A",
       "ticker": "GIB.A",
       "country": "Canada",
@@ -270579,7 +264317,7 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SEDOL:BJJMGL2",
+      "isin": "SEDOL:BJJMGY5",
       "name": "FOX CLASS A",
       "ticker": "FOXA",
       "country": "United States",
@@ -270984,7 +264722,7 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SYNTH_SRT3",
+      "isin": "SEDOL:BYZ2QP5",
       "name": "SARTORIUS PREF AG",
       "ticker": "SRT3",
       "country": "Germany",
@@ -271643,7 +265381,7 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SYNTH_9CI",
+      "isin": "SEDOL:BNHXFJ6",
       "name": "CAPITALAND INVESTMENT LTD",
       "ticker": "9CI",
       "country": "Singapore",
@@ -286245,7 +279983,7 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SYNTH_GE",
+      "isin": "SEDOL:BL59CR9",
       "name": "GE AEROSPACE",
       "ticker": "GE",
       "country": "United States",
@@ -289919,7 +283657,7 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SEDOL:BJJMGL2",
+      "isin": "SEDOL:BJJMGY5",
       "name": "FOX CLASS A",
       "ticker": "FOXA",
       "country": "United States",
@@ -291316,7 +285054,7 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SYNTH_NSIS B",
+      "isin": "SEDOL:B798FW0",
       "name": "NOVOZYMES B",
       "ticker": "NSIS B",
       "country": "Denmark",
@@ -291451,7 +285189,7 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SYNTH_BMW",
+      "isin": "SEDOL:5756029",
       "name": "BMW",
       "ticker": "BMW",
       "country": "Germany",
@@ -292666,7 +286404,7 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SYNTH_SRT3",
+      "isin": "SEDOL:BYZ2QP5",
       "name": "SARTORIUS PREF AG",
       "ticker": "SRT3",
       "country": "Germany",
@@ -312974,7 +306712,7 @@
       "asset_class": "equity"
     },
     {
-      "isin": "SYNTH_SRT3",
+      "isin": "SEDOL:BYZ2QP5",
       "name": "SARTORIUS PREF AG",
       "ticker": "SRT3",
       "country": "Germany",

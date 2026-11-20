@@ -60,30 +60,6 @@
     "is_stale": false
   },
   {
-    "code": "GLIN_HOLDINGS",
-    "name": "Smartshares GLIN_HOLDINGS ETF",
-    "provider": "Smartshares",
-    "effective_date": "2026-11-17",
-    "cash_ratio": 0.0,
-    "hedging_ratio": 0.0,
-    "constituent_count": 143,
-    "asset_class": "equity",
-    "cadence": "monthly",
-    "is_stale": false
-  },
-  {
-    "code": "HEAL_HOLDINGS",
-    "name": "Smartshares HEAL_HOLDINGS ETF",
-    "provider": "Smartshares",
-    "effective_date": "2026-10-31",
-    "cash_ratio": 0.0017,
-    "hedging_ratio": 0.0,
-    "constituent_count": 193,
-    "asset_class": "mixed",
-    "cadence": "monthly",
-    "is_stale": false
-  },
-  {
     "code": "NGB",
     "name": "Smart S&P/Nzx Nz Government Bond Etf",
     "provider": "Smartshares",
@@ -127,18 +103,6 @@
     "cash_ratio": 0.0009,
     "hedging_ratio": 0.0,
     "constituent_count": 20,
-    "asset_class": "equity",
-    "cadence": "monthly",
-    "is_stale": false
-  },
-  {
-    "code": "SAJP_HOLDINGS",
-    "name": "Smartshares SAJP_HOLDINGS ETF",
-    "provider": "Smartshares",
-    "effective_date": "2026-10-31",
-    "cash_ratio": 0.0103,
-    "hedging_ratio": 0.0,
-    "constituent_count": 152,
     "asset_class": "equity",
     "cadence": "monthly",
     "is_stale": false
@@ -594,7 +558,7 @@
     "effective_date": "2026-09-30",
     "cash_ratio": 0.0244,
     "hedging_ratio": 0.0,
-    "constituent_count": 1048,
+    "constituent_count": 845,
     "asset_class": "mixed",
     "cadence": "monthly",
     "is_stale": false

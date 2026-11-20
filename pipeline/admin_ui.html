@@ -1617,14 +1617,14 @@
             <div class="row-actions">
               <input type="text" id="map-isin-${idx}" onfocus="focusedMapInputId = 'map-isin-${idx}'" placeholder="Focus here &amp; click 'Use ISIN' above, or paste ISIN" style="flex: 1;">
               <button class="btn btn-primary btn-sm" onclick="saveAliasForUnresolved(${idx})">Map &amp; Save</button>
-              <button class="btn btn-sm" onclick="toggleElement('manual-unresolved-${idx}')">Manual Country/Sector</button>
+              <button class="btn btn-sm" onclick="toggleElement('manual-unresolved-${idx}')">Unlisted / Manual Country &amp; Sector</button>
             </div>
             <div id="manual-unresolved-${idx}" style="display: none; margin-top: 6px; padding: 8px; background: var(--card-alt); border: 1px solid var(--border); border-radius: 6px;">
-              <div style="font-size: 11px; color: var(--muted); margin-bottom: 6px;">Assign Country &amp; GICS Sector manually (adds to manual_securities.json and maps this holding):</div>
+              <div style="font-size: 11px; color: var(--muted); margin-bottom: 6px;">Map an unlisted or custom company by Country &amp; GICS Sector (ISIN &amp; Ticker are optional — saves to manual_securities.json and maps globally):</div>
               <div class="row-actions">
                 <input type="text" id="manual-unres-isin-${idx}" value="" placeholder="ISIN/SEDOL (optional)" style="width: 145px;">
-                <input type="text" id="manual-unres-ticker-${idx}" value="${escapeHtml(item.raw_ticker || '')}" placeholder="Ticker" style="width: 90px;">
-                <input type="text" id="manual-unres-country-${idx}" list="country-presets" placeholder="Country (e.g. United Kingdom)" style="flex: 1; min-width: 140px;">
+                <input type="text" id="manual-unres-ticker-${idx}" value="${escapeHtml(item.raw_ticker || '')}" placeholder="Ticker (optional)" style="width: 110px;">
+                <input type="text" id="manual-unres-country-${idx}" list="country-presets" placeholder="Country (e.g. New Zealand)" style="flex: 1; min-width: 140px;">
                 <select id="manual-unres-sector-${idx}" style="flex: 1; min-width: 160px;">
                   <option value="">Select GICS Sector...</option>
                   ${renderSectorOptions()}
@@ -1824,7 +1824,7 @@
             ticker,
             country,
             sector,
-            scope_key: `${item.provider}:${item.fund_code}`,
+            scope_key: '*',
             raw_name: item.raw_name,
           }),
         });
