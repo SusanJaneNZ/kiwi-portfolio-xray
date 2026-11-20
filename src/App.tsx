@@ -5,6 +5,7 @@ import { HoldingsTable } from './components/HoldingsTable';
 import { LiquidityCard } from './components/LiquidityCard';
 import { PortfolioInputTable } from './components/PortfolioInputTable';
 import { RetirementCashflowPanel } from './components/RetirementCashflowPanel';
+import { IndexReplicatorPanel } from './components/IndexReplicatorPanel';
 import { StackedBarChart } from './components/StackedBarChart';
 import { computeFreshnessEnvelope } from './engine/freshness';
 import { calculateRetirementCashflow } from './engine/income';
@@ -362,12 +363,21 @@ export const App: React.FC = () => {
           onApplyDrawdownToRebalancer={handleApplyDrawdownToRebalancer}
         />
 
-        {/* 6. Rebalancing */}
+        {/* 6. Bucket Rebalancing */}
         <BucketRebalancer
           portfolioState={portfolioState}
           onUpdateState={handleUpdateState}
           suggestedDrawdownNZD={cashflowResult.netCapitalDrawdownRequiredNZD}
           activeWithdrawal={activeWithdrawal}
+        />
+
+        {/* 7. DIY Direct Index Rebalancer */}
+        <IndexReplicatorPanel
+          portfolioState={portfolioState}
+          constituentsMap={constituentsMap}
+          lookThroughHoldings={calculationResult.holdings}
+          directEquitiesCatalog={directCatalog}
+          onUpdateState={handleUpdateState}
         />
       </div>
     </div>
