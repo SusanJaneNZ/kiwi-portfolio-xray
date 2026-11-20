@@ -47,4 +47,8 @@ kiwi_portfolio_backup_*.json
 # Local pricing and disclosure caches
 data/cache/
 
+# Playwright reports & artifacts
+playwright-report/
+test-results/
+
 
