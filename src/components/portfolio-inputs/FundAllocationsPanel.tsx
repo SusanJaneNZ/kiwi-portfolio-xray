@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { CollapsiblePanel } from '../CollapsiblePanel';
 import { BucketSelect } from './BucketSelect';
-import { DEFAULT_STARTER_BUCKETS, FundAssetClass, FundMetadata, UserPortfolioState } from '../../types/portfolio';
+import { FundAssetClass, FundMetadata, UserPortfolioState } from '../../types/portfolio';
 import { formatNZD } from '../../utils/format';
 import { ParsedSmartInvestorUrl, parseAndValidateFundUrl } from '../../utils/fundUrl';
 
@@ -149,7 +149,7 @@ export const FundAllocationsPanel: React.FC<FundAllocationsPanelProps> = ({
   }, [customUrl]);
 
   const availableBuckets = useMemo(() => {
-    return portfolioState.buckets.length > 0 ? portfolioState.buckets : DEFAULT_STARTER_BUCKETS;
+    return portfolioState.buckets;
   }, [portfolioState.buckets]);
 
   const customCodeSet = useMemo(() => {
@@ -518,7 +518,7 @@ Please add this fund to \`pipeline/fund_catalog.json\` so it is ingested into th
           onClick={() => setShowAddForm(!showAddForm)}
           className="text-xs bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700/80 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 whitespace-nowrap shadow-sm"
         >
-          <span>{showAddForm ? '✕ Close Form' : '➕ Add Fund / Request Ingestion'}</span>
+          <span>{showAddForm ? '✕ Close Form' : '➕ Request New Fund'}</span>
         </button>
       </div>
 
@@ -686,7 +686,7 @@ Please add this fund to \`pipeline/fund_catalog.json\` so it is ingested into th
           <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-800">
             <span className="text-[11px] text-slate-500">
               {urlValidation.isValid
-                ? 'Valid Sorted link detected. Ready to save or submit for automated ingestion.'
+                ? 'Valid Sorted link detected. Ready to save for processing.'
                 : 'Enter details above to track this fund immediately.'}
             </span>
 
@@ -700,22 +700,16 @@ Please add this fund to \`pipeline/fund_catalog.json\` so it is ingested into th
               </button>
               <button
                 type="button"
-                onClick={() => handleAddFund(false)}
-                className="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-medium transition-colors"
+                onClick={() => handleAddFund(urlValidation.isValid)}
+                title={
+                  urlValidation.isValid
+                    ? 'Saves fund to your portfolio and submits it for processing'
+                    : 'Saves fund to your portfolio'
+                }
+                className="px-4 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-medium transition-colors shadow-sm"
               >
-                Save Fund to Portfolio
+                Save for processing
               </button>
-              {urlValidation.isValid && (
-                <button
-                  type="button"
-                  onClick={() => handleAddFund(true)}
-                  title="Saves fund to your portfolio and opens a pre-filled GitHub Issue for automated nightly ingestion"
-                  className="px-4 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-medium transition-colors flex items-center gap-1.5 shadow-sm"
-                >
-                  <span>🚀</span>
-                  <span>Save &amp; Submit for Ingestion</span>
-                </button>
-              )}
             </div>
           </div>
         </div>
@@ -764,7 +758,7 @@ Please add this fund to \`pipeline/fund_catalog.json\` so it is ingested into th
                 onClick={() => setShowAddForm(true)}
                 className="text-xs text-indigo-400 hover:text-indigo-300 underline underline-offset-2"
               >
-                ➕ Add Fund / Scheme
+                ➕ Request New Fund
               </button>
             </div>
           </div>

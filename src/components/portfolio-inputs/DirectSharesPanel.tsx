@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { CollapsiblePanel } from '../CollapsiblePanel';
 import { BucketSelect } from './BucketSelect';
 import {
-  DEFAULT_STARTER_BUCKETS,
   DirectEquityCatalogItem,
   DirectHolding,
   PortfolioBucket,
@@ -41,7 +40,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
   const [newShareCurrency, setNewShareCurrency] = useState<'NZD' | 'AUD'>('NZD');
 
   const availableBuckets = useMemo<PortfolioBucket[]>(() => {
-    return portfolioState.buckets.length > 0 ? portfolioState.buckets : DEFAULT_STARTER_BUCKETS;
+    return portfolioState.buckets;
   }, [portfolioState.buckets]);
 
   const defaultBucketId = useMemo<string>(() => {
@@ -615,7 +614,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
+                <div className="flex items-start gap-2 flex-wrap sm:flex-nowrap">
                   <BucketSelect
                     instrumentKey={`direct:${dh.isin}`}
                     buckets={availableBuckets}
@@ -627,7 +626,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                   <select
                     value={dh.currency || 'NZD'}
                     onChange={(e) => handleCurrencyChange(dh.isin, e.target.value as 'NZD' | 'AUD')}
-                    className="bg-slate-900 border border-slate-800 rounded-lg px-2 py-1.5 text-xs text-slate-300 font-mono focus:outline-none focus:border-indigo-500"
+                    className="h-[30px] bg-slate-900 border border-slate-800 rounded-lg px-2 text-xs text-slate-300 font-mono focus:outline-none focus:border-indigo-500"
                     title="Select native currency for this holding"
                   >
                     <option value="NZD">NZD</option>
@@ -643,12 +642,12 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                       value={safeShares > 0 ? safeShares : ''}
                       placeholder="Shares"
                       onChange={(e) => handleSharesChange(dh.isin, e.target.value)}
-                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-2 py-1.5 text-right text-xs text-white focus:outline-none focus:border-emerald-500 font-mono"
+                      className="w-full h-[30px] bg-slate-900 border border-slate-800 rounded-lg px-2 text-right text-xs text-white focus:outline-none focus:border-emerald-500 font-mono"
                     />
-                    <span className="text-[9px] text-slate-500 block text-right pr-1">shares</span>
+                    <span className="text-[9px] text-slate-500 block text-right pr-1 leading-tight mt-0.5">shares</span>
                   </div>
 
-                  <span className="text-slate-600 font-mono text-xs">×</span>
+                  <span className="h-[30px] flex items-center text-slate-600 font-mono text-xs">×</span>
 
                   {/* Price Input */}
                   <div className="w-24 relative" title={`Price per share in ${dh.currency || 'NZD'}`}>
@@ -659,20 +658,20 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                       value={safePrice > 0 ? safePrice : ''}
                       placeholder="<unknown>"
                       onChange={(e) => handlePriceChange(dh.isin, e.target.value)}
-                      className={`w-full bg-slate-900 border ${
+                      className={`w-full h-[30px] bg-slate-900 border ${
                         isPriceUnknown ? 'border-amber-700/60 placeholder-amber-400/70' : 'border-slate-800'
-                      } rounded-lg px-2 py-1.5 text-right text-xs text-white focus:outline-none focus:border-emerald-500 font-mono`}
+                      } rounded-lg px-2 text-right text-xs text-white focus:outline-none focus:border-emerald-500 font-mono`}
                     />
-                    <span className="text-[9px] text-slate-500 block text-right pr-1">
+                    <span className="text-[9px] text-slate-500 block text-right pr-1 leading-tight mt-0.5">
                       {isAud ? 'A$/sh' : 'NZ$/sh'}
                     </span>
                   </div>
 
-                  <span className="text-slate-600 font-mono text-xs">=</span>
+                  <span className="h-[30px] flex items-center text-slate-600 font-mono text-xs">=</span>
 
                   {/* Computed Read-Only Value */}
                   <div
-                    className="w-28 py-1.5 px-2 bg-slate-900/60 border border-slate-800/80 rounded-lg text-right text-xs font-mono font-medium flex items-center justify-end"
+                    className="w-28 h-[30px] px-2 bg-slate-900/60 border border-slate-800/80 rounded-lg text-right text-xs font-mono font-medium flex items-center justify-end"
                     title={isPriceUnknown ? 'Price unknown — click Update NZX Prices or enter price manually' : 'Calculated Total Value (Shares × Price)'}
                   >
                     {isPriceUnknown ? (
@@ -688,7 +687,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                   <button
                     type="button"
                     onClick={() => handleRemoveDirect(dh.isin)}
-                    className="p-1.5 text-slate-500 hover:text-rose-400 hover:bg-rose-950/40 rounded-lg transition-colors"
+                    className="h-[30px] px-1.5 flex items-center text-slate-500 hover:text-rose-400 hover:bg-rose-950/40 rounded-lg transition-colors"
                     title="Remove holding"
                   >
                     ✕
@@ -700,7 +699,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
 
           {/* Add New Holding Form */}
           <div className="pt-2 relative">
-            <div className="flex gap-2 flex-wrap sm:flex-nowrap">
+            <div className="flex items-start gap-2 flex-wrap sm:flex-nowrap">
               <div className="relative flex-1 min-w-[200px]">
                 <input
                   type="text"
@@ -710,7 +709,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                     setSelectedEquity(null);
                   }}
                   placeholder="Search share or listed ETF e.g. CEN, FPH, USF, BHP..."
-                  className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-3 pr-8 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+                  className="w-full h-[30px] bg-slate-950 border border-slate-800 rounded-lg pl-3 pr-8 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
                 />
                 {searchQuery && (
                   <button
@@ -730,24 +729,26 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
 
               {selectedEquity && (
                 <>
-                  <select
-                    value={newShareBucket}
-                    onChange={(e) => setNewShareBucket(e.target.value)}
-                    className="bg-slate-900 border border-slate-800 rounded-lg px-2 py-1.5 text-xs text-slate-300 font-mono focus:outline-none focus:border-indigo-500 max-w-[130px]"
-                    title="Assign to target bucket (defaults to Growth)"
-                  >
-                    {availableBuckets.map((b) => (
-                      <option key={b.id} value={b.id}>
-                        {b.name}
-                      </option>
-                    ))}
-                    <option value="">Unassigned</option>
-                  </select>
+                  {availableBuckets.length > 0 && (
+                    <select
+                      value={newShareBucket}
+                      onChange={(e) => setNewShareBucket(e.target.value)}
+                      className="h-[30px] bg-slate-900 border border-slate-800 rounded-lg px-2 text-xs text-slate-300 font-mono focus:outline-none focus:border-indigo-500 max-w-[140px]"
+                      title="Rebalance bucket assignment"
+                    >
+                      <option value="">Bucket: None</option>
+                      {availableBuckets.map((b) => (
+                        <option key={b.id} value={b.id}>
+                          {b.name}
+                        </option>
+                      ))}
+                    </select>
+                  )}
 
                   <select
                     value={newShareCurrency}
                     onChange={(e) => setNewShareCurrency(e.target.value as 'NZD' | 'AUD')}
-                    className="bg-slate-900 border border-slate-800 rounded-lg px-2 py-1.5 text-xs text-slate-300 font-mono focus:outline-none focus:border-indigo-500"
+                    className="h-[30px] bg-slate-900 border border-slate-800 rounded-lg px-2 text-xs text-slate-300 font-mono focus:outline-none focus:border-indigo-500"
                     title="Select currency for new holding"
                   >
                     <option value="NZD">NZD</option>
@@ -762,10 +763,10 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                       placeholder="Shares"
                       value={newShareCount}
                       onChange={(e) => setNewShareCount(e.target.value)}
-                      className="w-full bg-slate-950 border border-slate-800 rounded-lg px-2 py-1.5 text-right text-xs text-white font-mono"
+                      className="w-full h-[30px] bg-slate-950 border border-slate-800 rounded-lg px-2 text-right text-xs text-white font-mono"
                       title="Number of shares to add"
                     />
-                    <span className="text-[9px] text-slate-500 block text-right pr-1">shares</span>
+                    <span className="text-[9px] text-slate-500 block text-right pr-1 leading-tight mt-0.5">shares</span>
                   </div>
 
                   <div className="w-24 relative">
@@ -776,15 +777,15 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                       placeholder="<unknown>"
                       value={newSharePrice}
                       onChange={(e) => setNewSharePrice(e.target.value)}
-                      className="w-full bg-slate-950 border border-slate-800 rounded-lg px-2 py-1.5 text-right text-xs text-white font-mono placeholder-amber-400/60"
+                      className="w-full h-[30px] bg-slate-950 border border-slate-800 rounded-lg px-2 text-right text-xs text-white font-mono placeholder-amber-400/60"
                       title={`Price per share in ${newShareCurrency} (leave empty to fetch via Yahoo Finance)`}
                     />
-                    <span className="text-[9px] text-slate-500 block text-right pr-1">
+                    <span className="text-[9px] text-slate-500 block text-right pr-1 leading-tight mt-0.5">
                       {newShareCurrency === 'AUD' ? 'A$/sh' : 'NZ$/sh'}
                     </span>
                   </div>
 
-                  <div className="w-28 py-1.5 px-2 bg-slate-950 border border-slate-800 rounded-lg text-right text-xs font-mono flex items-center justify-end">
+                  <div className="w-28 h-[30px] px-2 bg-slate-950 border border-slate-800 rounded-lg text-right text-xs font-mono flex items-center justify-end">
                     {parseFloat(newShareCount) > 0 && parseFloat(newSharePrice) > 0 ? (
                       <span className="text-emerald-400">
                         {newShareCurrency === 'AUD' ? 'A$' : '$'}
@@ -804,7 +805,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
               <button
                 disabled={!selectedEquity || (parseFloat(newShareCount) || 0) <= 0}
                 onClick={handleAddDirect}
-                className="bg-indigo-600 disabled:opacity-40 hover:bg-indigo-500 text-white text-xs font-medium px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
+                className="h-[30px] bg-indigo-600 disabled:opacity-40 hover:bg-indigo-500 text-white text-xs font-medium px-3 rounded-lg transition-colors whitespace-nowrap"
               >
                 + Add
               </button>
