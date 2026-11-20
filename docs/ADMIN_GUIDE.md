@@ -284,12 +284,13 @@ flowchart TD
 
 Administrators can monitor the health of automated fund processing via standard GitHub interfaces:
 
-1. **Viewing Active and Past Ingestion Runs:**
+1. **Viewing Active and Past Workflow Runs:**
    - Go to your repository on GitHub: `https://github.com/<owner>/kiwi-portfolio-xray/actions`.
-   - Check the two relevant workflows:
-     - **Process Crowdsourced Fund Requests** (`.github/workflows/fund-request-bot.yml`): Runs on issue submission. Typical execution time: ~15–30 seconds.
-     - **Upstream Ingestion & Data Compilation** (`.github/workflows/ingest.yml`): Runs monthly (1st of each month), via manual trigger, or when triggered by the bot. Typical execution time: ~1–3 minutes.
-   - A green checkmark (✓) indicates successful metadata extraction, catalog commit, and ingestion.
+   - Check the three workflows:
+     - **Deploy Kiwi Portfolio X-Ray to GitHub Pages** (`.github/workflows/deploy.yml`): Runs on Pull Requests to `main` (test/build verification only) and on pushes/merges to `main` or manual `workflow_dispatch` (verifies and deploys to GitHub Pages). Ignores doc-only changes (`docs/**`, `README.md`). Typical execution time: ~1–2 minutes.
+     - **Process Crowdsourced Fund Requests** (`.github/workflows/fund-request-bot.yml`): Runs on issue submission (`new-fund` label). Typical execution time: ~15–30 seconds.
+     - **Upstream Ingestion & Data Compilation** (`.github/workflows/ingest.yml`): Runs monthly (1st of each month), via manual `workflow_dispatch`, or when triggered by the bot. Typical execution time: ~1–3 minutes.
+   - Note: GitHub labels each run in the Actions list with the commit message that triggered it. A green checkmark (✓) indicates a successful run.
 
 2. **Tracking User Fund Requests:**
    - Navigate to the **Issues** tab (`/issues?q=label%3Anew-fund`).
