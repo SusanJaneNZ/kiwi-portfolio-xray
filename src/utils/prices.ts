@@ -1,6 +1,7 @@
 /**
- * Client-side stock/ETF price synchronization with daily lockout cache.
- * Powered by Yahoo Finance API via local dev server proxy.
+ * Client-side stock/ETF end-of-day price synchronization with daily lockout cache.
+ * Reads the compiled `data/prices.json` dataset (refreshed daily by GitHub Actions
+ * via `pipeline/fetch_prices.py`, or locally via `/api/prices/refresh`).
  */
 
 export const PRICE_CACHE_KEY = 'kiwi_daily_prices_cache_v1';
@@ -34,6 +35,14 @@ export interface FetchPricesResult {
   error?: string;
   diagnostics?: PriceDiagnosticItem[];
   logPath?: string;
+}
+
+interface StaticPricesPayload {
+  date?: string;
+  updatedAt?: string;
+  source?: string;
+  count?: number;
+  prices?: Record<string, number>;
 }
 
 export function getTodayDateString(): string {
@@ -82,79 +91,8 @@ export function areTickersCachedToday(tickers: string[]): boolean {
 }
 
 /**
- * Optional Cloudflare Worker URL (see /worker). Set at build time via VITE_PRICE_PROXY_URL.
- * Used only when the local `/api/prices` dev server is unavailable (e.g. GitHub Pages).
- */
-const PRICE_PROXY_URL: string = (
-  (typeof import.meta !== 'undefined' &&
-    (import.meta as unknown as { env?: Record<string, string | undefined> }).env?.VITE_PRICE_PROXY_URL) ||
-  ''
-).replace(/\/+$/, '');
-
-async function fetchLivePricesViaWorker(
-  cleanTickers: string[],
-  today: string,
-  isStoredToday: boolean,
-  stored: DailyPriceCache | null
-): Promise<FetchPricesResult> {
-  if (!PRICE_PROXY_URL) {
-    return {
-      ok: false,
-      prices: {},
-      date: today,
-      cached: false,
-      error: 'Live prices are not available on this site. Enter prices manually, or run the app locally.',
-    };
-  }
-
-  try {
-    const res = await fetch(`${PRICE_PROXY_URL}/?tickers=${encodeURIComponent(cleanTickers.join(','))}`, {
-      headers: { Accept: 'application/json' },
-      signal: AbortSignal.timeout(15000),
-    });
-    const data = (await res.json().catch(() => null)) as FetchPricesResult | null;
-    if (!res.ok || !data) {
-      return {
-        ok: false,
-        prices: {},
-        date: today,
-        cached: false,
-        error: data?.error || `Price service returned HTTP ${res.status}`,
-        diagnostics: data?.diagnostics,
-      };
-    }
-
-    const fetchTimestamp = new Date().toISOString();
-    if (data.ok && data.prices) {
-      const existingPrices = isStoredToday && stored ? stored.prices : {};
-      saveStoredDailyPrices({
-        date: today,
-        lastFetchedAt: fetchTimestamp,
-        prices: { ...existingPrices, ...data.prices },
-      });
-    }
-    return { ...data, lastFetchedAt: fetchTimestamp };
-  } catch (err) {
-    return {
-      ok: false,
-      prices: {},
-      date: today,
-      cached: false,
-      error: `Could not reach the price service: ${err instanceof Error ? err.message : String(err)}`,
-    };
-  }
-}
-
-/** True only on known static hosts (no `/api/prices` server). Everything else tries the local server first. */
-function isStaticHostRuntime(): boolean {
-  if (typeof window === 'undefined' || !window.location?.hostname) return false;
-  return window.location.hostname.endsWith('.github.io');
-}
-
-/**
- * Fetches prices for the given stock and ETF tickers in a single batched call.
- * Uses local `/api/prices` proxy on localhost, and falls back to the Cloudflare Worker price proxy (see /worker)
- * on static hosting (e.g. GitHub Pages).
+ * Loads end-of-day closing prices for the requested tickers from `data/prices.json`.
+ * Works identically on localhost and GitHub Pages.
  */
 export async function fetchNzxPrices(tickers: string[], force = false): Promise<FetchPricesResult> {
   const cleanTickers = Array.from(
@@ -196,67 +134,63 @@ export async function fetchNzxPrices(tickers: string[], force = false): Promise<
     }
   }
 
-  // On static hosting (e.g. GitHub Pages), skip /api/prices 404 and fetch live via CORS proxy
-  if (isStaticHostRuntime()) {
-    return fetchLivePricesViaWorker(cleanTickers, today, isStoredToday, stored);
-  }
+  const basePath =
+    (typeof import.meta !== 'undefined' &&
+      (import.meta as unknown as { env?: Record<string, string | undefined> }).env?.BASE_URL) ||
+    './';
 
-  // Hit local dev server proxy /api/prices
   try {
-    const query = new URLSearchParams({
-      tickers: cleanTickers.join(','),
-      force: force ? 'true' : 'false',
+    const response = await fetch(`${basePath}data/prices.json?t=${Date.now()}`, {
+      headers: { Accept: 'application/json' },
     });
-
-    const response = await fetch(`/api/prices?${query.toString()}`);
-    if (response.status === 404) {
-      return fetchLivePricesViaWorker(cleanTickers, today, isStoredToday, stored);
-    }
     if (!response.ok) {
-      const errorJson = await response.json().catch(() => ({}));
       return {
         ok: false,
         prices: {},
         date: today,
         cached: false,
-        error: errorJson.error || `HTTP ${response.status} fetching prices`,
+        error: `End-of-day price dataset unavailable (HTTP ${response.status}).`,
       };
     }
 
-    const data = (await response.json()) as FetchPricesResult;
-    const fetchTimestamp = new Date().toISOString();
+    const payload = (await response.json()) as StaticPricesPayload;
+    const catalog = payload?.prices || {};
+    const matchedPrices: Record<string, number> = {};
+    let fetchedCount = 0;
 
-    // Log complete diagnostics to browser console for immediate visibility
-    if (data.diagnostics && data.diagnostics.length > 0) {
-      console.groupCollapsed(`[Yahoo Finance Pricing API] Request/Response details for ${cleanTickers.length} ticker(s)`);
-      console.table(
-        data.diagnostics.map((d) => ({
-          Ticker: d.ticker,
-          Status: `${d.status} ${d.statusText}`,
-          OK: d.ok,
-          Price: d.extractedPrice !== null ? `$${d.extractedPrice}` : 'N/A',
-          Currency: d.currency || 'N/A',
-          Error: d.error || (d.ok ? 'None' : 'Failed'),
-          URL: d.url,
-        }))
-      );
-      console.log('Full Diagnostics Objects:', data.diagnostics);
-      console.groupEnd();
+    for (const ticker of cleanTickers) {
+      const base = ticker.replace(/\.(NZ|AX)$/i, '');
+      const price = catalog[ticker] ?? catalog[base] ?? catalog[`${base}.NZ`] ?? catalog[`${base}.AX`];
+      if (typeof price === 'number' && Number.isFinite(price) && price > 0) {
+        matchedPrices[ticker] = price;
+        matchedPrices[base] = price;
+        fetchedCount++;
+      }
     }
 
-    if (data.ok && data.prices) {
+    const asOfDate = payload?.date || today;
+    const asOfTimestamp = payload?.updatedAt || new Date().toISOString();
+
+    if (fetchedCount > 0) {
       const existingPrices = isStoredToday && stored ? stored.prices : {};
-      const mergedPrices = { ...existingPrices, ...data.prices };
       saveStoredDailyPrices({
-        date: today,
-        lastFetchedAt: fetchTimestamp,
-        prices: mergedPrices,
+        date: asOfDate,
+        lastFetchedAt: asOfTimestamp,
+        prices: { ...existingPrices, ...matchedPrices },
       });
     }
 
     return {
-      ...data,
-      lastFetchedAt: fetchTimestamp,
+      ok: fetchedCount > 0,
+      prices: matchedPrices,
+      date: asOfDate,
+      cached: false,
+      fetchedCount,
+      lastFetchedAt: asOfTimestamp,
+      error:
+        fetchedCount === 0
+          ? 'No end-of-day prices found for these tickers in data/prices.json.'
+          : undefined,
     };
   } catch (err) {
     return {
@@ -264,10 +198,29 @@ export async function fetchNzxPrices(tickers: string[], force = false): Promise<
       prices: {},
       date: today,
       cached: false,
-      error: String(err),
+      error: err instanceof Error ? err.message : String(err),
     };
   }
 }
 
-export const fetchStockPrices = fetchNzxPrices;
+/**
+ * Localhost-only helper: triggers the same `pipeline/fetch_prices.py` workflow locally
+ * via Vite's `/api/prices/refresh` middleware to regenerate `public/data/prices.json`.
+ */
+export async function refreshLocalEndOfDayPrices(): Promise<{ ok: boolean; count?: number; date?: string; error?: string }> {
+  try {
+    const res = await fetch('/api/prices/refresh', {
+      method: 'POST',
+      headers: { 'X-Requested-With': 'KiwiPortfolioXRay' },
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data.ok) {
+      return { ok: false, error: data.error || `HTTP ${res.status} refreshing end-of-day prices` };
+    }
+    return { ok: true, count: data.count, date: data.date };
+  } catch (err) {
+    return { ok: false, error: err instanceof Error ? err.message : String(err) };
+  }
+}
 
+export const fetchStockPrices = fetchNzxPrices;

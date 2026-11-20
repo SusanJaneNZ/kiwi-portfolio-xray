@@ -137,7 +137,7 @@ export const pricesTestCases: [string, () => Promise<void>][] = [
     },
   ],
   [
-    'fetchNzxPrices calls /api/prices when uncached and updates local cache',
+    'fetchNzxPrices loads data/prices.json when uncached and updates local cache',
     async () => {
       const origWindow = (globalThis as any).window;
       const mockStorage = new MockLocalStorage();
@@ -152,10 +152,9 @@ export const pricesTestCases: [string, () => Promise<void>][] = [
           fetchedUrl = String(url);
           return new Response(
             JSON.stringify({
-              ok: true,
-              prices: { AIA: 7.85 },
               date: today,
-              cached: false,
+              updatedAt: `${today}T07:00:00Z`,
+              prices: { 'AIA.NZ': 7.85 },
             }),
             { status: 200, headers: { 'Content-Type': 'application/json' } }
           );
@@ -164,7 +163,7 @@ export const pricesTestCases: [string, () => Promise<void>][] = [
         const result = await fetchNzxPrices(['AIA']);
         assertTrue(result.ok, 'result ok');
         assertEq(result.prices.AIA, 7.85, 'AIA price parsed');
-        assertTrue(fetchedUrl.includes('/api/prices?tickers=AIA&force=false'), 'called /api/prices');
+        assertTrue(fetchedUrl.includes('data/prices.json'), 'loaded data/prices.json');
 
         const stored = loadStoredDailyPrices();
         assertEq(stored?.prices.AIA, 7.85, 'AIA price persisted into storage');
@@ -196,10 +195,9 @@ export const pricesTestCases: [string, () => Promise<void>][] = [
           fetchCalled = true;
           return new Response(
             JSON.stringify({
-              ok: true,
-              prices: { CEN: 8.75 },
               date: today,
-              cached: false,
+              updatedAt: `${today}T07:00:00Z`,
+              prices: { 'CEN.NZ': 8.75 },
             }),
             { status: 200, headers: { 'Content-Type': 'application/json' } }
           );
