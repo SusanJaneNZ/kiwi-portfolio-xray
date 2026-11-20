@@ -47,6 +47,11 @@ class TestAdminUI(unittest.TestCase):
             REPO_ROOT / "pipeline" / "feeder_registry.json",
             self.service.feeder_registry_path,
         )
+        self.service.fund_catalog_path = self.tmp_dir / "fund_catalog.json"
+        shutil.copy(
+            REPO_ROOT / "pipeline" / "fund_catalog.json",
+            self.service.fund_catalog_path,
+        )
 
     def tearDown(self):
         shutil.rmtree(self.tmp_dir, ignore_errors=True)
@@ -340,6 +345,15 @@ class TestAdminUI(unittest.TestCase):
 
     def test_catalog_granular_awaiting_statuses(self):
         """Verifies that get_fund_catalog assigns granular sub_status and target_panel to awaiting funds."""
+        # Seed a deterministic empty output_dir and two awaiting funds:
+        # 1) GLD (staged disclosure, not yet published -> AWAITING_PUBLISH)
+        # 2) UNSTAGED_TEST_FUND (no staged disclosure -> AWAITING_DISCLOSURE)
+        self.service.save_fund_catalog_entry({
+            "fund_code": "UNSTAGED_TEST_FUND",
+            "fund_name": "Unstaged Test Fund",
+            "provider": "Simplicity",
+            "fnd_code": "FND99887",
+        })
         catalog = self.service.get_fund_catalog()
         self.assertGreater(len(catalog), 0)
 
@@ -375,13 +389,28 @@ class TestAdminUI(unittest.TestCase):
             self.assertEqual(gld_entry["status_label"], "Awaiting Publish")
             self.assertEqual(gld_entry["target_panel"], "panel-diagnostics")
 
-        # Check an un-staged fund like FISHER_KIWISAVER_GROWTH
-        fkg_entry = next((c for c in catalog if c["fund_code"] == "FISHER_KIWISAVER_GROWTH"), None)
-        if fkg_entry:
-            self.assertEqual(fkg_entry["status"], "AWAITING_PROCESSING")
-            self.assertEqual(fkg_entry["sub_status"], "AWAITING_DISCLOSURE")
-            self.assertEqual(fkg_entry["status_label"], "Awaiting Disclosure File")
-            self.assertEqual(fkg_entry["target_panel"], "panel-staging")
+        # Check an un-staged fund
+        unstaged = next((c for c in catalog if c["fund_code"] == "UNSTAGED_TEST_FUND"), None)
+        self.assertIsNotNone(unstaged)
+        self.assertEqual(unstaged["status"], "AWAITING_PROCESSING")
+        self.assertEqual(unstaged["sub_status"], "AWAITING_DISCLOSURE")
+        self.assertEqual(unstaged["status_label"], "Awaiting Disclosure File")
+        self.assertEqual(unstaged["target_panel"], "panel-staging")
+
+    def test_smartshares_adapter_rejects_misplaced_ishares_csv(self):
+        """Misplaced overseas Master ETF CSVs in smartshares/ fail fast instead of creating phantom entries."""
+        from pipeline.adapters.smartshares_direct_adapter import SmartsharesDirectAdapter
+
+        bad_csv = self.staging_dir / "smartshares" / "HEAL_holdings.csv"
+        bad_csv.write_text(
+            'Fund Holdings as of,"16/Nov/2026"\n\n'
+            'Ticker,Name,Sector,Asset Class,Market Value,Weight (%),Notional Value,Shares,Price,Location,Exchange,Market Currency\n'
+            '"MRNA","MODERNA","Health Care","Equity","86,582,455.08","5.42","86,582,455.08","402,204.00","215.27","United States","NASDAQ","USD"\n',
+            encoding="utf-8",
+        )
+        adapter = SmartsharesDirectAdapter()
+        with self.assertRaises(ValueError):
+            adapter.parse(bad_csv)
 
     def test_admin_ui_html_syntax_and_script_validity(self):
         """Verifies that admin_ui.html exists and all embedded <script> tags contain valid JavaScript with no syntax errors or duplicate declarations."""

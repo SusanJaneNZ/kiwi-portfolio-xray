@@ -189,27 +189,7 @@ export const FundAllocationsPanel: React.FC<FundAllocationsPanelProps> = ({
       }
     }
 
-    // 3. Preset funds (popular KiwiSaver & unlisted funds discoverable when browsing)
-    for (const preset of PRESET_FUNDS) {
-      const codeUpper = preset.code.toUpperCase();
-      if (!seenCodes.has(codeUpper)) {
-        seenCodes.add(codeUpper);
-        list.push({
-          code: preset.code,
-          name: preset.name,
-          provider: preset.provider,
-          effective_date: new Date().toISOString().split('T')[0],
-          cash_ratio: 0.035,
-          hedging_ratio: 0,
-          constituent_count: 0,
-          asset_class: preset.assetClass,
-          isKiwiSaver: preset.isKiwiSaver,
-          smartInvestorUrl: preset.url,
-        });
-      }
-    }
-
-    // 4. Any remaining custom or legacy code present in fundBalances
+    // 3. Any remaining custom or legacy code present in fundBalances
     for (const code of Object.keys(portfolioState.fundBalances)) {
       const codeUpper = code.toUpperCase();
       if (!seenCodes.has(codeUpper)) {

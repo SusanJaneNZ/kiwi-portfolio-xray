@@ -117,6 +117,21 @@ class SmartsharesDirectAdapter(BaseAdapter):
         return any(code in name for code in SMARTSHARES_DIRECT_FUNDS)
 
     def parse(self, file_path: Path) -> FundExtractionResult:
+        # Guard against overseas Master ETF CSVs (iShares, Vanguard, SPDR) misplaced in smartshares/
+        if file_path.suffix.lower() == ".csv":
+            try:
+                head = file_path.read_text(encoding="utf-8-sig", errors="replace")[:1500].lower()
+                if (
+                    ("notional value" in head and "market currency" in head)
+                    or ("holdings_details" in file_path.name.lower())
+                    or ("sedol" in head and "ticker" in head and "asset class" in head)
+                ):
+                    raise ValueError(
+                        f"Misplaced overseas Master ETF CSV '{file_path.name}' in smartshares/ — "
+                        "move to data/staging/ishares/, vanguard/, or spdr/."
+                    )
+            except OSError:
+                pass
         fund_code = self._extract_code_from_filename(file_path.name)
         fund_name = SMARTSHARES_DIRECT_FUNDS.get(fund_code, f"Smartshares {fund_code} ETF")
         return parse_nz_fund_file(

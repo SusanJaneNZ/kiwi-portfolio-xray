@@ -7,7 +7,9 @@ import base64
 import csv
 import io
 import json
+import logging
 import re
+import shutil
 import sys
 import threading
 import traceback
@@ -17,6 +19,8 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qs, urlparse
+
+logger = logging.getLogger(__name__)
 
 from pipeline.adapters import PROVIDER_ADAPTERS, iter_staged_files
 from pipeline.adapters.tabular_reader import read_tabular_rows
@@ -364,8 +368,8 @@ class AdminService:
         if not catalog:
             return []
 
-        # Load public/data/funds_registry.json if present to discover constituent_count & effective_date
-        registry_path = self.repo_root / "public" / "data" / "funds_registry.json"
+        # Load funds_registry.json from output_dir if present to discover constituent_count & effective_date
+        registry_path = self.output_dir / "funds_registry.json"
         reg_map: dict[str, dict[str, Any]] = {}
         if registry_path.exists():
             try:
@@ -955,8 +959,7 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                     for f in backups_dir.glob("*.json"):
                         if f.is_file():
                             stat = f.stat()
-                            import datetime
-                            dt = datetime.datetime.fromtimestamp(stat.st_mtime, tz=datetime.timezone.utc)
+                            dt = datetime.fromtimestamp(stat.st_mtime, tz=timezone.utc)
                             items.append({
                                 "filename": f.name,
                                 "isCurrent": f.name == "portfolio_backup.json",
@@ -966,8 +969,7 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                     legacy = service.repo_root / "portfolio_backup.json"
                     if legacy.exists() and not any(i["filename"] == "portfolio_backup.json" for i in items):
                         stat = legacy.stat()
-                        import datetime
-                        dt = datetime.datetime.fromtimestamp(stat.st_mtime, tz=datetime.timezone.utc)
+                        dt = datetime.fromtimestamp(stat.st_mtime, tz=timezone.utc)
                         items.append({
                             "filename": "portfolio_backup.json",
                             "isCurrent": True,
@@ -1105,8 +1107,7 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                 elif path == "/api/portfolio/export":
                     backups_dir = service.repo_root / "backups"
                     backups_dir.mkdir(parents=True, exist_ok=True)
-                    import datetime
-                    now = datetime.datetime.now()
+                    now = datetime.now()
                     stamp = now.strftime("%Y-%m-%d_%H%M%S")
                     export_name = f"kiwi_portfolio_{stamp}.json"
                     export_path = backups_dir / export_name
@@ -1119,9 +1120,7 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                     legacy_backup = service.repo_root / "portfolio_backup.json"
                     src = main_backup if main_backup.exists() else legacy_backup if legacy_backup.exists() else None
                     if src and src.exists():
-                        import datetime
-                        import shutil
-                        now = datetime.datetime.now()
+                        now = datetime.now()
                         stamp = now.strftime("%Y-%m-%d_%H%M%S")
                         dated_name = f"portfolio_backup_{stamp}.json"
                         dated_path = backups_dir / dated_name

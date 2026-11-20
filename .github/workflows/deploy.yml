@@ -29,8 +29,10 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Run Upstream Pipeline Tests & Asset Verification
+      - name: Run Upstream Pipeline Lint, Tests & Asset Verification
         run: |
+          pip install ruff
+          ruff check --select F821,F823 pipeline/
           python -m unittest discover -s pipeline/tests -v
           python -m pipeline.ingest --staging-dir data/staging --output-dir public/data
 
@@ -41,6 +43,9 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
+
+      - name: Run Frontend Tests
+        run: npm test
 
       - name: Build Web Application
         run: npm run build

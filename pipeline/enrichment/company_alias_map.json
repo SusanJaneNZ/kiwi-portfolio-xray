@@ -345,5 +345,9 @@
   "Smartshares:GLIN_HOLDINGS": {
     "HUTCHISON PORT HOLDINGS UNITS TRUS": "SEDOL:B56ZM74",
     "NETLINK NBN TRUST UNITS": "SEDOL:BF5GLW6"
+  },
+  "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
+    "Tesla Motors Inc": "SEDOL:B616C79",
+    "Eli Lilly and Company": "SEDOL:2516152"
   }
 }

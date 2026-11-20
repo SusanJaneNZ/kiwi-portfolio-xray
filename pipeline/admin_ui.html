@@ -743,7 +743,7 @@
         <pre id="alert-modal-text" style="white-space: pre-wrap; word-break: break-word; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; line-height: 1.5; margin: 0; user-select: text; -webkit-user-select: text; cursor: text; background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border); padding: 12px; border-radius: 6px; max-height: 60vh; overflow-y: auto; color: var(--text);"></pre>
       </div>
       <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 14px;">
-        <button id="alert-modal-copy-btn" class="btn btn-primary btn-sm" onclick="copyAlertModalText()" style="display: none;">
+        <button id="alert-modal-copy-btn" class="btn btn-primary btn-sm" onclick="copyAlertModalText()">
           📋 Copy Text
         </button>
         <button class="btn btn-secondary btn-sm" onclick="closeAlertModal()">
@@ -992,8 +992,9 @@
         } catch (_) { }
       }
 
+      const normTargetProv = (provider || '').toLowerCase().replace(/[\s\-]+/g, '_');
       const targetFunds = (catalogData || []).filter(
-        c => (c.provider || '').toLowerCase() === provider.toLowerCase()
+        c => (c.provider || '').toLowerCase().replace(/[\s\-]+/g, '_') === normTargetProv
       );
 
       if (btn) btn.disabled = true;
@@ -1259,7 +1260,8 @@
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
     }
 
     async function api(url, options = {}) {
@@ -1484,7 +1486,7 @@
         prodBtn.disabled = true;
         if (!dryRun) prodBtn.textContent = '⏳ Publishing Datasets...';
       }
-      const reportPanel = document.getElementById('panel-report');
+      const reportPanel = document.getElementById('panel-diagnostics');
       if (reportPanel && !reportPanel.open) {
         reportPanel.open = true;
       }
@@ -2197,7 +2199,8 @@
 
       filtered.forEach((c) => {
         const isAwaiting = c.status === 'AWAITING_PROCESSING' || !c.constituent_count;
-        const failedFundInfo = lastAutoFetchResults[(c.provider || '').toLowerCase()]?.failed?.find(f => f.code === c.fund_code);
+        const normProv = (c.provider || '').toLowerCase().replace(/[\s\-]+/g, '_');
+        const failedFundInfo = (lastAutoFetchResults[normProv] || lastAutoFetchResults[(c.provider || '').toLowerCase()])?.failed?.find(f => f.code === c.fund_code);
 
         let statusBadge;
         if (isAwaiting) {
