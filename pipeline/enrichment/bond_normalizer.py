@@ -172,8 +172,10 @@ class AssetClassifier:
         if fund_code in EQUITY_FUND_ALLOWLIST:
             return "equity"
 
-        # Rule 2: Fixed Interest / Debt / Mortgages / FRNs / Bond ETFs / Rate Derivatives
+        # Rule 2: Fixed Interest / Debt / Mortgages / FRNs / Securitisation Tranches / Bond ETFs
         if _MORTGAGE_RE.search(name):
+            return "fixed_interest"
+        if re.search(r"\b20\d{2}\s*-\s*\d+(?:\s+[A-Z]\d?)?\s*$", name.strip()):
             return "fixed_interest"
         if _COUPON_RE.search(name) and _DATE_RE.search(name):
             return "fixed_interest"

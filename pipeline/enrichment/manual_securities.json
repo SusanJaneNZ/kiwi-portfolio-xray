@@ -316,5 +316,59 @@
     "ticker": "ILS",
     "country": "Isreal",
     "sector": "Financials"
+  },
+  "MANUAL:SIMPLICITY_LIVING_LTD_ORDINARY_S": {
+    "name": "Simplicity Living Ltd Ordinary Shares",
+    "ticker": "",
+    "country": "New Zealand",
+    "sector": "Real Estate"
+  },
+  "MANUAL:ICEHOUSE_VENTURES_GROWTH_FUND_II": {
+    "name": "Icehouse Ventures Growth Fund II LP",
+    "ticker": "",
+    "country": "New Zealand",
+    "sector": "Information Technology"
+  },
+  "MANUAL:RELIABLE_FOUNDATIONS_LTD": {
+    "name": "Reliable Foundations LTD",
+    "ticker": "",
+    "country": "New Zealand",
+    "sector": "Industrials"
+  },
+  "MANUAL:DATA_TORQUE_LTD": {
+    "name": "Data Torque Ltd",
+    "ticker": "",
+    "country": "New Zealand",
+    "sector": "Information Technology"
+  },
+  "MANUAL:TAX_TRADERS_LIMITED": {
+    "name": "Tax Traders Limited",
+    "ticker": "",
+    "country": "New Zealand",
+    "sector": "Financials"
+  },
+  "MANUAL:STABICRAFT_MARINE_LIMITED": {
+    "name": "Stabicraft Marine Limited",
+    "ticker": "",
+    "country": "New Zealand",
+    "sector": "Consumer Discretionary"
+  },
+  "MANUAL:ELIM_EDUCATION_IMPACT_INV_TRUST": {
+    "name": "Elim Education Impact Inv Trust",
+    "ticker": "",
+    "country": "New Zealand",
+    "sector": "Consumer Discretionary"
+  },
+  "MANUAL:TUHUA_VENTURES_II_FUND": {
+    "name": "Tuhua Ventures II Fund",
+    "ticker": "",
+    "country": "New Zealand",
+    "sector": "Financials"
+  },
+  "MANUAL:BRIDGEWEST_VENTURE_FUND_1_LP": {
+    "name": "Bridgewest Venture Fund 1 LP",
+    "ticker": "",
+    "country": "New Zealand",
+    "sector": "Financials"
   }
 }

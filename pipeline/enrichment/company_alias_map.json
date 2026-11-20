@@ -349,5 +349,28 @@
   "Simplicity:SIMPLICITY_KIWISAVER_GROWTH": {
     "Tesla Motors Inc": "SEDOL:B616C79",
     "Eli Lilly and Company": "SEDOL:2516152"
+  },
+  "*": {
+    "Simplicity Living Ltd Ordinary Shares": "MANUAL:SIMPLICITY_LIVING_LTD_ORDINARY_S",
+    "Procter and Gamble CO/THE": "SEDOL:2704407",
+    "Goodman NZ Ltd. & Goodman Property Services Ltd.": "NZX:GNZ",
+    "Icehouse Ventures Growth Fund II LP": "MANUAL:ICEHOUSE_VENTURES_GROWTH_FUND_II",
+    "KLA-Tencor Corp": "SEDOL:2480138",
+    "Reliable Foundations LTD": "MANUAL:RELIABLE_FOUNDATIONS_LTD",
+    "Data Torque Ltd": "MANUAL:DATA_TORQUE_LTD",
+    "Tax Traders Limited": "MANUAL:TAX_TRADERS_LIMITED",
+    "Stabicraft Marine Limited": "MANUAL:STABICRAFT_MARINE_LIMITED",
+    "Dell Inc": "SEDOL:BHKD3S6",
+    "Elim Education Impact Inv Trust": "MANUAL:ELIM_EDUCATION_IMPACT_INV_TRUST",
+    "Newmont Mining Corp": "SEDOL:2636607",
+    "Tuhua Ventures II Fund": "MANUAL:TUHUA_VENTURES_II_FUND",
+    "Bridgewest Venture Fund 1 LP": "MANUAL:BRIDGEWEST_VENTURE_FUND_1_LP",
+    "Freeport - McMoran Copper": "SEDOL:2352118",
+    "Adobe Systems Inc": "SEDOL:2008154",
+    "PNC Financial Services Group I": "SEDOL:2692665",
+    "Muenchener Rueckversicherungs-": "SEDOL:5294121",
+    "HCA Holdings Inc": "SEDOL:B4MGBG6",
+    "Deutsche Post AG": "SEDOL:4617859",
+    "Arthur J Gallagagh & Co": "SEDOL:2359506"
   }
 }

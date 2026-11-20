@@ -64881,11 +64881,11 @@
   ],
   "SIMPLICITY_KIWISAVER_GROWTH": [
     {
-      "isin": "UNRESOLVED_0",
+      "isin": "MANUAL:SIMPLICITY_LIVING_LTD_ORDINARY_S",
       "name": "Simplicity Living Ltd Ordinary Shares",
       "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "country": "New Zealand",
+      "sector": "Real Estate",
       "weight": 0.07499091,
       "asset_class": "equity"
     },
@@ -65221,19 +65221,19 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_51",
-      "name": "Procter and Gamble CO/THE",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2704407",
+      "name": "Procter & Gamble Co/The",
+      "ticker": "PG",
+      "country": "United States",
+      "sector": "Consumer Staples",
       "weight": 0.00276984,
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_52",
-      "name": "Goodman NZ Ltd. & Goodman Property Services Ltd.",
-      "ticker": "",
-      "country": "Unknown",
+      "isin": "NZX:GNZ",
+      "name": "Goodman Property Trust",
+      "ticker": "GNZ.NZ",
+      "country": "New Zealand",
       "sector": "Unclassified",
       "weight": 0.00276984,
       "asset_class": "equity"
@@ -65329,11 +65329,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_70",
+      "isin": "MANUAL:ICEHOUSE_VENTURES_GROWTH_FUND_II",
       "name": "Icehouse Ventures Growth Fund II LP",
       "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "country": "New Zealand",
+      "sector": "Information Technology",
       "weight": 0.00215432,
       "asset_class": "equity"
     },
@@ -65356,11 +65356,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_74",
-      "name": "KLA-Tencor Corp",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2480138",
+      "name": "KLA Corp",
+      "ticker": "KLAC",
+      "country": "United States",
+      "sector": "Information Technology",
       "weight": 0.00205174,
       "asset_class": "equity"
     },
@@ -65518,11 +65518,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_94",
+      "isin": "MANUAL:RELIABLE_FOUNDATIONS_LTD",
       "name": "Reliable Foundations LTD",
       "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "country": "New Zealand",
+      "sector": "Industrials",
       "weight": 0.00174397,
       "asset_class": "equity"
     },
@@ -65554,11 +65554,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_99",
+      "isin": "MANUAL:DATA_TORQUE_LTD",
       "name": "Data Torque Ltd",
       "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "country": "New Zealand",
+      "sector": "Information Technology",
       "weight": 0.00164139,
       "asset_class": "equity"
     },
@@ -65601,11 +65601,11 @@
       "issuer_name": "Vector"
     },
     {
-      "isin": "UNRESOLVED_105",
+      "isin": "MANUAL:TAX_TRADERS_LIMITED",
       "name": "Tax Traders Limited",
       "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "country": "New Zealand",
+      "sector": "Financials",
       "weight": 0.0015388,
       "asset_class": "equity"
     },
@@ -65747,11 +65747,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_129",
+      "isin": "MANUAL:STABICRAFT_MARINE_LIMITED",
       "name": "Stabicraft Marine Limited",
       "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "country": "New Zealand",
+      "sector": "Consumer Discretionary",
       "weight": 0.00133363,
       "asset_class": "equity"
     },
@@ -65819,11 +65819,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_137",
-      "name": "Dell Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:BHKD3S6",
+      "name": "Dell Technologies Inc",
+      "ticker": "DELL",
+      "country": "United States",
+      "sector": "Information Technology",
       "weight": 0.00133363,
       "asset_class": "equity"
     },
@@ -65954,11 +65954,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_158",
+      "isin": "MANUAL:ELIM_EDUCATION_IMPACT_INV_TRUST",
       "name": "Elim Education Impact Inv Trust",
       "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "country": "New Zealand",
+      "sector": "Consumer Discretionary",
       "weight": 0.00112845,
       "asset_class": "equity"
     },
@@ -66062,11 +66062,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_173",
-      "name": "Newmont Mining Corp",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2636607",
+      "name": "NEWMONT CORPORATION",
+      "ticker": "NEM.AX",
+      "country": "Australia",
+      "sector": "Materials",
       "weight": 0.00102587,
       "asset_class": "equity"
     },
@@ -66086,15 +66086,6 @@
       "country": "United States",
       "sector": "Financials",
       "weight": 0.00102587,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_177",
-      "name": "Indi 2025 - 1",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
-      "weight": 0.00092328,
       "asset_class": "equity"
     },
     {
@@ -66161,11 +66152,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_186",
+      "isin": "MANUAL:TUHUA_VENTURES_II_FUND",
       "name": "Tuhua Ventures II Fund",
       "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "country": "New Zealand",
+      "sector": "Financials",
       "weight": 0.00092328,
       "asset_class": "equity"
     },
@@ -66296,11 +66287,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_207",
-      "name": "Freeport - McMoran Copper",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2352118",
+      "name": "Freeport-McMoRan Inc",
+      "ticker": "FCX",
+      "country": "United States",
+      "sector": "Materials",
       "weight": 0.00082069,
       "asset_class": "equity"
     },
@@ -66359,11 +66350,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_215",
+      "isin": "MANUAL:BRIDGEWEST_VENTURE_FUND_1_LP",
       "name": "Bridgewest Venture Fund 1 LP",
       "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "country": "New Zealand",
+      "sector": "Financials",
       "weight": 0.00082069,
       "asset_class": "equity"
     },
@@ -66386,11 +66377,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_218",
-      "name": "Adobe Systems Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2008154",
+      "name": "Adobe Inc",
+      "ticker": "ADBE",
+      "country": "United States",
+      "sector": "Information Technology",
       "weight": 0.00082069,
       "asset_class": "equity"
     },
@@ -66485,11 +66476,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_233",
-      "name": "PNC Financial Services Group I",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2692665",
+      "name": "PNC Financial Services Group Inc/The",
+      "ticker": "PNC",
+      "country": "United States",
+      "sector": "Financials",
       "weight": 0.00071811,
       "asset_class": "equity"
     },
@@ -66788,11 +66779,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_272",
-      "name": "Muenchener Rueckversicherungs-",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:5294121",
+      "name": "Muenchener Rueckversicherungs-Gesellschaft AG in Muenchen",
+      "ticker": "MUV2",
+      "country": "Germany",
+      "sector": "Financials",
       "weight": 0.00061552,
       "asset_class": "equity"
     },
@@ -66847,15 +66838,6 @@
       "ticker": "HLT",
       "country": "United States",
       "sector": "Consumer Discretionary",
-      "weight": 0.00061552,
-      "asset_class": "equity"
-    },
-    {
-      "isin": "UNRESOLVED_283",
-      "name": "FPQC 2026-1 A",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
       "weight": 0.00061552,
       "asset_class": "equity"
     },
@@ -67033,11 +67015,11 @@
       "issuer_name": "Powerco"
     },
     {
-      "isin": "UNRESOLVED_308",
-      "name": "HCA Holdings Inc",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:B4MGBG6",
+      "name": "HCA Healthcare Inc",
+      "ticker": "HCA",
+      "country": "United States",
+      "sector": "Health Care",
       "weight": 0.00051293,
       "asset_class": "equity"
     },
@@ -67168,11 +67150,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_323",
-      "name": "Deutsche Post AG",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:4617859",
+      "name": "DHL AG",
+      "ticker": "DHL",
+      "country": "Germany",
+      "sector": "Industrials",
       "weight": 0.00051293,
       "asset_class": "equity"
     },
@@ -67204,11 +67186,11 @@
       "asset_class": "equity"
     },
     {
-      "isin": "UNRESOLVED_327",
-      "name": "Arthur J Gallagagh & Co",
-      "ticker": "",
-      "country": "Unknown",
-      "sector": "Unclassified",
+      "isin": "SEDOL:2359506",
+      "name": "Arthur J Gallagher & Co",
+      "ticker": "AJG",
+      "country": "United States",
+      "sector": "Financials",
       "weight": 0.00051293,
       "asset_class": "equity"
     },
@@ -71905,11 +71887,11 @@
     },
     {
       "isin": "OTHER:MINOR_UNMAPPED",
-      "name": "Other / Minor Unmapped Holdings (53 items <0.05%)",
+      "name": "Other / Minor Unmapped Holdings (51 items <0.05%)",
       "ticker": "",
       "country": "Global",
       "sector": "Unclassified",
-      "weight": 0.00974574,
+      "weight": 0.00913022,
       "asset_class": "equity"
     },
     {
@@ -72197,6 +72179,16 @@
       "tranche_count": 1
     },
     {
+      "isin": "BOND:INDI_1",
+      "name": "Indi - 1",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00092328,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
       "isin": "BOND:ASIA",
       "name": "ASIA",
       "ticker": "",
@@ -72287,6 +72279,16 @@
       "tranche_count": 1
     },
     {
+      "isin": "BOND:FPQC_1_A",
+      "name": "FPQC -1 A",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00061552,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
       "isin": "BOND:NPLYDC",
       "name": "NPLYDC",
       "ticker": "",
@@ -72309,6 +72311,16 @@
     {
       "isin": "BOND:AVNZP",
       "name": "AVNZP",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00041035,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:UDCAU_2_A",
+      "name": "UDCAU -2 A",
       "ticker": "",
       "country": "Global",
       "sector": "Corporate / Other",
@@ -72343,6 +72355,16 @@
       "country": "Global",
       "sector": "Corporate / Other",
       "weight": 0.00030776,
+      "asset_class": "fixed_interest",
+      "tranche_count": 1
+    },
+    {
+      "isin": "BOND:TURNS_1_A",
+      "name": "TURNS -1 A",
+      "ticker": "",
+      "country": "Global",
+      "sector": "Corporate / Other",
+      "weight": 0.00020517,
       "asset_class": "fixed_interest",
       "tranche_count": 1
     },

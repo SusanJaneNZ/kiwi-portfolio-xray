@@ -123,7 +123,6 @@ PROVIDER_DEFINITIONS: tuple[dict[str, Any], ...] = (
     {"slug": "spdr", "display_name": "SPDR", "legal_name": "State Street SPDR", "kind": "master", "is_kiwisaver": False, "can_auto_fetch": False, "scheme_id": None, "offer_id": None},
     {"slug": "betashares", "display_name": "BetaShares", "legal_name": "BetaShares", "kind": "master", "is_kiwisaver": False, "can_auto_fetch": False, "scheme_id": None, "offer_id": None},
     {"slug": "directories", "display_name": "Directories", "legal_name": "Exchange Directories", "kind": "reference", "is_kiwisaver": False, "can_auto_fetch": False, "scheme_id": None, "offer_id": None},
-    {"slug": "kiwisaver", "display_name": "KiwiSaver", "legal_name": "KiwiSaver", "kind": "domestic", "is_kiwisaver": True, "can_auto_fetch": False, "scheme_id": None, "offer_id": None},
     {"slug": "custom", "display_name": "Custom", "legal_name": "Custom", "kind": "domestic", "is_kiwisaver": False, "can_auto_fetch": False, "scheme_id": None, "offer_id": None},
 )
 

@@ -558,7 +558,7 @@
     "effective_date": "2026-09-30",
     "cash_ratio": 0.0244,
     "hedging_ratio": 0.0,
-    "constituent_count": 845,
+    "constituent_count": 847,
     "asset_class": "mixed",
     "cadence": "monthly",
     "is_stale": false

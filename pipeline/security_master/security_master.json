@@ -424,6 +424,78 @@
     "exchange": "MANUAL"
   },
   {
+    "isin": "MANUAL:SIMPLICITY_LIVING_LTD_ORDINARY_S",
+    "name": "Simplicity Living Ltd Ordinary Shares",
+    "ticker": "",
+    "country": "New Zealand",
+    "sector": "Real Estate",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "MANUAL:ICEHOUSE_VENTURES_GROWTH_FUND_II",
+    "name": "Icehouse Ventures Growth Fund II LP",
+    "ticker": "",
+    "country": "New Zealand",
+    "sector": "Information Technology",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "MANUAL:RELIABLE_FOUNDATIONS_LTD",
+    "name": "Reliable Foundations LTD",
+    "ticker": "",
+    "country": "New Zealand",
+    "sector": "Industrials",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "MANUAL:DATA_TORQUE_LTD",
+    "name": "Data Torque Ltd",
+    "ticker": "",
+    "country": "New Zealand",
+    "sector": "Information Technology",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "MANUAL:TAX_TRADERS_LIMITED",
+    "name": "Tax Traders Limited",
+    "ticker": "",
+    "country": "New Zealand",
+    "sector": "Financials",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "MANUAL:STABICRAFT_MARINE_LIMITED",
+    "name": "Stabicraft Marine Limited",
+    "ticker": "",
+    "country": "New Zealand",
+    "sector": "Consumer Discretionary",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "MANUAL:ELIM_EDUCATION_IMPACT_INV_TRUST",
+    "name": "Elim Education Impact Inv Trust",
+    "ticker": "",
+    "country": "New Zealand",
+    "sector": "Consumer Discretionary",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "MANUAL:TUHUA_VENTURES_II_FUND",
+    "name": "Tuhua Ventures II Fund",
+    "ticker": "",
+    "country": "New Zealand",
+    "sector": "Financials",
+    "exchange": "MANUAL"
+  },
+  {
+    "isin": "MANUAL:BRIDGEWEST_VENTURE_FUND_1_LP",
+    "name": "Bridgewest Venture Fund 1 LP",
+    "ticker": "",
+    "country": "New Zealand",
+    "sector": "Financials",
+    "exchange": "MANUAL"
+  },
+  {
     "isin": "SEDOL:6076146",
     "name": "Westpac Banking Corporation",
     "ticker": "WBC.NZ",

@@ -66,6 +66,8 @@ class TestAssetClassifierAndBondPipeline(unittest.TestCase):
         self.assertEqual(self.classifier.classify_holding("KIWI Float 13/06/2028"), "fixed_interest")
         self.assertEqual(self.classifier.classify_holding("UDC Endeavour Auto ABS Trust"), "fixed_interest")
         self.assertEqual(self.classifier.classify_holding("MTFNZ M25 A"), "fixed_interest")
+        self.assertEqual(self.classifier.classify_holding("Indi 2025 - 1"), "fixed_interest")
+        self.assertEqual(self.classifier.classify_holding("FPQC 2026-1 A"), "fixed_interest")
 
         # Accounting / Capital Call rows -> accounting
         self.assertEqual(self.classifier.classify_holding("Debtors"), "accounting")
