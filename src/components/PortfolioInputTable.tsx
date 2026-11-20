@@ -25,7 +25,7 @@ interface PortfolioInputTableProps {
   portfolioState: UserPortfolioState;
   fundsRegistry: FundMetadata[];
   directEquitiesCatalog: DirectEquityCatalogItem[];
-  onUpdateState: (state: UserPortfolioState) => void;
+  onUpdateState: (action: UserPortfolioState | ((prev: UserPortfolioState) => UserPortfolioState)) => void;
   totalPortfolioNZD: number;
 }
 
@@ -75,14 +75,14 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
     if (hasEnteredPortfolio) {
       await createDatedBackupOnDisk();
     }
-    onUpdateState({
-      ...portfolioState,
+    onUpdateState((prev) => ({
+      ...prev,
       fundBalances: {},
       directHoldings: [],
       fixedInterest: [],
       cashDeposits: [],
       bucketAssignments: {},
-    });
+    }));
   };
 
   const handleExportPortfolio = async () => {

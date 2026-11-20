@@ -47,6 +47,22 @@ test.describe('Kiwi Portfolio X-Ray — Live Portfolio UI E2E', () => {
       });
     });
 
+    await page.route('**/*er-api.com/**', async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ rates: { NZD: 1.09 } }),
+      });
+    });
+
+    await page.route('**/*frankfurter*/**', async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ rates: { NZD: 1.09 } }),
+      });
+    });
+
     // Accept confirmation dialogs cleanly (Clear Portfolio / Load Sample)
     page.on('dialog', async (dialog) => {
       await dialog.accept();
