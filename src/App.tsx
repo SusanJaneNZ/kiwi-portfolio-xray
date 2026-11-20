@@ -34,6 +34,7 @@ export const App: React.FC = () => {
   const [fundsRegistry, setFundsRegistry] = useState<FundMetadata[]>([]);
   const [constituentsMap, setConstituentsMap] = useState<Record<string, Constituent[]>>({});
   const [directCatalog, setDirectCatalog] = useState<DirectEquityCatalogItem[]>([]);
+  const [features, setFeatures] = useState<{ indexReplicator: boolean }>({ indexReplicator: false });
   const [isLoading, setIsLoading] = useState(true);
   const [dataLoadError, setDataLoadError] = useState<string | null>(null);
 
@@ -112,10 +113,13 @@ export const App: React.FC = () => {
     async function loadData() {
       try {
         const basePath = import.meta.env.BASE_URL || '/';
-        const [fundsRes, constRes, directRes] = await Promise.all([
+        const [fundsRes, constRes, directRes, featuresRes] = await Promise.all([
           fetchJson<FundMetadata[]>(`${basePath}data/funds_registry.json`),
           fetchJson<Record<string, Constituent[]>>(`${basePath}data/constituents.json`),
           fetchJson<DirectEquityCatalogItem[]>(`${basePath}data/direct_equities.json`),
+          fetchJson<{ indexReplicator?: boolean }>(`${basePath}data/features.json`).catch(() => ({
+            indexReplicator: false,
+          })),
         ]);
 
         const listedEtfs: DirectEquityCatalogItem[] = fundsRes
@@ -147,6 +151,7 @@ export const App: React.FC = () => {
         setFundsRegistry(fundsRes);
         setConstituentsMap(constRes);
         setDirectCatalog(mergedCatalog);
+        setFeatures({ indexReplicator: Boolean(featuresRes?.indexReplicator) });
         setDataLoadError(null);
 
         // Reconcile any saved direct holdings whose legacy ISIN differs from compiled canonical ISIN/SEDOL
@@ -371,14 +376,18 @@ export const App: React.FC = () => {
           activeWithdrawal={activeWithdrawal}
         />
 
-        {/* 7. DIY Direct Index Rebalancer */}
-        <IndexReplicatorPanel
-          portfolioState={portfolioState}
-          constituentsMap={constituentsMap}
-          lookThroughHoldings={calculationResult.holdings}
-          directEquitiesCatalog={directCatalog}
-          onUpdateState={handleUpdateState}
-        />
+        {/* 7. DIY Direct Index Rebalancer (feature-flagged via public/data/features.json or ?replicator=1) */}
+        {(features.indexReplicator ||
+          (typeof window !== 'undefined' &&
+            new URLSearchParams(window.location.search).get('replicator') === '1')) && (
+          <IndexReplicatorPanel
+            portfolioState={portfolioState}
+            constituentsMap={constituentsMap}
+            lookThroughHoldings={calculationResult.holdings}
+            directEquitiesCatalog={directCatalog}
+            onUpdateState={handleUpdateState}
+          />
+        )}
       </div>
     </div>
   );

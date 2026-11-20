@@ -264,13 +264,26 @@ test.describe('Kiwi Portfolio X-Ray — Live Portfolio UI E2E', () => {
     expect(pageErrors, `Uncaught page errors: ${pageErrors.join('; ')}`).toEqual([]);
   });
 
-  test('3. DIY Direct Index Rebalancer (DIV & ASD) renders breakeven cards and constituent table', async ({
+  test('3. DIY Direct Index Rebalancer respects feature flag and renders DIV & ASD when enabled', async ({
     page,
   }) => {
     const pageErrors: string[] = [];
     page.on('pageerror', (err) => pageErrors.push(err.message));
 
+    // When disabled in features.json (default), panel stays hidden
     await page.goto('/');
+    await expect(page.getByText('Kiwi Portfolio X-Ray').first()).toBeVisible({ timeout: 15_000 });
+    await expect(page.locator('button', { hasText: /DIY Direct Index Rebalancer/i })).toHaveCount(0);
+
+    // When enabled via features.json, panel renders and functions cleanly
+    await page.route('**/data/features.json*', async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ indexReplicator: true }),
+      });
+    });
+    await page.reload();
     await expect(page.getByText('Kiwi Portfolio X-Ray').first()).toBeVisible({ timeout: 15_000 });
 
     // Expand DIY Direct Index Rebalancer panel (below Bucket Rebalancer)

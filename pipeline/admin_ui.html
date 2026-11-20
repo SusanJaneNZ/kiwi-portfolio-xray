@@ -490,6 +490,10 @@
           and build `public/data/`.</p>
       </div>
       <div class="row-actions">
+        <button id="btn-toggle-replicator" class="btn btn-sm" onclick="toggleFeatureFlag('indexReplicator')"
+          title="Toggle DIY Direct Index Replicator visibility in public/data/features.json (commit &amp; deploy to take effect live)">
+          Index Replicator: OFF
+        </button>
         <button class="btn btn-sm" onclick="setAllPanelsOpen(true)">Expand All</button>
         <button class="btn btn-sm" onclick="setAllPanelsOpen(false)">Collapse All</button>
         <button id="btn-dry-run" class="btn btn-primary" onclick="runPipeline(true)">▶ Run Dry-Run (--dry-run)</button>
@@ -2509,9 +2513,52 @@
       });
     }
 
+    let featureFlags = { indexReplicator: false };
+
+    function renderFeatureFlags() {
+      const btn = document.getElementById('btn-toggle-replicator');
+      if (!btn) return;
+      const isLive = Boolean(featureFlags.indexReplicator);
+      btn.textContent = isLive ? 'Index Replicator: LIVE' : 'Index Replicator: OFF';
+      btn.className = isLive ? 'btn btn-sm btn-ok' : 'btn btn-sm';
+    }
+
+    async function loadFeatureFlags() {
+      try {
+        const res = await api('/api/features');
+        if (res && res.features) {
+          featureFlags = res.features;
+          renderFeatureFlags();
+        }
+      } catch (err) {
+        console.warn('Could not load feature flags:', err);
+      }
+    }
+
+    async function toggleFeatureFlag(key) {
+      const nextVal = !Boolean(featureFlags[key]);
+      try {
+        const res = await api('/api/features', {
+          method: 'POST',
+          body: JSON.stringify({ key, enabled: nextVal }),
+        });
+        if (res && res.features) {
+          featureFlags = res.features;
+          renderFeatureFlags();
+          showToast(
+            `${key} set to ${nextVal ? 'LIVE' : 'OFF'} in public/data/features.json (commit & PR to deploy)`,
+            'ok'
+          );
+        }
+      } catch (err) {
+        showToast(`Failed to update feature flag: ${err.message}`, 'err');
+      }
+    }
+
     // Initial load
     initCollapsiblePanels();
     updateProviderSourceCallout();
+    loadFeatureFlags();
     loadStagedFiles();
     loadAliases();
     loadFeeders();
