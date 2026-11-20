@@ -23,9 +23,10 @@ export const BucketSelect: React.FC<BucketSelectProps> = ({
       value={current}
       onChange={(e) => onAssign(instrumentKey, e.target.value)}
       aria-label={`Assign bucket for ${instrumentKey}`}
-      className="bg-slate-900 border border-slate-800 rounded-lg px-2 py-1.5 text-[11px] text-slate-300 focus:outline-none focus:border-indigo-500 max-w-[130px]"
+      title="Rebalance bucket assignment"
+      className="h-[30px] bg-slate-900 border border-slate-800 rounded-lg px-2 text-[11px] text-slate-300 focus:outline-none focus:border-indigo-500 max-w-[140px]"
     >
-      <option value="">Unassigned</option>
+      <option value="">Bucket: None</option>
       {buckets.map((b) => (
         <option key={b.id} value={b.id}>
           {b.name}

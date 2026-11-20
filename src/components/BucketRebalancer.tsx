@@ -12,9 +12,8 @@ interface BucketRebalancerProps {
 }
 
 const STARTER_PRESET: PortfolioBucket[] = [
-  { id: 'bkt-term-deposits', name: 'Term Deposits', targetPercent: 20 },
-  { id: 'bkt-high-div', name: 'High Div Yield', targetPercent: 20 },
   { id: 'bkt-growth', name: 'Growth', targetPercent: 60 },
+  { id: 'bkt-defensive', name: 'Defensive', targetPercent: 40 },
 ];
 
 const fmtMoney = (v: number) => formatNZD(v, 2);
@@ -56,17 +55,15 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
   const handleApplyPreset = () => {
     if (
       portfolioState.buckets.length > 0 &&
-      !window.confirm('Replace your existing buckets with the 20% Term Deposits / 20% High Div Yield / 60% Growth preset?')
+      !window.confirm('Replace your existing buckets with the 60% Growth / 40% Defensive preset?')
     ) {
       return;
     }
     const nextAssignments: Record<string, string> = {};
-    // Convenience auto-assign direct term deposits into Term Deposits bucket when applying starter preset
+    // Convenience auto-assign fixed interest & cash into Defensive bucket when applying starter preset
     const fiList = portfolioState.fixedInterest || portfolioState.cashDeposits || [];
     for (const dep of fiList) {
-      if ((dep.category || dep.type) === 'term_deposit') {
-        nextAssignments[`fi:${dep.id}`] = 'bkt-term-deposits';
-      }
+      nextAssignments[`fi:${dep.id}`] = 'bkt-defensive';
     }
     onUpdateState({
       ...portfolioState,
@@ -203,7 +200,7 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
               onClick={handleApplyPreset}
               className="text-xs text-indigo-400 hover:text-indigo-300 underline underline-offset-2 whitespace-nowrap font-medium"
             >
-              Load 20 / 20 / 60 Preset
+              Load 60 / 40 Preset
             </button>
           </div>
         )}

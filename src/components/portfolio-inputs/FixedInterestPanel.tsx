@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { CollapsiblePanel } from '../CollapsiblePanel';
 import { BucketSelect } from './BucketSelect';
 import {
-  DEFAULT_STARTER_BUCKETS,
   FixedInterestCategory,
   FixedInterestHolding,
   FixedInterestTaxType,
@@ -61,7 +60,7 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
     portfolioState.fixedInterest || portfolioState.cashDeposits || [];
 
   const availableBuckets = React.useMemo(() => {
-    return portfolioState.buckets.length > 0 ? portfolioState.buckets : DEFAULT_STARTER_BUCKETS;
+    return portfolioState.buckets;
   }, [portfolioState.buckets]);
 
   const handleValueChange = (id: string, value: string) => {
@@ -413,14 +412,6 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
       }
     >
       <div className="space-y-2 text-xs">
-        {/* Tier 0 External Cash Educational Tip */}
-        <div className="bg-slate-900/60 border border-slate-800/80 rounded-lg p-2.5 text-[11px] text-slate-400 flex items-start gap-2">
-          <span className="text-amber-400 text-sm leading-none mt-0.5">💡</span>
-          <div>
-            <span className="font-medium text-slate-200">Retail Portfolio Tip:</span> Only enter cash and deposits allocated to your investment portfolio (defensive anchor / dry powder). Keep your separate 1–3 year day-to-day living buffer (Tier 0) outside this tool to keep rebalancing targets accurate.
-          </div>
-        </div>
-
         {/* Existing Holdings List */}
         {holdingsList.map((dep) => {
           const category = dep.category || dep.type || 'term_deposit';

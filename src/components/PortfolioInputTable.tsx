@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 import {
-  DEFAULT_STARTER_BUCKETS,
   DirectEquityCatalogItem,
   FundMetadata,
   UserPortfolioState,
@@ -166,8 +165,7 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
         delete nextAssignments[`td:${instrumentKey.slice(3)}`];
       }
     }
-    const nextBuckets = portfolioState.buckets.length > 0 ? portfolioState.buckets : DEFAULT_STARTER_BUCKETS;
-    onUpdateState({ ...portfolioState, buckets: nextBuckets, bucketAssignments: nextAssignments });
+    onUpdateState({ ...portfolioState, bucketAssignments: nextAssignments });
   };
 
   const managedFundSumNZD = Object.entries(portfolioState.fundBalances).reduce(
