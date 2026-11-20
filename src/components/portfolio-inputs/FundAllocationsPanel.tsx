@@ -424,20 +424,15 @@ Please add this fund to \`pipeline/fund_catalog.json\` so it is ingested into th
       }
       headerRight={
         <span className="text-xs text-sky-400 font-mono">
-          {formatNZD(fundSumNZD)} ({totalPortfolioNZD > 0 ? ((fundSumNZD / totalPortfolioNZD) * 100).toFixed(1) : 0}% of portfolio)
+          ${formatNZD(fundSumNZD)} ({totalPortfolioNZD > 0 ? ((fundSumNZD / totalPortfolioNZD) * 100).toFixed(1) : 0}% of portfolio)
         </span>
       }
     >
       {/* Informational Look-Through Note */}
       <div className="bg-slate-900/40 border border-slate-800/60 rounded-lg p-2.5 text-[11px] text-slate-400 flex items-start gap-2 mb-3">
         <span className="text-sky-400 text-sm mt-0.5">ℹ️</span>
-        <div className="space-y-1">
-          <div>
-            Enter your current total dollar balance in <strong>NZD</strong> for off-market managed funds and KiwiSaver schemes (e.g. <strong>Kernel</strong>, <strong>Simplicity</strong>, <strong>Fisher Funds</strong>, <strong>Milford</strong>).
-          </div>
-          <div className="text-slate-500 text-[10px]">
-            Market-traded shares and ETFs are in <strong>Panel 1</strong> by share count. Don’t see your fund? Click <strong>➕ Add New Fund</strong> to add it instantly via Sorted Smart Investor and request automated nightly ingestion.
-          </div>
+        <div>
+          Enter NZD balances for managed funds and KiwiSaver schemes. Add NZX/ASX shares and ETFs in <strong>1. Exchange-Traded Shares &amp; Listed ETFs</strong> above, or click <strong>➕ Request New Fund</strong> to add a missing fund.
         </div>
       </div>
 
@@ -686,7 +681,7 @@ Please add this fund to \`pipeline/fund_catalog.json\` so it is ingested into th
           <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-800">
             <span className="text-[11px] text-slate-500">
               {urlValidation.isValid
-                ? 'Valid Sorted link detected. Ready to save for processing.'
+                ? 'Valid Sorted link detected. Saving will add this fund and open GitHub to submit it for processing.'
                 : 'Enter details above to track this fund immediately.'}
             </span>
 

@@ -102,7 +102,7 @@ test.describe('Kiwi Portfolio X-Ray — Live Portfolio UI E2E', () => {
     await shareSearch.fill('MCY');
     await page.locator('div', { hasText: /Mercury NZ/i }).filter({ hasText: 'MCY' }).last().click();
     await page.getByPlaceholder('Shares').first().fill('1000');
-    await page.getByPlaceholder('<unknown>').first().fill('6.50');
+    await page.getByPlaceholder('Price').first().fill('6.50');
     await page.getByRole('button', { name: '+ Add', exact: true }).click();
     await expect(page.getByText('$6,500.00').first()).toBeVisible();
 

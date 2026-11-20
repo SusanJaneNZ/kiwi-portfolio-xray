@@ -13,6 +13,7 @@ import {
   exportPortfolioToDisk,
   fetchBackupsList,
   importPortfolioJSON,
+  isSamplePortfolio,
   loadPortfolioFromDisk,
   DiskBackupInfo,
 } from '../storage/localStorage';
@@ -84,9 +85,16 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
     }));
   };
 
+  const isLocalHost =
+    typeof window !== 'undefined' &&
+    (window.location.hostname === 'localhost' ||
+      window.location.hostname === '127.0.0.1' ||
+      window.location.hostname === '::1');
+  const showingSample = isSamplePortfolio(portfolioState);
+
   const handleExportPortfolio = async () => {
-    // 1. Export locally to backups/ folder under repo root
-    const diskResult = await exportPortfolioToDisk(portfolioState);
+    // 1. Export locally to backups/ folder when running on localhost
+    const diskResult = isLocalHost ? await exportPortfolioToDisk(portfolioState) : { ok: false };
 
     // 2. Download copy in browser
     const jsonStr = exportPortfolioJSON(portfolioState);
@@ -98,8 +106,7 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
     a.click();
     URL.revokeObjectURL(url);
 
-    const destMsg = diskResult.path || 'backups/';
-    setNotice(`Exported to ${destMsg} and downloaded.`);
+    setNotice(diskResult.ok && diskResult.path ? `Exported to ${diskResult.path} and downloaded.` : 'Downloaded JSON backup.');
     setTimeout(() => setNotice(null), 4500);
   };
 
@@ -190,12 +197,24 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
             <span className="text-xs font-mono font-normal bg-slate-800 text-slate-300 px-2 py-0.5 rounded-full border border-slate-700">
               ${totalPortfolioNZD.toLocaleString('en-NZ', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} NZD
             </span>
+            {showingSample && (
+              <span
+                title="Viewing built-in sample holdings. Click Clear Portfolio to enter your own."
+                className="inline-flex items-center text-[11px] font-normal text-amber-300 bg-amber-950/50 border border-amber-700/40 px-2 py-0.5 rounded-full"
+              >
+                Sample Portfolio
+              </span>
+            )}
             <span
-              title="Continuous background persistence to local backups/ folder (backups/portfolio_backup.json in .gitignore) and browser storage."
+              title={
+                isLocalHost
+                  ? 'Auto-saved to browser storage and local backups/portfolio_backup.json.'
+                  : 'Saved privately in this browser only (localStorage + IndexedDB). Use Export Portfolio for a backup copy.'
+              }
               className="inline-flex items-center gap-1.5 text-[11px] font-normal text-emerald-400 bg-emerald-950/50 border border-emerald-800/40 px-2 py-0.5 rounded-full"
             >
               <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              <span>Portfolio auto-saved to <code className="font-mono text-emerald-300">backups/portfolio_backup.json</code></span>
+              <span>{isLocalHost ? 'Auto-saved' : 'Saved in this browser'}</span>
             </span>
             {notice && (
               <span className="inline-flex items-center gap-1 text-[11px] text-cyan-300 bg-cyan-950/60 border border-cyan-800/50 px-2.5 py-0.5 rounded-full">
@@ -208,21 +227,21 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
           <div className="flex flex-wrap items-center gap-2" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={handleExportPortfolio}
-              title="Export entered portfolio inputs to local backups/ folder and download JSON backup file"
+              title={isLocalHost ? 'Save to local backups/ folder and download JSON backup' : 'Download a JSON backup of your portfolio'}
               className="text-xs bg-slate-950 hover:bg-slate-800 text-slate-200 border border-slate-800 px-3 py-1.5 rounded-lg transition-colors"
             >
               Export Portfolio
             </button>
             <button
               onClick={handleOpenImportModal}
-              title="Import portfolio defaults from local backups/ folder, or choose file from device"
+              title={isLocalHost ? 'Import from local backups/ folder or choose a JSON file' : 'Import a JSON portfolio backup file from your device'}
               className="text-xs bg-slate-950 hover:bg-slate-800 text-slate-200 border border-slate-800 px-3 py-1.5 rounded-lg transition-colors"
             >
               Import Portfolio
             </button>
             <button
               onClick={handleClearPortfolio}
-              title="Clear all entered fund balances, direct shares, and term deposits"
+              title="Clear all entered funds, direct shares, and fixed interest/cash"
               className="text-xs bg-slate-950 hover:bg-rose-950/40 text-slate-400 hover:text-rose-400 border border-slate-800 px-3 py-1.5 rounded-lg transition-colors"
             >
               Clear Portfolio

@@ -19,7 +19,7 @@ export const LiquidityCard: React.FC<LiquidityCardProps> = ({
   const segments = [
     { label: 'NZ / AU Equities', pct: liquidity.nzAuEquitiesPercentage, val: liquidity.nzAuEquitiesNZD, color: 'bg-sky-500' },
     { label: 'Intl Equities', pct: liquidity.intlEquitiesPercentage, val: liquidity.intlEquitiesNZD, color: 'bg-indigo-500' },
-    { label: 'Fixed Interest (Bonds)', pct: liquidity.bondsPercentage, val: liquidity.totalBondsNZD, color: 'bg-teal-500' },
+    { label: 'Bonds', pct: liquidity.bondsPercentage, val: liquidity.totalBondsNZD, color: 'bg-teal-500' },
     { label: 'Term Deposits', pct: liquidity.termDepositsPercentage, val: liquidity.totalTermDepositsNZD, color: 'bg-amber-500' },
     { label: 'Cash & Hedging', pct: liquidity.cashPercentage + liquidity.hedgingPercentage, val: liquidity.totalCashNZD + liquidity.totalHedgingNZD, color: 'bg-purple-500' },
   ];
@@ -73,21 +73,18 @@ export const LiquidityCard: React.FC<LiquidityCardProps> = ({
           <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-3.5">
             <span className="text-xs text-slate-400">Total Portfolio Value</span>
             <div className="text-xl font-bold text-white mt-1">${fmtNZD(liquidity.totalPortfolioNZD)} NZD</div>
-            <span className="text-[11px] text-emerald-400 flex items-center gap-1 mt-0.5">
-              Growth {liquidity.growthPercentage.toFixed(0)}% · Defensive {liquidity.defensivePercentage.toFixed(0)}%
-            </span>
           </div>
 
           <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-3.5">
             <span className="text-xs text-slate-400">Look-Through Equities</span>
             <div className="text-xl font-bold text-sky-400 mt-1">${fmtNZD(liquidity.totalEquitiesNZD)} NZD</div>
             <span className="text-[11px] text-slate-400 mt-0.5 block">
-              {liquidity.equitiesPercentage.toFixed(2)}% across {constituentCount.toLocaleString()} stocks
+              {liquidity.equitiesPercentage.toFixed(2)}% across {constituentCount.toLocaleString()} companies
             </span>
           </div>
 
           <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-3.5">
-            <span className="text-xs text-slate-400">Fixed Interest / Bonds</span>
+            <span className="text-xs text-slate-400">Bonds</span>
             <div className="text-xl font-bold text-teal-400 mt-1">${fmtNZD(liquidity.totalBondsNZD)} NZD</div>
             <span className="text-[11px] text-slate-400 mt-0.5 block">
               {liquidity.bondsPercentage.toFixed(2)}% across {bondIssuerCount.toLocaleString()} issuers

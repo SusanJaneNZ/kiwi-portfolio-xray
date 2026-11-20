@@ -23,12 +23,12 @@ export const EquitiesTabTable: React.FC<EquitiesTabTableProps> = ({
             <th className="py-3 px-4 w-12 text-center">#</th>
             <th className="py-3 px-4">Ticker</th>
             <th className="py-3 px-4">Company Name</th>
-            <th className="py-3 px-4">Canonical ISIN</th>
+            <th className="py-3 px-4">ID / ISIN</th>
             <th className="py-3 px-4">Country</th>
-            <th className="py-3 px-4">GICS Sector</th>
+            <th className="py-3 px-4">Sector</th>
             <th className="py-3 px-4 text-right">Exposure (NZD)</th>
             <th className="py-3 px-4 text-right">Weight</th>
-            <th className="py-3 px-4 w-12 text-center">Drill</th>
+            <th className="py-3 px-4 w-12 text-center">Details</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-slate-800/60 font-sans">
@@ -55,7 +55,7 @@ export const EquitiesTabTable: React.FC<EquitiesTabTableProps> = ({
                     <td className="py-3 px-4 italic text-slate-300">{h.name}</td>
                     <td className="py-3 px-4 font-mono text-slate-500">—</td>
                     <td className="py-3 px-4">🌐 Multi-Country</td>
-                    <td className="py-3 px-4">All 11 Sectors</td>
+                    <td className="py-3 px-4">Multiple Sectors</td>
                     <td className="py-3 px-4 text-right font-bold text-slate-300 font-mono">
                       ${formatNZD(h.valueNZD, 2)}
                     </td>

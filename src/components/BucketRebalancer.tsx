@@ -149,7 +149,7 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
     <CollapsiblePanel
       id="bucket-rebalancer"
       title={<span>Buckets &amp; Withdrawal Rebalancer</span>}
-      subtitle="Unlike the look-through Asset Split above (which decomposes inside mixed funds), Buckets group your holdings into target allocations and compute minimum-turnover withdrawals, buys, and sells."
+      subtitle="Group holdings into target buckets to calculate minimum-turnover withdrawals and rebalance trades."
       className="md:p-5"
     >
       <div className="space-y-4">
@@ -273,7 +273,7 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
             <span className="font-semibold text-amber-300">
               ⚠ ${fmtMoney(rebalanceResult.totalUnassignedNZD)} NZD in Unassigned Holdings (excluded from rebalance targets)
             </span>
-            <span className="text-[11px] text-amber-200/70">Assign directly below or in Portfolio Inputs:</span>
+            <span className="text-[11px] text-amber-200/70">Assign directly below or in Portfolio:</span>
           </div>
           <div className="flex flex-wrap gap-2">
             {rebalanceResult.unassignedHoldings.map((item) => (
@@ -328,9 +328,9 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
                   type="button"
                   onClick={() => setWithdrawalInput(String(suggestedDrawdownNZD))}
                   className="text-[11px] bg-amber-900/40 hover:bg-amber-800/60 text-amber-200 border border-amber-700/50 rounded-lg px-2.5 py-1.5 transition-colors font-medium flex items-center gap-1 shadow-sm"
-                  title="Sync with net capital shortfall calculated in Retirement Cashflow above"
+                  title="Sync with capital drawdown calculated in Projected Organic Cashflow above"
                 >
-                  <span>⚡ Use Net Shortfall (${fmtMoney(suggestedDrawdownNZD)})</span>
+                  <span>⚡ Use Capital Drawdown (${fmtMoney(suggestedDrawdownNZD)})</span>
                 </button>
               )}
             </div>

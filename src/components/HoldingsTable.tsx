@@ -24,9 +24,7 @@ export const HoldingsTable: React.FC<HoldingsTableProps> = ({
   const [groupMicro, setGroupMicro] = useState(true);
   const [viewMode, setViewMode] = useState<'total' | 'equities'>('total');
   const [sortBy, setSortBy] = useState<'value' | 'ticker'>('value');
-  const [expandedRows, setExpandedRows] = useState<Record<string, boolean>>({
-    'SEDOL:B8W6K56': true,
-  });
+  const [expandedRows, setExpandedRows] = useState<Record<string, boolean>>({});
 
   const toggleRow = (key: string) => {
     setExpandedRows((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -76,10 +74,10 @@ export const HoldingsTable: React.FC<HoldingsTableProps> = ({
 
   const subtitle =
     activeTab === 'equities'
-      ? 'Multi-fund holdings and direct NZX/ASX shares deduplicated by canonical ISIN.'
+      ? 'Fund constituents and direct NZX/ASX shares combined by company ID.'
       : activeTab === 'bonds'
-        ? 'Fixed-interest debt tranches consolidated per normalized issuer and bond category.'
-        : 'Combined institutional concentration across Equities, Bonds, and Term Deposits / Call Cash.';
+        ? 'Bond holdings grouped by issuer and category.'
+        : 'Total exposure per institution across equities, bonds, deposits, and cash.';
 
   return (
     <CollapsiblePanel
@@ -125,7 +123,7 @@ export const HoldingsTable: React.FC<HoldingsTableProps> = ({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Filter ticker, issuer, country..."
-                className="bg-slate-950 border border-slate-800 rounded-lg pl-8 pr-8 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 w-56"
+                className="bg-slate-950 border border-slate-800 rounded-lg pl-8 pr-8 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 w-64"
               />
               <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs pointer-events-none">🔍</span>
               {searchQuery && (
@@ -194,23 +192,13 @@ export const HoldingsTable: React.FC<HoldingsTableProps> = ({
 
               <button
                 onClick={handleExportCSV}
-                title="Download lookthrough holdings as a CSV spreadsheet"
+                title="Download look-through equity holdings as CSV"
                 className="text-xs bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800 px-2.5 py-1.5 rounded-lg transition-colors flex items-center gap-1.5"
               >
                 <span>📥</span>
-                <span>Export CSV</span>
+                <span>Export Equities CSV</span>
               </button>
             </div>
-          )}
-          {activeTab !== 'equities' && (
-            <button
-              onClick={handleExportCSV}
-              title="Download lookthrough holdings as a CSV spreadsheet"
-              className="text-xs bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800 px-2.5 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ml-auto"
-            >
-              <span>📥</span>
-              <span>Export CSV</span>
-            </button>
           )}
         </div>
 
