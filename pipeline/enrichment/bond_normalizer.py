@@ -60,11 +60,20 @@ _EXPLICIT_TD_RE = re.compile(
     r"\b(?:term\s+deposit|call\s+deposit|notice\s+saver|bank\s+deposit|deposit)\b",
     re.IGNORECASE,
 )
+_MORTGAGE_RE = re.compile(
+    r"\b(?:loan\s+secured\s+over\s+residential\s+property|residential\s+mortgage|mtge)\b",
+    re.IGNORECASE,
+)
+_ACCOUNTING_RE = re.compile(
+    r"^(?:debtors|creditors|accrued\s+(?:income|interest|expenses)|receivables|payables)$|\bcapital\s+call\b",
+    re.IGNORECASE,
+)
 _BOND_KEYWORD_RE = re.compile(
     r"\b(?:new\s+zealand\s+government|nzgs|lgfa|nzlgfa|local\s+government\s+funding|housing\s+new\s+zealand|"
     r"us\s+treasury|u\.s\.\s+treasury|uk\s+gilt|bundesrepublik|"
     r"government\d*|govt|republic\s+of|kingdom\s+of|sovereign|"
     r"treasury\s+(?:bill|note|bond)|frn|floating\s+rate\s+note|fixed\s+rate\s+note|"
+    r"nfix\d[a-z]*|bkbm|abs\s+trust|mtfnz|"
     r"capital\s+notes?|subordinated\s+notes?|senior\s+notes?|perpetual(?!\s+(?:limited|ltd|group|plc|corp|inc|holdings)\b)|perp|"
     r"class\s+[a-z]\b|magnum\s+trust|kea\s+pl|ignition|"
     r"pnote|promissory\s+notes?|\bprf\b|\bpref\b|preference\s+shares?|"
@@ -83,8 +92,9 @@ _TRANCHE_STRIP_PATTERNS = [
     re.compile(rf"(?<=\s)\d{{1,2}}\.\d{{1,4}}(?=\s*(?:$|CB\b|GB\b))", re.IGNORECASE),
     _DATE_RE,
     re.compile(r"\b(?:series|tranche)\s+[a-z0-9-]+\b", re.IGNORECASE),
+    re.compile(r"\b(?:nfix\d[a-z]*|bkbm)\s*(?:\+\s*\d+)?\b", re.IGNORECASE),
     re.compile(
-        r"\b(?:senior|unsecured|secured|subordinated|notes?|frn|fixed|floating|"
+        r"\b(?:senior|unsecured|secured|subordinated|notes?|frn|fixed|floating|float|"
         r"green\s+bond|social\s+bond|sustainability\s+bond|international\s+bond|bond|perpetual|callable|perp|"
         r"class\s+[a-z]\b|magnum\s+trust|kea\s+pl|ignition|"
         r"pnote|promissory\s+notes?|\bprf\b|\bpref\b|preference\s+shares?|"
@@ -138,13 +148,16 @@ class AssetClassifier:
         return None, None, {}
 
     def classify_holding(self, name: str, fund_code: str = "", asset_class_hint: str = "") -> str:
-        """Routes a single non-cash holding into 'term_deposit', 'fixed_interest', or 'equity'."""
+        """Routes a single non-cash holding into 'term_deposit', 'fixed_interest', 'accounting', or 'equity'."""
+        if _ACCOUNTING_RE.search(name.strip()):
+            return "accounting"
+
         hint = (asset_class_hint or "").strip().lower()
         if "term deposit" in hint:
             return "term_deposit"
 
         # Rule 1: Explicit Term Deposit / Call Deposit (even when rate % + maturity date appear)
-        has_bond_kw = bool(_BOND_KEYWORD_RE.search(name) or _BOND_FUND_RE.search(name))
+        has_bond_kw = bool(_BOND_KEYWORD_RE.search(name) or _BOND_FUND_RE.search(name) or _MORTGAGE_RE.search(name))
         if _EXPLICIT_TD_RE.search(name) and not has_bond_kw:
             return "term_deposit"
         if re.search(r"\bTD\b", name) and not re.search(r"\bLtd\b", name, re.IGNORECASE):
@@ -159,10 +172,12 @@ class AssetClassifier:
         if fund_code in EQUITY_FUND_ALLOWLIST:
             return "equity"
 
-        # Rule 2: Fixed Interest / Debt / Bond ETFs / Rate Derivatives
+        # Rule 2: Fixed Interest / Debt / Mortgages / FRNs / Bond ETFs / Rate Derivatives
+        if _MORTGAGE_RE.search(name):
+            return "fixed_interest"
         if _COUPON_RE.search(name) and _DATE_RE.search(name):
             return "fixed_interest"
-        if _DATE_RE.search(name) and re.search(r"\b(?:abs|mbs|rmbs|frm|cb|gb)\b", name, re.IGNORECASE):
+        if _DATE_RE.search(name) and re.search(r"\b(?:abs|mbs|rmbs|frm|cb|gb|float|floating)\b", name, re.IGNORECASE):
             return "fixed_interest"
         if _BOND_KEYWORD_RE.search(name) or _BOND_FUND_RE.search(name):
             return "fixed_interest"
@@ -171,7 +186,17 @@ class AssetClassifier:
         return "equity"
 
     def normalize_bond_holding(self, raw_name: str, country_hint: str = "") -> dict[str, Any]:
-        """Normalizes a fixed-interest tranche or bond ETF into a canonical issuer record."""
+        """Normalizes a fixed-interest tranche, mortgage pool, or bond ETF into a canonical issuer record."""
+        if "residential property" in raw_name.lower() and _MORTGAGE_RE.search(raw_name):
+            return {
+                "isin": "BOND:NZ_RESIDENTIAL_MORTGAGES",
+                "name": "NZ Residential Mortgages",
+                "sector": "Corporate / Other",
+                "country": "New Zealand",
+                "issuer_key": None,
+                "issuer_name": None,
+                "consolidation_key": "NZ_RESIDENTIAL_MORTGAGES",
+            }
         is_etf_or_fund = bool(_BOND_FUND_RE.search(raw_name))
         cleaned = " ".join(raw_name.split())
 

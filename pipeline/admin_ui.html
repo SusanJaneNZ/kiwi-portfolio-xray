@@ -1680,7 +1680,7 @@
     async function saveAliasForUnresolved(idx) {
       const item = unresolvedItemsState[idx];
       if (!item) return;
-      const scope = `${item.provider}:${item.fund_code}`;
+      const scope = '*';
       const isin = document.getElementById(`map-isin-${idx}`).value.trim();
       if (!isin) {
         alert('Enter an ISIN first (you can search above and click "Use ISIN").');
@@ -1732,7 +1732,7 @@
       const item = unresolvedItemsState[itemIdx];
       const cand = item && item.candidates ? item.candidates[candIdx] : null;
       if (!item || !cand) return;
-      const scope = `${item.provider}:${item.fund_code}`;
+      const scope = '*';
       try {
         await api('/api/aliases/set', {
           method: 'POST',

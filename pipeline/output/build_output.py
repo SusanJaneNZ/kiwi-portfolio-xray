@@ -379,6 +379,11 @@ class PipelineCompiler:
         resolved_equities: list[dict] = []
         consolidated_bonds: dict[str, dict] = {}
         consolidated_tds: dict[str, dict] = {}
+        consolidated_accounting: dict[str, dict] = {}
+        minor_unmapped_weight = 0.0
+        minor_unmapped_count = 0
+        MINOR_UNMAPPED_THRESHOLD = 0.0005  # 0.05% per holding
+        MINOR_UNMAPPED_AGGREGATE_CAP = 0.025  # 2.5% per fund cap before warning
         raw_non_cash_sum = sum(h.weight for h in fund_res.holdings)
 
         # Normalize investable weights after segregating cash & hedging to preserve weight integrity
@@ -390,6 +395,18 @@ class PipelineCompiler:
             normalized_weight = h.weight * weight_norm_factor
             hint = getattr(h, "raw_metadata", {}).get("asset_class", "")
             row_class = classifier.classify_holding(h.name, fund_code=fund_res.fund_code, asset_class_hint=hint)
+
+            if row_class == "accounting":
+                acct = {
+                    "isin": "ACCOUNTING:RECEIVABLES_PAYABLES",
+                    "name": "Receivables, Payables & Capital Calls",
+                    "sector": "Corporate / Other",
+                    "country": "New Zealand",
+                    "issuer_key": None,
+                    "issuer_name": None,
+                }
+                self._accumulate_non_equity(consolidated_accounting, acct, "fixed_interest", normalized_weight)
+                continue
 
             if row_class == "term_deposit":
                 td = classifier.normalize_term_deposit(h.name, country_hint=h.country or "")
@@ -421,6 +438,10 @@ class PipelineCompiler:
                 }
                 self._stamp_issuer(entry, classifier)
                 resolved_equities.append(entry)
+            elif abs(normalized_weight) < MINOR_UNMAPPED_THRESHOLD:
+                # Auto-bucket immaterial (<0.05%) unmatched rows to preserve weight sum without manual mapping fatigue
+                minor_unmapped_weight += normalized_weight
+                minor_unmapped_count += 1
             else:
                 # Synthetic placeholder record to preserve weight sum integrity
                 synth_isin = f"UNRESOLVED_{h.ticker or idx}"
@@ -442,17 +463,43 @@ class PipelineCompiler:
                     "weight": round(normalized_weight, 6),
                     "reason": match.reason,
                     "suggested_snippet": {
-                        f"{fund_res.provider}:{fund_res.fund_code}": {
+                        "*": {
                             h.name: "INSERT_CANONICAL_ISIN"
                         }
                     },
                 })
 
-        for group in (consolidated_bonds, consolidated_tds):
+        if minor_unmapped_count > 0:
+            resolved_equities.append({
+                "isin": "OTHER:MINOR_UNMAPPED",
+                "name": f"Other / Minor Unmapped Holdings ({minor_unmapped_count} items <0.05%)",
+                "ticker": "",
+                "country": "Global",
+                "sector": "Unclassified",
+                "weight": round(minor_unmapped_weight, 8),
+                "asset_class": "equity",
+            })
+            if minor_unmapped_weight > MINOR_UNMAPPED_AGGREGATE_CAP:
+                unresolved_collector.append({
+                    "provider": fund_res.provider,
+                    "fund_code": fund_res.fund_code,
+                    "raw_name": f"[AGGREGATE MINOR UNMAPPED CAP EXCEEDED: {minor_unmapped_count} rows]",
+                    "raw_ticker": "",
+                    "weight": round(minor_unmapped_weight, 6),
+                    "reason": "minor_unmapped_cap_exceeded",
+                    "suggested_snippet": {},
+                })
+
+        for group in (consolidated_bonds, consolidated_tds, consolidated_accounting):
             for entry in group.values():
                 entry["weight"] = round(entry["weight"], 8)
 
-        resolved_constituents = resolved_equities + list(consolidated_bonds.values()) + list(consolidated_tds.values())
+        resolved_constituents = (
+            resolved_equities
+            + list(consolidated_bonds.values())
+            + list(consolidated_tds.values())
+            + list(consolidated_accounting.values())
+        )
 
         return UnwrappedFund(
             fund_code=fund_res.fund_code,

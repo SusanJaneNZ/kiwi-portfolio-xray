@@ -60,6 +60,24 @@ class TestAssetClassifierAndBondPipeline(unittest.TestCase):
         self.assertEqual(self.classifier.classify_holding("Chorus Capital Notes"), "fixed_interest")
         self.assertEqual(self.classifier.classify_holding("iShares Core US Aggregate Bond ETF"), "fixed_interest")
 
+        # NZ Residential Mortgages, FRNs (NFIX3FRA/Float), ABS Trusts -> fixed_interest
+        self.assertEqual(self.classifier.classify_holding("Loan secured over residential property in Auckland"), "fixed_interest")
+        self.assertEqual(self.classifier.classify_holding("BZLNZ NFIX3FRA + 58 11/05/2029"), "fixed_interest")
+        self.assertEqual(self.classifier.classify_holding("KIWI Float 13/06/2028"), "fixed_interest")
+        self.assertEqual(self.classifier.classify_holding("UDC Endeavour Auto ABS Trust"), "fixed_interest")
+        self.assertEqual(self.classifier.classify_holding("MTFNZ M25 A"), "fixed_interest")
+
+        # Accounting / Capital Call rows -> accounting
+        self.assertEqual(self.classifier.classify_holding("Debtors"), "accounting")
+        self.assertEqual(self.classifier.classify_holding("Creditors"), "accounting")
+        self.assertEqual(self.classifier.classify_holding("IVX Capital Call"), "accounting")
+
+        # Mortgage consolidation into single canonical NZ Residential Mortgages pool
+        m1 = self.classifier.normalize_bond_holding("Loan secured over residential property in Auckland")
+        m2 = self.classifier.normalize_bond_holding("Loan secured over residential property in Wellington")
+        self.assertEqual(m1["isin"], "BOND:NZ_RESIDENTIAL_MORTGAGES")
+        self.assertEqual(m1["isin"], m2["isin"])
+
     def test_tranche_stripping_country_and_sector(self):
         b1 = self.classifier.normalize_bond_holding("New Zealand Government 4.5% 15/04/2027 Series 1")
         b2 = self.classifier.normalize_bond_holding("NZGS 3.50% 14-Apr-33 Tranche 2")

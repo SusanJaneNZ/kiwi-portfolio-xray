@@ -150,8 +150,9 @@ class SecurityMatcher:
                 for tok in get_stem_tokens(clean_name):
                     self.by_token.setdefault(tok, []).append(sec)
 
-        # Unambiguous cross-fund alias fallback (None marks conflicting multi-fund targets)
+        # Unambiguous cross-fund alias fallback (exact raw name AND normalized name; None marks conflicting targets)
         self.global_alias_by_name: dict[str, Optional[str]] = {}
+        self.global_alias_by_norm_name: dict[str, Optional[str]] = {}
         for scope_map in self.alias_map.values():
             if not isinstance(scope_map, dict):
                 continue
@@ -160,6 +161,12 @@ class SecurityMatcher:
                     self.global_alias_by_name[raw_name] = target_isin
                 elif self.global_alias_by_name[raw_name] != target_isin:
                     self.global_alias_by_name[raw_name] = None
+                norm_alias = normalize_company_name(raw_name)
+                if norm_alias:
+                    if norm_alias not in self.global_alias_by_norm_name:
+                        self.global_alias_by_norm_name[norm_alias] = target_isin
+                    elif self.global_alias_by_norm_name[norm_alias] != target_isin:
+                        self.global_alias_by_norm_name[norm_alias] = None
 
     def match(
         self,
@@ -170,7 +177,8 @@ class SecurityMatcher:
         fund_code: str = "",
     ) -> MatchResult:
         """Attempts to match an incoming record using alias, ISIN, exact ticker, and fuzzy guardrails."""
-        # 1. Check explicit provider alias map first (per-fund -> provider wildcard -> unambiguous cross-fund)
+        clean_in = normalize_company_name(name)
+        # 1. Check explicit provider alias map first (per-fund -> provider wildcard -> global '*' -> unambiguous cross-fund)
         alias_key = f"{provider}:{fund_code}"
         fund_aliases = self.alias_map.get(alias_key, {})
         alias_isin = fund_aliases.get(name)
@@ -179,6 +187,8 @@ class SecurityMatcher:
             alias_isin = self.alias_map.get(f"{provider}:*", {}).get(name) or self.alias_map.get("*", {}).get(name)
             if not alias_isin:
                 alias_isin = self.global_alias_by_name.get(name)
+                if not alias_isin and clean_in:
+                    alias_isin = self.global_alias_by_norm_name.get(clean_in)
                 alias_reason = "cross_fund_alias_map"
 
         if alias_isin:
