@@ -327,7 +327,7 @@ class AdminService:
             try:
                 from pipeline.adapters.spdr_adapter import SPDRAdapter
                 s_ad = SPDRAdapter()
-                for f in sp_dir.glob("*.xlsx"):
+                for f in list(sp_dir.glob("*.csv")) + list(sp_dir.glob("*.xlsx")):
                     ticker = s_ad._extract_ticker(f.name)
                     if ticker:
                         result["spdr"].add(ticker.upper())

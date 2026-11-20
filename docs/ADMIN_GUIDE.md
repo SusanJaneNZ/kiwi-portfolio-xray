@@ -18,7 +18,7 @@ python3 -m pipeline.admin_ui
 Kiwi Portfolio X-Ray divides portfolio data ingestion into two distinct operational flows:
 
 * **NZ Fund Constituent Disclosures (`.xlsx`) — Automated Ingestion:**  
-  Statutory quarterly portfolio filings for New Zealand funds (Smartshares ETFs, Kernel Wealth index funds, and KiwiSaver / managed schemes like Fisher Funds, Milford, Simplicity) are **automatically discovered, downloaded, and unwrapped** via the NZ Disclose Register / Sorted Smart Investor API. The nightly GitHub Actions pipeline and Admin Web Console handle these without manual intervention.
+  Statutory quarterly portfolio filings for New Zealand funds (Smartshares ETFs, Kernel Wealth index funds, and KiwiSaver / managed schemes like Fisher Funds, Milford, Simplicity) are **automatically discovered, downloaded, rolled over on new quarters, and unwrapped** via the NZ Disclose Register / Sorted Smart Investor. The monthly GitHub Actions pipeline (`Upstream Ingestion & Data Compilation`) and Admin Web Console handle these automatically, including slash-stripping URL normalization (`S&P/NZX` → `S&PNZX`) and cleanup of superseded quarterly files.
 
 * **Overseas Master ETFs (`.csv`) — Manual Periodic Maintenance:**  
   Overseas wholesale ETFs issued by Vanguard (US/AU), iShares (BlackRock), and State Street SPDR are not filed on the NZ Disclose Register. When overseas issuers update their holdings, an administrator periodically downloads the latest CSV from their respective portals, drops it into the staging directory (`data/staging/vanguard/`, `data/staging/ishares/`, or `data/staging/spdr/`) via the Admin Web UI, and clicks **`⚡ Publish Datasets (public/data/)`** to unwrap all dependent feeder funds.
@@ -31,7 +31,7 @@ The application relies on 5 source streams and 2 reference directories. All data
 
 | Dataset / Source | Source Portal | Staging Target Directory | Format & File Content | Frequency | Automation Level | Purpose |
 |---|---|---|---|---|---|---|
-| **NZ Statutory Fund Disclosures**<br>• **Smartshares ETFs & Feeder Funds** (`FNZ`, `NZG`, `TWF`, `USF`, `NGB`, etc.)<br>• **Kernel Wealth Index Funds** (`Kernel NZ 50`, `World Ex-US`, `Global ESG`, etc.)<br>• **KiwiSaver & Managed Funds** (`Fisher Funds`, `Milford`, `Simplicity`, `Generate`, `Booster`, `ANZ`, etc.) | [Sorted Smart Investor](https://smartinvestor.sorted.org.nz)<br>*(Disclose Register)* | `data/staging/smartshares/`<br>`data/staging/kernel/`<br>`data/staging/<manager>/` | XLSX (`*.xlsx`): Statutory asset names, % of net assets, Cash & payables | Quarterly / Semi-Annual | **Automated**<br>(Nightly bot / Admin UI `📥 Fetch`) | Official statutory quarterly portfolio holdings for all domestic funds, ETFs, and KiwiSaver schemes; ingested and parsed automatically |
+| **NZ Statutory Fund Disclosures**<br>• **Smartshares ETFs & Feeder Funds** (`FNZ`, `NZG`, `TWF`, `USF`, `NGB`, etc.)<br>• **Kernel Wealth Index Funds** (`Kernel NZ 50`, `World Ex-US`, `Global ESG`, etc.)<br>• **KiwiSaver & Managed Funds** (`Fisher Funds`, `Milford`, `Simplicity`, `Generate`, `Booster`, `ANZ`, etc.) | [Sorted Smart Investor](https://smartinvestor.sorted.org.nz)<br>*(Disclose Register)* | `data/staging/smartshares/`<br>`data/staging/kernel/`<br>`data/staging/<manager>/` | XLSX (`*.xlsx`): Statutory asset names, % of net assets, Cash & payables | Quarterly / Semi-Annual | **Automated**<br>(Monthly CI / Bot / Admin UI `📥 Fetch`) | Official statutory quarterly portfolio holdings for all domestic funds, ETFs, and KiwiSaver schemes; ingested and parsed automatically |
 | **Vanguard US Master ETFs** (`VT`, `VOO`, `VGK`, `VPL`, `VWO`, `VO`, `VB`) | [Vanguard US Advisor Portal](https://advisors.vanguard.com/investments/products/vt/vanguard-total-world-stock-etf) (*Holdings details* → *Export full holdings*) | `data/staging/vanguard/` | CSV (`Holdings_details_<TICKER_OR_FUND>.csv`): Ticker, Holdings/Name, % of funds, Sub-Industry, Country, SEDOL/CUSIP/ISIN | Monthly (around the 15th) | **Manual Admin Action Required** | Underlying global companies for Smartshares feeder wrappers & Known Companies Register |
 | **iShares (BlackRock) Master ETFs** (`IWLD`, `IVV`, `SAEU`, `SASU`) | [BlackRock Australia / US](https://www.blackrock.com/au/products/investment-funds) (Product Holdings CSV) | `data/staging/ishares/` | CSV (`<TICKER>_holdings.csv`): Ticker, Name, Sector, Location, Weight (%) | Monthly / Quarterly | **Manual Admin Action Required** | Underlying global companies for Smartshares ESG wrappers |
 | **SPDR (State Street) Master ETFs** (e.g., `SPEM` — SPDR Portfolio Emerging Markets ETF) | [State Street Global Advisors (SSGA) SPEM Portal](https://www.ssga.com/us/en/intermediary/etfs/state-street-spdr-portfolio-emerging-markets-etf-spem) (*Holdings* → *Daily / Export Holdings CSV*) | `data/staging/spdr/` | CSV (`SPEM_holdings.csv`): Ticker, Name, Weight, Sector, Country | Monthly / Quarterly | **Manual Admin Action Required** | Underlying global emerging markets companies for Kernel Emerging Markets feeder wrapper |
@@ -86,8 +86,8 @@ A key design feature of Kiwi Portfolio X-Ray is that the reference dataset (**Kn
 ### How Multi-Country Equities are Mapped:
 * **Direct Matching**: When an unlisted fund like **Kernel S&P World Ex-U.S.**, **Kernel Global Clean Energy**, or **Kernel Global 100** publishes quarterly holdings (e.g. Nestlé, ASML, Vestas Wind Systems, Orsted, Samsung, TSMC), their company names and tickers are mapped directly against the **14,680+ global companies** in the Known Companies Register.
 * **String Normalization**: Corporate legal suffixes (e.g., `A/S`, `AG`, `SA`, `NV`, `Oyj`, `PLC`, `Ltd`) are stripped before matching so formatting differences do not prevent a match.
-* **Unmapped Holdings**: If a company is outside the Known Companies Register or its name is reported with unusual punctuation, the pipeline flags it in `unresolved_entries.json`. The administrator maps it once in `company_alias_map.json` via the Admin Web UI, and it is permanently mapped for all future quarters.
-* **Bonds, Term Deposits & Cash Holdings**: Direct fixed-interest bonds, bank term deposits, and cash accounts are classified row-by-row via [`bond_normalizer.py`](file:///mnt/c/Users/susan/wsl/kiwi-portfolio-xray/pipeline/enrichment/bond_normalizer.py) and rolled up by institutional issuer ([`issuer_alias_map.json`](file:///mnt/c/Users/susan/wsl/kiwi-portfolio-xray/pipeline/enrichment/issuer_alias_map.json)) without generating false unmapped company entries.
+* **Unmapped Holdings & Materiality Bucketing**: If a material equity ($\ge 0.05\%$ weight) is outside the Known Companies Register, the pipeline flags it in `unresolved_entries.json`. Mapping it once in the Admin UI saves a global `"*"` alias in `company_alias_map.json` that automatically applies across all funds and future quarters. Immaterial unmatched rows ($< 0.05\%$ each) are rolled into `OTHER:MINOR_UNMAPPED` (with an automatic warning if a fund's aggregate minor tail exceeds `2.5%`).
+* **Bonds, Mortgages, FRNs, Term Deposits & Accounting Rows**: Direct bonds, NZ residential mortgages (`BOND:NZ_RESIDENTIAL_MORTGAGES`), floating-rate notes (`NFIX3FRA`/`BKBM`/`Float`), ABS trusts, bank term deposits, and accounting rows (`Debtors`/`Creditors`/`Capital Call`) are classified upstream via [`bond_normalizer.py`](file:///mnt/c/Users/susan/wsl/kiwi-portfolio-xray/pipeline/enrichment/bond_normalizer.py) and rolled up by institutional issuer ([`issuer_alias_map.json`](file:///mnt/c/Users/susan/wsl/kiwi-portfolio-xray/pipeline/enrichment/issuer_alias_map.json)) without generating false unmapped company entries.
 
 ---
 
@@ -101,7 +101,7 @@ python3 -m pipeline.admin_ui
 ```
 Open `http://127.0.0.1:8787` in your browser to:
 * **Managed Fund Catalogue (Panel 5)**: Monitor all registered funds with real-time **Status (`⏳ Awaiting Processing` vs `✔ Processed`)**, **As Of Dates**, constituent counts, and one-click `📥 Fetch` actions. Unprocessed funds are automatically prioritized at the top, followed by oldest disclosure dates first.
-* **Filter & Search**: Quickly filter by `⏳ Awaiting Processing`, `Kernel`, or `Smartshares`, with instant search and one-click `✕` query clearing.
+* **Filter & Search**: Quickly filter by `All`, `⏳ Awaiting Processing`, `Simplicity`, `Kernel`, `Smartshares`, or `Fisher Funds`, with instant search and one-click `✕` query clearing.
 * **Stage Master ETF Files (Panel 1)**: Drag-and-drop downloaded Vanguard, iShares, or SPDR files directly into `data/staging/vanguard/`, `data/staging/ishares/`, or `data/staging/spdr/`.
 * **Map Unmapped Companies (Panel 6)**: Search the Known Companies Register and save company mappings into `company_alias_map.json`.
 * **Publish Datasets (Header / Panel 3)**: Run `--dry-run` diagnostics and publish production datasets (`public/data/`) with one click via **⚡ Publish Datasets (public/data/)**.
@@ -196,9 +196,9 @@ If the dry-run reports unmapped company holdings, map them in the Admin Web UI (
 ## 8. Configuring a New Feeder Fund Pairing (`feeder_registry.json`)
 
 ### When is this needed?
-The 10 standard New Zealand feeder funds are already pre-configured (`TWF` $\rightarrow$ `VT`, `USF` $\rightarrow$ `VOO`, `EUF` $\rightarrow$ `VGK`, `APA` $\rightarrow$ `VPL`, `EMF` $\rightarrow$ `VWO`, `ESG` $\rightarrow$ `IWLD`, `USS` $\rightarrow$ `VB`, `USM` $\rightarrow$ `VO`, `USA` $\rightarrow$ `SASU`, `EUG` $\rightarrow$ `SAEU`).
+23 standard New Zealand feeder funds are already pre-configured in [`pipeline/feeder_registry.json`](file:///mnt/c/Users/susan/wsl/kiwi-portfolio-xray/pipeline/feeder_registry.json) (including `TWF`/`TWH` $\rightarrow$ `VT`, `USF`/`USE` $\rightarrow$ `VOO`, `EUF` $\rightarrow$ `VGK`, `APA` $\rightarrow$ `VPL`, `EMF` $\rightarrow$ `VWO`, `ESG` $\rightarrow$ `IWLD`, `KERNEL_EMERGING_MARKETS` $\rightarrow$ `SPEM`, and more).
 
-You **only** need to configure a new feeder pairing if a Fund Manager introduces a **new wrapper fund** that invests $\ge 75\%$ of its assets into an overseas Master ETF.
+You **only** need to configure a new feeder pairing if a Fund Manager introduces a **new equity wrapper fund** that invests $\ge 75\%$ of its assets into a single overseas Master ETF. Physical commodity/bullion trusts (such as `GLD` / Smart Gold ETF) are automatically bypassed and compile directly without requiring a master ETF file.
 
 ### Step-by-Step Procedure:
 1. **Check the Feeder Fund's Disclosure:**
@@ -248,7 +248,7 @@ flowchart TD
     Parser -->|"Atomically update & sort"| Catalog["pipeline/fund_catalog.json"]
     BotAction -->|"git commit & push [skip ci]"| MainBranch["Branch: main"]
     BotAction -->|"Add confirmation comment & close"| ClosedIssue["Closed GitHub Issue"]
-    BotAction -->|"workflow_call (or nightly cron)"| IngestAction[".github/workflows/ingest.yml"]
+    BotAction -->|"gh workflow run (or monthly cron)"| IngestAction[".github/workflows/ingest.yml"]
     IngestAction -->|"python -m pipeline.ingest --fetch"| Compile["Fetch Disclose .xlsx & compile to public/data/"]
     Compile -->|"Deploy update"| GitHubPages["Production Web App"]
 ```
@@ -266,14 +266,14 @@ flowchart TD
    - *In the meantime, the user's browser immediately models the fund using the synthetic 80% Growth Equities / 20% Bonds look-through fallback so their portfolio balance and asset class split remain 100% accurate without waiting.*
 
 2. **Automated Issue Processing:**
-   - The GitHub Action `.github/workflows/fund-request-bot.yml` activates on `issues: [opened, labeled]` when `labels contains 'new-fund'`.
-   - It executes `python3 -m pipeline.automation.process_fund_request --title "$TITLE" --body "$BODY"`.
+   - The GitHub Action `.github/workflows/fund-request-bot.yml` (**Process Crowdsourced Fund Requests**) activates on `issues: [opened, labeled]` when `labels contains 'new-fund'`.
+   - It executes `python pipeline/automation/process_fund_request.py` using the issue title and body environment variables.
    - The parser checks for JSON blocks, falls back to markdown lines and URLs, verifies that a valid `FND...` code exists, and safely adds or updates the entry in `pipeline/fund_catalog.json`.
-   - The action commits `pipeline/fund_catalog.json` directly to `main` with a clean commit message (`feat(catalog): register <fund_name> (<fund_code>) via bot`).
-   - The bot posts an automated markdown comment acknowledging the addition, closes the issue, and triggers `.github/workflows/ingest.yml`.
+   - The action commits `pipeline/fund_catalog.json` directly to `main` (`chore(catalog): add fund from issue #<number> [skip ci]`).
+   - The bot posts an automated markdown comment acknowledging the addition, closes the issue, and triggers `.github/workflows/ingest.yml` via `gh workflow run ingest.yml`.
 
 3. **Downstream Ingestion & Production Compilation:**
-   - `.github/workflows/ingest.yml` runs either via scheduled cron (`0 6 1 * *`), manual `workflow_dispatch`, or when called by the bot (`workflow_call`).
+   - `.github/workflows/ingest.yml` (**Upstream Ingestion & Data Compilation**) runs via monthly scheduled cron (`0 6 1 * *`), manual `workflow_dispatch`, or `gh workflow run` triggered by the bot.
    - It runs `python -m pipeline.ingest --fetch --staging-dir data/staging --output-dir public/data`.
    - `GenericDomesticAdapter` dynamically compiles and unwraps the newly added fund's quarterly holdings into `public/data/funds_registry.json` and `constituents.json`.
    - Once published, any user who holds that fund automatically sees full line-item company look-through instead of the synthetic fallback!
@@ -287,8 +287,8 @@ Administrators can monitor the health of automated fund processing via standard 
 1. **Viewing Active and Past Ingestion Runs:**
    - Go to your repository on GitHub: `https://github.com/<owner>/kiwi-portfolio-xray/actions`.
    - Check the two relevant workflows:
-     - **Fund Request Bot** (`.github/workflows/fund-request-bot.yml`): Runs on issue submission. Typical execution time: ~15–30 seconds.
-     - **Nightly Data Ingestion Pipeline** (`.github/workflows/ingest.yml`): Runs on schedule, manual trigger, or bot call. Typical execution time: ~1–3 minutes.
+     - **Process Crowdsourced Fund Requests** (`.github/workflows/fund-request-bot.yml`): Runs on issue submission. Typical execution time: ~15–30 seconds.
+     - **Upstream Ingestion & Data Compilation** (`.github/workflows/ingest.yml`): Runs monthly (1st of each month), via manual trigger, or when triggered by the bot. Typical execution time: ~1–3 minutes.
    - A green checkmark (✓) indicates successful metadata extraction, catalog commit, and ingestion.
 
 2. **Tracking User Fund Requests:**
@@ -315,11 +315,12 @@ GitHub sends automated email notifications to administrators when an Action fail
 * **Symptom:** In `.github/workflows/ingest.yml`, the step `Run Ingestion Pipeline` reports an HTTP error downloading disclosures from `smartinvestor.sorted.org.nz` or `disclose-register.companiesoffice.govt.nz`.
 * **Root Cause:** Sorted or Disclose Register is undergoing temporary maintenance or rate-limiting.
 * **Protection Built into Architecture:**
-  - The pipeline has per-fund **circuit breakers** (`PipelineCompiler.compile()`). A failure on one fund never deletes existing cached data or halts compilation of other valid funds.
-  - The front-end automatically retains the synthetic 80/20 look-through fallback so end users never experience broken calculations.
+  - During fetching, `SmartInvestorFetcher` retains existing staged files on HTTP errors so temporary outages never wipe cached disclosures.
+  - During compilation, `PipelineCompiler.compile()` enforces a **circuit breaker**: if a staged file is corrupt or fails schema validation, `validation_report.is_valid` is set to `False` and production writes to `public/data/` are aborted (unless `--force` is explicitly passed) so corrupted datasets never overwrite production.
+  - The front-end automatically retains the synthetic 80/20 look-through fallback for un-ingested funds.
 * **Resolution:**
   1. Check if Sorted Smart Investor is accessible in a web browser.
-  2. Once the upstream site is back online, navigate to **Actions** → **Nightly Data Ingestion Pipeline** → click **Run workflow** (`workflow_dispatch`).
+  2. Once the upstream site is back online, navigate to **Actions** → **Upstream Ingestion & Data Compilation** → click **Run workflow** (`workflow_dispatch`).
   3. The pipeline will retry the download, update `public/data/`, and push changes to `main`.
 
 #### Scenario 3: Unmapped Holdings or Schema Mismatch in a Newly Ingested Fund
@@ -344,9 +345,8 @@ GitHub sends automated email notifications to administrators when an Action fail
 * **Symptom:** The bot fails at step `Commit and Push Catalogue Update` with `error: failed to push some refs to ... (fetch first)`.
 * **Root Cause:** Two users submitted fund requests at the exact same second, or an administrator pushed a commit while the bot was executing.
 * **Resolution:**
-  1. The bot action includes `git pull --rebase` before pushing. If an edge-case rebase conflict occurs:
-  2. Re-trigger the failed workflow from the GitHub Actions run page by clicking **Re-run all jobs**.
-  3. The action will fetch the fresh `main` branch and cleanly append the entry.
+  1. Re-trigger the failed workflow from the GitHub Actions run page by clicking **Re-run all jobs**.
+  2. The action will fetch the fresh `main` branch and cleanly append the entry.
 
 ---
 

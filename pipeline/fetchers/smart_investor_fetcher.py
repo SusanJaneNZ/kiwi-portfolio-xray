@@ -9,6 +9,7 @@ import os
 import re
 import time
 from dataclasses import dataclass
+from datetime import date
 from pathlib import Path
 from typing import Any, Callable, Optional, Sequence
 from urllib.error import HTTPError, URLError
@@ -76,6 +77,39 @@ from pipeline.providers import (
     get_legal_manager_name,
     normalize_provider,
 )
+
+
+_QUARTER_ENDS: tuple[tuple[int, int, str], ...] = (
+    (3, 31, "March"),
+    (6, 30, "June"),
+    (9, 30, "September"),
+    (12, 31, "December"),
+)
+
+
+def recent_quarter_end_dates(count: int = 4, today: Optional[date] = None) -> list[str]:
+    """Returns the most recent N calendar quarter-end dates formatted as 'DD-Month-YYYY'."""
+    ref = today or date.today()
+    candidates: list[tuple[date, str]] = []
+    for yr in range(ref.year, ref.year - 3, -1):
+        for month, day, month_name in reversed(_QUARTER_ENDS):
+            q_date = date(yr, month, day)
+            if q_date <= ref:
+                candidates.append((q_date, f"{day:02d}-{month_name}-{yr}"))
+                if len(candidates) >= count:
+                    return [label for _, label in candidates]
+    return [label for _, label in candidates]
+
+
+def latest_quarter_end_iso(today: Optional[date] = None) -> str:
+    """Returns the most recent calendar quarter-end date as 'YYYY-MM-DD'."""
+    ref = today or date.today()
+    for yr in range(ref.year, ref.year - 2, -1):
+        for month, day, _ in reversed(_QUARTER_ENDS):
+            q_date = date(yr, month, day)
+            if q_date <= ref:
+                return q_date.isoformat()
+    return ref.isoformat()
 
 
 def get_default_catalog_path() -> Path:
@@ -381,24 +415,27 @@ class SmartInvestorFetcher:
         offer = meta.offer_id or default_ofr
         fnd = meta.fund_id.strip()
 
-        page_url = f"https://www.smartinvestor.sorted.org.nz/kiwisaver-and-managed-funds/{scheme}/{offer}/{fnd}/"
-        logger.info("Scraping fund profile page for %s (%s) at URL: %s", meta.target_code, meta.fund_id, page_url)
-        try:
-            content = self._downloader(page_url, self.user_agent)
-            html_text = content.decode("utf-8", errors="replace")
-            m = re.search(
-                r'href=[\"\']([^\"\']*disclose-document/full-portfolio/[^\"\']+\.xlsx(?:[^\s\"\'<>]*)?)[\"\']',
-                html_text,
-                re.IGNORECASE,
-            )
-            if m:
-                raw_link = html_lib.unescape(m.group(1))
-                if raw_link.startswith("/"):
-                    raw_link = f"https://www.smartinvestor.sorted.org.nz{raw_link}"
-                logger.info("Discovered live disclosure link for %s (%s): %s", meta.target_code, meta.fund_id, raw_link)
-                return raw_link
-        except Exception as exc:
-            logger.info("Profile page scrape failed for %s (%s) at '%s': %s", meta.target_code, meta.fund_id, page_url, exc)
+        if scheme and offer and fnd:
+            page_url = f"https://www.smartinvestor.sorted.org.nz/kiwisaver-and-managed-funds/{scheme}/{offer}/{fnd}/"
+            logger.info("Scraping fund profile page for %s (%s) at URL: %s", meta.target_code, meta.fund_id, page_url)
+            try:
+                content = self._downloader(page_url, self.user_agent)
+                html_text = content.decode("utf-8", errors="replace")
+                m = re.search(
+                    r'href=[\"\']([^\"\']*disclose-document/full-portfolio/[^\"\']+\.xlsx(?:[^\s\"\'<>]*)?)[\"\']',
+                    html_text,
+                    re.IGNORECASE,
+                )
+                if m:
+                    raw_link = html_lib.unescape(m.group(1))
+                    if raw_link.startswith("/"):
+                        raw_link = f"https://www.smartinvestor.sorted.org.nz{raw_link}"
+                    logger.info("Discovered live disclosure link for %s (%s): %s", meta.target_code, meta.fund_id, raw_link)
+                    return raw_link
+            except Exception as exc:
+                logger.info("Profile page scrape failed for %s (%s) at '%s': %s", meta.target_code, meta.fund_id, page_url, exc)
+        else:
+            logger.info("Skipping profile page scrape for %s (%s): missing verified scheme_id/offer_id", meta.target_code, meta.fund_id)
 
         if meta.holdings_url and "disclose-document/full-portfolio" in meta.holdings_url:
             return meta.holdings_url
@@ -571,7 +608,7 @@ class SmartInvestorFetcher:
                 short_clean = re.sub(r"[^A-Za-z0-9]+", "-", short_name).strip("-").upper()
                 if short_clean and short_clean not in slugs:
                     slugs.append(short_clean)
-            candidate_dates = ["30-September-2026", "30-June-2026", "31-March-2026", "31-December-2025"]
+            candidate_dates = recent_quarter_end_dates(4)
             for slug in slugs:
                 for qdate in candidate_dates:
                     durl = f"https://www.smartinvestor.sorted.org.nz/disclose-document/full-portfolio/{clean_fnd}/{slug}-{clean_fnd}-Full-portfolio-holdings-{qdate}.xlsx"
