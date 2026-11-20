@@ -2318,7 +2318,7 @@
         }
         showToast(`Opened Panel 1: Stage Master ETF disclosure (${targetParam}) for ${fundCode}`);
       } else if (subStatus === 'AWAITING_COMPANY_MAPPING') {
-        const searchInput = document.getElementById('sm-search-input') || document.getElementById('alias-search');
+        const searchInput = document.getElementById('sm-search-input');
         if (searchInput) {
           searchInput.value = fundCode;
           searchInput.dispatchEvent(new Event('input'));

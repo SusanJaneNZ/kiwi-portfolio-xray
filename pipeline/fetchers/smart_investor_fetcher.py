@@ -70,30 +70,12 @@ class DiscloseFundMeta:
     is_etf: bool = False
 
 
-# Default Scheme and Offer IDs for well-known NZ KiwiSaver and retail fund managers
-KNOWN_PROVIDER_SCHEMES: dict[str, tuple[str, str]] = {
-    "kernel": ("SCH12697", "OFR12698"),
-    "smartshares": ("SCH10752", "OFR10865"),
-    "simplicity": ("SCH11598", "OFR11634"),
-    "fisher_funds": ("SCH10647", "OFR10672"),
-    "fisher": ("SCH10647", "OFR10672"),
-    "milford": ("SCH10769", "OFR10787"),
-    "generate": ("SCH10398", "OFR10405"),
-    "booster": ("SCH10360", "OFR10361"),
-    "anz": ("SCH10323", "OFR10324"),
-    "asb": ("SCH10260", "OFR10261"),
-    "westpac": ("SCH10784", "OFR10801"),
-    "bnz": ("SCH10387", "OFR10391"),
-}
-
-
-def get_default_scheme_offer(provider: str) -> tuple[str, str]:
-    """Returns the default (scheme_id, offer_id) pair for a given provider or generic fallback."""
-    norm = re.sub(r"[\s\-]+", "_", provider.strip().lower())
-    for k, v in KNOWN_PROVIDER_SCHEMES.items():
-        if k in norm or norm in k:
-            return v
-    return ("SCH10752", "OFR10865")
+from pipeline.providers import (
+    KNOWN_PROVIDER_SCHEMES,
+    get_default_scheme_offer,
+    get_legal_manager_name,
+    normalize_provider,
+)
 
 
 def get_default_catalog_path() -> Path:
@@ -112,26 +94,11 @@ def load_catalog(catalog_path: Path | None = None) -> list[DiscloseFundMeta]:
         for item in data:
             raw_provider = str(item.get("provider", "kernel")).strip()
             # Normalize provider to match staging directory conventions (e.g. "Fisher Funds" -> "fisher_funds")
-            provider = re.sub(r"[\s\-]+", "_", raw_provider.lower())
+            provider = normalize_provider(raw_provider)
             default_sch, default_ofr = get_default_scheme_offer(provider)
             scheme_id = item.get("scheme_id") or default_sch
             offer_id = item.get("offer_id") or default_ofr
-            manager = item.get("manager_name")
-            if not manager:
-                if "kernel" in provider:
-                    manager = "Kernel Wealth Limited"
-                elif "fisher" in provider:
-                    manager = "Fisher Funds Management Limited"
-                elif "smartshares" in provider:
-                    manager = "Smartshares Limited"
-                elif "simplicity" in provider:
-                    manager = "Simplicity NZ Limited"
-                elif "milford" in provider:
-                    manager = "Milford Funds Limited"
-                elif "booster" in provider:
-                    manager = "Booster Investment Management Limited"
-                else:
-                    manager = raw_provider
+            manager = item.get("manager_name") or get_legal_manager_name(provider, fallback=raw_provider)
 
             fnd_code = str(item.get("fnd_code") or item.get("fund_id", "")).strip()
             holdings_url = str(item.get("holdings_url", "")).strip()

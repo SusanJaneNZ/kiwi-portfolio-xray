@@ -452,6 +452,127 @@ class TestAdminUI(unittest.TestCase):
         self.assertIn("function copyAlertModalText", content)
         self.assertIn("window.alert = function", content)
 
+    def test_admin_ui_html_handlers_dom_ids_routes_and_providers_contract(self):
+        """Static contract test catching missing JS handlers, broken DOM IDs, unknown /api/ routes, and provider drift."""
+        from pipeline.providers import ALLOWED_PROVIDERS, normalize_provider
+
+        html_content = (REPO_ROOT / "pipeline" / "admin_ui.html").read_text(encoding="utf-8")
+        py_content = (REPO_ROOT / "pipeline" / "admin_ui.py").read_text(encoding="utf-8")
+
+        # 1. Every inline event handler function call in admin_ui.html must be defined in <script>
+        defined_fns = set(re.findall(r"(?:async\s+)?function\s+([A-Za-z_][A-Za-z0-9_]*)\s*\(", html_content))
+        # Also allow standard DOM/JS built-ins & control-flow keywords used inline
+        allowed_builtins = {"this", "event", "alert", "confirm", "console", "window", "document", "closest", "if", "for", "while", "switch", "return"}
+        handler_attrs = re.findall(r'\bon(?:click|change|input|submit|toggle)="([^"]+)"', html_content)
+        missing_handlers = []
+        for expr in handler_attrs:
+            # Find top-level function calls (not method calls like foo.bar())
+            for fn_name in re.findall(r"(?<![.\w])([A-Za-z_][A-Za-z0-9_]*)\s*\(", expr):
+                if fn_name not in defined_fns and fn_name not in allowed_builtins:
+                    missing_handlers.append(fn_name)
+        self.assertEqual(missing_handlers, [], f"Undefined JS handler functions referenced in HTML: {missing_handlers}")
+
+        # 2. Every static document.getElementById('literal') must exist as id="literal" in HTML
+        static_ids = set(re.findall(r'\bid="([^"]+)"', html_content))
+        queried_ids = set(re.findall(r"document\.getElementById\(\s*'([^'$]+)'\s*\)", html_content))
+        # Exclude dynamic IDs generated via JS template strings (e.g. btn-auto-fetch, autofetch-status-*)
+        dynamic_id_literals = set(re.findall(r'id="([A-Za-z0-9_-]+)"', html_content))
+        all_known_ids = static_ids | dynamic_id_literals
+        missing_ids = sorted(i for i in queried_ids if i not in all_known_ids)
+        self.assertEqual(missing_ids, [], f"getElementById() references missing DOM IDs: {missing_ids}")
+
+        # 3. Every api('/api/...') path in admin_ui.html must be handled in admin_ui.py
+        js_routes = set(re.findall(r"api\(\s*['\"](/api/[a-zA-Z0-9_/-]+)", html_content))
+        py_routes = set(re.findall(r'["\'](/api/[a-zA-Z0-9_/-]+)["\']', py_content))
+        missing_routes = sorted(r for r in js_routes if r not in py_routes)
+        self.assertEqual(missing_routes, [], f"Admin UI calls unhandled API routes: {missing_routes}")
+
+        # 4. Every option in #catalog-add-provider must exist in ALLOWED_PROVIDERS
+        select_match = re.search(r'<select id="catalog-add-provider"[^>]*>([\s\S]*?)</select>', html_content)
+        self.assertIsNotNone(select_match)
+        option_values = re.findall(r'<option\s+value="([^"]+)"', select_match.group(1))
+        missing_providers = [v for v in option_values if normalize_provider(v) not in ALLOWED_PROVIDERS]
+        self.assertEqual(missing_providers, [], f"Dropdown providers missing from ALLOWED_PROVIDERS: {missing_providers}")
+
+    def test_admin_ui_additional_http_routes_and_feeder_commodity_bypass(self):
+        """Exercises /api/config, staging/alias/manual-security HTTP routes, and commodity feeder bypass."""
+        from pipeline.adapters.base import FundExtractionResult, RawHolding
+        from pipeline.enrichment.bond_normalizer import AssetClassifier
+        from pipeline.output.build_output import PipelineCompiler
+
+        compiler = PipelineCompiler(repo_root=REPO_ROOT, staging_dir=self.staging_dir, output_dir=self.output_dir)
+        classifier = AssetClassifier()
+
+        # 1. Verify _detect_unconfigured_feeder bypasses physical gold but flags equity feeders
+        gld_res = FundExtractionResult(
+            fund_code="GLD",
+            fund_name="Smart Gold ETF",
+            provider="Smartshares",
+            effective_date="2026-09-30",
+            holdings=[RawHolding(name="iShares Gold Trust", weight=0.995)],
+        )
+        self.assertIsNone(compiler._detect_unconfigured_feeder(gld_res, classifier))
+
+        eq_feeder = FundExtractionResult(
+            fund_code="NEW_FEEDER",
+            fund_name="Smart Global Test ETF",
+            provider="Smartshares",
+            effective_date="2026-09-30",
+            holdings=[RawHolding(name="Vanguard Total World Stock ETF", weight=0.98)],
+        )
+        detected = compiler._detect_unconfigured_feeder(eq_feeder, classifier)
+        self.assertIsNotNone(detected)
+        self.assertEqual(detected["fund_code"], "NEW_FEEDER")
+
+        # 2. Verify /api/config, /api/staging/upload+preview+delete, /api/aliases/set+delete, /api/security-master
+        handler = make_handler(self.service)
+        server = ThreadingHTTPServer(("127.0.0.1", 0), handler)
+        port = server.server_address[1]
+        t = threading.Thread(target=server.serve_forever, daemon=True)
+        t.start()
+        try:
+            with urllib.request.urlopen(f"http://127.0.0.1:{port}/api/config") as resp:
+                cfg = json.loads(resp.read().decode("utf-8"))
+                slugs = {p["slug"] for p in cfg["providers"]}
+                self.assertIn("simplicity", slugs)
+                self.assertIn("fisher_funds", slugs)
+
+            with urllib.request.urlopen(f"http://127.0.0.1:{port}/api/security-master?q=Mercury") as resp:
+                sm = json.loads(resp.read().decode("utf-8"))
+                self.assertGreater(len(sm["results"]), 0)
+
+            up_req = urllib.request.Request(
+                f"http://127.0.0.1:{port}/api/staging/upload",
+                data=json.dumps({
+                    "provider": "simplicity",
+                    "filename": "simplicity_test.csv",
+                    "content": "Asset name,% of fund net assets\nMercury NZ Ltd,50.0%\nCash,50.0%\n",
+                }).encode("utf-8"),
+                headers={"Content-Type": "application/json"},
+                method="POST",
+            )
+            with urllib.request.urlopen(up_req) as resp:
+                self.assertEqual(resp.status, 200)
+
+            with urllib.request.urlopen(
+                f"http://127.0.0.1:{port}/api/staging/preview?provider=simplicity&filename=simplicity_test.csv"
+            ) as resp:
+                prev = json.loads(resp.read().decode("utf-8"))
+                self.assertIn("raw_lines", prev)
+                self.assertGreater(len(prev["raw_lines"]), 0)
+
+            del_req = urllib.request.Request(
+                f"http://127.0.0.1:{port}/api/staging/delete",
+                data=json.dumps({"provider": "simplicity", "filename": "simplicity_test.csv"}).encode("utf-8"),
+                headers={"Content-Type": "application/json"},
+                method="POST",
+            )
+            with urllib.request.urlopen(del_req) as resp:
+                self.assertTrue(json.loads(resp.read().decode("utf-8"))["deleted"])
+        finally:
+            server.shutdown()
+            server.server_close()
+
 
 if __name__ == "__main__":
     unittest.main()

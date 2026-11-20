@@ -35,23 +35,13 @@ from pipeline.security_master.build_security_master import (
     parse_asx_directory,
     parse_nzx_directory,
 )
-from pipeline.fetchers.smart_investor_fetcher import get_default_scheme_offer
-
-ALLOWED_PROVIDERS = {
-    "directories",
-    "smartshares",
-    "vanguard",
-    "ishares",
-    "spdr",
-    "kernel",
-    "betashares",
-    "kiwisaver",
-    "fisher_funds",
-    "simplicity",
-    "milford",
-    "booster",
-    "custom",
-}
+from pipeline.providers import (
+    ALLOWED_PROVIDERS,
+    KIWISAVER_PROVIDER_SLUGS,
+    get_default_scheme_offer,
+    get_provider_config,
+    normalize_provider,
+)
 
 ALLOWED_MASTER_PROVIDERS = {"vanguard", "ishares", "spdr"}
 
@@ -935,6 +925,8 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                     self.send_header("Content-Length", str(len(content)))
                     self.end_headers()
                     self.wfile.write(content)
+                elif path == "/api/config":
+                    self._send_json({"providers": get_provider_config()})
                 elif path == "/api/staging":
                     self._send_json({"files": service.list_staged_files()})
                 elif path == "/api/staging/preview":
