@@ -38,6 +38,11 @@ jobs:
         run: |
           python -m pipeline.ingest --fetch --staging-dir data/staging --output-dir public/data
 
+      - name: Refresh Bundled End-of-Day Prices
+        continue-on-error: true
+        run: |
+          python -m pipeline.fetch_prices --data-dir public/data --output public/data/prices.json
+
       - name: Create Pull Request for Updated Datasets
         uses: peter-evans/create-pull-request@v7
         with:
@@ -46,12 +51,12 @@ jobs:
             pipeline/security_master/security_master.json
           branch: chore/monthly-data-ingest
           delete-branch: true
-          commit-message: "data: compile static portfolio look-through assets"
-          title: "data: update compiled portfolio look-through datasets"
+          commit-message: "data: compile static portfolio look-through assets and refresh prices"
+          title: "data: update compiled portfolio look-through datasets & prices"
           body: |
             Automated data ingestion run from `ingest.yml`.
 
-            Updates `public/data/` and `pipeline/security_master/security_master.json`.
+            Updates `public/data/` (including bundled fallback `prices.json`) and `pipeline/security_master/security_master.json`.
           reviewers: susanjanenz
           assignees: susanjanenz
 
