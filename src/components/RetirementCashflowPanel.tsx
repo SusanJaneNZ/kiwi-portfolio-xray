@@ -275,7 +275,7 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
         {/* Visual Living Budget Funding Sources Bar */}
         <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-3 space-y-2.5">
           <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
-            <span className="font-semibold text-slate-300">Annual Budget Funding Sources</span>
+            <span className="font-semibold text-slate-300">Annual Cash Inflows &amp; Funding Sources</span>
             <div className="flex items-center gap-1 bg-slate-900 border border-slate-800 rounded-lg p-0.5 text-[11px]">
               <button
                 type="button"
