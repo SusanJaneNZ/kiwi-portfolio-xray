@@ -1,0 +1,41 @@
+name: Daily End-of-Day Price Refresh
+
+on:
+  schedule:
+    # 07:00 UTC Mon-Fri (~8:00 PM NZDT / 7:00 PM NZST, after NZX & ASX close)
+    - cron: '0 7 * * 1-5'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh-prices:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Seed Previous Prices from prices-data Branch (if present)
+        run: |
+          git fetch origin prices-data && git show origin/prices-data:prices.json > /tmp/prices.json || true
+
+      - name: Fetch End-of-Day NZX & ASX Prices
+        run: |
+          python -m pipeline.fetch_prices --data-dir public/data --output /tmp/prices.json
+
+      - name: Publish prices.json to prices-data Branch
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action [Prices]"
+          git checkout --orphan prices-data-tmp
+          git rm -rf . > /dev/null 2>&1 || true
+          cp /tmp/prices.json prices.json
+          git add prices.json
+          git commit -m "data: refresh end-of-day NZX/ASX prices"
+          git push origin HEAD:refs/heads/prices-data --force

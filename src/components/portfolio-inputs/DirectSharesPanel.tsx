@@ -13,6 +13,7 @@ import {
   fetchNzxPrices,
   getTodayDateString,
   loadStoredDailyPrices,
+  PriceDataSource,
   PriceDiagnosticItem,
 } from '../../utils/prices';
 
@@ -59,10 +60,17 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
   }, [availableBuckets, defaultBucketId]);
 
   const [isFetchingPrices, setIsFetchingPrices] = useState(false);
-  const [cachedDate, setCachedDate] = useState<string | null>(null);
+  const [cachedDate, setCachedDate] = useState<string | null>(() => {
+    const cached = loadStoredDailyPrices();
+    return cached?.date || null;
+  });
   const [lastFetchedAt, setLastFetchedAt] = useState<string | null>(() => {
     const cached = loadStoredDailyPrices();
     return cached?.lastFetchedAt || null;
+  });
+  const [priceSource, setPriceSource] = useState<PriceDataSource | undefined>(() => {
+    const cached = loadStoredDailyPrices();
+    return cached?.source;
   });
   const [priceNotice, setPriceNotice] = useState<string | null>(null);
   const [priceDiagnostics, setPriceDiagnostics] = useState<PriceDiagnosticItem[] | null>(null);
@@ -80,9 +88,11 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
     if (cached?.lastFetchedAt) {
       setLastFetchedAt(cached.lastFetchedAt);
     }
-    const isToday = cached?.date === getTodayDateString();
-    if (isToday && cached?.date) {
+    if (cached?.date) {
       setCachedDate(cached.date);
+    }
+    if (cached?.source) {
+      setPriceSource(cached.source);
     }
   }, [portfolioState.directHoldings]);
 
@@ -109,23 +119,40 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
   }, [portfolioState.directHoldings]);
 
   const currentAsAtText = useMemo(() => {
+    if (cachedDate) {
+      const parsed = new Date(`${cachedDate}T00:00:00`);
+      if (!isNaN(parsed.getTime())) {
+        return parsed.toLocaleDateString('en-NZ', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric',
+        });
+      }
+      return cachedDate;
+    }
     if (!lastFetchedAt) return null;
     try {
       const d = new Date(lastFetchedAt);
       if (!isNaN(d.getTime())) {
-        return d.toLocaleString('en-NZ', {
+        return d.toLocaleDateString('en-NZ', {
           day: 'numeric',
           month: 'short',
-          hour: 'numeric',
-          minute: '2-digit',
-          hour12: true,
+          year: 'numeric',
         });
       }
     } catch {
       // fallback
     }
-    return cachedDate;
+    return null;
   }, [lastFetchedAt, cachedDate]);
+
+  const isPriceDateStale = useMemo(() => {
+    if (!cachedDate) return false;
+    const loadedMs = new Date(`${cachedDate}T00:00:00`).getTime();
+    if (isNaN(loadedMs)) return false;
+    const ageDays = (Date.now() - loadedMs) / (1000 * 60 * 60 * 24);
+    return ageDays > 3.5; // Allow weekend gap (Fri -> Mon) before flagging stale
+  }, [cachedDate]);
 
   const fetchFxRate = async () => {
     setIsFetchingFx(true);
@@ -163,7 +190,16 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
     );
 
     setIsFetchingPrices(true);
-    setPriceNotice(`Fetching live prices for ${tickersToFetch.length} ticker(s) from Yahoo Finance...`);
+    const isLocal =
+      typeof window !== 'undefined' &&
+      (window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1' ||
+        window.location.hostname === '::1');
+    setPriceNotice(
+      isLocal
+        ? `Refreshing local end-of-day dataset and updating ${tickersToFetch.length} holding(s)...`
+        : `Loading end-of-day prices for ${tickersToFetch.length} holding(s)...`
+    );
     setPriceDiagnostics(null);
 
     try {
@@ -173,7 +209,8 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
       }
 
       if (!res.ok && res.error) {
-        setPriceNotice(`Price update error: ${res.error}`);
+        const stillShowing = currentAsAtText ? ` Still showing prices as of ${currentAsAtText}.` : '';
+        setPriceNotice(`Price update error: ${res.error}.${stillShowing}`);
         setIsFetchingPrices(false);
         return;
       }
@@ -211,23 +248,25 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
         }));
       }
 
+      const fallbackSuffix = res.source === 'bundled' ? ' (offline fallback file)' : '';
       if (updatedCount === 0) {
         setPriceNotice(
-          `Updated 0 prices from Yahoo Finance (${tickersToFetch.length} requested). Click "View Request/Response Log" to inspect diagnostics.`
+          `Updated 0 prices from end-of-day dataset (${tickersToFetch.length} requested).`
         );
       } else if (updatedCount < tickersToFetch.length) {
         setPriceNotice(
-          `Updated ${updatedCount} of ${tickersToFetch.length} prices from Yahoo Finance (${tickersToFetch.length - updatedCount} had no price data).`
+          `Updated ${updatedCount} of ${tickersToFetch.length} end-of-day prices as of ${res.date}${fallbackSuffix} (${tickersToFetch.length - updatedCount} not in dataset; enter manually).`
         );
       } else {
-        setPriceNotice(`✓ Successfully updated all ${updatedCount} prices from Yahoo Finance`);
+        setPriceNotice(`✓ Updated all ${updatedCount} end-of-day prices (as of ${res.date}${fallbackSuffix})`);
       }
 
-      const today = getTodayDateString();
-      setCachedDate(today);
-      setLastFetchedAt(new Date().toISOString());
+      setCachedDate(res.date || getTodayDateString());
+      setLastFetchedAt(res.lastFetchedAt || new Date().toISOString());
+      setPriceSource(res.source);
     } catch (err) {
-      setPriceNotice(`Price update failed: ${String(err)}`);
+      const stillShowing = currentAsAtText ? ` Still showing prices as of ${currentAsAtText}.` : '';
+      setPriceNotice(`Price update failed: ${String(err)}.${stillShowing}`);
     } finally {
       setIsFetchingPrices(false);
     }
@@ -491,22 +530,25 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
               <span className="text-base">📈</span>
               <div>
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="font-semibold text-slate-200">Live Pricing</span>
-                  {currentAsAtText && unpricedCount === 0 ? (
+                  <span className="font-semibold text-slate-200">End-of-Day Prices</span>
+                  {currentAsAtText && unpricedCount === 0 && !isPriceDateStale && priceSource !== 'bundled' ? (
                     <span
                       className="text-[11px] text-emerald-400 font-medium bg-emerald-950/60 border border-emerald-800/40 rounded px-2 py-0.5"
                     >
-                      ✓ Prices are current as at {currentAsAtText}
+                      ✓ Prices as of {currentAsAtText}
                     </span>
-                  ) : currentAsAtText && unpricedCount > 0 ? (
+                  ) : currentAsAtText ? (
                     <span
                       className="text-[11px] text-amber-300 font-medium bg-amber-950/60 border border-amber-800/40 rounded px-2 py-0.5"
                     >
-                      Prices are current as at {currentAsAtText} ({unpricedCount} unpriced)
+                      ⚠ Prices as of {currentAsAtText}
+                      {priceSource === 'bundled' ? ' (offline fallback)' : ''}
+                      {isPriceDateStale ? ' · older' : ''}
+                      {unpricedCount > 0 ? ` · ${unpricedCount} unpriced` : ''}
                     </span>
                   ) : (
                     <span className="text-[11px] text-amber-400 italic">
-                      Prices not yet fetched for {unpricedCount > 0 ? `${unpricedCount} holding${unpricedCount > 1 ? 's' : ''}` : 'current holdings'}
+                      Prices not yet loaded for {unpricedCount > 0 ? `${unpricedCount} holding${unpricedCount > 1 ? 's' : ''}` : 'current holdings'}
                     </span>
                   )}
                   {isFetchingPrices && (
@@ -516,7 +558,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                   )}
                 </div>
                 <p className="text-[11px] text-slate-400">
-                  Yahoo Finance (NZX &amp; ASX)
+                  Daily closing prices via Yahoo Finance (NZX &amp; ASX)
                 </p>
               </div>
             </div>
@@ -526,7 +568,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                 onClick={handleUpdatePrices}
                 disabled={isFetchingPrices}
                 className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5 shadow-sm"
-                title="Fetch latest live prices for direct shares and ETFs via Yahoo Finance"
+                title="Load latest end-of-day closing prices for direct shares and ETFs"
               >
                 <span className={isFetchingPrices ? 'animate-spin inline-block' : 'inline-block'}>↻</span>
                 <span>{isFetchingPrices ? 'Updating...' : 'Update Prices'}</span>
