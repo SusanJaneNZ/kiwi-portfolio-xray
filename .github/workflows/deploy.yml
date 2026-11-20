@@ -54,6 +54,8 @@ jobs:
         run: npm test
 
       - name: Build Web Application
+        env:
+          VITE_PRICE_PROXY_URL: ${{ vars.PRICE_PROXY_URL }}
         run: npm run build
 
       - name: Install Playwright Chromium & Run E2E Smoke Tests
@@ -95,6 +97,8 @@ jobs:
         run: npm test
 
       - name: Build Web Application
+        env:
+          VITE_PRICE_PROXY_URL: ${{ vars.PRICE_PROXY_URL }}
         run: npm run build
 
       - name: Install Playwright Chromium & Run E2E Smoke Tests

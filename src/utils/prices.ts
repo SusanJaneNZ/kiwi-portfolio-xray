@@ -81,125 +81,80 @@ export function areTickersCachedToday(tickers: string[]): boolean {
   });
 }
 
-async function fetchTickerViaCorsProxy(ticker: string): Promise<{ price: number | null; diagnostic: PriceDiagnosticItem }> {
-  const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?interval=1d&range=5d`;
-  const proxies = [
-    `https://corsproxy.io/?url=${encodeURIComponent(yahooUrl)}`,
-    `https://api.allorigins.win/raw?url=${encodeURIComponent(yahooUrl)}`,
-  ];
+/**
+ * Optional Cloudflare Worker URL (see /worker). Set at build time via VITE_PRICE_PROXY_URL.
+ * Used only when the local `/api/prices` dev server is unavailable (e.g. GitHub Pages).
+ */
+const PRICE_PROXY_URL: string = (
+  (typeof import.meta !== 'undefined' &&
+    (import.meta as unknown as { env?: Record<string, string | undefined> }).env?.VITE_PRICE_PROXY_URL) ||
+  ''
+).replace(/\/+$/, '');
 
-  let lastStatus = 0;
-  let lastStatusText = 'Network Error';
-  let lastError = 'All live price proxies failed';
-  let lastUrl = proxies[0];
-
-  for (const proxyUrl of proxies) {
-    lastUrl = proxyUrl;
-    try {
-      const res = await fetch(proxyUrl, {
-        headers: { Accept: 'application/json' },
-        signal: AbortSignal.timeout(8000),
-      });
-      lastStatus = res.status;
-      lastStatusText = res.statusText || '';
-      if (!res.ok) {
-        lastError = `HTTP ${res.status}`;
-        continue;
-      }
-      const json = await res.json();
-      const meta = json?.chart?.result?.[0]?.meta;
-      const rawPrice = meta?.regularMarketPrice ?? meta?.previousClose;
-      if (typeof rawPrice === 'number' && Number.isFinite(rawPrice) && rawPrice > 0) {
-        return {
-          price: Math.round(rawPrice * 10000) / 10000,
-          diagnostic: {
-            ticker,
-            url: proxyUrl,
-            status: res.status,
-            statusText: res.statusText || 'OK',
-            ok: true,
-            extractedPrice: Math.round(rawPrice * 10000) / 10000,
-            currency: meta?.currency || null,
-            error: null,
-          },
-        };
-      }
-      lastError = 'No price field in Yahoo Finance response';
-    } catch (err) {
-      lastError = err instanceof Error ? err.message : String(err);
-    }
-  }
-
-  return {
-    price: null,
-    diagnostic: {
-      ticker,
-      url: lastUrl,
-      status: lastStatus,
-      statusText: lastStatusText,
-      ok: false,
-      extractedPrice: null,
-      currency: null,
-      error: lastError,
-    },
-  };
-}
-
-async function fetchLivePricesViaPublicProxy(
+async function fetchLivePricesViaWorker(
   cleanTickers: string[],
   today: string,
   isStoredToday: boolean,
   stored: DailyPriceCache | null
 ): Promise<FetchPricesResult> {
-  const results = await Promise.all(cleanTickers.map((t) => fetchTickerViaCorsProxy(t)));
-  const prices: Record<string, number> = {};
-  const diagnostics: PriceDiagnosticItem[] = [];
-  let fetchedCount = 0;
-
-  for (let i = 0; i < cleanTickers.length; i++) {
-    const ticker = cleanTickers[i];
-    const base = ticker.replace(/\.(NZ|AX)$/i, '');
-    const { price, diagnostic } = results[i];
-    diagnostics.push(diagnostic);
-    if (typeof price === 'number' && price > 0) {
-      prices[ticker] = price;
-      prices[base] = price;
-      fetchedCount++;
-    }
-  }
-
-  const fetchTimestamp = new Date().toISOString();
-  if (fetchedCount > 0) {
-    const existingPrices = isStoredToday && stored ? stored.prices : {};
-    saveStoredDailyPrices({
+  if (!PRICE_PROXY_URL) {
+    return {
+      ok: false,
+      prices: {},
       date: today,
-      lastFetchedAt: fetchTimestamp,
-      prices: { ...existingPrices, ...prices },
-    });
+      cached: false,
+      error: 'Live prices are not available on this site. Enter prices manually, or run the app locally.',
+    };
   }
 
-  return {
-    ok: fetchedCount > 0,
-    prices,
-    date: today,
-    cached: false,
-    fetchedCount,
-    lastFetchedAt: fetchTimestamp,
-    diagnostics,
-    error: fetchedCount === 0 ? 'Could not fetch live prices from Yahoo Finance. Please try again or enter prices manually.' : undefined,
-  };
+  try {
+    const res = await fetch(`${PRICE_PROXY_URL}/?tickers=${encodeURIComponent(cleanTickers.join(','))}`, {
+      headers: { Accept: 'application/json' },
+      signal: AbortSignal.timeout(15000),
+    });
+    const data = (await res.json().catch(() => null)) as FetchPricesResult | null;
+    if (!res.ok || !data) {
+      return {
+        ok: false,
+        prices: {},
+        date: today,
+        cached: false,
+        error: data?.error || `Price service returned HTTP ${res.status}`,
+        diagnostics: data?.diagnostics,
+      };
+    }
+
+    const fetchTimestamp = new Date().toISOString();
+    if (data.ok && data.prices) {
+      const existingPrices = isStoredToday && stored ? stored.prices : {};
+      saveStoredDailyPrices({
+        date: today,
+        lastFetchedAt: fetchTimestamp,
+        prices: { ...existingPrices, ...data.prices },
+      });
+    }
+    return { ...data, lastFetchedAt: fetchTimestamp };
+  } catch (err) {
+    return {
+      ok: false,
+      prices: {},
+      date: today,
+      cached: false,
+      error: `Could not reach the price service: ${err instanceof Error ? err.message : String(err)}`,
+    };
+  }
 }
 
-function isLocalhostRuntime(): boolean {
-  if (typeof window === 'undefined' || !window.location?.hostname) return true;
-  const host = window.location.hostname;
-  return host === 'localhost' || host === '127.0.0.1' || host === '::1';
+/** True only on known static hosts (no `/api/prices` server). Everything else tries the local server first. */
+function isStaticHostRuntime(): boolean {
+  if (typeof window === 'undefined' || !window.location?.hostname) return false;
+  return window.location.hostname.endsWith('.github.io');
 }
 
 /**
  * Fetches prices for the given stock and ETF tickers in a single batched call.
- * Uses local `/api/prices` proxy on localhost, and falls back to live CORS-proxied
- * Yahoo Finance requests on static hosting (e.g. GitHub Pages).
+ * Uses local `/api/prices` proxy on localhost, and falls back to the Cloudflare Worker price proxy (see /worker)
+ * on static hosting (e.g. GitHub Pages).
  */
 export async function fetchNzxPrices(tickers: string[], force = false): Promise<FetchPricesResult> {
   const cleanTickers = Array.from(
@@ -242,8 +197,8 @@ export async function fetchNzxPrices(tickers: string[], force = false): Promise<
   }
 
   // On static hosting (e.g. GitHub Pages), skip /api/prices 404 and fetch live via CORS proxy
-  if (!isLocalhostRuntime()) {
-    return fetchLivePricesViaPublicProxy(cleanTickers, today, isStoredToday, stored);
+  if (isStaticHostRuntime()) {
+    return fetchLivePricesViaWorker(cleanTickers, today, isStoredToday, stored);
   }
 
   // Hit local dev server proxy /api/prices
@@ -255,7 +210,7 @@ export async function fetchNzxPrices(tickers: string[], force = false): Promise<
 
     const response = await fetch(`/api/prices?${query.toString()}`);
     if (response.status === 404) {
-      return fetchLivePricesViaPublicProxy(cleanTickers, today, isStoredToday, stored);
+      return fetchLivePricesViaWorker(cleanTickers, today, isStoredToday, stored);
     }
     if (!response.ok) {
       const errorJson = await response.json().catch(() => ({}));
