@@ -81,9 +81,125 @@ export function areTickersCachedToday(tickers: string[]): boolean {
   });
 }
 
+async function fetchTickerViaCorsProxy(ticker: string): Promise<{ price: number | null; diagnostic: PriceDiagnosticItem }> {
+  const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?interval=1d&range=5d`;
+  const proxies = [
+    `https://corsproxy.io/?url=${encodeURIComponent(yahooUrl)}`,
+    `https://api.allorigins.win/raw?url=${encodeURIComponent(yahooUrl)}`,
+  ];
+
+  let lastStatus = 0;
+  let lastStatusText = 'Network Error';
+  let lastError = 'All live price proxies failed';
+  let lastUrl = proxies[0];
+
+  for (const proxyUrl of proxies) {
+    lastUrl = proxyUrl;
+    try {
+      const res = await fetch(proxyUrl, {
+        headers: { Accept: 'application/json' },
+        signal: AbortSignal.timeout(8000),
+      });
+      lastStatus = res.status;
+      lastStatusText = res.statusText || '';
+      if (!res.ok) {
+        lastError = `HTTP ${res.status}`;
+        continue;
+      }
+      const json = await res.json();
+      const meta = json?.chart?.result?.[0]?.meta;
+      const rawPrice = meta?.regularMarketPrice ?? meta?.previousClose;
+      if (typeof rawPrice === 'number' && Number.isFinite(rawPrice) && rawPrice > 0) {
+        return {
+          price: Math.round(rawPrice * 10000) / 10000,
+          diagnostic: {
+            ticker,
+            url: proxyUrl,
+            status: res.status,
+            statusText: res.statusText || 'OK',
+            ok: true,
+            extractedPrice: Math.round(rawPrice * 10000) / 10000,
+            currency: meta?.currency || null,
+            error: null,
+          },
+        };
+      }
+      lastError = 'No price field in Yahoo Finance response';
+    } catch (err) {
+      lastError = err instanceof Error ? err.message : String(err);
+    }
+  }
+
+  return {
+    price: null,
+    diagnostic: {
+      ticker,
+      url: lastUrl,
+      status: lastStatus,
+      statusText: lastStatusText,
+      ok: false,
+      extractedPrice: null,
+      currency: null,
+      error: lastError,
+    },
+  };
+}
+
+async function fetchLivePricesViaPublicProxy(
+  cleanTickers: string[],
+  today: string,
+  isStoredToday: boolean,
+  stored: DailyPriceCache | null
+): Promise<FetchPricesResult> {
+  const results = await Promise.all(cleanTickers.map((t) => fetchTickerViaCorsProxy(t)));
+  const prices: Record<string, number> = {};
+  const diagnostics: PriceDiagnosticItem[] = [];
+  let fetchedCount = 0;
+
+  for (let i = 0; i < cleanTickers.length; i++) {
+    const ticker = cleanTickers[i];
+    const base = ticker.replace(/\.(NZ|AX)$/i, '');
+    const { price, diagnostic } = results[i];
+    diagnostics.push(diagnostic);
+    if (typeof price === 'number' && price > 0) {
+      prices[ticker] = price;
+      prices[base] = price;
+      fetchedCount++;
+    }
+  }
+
+  const fetchTimestamp = new Date().toISOString();
+  if (fetchedCount > 0) {
+    const existingPrices = isStoredToday && stored ? stored.prices : {};
+    saveStoredDailyPrices({
+      date: today,
+      lastFetchedAt: fetchTimestamp,
+      prices: { ...existingPrices, ...prices },
+    });
+  }
+
+  return {
+    ok: fetchedCount > 0,
+    prices,
+    date: today,
+    cached: false,
+    fetchedCount,
+    lastFetchedAt: fetchTimestamp,
+    diagnostics,
+    error: fetchedCount === 0 ? 'Could not fetch live prices from Yahoo Finance. Please try again or enter prices manually.' : undefined,
+  };
+}
+
+function isLocalhostRuntime(): boolean {
+  if (typeof window === 'undefined' || !window.location?.hostname) return true;
+  const host = window.location.hostname;
+  return host === 'localhost' || host === '127.0.0.1' || host === '::1';
+}
+
 /**
  * Fetches prices for the given stock and ETF tickers in a single batched call.
- * If all tickers are cached for today and force is false, no network request is made.
+ * Uses local `/api/prices` proxy on localhost, and falls back to live CORS-proxied
+ * Yahoo Finance requests on static hosting (e.g. GitHub Pages).
  */
 export async function fetchNzxPrices(tickers: string[], force = false): Promise<FetchPricesResult> {
   const cleanTickers = Array.from(
@@ -125,6 +241,11 @@ export async function fetchNzxPrices(tickers: string[], force = false): Promise<
     }
   }
 
+  // On static hosting (e.g. GitHub Pages), skip /api/prices 404 and fetch live via CORS proxy
+  if (!isLocalhostRuntime()) {
+    return fetchLivePricesViaPublicProxy(cleanTickers, today, isStoredToday, stored);
+  }
+
   // Hit local dev server proxy /api/prices
   try {
     const query = new URLSearchParams({
@@ -133,6 +254,9 @@ export async function fetchNzxPrices(tickers: string[], force = false): Promise<
     });
 
     const response = await fetch(`/api/prices?${query.toString()}`);
+    if (response.status === 404) {
+      return fetchLivePricesViaPublicProxy(cleanTickers, today, isStoredToday, stored);
+    }
     if (!response.ok) {
       const errorJson = await response.json().catch(() => ({}));
       return {

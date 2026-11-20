@@ -196,15 +196,6 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
             'Add Fixed Interest or Cash'
           )}
         </div>
-        {isInlineEdit && (
-          <button
-            type="button"
-            onClick={handleCancelEdit}
-            className="text-[11px] text-slate-400 hover:text-white underline cursor-pointer"
-          >
-            Cancel Edit
-          </button>
-        )}
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -403,7 +394,7 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
       }
       headerRight={
         <span className="text-xs text-amber-400 font-mono">
-          {formatNZD(fixedInterestSumNZD)} (
+          ${formatNZD(fixedInterestSumNZD)} (
           {totalPortfolioNZD > 0
             ? ((fixedInterestSumNZD / totalPortfolioNZD) * 100).toFixed(1)
             : 0}

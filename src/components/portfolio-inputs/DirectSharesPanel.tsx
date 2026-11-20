@@ -416,7 +416,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
       }
       headerRight={
         <span className="text-xs text-emerald-400 font-mono">
-          {formatNZD(directSumNZD)} ({totalPortfolioNZD > 0 ? ((directSumNZD / totalPortfolioNZD) * 100).toFixed(1) : 0}% of portfolio)
+          ${formatNZD(directSumNZD)} ({totalPortfolioNZD > 0 ? ((directSumNZD / totalPortfolioNZD) * 100).toFixed(1) : 0}% of portfolio)
         </span>
       }
     >
@@ -441,7 +441,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                   )}
                 </div>
                 <p className="text-[11px] text-slate-400">
-                  Applied automatically to ASX shares held in AUD
+                  Used for AUD holdings
                 </p>
               </div>
             </div>
@@ -516,7 +516,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                   )}
                 </div>
                 <p className="text-[11px] text-slate-400">
-                  On-demand live price refresh via Yahoo Finance API (NZX & ASX).
+                  Yahoo Finance (NZX &amp; ASX)
                 </p>
               </div>
             </div>
@@ -603,10 +603,10 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                       <>
                         <span>•</span>
                         {isPriceUnknown ? (
-                          <span className="text-amber-400/80 italic text-[11px]">&lt;unknown&gt;</span>
+                          <span className="text-amber-400/80 italic text-[11px]">Unpriced</span>
                         ) : (
                           <span className="text-emerald-400 font-mono">
-                            NZD ${formatNZD(valueNZD)}
+                            ${formatNZD(valueNZD)} NZD
                           </span>
                         )}
                       </>
@@ -656,7 +656,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                       min="0"
                       step="0.0001"
                       value={safePrice > 0 ? safePrice : ''}
-                      placeholder="<unknown>"
+                      placeholder="Price"
                       onChange={(e) => handlePriceChange(dh.isin, e.target.value)}
                       className={`w-full h-[30px] bg-slate-900 border ${
                         isPriceUnknown ? 'border-amber-700/60 placeholder-amber-400/70' : 'border-slate-800'
@@ -672,10 +672,10 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                   {/* Computed Read-Only Value */}
                   <div
                     className="w-28 h-[30px] px-2 bg-slate-900/60 border border-slate-800/80 rounded-lg text-right text-xs font-mono font-medium flex items-center justify-end"
-                    title={isPriceUnknown ? 'Price unknown — click Update NZX Prices or enter price manually' : 'Calculated Total Value (Shares × Price)'}
+                    title={isPriceUnknown ? 'Price needed — click Update Prices or enter manually' : 'Calculated Total Value (Shares × Price)'}
                   >
                     {isPriceUnknown ? (
-                      <span className="text-amber-400 italic text-[11px]">&lt;unknown&gt;</span>
+                      <span className="text-amber-400 italic text-[11px]">Unpriced</span>
                     ) : (
                       <span className="text-emerald-400">
                         {isAud ? 'A$' : '$'}{formatNZD(dh.value)}
@@ -774,7 +774,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                       type="number"
                       min="0"
                       step="0.0001"
-                      placeholder="<unknown>"
+                      placeholder="Price"
                       value={newSharePrice}
                       onChange={(e) => setNewSharePrice(e.target.value)}
                       className="w-full h-[30px] bg-slate-950 border border-slate-800 rounded-lg px-2 text-right text-xs text-white font-mono placeholder-amber-400/60"
@@ -794,7 +794,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                         )}
                       </span>
                     ) : parseFloat(newShareCount) > 0 ? (
-                      <span className="text-amber-400/80 italic text-[11px]">&lt;unknown&gt;</span>
+                      <span className="text-amber-400/80 italic text-[11px]">Unpriced</span>
                     ) : (
                       <span className="text-slate-600 font-mono text-xs">-</span>
                     )}
