@@ -6,9 +6,12 @@
 
 export const PRICE_CACHE_KEY = 'kiwi_daily_prices_cache_v1';
 
+export type PriceDataSource = 'remote' | 'local' | 'bundled';
+
 export interface DailyPriceCache {
   date: string; // YYYY-MM-DD
   lastFetchedAt: string; // ISO string
+  source?: PriceDataSource;
   prices: Record<string, number>;
 }
 
@@ -32,6 +35,7 @@ export interface FetchPricesResult {
   cached: boolean;
   fetchedCount?: number;
   lastFetchedAt?: string;
+  source?: PriceDataSource;
   error?: string;
   diagnostics?: PriceDiagnosticItem[];
   logPath?: string;
@@ -90,9 +94,21 @@ export function areTickersCachedToday(tickers: string[]): boolean {
   });
 }
 
+const REMOTE_EOD_PRICES_URL =
+  'https://raw.githubusercontent.com/SusanJaneNZ/kiwi-portfolio-xray/prices-data/prices.json';
+
+function isLocalhostBrowser(): boolean {
+  if (typeof window === 'undefined' || !window.location?.hostname) return false;
+  const host = window.location.hostname;
+  return host === 'localhost' || host === '127.0.0.1' || host === '::1';
+}
+
 /**
- * Loads end-of-day closing prices for the requested tickers from `data/prices.json`.
- * Works identically on localhost and GitHub Pages.
+ * Loads end-of-day closing prices for the requested tickers.
+ * - On localhost: runs `/api/prices/refresh` (the same `pipeline/fetch_prices.py` script
+ *   used by GitHub Actions) when forced or uncached, then reads local `data/prices.json`.
+ * - On GitHub Pages: reads the auto-published `prices-data` branch on GitHub directly
+ *   (zero-PR daily refresh), falling back to the bundled `data/prices.json` if offline.
  */
 export async function fetchNzxPrices(tickers: string[], force = false): Promise<FetchPricesResult> {
   const cleanTickers = Array.from(
@@ -130,7 +146,18 @@ export async function fetchNzxPrices(tickers: string[], force = false): Promise<
         cached: true,
         fetchedCount: 0,
         lastFetchedAt: stored.lastFetchedAt,
+        source: stored.source,
       };
+    }
+  }
+
+  const isLocal = isLocalhostBrowser();
+  let localRefreshFailed = false;
+  if (isLocal) {
+    // Run the same pipeline/fetch_prices.py script locally so localhost tests the exact workflow
+    const refreshRes = await refreshLocalEndOfDayPrices();
+    if (!refreshRes.ok) {
+      localRefreshFailed = true;
     }
   }
 
@@ -139,68 +166,84 @@ export async function fetchNzxPrices(tickers: string[], force = false): Promise<
       (import.meta as unknown as { env?: Record<string, string | undefined> }).env?.BASE_URL) ||
     './';
 
-  try {
-    const response = await fetch(`${basePath}data/prices.json?t=${Date.now()}`, {
-      headers: { Accept: 'application/json' },
-    });
-    if (!response.ok) {
-      return {
-        ok: false,
-        prices: {},
-        date: today,
-        cached: false,
-        error: `End-of-day price dataset unavailable (HTTP ${response.status}).`,
-      };
-    }
+  const candidates: { url: string; source: PriceDataSource }[] = isLocal
+    ? [
+        { url: `${basePath}data/prices.json?t=${Date.now()}`, source: localRefreshFailed ? 'bundled' : 'local' },
+        { url: `${REMOTE_EOD_PRICES_URL}?t=${Date.now()}`, source: 'remote' },
+      ]
+    : [
+        { url: `${REMOTE_EOD_PRICES_URL}?t=${Date.now()}`, source: 'remote' },
+        { url: `${basePath}data/prices.json?t=${Date.now()}`, source: 'bundled' },
+      ];
 
-    const payload = (await response.json()) as StaticPricesPayload;
-    const catalog = payload?.prices || {};
-    const matchedPrices: Record<string, number> = {};
-    let fetchedCount = 0;
+  let payload: StaticPricesPayload | null = null;
+  let loadedSource: PriceDataSource = 'remote';
+  let lastError = 'End-of-day price dataset unavailable.';
 
-    for (const ticker of cleanTickers) {
-      const base = ticker.replace(/\.(NZ|AX)$/i, '');
-      const price = catalog[ticker] ?? catalog[base] ?? catalog[`${base}.NZ`] ?? catalog[`${base}.AX`];
-      if (typeof price === 'number' && Number.isFinite(price) && price > 0) {
-        matchedPrices[ticker] = price;
-        matchedPrices[base] = price;
-        fetchedCount++;
+  for (const candidate of candidates) {
+    try {
+      const response = await fetch(candidate.url, { headers: { Accept: 'application/json' } });
+      if (response.ok) {
+        payload = (await response.json()) as StaticPricesPayload;
+        loadedSource = candidate.source;
+        break;
       }
+      lastError = `End-of-day price dataset unavailable (HTTP ${response.status}).`;
+    } catch (err) {
+      lastError = err instanceof Error ? err.message : String(err);
     }
+  }
 
-    const asOfDate = payload?.date || today;
-    const asOfTimestamp = payload?.updatedAt || new Date().toISOString();
-
-    if (fetchedCount > 0) {
-      const existingPrices = isStoredToday && stored ? stored.prices : {};
-      saveStoredDailyPrices({
-        date: asOfDate,
-        lastFetchedAt: asOfTimestamp,
-        prices: { ...existingPrices, ...matchedPrices },
-      });
-    }
-
-    return {
-      ok: fetchedCount > 0,
-      prices: matchedPrices,
-      date: asOfDate,
-      cached: false,
-      fetchedCount,
-      lastFetchedAt: asOfTimestamp,
-      error:
-        fetchedCount === 0
-          ? 'No end-of-day prices found for these tickers in data/prices.json.'
-          : undefined,
-    };
-  } catch (err) {
+  if (!payload) {
     return {
       ok: false,
       prices: {},
       date: today,
       cached: false,
-      error: err instanceof Error ? err.message : String(err),
+      error: lastError,
     };
   }
+
+  const catalog = payload?.prices || {};
+  const matchedPrices: Record<string, number> = {};
+  let fetchedCount = 0;
+
+  for (const ticker of cleanTickers) {
+    const base = ticker.replace(/\.(NZ|AX)$/i, '');
+    const price = catalog[ticker] ?? catalog[base] ?? catalog[`${base}.NZ`] ?? catalog[`${base}.AX`];
+    if (typeof price === 'number' && Number.isFinite(price) && price > 0) {
+      matchedPrices[ticker] = price;
+      matchedPrices[base] = price;
+      fetchedCount++;
+    }
+  }
+
+  const asOfDate = payload?.date || today;
+  const asOfTimestamp = payload?.updatedAt || new Date().toISOString();
+
+  if (fetchedCount > 0) {
+    const existingPrices = isStoredToday && stored ? stored.prices : {};
+    saveStoredDailyPrices({
+      date: asOfDate,
+      lastFetchedAt: asOfTimestamp,
+      source: loadedSource,
+      prices: { ...existingPrices, ...matchedPrices },
+    });
+  }
+
+  return {
+    ok: fetchedCount > 0,
+    prices: matchedPrices,
+    date: asOfDate,
+    cached: false,
+    fetchedCount,
+    lastFetchedAt: asOfTimestamp,
+    source: loadedSource,
+    error:
+      fetchedCount === 0
+        ? 'No end-of-day prices found for these tickers.'
+        : undefined,
+  };
 }
 
 /**

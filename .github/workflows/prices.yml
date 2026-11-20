@@ -8,7 +8,6 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
 
 jobs:
   refresh-prices:
@@ -22,21 +21,21 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Seed Previous Prices from prices-data Branch (if present)
+        run: |
+          git fetch origin prices-data && git show origin/prices-data:prices.json > /tmp/prices.json || true
+
       - name: Fetch End-of-Day NZX & ASX Prices
         run: |
-          python -m pipeline.fetch_prices --data-dir public/data --output public/data/prices.json
+          python -m pipeline.fetch_prices --data-dir public/data --output /tmp/prices.json
 
-      - name: Create Pull Request for Updated Prices
-        uses: peter-evans/create-pull-request@v7
-        with:
-          add-paths: public/data/prices.json
-          branch: chore/daily-eod-prices
-          delete-branch: true
-          commit-message: "data: refresh end-of-day NZX/ASX prices"
-          title: "data: refresh end-of-day NZX & ASX prices"
-          body: |
-            Automated end-of-day price refresh from `prices.yml` (Yahoo Finance).
-
-            Updates `public/data/prices.json` for hosted GitHub Pages users.
-          reviewers: susanjanenz
-          assignees: susanjanenz
+      - name: Publish prices.json to prices-data Branch
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action [Prices]"
+          git checkout --orphan prices-data-tmp
+          git rm -rf . > /dev/null 2>&1 || true
+          cp /tmp/prices.json prices.json
+          git add prices.json
+          git commit -m "data: refresh end-of-day NZX/ASX prices"
+          git push origin HEAD:refs/heads/prices-data --force

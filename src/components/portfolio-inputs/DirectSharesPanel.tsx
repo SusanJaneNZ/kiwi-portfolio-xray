@@ -13,8 +13,8 @@ import {
   fetchNzxPrices,
   getTodayDateString,
   loadStoredDailyPrices,
+  PriceDataSource,
   PriceDiagnosticItem,
-  refreshLocalEndOfDayPrices,
 } from '../../utils/prices';
 
 interface DirectSharesPanelProps {
@@ -60,16 +60,17 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
   }, [availableBuckets, defaultBucketId]);
 
   const [isFetchingPrices, setIsFetchingPrices] = useState(false);
-  const [isRefreshingEodFile, setIsRefreshingEodFile] = useState(false);
-  const isLocalHost =
-    typeof window !== 'undefined' &&
-    (window.location.hostname === 'localhost' ||
-      window.location.hostname === '127.0.0.1' ||
-      window.location.hostname === '::1');
-  const [cachedDate, setCachedDate] = useState<string | null>(null);
+  const [cachedDate, setCachedDate] = useState<string | null>(() => {
+    const cached = loadStoredDailyPrices();
+    return cached?.date || null;
+  });
   const [lastFetchedAt, setLastFetchedAt] = useState<string | null>(() => {
     const cached = loadStoredDailyPrices();
     return cached?.lastFetchedAt || null;
+  });
+  const [priceSource, setPriceSource] = useState<PriceDataSource | undefined>(() => {
+    const cached = loadStoredDailyPrices();
+    return cached?.source;
   });
   const [priceNotice, setPriceNotice] = useState<string | null>(null);
   const [priceDiagnostics, setPriceDiagnostics] = useState<PriceDiagnosticItem[] | null>(null);
@@ -87,9 +88,11 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
     if (cached?.lastFetchedAt) {
       setLastFetchedAt(cached.lastFetchedAt);
     }
-    const isToday = cached?.date === getTodayDateString();
-    if (isToday && cached?.date) {
+    if (cached?.date) {
       setCachedDate(cached.date);
+    }
+    if (cached?.source) {
+      setPriceSource(cached.source);
     }
   }, [portfolioState.directHoldings]);
 
@@ -116,23 +119,40 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
   }, [portfolioState.directHoldings]);
 
   const currentAsAtText = useMemo(() => {
+    if (cachedDate) {
+      const parsed = new Date(`${cachedDate}T00:00:00`);
+      if (!isNaN(parsed.getTime())) {
+        return parsed.toLocaleDateString('en-NZ', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric',
+        });
+      }
+      return cachedDate;
+    }
     if (!lastFetchedAt) return null;
     try {
       const d = new Date(lastFetchedAt);
       if (!isNaN(d.getTime())) {
-        return d.toLocaleString('en-NZ', {
+        return d.toLocaleDateString('en-NZ', {
           day: 'numeric',
           month: 'short',
-          hour: 'numeric',
-          minute: '2-digit',
-          hour12: true,
+          year: 'numeric',
         });
       }
     } catch {
       // fallback
     }
-    return cachedDate;
+    return null;
   }, [lastFetchedAt, cachedDate]);
+
+  const isPriceDateStale = useMemo(() => {
+    if (!cachedDate) return false;
+    const loadedMs = new Date(`${cachedDate}T00:00:00`).getTime();
+    if (isNaN(loadedMs)) return false;
+    const ageDays = (Date.now() - loadedMs) / (1000 * 60 * 60 * 24);
+    return ageDays > 3.5; // Allow weekend gap (Fri -> Mon) before flagging stale
+  }, [cachedDate]);
 
   const fetchFxRate = async () => {
     setIsFetchingFx(true);
@@ -170,7 +190,16 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
     );
 
     setIsFetchingPrices(true);
-    setPriceNotice(`Loading end-of-day prices for ${tickersToFetch.length} ticker(s)...`);
+    const isLocal =
+      typeof window !== 'undefined' &&
+      (window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1' ||
+        window.location.hostname === '::1');
+    setPriceNotice(
+      isLocal
+        ? `Refreshing local end-of-day dataset and updating ${tickersToFetch.length} holding(s)...`
+        : `Loading end-of-day prices for ${tickersToFetch.length} holding(s)...`
+    );
     setPriceDiagnostics(null);
 
     try {
@@ -180,7 +209,8 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
       }
 
       if (!res.ok && res.error) {
-        setPriceNotice(`Price update error: ${res.error}`);
+        const stillShowing = currentAsAtText ? ` Still showing prices as of ${currentAsAtText}.` : '';
+        setPriceNotice(`Price update error: ${res.error}.${stillShowing}`);
         setIsFetchingPrices(false);
         return;
       }
@@ -218,42 +248,27 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
         }));
       }
 
+      const fallbackSuffix = res.source === 'bundled' ? ' (offline fallback file)' : '';
       if (updatedCount === 0) {
         setPriceNotice(
           `Updated 0 prices from end-of-day dataset (${tickersToFetch.length} requested).`
         );
       } else if (updatedCount < tickersToFetch.length) {
         setPriceNotice(
-          `Updated ${updatedCount} of ${tickersToFetch.length} end-of-day prices (${tickersToFetch.length - updatedCount} not in dataset; enter manually).`
+          `Updated ${updatedCount} of ${tickersToFetch.length} end-of-day prices as of ${res.date}${fallbackSuffix} (${tickersToFetch.length - updatedCount} not in dataset; enter manually).`
         );
       } else {
-        setPriceNotice(`✓ Updated all ${updatedCount} end-of-day prices (as of ${res.date})`);
+        setPriceNotice(`✓ Updated all ${updatedCount} end-of-day prices (as of ${res.date}${fallbackSuffix})`);
       }
 
       setCachedDate(res.date || getTodayDateString());
       setLastFetchedAt(res.lastFetchedAt || new Date().toISOString());
+      setPriceSource(res.source);
     } catch (err) {
-      setPriceNotice(`Price update failed: ${String(err)}`);
+      const stillShowing = currentAsAtText ? ` Still showing prices as of ${currentAsAtText}.` : '';
+      setPriceNotice(`Price update failed: ${String(err)}.${stillShowing}`);
     } finally {
       setIsFetchingPrices(false);
-    }
-  };
-
-  const handleRefreshEodFile = async () => {
-    setIsRefreshingEodFile(true);
-    setPriceNotice('Running local end-of-day price workflow (pipeline/fetch_prices.py)...');
-    try {
-      const result = await refreshLocalEndOfDayPrices();
-      if (!result.ok) {
-        setPriceNotice(`EOD refresh error: ${result.error || 'Unknown error'}`);
-        return;
-      }
-      setPriceNotice(`✓ Refreshed data/prices.json (${result.count ?? 0} tickers, as of ${result.date}). Applying...`);
-      await handleUpdatePrices();
-    } catch (err) {
-      setPriceNotice(`EOD refresh failed: ${String(err)}`);
-    } finally {
-      setIsRefreshingEodFile(false);
     }
   };
 
@@ -516,26 +531,29 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
               <div>
                 <div className="flex items-center gap-2 flex-wrap">
                   <span className="font-semibold text-slate-200">End-of-Day Prices</span>
-                  {currentAsAtText && unpricedCount === 0 ? (
+                  {currentAsAtText && unpricedCount === 0 && !isPriceDateStale && priceSource !== 'bundled' ? (
                     <span
                       className="text-[11px] text-emerald-400 font-medium bg-emerald-950/60 border border-emerald-800/40 rounded px-2 py-0.5"
                     >
                       ✓ Prices as of {currentAsAtText}
                     </span>
-                  ) : currentAsAtText && unpricedCount > 0 ? (
+                  ) : currentAsAtText ? (
                     <span
                       className="text-[11px] text-amber-300 font-medium bg-amber-950/60 border border-amber-800/40 rounded px-2 py-0.5"
                     >
-                      Prices as of {currentAsAtText} ({unpricedCount} unpriced)
+                      ⚠ Prices as of {currentAsAtText}
+                      {priceSource === 'bundled' ? ' (offline fallback)' : ''}
+                      {isPriceDateStale ? ' · older' : ''}
+                      {unpricedCount > 0 ? ` · ${unpricedCount} unpriced` : ''}
                     </span>
                   ) : (
                     <span className="text-[11px] text-amber-400 italic">
                       Prices not yet loaded for {unpricedCount > 0 ? `${unpricedCount} holding${unpricedCount > 1 ? 's' : ''}` : 'current holdings'}
                     </span>
                   )}
-                  {(isFetchingPrices || isRefreshingEodFile) && (
+                  {isFetchingPrices && (
                     <span className="text-[10px] text-indigo-400 animate-pulse">
-                      {isRefreshingEodFile ? 'Refreshing EOD file...' : 'Updating prices...'}
+                      Updating prices...
                     </span>
                   )}
                 </div>
@@ -545,22 +563,10 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
               </div>
             </div>
             <div className="flex items-center gap-2">
-              {isLocalHost && (
-                <button
-                  type="button"
-                  onClick={handleRefreshEodFile}
-                  disabled={isRefreshingEodFile || isFetchingPrices}
-                  className="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 disabled:opacity-50 text-slate-200 border border-slate-700 rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5"
-                  title="Localhost only: run pipeline/fetch_prices.py to refresh public/data/prices.json"
-                >
-                  <span className={isRefreshingEodFile ? 'animate-spin inline-block' : 'inline-block'}>↻</span>
-                  <span>{isRefreshingEodFile ? 'Refreshing...' : 'Refresh EOD File'}</span>
-                </button>
-              )}
               <button
                 type="button"
                 onClick={handleUpdatePrices}
-                disabled={isFetchingPrices || isRefreshingEodFile}
+                disabled={isFetchingPrices}
                 className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5 shadow-sm"
                 title="Load latest end-of-day closing prices for direct shares and ETFs"
               >

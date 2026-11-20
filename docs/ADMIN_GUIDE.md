@@ -225,13 +225,17 @@ Once dry-run validation passes with zero critical errors:
 # 1. Validate and publish production datasets into public/data/
 python3 -m pipeline.ingest --staging-dir data/staging/ --output-dir public/data/
 
-# 2. Run test suites
+# 2. Run lint & test suites
+ruff check --select F821,F823 pipeline/
+python3 -m unittest discover -s pipeline/tests -v
 npm test
-python3 -m unittest discover -s pipeline/tests
 
-# 3. Build frontend bundle
+# 3. Build frontend bundle & run Playwright E2E smoke tests
 npm run build
+npm run test:e2e
 ```
+
+Opening a Pull Request against `main` automatically runs the `verify` job in `.github/workflows/deploy.yml` (Python lint/tests, pipeline verification, `npm test`, `npm run build`, and `npm run test:e2e`). Merging to `main` triggers `build-and-deploy` and publishes to GitHub Pages.
 
 ---
 
@@ -241,60 +245,59 @@ To eliminate the manual bottleneck of administrators individually discovering, c
 
 ```mermaid
 flowchart TD
-    User["Retail User (Panel 2: Managed Funds & KiwiSaver)"] -->|"➕ Add Fund & Validate Sorted Link"| UIForm["parseAndValidateFundUrl() (SCH.../OFR.../FND...)"]
-    UIForm -->|"🚀 Save & Submit for Ingestion"| GHIssue["Pre-populated GitHub Issue (label: 'new-fund')"]
+    User["Retail User (Panel 2: Managed Funds & KiwiSaver)"] -->|"➕ Request New Fund & Validate Sorted Link"| UIForm["parseAndValidateFundUrl() (SCH.../OFR.../FND...)"]
+    UIForm -->|"Save for processing"| GHIssue["Pre-populated GitHub Issue (label: 'new-fund')"]
     GHIssue -->|"Event: issues [opened, labeled]"| BotAction[".github/workflows/fund-request-bot.yml"]
     BotAction -->|"Parse Title / Body / JSON"| Parser["pipeline/automation/process_fund_request.py"]
     Parser -->|"Atomically update & sort"| Catalog["pipeline/fund_catalog.json"]
-    BotAction -->|"git commit & push [skip ci]"| MainBranch["Branch: main"]
-    BotAction -->|"Add confirmation comment & close"| ClosedIssue["Closed GitHub Issue"]
-    BotAction -->|"gh workflow run (or monthly cron)"| IngestAction[".github/workflows/ingest.yml"]
+    BotAction -->|"Opens PR (Closes #issue)"| MaintainerPR["Pull Request for Maintainer Review"]
+    MaintainerPR -->|"Approved & Merged"| MainBranch["Branch: main"]
+    MainBranch -->|"Monthly cron or manual Run workflow"| IngestAction[".github/workflows/ingest.yml"]
     IngestAction -->|"python -m pipeline.ingest --fetch"| Compile["Fetch Disclose .xlsx & compile to public/data/"]
-    Compile -->|"Deploy update"| GitHubPages["Production Web App"]
+    Compile -->|"Opens PR (chore/monthly-data-ingest)"| DataPR["Maintainer Merges Data PR"]
+    DataPR -->|"Triggers deploy.yml"| GitHubPages["Production Web App"]
 ```
 
 ### A. How the Automated Flow Operates
 
 1. **Client-Side Request Submission:**
-   - In **Panel 2 (Managed Funds & KiwiSaver)**, the user enters a Sorted Smart Investor link or Disclose `.xlsx` URL.
-   - The UI parses and validates the link in real time (`parseAndValidateFundUrl`) and unlocks **"🚀 Save & Submit for Ingestion"**.
-   - Clicking this opens a pre-formatted GitHub issue on the repository with:
+   - In **Panel 2 (Managed Funds & KiwiSaver)**, the user clicks **➕ Request New Fund** and enters a Sorted Smart Investor link or Disclose `.xlsx` URL.
+   - The UI parses and validates the link in real time (`parseAndValidateFundUrl`).
+   - Clicking **Save for processing** saves the fund immediately to the user's browser and opens a pre-formatted GitHub issue on the repository with:
      - Issue Title: `[Fund Request] <Fund Name>`
      - Labels: `new-fund`
      - Markdown bullet summary (`Fund Name`, `Fund Manager`, `Fund Code`, `Smart Investor Link`, `Scheme ID`, `Offer ID`, `Fund ID`, `Is KiwiSaver`)
      - An embedded, machine-readable JSON code block containing verified metadata.
-   - *In the meantime, the user's browser immediately models the fund using the synthetic 80% Growth Equities / 20% Bonds look-through fallback so their portfolio balance and asset class split remain 100% accurate without waiting.*
+   - *In the meantime, the user's browser immediately models the fund using the synthetic 80% Growth Equities / 20% Bonds look-through fallback so their portfolio balance and asset class split remain accurate without waiting.*
 
-2. **Automated Issue Processing:**
-   - The GitHub Action `.github/workflows/fund-request-bot.yml` (**Process Crowdsourced Fund Requests**) activates on `issues: [opened, labeled]` when `labels contains 'new-fund'`.
+2. **Automated Issue Processing (PR-Based):**
+   - The GitHub Action `.github/workflows/fund-request-bot.yml` (**Process Crowdsourced Fund Requests**) activates on `issues: [opened, labeled]` when the issue has label `new-fund` or starts with `[Fund Request]`.
    - It executes `python pipeline/automation/process_fund_request.py` using the issue title and body environment variables.
-   - The parser checks for JSON blocks, falls back to markdown lines and URLs, verifies that a valid `FND...` code exists, and safely adds or updates the entry in `pipeline/fund_catalog.json`.
-   - The action commits `pipeline/fund_catalog.json` directly to `main` (`chore(catalog): add fund from issue #<number> [skip ci]`).
-   - The bot posts an automated markdown comment acknowledging the addition, closes the issue, and triggers `.github/workflows/ingest.yml` via `gh workflow run ingest.yml`.
+   - The parser validates the `FND...` code, updates `pipeline/fund_catalog.json`, and opens a **Pull Request** (`chore/fund-request-<issue#>`) assigned to the repository maintainer with `Closes #<issue#>` in the PR body (so `main` stays protected by branch rulesets).
+   - The bot comments on the issue with a link to the PR. Once the maintainer approves and merges the PR, the issue closes automatically.
 
-3. **Downstream Ingestion & Production Compilation:**
-   - `.github/workflows/ingest.yml` (**Upstream Ingestion & Data Compilation**) runs via monthly scheduled cron (`0 6 1 * *`), manual `workflow_dispatch`, or `gh workflow run` triggered by the bot.
-   - It runs `python -m pipeline.ingest --fetch --staging-dir data/staging --output-dir public/data`.
-   - `GenericDomesticAdapter` dynamically compiles and unwraps the newly added fund's quarterly holdings into `public/data/funds_registry.json` and `constituents.json`.
-   - Once published, any user who holds that fund automatically sees full line-item company look-through instead of the synthetic fallback!
+3. **Downstream Ingestion & Production Compilation (PR-Based):**
+   - `.github/workflows/ingest.yml` (**Upstream Ingestion & Data Compilation**) runs via monthly scheduled cron (`0 6 1 * *`), manual `workflow_dispatch`, or `workflow_call`.
+   - It runs Python lint/tests and `python -m pipeline.ingest --fetch --staging-dir data/staging --output-dir public/data`.
+   - Changes to `public/data/` and `pipeline/security_master/security_master.json` are opened as a Pull Request (`chore/monthly-data-ingest`) for maintainer review.
+   - Merging that PR triggers `.github/workflows/deploy.yml` (`build-and-deploy`) to publish the updated look-through datasets to GitHub Pages.
 
 ---
 
 ### B. Administrator Monitoring: How to Check Bot & Ingestion Runs
 
-Administrators can monitor the health of automated fund processing via standard GitHub interfaces:
+Administrators can monitor all automated workflows in GitHub Actions (`https://github.com/<owner>/kiwi-portfolio-xray/actions`):
 
-1. **Viewing Active and Past Ingestion Runs:**
-   - Go to your repository on GitHub: `https://github.com/<owner>/kiwi-portfolio-xray/actions`.
-   - Check the two relevant workflows:
-     - **Process Crowdsourced Fund Requests** (`.github/workflows/fund-request-bot.yml`): Runs on issue submission. Typical execution time: ~15–30 seconds.
-     - **Upstream Ingestion & Data Compilation** (`.github/workflows/ingest.yml`): Runs monthly (1st of each month), via manual trigger, or when triggered by the bot. Typical execution time: ~1–3 minutes.
-   - A green checkmark (✓) indicates successful metadata extraction, catalog commit, and ingestion.
+1. **Automated Workflows:**
+   - **Process Crowdsourced Fund Requests** (`.github/workflows/fund-request-bot.yml`): Runs on `[Fund Request]` / `new-fund` issues (~15–30s). Opens a catalog PR.
+   - **Upstream Ingestion & Data Compilation** (`.github/workflows/ingest.yml`): Runs monthly (1st of each month at `06:00 UTC`) or manually (~1–3 min). Opens a data PR.
+   - **Daily End-of-Day Price Refresh** (`.github/workflows/prices.yml`): Runs Mon–Fri at `07:00 UTC` (~30s). Publishes `prices.json` directly to the `prices-data` branch (zero PRs).
+   - **Deploy Kiwi Portfolio X-Ray to GitHub Pages** (`.github/workflows/deploy.yml`): Runs `verify` on PRs to `main`, and `build-and-deploy` on pushes to `main`.
 
 2. **Tracking User Fund Requests:**
-   - Navigate to the **Issues** tab (`/issues?q=label%3Anew-fund`).
-   - **Closed issues**: Successfully processed by the bot with an automated confirmation comment.
-   - **Open issues**: Either awaiting bot execution, manually submitted without the `new-fund` label, or encountered a validation error.
+   - Navigate to the **Issues** tab (`/issues?q=label%3Anew-fund`) and **Pull Requests** tab.
+   - **Open PRs**: Awaiting maintainer review/merge (GitHub sends a review-request notification automatically).
+   - **Closed issues**: Merged and closed automatically via `Closes #<issue#>`.
 
 ---
 
@@ -321,12 +324,12 @@ GitHub sends automated email notifications to administrators when an Action fail
 * **Resolution:**
   1. Check if Sorted Smart Investor is accessible in a web browser.
   2. Once the upstream site is back online, navigate to **Actions** → **Upstream Ingestion & Data Compilation** → click **Run workflow** (`workflow_dispatch`).
-  3. The pipeline will retry the download, update `public/data/`, and push changes to `main`.
+  3. The pipeline will retry the download and open/update the `chore/monthly-data-ingest` PR for review.
 
 #### Scenario 3: Unmapped Holdings or Schema Mismatch in a Newly Ingested Fund
 * **Symptom:** The ingestion pipeline succeeds, but `unresolved_entries.json` contains unmapped company names, or a fund manager uses non-standard column headers.
 * **Resolution:**
-  1. Pull the latest `main` branch locally: `git pull origin main`.
+  1. Pull the latest `main` branch locally and create a feature branch: `git pull origin main && git checkout -b fix/company-aliases`.
   2. Launch the local Admin Console:
      ```bash
      python3 -m pipeline.admin_ui
@@ -334,23 +337,44 @@ GitHub sends automated email notifications to administrators when an Action fail
   3. Open `http://127.0.0.1:8787` in your browser.
   4. View the unmapped item in **Panel 6: Unmapped Companies**, search the Known Companies Register for the company's canonical ISIN, and click **Save Alias**.
   5. Click **⚡ Publish Datasets (public/data/)**.
-  6. Commit and push the updated alias map:
+  6. Commit, push your branch, and open a PR to `main`:
      ```bash
      git add pipeline/enrichment/company_alias_map.json public/data/
      git commit -m "fix(mapping): add company alias for <fund_code>"
-     git push origin main
+     git push -u origin fix/company-aliases
      ```
-
-#### Scenario 4: Git Concurrency Conflict / Non-Fast-Forward Push
-* **Symptom:** The bot fails at step `Commit and Push Catalogue Update` with `error: failed to push some refs to ... (fetch first)`.
-* **Root Cause:** Two users submitted fund requests at the exact same second, or an administrator pushed a commit while the bot was executing.
-* **Resolution:**
-  1. Re-trigger the failed workflow from the GitHub Actions run page by clicking **Re-run all jobs**.
-  2. The action will fetch the fresh `main` branch and cleanly append the entry.
 
 ---
 
-## 11. System Concepts & Architecture Glossary
+## 11. End-of-Day Share & ETF Pricing Mechanism
+
+Because GitHub Pages is static-only and stock quote endpoints (Yahoo Finance, ASX) do not send browser CORS headers, share and ETF prices use a **single, unified end-of-day dataset (`prices.json`)** across both hosted and local environments:
+
+### How It Works
+1. **Daily Automated Refresh (`.github/workflows/prices.yml`):**
+   - Runs every weekday at `07:00 UTC` (~8:00 PM NZDT / 7:00 PM NZST, after NZX & ASX close) and supports manual **Run workflow** (`workflow_dispatch`).
+   - Executes `python -m pipeline.fetch_prices --data-dir public/data --output /tmp/prices.json`, which fetches end-of-day closing prices from Yahoo Finance for:
+     - **All NZX equities** (~161 tickers from `direct_equities.json`)
+     - **All Smartshares & BetaShares listed ETFs** (~45 `.NZ`/`.AX` tickers from `funds_registry.json`)
+     - **Liquid ASX equities** (~326 tickers that appear in compiled fund holdings — ASX 300+ companies such as BHP, CBA, CSL, WES, etc.)
+   - Merges onto the previous `prices.json` so a transient fetch miss never drops an existing price.
+   - Publishes `prices.json` directly to a dedicated, unprotected orphan branch (**`prices-data`**) — **zero PRs to merge**, while `main` remains strictly protected.
+
+2. **Hosted GitHub Pages (`src/utils/prices.ts`):**
+   - Clicking **Update Prices** in **Panel 1 (Exchange-Traded Shares & Listed ETFs)** is **read-only**: it downloads `https://raw.githubusercontent.com/SusanJaneNZ/kiwi-portfolio-xray/prices-data/prices.json` (served over GitHub's CDN with `Access-Control-Allow-Origin: *`), falling back to the bundled `data/prices.json` if offline.
+   - Users never call Yahoo Finance or trigger GitHub Actions, so any number of concurrent users can click **Update Prices** with zero rate-limit risk.
+   - *Note:* Live **AUD/NZD exchange rates** (`src/utils/fx.ts`) are fetched directly from CORS-enabled public FX APIs (`open.er-api.com`, falling back to `frankfurter.app`).
+
+3. **Localhost Testing (`vite.config.ts` & CLI):**
+   - When running locally on `localhost` (`npm run dev` or `npm run preview`), clicking **Update Prices** automatically calls `POST /api/prices/refresh` — which executes the exact same `python3 -m pipeline.fetch_prices` script locally, writes `public/data/prices.json` (and `dist/data/prices.json` if present), and immediately loads those prices into the UI.
+   - You can also run the script directly from the terminal at any time:
+     ```bash
+     npm run prices:refresh
+     ```
+
+---
+
+## 12. System Concepts & Architecture Glossary
 
 This glossary defines the authoritative naming conventions for Kiwi Portfolio X-Ray, establishing a clear reference for all terminology across the documentation and administrative tooling:
 

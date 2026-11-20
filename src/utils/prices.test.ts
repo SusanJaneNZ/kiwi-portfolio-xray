@@ -163,7 +163,7 @@ export const pricesTestCases: [string, () => Promise<void>][] = [
         const result = await fetchNzxPrices(['AIA']);
         assertTrue(result.ok, 'result ok');
         assertEq(result.prices.AIA, 7.85, 'AIA price parsed');
-        assertTrue(fetchedUrl.includes('data/prices.json'), 'loaded data/prices.json');
+        assertTrue(fetchedUrl.includes('prices.json'), 'loaded prices.json');
 
         const stored = loadStoredDailyPrices();
         assertEq(stored?.prices.AIA, 7.85, 'AIA price persisted into storage');
