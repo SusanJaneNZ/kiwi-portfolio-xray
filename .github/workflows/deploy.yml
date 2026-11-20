@@ -19,11 +19,53 @@ permissions:
   id-token: write
 
 concurrency:
-  group: 'pages-${{ github.ref }}'
+  group: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || 'pages' }}
   cancel-in-progress: true
 
 jobs:
   verify:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Run Upstream Pipeline Lint, Tests & Asset Verification
+        run: |
+          pip install ruff
+          ruff check --select F821,F823 pipeline/
+          python -m unittest discover -s pipeline/tests -v
+          python -m pipeline.ingest --staging-dir data/staging --output-dir public/data
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Frontend Tests
+        run: npm test
+
+      - name: Build Web Application
+        run: npm run build
+
+      - name: Install Playwright Chromium & Run E2E Smoke Tests
+        run: |
+          npx playwright install --with-deps chromium
+          npm run test:e2e
+
+  build-and-deploy:
+    if: github.event_name != 'pull_request'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -61,23 +103,16 @@ jobs:
           npm run test:e2e
 
       - name: Setup Pages
-        if: github.event_name != 'pull_request' && github.event.repository.private == false
+        if: github.event.repository.private == false
         uses: actions/configure-pages@v5
 
       - name: Upload Artifact
-        if: github.event_name != 'pull_request' && github.event.repository.private == false
+        if: github.event.repository.private == false
         uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
 
-  deploy:
-    needs: verify
-    if: github.event_name != 'pull_request' && github.event.repository.private == false
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
       - name: Deploy to GitHub Pages
         id: deployment
+        if: github.event.repository.private == false
         uses: actions/deploy-pages@v4

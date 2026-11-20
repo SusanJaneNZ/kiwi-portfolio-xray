@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   build-and-compile:
@@ -37,10 +38,20 @@ jobs:
         run: |
           python -m pipeline.ingest --fetch --staging-dir data/staging --output-dir public/data
 
-      - name: Commit and Push Updated Datasets
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action [CI/CD]"
-          git add public/data/ pipeline/security_master/security_master.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "data: compile static portfolio look-through assets [skip ci]" && git push)
+      - name: Create Pull Request for Updated Datasets
+        uses: peter-evans/create-pull-request@v7
+        with:
+          add-paths: |
+            public/data/
+            pipeline/security_master/security_master.json
+          branch: chore/monthly-data-ingest
+          delete-branch: true
+          commit-message: "data: compile static portfolio look-through assets"
+          title: "data: update compiled portfolio look-through datasets"
+          body: |
+            Automated data ingestion run from `ingest.yml`.
+
+            Updates `public/data/` and `pipeline/security_master/security_master.json`.
+          reviewers: susanjanenz
+          assignees: susanjanenz
 

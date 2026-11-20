@@ -23,7 +23,7 @@ interface DirectSharesPanelProps {
   totalPortfolioNZD: number;
   directSumNZD: number;
   onAssignBucket: (instrumentKey: string, bucketId: string) => void;
-  onUpdateState: (state: UserPortfolioState) => void;
+  onUpdateState: (action: UserPortfolioState | ((prev: UserPortfolioState) => UserPortfolioState)) => void;
 }
 
 export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
@@ -135,7 +135,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
       if (result && result.rate > 0) {
         hasAutoFetchedFx.current = true;
         setFxTimestamp(result.timestamp);
-        onUpdateState({ ...portfolioState, audNzdRate: result.rate });
+        onUpdateState((prev) => ({ ...prev, audNzdRate: result.rate }));
       }
     } catch {
       // Fallback silently to existing rate
@@ -205,7 +205,11 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
       });
 
       if (updatedCount > 0) {
-        onUpdateState({ ...portfolioState, directHoldings: updatedHoldings });
+        const updatedByIsin = new Map(updatedHoldings.map((h) => [h.isin, h]));
+        onUpdateState((prev) => ({
+          ...prev,
+          directHoldings: prev.directHoldings.map((h) => updatedByIsin.get(h.isin) ?? h),
+        }));
       }
 
       if (updatedCount === 0) {

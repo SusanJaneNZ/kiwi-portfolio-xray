@@ -7,7 +7,7 @@ on:
 permissions:
   contents: write
   issues: write
-  actions: write
+  pull-requests: write
 
 jobs:
   process-request:
@@ -30,37 +30,35 @@ jobs:
         run: |
           python pipeline/automation/process_fund_request.py
 
-      - name: Commit and Push Updated Catalog
-        id: git_commit
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "Kiwi-Portfolio-Bot [CI/CD]"
-          git add pipeline/fund_catalog.json
-          if git diff --staged --quiet; then
-            echo "No catalog changes needed (already up to date)."
-            echo "has_changes=false" >> $GITHUB_OUTPUT
-          else
-            git commit -m "chore(catalog): add fund from issue #${{ github.event.issue.number }} [skip ci]"
-            git push
-            echo "has_changes=true" >> $GITHUB_OUTPUT
-          fi
+      - name: Create Pull Request for Updated Catalog
+        id: create_pr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          add-paths: pipeline/fund_catalog.json
+          branch: chore/fund-request-${{ github.event.issue.number }}
+          delete-branch: true
+          commit-message: "chore(catalog): add fund from issue #${{ github.event.issue.number }}"
+          title: "chore(catalog): add fund from issue #${{ github.event.issue.number }}"
+          body: |
+            Automated catalog update from fund request issue #${{ github.event.issue.number }}.
 
-      - name: Comment and Close Issue
+            Closes #${{ github.event.issue.number }}
+          reviewers: susanjanenz
+          assignees: susanjanenz
+
+      - name: Comment on Issue
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUM: ${{ github.event.issue.number }}
+          PR_URL: ${{ steps.create_pr.outputs.pull-request-url }}
         run: |
-          gh issue comment "$ISSUE_NUM" --body "🎉 **Fund Successfully Registered!**
+          if [ -n "$PR_URL" ]; then
+            gh issue comment "$ISSUE_NUM" --body "🎉 **Fund Request Validated!**
 
-          This fund has been validated and added to \`pipeline/fund_catalog.json\`.
-          The ingestion pipeline will download its official Disclose Register spreadsheet and compile it into the global look-through catalogue.
+            A pull request has been opened to add this fund to \`pipeline/fund_catalog.json\`: $PR_URL
 
-          Thank you for contributing to Kiwi Portfolio X-Ray!"
-          gh issue close "$ISSUE_NUM" --reason "completed"
-
-      - name: Trigger Ingestion Pipeline
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "Triggering upstream ingestion pipeline..."
-          gh workflow run ingest.yml || echo "Could not trigger ingest.yml automatically; will run on schedule."
+            Once approved and merged by a maintainer, this issue will close automatically and the fund will be included in the next ingestion run."
+          else
+            gh issue comment "$ISSUE_NUM" --body "ℹ️ This fund is already present in \`pipeline/fund_catalog.json\`. Closing issue."
+            gh issue close "$ISSUE_NUM" --reason "completed"
+          fi

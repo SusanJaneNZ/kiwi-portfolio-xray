@@ -834,6 +834,7 @@ Please add this fund to \`pipeline/fund_catalog.json\` so it is ingested into th
                       value={balance > 0 ? balance : ''}
                       onChange={(e) => handleFundBalanceChange(fund.code, e.target.value)}
                       placeholder="0.00"
+                      aria-label={`Balance in NZD for ${fund.code}`}
                       className="w-full bg-slate-900 border border-slate-700/80 rounded-lg pl-6 pr-2 py-1 text-xs text-right font-mono text-white focus:outline-none focus:border-indigo-500"
                     />
                   </div>
