@@ -401,7 +401,7 @@ export function generateReplicationPlan(params: GenerateReplicationParams): Repl
 export function formatTradeOrderList(plan: ReplicationPlan): string {
   const lines: string[] = [
     `DIY Index Replicator Trade Plan — ${plan.model.name} (Top ${plan.depth})`,
-    `Mode: ${plan.mode === 'portfolio_aware' ? 'Whole-Portfolio Aware' : 'Standalone Sleeve'} | Target Budget: $${plan.breakeven.budgetNZD.toFixed(0)} NZD`,
+    `Mode: ${plan.mode === 'portfolio_aware' ? 'Whole-Portfolio Aware' : 'Standalone Holding'} | Target Budget: $${plan.breakeven.budgetNZD.toFixed(0)} NZD`,
     `Est. Annual Fee Saved: $${plan.breakeven.annualFeeDragNZD.toFixed(2)}/yr (${(plan.model.merRate * 100).toFixed(2)}% MER) | Breakeven: ${Number.isFinite(plan.breakeven.breakevenMonths) ? plan.breakeven.breakevenMonths.toFixed(1) + ' months' : 'N/A'}`,
     '',
   ];

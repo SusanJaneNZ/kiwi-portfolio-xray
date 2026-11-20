@@ -253,7 +253,7 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
 
             <div>
               <label className="block text-[11px] text-slate-400 mb-1">
-                Target Sleeve Budget (NZD)
+                Target Holding Budget (NZD)
               </label>
               <input
                 type="number"
@@ -300,7 +300,7 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
                   onChange={() => setMode('standalone')}
                   className="accent-indigo-500"
                 />
-                <span>Standalone Sleeve</span>
+                <span>Standalone Holding</span>
               </label>
             </div>
 
@@ -388,7 +388,7 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
                 <th className="py-2 px-3">Constituent</th>
                 <th className="py-2 px-2 text-right">Target %</th>
                 <th className="py-2 px-2 text-right">Target $</th>
-                <th className="py-2 px-2 text-right">Existing Hold</th>
+                <th className="py-2 px-2 text-right">Actual $ Held</th>
                 <th className="py-2 px-2 text-right">Price ({activeModel.currency})</th>
                 <th className="py-2 px-2 text-right">Target Shares</th>
                 <th className="py-2 px-3 text-right">Action</th>
@@ -472,7 +472,10 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
                 </td>
                 <td className="py-2 px-2 text-right">100.0%</td>
                 <td className="py-2 px-2 text-right">{formatNZD(plan.totalAllocatedNZD)}</td>
-                <td colSpan={4} className="py-2 px-3 text-right text-slate-400">
+                <td className="py-2 px-2 text-right text-amber-300">
+                  {formatNZD(plan.rows.reduce((acc, r) => acc + r.existingTotalNZD, 0))}
+                </td>
+                <td colSpan={3} className="py-2 px-3 text-right text-slate-400">
                   Est. Trade Value: {formatNZD(plan.totalTradeValueNZD)}
                 </td>
               </tr>
