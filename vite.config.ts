@@ -2,6 +2,7 @@ import { defineConfig, Plugin, Connect } from 'vite';
 import react from '@vitejs/plugin-react';
 import fs from 'node:fs';
 import path from 'node:path';
+import { execFile } from 'node:child_process';
 
 const MAX_BODY_BYTES = 5 * 1024 * 1024; // 5 MB
 
@@ -354,6 +355,38 @@ function createPricesMiddleware(): Connect.NextHandleFunction {
   return async (req, res, next) => {
     if (!req.url?.startsWith('/api/prices')) {
       return next();
+    }
+
+    // Localhost-only: run the same pipeline/fetch_prices.py script used by GitHub Actions
+    if (req.url === '/api/prices/refresh' && req.method === 'POST') {
+      const repoRoot = process.cwd();
+      const outputPath = path.join(repoRoot, 'public', 'data', 'prices.json');
+      const distOutputPath = path.join(repoRoot, 'dist', 'data', 'prices.json');
+      execFile(
+        'python3',
+        ['-m', 'pipeline.fetch_prices', '--data-dir', 'public/data', '--output', outputPath],
+        { cwd: repoRoot, timeout: 120_000 },
+        (err, stdout, stderr) => {
+          res.setHeader('Content-Type', 'application/json');
+          if (err) {
+            res.statusCode = 500;
+            res.end(JSON.stringify({ ok: false, error: stderr || err.message }));
+            return;
+          }
+          try {
+            const raw = fs.readFileSync(outputPath, 'utf-8');
+            if (fs.existsSync(path.dirname(distOutputPath))) {
+              fs.writeFileSync(distOutputPath, raw, 'utf-8');
+            }
+            const parsed = JSON.parse(raw);
+            res.end(JSON.stringify({ ok: true, count: parsed.count, date: parsed.date, log: stdout.trim() }));
+          } catch (readErr) {
+            res.statusCode = 500;
+            res.end(JSON.stringify({ ok: false, error: String(readErr) }));
+          }
+        }
+      );
+      return;
     }
 
     if (req.method !== 'GET') {

@@ -22,10 +22,10 @@ export const BondIssuersTabTable: React.FC<BondIssuersTabTableProps> = ({
             <th className="py-3 px-4">Bond Issuer / ETF</th>
             <th className="py-3 px-4">Category</th>
             <th className="py-3 px-4">Country</th>
-            <th className="py-3 px-4 text-right">Tranches</th>
+            <th className="py-3 px-4 text-right">Holdings</th>
             <th className="py-3 px-4 text-right">Exposure (NZD)</th>
             <th className="py-3 px-4 text-right">% Portfolio</th>
-            <th className="py-3 px-4 w-12 text-center">Drill</th>
+            <th className="py-3 px-4 w-12 text-center">Details</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-slate-800/60 font-sans">

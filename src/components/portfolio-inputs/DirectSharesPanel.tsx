@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { CollapsiblePanel } from '../CollapsiblePanel';
 import { BucketSelect } from './BucketSelect';
 import {
-  DEFAULT_STARTER_BUCKETS,
   DirectEquityCatalogItem,
   DirectHolding,
   PortfolioBucket,
@@ -14,6 +13,7 @@ import {
   fetchNzxPrices,
   getTodayDateString,
   loadStoredDailyPrices,
+  PriceDataSource,
   PriceDiagnosticItem,
 } from '../../utils/prices';
 
@@ -41,7 +41,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
   const [newShareCurrency, setNewShareCurrency] = useState<'NZD' | 'AUD'>('NZD');
 
   const availableBuckets = useMemo<PortfolioBucket[]>(() => {
-    return portfolioState.buckets.length > 0 ? portfolioState.buckets : DEFAULT_STARTER_BUCKETS;
+    return portfolioState.buckets;
   }, [portfolioState.buckets]);
 
   const defaultBucketId = useMemo<string>(() => {
@@ -60,10 +60,17 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
   }, [availableBuckets, defaultBucketId]);
 
   const [isFetchingPrices, setIsFetchingPrices] = useState(false);
-  const [cachedDate, setCachedDate] = useState<string | null>(null);
+  const [cachedDate, setCachedDate] = useState<string | null>(() => {
+    const cached = loadStoredDailyPrices();
+    return cached?.date || null;
+  });
   const [lastFetchedAt, setLastFetchedAt] = useState<string | null>(() => {
     const cached = loadStoredDailyPrices();
     return cached?.lastFetchedAt || null;
+  });
+  const [priceSource, setPriceSource] = useState<PriceDataSource | undefined>(() => {
+    const cached = loadStoredDailyPrices();
+    return cached?.source;
   });
   const [priceNotice, setPriceNotice] = useState<string | null>(null);
   const [priceDiagnostics, setPriceDiagnostics] = useState<PriceDiagnosticItem[] | null>(null);
@@ -81,9 +88,11 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
     if (cached?.lastFetchedAt) {
       setLastFetchedAt(cached.lastFetchedAt);
     }
-    const isToday = cached?.date === getTodayDateString();
-    if (isToday && cached?.date) {
+    if (cached?.date) {
       setCachedDate(cached.date);
+    }
+    if (cached?.source) {
+      setPriceSource(cached.source);
     }
   }, [portfolioState.directHoldings]);
 
@@ -110,23 +119,40 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
   }, [portfolioState.directHoldings]);
 
   const currentAsAtText = useMemo(() => {
+    if (cachedDate) {
+      const parsed = new Date(`${cachedDate}T00:00:00`);
+      if (!isNaN(parsed.getTime())) {
+        return parsed.toLocaleDateString('en-NZ', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric',
+        });
+      }
+      return cachedDate;
+    }
     if (!lastFetchedAt) return null;
     try {
       const d = new Date(lastFetchedAt);
       if (!isNaN(d.getTime())) {
-        return d.toLocaleString('en-NZ', {
+        return d.toLocaleDateString('en-NZ', {
           day: 'numeric',
           month: 'short',
-          hour: 'numeric',
-          minute: '2-digit',
-          hour12: true,
+          year: 'numeric',
         });
       }
     } catch {
       // fallback
     }
-    return cachedDate;
+    return null;
   }, [lastFetchedAt, cachedDate]);
+
+  const isPriceDateStale = useMemo(() => {
+    if (!cachedDate) return false;
+    const loadedMs = new Date(`${cachedDate}T00:00:00`).getTime();
+    if (isNaN(loadedMs)) return false;
+    const ageDays = (Date.now() - loadedMs) / (1000 * 60 * 60 * 24);
+    return ageDays > 3.5; // Allow weekend gap (Fri -> Mon) before flagging stale
+  }, [cachedDate]);
 
   const fetchFxRate = async () => {
     setIsFetchingFx(true);
@@ -164,7 +190,16 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
     );
 
     setIsFetchingPrices(true);
-    setPriceNotice(`Fetching live prices for ${tickersToFetch.length} ticker(s) from Yahoo Finance...`);
+    const isLocal =
+      typeof window !== 'undefined' &&
+      (window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1' ||
+        window.location.hostname === '::1');
+    setPriceNotice(
+      isLocal
+        ? `Refreshing local end-of-day dataset and updating ${tickersToFetch.length} holding(s)...`
+        : `Loading end-of-day prices for ${tickersToFetch.length} holding(s)...`
+    );
     setPriceDiagnostics(null);
 
     try {
@@ -174,7 +209,8 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
       }
 
       if (!res.ok && res.error) {
-        setPriceNotice(`Price update error: ${res.error}`);
+        const stillShowing = currentAsAtText ? ` Still showing prices as of ${currentAsAtText}.` : '';
+        setPriceNotice(`Price update error: ${res.error}.${stillShowing}`);
         setIsFetchingPrices(false);
         return;
       }
@@ -212,23 +248,25 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
         }));
       }
 
+      const fallbackSuffix = res.source === 'bundled' ? ' (offline fallback file)' : '';
       if (updatedCount === 0) {
         setPriceNotice(
-          `Updated 0 prices from Yahoo Finance (${tickersToFetch.length} requested). Click "View Request/Response Log" to inspect diagnostics.`
+          `Updated 0 prices from end-of-day dataset (${tickersToFetch.length} requested).`
         );
       } else if (updatedCount < tickersToFetch.length) {
         setPriceNotice(
-          `Updated ${updatedCount} of ${tickersToFetch.length} prices from Yahoo Finance (${tickersToFetch.length - updatedCount} had no price data).`
+          `Updated ${updatedCount} of ${tickersToFetch.length} end-of-day prices as of ${res.date}${fallbackSuffix} (${tickersToFetch.length - updatedCount} not in dataset; enter manually).`
         );
       } else {
-        setPriceNotice(`✓ Successfully updated all ${updatedCount} prices from Yahoo Finance`);
+        setPriceNotice(`✓ Updated all ${updatedCount} end-of-day prices (as of ${res.date}${fallbackSuffix})`);
       }
 
-      const today = getTodayDateString();
-      setCachedDate(today);
-      setLastFetchedAt(new Date().toISOString());
+      setCachedDate(res.date || getTodayDateString());
+      setLastFetchedAt(res.lastFetchedAt || new Date().toISOString());
+      setPriceSource(res.source);
     } catch (err) {
-      setPriceNotice(`Price update failed: ${String(err)}`);
+      const stillShowing = currentAsAtText ? ` Still showing prices as of ${currentAsAtText}.` : '';
+      setPriceNotice(`Price update failed: ${String(err)}.${stillShowing}`);
     } finally {
       setIsFetchingPrices(false);
     }
@@ -417,7 +455,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
       }
       headerRight={
         <span className="text-xs text-emerald-400 font-mono">
-          {formatNZD(directSumNZD)} ({totalPortfolioNZD > 0 ? ((directSumNZD / totalPortfolioNZD) * 100).toFixed(1) : 0}% of portfolio)
+          ${formatNZD(directSumNZD)} ({totalPortfolioNZD > 0 ? ((directSumNZD / totalPortfolioNZD) * 100).toFixed(1) : 0}% of portfolio)
         </span>
       }
     >
@@ -442,7 +480,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                   )}
                 </div>
                 <p className="text-[11px] text-slate-400">
-                  Applied automatically to ASX shares held in AUD
+                  Used for AUD holdings
                 </p>
               </div>
             </div>
@@ -492,22 +530,25 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
               <span className="text-base">📈</span>
               <div>
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="font-semibold text-slate-200">Live Pricing</span>
-                  {currentAsAtText && unpricedCount === 0 ? (
+                  <span className="font-semibold text-slate-200">End-of-Day Prices</span>
+                  {currentAsAtText && unpricedCount === 0 && !isPriceDateStale && priceSource !== 'bundled' ? (
                     <span
                       className="text-[11px] text-emerald-400 font-medium bg-emerald-950/60 border border-emerald-800/40 rounded px-2 py-0.5"
                     >
-                      ✓ Prices are current as at {currentAsAtText}
+                      ✓ Prices as of {currentAsAtText}
                     </span>
-                  ) : currentAsAtText && unpricedCount > 0 ? (
+                  ) : currentAsAtText ? (
                     <span
                       className="text-[11px] text-amber-300 font-medium bg-amber-950/60 border border-amber-800/40 rounded px-2 py-0.5"
                     >
-                      Prices are current as at {currentAsAtText} ({unpricedCount} unpriced)
+                      ⚠ Prices as of {currentAsAtText}
+                      {priceSource === 'bundled' ? ' (offline fallback)' : ''}
+                      {isPriceDateStale ? ' · older' : ''}
+                      {unpricedCount > 0 ? ` · ${unpricedCount} unpriced` : ''}
                     </span>
                   ) : (
                     <span className="text-[11px] text-amber-400 italic">
-                      Prices not yet fetched for {unpricedCount > 0 ? `${unpricedCount} holding${unpricedCount > 1 ? 's' : ''}` : 'current holdings'}
+                      Prices not yet loaded for {unpricedCount > 0 ? `${unpricedCount} holding${unpricedCount > 1 ? 's' : ''}` : 'current holdings'}
                     </span>
                   )}
                   {isFetchingPrices && (
@@ -517,7 +558,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                   )}
                 </div>
                 <p className="text-[11px] text-slate-400">
-                  On-demand live price refresh via Yahoo Finance API (NZX & ASX).
+                  Daily closing prices via Yahoo Finance (NZX &amp; ASX)
                 </p>
               </div>
             </div>
@@ -527,7 +568,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                 onClick={handleUpdatePrices}
                 disabled={isFetchingPrices}
                 className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5 shadow-sm"
-                title="Fetch latest live prices for direct shares and ETFs via Yahoo Finance"
+                title="Load latest end-of-day closing prices for direct shares and ETFs"
               >
                 <span className={isFetchingPrices ? 'animate-spin inline-block' : 'inline-block'}>↻</span>
                 <span>{isFetchingPrices ? 'Updating...' : 'Update Prices'}</span>
@@ -604,10 +645,10 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                       <>
                         <span>•</span>
                         {isPriceUnknown ? (
-                          <span className="text-amber-400/80 italic text-[11px]">&lt;unknown&gt;</span>
+                          <span className="text-amber-400/80 italic text-[11px]">Unpriced</span>
                         ) : (
                           <span className="text-emerald-400 font-mono">
-                            NZD ${formatNZD(valueNZD)}
+                            ${formatNZD(valueNZD)} NZD
                           </span>
                         )}
                       </>
@@ -615,7 +656,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
+                <div className="flex items-start gap-2 flex-wrap sm:flex-nowrap">
                   <BucketSelect
                     instrumentKey={`direct:${dh.isin}`}
                     buckets={availableBuckets}
@@ -627,7 +668,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                   <select
                     value={dh.currency || 'NZD'}
                     onChange={(e) => handleCurrencyChange(dh.isin, e.target.value as 'NZD' | 'AUD')}
-                    className="bg-slate-900 border border-slate-800 rounded-lg px-2 py-1.5 text-xs text-slate-300 font-mono focus:outline-none focus:border-indigo-500"
+                    className="h-[30px] bg-slate-900 border border-slate-800 rounded-lg px-2 text-xs text-slate-300 font-mono focus:outline-none focus:border-indigo-500"
                     title="Select native currency for this holding"
                   >
                     <option value="NZD">NZD</option>
@@ -643,12 +684,12 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                       value={safeShares > 0 ? safeShares : ''}
                       placeholder="Shares"
                       onChange={(e) => handleSharesChange(dh.isin, e.target.value)}
-                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-2 py-1.5 text-right text-xs text-white focus:outline-none focus:border-emerald-500 font-mono"
+                      className="w-full h-[30px] bg-slate-900 border border-slate-800 rounded-lg px-2 text-right text-xs text-white focus:outline-none focus:border-emerald-500 font-mono"
                     />
-                    <span className="text-[9px] text-slate-500 block text-right pr-1">shares</span>
+                    <span className="text-[9px] text-slate-500 block text-right pr-1 leading-tight mt-0.5">shares</span>
                   </div>
 
-                  <span className="text-slate-600 font-mono text-xs">×</span>
+                  <span className="h-[30px] flex items-center text-slate-600 font-mono text-xs">×</span>
 
                   {/* Price Input */}
                   <div className="w-24 relative" title={`Price per share in ${dh.currency || 'NZD'}`}>
@@ -657,26 +698,26 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                       min="0"
                       step="0.0001"
                       value={safePrice > 0 ? safePrice : ''}
-                      placeholder="<unknown>"
+                      placeholder="Price"
                       onChange={(e) => handlePriceChange(dh.isin, e.target.value)}
-                      className={`w-full bg-slate-900 border ${
+                      className={`w-full h-[30px] bg-slate-900 border ${
                         isPriceUnknown ? 'border-amber-700/60 placeholder-amber-400/70' : 'border-slate-800'
-                      } rounded-lg px-2 py-1.5 text-right text-xs text-white focus:outline-none focus:border-emerald-500 font-mono`}
+                      } rounded-lg px-2 text-right text-xs text-white focus:outline-none focus:border-emerald-500 font-mono`}
                     />
-                    <span className="text-[9px] text-slate-500 block text-right pr-1">
+                    <span className="text-[9px] text-slate-500 block text-right pr-1 leading-tight mt-0.5">
                       {isAud ? 'A$/sh' : 'NZ$/sh'}
                     </span>
                   </div>
 
-                  <span className="text-slate-600 font-mono text-xs">=</span>
+                  <span className="h-[30px] flex items-center text-slate-600 font-mono text-xs">=</span>
 
                   {/* Computed Read-Only Value */}
                   <div
-                    className="w-28 py-1.5 px-2 bg-slate-900/60 border border-slate-800/80 rounded-lg text-right text-xs font-mono font-medium flex items-center justify-end"
-                    title={isPriceUnknown ? 'Price unknown — click Update NZX Prices or enter price manually' : 'Calculated Total Value (Shares × Price)'}
+                    className="w-28 h-[30px] px-2 bg-slate-900/60 border border-slate-800/80 rounded-lg text-right text-xs font-mono font-medium flex items-center justify-end"
+                    title={isPriceUnknown ? 'Price needed — click Update Prices or enter manually' : 'Calculated Total Value (Shares × Price)'}
                   >
                     {isPriceUnknown ? (
-                      <span className="text-amber-400 italic text-[11px]">&lt;unknown&gt;</span>
+                      <span className="text-amber-400 italic text-[11px]">Unpriced</span>
                     ) : (
                       <span className="text-emerald-400">
                         {isAud ? 'A$' : '$'}{formatNZD(dh.value)}
@@ -688,7 +729,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                   <button
                     type="button"
                     onClick={() => handleRemoveDirect(dh.isin)}
-                    className="p-1.5 text-slate-500 hover:text-rose-400 hover:bg-rose-950/40 rounded-lg transition-colors"
+                    className="h-[30px] px-1.5 flex items-center text-slate-500 hover:text-rose-400 hover:bg-rose-950/40 rounded-lg transition-colors"
                     title="Remove holding"
                   >
                     ✕
@@ -700,7 +741,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
 
           {/* Add New Holding Form */}
           <div className="pt-2 relative">
-            <div className="flex gap-2 flex-wrap sm:flex-nowrap">
+            <div className="flex items-start gap-2 flex-wrap sm:flex-nowrap">
               <div className="relative flex-1 min-w-[200px]">
                 <input
                   type="text"
@@ -710,7 +751,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                     setSelectedEquity(null);
                   }}
                   placeholder="Search share or listed ETF e.g. CEN, FPH, USF, BHP..."
-                  className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-3 pr-8 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+                  className="w-full h-[30px] bg-slate-950 border border-slate-800 rounded-lg pl-3 pr-8 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
                 />
                 {searchQuery && (
                   <button
@@ -730,24 +771,26 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
 
               {selectedEquity && (
                 <>
-                  <select
-                    value={newShareBucket}
-                    onChange={(e) => setNewShareBucket(e.target.value)}
-                    className="bg-slate-900 border border-slate-800 rounded-lg px-2 py-1.5 text-xs text-slate-300 font-mono focus:outline-none focus:border-indigo-500 max-w-[130px]"
-                    title="Assign to target bucket (defaults to Growth)"
-                  >
-                    {availableBuckets.map((b) => (
-                      <option key={b.id} value={b.id}>
-                        {b.name}
-                      </option>
-                    ))}
-                    <option value="">Unassigned</option>
-                  </select>
+                  {availableBuckets.length > 0 && (
+                    <select
+                      value={newShareBucket}
+                      onChange={(e) => setNewShareBucket(e.target.value)}
+                      className="h-[30px] bg-slate-900 border border-slate-800 rounded-lg px-2 text-xs text-slate-300 font-mono focus:outline-none focus:border-indigo-500 max-w-[140px]"
+                      title="Rebalance bucket assignment"
+                    >
+                      <option value="">Bucket: None</option>
+                      {availableBuckets.map((b) => (
+                        <option key={b.id} value={b.id}>
+                          {b.name}
+                        </option>
+                      ))}
+                    </select>
+                  )}
 
                   <select
                     value={newShareCurrency}
                     onChange={(e) => setNewShareCurrency(e.target.value as 'NZD' | 'AUD')}
-                    className="bg-slate-900 border border-slate-800 rounded-lg px-2 py-1.5 text-xs text-slate-300 font-mono focus:outline-none focus:border-indigo-500"
+                    className="h-[30px] bg-slate-900 border border-slate-800 rounded-lg px-2 text-xs text-slate-300 font-mono focus:outline-none focus:border-indigo-500"
                     title="Select currency for new holding"
                   >
                     <option value="NZD">NZD</option>
@@ -762,10 +805,10 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                       placeholder="Shares"
                       value={newShareCount}
                       onChange={(e) => setNewShareCount(e.target.value)}
-                      className="w-full bg-slate-950 border border-slate-800 rounded-lg px-2 py-1.5 text-right text-xs text-white font-mono"
+                      className="w-full h-[30px] bg-slate-950 border border-slate-800 rounded-lg px-2 text-right text-xs text-white font-mono"
                       title="Number of shares to add"
                     />
-                    <span className="text-[9px] text-slate-500 block text-right pr-1">shares</span>
+                    <span className="text-[9px] text-slate-500 block text-right pr-1 leading-tight mt-0.5">shares</span>
                   </div>
 
                   <div className="w-24 relative">
@@ -773,18 +816,18 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                       type="number"
                       min="0"
                       step="0.0001"
-                      placeholder="<unknown>"
+                      placeholder="Price"
                       value={newSharePrice}
                       onChange={(e) => setNewSharePrice(e.target.value)}
-                      className="w-full bg-slate-950 border border-slate-800 rounded-lg px-2 py-1.5 text-right text-xs text-white font-mono placeholder-amber-400/60"
+                      className="w-full h-[30px] bg-slate-950 border border-slate-800 rounded-lg px-2 text-right text-xs text-white font-mono placeholder-amber-400/60"
                       title={`Price per share in ${newShareCurrency} (leave empty to fetch via Yahoo Finance)`}
                     />
-                    <span className="text-[9px] text-slate-500 block text-right pr-1">
+                    <span className="text-[9px] text-slate-500 block text-right pr-1 leading-tight mt-0.5">
                       {newShareCurrency === 'AUD' ? 'A$/sh' : 'NZ$/sh'}
                     </span>
                   </div>
 
-                  <div className="w-28 py-1.5 px-2 bg-slate-950 border border-slate-800 rounded-lg text-right text-xs font-mono flex items-center justify-end">
+                  <div className="w-28 h-[30px] px-2 bg-slate-950 border border-slate-800 rounded-lg text-right text-xs font-mono flex items-center justify-end">
                     {parseFloat(newShareCount) > 0 && parseFloat(newSharePrice) > 0 ? (
                       <span className="text-emerald-400">
                         {newShareCurrency === 'AUD' ? 'A$' : '$'}
@@ -793,7 +836,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                         )}
                       </span>
                     ) : parseFloat(newShareCount) > 0 ? (
-                      <span className="text-amber-400/80 italic text-[11px]">&lt;unknown&gt;</span>
+                      <span className="text-amber-400/80 italic text-[11px]">Unpriced</span>
                     ) : (
                       <span className="text-slate-600 font-mono text-xs">-</span>
                     )}
@@ -804,7 +847,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
               <button
                 disabled={!selectedEquity || (parseFloat(newShareCount) || 0) <= 0}
                 onClick={handleAddDirect}
-                className="bg-indigo-600 disabled:opacity-40 hover:bg-indigo-500 text-white text-xs font-medium px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
+                className="h-[30px] bg-indigo-600 disabled:opacity-40 hover:bg-indigo-500 text-white text-xs font-medium px-3 rounded-lg transition-colors whitespace-nowrap"
               >
                 + Add
               </button>

@@ -12,9 +12,8 @@ interface BucketRebalancerProps {
 }
 
 const STARTER_PRESET: PortfolioBucket[] = [
-  { id: 'bkt-term-deposits', name: 'Term Deposits', targetPercent: 20 },
-  { id: 'bkt-high-div', name: 'High Div Yield', targetPercent: 20 },
   { id: 'bkt-growth', name: 'Growth', targetPercent: 60 },
+  { id: 'bkt-defensive', name: 'Defensive', targetPercent: 40 },
 ];
 
 const fmtMoney = (v: number) => formatNZD(v, 2);
@@ -56,17 +55,15 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
   const handleApplyPreset = () => {
     if (
       portfolioState.buckets.length > 0 &&
-      !window.confirm('Replace your existing buckets with the 20% Term Deposits / 20% High Div Yield / 60% Growth preset?')
+      !window.confirm('Replace your existing buckets with the 60% Growth / 40% Defensive preset?')
     ) {
       return;
     }
     const nextAssignments: Record<string, string> = {};
-    // Convenience auto-assign direct term deposits into Term Deposits bucket when applying starter preset
+    // Convenience auto-assign fixed interest & cash into Defensive bucket when applying starter preset
     const fiList = portfolioState.fixedInterest || portfolioState.cashDeposits || [];
     for (const dep of fiList) {
-      if ((dep.category || dep.type) === 'term_deposit') {
-        nextAssignments[`fi:${dep.id}`] = 'bkt-term-deposits';
-      }
+      nextAssignments[`fi:${dep.id}`] = 'bkt-defensive';
     }
     onUpdateState({
       ...portfolioState,
@@ -152,17 +149,7 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
     <CollapsiblePanel
       id="bucket-rebalancer"
       title={<span>Buckets &amp; Withdrawal Rebalancer</span>}
-      subtitle="Unlike the look-through Asset Split above (which decomposes inside mixed funds), Buckets group your holdings into target allocations and compute minimum-turnover withdrawals, buys, and sells."
-      headerRight={
-        portfolioState.buckets.length === 0 ? (
-          <button
-            onClick={handleApplyPreset}
-            className="text-xs bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800 px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
-          >
-            Load 20 / 20 / 60 Preset
-          </button>
-        ) : undefined
-      }
+      subtitle="Group holdings into target buckets to calculate minimum-turnover withdrawals and rebalance trades."
       className="md:p-5"
     >
       <div className="space-y-4">
@@ -203,7 +190,7 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
               onClick={handleApplyPreset}
               className="text-xs text-indigo-400 hover:text-indigo-300 underline underline-offset-2 whitespace-nowrap font-medium"
             >
-              Load 20 / 20 / 60 Preset
+              Load 60 / 40 Preset
             </button>
           </div>
         )}
@@ -286,7 +273,7 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
             <span className="font-semibold text-amber-300">
               ⚠ ${fmtMoney(rebalanceResult.totalUnassignedNZD)} NZD in Unassigned Holdings (excluded from rebalance targets)
             </span>
-            <span className="text-[11px] text-amber-200/70">Assign directly below or in Portfolio Inputs:</span>
+            <span className="text-[11px] text-amber-200/70">Assign directly below or in Portfolio:</span>
           </div>
           <div className="flex flex-wrap gap-2">
             {rebalanceResult.unassignedHoldings.map((item) => (
@@ -341,9 +328,9 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
                   type="button"
                   onClick={() => setWithdrawalInput(String(suggestedDrawdownNZD))}
                   className="text-[11px] bg-amber-900/40 hover:bg-amber-800/60 text-amber-200 border border-amber-700/50 rounded-lg px-2.5 py-1.5 transition-colors font-medium flex items-center gap-1 shadow-sm"
-                  title="Sync with net capital shortfall calculated in Retirement Cashflow above"
+                  title="Sync with capital drawdown calculated in Projected Organic Cashflow above"
                 >
-                  <span>⚡ Use Net Shortfall (${fmtMoney(suggestedDrawdownNZD)})</span>
+                  <span>⚡ Use Capital Drawdown (${fmtMoney(suggestedDrawdownNZD)})</span>
                 </button>
               )}
             </div>

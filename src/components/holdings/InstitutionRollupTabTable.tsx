@@ -25,14 +25,14 @@ export const InstitutionRollupTabTable: React.FC<InstitutionRollupTabTableProps>
             <th className="py-3 px-4 text-right">Deposits &amp; Cash (NZD)</th>
             <th className="py-3 px-4 text-right">Total Exposure (NZD)</th>
             <th className="py-3 px-4 text-right">% Portfolio</th>
-            <th className="py-3 px-4 w-12 text-center">Drill</th>
+            <th className="py-3 px-4 w-12 text-center">Details</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-slate-800/60 font-sans">
           {institutions.length === 0 ? (
             <tr>
               <td colSpan={8} className="py-10 text-center text-slate-500">
-                No multi-asset or deposit institutional exposures found.
+                No institutional exposures matching current criteria.
               </td>
             </tr>
           ) : (

@@ -124,7 +124,7 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
     <CollapsiblePanel
       id="retirement-cashflow"
       title={<span>Projected Organic Cashflow</span>}
-      subtitle="Analyze 12-month forward cashflow across PIE vs Non-PIE income, and determine any capital drawdown needed for living expenses."
+      subtitle="12-month projected after-tax income vs living budget."
       headerRight={
         <span className="font-mono px-2.5 py-1 rounded-full text-xs font-semibold border bg-slate-900 text-slate-300 border-slate-700">
           {cashflowResult.isFullyFunded
@@ -455,7 +455,7 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
                   : 'border-transparent text-slate-400 hover:text-slate-200'
               }`}
             >
-              🏦 Term Deposits &amp; Bonds ({cashflowResult.fixedInterestItems.length})
+              🏦 Fixed Interest &amp; Cash ({cashflowResult.fixedInterestItems.length})
             </button>
             <button
               type="button"
@@ -529,7 +529,7 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
                   </div>
                 )}
                 <p className="text-[11px] text-slate-500">
-                  NZ Super rates reflect standard net "M" tax code payments from Work and Income NZ.
+                  Standard net M-code rates (Work and Income NZ).
                 </p>
               </div>
 
@@ -557,7 +557,7 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
                   />
                 </div>
                 <p className="text-[11px] text-slate-500">
-                  Gross residential rental income, foreign state pensions (UK/Australian), or consulting. Automatically included in total non-PIE income and taxed across progressive NZ brackets.
+                  Pre-tax rental, overseas pensions, or consulting (taxed at NZ personal brackets).
                 </p>
               </div>
             </div>
@@ -597,7 +597,7 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
                     className="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-white font-medium focus:outline-none focus:border-indigo-500 text-xs"
                   >
                     <option value="auto">
-                      Auto: {(cashflowResult.eligiblePirRate * 100).toFixed(1)}% PIR (Default based on projected ${fmtMoney(cashflowResult.totalNonPieGrossAnnualNZD)} taxable / ${fmtMoney(cashflowResult.totalNonPieGrossAnnualNZD + cashflowResult.totalPieGrossNZD)} total income) [Recommended]
+                      Auto ({(cashflowResult.eligiblePirRate * 100).toFixed(1)}% PIR — Recommended)
                     </option>
                     <option value="0.28">28.0% PIR (Taxable income over $48k or total income over $70k)</option>
                     <option value="0.175">17.5% PIR (Taxable income up to $48k &amp; total income up to $70k)</option>
@@ -619,7 +619,7 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
               </div>
 
               <p className="text-[11px] text-slate-500 leading-relaxed">
-                Applied to all PIE Term Deposits and multi-rate unlisted PIE funds (e.g. Kernel). Listed PIE funds and ETFs (e.g. Smartshares on NZX) are legally fixed at 28% under NZ tax legislation. Under IRD rules, your PIR is determined by your taxable and total income across the previous two tax years.
+                Applies to PIE Term Deposits and unlisted PIE funds (e.g. Kernel). Listed PIE ETFs (e.g. Smartshares on NZX) are fixed at 28%. Under IRD rules, PIR is based on your previous two tax years.
               </p>
             </div>
 
@@ -767,7 +767,7 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
               </div>
 
               <p className="text-[11px] text-slate-500 leading-relaxed">
-                Tax is calculated automatically across NZ income tax brackets (10.5% up to $15.6k, 17.5% up to $53.5k, 30% up to $78.1k, 33% up to $180k, 39% over $180k) on all captured non-PIE income (NZ Super, other gross inflows, non-PIE TDs/bonds, and direct share dividends). 28% NZ company imputation credits directly reduce your tax payable.
+                Calculated using NZ statutory brackets (10.5%–39%) on non-PIE income. NZ company imputation credits (28%) directly reduce tax payable.
               </p>
             </div>
           </div>
@@ -778,24 +778,24 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
           <div className="border border-slate-800 rounded-xl overflow-hidden bg-slate-950">
             {/* Tab 2 Header Note */}
             <div className="px-3 py-2 bg-slate-900/70 border-b border-slate-800 text-xs text-slate-400">
-              Assumes current term deposits and bonds run for 12 months at stated rates (assuming rollover upon maturity).
+              Assumes 12-month rollover at current stated rates.
             </div>
 
             {cashflowResult.fixedInterestItems.length === 0 ? (
               <div className="p-4 text-center text-slate-500 text-xs">
-                No term deposits, corporate bonds, or cash holdings entered yet in Panel 3.
+                No fixed interest or cash entered. Add them under Portfolio → 3. Fixed Interest &amp; Cash.
               </div>
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs min-w-[760px]">
                   <thead className="bg-slate-900 border-b border-slate-800 text-slate-400 font-semibold uppercase tracking-wider text-[11px]">
                     <tr>
-                      <th className="py-2.5 px-3">Institution &amp; Security</th>
+                      <th className="py-2.5 px-3">Institution &amp; Holding</th>
                       <th className="py-2.5 px-3">Category</th>
-                      <th className="py-2.5 px-3">Tax Structure</th>
+                      <th className="py-2.5 px-3">Tax Treatment</th>
                       <th className="py-2.5 px-3 text-right">Principal</th>
                       <th className="py-2.5 px-3 text-right">Rate p.a.</th>
-                      <th className="py-2.5 px-3 text-right">Payment Cadence</th>
+                      <th className="py-2.5 px-3 text-right">Payment Frequency</th>
                       <th className="py-2.5 px-3 text-right">Gross Annual</th>
                     </tr>
                   </thead>
@@ -875,7 +875,7 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
                 <thead className="bg-slate-900 border-b border-slate-800 text-slate-400 font-semibold uppercase tracking-wider text-[11px]">
                   <tr>
                     <th className="py-2.5 px-3">Holding</th>
-                    <th className="py-2.5 px-3">Tax Classification</th>
+                    <th className="py-2.5 px-3">Tax Treatment</th>
                     <th className="py-2.5 px-3 text-right">Holdings / Units</th>
                     <th className="py-2.5 px-3 text-right">Value (NZD)</th>
                     <th className="py-2.5 px-3 text-right">Div Yield %</th>
@@ -904,7 +904,7 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
                           {item.isPie ? (
                             <span className="text-teal-400 bg-teal-950/60 border border-teal-800/40 rounded px-1.5 py-0.5 font-mono">
                               {item.kind === 'fund'
-                                ? `Multi-Rate PIE (${((settings.pirRate ?? 0.28) * 100).toFixed(1)}% PIR)`
+                                ? `Multi-Rate PIE (${(cashflowResult.pirRate * 100).toFixed(1)}% PIR)`
                                 : 'Listed PIE ETF (28% Fixed)'}
                             </span>
                           ) : (

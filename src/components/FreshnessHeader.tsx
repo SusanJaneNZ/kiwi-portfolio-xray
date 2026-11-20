@@ -32,7 +32,7 @@ export const FreshnessHeader: React.FC<FreshnessHeaderProps> = ({
           <h1 className="text-xl font-bold tracking-tight text-white">Kiwi Portfolio X-Ray</h1>
         </div>
         <p className="text-xs text-slate-400">
-          Aggregating Smartshares, Kernel, Vanguard, and direct NZX/ASX equities into true underlying company exposures.
+          Look-through exposure across NZ/AU funds, KiwiSaver, ETFs, direct shares, bonds, and deposits.
         </p>
         {recoveredNotice && (
           <div className="flex flex-wrap items-center gap-2 text-[11px] text-slate-400 pt-0.5">
@@ -62,7 +62,7 @@ export const FreshnessHeader: React.FC<FreshnessHeaderProps> = ({
                 }`}
               ></span>
             </span>
-            <span className="text-slate-400">Fund Constituents Current As Of:</span>
+            <span className="text-slate-400">Fund Data As of:</span>
             {envelope.minEffectiveDate === 'N/A' ? (
               <span className="font-medium text-slate-400">No active fund dates</span>
             ) : envelope.minEffectiveDate === envelope.maxEffectiveDate ? (
