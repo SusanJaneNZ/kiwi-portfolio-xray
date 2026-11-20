@@ -14,7 +14,7 @@ A static, browser-based portfolio look-through analyzer for New Zealand retail i
 
 ## Privacy & Zero Backend
 
-All portfolio numbers you enter stay **100% in your browser** (`localStorage` / IndexedDB, with optional JSON/CSV export). There is no backend server, no user accounts, and no tracking or analytics.
+All portfolio numbers you enter stay **100% in your browser** (`localStorage` / IndexedDB). There is no backend server, no user accounts, and no tracking or analytics. Because data is stored locally per browser/device, it does not automatically sync across devices — use **Export JSON** / **Import JSON** in the app to back up or transfer your portfolio between devices.
 
 ## Key Capabilities
 
