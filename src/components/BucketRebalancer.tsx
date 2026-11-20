@@ -262,6 +262,7 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
               type="number"
               min="0"
               max="100"
+              aria-label="New bucket target percent"
               value={newBucketTarget}
               onChange={(e) => setNewBucketTarget(e.target.value)}
               className="w-full bg-slate-900 border border-slate-800 rounded-lg pl-2.5 pr-6 py-1.5 text-right text-white font-mono"
@@ -297,6 +298,7 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
                 <span className="font-mono text-slate-400">${fmtMoney(item.valueNZD)}</span>
                 <select
                   value=""
+                  aria-label={`Assign bucket for ${item.label}`}
                   onChange={(e) => handleAssignUnassigned(item.key, e.target.value)}
                   className="bg-slate-900 border border-slate-700 rounded px-1.5 py-0.5 text-[11px] text-amber-300"
                 >
