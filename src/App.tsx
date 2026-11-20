@@ -376,8 +376,10 @@ export const App: React.FC = () => {
           activeWithdrawal={activeWithdrawal}
         />
 
-        {/* 7. DIY Direct Index Rebalancer (feature-flagged via public/data/features.json or ?replicator=1) */}
+        {/* 7. DIY Direct Index Rebalancer (feature-flagged via public/data/features.json, VITE_ENABLE_INDEX_REPLICATOR, or ?replicator=1) */}
         {(features.indexReplicator ||
+          import.meta.env.VITE_ENABLE_INDEX_REPLICATOR === 'true' ||
+          import.meta.env.VITE_ENABLE_INDEX_REPLICATOR === '1' ||
           (typeof window !== 'undefined' &&
             new URLSearchParams(window.location.search).get('replicator') === '1')) && (
           <IndexReplicatorPanel
