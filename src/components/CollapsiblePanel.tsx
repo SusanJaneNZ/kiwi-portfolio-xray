@@ -79,23 +79,23 @@ export const CollapsiblePanel: React.FC<CollapsiblePanelProps> = ({
 
   return (
     <section id={id} className={`bg-slate-900/80 border border-slate-800 rounded-2xl p-4 shadow-sm ${className}`}>
-      <div className="flex flex-wrap items-center justify-between gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-2.5">
         <button
           type="button"
           aria-expanded={isOpen}
           onClick={handleToggle}
-          className="flex items-center gap-2 min-w-0 flex-1 text-left cursor-pointer select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-lg"
+          className="flex items-center gap-2 min-w-0 flex-1 basis-[220px] text-left cursor-pointer select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-lg"
         >
-          <span className={`text-[11px] text-slate-400 transition-transform ${isOpen ? '' : '-rotate-90'}`}>
+          <span className={`shrink-0 text-[11px] text-slate-400 transition-transform ${isOpen ? '' : '-rotate-90'}`}>
             ▼
           </span>
-          <div className="min-w-0">
+          <div className="min-w-0 flex-1">
             <div className="text-sm font-semibold text-white flex items-center gap-2 flex-wrap">{title}</div>
             {subtitle && <div className="text-xs text-slate-400 mt-0.5">{subtitle}</div>}
           </div>
         </button>
         {headerRight && (
-          <div className="flex items-center gap-2 flex-wrap">
+          <div className="flex items-center gap-2 flex-wrap max-w-full">
             {headerRight}
           </div>
         )}

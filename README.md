@@ -4,6 +4,8 @@ A static, browser-based portfolio look-through analyzer for New Zealand retail i
 
 **Live App:** https://susanjanenz.github.io/kiwi-portfolio-xray/
 
+![Kiwi Portfolio X-Ray — Asset Class Split & Sector Breakdown](docs/images/overview.png)
+
 > [!WARNING]
 > **Disclaimer — Not Financial or Tax Advice**
 >
@@ -18,11 +20,29 @@ All portfolio numbers you enter stay **100% in your browser** (`localStorage` / 
 
 ## Key Capabilities
 
-* **3-Tier Portfolio Input:** Track (1) Exchange-traded shares & listed ETFs (units × price), (2) Managed funds & KiwiSaver in NZD, and (3) Fixed interest & cash (bonds, PIE/RWT term deposits, cash).
+* **3-Tier Portfolio Input:** Track (1) NZX/ASX exchange-traded shares & listed ETFs (units × price), (2) Managed funds & KiwiSaver in NZD, and (3) Fixed interest & cash (bonds, PIE/RWT term deposits, cash).
 * **Recursive Feeder Fund Unwrapping:** Unpacks NZ feeder ETFs (e.g. Smartshares `TWF`, `USF`, `ESG`, `EMF`, Kernel Emerging Markets) into their underlying Vanguard, iShares, and SPDR holdings.
 * **Cross-Fund Look-Through & Asset Split:** Aggregates overlapping company, sector (GICS), country, and bank/issuer exposure across funds and direct holdings, and splits multi-asset funds into true Equities, Fixed Interest, Term Deposits, and Cash.
 * **Retirement Cashflow & Bucket Rebalancer:** Models forward dividend/interest income (with NZ PIR / RWT tax estimates) and minimum-turnover withdrawal rebalancing across user-defined buckets.
+* **DIY Direct Index Replicator:** Models direct NZX/ASX stock portfolios replicating popular index ETFs (`DIV`, `FNZ`, `TNZ`, `ASD`, `OZY`), compares ETF fee savings vs. brokerage breakeven, subtracts existing fund & direct holdings to avoid double-ups, and generates actionable buy/sell share orders.
 * **Crowdsourced Fund Requests:** Paste a Sorted Smart Investor URL for an unlisted NZ fund to model it immediately with a fallback split and optionally submit a GitHub Issue for automated ingestion.
+
+## Screenshots
+
+### Cross-Fund Look-Through Exposure
+See every underlying company you own across KiwiSaver, managed funds, ETFs, and direct shares — with `[Direct + Fund]` overlap badges:
+
+![Look-Through Exposures Table](docs/images/lookthrough.png)
+
+### DIY Direct Index Replicator
+Replicate popular NZX/ASX ETFs (`DIV`, `FNZ`, `TNZ`, `ASD`, `OZY`) directly, subtract existing fund & direct holdings, and check brokerage breakeven:
+
+![DIY Direct Index Replicator](docs/images/replicator.png)
+
+### Projected Organic Cashflow
+Estimate 12-month after-tax PIE and non-PIE income against your living budget:
+
+![Projected Organic Cashflow](docs/images/cashflow.png)
 
 ## Local Development
 
@@ -30,8 +50,3 @@ All portfolio numbers you enter stay **100% in your browser** (`localStorage` / 
 npm install
 npm run dev
 ```
-
-## Documentation
-
-* **Administrator & Ingestion Guide:** [docs/ADMIN_GUIDE.md](docs/ADMIN_GUIDE.md)
-* **Architecture & Design Docs:** [docs/designs/SITEMAP.md](docs/designs/SITEMAP.md)
