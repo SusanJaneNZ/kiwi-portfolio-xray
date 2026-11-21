@@ -59,7 +59,7 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
     if (stored?.prices) {
       setPriceOverrides((prev) => ({ ...stored.prices, ...prev }));
     }
-  }, []);
+  }, [portfolioState.directHoldings]);
 
   const budgetNZD = Math.max(0, parseFloat(budgetInput) || 0);
   const brokeragePerTrade = Math.max(0, parseFloat(brokerageInput) || 0);
@@ -310,9 +310,16 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
               disabled={isFetchingPrices}
               className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-sky-300 border border-slate-700 text-[11px] font-medium disabled:opacity-50"
             >
-              {isFetchingPrices ? '⏳ Fetching Prices...' : '🔄 Fetch Live Prices'}
+              {isFetchingPrices ? '⏳ Updating Prices...' : '↻ Update Prices'}
             </button>
           </div>
+
+          {missingPriceCount > 0 && (
+            <div className="bg-amber-950/30 border border-amber-800/40 rounded-lg px-3 py-1.5 text-amber-200 text-[11px]">
+              ⚠️ {missingPriceCount} stock(s) need a share price to compute share counts. Click{' '}
+              <strong>Update Prices</strong> above or enter a price inline.
+            </div>
+          )}
         </div>
 
         {/* Breakeven KPI Strip */}
@@ -322,10 +329,10 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
               Annual Passive Fee Drag ({(activeModel.merRate * 100).toFixed(2)}% MER)
             </div>
             <div className="text-lg font-bold font-mono text-amber-300 mt-0.5">
-              {formatNZD(plan.breakeven.annualFeeDragNZD)} / yr
+              ${formatNZD(plan.breakeven.annualFeeDragNZD)} / yr
             </div>
             <div className="text-[11px] text-slate-500">
-              5-yr net savings: {formatNZD(plan.breakeven.fiveYearNetSavingsNZD)}
+              5-yr net savings: ${formatNZD(plan.breakeven.fiveYearNetSavingsNZD)}
             </div>
           </div>
 
@@ -334,10 +341,10 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
               Est. Setup Brokerage ({plan.breakeven.activeTradeCount} trades)
             </div>
             <div className="text-lg font-bold font-mono text-slate-100 mt-0.5">
-              {formatNZD(plan.breakeven.estimatedBrokerageNZD)}
+              ${formatNZD(plan.breakeven.estimatedBrokerageNZD)}
             </div>
             <div className="text-[11px] text-slate-500">
-              One-off @ {formatNZD(plan.breakeven.brokeragePerTradeNZD)} / order
+              One-off @ ${formatNZD(plan.breakeven.brokeragePerTradeNZD)} / order
             </div>
           </div>
 
@@ -355,13 +362,13 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
                     : 'text-amber-300 font-mono'
                 }
               >
-                {formatNZD(plan.breakeven.yearOneNetSavingsNZD)}
+                {plan.breakeven.yearOneNetSavingsNZD < 0 ? '-' : ''}${formatNZD(Math.abs(plan.breakeven.yearOneNetSavingsNZD))}
               </span>
             </div>
           </div>
         </div>
 
-        {/* Overlap & Price Notices */}
+        {/* Overlap Notice */}
         {mode === 'portfolio_aware' && plan.overlapCount > 0 && (
           <div className="bg-indigo-950/40 border border-indigo-800/50 rounded-xl px-3.5 py-2.5 text-indigo-200 flex items-center gap-2">
             <span>ℹ️</span>
@@ -370,13 +377,6 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
               constituent(s) in your KiwiSaver / managed funds. Buy orders were trimmed and
               surplus budget redistributed across under-owned constituents.
             </span>
-          </div>
-        )}
-
-        {missingPriceCount > 0 && (
-          <div className="bg-amber-950/30 border border-amber-800/40 rounded-xl px-3.5 py-2 text-amber-200">
-            ⚠️ {missingPriceCount} stock(s) need a share price to compute discrete share counts.
-            Click <strong>Fetch Live Prices</strong> or type an approximate price inline.
           </div>
         )}
 
@@ -390,7 +390,6 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
                 <th className="py-2 px-2 text-right">Target $</th>
                 <th className="py-2 px-2 text-right">Actual $ Held</th>
                 <th className="py-2 px-2 text-right">Price ({activeModel.currency})</th>
-                <th className="py-2 px-2 text-right">Target Shares</th>
                 <th className="py-2 px-3 text-right">Action</th>
               </tr>
             </thead>
@@ -410,15 +409,23 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
                     {(r.adjustedSleeveWeight * 100).toFixed(1)}%
                   </td>
                   <td className="py-2 px-2 text-right font-mono text-slate-100">
-                    {formatNZD(r.targetAllocationNZD)}
+                    ${formatNZD(r.targetAllocationNZD)}
                     {r.overlapTrimmed && (
-                      <div className="text-[10px] text-indigo-300">trimmed</div>
+                      <div
+                        className="text-[10px] text-indigo-300 cursor-help underline decoration-dotted"
+                        title={`Reduced from $${formatNZD(r.baselineTargetNZD)} to avoid overlap — Direct: $${formatNZD(r.existingDirectNZD)} · Indirect (funds): $${formatNZD(r.existingIndirectNZD)}`}
+                      >
+                        reduced (in funds)
+                      </div>
                     )}
                   </td>
-                  <td className="py-2 px-2 text-right font-mono">
+                  <td
+                    className="py-2 px-2 text-right font-mono"
+                    title={`Direct: $${formatNZD(r.existingDirectNZD)} · Indirect (funds): $${formatNZD(r.existingIndirectNZD)}`}
+                  >
                     {r.existingTotalNZD > 0 ? (
                       <div>
-                        <span className="text-amber-300">{formatNZD(r.existingTotalNZD)}</span>
+                        <span className="text-amber-300">${formatNZD(r.existingTotalNZD)}</span>
                         <div className="text-[10px] text-slate-500">{r.existingSourcesLabel}</div>
                       </div>
                     ) : (
@@ -441,9 +448,6 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
                       }}
                       className="w-20 text-right bg-slate-950 border border-slate-700 rounded px-1.5 py-0.5 font-mono text-xs text-slate-100"
                     />
-                  </td>
-                  <td className="py-2 px-2 text-right font-mono text-slate-200">
-                    {r.priceNZD > 0 ? r.targetShares.toLocaleString() : '—'}
                   </td>
                   <td className="py-2 px-3 text-right font-mono">
                     {r.priceNZD <= 0 ? (
@@ -471,12 +475,12 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
                   Total ({plan.rows.length} holdings)
                 </td>
                 <td className="py-2 px-2 text-right">100.0%</td>
-                <td className="py-2 px-2 text-right">{formatNZD(plan.totalAllocatedNZD)}</td>
+                <td className="py-2 px-2 text-right">${formatNZD(plan.totalAllocatedNZD)}</td>
                 <td className="py-2 px-2 text-right text-amber-300">
-                  {formatNZD(plan.rows.reduce((acc, r) => acc + r.existingTotalNZD, 0))}
+                  ${formatNZD(plan.rows.reduce((acc, r) => acc + r.existingTotalNZD, 0))}
                 </td>
-                <td colSpan={3} className="py-2 px-3 text-right text-slate-400">
-                  Est. Trade Value: {formatNZD(plan.totalTradeValueNZD)}
+                <td colSpan={2} className="py-2 px-3 text-right text-slate-400">
+                  Est. Trade Value: ${formatNZD(plan.totalTradeValueNZD)}
                 </td>
               </tr>
             </tfoot>

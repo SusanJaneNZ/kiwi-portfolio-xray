@@ -627,6 +627,14 @@ function portfolioAutoBackupPlugin(): Plugin {
 export default defineConfig({
   plugins: [react(), portfolioAutoBackupPlugin()],
   base: './',
+  server: {
+    port: 5173,
+    strictPort: true,
+  },
+  preview: {
+    port: 4173,
+    strictPort: true,
+  },
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
