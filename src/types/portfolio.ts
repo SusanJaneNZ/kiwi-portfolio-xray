@@ -246,6 +246,14 @@ export const DEFAULT_CASHFLOW_SETTINGS: RetirementCashflowSettings = {
   tdProjectionMode: 'rollover',
 };
 
+export interface ReplicatorSettings {
+  selectedCode?: string;
+  depth?: number;
+  targetHoldingNZD?: number;
+  brokerageNZD?: number;
+  mode?: 'portfolio_aware' | 'standalone';
+}
+
 export interface UserPortfolioState {
   version: 2;
   timestamp: string;
@@ -259,4 +267,5 @@ export interface UserPortfolioState {
   customFunds?: FundMetadata[];
   pirRate?: PirRate;
   cashflowSettings?: RetirementCashflowSettings;
+  replicatorSettings?: ReplicatorSettings;
 }

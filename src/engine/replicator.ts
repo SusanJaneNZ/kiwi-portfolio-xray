@@ -134,19 +134,28 @@ function normTicker(t?: string): string {
 function resolveNativePrice(
   ticker: string,
   exchange: 'NZX' | 'ASX',
+  currency: 'NZD' | 'AUD',
   pricesByTicker: Record<string, number>,
   existingDirect?: DirectHolding
 ): number {
+  const upper = ticker.trim().toUpperCase();
   const base = normTicker(ticker);
   const suffix = exchange === 'ASX' ? '.AX' : '.NZ';
-  const candidates = [ticker, ticker.toUpperCase(), `${base}${suffix}`, base];
+  const suffixed = `${base}${suffix}`;
+
+  // Explicit 0 in pricesByTicker means the user intentionally cleared the inline price input
+  if (pricesByTicker[upper] === 0 || pricesByTicker[suffixed] === 0) {
+    return 0;
+  }
+
+  const candidates = [upper, suffixed, base];
   for (const key of candidates) {
     const p = pricesByTicker[key];
     if (typeof p === 'number' && Number.isFinite(p) && p > 0) {
       return p;
     }
   }
-  if (existingDirect && existingDirect.price > 0) {
+  if (existingDirect && existingDirect.currency === currency && existingDirect.price > 0) {
     return existingDirect.price;
   }
   return 0;
@@ -205,12 +214,14 @@ export function generateReplicationPlan(params: GenerateReplicationParams): Repl
   const topK = equityRows.slice(0, clampedDepth);
   const rawIndexCoverage = topK.reduce((acc, c) => acc + c.weight, 0);
 
-  const directByIsin = new Map<string, DirectHolding>();
-  const directByBaseTicker = new Map<string, DirectHolding>();
+  const directByExchangeIsin = new Map<string, DirectHolding>();
+  const directByExchangeTicker = new Map<string, DirectHolding>();
   for (const dh of existingDirectHoldings || []) {
     if (dh.isEtf) continue;
-    directByIsin.set(dh.isin, dh);
-    if (dh.ticker) directByBaseTicker.set(normTicker(dh.ticker), dh);
+    directByExchangeIsin.set(`${dh.exchange}:${dh.isin}`, dh);
+    if (dh.ticker) {
+      directByExchangeTicker.set(`${dh.exchange}:${normTicker(dh.ticker)}`, dh);
+    }
   }
 
   const ltByIsin = new Map<string, ConsolidatedHolding>();
@@ -221,27 +232,32 @@ export function generateReplicationPlan(params: GenerateReplicationParams): Repl
     if (h.ticker) ltByBaseTicker.set(normTicker(h.ticker), h);
   }
 
-  const catalogByIsin = new Map<string, DirectEquityCatalogItem>();
-  const catalogByBaseTicker = new Map<string, DirectEquityCatalogItem>();
+  const catalogByExchangeIsin = new Map<string, DirectEquityCatalogItem>();
+  const catalogByExchangeTicker = new Map<string, DirectEquityCatalogItem>();
   for (const item of directCatalog || []) {
     if (item.isEtf) continue;
-    catalogByIsin.set(item.isin, item);
-    if (item.ticker) catalogByBaseTicker.set(normTicker(item.ticker), item);
+    catalogByExchangeIsin.set(`${item.exchange}:${item.isin}`, item);
+    if (item.ticker) {
+      catalogByExchangeTicker.set(`${item.exchange}:${normTicker(item.ticker)}`, item);
+    }
   }
 
   const prelim = topK.map((c) => {
     const normalizedWeight = rawIndexCoverage > 0 ? c.weight / rawIndexCoverage : 0;
     const baseTicker = normTicker(c.ticker);
-    const catItem = catalogByIsin.get(c.isin) || (baseTicker ? catalogByBaseTicker.get(baseTicker) : undefined);
-    const existingDirect =
-      directByIsin.get(c.isin) || (baseTicker ? directByBaseTicker.get(baseTicker) : undefined);
-    const ltEntry = ltByIsin.get(c.isin) || (baseTicker ? ltByBaseTicker.get(baseTicker) : undefined);
-
+    const catItem =
+      catalogByExchangeIsin.get(`${model.exchange}:${c.isin}`) ||
+      (baseTicker ? catalogByExchangeTicker.get(`${model.exchange}:${baseTicker}`) : undefined);
     const exchange: 'NZX' | 'ASX' = catItem?.exchange || model.exchange;
     const currency: 'NZD' | 'AUD' = exchange === 'ASX' ? 'AUD' : 'NZD';
+    const existingDirect =
+      directByExchangeIsin.get(`${exchange}:${c.isin}`) ||
+      (baseTicker ? directByExchangeTicker.get(`${exchange}:${baseTicker}`) : undefined);
+    const ltEntry = ltByIsin.get(c.isin) || (baseTicker ? ltByBaseTicker.get(baseTicker) : undefined);
+
     const displayTicker = catItem?.ticker || c.ticker || baseTicker;
 
-    const existingDirectNZD = existingDirect
+    const existingDirectSavedNZD = existingDirect
       ? existingDirect.shares * existingDirect.price * (existingDirect.currency === 'AUD' ? safeFx : 1)
       : 0;
 
@@ -249,7 +265,7 @@ export function generateReplicationPlan(params: GenerateReplicationParams): Repl
     const fundSourceCodes: string[] = [];
     if (ltEntry) {
       for (const src of ltEntry.sources) {
-        if (src.sourceType === 'fund' && src.fundCode?.toUpperCase() !== model.code.toUpperCase()) {
+        if (src.sourceType === 'fund') {
           existingIndirectNZD += src.valueNZD;
           if (src.fundCode && !fundSourceCodes.includes(src.fundCode)) {
             fundSourceCodes.push(src.fundCode);
@@ -258,9 +274,9 @@ export function generateReplicationPlan(params: GenerateReplicationParams): Repl
       }
     }
 
-    const existingTotalNZD = existingDirectNZD + existingIndirectNZD;
+    const existingTotalNZD = existingDirectSavedNZD + existingIndirectNZD;
     const sourceParts: string[] = [];
-    if (existingDirectNZD > 0) sourceParts.push('Direct');
+    if (existingDirectSavedNZD > 0) sourceParts.push('Direct');
     if (fundSourceCodes.length > 0) sourceParts.push(fundSourceCodes.slice(0, 2).join(', '));
 
     return {
@@ -272,7 +288,7 @@ export function generateReplicationPlan(params: GenerateReplicationParams): Repl
       displayTicker,
       normalizedWeight,
       baselineTargetNZD: safeBudget * normalizedWeight,
-      existingDirectNZD,
+      existingDirectSavedNZD,
       existingIndirectNZD,
       existingTotalNZD,
       existingSourcesLabel: sourceParts.join(' + '),
@@ -282,34 +298,15 @@ export function generateReplicationPlan(params: GenerateReplicationParams): Repl
   const targetDollars = prelim.map((p) => p.baselineTargetNZD);
   const trimmedFlags = prelim.map(() => false);
 
-  if (mode === 'portfolio_aware' && safeBudget > 0) {
-    let freedBudget = 0;
-    const uncappedIndices: number[] = [];
-
+  if (mode === 'portfolio_aware' && safeBudget > 0 && prelim.length > 0) {
+    // Target Holding (NZD) represents the total combined exposure (Funds + Direct).
+    // Each stock's direct target tops up only the shortfall below its exact index slice:
+    //   directTarget_i = max(0, TargetHolding * w_i - existingIndirect_i).
+    // Stocks already over-held in funds get $0 direct without shrinking other stocks' slices.
     for (let i = 0; i < prelim.length; i++) {
-      const p = prelim[i];
-      if (p.existingIndirectNZD > 0.01) {
-        const netNeeded = Math.max(0, p.baselineTargetNZD - p.existingIndirectNZD);
-        if (netNeeded < p.baselineTargetNZD) {
-          freedBudget += p.baselineTargetNZD - netNeeded;
-          targetDollars[i] = netNeeded;
-          trimmedFlags[i] = true;
-        }
-      } else {
-        uncappedIndices.push(i);
-      }
-    }
-
-    if (freedBudget > 0 && uncappedIndices.length > 0) {
-      const uncappedWeightSum = uncappedIndices.reduce(
-        (acc, idx) => acc + prelim[idx].normalizedWeight,
-        0
-      );
-      if (uncappedWeightSum > 0) {
-        for (const idx of uncappedIndices) {
-          targetDollars[idx] += freedBudget * (prelim[idx].normalizedWeight / uncappedWeightSum);
-        }
-      }
+      const directTarget = Math.max(0, prelim[i].baselineTargetNZD - prelim[i].existingIndirectNZD);
+      targetDollars[i] = directTarget;
+      trimmedFlags[i] = prelim[i].existingIndirectNZD > 0.01;
     }
   }
 
@@ -321,22 +318,44 @@ export function generateReplicationPlan(params: GenerateReplicationParams): Repl
     const priceNative = resolveNativePrice(
       p.displayTicker,
       p.exchange,
+      p.currency,
       pricesByTicker,
       p.existingDirect
     );
     const priceNZD = priceNative > 0 ? priceNative * (p.currency === 'AUD' ? safeFx : 1) : 0;
 
     const existingDirectShares = p.existingDirect ? p.existingDirect.shares : 0;
+    // Value existing direct shares at current priceNZD when available so drift check is never stale
+    const existingDirectNZD =
+      existingDirectShares > 0 && priceNZD > 0
+        ? existingDirectShares * priceNZD
+        : p.existingDirectSavedNZD;
+    const existingTotalNZD = existingDirectNZD + p.existingIndirectNZD;
+
     let targetShares = priceNZD > 0 ? Math.floor(targetAllocationNZD / priceNZD) : existingDirectShares;
     let deltaShares = targetShares - existingDirectShares;
     let driftSuppressed = false;
 
-    if (existingDirectShares > 0 && targetAllocationNZD > 0 && priceNZD > 0) {
-      const driftRatio = Math.abs(p.existingDirectNZD / targetAllocationNZD - 1.0);
-      if (driftRatio <= driftBandPct) {
-        targetShares = existingDirectShares;
-        deltaShares = 0;
-        driftSuppressed = true;
+    if (priceNZD > 0) {
+      if (existingDirectShares > 0 && targetAllocationNZD > 0) {
+        const driftRatio = Math.abs(existingDirectNZD / targetAllocationNZD - 1.0);
+        if (driftRatio <= driftBandPct) {
+          targetShares = existingDirectShares;
+          deltaShares = 0;
+          driftSuppressed = true;
+        }
+      } else if (
+        mode === 'portfolio_aware' &&
+        p.existingIndirectNZD > 0 &&
+        p.baselineTargetNZD > 0 &&
+        deltaShares !== 0
+      ) {
+        const combinedDriftRatio = Math.abs(existingTotalNZD / p.baselineTargetNZD - 1.0);
+        if (combinedDriftRatio <= driftBandPct) {
+          targetShares = existingDirectShares;
+          deltaShares = 0;
+          driftSuppressed = true;
+        }
       }
     }
 
@@ -357,9 +376,9 @@ export function generateReplicationPlan(params: GenerateReplicationParams): Repl
       adjustedSleeveWeight,
       baselineTargetNZD: p.baselineTargetNZD,
       targetAllocationNZD,
-      existingDirectNZD: p.existingDirectNZD,
+      existingDirectNZD,
       existingIndirectNZD: p.existingIndirectNZD,
-      existingTotalNZD: p.existingTotalNZD,
+      existingTotalNZD,
       existingDirectShares,
       existingSourcesLabel: p.existingSourcesLabel,
       overlapTrimmed: trimmedFlags[idx],
@@ -374,14 +393,19 @@ export function generateReplicationPlan(params: GenerateReplicationParams): Repl
   });
 
   const activeTrades = rows.filter((r) => r.action !== 'HOLD');
+  const unpricedBuyRows = rows.filter((r) => r.priceNZD <= 0 && r.targetAllocationNZD > 0);
   const totalAllocatedNZD = rows.reduce((acc, r) => acc + r.targetAllocationNZD, 0);
   const totalTradeValueNZD = activeTrades.reduce((acc, r) => acc + Math.abs(r.deltaValueNZD), 0);
   const overlapCount = rows.filter((r) => r.overlapTrimmed).length;
 
+  // Count priced active trades + unpriced rows with a positive target; 0 when budget is $0 or all priced rows are HOLD
+  const estimatedTradeCount =
+    totalAllocatedNZD <= 0 ? activeTrades.length : activeTrades.length + unpricedBuyRows.length;
+
   const breakeven = calculateBreakevenMetrics(
-    safeBudget,
+    totalAllocatedNZD,
     model.merRate,
-    activeTrades.length || rows.length,
+    estimatedTradeCount,
     brokeragePerTradeNZD
   );
 
@@ -400,21 +424,27 @@ export function generateReplicationPlan(params: GenerateReplicationParams): Repl
 
 export function formatTradeOrderList(plan: ReplicationPlan): string {
   const lines: string[] = [
-    `DIY Index Replicator Trade Plan — ${plan.model.name} (Top ${plan.depth})`,
-    `Mode: ${plan.mode === 'portfolio_aware' ? 'Whole-Portfolio Aware' : 'Standalone Holding'} | Target Budget: $${plan.breakeven.budgetNZD.toFixed(0)} NZD`,
-    `Est. Annual Fee Saved: $${plan.breakeven.annualFeeDragNZD.toFixed(2)}/yr (${(plan.model.merRate * 100).toFixed(2)}% MER) | Breakeven: ${Number.isFinite(plan.breakeven.breakevenMonths) ? plan.breakeven.breakevenMonths.toFixed(1) + ' months' : 'N/A'}`,
+    `DIY Direct Index Trade Orders — ${plan.model.name} (Top ${plan.depth})`,
+    `Mode: ${plan.mode === 'portfolio_aware' ? 'Portfolio-Aware' : 'Standalone'} | Target Direct Total: $${plan.totalAllocatedNZD.toFixed(0)} NZD`,
+    `Est. Annual Fee Saved: $${plan.breakeven.annualFeeDragNZD.toFixed(2)}/yr (${(plan.model.merRate * 100).toFixed(2)}% fee) | Breakeven: ${Number.isFinite(plan.breakeven.breakevenMonths) ? plan.breakeven.breakevenMonths.toFixed(1) + ' months' : 'N/A'}`,
     '',
   ];
 
   let idx = 1;
   for (const r of plan.rows) {
-    if (r.action === 'HOLD' && r.priceNZD > 0) continue;
+    if (r.priceNZD > 0 && r.action === 'HOLD') continue;
+    if (r.priceNZD <= 0 && r.targetAllocationNZD <= 0) continue;
+
     const pricePart =
       r.priceNative > 0
         ? `@ ~${r.currency === 'AUD' ? 'A$' : '$'}${r.priceNative.toFixed(2)} ${r.currency} (~$${Math.abs(r.deltaValueNZD).toFixed(0)} NZD)`
-        : `(Target: $${r.targetAllocationNZD.toFixed(0)} NZD — enter live price)`;
+        : `(Target: $${r.targetAllocationNZD.toFixed(0)} NZD — price needed)`;
+    const fundSources = r.existingSourcesLabel
+      .split(' + ')
+      .filter((s) => s && s !== 'Direct')
+      .join(', ');
     const note = r.overlapTrimmed
-      ? ` [Trimmed: $${r.existingIndirectNZD.toFixed(0)} held in ${r.existingSourcesLabel}]`
+      ? ` [Reduced: $${r.existingIndirectNZD.toFixed(0)} held in ${fundSources || 'funds'}]`
       : '';
     if (r.priceNZD > 0) {
       lines.push(`${idx}. ${r.action} ${Math.abs(r.deltaShares).toLocaleString()} ${r.ticker} ${pricePart}${note}`);
@@ -422,6 +452,10 @@ export function formatTradeOrderList(plan: ReplicationPlan): string {
       lines.push(`${idx}. BUY ${r.ticker} ${pricePart}${note}`);
     }
     idx++;
+  }
+
+  if (idx === 1) {
+    lines.push('No trades required — portfolio is already aligned with targets.');
   }
 
   return lines.join('\n');

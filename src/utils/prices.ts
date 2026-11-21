@@ -210,10 +210,14 @@ export async function fetchNzxPrices(tickers: string[], force = false): Promise<
 
   for (const ticker of cleanTickers) {
     const base = ticker.replace(/\.(NZ|AX)$/i, '');
-    const price = catalog[ticker] ?? catalog[base] ?? catalog[`${base}.NZ`] ?? catalog[`${base}.AX`];
+    const hasExchangeSuffix = /\.(NZ|AX)$/i.test(ticker);
+    // Never fall back across exchanges (.AX <-> .NZ) without FX conversion
+    const price = hasExchangeSuffix
+      ? (catalog[ticker] ?? catalog[base])
+      : (catalog[ticker] ?? catalog[base] ?? catalog[`${base}.NZ`] ?? catalog[`${base}.AX`]);
     if (typeof price === 'number' && Number.isFinite(price) && price > 0) {
       matchedPrices[ticker] = price;
-      matchedPrices[base] = price;
+      if (!hasExchangeSuffix) matchedPrices[base] = price;
       fetchedCount++;
     }
   }
