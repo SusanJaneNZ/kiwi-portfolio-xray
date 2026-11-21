@@ -291,16 +291,17 @@ test.describe('Kiwi Portfolio X-Ray — Live Portfolio UI E2E', () => {
     await expect(replicatorHeader).toBeVisible();
     await replicatorHeader.click();
 
-    // Verify DIV model loads with breakeven cards, Actual $ Held column & NZ Imputation badge
+    // Verify DIV model loads with breakeven cards, Held in Funds / Held Directly columns & NZD price column
     await expect(page.getByText('Annual Passive Fee Drag')).toBeVisible();
     await expect(page.getByText('Breakeven Payoff Time')).toBeVisible();
-    await expect(page.getByText('Actual $ Held')).toBeVisible();
-    await expect(page.getByText('NZ Imputation Credits · Zero FIF').first()).toBeVisible();
+    await expect(page.getByText('Held in Funds')).toBeVisible();
+    await expect(page.getByText('Held Directly')).toBeVisible();
+    await expect(page.getByText('Price (NZD)')).toBeVisible();
 
-    // Switch Target Index to ASD and verify Trans-Tasman FIF Exempt badge appears
+    // Switch Target Index to ASD and verify AUD price column appears
     const indexSelect = page.locator('select').filter({ hasText: 'Smartshares NZ Dividend ETF (DIV)' });
     await indexSelect.selectOption('ASD');
-    await expect(page.getByText('Trans-Tasman FIF Exempt (ASX)').first()).toBeVisible();
+    await expect(page.getByText('Price (AUD)')).toBeVisible();
 
     expect(pageErrors, `Uncaught page errors: ${pageErrors.join('; ')}`).toEqual([]);
   });

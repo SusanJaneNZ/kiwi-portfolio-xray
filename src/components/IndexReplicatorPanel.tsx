@@ -201,12 +201,7 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
       id="index-replicator"
       defaultOpen={false}
       title="⚡ DIY Direct Index Rebalancer (DIV / ASD)"
-      subtitle="Replicate top-heavy NZX/ASX dividend indices directly to eliminate 0.54% MER using your target bucket allocation"
-      headerRight={
-        <span className="text-[11px] px-2 py-0.5 rounded-full bg-emerald-950/70 text-emerald-300 border border-emerald-700/50">
-          {activeModel.taxBadge}
-        </span>
-      }
+      subtitle="Replicate top-heavy NZX/ASX indices directly to save on ongoing ETF management fees"
       className="md:p-5"
     >
       <div className="space-y-4 text-xs pt-1">
@@ -216,7 +211,6 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
             <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
               1. Index Model, Capital &amp; Overlap Mode
             </span>
-            <span className="text-[11px] text-slate-400">{activeModel.taxSummary}</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -253,7 +247,7 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
 
             <div>
               <label className="block text-[11px] text-slate-400 mb-1">
-                Target Holding Budget (NZD)
+                Target Holding (NZD)
               </label>
               <input
                 type="number"
@@ -368,18 +362,6 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
           </div>
         </div>
 
-        {/* Overlap Notice */}
-        {mode === 'portfolio_aware' && plan.overlapCount > 0 && (
-          <div className="bg-indigo-950/40 border border-indigo-800/50 rounded-xl px-3.5 py-2.5 text-indigo-200 flex items-center gap-2">
-            <span>ℹ️</span>
-            <span>
-              Detected existing indirect exposure to <strong>{plan.overlapCount}</strong>{' '}
-              constituent(s) in your KiwiSaver / managed funds. Buy orders were trimmed and
-              surplus budget redistributed across under-owned constituents.
-            </span>
-          </div>
-        )}
-
         {/* Step 2: Constituent Table */}
         <div className="border border-slate-800 rounded-xl overflow-x-auto">
           <table className="w-full text-left border-collapse">
@@ -388,13 +370,23 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
                 <th className="py-2 px-3">Constituent</th>
                 <th className="py-2 px-2 text-right">Target %</th>
                 <th className="py-2 px-2 text-right">Target $</th>
-                <th className="py-2 px-2 text-right">Actual $ Held</th>
+                <th className="py-2 px-2 text-right">Held in Funds</th>
+                <th className="py-2 px-2 text-right">Held Directly</th>
                 <th className="py-2 px-2 text-right">Price ({activeModel.currency})</th>
                 <th className="py-2 px-3 text-right">Action</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-800/70">
-              {plan.rows.map((r) => (
+              {plan.rows.map((r) => {
+                const displayTargetNZD =
+                  mode === 'portfolio_aware'
+                    ? r.targetAllocationNZD + Math.min(r.existingIndirectNZD, r.baselineTargetNZD)
+                    : r.targetAllocationNZD;
+                const fundSourcesOnly = r.existingSourcesLabel
+                  .split(' + ')
+                  .filter((s) => s && s !== 'Direct')
+                  .join(', ');
+                return (
                 <tr key={r.isin + r.ticker} className="hover:bg-slate-800/40">
                   <td className="py-2 px-3">
                     <div className="font-medium text-slate-100">
@@ -408,25 +400,39 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
                   <td className="py-2 px-2 text-right font-mono text-slate-200">
                     {(r.adjustedSleeveWeight * 100).toFixed(1)}%
                   </td>
-                  <td className="py-2 px-2 text-right font-mono text-slate-100">
-                    ${formatNZD(r.targetAllocationNZD)}
-                    {r.overlapTrimmed && (
-                      <div
-                        className="text-[10px] text-indigo-300 cursor-help underline decoration-dotted"
-                        title={`Reduced from $${formatNZD(r.baselineTargetNZD)} to avoid overlap — Direct: $${formatNZD(r.existingDirectNZD)} · Indirect (funds): $${formatNZD(r.existingIndirectNZD)}`}
-                      >
-                        reduced (in funds)
+                  <td
+                    className="py-2 px-2 text-right font-mono text-slate-100"
+                    title={
+                      mode === 'portfolio_aware' && r.existingIndirectNZD > 0
+                        ? `Total target: $${formatNZD(displayTargetNZD)} ($${formatNZD(r.targetAllocationNZD)} direct + $${formatNZD(Math.min(r.existingIndirectNZD, r.baselineTargetNZD))} in funds)`
+                        : `Direct target: $${formatNZD(r.targetAllocationNZD)}`
+                    }
+                  >
+                    ${formatNZD(displayTargetNZD)}
+                  </td>
+                  <td className="py-2 px-2 text-right font-mono">
+                    {r.existingIndirectNZD > 0 ? (
+                      <div>
+                        <span className={mode === 'portfolio_aware' ? 'text-indigo-300' : 'text-slate-400'}>
+                          ${formatNZD(r.existingIndirectNZD)}
+                        </span>
+                        {fundSourcesOnly && (
+                          <div className="text-[10px] text-slate-500">{fundSourcesOnly}</div>
+                        )}
                       </div>
+                    ) : (
+                      <span className="text-slate-600">$0</span>
                     )}
                   </td>
-                  <td
-                    className="py-2 px-2 text-right font-mono"
-                    title={`Direct: $${formatNZD(r.existingDirectNZD)} · Indirect (funds): $${formatNZD(r.existingIndirectNZD)}`}
-                  >
-                    {r.existingTotalNZD > 0 ? (
+                  <td className="py-2 px-2 text-right font-mono">
+                    {r.existingDirectNZD > 0 ? (
                       <div>
-                        <span className="text-amber-300">${formatNZD(r.existingTotalNZD)}</span>
-                        <div className="text-[10px] text-slate-500">{r.existingSourcesLabel}</div>
+                        <span className="text-amber-300">${formatNZD(r.existingDirectNZD)}</span>
+                        {r.existingDirectShares > 0 && (
+                          <div className="text-[10px] text-slate-500">
+                            {r.existingDirectShares.toLocaleString()} sh
+                          </div>
+                        )}
                       </div>
                     ) : (
                       <span className="text-slate-600">$0</span>
@@ -467,7 +473,8 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
                     )}
                   </td>
                 </tr>
-              ))}
+                );
+              })}
             </tbody>
             <tfoot>
               <tr className="bg-slate-950/80 border-t border-slate-700 font-mono text-slate-200">
@@ -475,9 +482,23 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
                   Total ({plan.rows.length} holdings)
                 </td>
                 <td className="py-2 px-2 text-right">100.0%</td>
-                <td className="py-2 px-2 text-right">${formatNZD(plan.totalAllocatedNZD)}</td>
+                <td className="py-2 px-2 text-right">
+                  ${formatNZD(
+                    plan.rows.reduce(
+                      (acc, r) =>
+                        acc +
+                        (mode === 'portfolio_aware'
+                          ? r.targetAllocationNZD + Math.min(r.existingIndirectNZD, r.baselineTargetNZD)
+                          : r.targetAllocationNZD),
+                      0
+                    )
+                  )}
+                </td>
+                <td className="py-2 px-2 text-right text-indigo-300">
+                  ${formatNZD(plan.rows.reduce((acc, r) => acc + r.existingIndirectNZD, 0))}
+                </td>
                 <td className="py-2 px-2 text-right text-amber-300">
-                  ${formatNZD(plan.rows.reduce((acc, r) => acc + r.existingTotalNZD, 0))}
+                  ${formatNZD(plan.rows.reduce((acc, r) => acc + r.existingDirectNZD, 0))}
                 </td>
                 <td colSpan={2} className="py-2 px-3 text-right text-slate-400">
                   Est. Trade Value: ${formatNZD(plan.totalTradeValueNZD)}
