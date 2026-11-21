@@ -192,15 +192,15 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
         id="portfolio-inputs-group"
         defaultOpen={false}
         title={
-          <div className="flex items-center gap-2.5 flex-wrap">
+          <div className="flex items-center gap-2 flex-wrap">
             <span className="text-sm font-semibold text-white">Portfolio</span>
-            <span className="text-xs font-mono font-normal bg-slate-800 text-slate-300 px-2 py-0.5 rounded-full border border-slate-700">
+            <span className="whitespace-nowrap text-xs font-mono font-normal bg-slate-800 text-slate-300 px-2 py-0.5 rounded-full border border-slate-700">
               ${totalPortfolioNZD.toLocaleString('en-NZ', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} NZD
             </span>
             {showingSample && (
               <span
                 title="Viewing built-in sample holdings. Click Clear Portfolio to enter your own."
-                className="inline-flex items-center text-[11px] font-normal text-amber-300 bg-amber-950/50 border border-amber-700/40 px-2 py-0.5 rounded-full"
+                className="whitespace-nowrap inline-flex items-center text-[11px] font-normal text-amber-300 bg-amber-950/50 border border-amber-700/40 px-2 py-0.5 rounded-full"
               >
                 Sample Portfolio
               </span>
@@ -211,13 +211,13 @@ export const PortfolioInputTable: React.FC<PortfolioInputTableProps> = ({
                   ? 'Auto-saved to browser storage and local backups/portfolio_backup.json.'
                   : 'Saved privately in this browser only (localStorage + IndexedDB). Use Export Portfolio for a backup copy.'
               }
-              className="inline-flex items-center gap-1.5 text-[11px] font-normal text-emerald-400 bg-emerald-950/50 border border-emerald-800/40 px-2 py-0.5 rounded-full"
+              className="whitespace-nowrap inline-flex items-center gap-1.5 text-[11px] font-normal text-emerald-400 bg-emerald-950/50 border border-emerald-800/40 px-2 py-0.5 rounded-full"
             >
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
               <span>{isLocalHost ? 'Auto-saved' : 'Saved in this browser'}</span>
             </span>
             {notice && (
-              <span className="inline-flex items-center gap-1 text-[11px] text-cyan-300 bg-cyan-950/60 border border-cyan-800/50 px-2.5 py-0.5 rounded-full">
+              <span className="whitespace-nowrap inline-flex items-center gap-1 text-[11px] text-cyan-300 bg-cyan-950/60 border border-cyan-800/50 px-2.5 py-0.5 rounded-full">
                 ✓ {notice}
               </span>
             )}

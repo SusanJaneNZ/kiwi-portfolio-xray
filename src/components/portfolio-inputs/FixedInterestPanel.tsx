@@ -413,7 +413,7 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
           return (
             <React.Fragment key={dep.id}>
               <div
-                className={`rounded-xl p-2.5 flex items-center justify-between gap-2 transition-colors border ${
+                className={`rounded-xl p-2.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 transition-colors border ${
                   isEditingThis
                     ? 'bg-amber-950/20 border-amber-500/80'
                     : 'bg-slate-950/80 border-slate-800/80'
@@ -423,7 +423,7 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
                   <div className="font-medium text-white flex items-center gap-1.5 flex-wrap">
                     {/* Category Badge */}
                     <span
-                      className={`px-1.5 py-0.5 rounded text-[10px] font-mono font-semibold uppercase tracking-wider border ${
+                      className={`px-1.5 py-0.5 rounded text-[10px] font-mono font-semibold uppercase tracking-wider border whitespace-nowrap ${
                         isBond
                           ? 'bg-indigo-950 text-indigo-300 border-indigo-700/50'
                           : isCash
@@ -436,17 +436,17 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
 
                     {/* Tax Badge */}
                     {dep.taxType === 'pie' ? (
-                      <span className="bg-cyan-950 text-cyan-300 px-1.5 py-0.5 rounded text-[10px] font-mono border border-cyan-800/50">
+                      <span className="bg-cyan-950 text-cyan-300 px-1.5 py-0.5 rounded text-[10px] font-mono border border-cyan-800/50 whitespace-nowrap">
                         PIE (PIR)
                       </span>
                     ) : (
-                      <span className="bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded text-[10px] font-mono">
+                      <span className="bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded text-[10px] font-mono whitespace-nowrap">
                         RWT
                       </span>
                     )}
 
                     <span className="text-slate-300 font-semibold">{dep.institution}</span>
-                    <span className="text-slate-400 truncate">· {dep.name || dep.label}</span>
+                    <span className="text-slate-400 break-words">· {dep.name || dep.label}</span>
                     {dep.depositId && (
                       <span className="text-[10px] text-slate-500 font-mono">({dep.depositId})</span>
                     )}
@@ -466,7 +466,7 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
                 </div>
 
                 {/* Principal / Face Value Input */}
-                <div className="flex items-center gap-2">
+                <div className="flex items-center flex-wrap gap-2 sm:shrink-0">
                   <div className="relative">
                     <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-500 font-mono text-xs">
                       $
