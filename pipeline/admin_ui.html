@@ -2536,7 +2536,9 @@
     }
 
     async function toggleFeatureFlag(key) {
+      const btn = document.getElementById('btn-toggle-replicator');
       const nextVal = !Boolean(featureFlags[key]);
+      if (btn) btn.disabled = true;
       try {
         const res = await api('/api/features', {
           method: 'POST',
@@ -2552,6 +2554,8 @@
         }
       } catch (err) {
         showToast(`Failed to update feature flag: ${err.message}`, 'err');
+      } finally {
+        if (btn) btn.disabled = false;
       }
     }
 

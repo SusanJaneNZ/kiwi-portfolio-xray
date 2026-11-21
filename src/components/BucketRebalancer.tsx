@@ -429,16 +429,15 @@ export const BucketRebalancer: React.FC<BucketRebalancerProps> = ({
                 </table>
               </div>
 
-              {(anyCombinedLiquidation || anyTermDepositOutflow) && (
-                <div className="text-[11px] text-slate-400 space-y-1">
-                  {anyCombinedLiquidation && (
-                    <p>• Where both a Withdraw and Sell appear in a bucket, total cash to liquidate from that bucket is Withdraw + Sell.</p>
-                  )}
-                  {anyTermDepositOutflow && (
-                    <p>• Note: Term Deposits normally cannot be withdrawn or sold before maturity without bank break fees — apply withdrawals from maturing deposits.</p>
-                  )}
-                </div>
-              )}
+              <div className="text-[11px] text-slate-400 space-y-1">
+                <p>• Before rebalancing, ensure your share prices and current dollar balances for managed funds, KiwiSaver, and deposits are up to date in Portfolio above.</p>
+                {anyCombinedLiquidation && (
+                  <p>• Where both a Withdraw and Sell appear in a bucket, total cash to liquidate from that bucket is Withdraw + Sell.</p>
+                )}
+                {anyTermDepositOutflow && (
+                  <p>• Note: Term Deposits normally cannot be withdrawn or sold before maturity without bank break fees — apply withdrawals from maturing deposits.</p>
+                )}
+              </div>
             </>
           )}
         </div>

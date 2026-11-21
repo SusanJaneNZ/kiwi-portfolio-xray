@@ -270,37 +270,39 @@ test.describe('Kiwi Portfolio X-Ray — Live Portfolio UI E2E', () => {
     const pageErrors: string[] = [];
     page.on('pageerror', (err) => pageErrors.push(err.message));
 
-    // When disabled in features.json (default), panel stays hidden
-    await page.goto('/');
-    await expect(page.getByText('Kiwi Portfolio X-Ray').first()).toBeVisible({ timeout: 15_000 });
-    await expect(page.locator('button', { hasText: /DIY Direct Index Rebalancer/i })).toHaveCount(0);
-
-    // When enabled via features.json, panel renders and functions cleanly
+    // When disabled in features.json, panel stays hidden
     await page.route('**/data/features.json*', async (route) => {
       await route.fulfill({
         status: 200,
         contentType: 'application/json',
-        body: JSON.stringify({ indexReplicator: true }),
+        body: JSON.stringify({ indexReplicator: false }),
       });
     });
+    await page.goto('/');
+    await expect(page.getByText('Kiwi Portfolio X-Ray').first()).toBeVisible({ timeout: 15_000 });
+    await expect(page.locator('button', { hasText: /DIY Direct Index Replicator/i })).toHaveCount(0);
+
+    // When enabled via default features.json, panel renders and functions cleanly
+    await page.unroute('**/data/features.json*');
     await page.reload();
     await expect(page.getByText('Kiwi Portfolio X-Ray').first()).toBeVisible({ timeout: 15_000 });
 
-    // Expand DIY Direct Index Rebalancer panel (below Bucket Rebalancer)
-    const replicatorHeader = page.locator('button', { hasText: /DIY Direct Index Rebalancer/i });
+    // Expand DIY Direct Index Replicator panel (below Bucket Rebalancer)
+    const replicatorHeader = page.locator('button', { hasText: /DIY Direct Index Replicator/i });
     await expect(replicatorHeader).toBeVisible();
     await replicatorHeader.click();
 
-    // Verify DIV model loads with breakeven cards, Actual $ Held column & NZ Imputation badge
-    await expect(page.getByText('Annual Passive Fee Drag')).toBeVisible();
-    await expect(page.getByText('Breakeven Payoff Time')).toBeVisible();
-    await expect(page.getByText('Actual $ Held')).toBeVisible();
-    await expect(page.getByText('NZ Imputation Credits · Zero FIF').first()).toBeVisible();
+    // Verify DIV model loads with breakeven cards, Held in Funds / Held Directly columns & NZD price column
+    await expect(page.getByText('Annual ETF Fee Saved')).toBeVisible();
+    await expect(page.getByText('Breakeven Time')).toBeVisible();
+    await expect(page.getByText('Held in Funds')).toBeVisible();
+    await expect(page.getByText('Held Directly')).toBeVisible();
+    await expect(page.getByText('Price (NZD)')).toBeVisible();
 
-    // Switch Target Index to ASD and verify Trans-Tasman FIF Exempt badge appears
+    // Switch Target Index to ASD and verify AUD price column appears
     const indexSelect = page.locator('select').filter({ hasText: 'Smartshares NZ Dividend ETF (DIV)' });
     await indexSelect.selectOption('ASD');
-    await expect(page.getByText('Trans-Tasman FIF Exempt (ASX)').first()).toBeVisible();
+    await expect(page.getByText('Price (AUD)')).toBeVisible();
 
     expect(pageErrors, `Uncaught page errors: ${pageErrors.join('; ')}`).toEqual([]);
   });

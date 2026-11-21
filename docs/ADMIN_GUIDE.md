@@ -3,8 +3,10 @@
 This guide details the operational procedures for sourcing fund disclosures, staging constituent files, unwrapping feeder funds, resolving unmapped companies, and publishing static look-through datasets for the Kiwi Portfolio X-Ray.
 
 ```bash
-# Run the local frontend preview
+# Run the local frontend preview (http://localhost:4173)
 npm run build && npm run preview
+# To preview the feature-flagged DIY Direct Index Replicator while it is OFF in production:
+# Open http://localhost:4173/?replicator=1 (or toggle "Index Replicator: OFF/LIVE" in the Admin Console)
 
 # Run the local Admin Web Console
 python3 -m pipeline.admin_ui

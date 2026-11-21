@@ -117,9 +117,9 @@ export const App: React.FC = () => {
           fetchJson<FundMetadata[]>(`${basePath}data/funds_registry.json`),
           fetchJson<Record<string, Constituent[]>>(`${basePath}data/constituents.json`),
           fetchJson<DirectEquityCatalogItem[]>(`${basePath}data/direct_equities.json`),
-          fetchJson<{ indexReplicator?: boolean }>(`${basePath}data/features.json`).catch(() => ({
-            indexReplicator: false,
-          })),
+          fetch(`${basePath}data/features.json?t=${Date.now()}`, { cache: 'no-cache' })
+            .then((r) => (r.ok ? r.json() : { indexReplicator: false }))
+            .catch(() => ({ indexReplicator: false })),
         ]);
 
         const listedEtfs: DirectEquityCatalogItem[] = fundsRes
@@ -376,12 +376,20 @@ export const App: React.FC = () => {
           activeWithdrawal={activeWithdrawal}
         />
 
-        {/* 7. DIY Direct Index Rebalancer (feature-flagged via public/data/features.json, VITE_ENABLE_INDEX_REPLICATOR, or ?replicator=1) */}
-        {(features.indexReplicator ||
-          import.meta.env.VITE_ENABLE_INDEX_REPLICATOR === 'true' ||
-          import.meta.env.VITE_ENABLE_INDEX_REPLICATOR === '1' ||
-          (typeof window !== 'undefined' &&
-            new URLSearchParams(window.location.search).get('replicator') === '1')) && (
+        {/* 7. DIY Direct Index Replicator (feature-flagged via public/data/features.json, VITE_ENABLE_INDEX_REPLICATOR, or ?replicator=1/0) */}
+        {(() => {
+          const qsParam =
+            typeof window !== 'undefined'
+              ? new URLSearchParams(window.location.search).get('replicator')
+              : null;
+          if (qsParam === '0') return false;
+          return (
+            qsParam === '1' ||
+            features.indexReplicator ||
+            import.meta.env.VITE_ENABLE_INDEX_REPLICATOR === 'true' ||
+            import.meta.env.VITE_ENABLE_INDEX_REPLICATOR === '1'
+          );
+        })() && (
           <IndexReplicatorPanel
             portfolioState={portfolioState}
             constituentsMap={constituentsMap}

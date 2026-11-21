@@ -80,30 +80,33 @@ class AdminService:
         return result
 
     def get_feature_flags(self) -> dict[str, bool]:
-        """Reads public/data/features.json with safe defaults."""
-        defaults: dict[str, bool] = {"indexReplicator": False}
+        """Reads public/data/features.json with safe defaults, preserving unknown keys."""
+        flags: dict[str, bool] = {"indexReplicator": False}
         features_path = self.output_dir / "features.json"
         if features_path.exists():
             try:
                 loaded = json.loads(features_path.read_text(encoding="utf-8"))
                 if isinstance(loaded, dict):
-                    for key in defaults:
-                        if key in loaded:
-                            defaults[key] = bool(loaded[key])
+                    for key, val in loaded.items():
+                        if isinstance(key, str) and isinstance(val, bool):
+                            flags[key] = val
             except Exception:
                 pass
-        return defaults
+        return flags
 
     def set_feature_flag(self, key: str, enabled: bool) -> dict[str, bool]:
-        """Updates a known feature flag in public/data/features.json."""
-        flags = self.get_feature_flags()
-        if key not in flags:
-            raise ValueError(f"Unknown feature flag '{key}'. Allowed: {sorted(flags.keys())}")
-        flags[key] = bool(enabled)
-        self.output_dir.mkdir(parents=True, exist_ok=True)
-        features_path = self.output_dir / "features.json"
-        features_path.write_text(json.dumps(flags, indent=2) + "\n", encoding="utf-8")
-        return flags
+        """Atomically updates a known feature flag in public/data/features.json."""
+        allowed = {"indexReplicator"}
+        if key not in allowed:
+            raise ValueError(f"Unknown feature flag '{key}'. Allowed: {sorted(allowed)}")
+        if not isinstance(enabled, bool):
+            raise ValueError("Feature flag 'enabled' must be a JSON boolean (true/false)")
+        with self._lock:
+            flags = self.get_feature_flags()
+            flags[key] = enabled
+            self.output_dir.mkdir(parents=True, exist_ok=True)
+            atomic_write_json(self.output_dir / "features.json", flags)
+            return flags
 
     def save_staged_file(
         self,
@@ -1071,10 +1074,21 @@ def make_handler(service: AdminService) -> type[BaseHTTPRequestHandler]:
                     catalog = service.delete_fund_catalog_entry(data.get("fund_code", ""))
                     self._send_json({"ok": True, "catalog": catalog})
                 elif path == "/api/features":
-                    flags = service.set_feature_flag(
-                        key=str(data.get("key", "")),
-                        enabled=bool(data.get("enabled", False)),
-                    )
+                    enabled_val = data.get("enabled")
+                    if not isinstance(enabled_val, bool):
+                        self._send_json(
+                            {"ok": False, "error": "Feature flag 'enabled' must be a boolean"},
+                            status=HTTPStatus.BAD_REQUEST,
+                        )
+                        return
+                    try:
+                        flags = service.set_feature_flag(
+                            key=str(data.get("key", "")),
+                            enabled=enabled_val,
+                        )
+                    except ValueError as ve:
+                        self._send_json({"ok": False, "error": str(ve)}, status=HTTPStatus.BAD_REQUEST)
+                        return
                     self._send_json({"ok": True, "features": flags})
                 elif path == "/api/aliases/set":
                     aliases = service.set_alias_mapping(

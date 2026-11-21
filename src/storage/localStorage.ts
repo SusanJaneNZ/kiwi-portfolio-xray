@@ -14,6 +14,7 @@ import {
   PaymentFrequency,
   PirRate,
   PortfolioBucket,
+  ReplicatorSettings,
   RetirementCashflowSettings,
   TdProjectionMode,
   UserPortfolioState,
@@ -354,6 +355,28 @@ function sanitizeCashflowSettings(raw: unknown): RetirementCashflowSettings | un
   };
 }
 
+function sanitizeReplicatorSettings(raw: unknown): ReplicatorSettings | undefined {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return undefined;
+  const r = raw as Record<string, unknown>;
+  const out: ReplicatorSettings = {};
+  if (typeof r.selectedCode === "string" && r.selectedCode.trim()) {
+    out.selectedCode = r.selectedCode.trim().toUpperCase();
+  }
+  if (typeof r.depth === "number" && Number.isFinite(r.depth) && r.depth >= 1) {
+    out.depth = Math.floor(r.depth);
+  }
+  if (isFiniteNonNegative(r.targetHoldingNZD)) {
+    out.targetHoldingNZD = r.targetHoldingNZD;
+  }
+  if (isFiniteNonNegative(r.brokerageNZD)) {
+    out.brokerageNZD = r.brokerageNZD;
+  }
+  if (r.mode === "portfolio_aware" || r.mode === "standalone") {
+    out.mode = r.mode;
+  }
+  return Object.keys(out).length > 0 ? out : undefined;
+}
+
 /**
  * Normalizes v1 or v2 saved/imported portfolio payloads into a valid v2 state.
  * Sanitizes per-field rather than discarding the entire portfolio if one entry is malformed.
@@ -403,6 +426,7 @@ export function normalizePortfolioState(candidate: unknown): UserPortfolioState 
 
   const fi = sanitizeFixedInterest(obj.fixedInterest || obj.cashDeposits);
   const cashflowSettings = sanitizeCashflowSettings(obj.cashflowSettings);
+  const replicatorSettings = sanitizeReplicatorSettings(obj.replicatorSettings);
   const customFunds = sanitizeCustomFunds(obj.customFunds);
   let pirRate: PirRate | undefined = undefined;
   if (obj.pirRate === 0.105 || obj.pirRate === 0.175 || obj.pirRate === 0.28) {
@@ -423,6 +447,7 @@ export function normalizePortfolioState(candidate: unknown): UserPortfolioState 
     bucketAssignments,
     ...(customFunds.length > 0 ? { customFunds } : {}),
     ...(cashflowSettings ? { cashflowSettings } : {}),
+    ...(replicatorSettings ? { replicatorSettings } : {}),
     ...(pirRate !== undefined ? { pirRate } : {}),
   };
 }
@@ -576,6 +601,7 @@ export function serializePortfolioPayload(state: UserPortfolioState): Record<str
     bucketAssignments: state.bucketAssignments,
     ...(state.customFunds && state.customFunds.length > 0 ? { customFunds: state.customFunds } : {}),
     ...(state.cashflowSettings ? { cashflowSettings: state.cashflowSettings } : {}),
+    ...(state.replicatorSettings ? { replicatorSettings: state.replicatorSettings } : {}),
     ...(state.pirRate !== undefined ? { pirRate: state.pirRate } : {}),
   };
 }

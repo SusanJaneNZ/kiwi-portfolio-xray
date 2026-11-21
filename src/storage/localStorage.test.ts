@@ -639,5 +639,33 @@ export const storageTestCases: Array<[string, () => void]> = [
       assertEq(reimported.customFunds![0].asset_class, "mixed", "reimported asset_class matches");
     },
   ],
+  [
+    "normalizePortfolioState and export/import round-trip replicatorSettings",
+    () => {
+      const stateWithReplicator: UserPortfolioState = {
+        ...DEFAULT_PORTFOLIO_STATE,
+        replicatorSettings: {
+          selectedCode: "DIV",
+          depth: 25,
+          targetHoldingNZD: 100000,
+          brokerageNZD: 4.5,
+          mode: "portfolio_aware",
+        },
+      };
+
+      const normalized = normalizePortfolioState(stateWithReplicator);
+      assertTrue(Boolean(normalized?.replicatorSettings), "replicatorSettings preserved");
+      assertEq(normalized!.replicatorSettings!.targetHoldingNZD, 100000, "targetHoldingNZD preserved");
+      assertEq(normalized!.replicatorSettings!.depth, 25, "depth preserved");
+
+      const jsonStr = exportPortfolioJSON(normalized!);
+      assertTrue(jsonStr.includes('"targetHoldingNZD": 100000'), "exported JSON contains targetHoldingNZD");
+
+      const reimported = importPortfolioJSON(jsonStr);
+      assertEq(reimported.replicatorSettings?.targetHoldingNZD, 100000, "reimported targetHoldingNZD matches");
+      assertEq(reimported.replicatorSettings?.selectedCode, "DIV", "reimported selectedCode matches");
+      assertEq(reimported.replicatorSettings?.mode, "portfolio_aware", "reimported mode matches");
+    },
+  ],
 ];
 
