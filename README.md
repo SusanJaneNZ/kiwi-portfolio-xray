@@ -1,10 +1,16 @@
 # Kiwi Portfolio X-Ray
 
-A static, browser-based portfolio look-through analyzer for New Zealand retail investors holding portfolios across KiwiSaver schemes, unlisted managed funds, NZX/ASX ETFs, direct shares, bonds, and bank term deposits.
+A free, private portfolio analysis and planning toolkit for New Zealand retail investors holding KiwiSaver schemes, unlisted managed funds, NZX/ASX ETFs, direct shares, bonds, and bank term deposits.
 
 **Live App:** https://susanjanenz.github.io/kiwi-portfolio-xray/
 
 ![Kiwi Portfolio X-Ray — Asset Class Split & Sector Breakdown](docs/images/overview.png)
+
+## Privacy & Security
+
+- **Never links to your accounts:** The app does **not** connect to any bank, broker, share registry, or KiwiSaver provider, and never asks for logins or credentials.
+- **Manually entered or uploaded:** Enter holdings yourself or upload your own CSV exports (e.g. Computershare, MUFG/Link) and JSON backups.
+- **100% local in your browser:** All portfolio data stays strictly on your device (`localStorage` / IndexedDB). There is no backend server, no user accounts, and no tracking or analytics. Use **Export Portfolio** / **Import Portfolio** to back up or move your portfolio between devices.
 
 > [!WARNING]
 > **Disclaimer — Not Financial or Tax Advice**
@@ -14,13 +20,9 @@ A static, browser-based portfolio look-through analyzer for New Zealand retail i
 > - Fund holdings and constituent weights are compiled from publicly available periodic filings (such as the NZ Companies Office Disclose Register / Sorted Smart Investor and overseas ETF issuer disclosures) and may lag current holdings, omit minor positions, or contain mapping/classification approximations.
 > - Always verify holdings, prices, and tax obligations against official fund documents, your broker, Inland Revenue (IRD), or a licensed financial adviser before making investment or tax decisions.
 
-## Privacy & Zero Backend
-
-All portfolio numbers you enter stay **100% in your browser** (`localStorage` / IndexedDB). There is no backend server, no user accounts, and no tracking or analytics. Because data is stored locally per browser/device, it does not automatically sync across devices — use **Export JSON** / **Import JSON** in the app to back up or transfer your portfolio between devices.
-
 ## Key Capabilities
 
-* **3-Tier Portfolio Input:** Track (1) NZX/ASX exchange-traded shares & listed ETFs (units × price), (2) Managed funds & KiwiSaver in NZD, and (3) Fixed interest & cash (bonds, PIE/RWT term deposits, cash).
+* **3-Tier Portfolio Input & Registry CSV Upload:** Track (1) NZX/ASX exchange-traded shares & listed ETFs (manual entry or cumulative CSV upload from Computershare, MUFG/Link, and other share registries), (2) Managed funds & KiwiSaver in NZD, and (3) Fixed interest & cash (bonds, PIE/RWT term deposits, cash).
 * **Recursive Feeder Fund Unwrapping:** Unpacks NZ feeder ETFs (e.g. Smartshares `TWF`, `USF`, `ESG`, `EMF`, Kernel Emerging Markets) into their underlying Vanguard, iShares, and SPDR holdings.
 * **Cross-Fund Look-Through & Asset Split:** Aggregates overlapping company, sector (GICS), country, and bank/issuer exposure across funds and direct holdings, and splits multi-asset funds into true Equities, Fixed Interest, Term Deposits, and Cash.
 * **Retirement Cashflow & Bucket Rebalancer:** Models forward dividend/interest income (with NZ PIR / RWT tax estimates) and minimum-turnover withdrawal rebalancing across user-defined buckets.
