@@ -16,6 +16,7 @@ import {
   PriceDataSource,
   PriceDiagnosticItem,
 } from '../../utils/prices';
+import { parseRegistryCsv, RegistryCsvParseResult } from '../../utils/registryCsv';
 
 interface DirectSharesPanelProps {
   portfolioState: UserPortfolioState;
@@ -76,6 +77,12 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
   const [priceDiagnostics, setPriceDiagnostics] = useState<PriceDiagnosticItem[] | null>(null);
   const [isDiagModalOpen, setIsDiagModalOpen] = useState(false);
   const [diagCopied, setDiagCopied] = useState(false);
+
+  const [isCsvModalOpen, setIsCsvModalOpen] = useState(false);
+  const [csvFileName, setCsvFileName] = useState<string | null>(null);
+  const [csvResult, setCsvResult] = useState<RegistryCsvParseResult | null>(null);
+  const [csvFeedback, setCsvFeedback] = useState<string | null>(null);
+  const csvFileInputRef = useRef<HTMLInputElement | null>(null);
 
   const [isFetchingFx, setIsFetchingFx] = useState(false);
   const [fxTimestamp, setFxTimestamp] = useState<string | null>(null);
@@ -445,6 +452,93 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
     setNewShareBucket(defaultBucketId);
   };
 
+  const handleCsvFileSelected = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setCsvFeedback(null);
+    try {
+      const text = await file.text();
+      const parsed = parseRegistryCsv(text, directEquitiesCatalog);
+      setCsvFileName(file.name);
+      setCsvResult(parsed);
+    } catch (err) {
+      setCsvFileName(file.name);
+      setCsvResult({
+        items: [],
+        skippedZeroBalance: 0,
+        skippedInvalidRows: 0,
+        detectedHeaders: 0,
+        warnings: [`Failed to read CSV file: ${err instanceof Error ? err.message : String(err)}`],
+      });
+    } finally {
+      e.target.value = '';
+    }
+  };
+
+  const handleConfirmCsvImport = () => {
+    if (!csvResult || csvResult.items.length === 0) return;
+    const itemsToImport = csvResult.items;
+    const importedFileName = csvFileName || 'CSV';
+
+    onUpdateState((prev) => {
+      const nextDirect = [...(prev.directHoldings || [])];
+      const nextAssignments = { ...(prev.bucketAssignments || {}) };
+      const safeRate = Number.isFinite(prev.audNzdRate) && prev.audNzdRate > 0 ? prev.audNzdRate : 1.1;
+      const bucketToAssign =
+        prev.buckets.length > 0
+          ? newShareBucket && prev.buckets.some((b) => b.id === newShareBucket)
+            ? newShareBucket
+            : defaultBucketId
+          : '';
+
+      for (const { holding } of itemsToImport) {
+        const baseImported = holding.ticker.split('.')[0].toUpperCase();
+        const existingIdx = nextDirect.findIndex(
+          (h) =>
+            h.exchange === holding.exchange &&
+            (h.isin === holding.isin || h.ticker.split('.')[0].toUpperCase() === baseImported)
+        );
+
+        if (existingIdx >= 0) {
+          const existing = nextDirect[existingIdx];
+          const totalShares = existing.shares + holding.shares;
+          let resolvedPrice = holding.price > 0 ? holding.price : existing.price;
+          if (existing.currency !== holding.currency && holding.price > 0) {
+            resolvedPrice =
+              existing.currency === 'NZD' ? holding.price * safeRate : holding.price / safeRate;
+            resolvedPrice = Math.round(resolvedPrice * 10000) / 10000;
+          }
+          const totalVal = Math.round(totalShares * resolvedPrice * 100) / 100;
+          nextDirect[existingIdx] = {
+            ...existing,
+            shares: totalShares,
+            price: resolvedPrice,
+            value: totalVal,
+            isEtf: existing.isEtf || holding.isEtf,
+            fundCode: existing.fundCode || holding.fundCode,
+          };
+        } else {
+          nextDirect.push(holding);
+          if (bucketToAssign && !nextAssignments[`direct:${holding.isin}`]) {
+            nextAssignments[`direct:${holding.isin}`] = bucketToAssign;
+          }
+        }
+      }
+
+      return {
+        ...prev,
+        directHoldings: nextDirect,
+        bucketAssignments: nextAssignments,
+      };
+    });
+
+    setCsvFeedback(
+      `✓ Added ${itemsToImport.length} holding${itemsToImport.length === 1 ? '' : 's'} from ${importedFileName}. You can upload another registry CSV or close.`
+    );
+    setCsvResult(null);
+    setCsvFileName(null);
+  };
+
   return (
     <CollapsiblePanel
       id="input-direct"
@@ -769,6 +863,22 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                 )}
               </div>
 
+              {!selectedEquity && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCsvResult(null);
+                    setCsvFileName(null);
+                    setCsvFeedback(null);
+                    setIsCsvModalOpen(true);
+                  }}
+                  title="Upload holdings CSV exported from Computershare, MUFG (Link), Automic, or BoardRoom"
+                  className="h-[30px] px-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-sky-300 border border-slate-700/80 text-xs font-medium whitespace-nowrap transition-colors"
+                >
+                  ↑ Import Registry CSV
+                </button>
+              )}
+
               {selectedEquity && (
                 <>
                   {availableBuckets.length > 0 && (
@@ -1003,6 +1113,175 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
               >
                 Close
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Registry CSV Upload Modal */}
+      {isCsvModalOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => setIsCsvModalOpen(false)}
+        >
+          <div
+            className="bg-slate-900 border border-slate-700 rounded-2xl max-w-2xl w-full max-h-[85vh] flex flex-col p-4 shadow-2xl space-y-3"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between border-b border-slate-800 pb-2.5 shrink-0">
+              <div>
+                <h3 className="text-sm font-semibold text-white">Import Share Registry CSV</h3>
+                <p className="text-[11px] text-slate-400">
+                  Supports Computershare, MUFG Corporate Markets (Link), Automic, BoardRoom &amp; generic NZX/ASX CSV exports.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsCsvModalOpen(false)}
+                aria-label="Close modal"
+                className="text-slate-400 hover:text-white px-2 py-1 rounded hover:bg-slate-800"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Cumulative Warning Banner */}
+            <div className="bg-amber-950/40 border border-amber-700/50 rounded-xl px-3 py-2 text-xs text-amber-200 shrink-0">
+              <strong>⚠️ Adds to existing portfolio (does not overwrite):</strong> Imported holdings are added cumulatively to your current Direct Shares &amp; ETFs (matching tickers will sum their shares). If you want to start fresh, click <strong>Clear Portfolio</strong> first. You can upload multiple registry files (e.g. Computershare NZ, then MUFG AU) one after another.
+            </div>
+
+            {/* File Picker */}
+            <div className="flex flex-wrap items-center gap-2 shrink-0">
+              <input
+                ref={csvFileInputRef}
+                type="file"
+                accept=".csv,text/csv"
+                onChange={handleCsvFileSelected}
+                className="hidden"
+              />
+              <button
+                type="button"
+                onClick={() => csvFileInputRef.current?.click()}
+                className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium transition-colors"
+              >
+                Choose CSV File…
+              </button>
+              {csvFileName && (
+                <span className="text-xs text-slate-300 font-mono truncate max-w-xs">{csvFileName}</span>
+              )}
+            </div>
+
+            {csvFeedback && (
+              <div className="bg-emerald-950/40 border border-emerald-700/50 rounded-xl px-3 py-2 text-xs text-emerald-300 shrink-0">
+                {csvFeedback}
+              </div>
+            )}
+
+            {csvResult && (
+              <div className="flex-1 overflow-y-auto space-y-2 min-h-0">
+                {csvResult.warnings.map((w, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-rose-950/40 border border-rose-800/50 rounded-lg px-3 py-2 text-xs text-rose-200"
+                  >
+                    {w}
+                  </div>
+                ))}
+
+                <div className="flex flex-wrap items-center gap-3 text-[11px] text-slate-400">
+                  <span>
+                    Ready to add: <strong className="text-emerald-300">{csvResult.items.length}</strong> holding{csvResult.items.length === 1 ? '' : 's'}
+                  </span>
+                  {csvResult.skippedZeroBalance > 0 && (
+                    <span>· Skipped {csvResult.skippedZeroBalance} zero-balance row{csvResult.skippedZeroBalance === 1 ? '' : 's'}</span>
+                  )}
+                  {csvResult.skippedInvalidRows > 0 && (
+                    <span>· Skipped {csvResult.skippedInvalidRows} unrecognised row{csvResult.skippedInvalidRows === 1 ? '' : 's'}</span>
+                  )}
+                </div>
+
+                {csvResult.items.length > 0 && (
+                  <div className="border border-slate-800 rounded-xl overflow-x-auto">
+                    <table className="w-full text-left text-xs border-collapse">
+                      <thead>
+                        <tr className="bg-slate-950/90 text-[11px] text-slate-400 border-b border-slate-800">
+                          <th className="py-1.5 px-2.5">Ticker</th>
+                          <th className="py-1.5 px-2">Name</th>
+                          <th className="py-1.5 px-2 text-right">Shares</th>
+                          <th className="py-1.5 px-2 text-right">Price</th>
+                          <th className="py-1.5 px-2.5 text-right">Value</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-800/70">
+                        {csvResult.items.map(({ holding, matchedCatalog }) => {
+                          const base = holding.ticker.split('.')[0].toUpperCase();
+                          const existing = portfolioState.directHoldings.find(
+                            (h) =>
+                              h.exchange === holding.exchange &&
+                              (h.isin === holding.isin || h.ticker.split('.')[0].toUpperCase() === base)
+                          );
+                          return (
+                            <tr key={`${holding.exchange}:${holding.ticker}`}>
+                              <td className="py-1.5 px-2.5 font-mono text-sky-300 whitespace-nowrap">
+                                {holding.ticker}
+                                {holding.isEtf && (
+                                  <span className="ml-1 text-[9px] px-1 py-0.5 rounded bg-indigo-950 text-indigo-300 border border-indigo-800/50">
+                                    ETF
+                                  </span>
+                                )}
+                                {!matchedCatalog && (
+                                  <span className="ml-1 text-[9px] px-1 py-0.5 rounded bg-slate-800 text-slate-400">
+                                    Custom
+                                  </span>
+                                )}
+                              </td>
+                              <td className="py-1.5 px-2 text-slate-200 max-w-[200px] truncate">
+                                {holding.name}
+                              </td>
+                              <td className="py-1.5 px-2 text-right font-mono text-slate-100">
+                                <div className="whitespace-nowrap">{holding.shares.toLocaleString()}</div>
+                                {existing && (
+                                  <div className="text-[10px] text-amber-300 font-sans">
+                                    adding {holding.shares.toLocaleString()} to existing {existing.shares.toLocaleString()} holding
+                                  </div>
+                                )}
+                              </td>
+                              <td className="py-1.5 px-2 text-right font-mono text-slate-300 whitespace-nowrap">
+                                {holding.price > 0
+                                  ? `${holding.currency === 'AUD' ? 'A$' : '$'}${holding.price}`
+                                  : '—'}
+                              </td>
+                              <td className="py-1.5 px-2.5 text-right font-mono text-emerald-300 whitespace-nowrap">
+                                {holding.value > 0
+                                  ? `${holding.currency === 'AUD' ? 'A$' : '$'}${formatNZD(holding.value)}`
+                                  : 'Unpriced'}
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div className="pt-2 border-t border-slate-800 flex items-center justify-end gap-2 shrink-0">
+              <button
+                type="button"
+                onClick={() => setIsCsvModalOpen(false)}
+                className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium"
+              >
+                Close
+              </button>
+              {csvResult && csvResult.items.length > 0 && (
+                <button
+                  type="button"
+                  onClick={handleConfirmCsvImport}
+                  className="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-medium"
+                >
+                  + Add {csvResult.items.length} Holding{csvResult.items.length === 1 ? '' : 's'} to Portfolio
+                </button>
+              )}
             </div>
           </div>
         </div>
