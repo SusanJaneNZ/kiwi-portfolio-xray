@@ -21,6 +21,7 @@ interface IndexReplicatorPanelProps {
   constituentsMap: Record<string, Constituent[]>;
   lookThroughHoldings: ConsolidatedHolding[];
   directEquitiesCatalog: DirectEquityCatalogItem[];
+  marginalPersonalTaxRate?: number;
   onUpdateState: (action: UserPortfolioState | ((prev: UserPortfolioState) => UserPortfolioState)) => void;
 }
 
@@ -31,6 +32,7 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
   constituentsMap,
   lookThroughHoldings,
   directEquitiesCatalog,
+  marginalPersonalTaxRate = 0.175,
   onUpdateState,
 }) => {
   const savedSettings = portfolioState.replicatorSettings;
@@ -43,6 +45,9 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
     savedSettings?.brokerageNZD !== undefined ? String(savedSettings.brokerageNZD) : '4.50'
   );
   const [mode, setMode] = useState<ReplicationMode>(() => savedSettings?.mode || 'portfolio_aware');
+  const [marginalRateOverride, setMarginalRateOverride] = useState<number | undefined>(
+    () => savedSettings?.marginalTaxRate
+  );
   const [priceOverrides, setPriceOverrides] = useState<Record<string, number>>({});
   const [isFetchingPrices, setIsFetchingPrices] = useState(false);
   const [priceFeedback, setPriceFeedback] = useState<string | null>(null);
@@ -73,7 +78,13 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
     if (savedSettings.mode && savedSettings.mode !== mode) {
       setMode(savedSettings.mode);
     }
+    if (savedSettings.marginalTaxRate !== marginalRateOverride) {
+      setMarginalRateOverride(savedSettings.marginalTaxRate);
+    }
   }, [savedSettings]);
+
+  const effectiveMarginalTaxRate =
+    marginalRateOverride !== undefined ? marginalRateOverride : marginalPersonalTaxRate;
 
   const persistReplicatorSettings = (patch: Partial<NonNullable<UserPortfolioState['replicatorSettings']>>) => {
     onUpdateState((prev) => ({
@@ -127,6 +138,7 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
       pricesByTicker: priceOverrides,
       audNzdRate: portfolioState.audNzdRate || 1.09,
       brokeragePerTradeNZD: brokeragePerTrade,
+      marginalTaxRate: effectiveMarginalTaxRate,
     });
   }, [
     activeModel,
@@ -140,6 +152,7 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
     directEquitiesCatalog,
     priceOverrides,
     brokeragePerTrade,
+    effectiveMarginalTaxRate,
   ]);
 
   const handleFetchLivePrices = async () => {
@@ -295,11 +308,16 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
   const rowTargets = plan.rows.map((r) => r.baselineTargetNZD);
   const totalDisplayTargetNZD = rowTargets.reduce((acc, v) => acc + v, 0);
 
-  const breakevenLabel = !Number.isFinite(plan.breakeven.breakevenMonths)
-    ? '—'
-    : plan.breakeven.breakevenMonths < 1
-      ? '< 1 month'
-      : `${plan.breakeven.breakevenMonths.toFixed(1)} months`;
+  const hasTaxDrag = plan.breakeven.annualTaxDragNZD > 0.01;
+  const etfCheaperAfterTax = hasTaxDrag && plan.breakeven.netAnnualSavingNZD <= 0;
+
+  const breakevenLabel = etfCheaperAfterTax
+    ? 'ETF cheaper'
+    : !Number.isFinite(plan.breakeven.breakevenMonths)
+      ? '—'
+      : plan.breakeven.breakevenMonths < 1
+        ? '< 1 month'
+        : `${plan.breakeven.breakevenMonths.toFixed(1)} months`;
 
   return (
     <CollapsiblePanel
@@ -310,11 +328,11 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
       className="md:p-5"
     >
       <div className="space-y-4 text-xs pt-1">
-        {/* Plan Settings */}
+        {/* Replicator Settings */}
         <div className="bg-slate-950/60 border border-slate-800 rounded-xl p-3.5 space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
-              Plan Settings
+              Replicator Settings
             </span>
             {activeModel.currency === 'AUD' && (
               <span className="text-[11px] font-mono text-sky-300 bg-sky-950/50 border border-sky-800/40 rounded px-2 py-0.5">
@@ -323,7 +341,7 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
             )}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
             <div>
               <label className="block text-[11px] text-slate-400 mb-1">Target Index</label>
               <select
@@ -413,6 +431,33 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
                 className="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-100 font-mono text-xs"
               />
             </div>
+
+            <div>
+              <label
+                className="block text-[11px] text-slate-400 mb-1"
+                title="Listed PIE ETFs cap dividend tax at 28%. Holding shares directly in the 30%, 33%, or 39% bracket adds tax drag on dividends."
+              >
+                Marginal Tax Rate
+              </label>
+              <select
+                value={marginalRateOverride === undefined ? 'auto' : String(marginalRateOverride)}
+                onChange={(e) => {
+                  const v = e.target.value;
+                  const next = v === 'auto' ? undefined : Number(v);
+                  setMarginalRateOverride(next);
+                  persistReplicatorSettings({ marginalTaxRate: next });
+                }}
+                className="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-100 text-xs"
+              >
+                <option value="auto">
+                  Auto (Cashflow: {(marginalPersonalTaxRate * 100).toFixed(marginalPersonalTaxRate === 0.105 || marginalPersonalTaxRate === 0.175 ? 1 : 0)}%)
+                </option>
+                <option value="0.28">≤ 28% (no PIE gap)</option>
+                <option value="0.3">30% (+2% vs PIE)</option>
+                <option value="0.33">33% (+5% vs PIE)</option>
+                <option value="0.39">39% (+11% vs PIE)</option>
+              </select>
+            </div>
           </div>
 
           <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
@@ -473,13 +518,22 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-3">
             <div className="text-[11px] text-slate-400">
-              Annual ETF Fee Saved ({(activeModel.merRate * 100).toFixed(2)}% fee)
+              {hasTaxDrag
+                ? `Est. Net Annual Saving — Fee & Tax (on $${formatNZD(plan.breakeven.budgetNZD)} direct holdings)`
+                : `Annual ETF Fee Saved (on $${formatNZD(plan.breakeven.budgetNZD)} direct holdings)`}
             </div>
-            <div className="text-lg font-bold font-mono text-amber-300 mt-0.5">
-              ${formatNZD(plan.breakeven.annualFeeDragNZD)} / yr
+            <div
+              className={`text-lg font-bold font-mono mt-0.5 ${
+                plan.breakeven.netAnnualSavingNZD < 0 ? 'text-rose-400' : 'text-amber-300'
+              }`}
+            >
+              {plan.breakeven.netAnnualSavingNZD < 0 ? '-' : ''}$
+              {formatNZD(Math.abs(plan.breakeven.netAnnualSavingNZD))} / yr
             </div>
             <div className="text-[11px] text-slate-500">
-              5-yr net savings: ${formatNZD(plan.breakeven.fiveYearNetSavingsNZD)}
+              {hasTaxDrag
+                ? `Fee saved $${formatNZD(plan.breakeven.annualFeeDragNZD)} − est. tax drag $${formatNZD(plan.breakeven.annualTaxDragNZD)} (~${(activeModel.estimatedYield * 100).toFixed(1)}% yield)`
+                : `5-yr net savings: $${formatNZD(plan.breakeven.fiveYearNetSavingsNZD)}`}
             </div>
           </div>
 
@@ -495,13 +549,21 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
             </div>
           </div>
 
-          <div className="bg-slate-950/70 border border-emerald-900/50 rounded-xl p-3">
+          <div
+            className={`bg-slate-950/70 border rounded-xl p-3 ${
+              etfCheaperAfterTax ? 'border-amber-800/60' : 'border-emerald-900/50'
+            }`}
+          >
             <div className="text-[11px] text-slate-400">Breakeven Time</div>
-            <div className="text-lg font-bold font-mono text-emerald-400 mt-0.5">
+            <div
+              className={`text-lg font-bold font-mono mt-0.5 ${
+                etfCheaperAfterTax ? 'text-amber-300' : 'text-emerald-400'
+              }`}
+            >
               {breakevenLabel}
             </div>
             <div className="text-[11px] text-slate-400">
-              Year 1 net gain:{' '}
+              Year 1 net:{' '}
               <span
                 className={
                   plan.breakeven.yearOneNetSavingsNZD >= 0
@@ -509,7 +571,8 @@ export const IndexReplicatorPanel: React.FC<IndexReplicatorPanelProps> = ({
                     : 'text-amber-300 font-mono'
                 }
               >
-                {plan.breakeven.yearOneNetSavingsNZD < 0 ? '-' : ''}${formatNZD(Math.abs(plan.breakeven.yearOneNetSavingsNZD))}
+                {plan.breakeven.yearOneNetSavingsNZD < 0 ? '-' : ''}$
+                {formatNZD(Math.abs(plan.breakeven.yearOneNetSavingsNZD))}
               </span>
             </div>
           </div>
