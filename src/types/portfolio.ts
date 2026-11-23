@@ -252,6 +252,7 @@ export interface ReplicatorSettings {
   targetHoldingNZD?: number;
   brokerageNZD?: number;
   mode?: 'portfolio_aware' | 'standalone';
+  marginalTaxRate?: number; // Undefined = Auto from Cashflow panel
 }
 
 export interface UserPortfolioState {

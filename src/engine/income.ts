@@ -67,6 +67,19 @@ export function calculateNzIncomeTax(taxableIncome: number): number {
   return Math.round(tax * 100) / 100;
 }
 
+/**
+ * Returns the statutory NZ marginal income tax rate for the next dollar of taxable income.
+ */
+export function getMarginalNzTaxRate(taxableIncome: number): number {
+  const safe = Math.max(0, Number.isFinite(taxableIncome) ? taxableIncome : 0);
+  for (const b of NZ_INCOME_TAX_BRACKETS) {
+    if (safe <= b.cap) {
+      return b.rate;
+    }
+  }
+  return 0.39;
+}
+
 /** Default dividend & distribution yields for common NZX equities and ETFs (as of 2026). */
 export const DEFAULT_DIVIDEND_YIELDS: Record<string, number> = {
   // Common Smartshares ETFs
@@ -191,6 +204,7 @@ export interface RetirementCashflowResult {
   nzImputationCreditsNZD: number;
   nonPieNetTaxPayableNZD: number;
   effectivePersonalTaxRate: number;
+  marginalPersonalTaxRate: number;
 
   // Total Retirement Cashflow (Net)
   totalRetirementInflowNZD: number;
@@ -655,6 +669,9 @@ export function calculateRetirementCashflow(params: {
     nzImputationCreditsNZD,
     nonPieNetTaxPayableNZD,
     effectivePersonalTaxRate,
+    marginalPersonalTaxRate: getMarginalNzTaxRate(
+      nonPieTaxpayerCount > 0 ? totalNonPieGrossAnnualNZD / nonPieTaxpayerCount : totalNonPieGrossAnnualNZD
+    ),
     totalRetirementInflowNZD,
     annualLivingBudgetNZD,
     pirRate,

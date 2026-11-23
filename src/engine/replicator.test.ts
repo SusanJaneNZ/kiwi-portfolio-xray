@@ -427,4 +427,19 @@ export const replicatorTestCases: Array<[string, () => void]> = [
       assertTrue(plan.rows[0].deltaShares === 0, `Expected 0 deltaShares, got ${plan.rows[0].deltaShares}`);
     },
   ],
+  [
+    'Breakeven accounts for dividend tax drag above 28% PIE cap at 33% and 39% marginal brackets',
+    () => {
+      // $100k DIV (0.54% fee = $540/yr, 5.5% yield = $5,500/yr gross dividends)
+      const at33 = calculateBreakevenMetrics(100000, 0.0054, 8, 4.5, 0.33, 0.055);
+      assertNear(at33.annualTaxDragNZD, 275, 0.01, 'At 33% (+5% vs 28% PIE), tax drag should be $275/yr');
+      assertNear(at33.netAnnualSavingNZD, 265, 0.01, 'At 33%, net annual saving should be $265/yr');
+      assertTrue(Number.isFinite(at33.breakevenMonths) && at33.breakevenMonths > 1.5, 'Breakeven should lengthen at 33%');
+
+      const at39 = calculateBreakevenMetrics(100000, 0.0054, 8, 4.5, 0.39, 0.055);
+      assertNear(at39.annualTaxDragNZD, 605, 0.01, 'At 39% (+11% vs 28% PIE), tax drag should be $605/yr');
+      assertNear(at39.netAnnualSavingNZD, -65, 0.01, 'At 39%, ETF is cheaper by $65/yr');
+      assertTrue(!Number.isFinite(at39.breakevenMonths), 'Breakeven should be Infinity when ETF is cheaper');
+    },
+  ],
 ];

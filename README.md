@@ -41,10 +41,10 @@ Replicate popular NZX/ASX ETFs (`DIV`, `FNZ`, `TNZ`, `ASD`, `OZY`) directly, sub
 
 ![DIY Direct Index Replicator](docs/images/replicator.png)
 
-### Projected Organic Cashflow
-Estimate 12-month after-tax PIE and non-PIE income against your living budget:
+### Projected Cashflow
+Estimate 12-month after-tax PIE and non-PIE income (dividends, interest, NZ Super, and other income) against your living budget:
 
-![Projected Organic Cashflow](docs/images/cashflow.png)
+![Projected Cashflow](docs/images/cashflow.png)
 
 ## Local Development
 
