@@ -11,6 +11,7 @@ export interface ReplicatorIndexModel {
   code: string;
   name: string;
   merRate: number; // Annual management fee (e.g. 0.0054 for 0.54%)
+  estimatedYield: number; // Est. annual gross dividend yield (e.g. 0.055 for 5.5%)
   exchange: 'NZX' | 'ASX';
   currency: 'NZD' | 'AUD';
   taxBadge: string;
@@ -22,6 +23,7 @@ export const REPLICATOR_INDEX_MODELS: ReplicatorIndexModel[] = [
     code: 'DIV',
     name: 'Smartshares NZ Dividend ETF (DIV)',
     merRate: 0.0054,
+    estimatedYield: 0.055,
     exchange: 'NZX',
     currency: 'NZD',
     taxBadge: 'NZ Imputation Credits · Zero FIF',
@@ -32,6 +34,7 @@ export const REPLICATOR_INDEX_MODELS: ReplicatorIndexModel[] = [
     code: 'ASD',
     name: 'Smartshares Australian Dividend ETF (ASD)',
     merRate: 0.0054,
+    estimatedYield: 0.055,
     exchange: 'ASX',
     currency: 'AUD',
     taxBadge: 'Trans-Tasman FIF Exempt (ASX)',
@@ -42,6 +45,7 @@ export const REPLICATOR_INDEX_MODELS: ReplicatorIndexModel[] = [
     code: 'TNZ',
     name: 'Smartshares NZ Top 10 ETF (TNZ)',
     merRate: 0.006,
+    estimatedYield: 0.035,
     exchange: 'NZX',
     currency: 'NZD',
     taxBadge: 'NZ Imputation Credits · Zero FIF',
@@ -52,6 +56,7 @@ export const REPLICATOR_INDEX_MODELS: ReplicatorIndexModel[] = [
     code: 'OZY',
     name: 'Smartshares Australian Top 20 ETF (OZY)',
     merRate: 0.006,
+    estimatedYield: 0.045,
     exchange: 'ASX',
     currency: 'AUD',
     taxBadge: 'Trans-Tasman FIF Exempt (ASX)',
@@ -91,7 +96,11 @@ export interface ReplicationRow {
 export interface BreakevenMetrics {
   budgetNZD: number;
   merRate: number;
+  estimatedYield: number;
+  marginalTaxRate: number;
   annualFeeDragNZD: number;
+  annualTaxDragNZD: number;
+  netAnnualSavingNZD: number;
   activeTradeCount: number;
   brokeragePerTradeNZD: number;
   estimatedBrokerageNZD: number;
@@ -125,6 +134,7 @@ export interface GenerateReplicationParams {
   audNzdRate: number;
   brokeragePerTradeNZD?: number;
   driftBandPct?: number;
+  marginalTaxRate?: number;
 }
 
 function normTicker(t?: string): string {
@@ -165,25 +175,39 @@ export function calculateBreakevenMetrics(
   budgetNZD: number,
   merRate: number,
   activeTradeCount: number,
-  brokeragePerTradeNZD = 4.5
+  brokeragePerTradeNZD = 4.5,
+  marginalTaxRate = 0.28,
+  estimatedYield = 0.055
 ): BreakevenMetrics {
   const safeBudget = Math.max(0, Number.isFinite(budgetNZD) ? budgetNZD : 0);
   const safeBrokerage = Math.max(0, Number.isFinite(brokeragePerTradeNZD) ? brokeragePerTradeNZD : 0);
+  const safeMarginal = Math.max(0, Number.isFinite(marginalTaxRate) ? marginalTaxRate : 0.28);
+  const safeYield = Math.max(0, Number.isFinite(estimatedYield) ? estimatedYield : 0);
+
   const annualFeeDragNZD = safeBudget * merRate;
+  // Listed PIE ETFs cap dividend tax at 28%; holding direct shares above 28% incurs (marginalRate - 28%) on gross dividends
+  const extraTaxRate = Math.max(0, safeMarginal - 0.28);
+  const annualTaxDragNZD = safeBudget * safeYield * extraTaxRate;
+  const netAnnualSavingNZD = annualFeeDragNZD - annualTaxDragNZD;
+
   const estimatedBrokerageNZD = activeTradeCount * safeBrokerage;
-  const monthlyFeeDrag = annualFeeDragNZD / 12;
-  const breakevenMonths = monthlyFeeDrag > 0 ? estimatedBrokerageNZD / monthlyFeeDrag : Infinity;
+  const monthlyNetSaving = netAnnualSavingNZD / 12;
+  const breakevenMonths = monthlyNetSaving > 0 ? estimatedBrokerageNZD / monthlyNetSaving : Infinity;
 
   return {
     budgetNZD: safeBudget,
     merRate,
+    estimatedYield: safeYield,
+    marginalTaxRate: safeMarginal,
     annualFeeDragNZD,
+    annualTaxDragNZD,
+    netAnnualSavingNZD,
     activeTradeCount,
     brokeragePerTradeNZD: safeBrokerage,
     estimatedBrokerageNZD,
     breakevenMonths,
-    yearOneNetSavingsNZD: annualFeeDragNZD - estimatedBrokerageNZD,
-    fiveYearNetSavingsNZD: annualFeeDragNZD * 5 - estimatedBrokerageNZD,
+    yearOneNetSavingsNZD: netAnnualSavingNZD - estimatedBrokerageNZD,
+    fiveYearNetSavingsNZD: netAnnualSavingNZD * 5 - estimatedBrokerageNZD,
   };
 }
 
@@ -201,6 +225,7 @@ export function generateReplicationPlan(params: GenerateReplicationParams): Repl
     audNzdRate,
     brokeragePerTradeNZD = 4.5,
     driftBandPct = 0.025,
+    marginalTaxRate = 0.28,
   } = params;
 
   const safeBudget = Math.max(0, Number.isFinite(budgetNZD) ? budgetNZD : 0);
@@ -406,7 +431,9 @@ export function generateReplicationPlan(params: GenerateReplicationParams): Repl
     totalAllocatedNZD,
     model.merRate,
     estimatedTradeCount,
-    brokeragePerTradeNZD
+    brokeragePerTradeNZD,
+    marginalTaxRate,
+    model.estimatedYield
   );
 
   return {

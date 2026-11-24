@@ -374,6 +374,9 @@ function sanitizeReplicatorSettings(raw: unknown): ReplicatorSettings | undefine
   if (r.mode === "portfolio_aware" || r.mode === "standalone") {
     out.mode = r.mode;
   }
+  if (typeof r.marginalTaxRate === "number" && Number.isFinite(r.marginalTaxRate) && r.marginalTaxRate >= 0 && r.marginalTaxRate <= 0.5) {
+    out.marginalTaxRate = r.marginalTaxRate;
+  }
   return Object.keys(out).length > 0 ? out : undefined;
 }
 

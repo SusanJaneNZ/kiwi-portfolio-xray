@@ -360,7 +360,7 @@ export const App: React.FC = () => {
           issuerRollup={calculationResult.issuerRollup}
         />
 
-        {/* 5. Projected Organic Cashflow */}
+        {/* 5. Projected Cashflow */}
         <RetirementCashflowPanel
           portfolioState={portfolioState}
           fundsRegistry={mergedFundsRegistry}
@@ -395,6 +395,7 @@ export const App: React.FC = () => {
             constituentsMap={constituentsMap}
             lookThroughHoldings={calculationResult.holdings}
             directEquitiesCatalog={directCatalog}
+            marginalPersonalTaxRate={cashflowResult.marginalPersonalTaxRate}
             onUpdateState={handleUpdateState}
           />
         )}

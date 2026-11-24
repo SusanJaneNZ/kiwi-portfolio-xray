@@ -123,7 +123,7 @@ export const RetirementCashflowPanel: React.FC<RetirementCashflowPanelProps> = (
   return (
     <CollapsiblePanel
       id="retirement-cashflow"
-      title={<span>Projected Organic Cashflow</span>}
+      title={<span>Projected Cashflow</span>}
       subtitle="12-month projected after-tax income vs living budget."
       headerRight={
         <span className="font-mono px-2.5 py-1 rounded-full text-xs font-semibold border bg-slate-900 text-slate-300 border-slate-700">

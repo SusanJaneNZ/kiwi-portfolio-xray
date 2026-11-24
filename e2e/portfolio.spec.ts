@@ -196,9 +196,9 @@ test.describe('Kiwi Portfolio X-Ray — Live Portfolio UI E2E', () => {
     await page.getByRole('button', { name: '+ Add Term Deposit' }).click();
     await expect(page.getByText('$100,000.00 NZD').first()).toBeVisible({ timeout: 10_000 });
 
-    // Verify Buckets & Withdrawal Rebalancer and Projected Organic Cashflow are visible
+    // Verify Buckets & Withdrawal Rebalancer and Projected Cashflow are visible
     await expect(page.getByText(/Buckets & Withdrawal Rebalancer/i).first()).toBeVisible();
-    await expect(page.getByText(/Projected Organic Cashflow/i).first()).toBeVisible();
+    await expect(page.getByText(/Projected Cashflow/i).first()).toBeVisible();
 
     // Assert Cashflow values for $80k KERNEL_NZ_20 (2.5% = $2,000 gross / $1,790 net @ 10.5% PIR)
     // + $20k PIE TD (5.0% = $1,000 gross / $895 net @ 10.5% PIR) -> Total PIE $3,000 gross / $2,685 net
