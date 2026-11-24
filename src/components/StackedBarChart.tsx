@@ -94,9 +94,8 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
   return (
     <CollapsiblePanel
       id="macro-charts"
-      title={
-        <span className="uppercase tracking-wider text-xs text-slate-300">Sector &amp; Country Breakdown</span>
-      }
+      title="Sector & Country Breakdown"
+      subtitle="Look-through equity exposure by GICS sector and country across funds and direct shares."
       headerRight={
         <div className="flex gap-1.5">
           <button

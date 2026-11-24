@@ -388,7 +388,7 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
     <CollapsiblePanel
       id="input-fixed-interest"
       title={
-        <span className="text-xs uppercase tracking-wider text-slate-300">
+        <span className="text-[13px] font-semibold text-slate-200">
           3. Fixed Interest &amp; Cash (NZD)
         </span>
       }
