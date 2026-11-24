@@ -477,6 +477,9 @@ export const FixedInterestPanel: React.FC<FixedInterestPanelProps> = ({
                       step="100"
                       value={dep.valueNZD || ''}
                       onChange={(e) => handleValueChange(dep.id, e.target.value)}
+                      onBlur={() => {
+                        if (!dep.valueNZD || dep.valueNZD <= 0) handleRemoveHolding(dep.id);
+                      }}
                       placeholder="0"
                       aria-label={`Principal for ${dep.institution} ${dep.name || dep.label}`}
                       className="w-28 pl-6 pr-2.5 py-1.5 bg-slate-900 border border-slate-700/80 rounded-lg text-right font-mono text-xs text-white focus:outline-none focus:ring-1 focus:ring-amber-500"
