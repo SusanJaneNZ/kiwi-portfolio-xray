@@ -30,9 +30,8 @@ export const LiquidityCard: React.FC<LiquidityCardProps> = ({
   return (
     <CollapsiblePanel
       id="asset-split"
-      title={
-        <span className="uppercase tracking-wider text-xs text-slate-300">Asset Class Split &amp; Summary</span>
-      }
+      title="Asset Class Split & Summary"
+      subtitle="True equities, bonds, term deposits, and cash after unwrapping funds and ETFs."
       headerRight={
         <span className="bg-slate-950 border border-slate-800 rounded-full px-2.5 py-0.5 text-[11px] font-mono">
           <span className="text-sky-400 font-semibold">Growth {liquidity.growthPercentage.toFixed(1)}%</span>

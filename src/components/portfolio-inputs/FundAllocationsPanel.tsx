@@ -418,8 +418,8 @@ Please add this fund to \`pipeline/fund_catalog.json\` so it is ingested into th
     <CollapsiblePanel
       id="input-managed-funds"
       title={
-        <span className="text-xs uppercase tracking-wider text-slate-300">
-          2. Managed Funds &amp; KiwiSaver (in NZD)
+        <span className="text-[13px] font-semibold text-slate-200">
+          2. Managed Funds &amp; KiwiSaver (NZD)
         </span>
       }
       headerRight={

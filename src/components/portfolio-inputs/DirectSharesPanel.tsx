@@ -543,7 +543,7 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
     <CollapsiblePanel
       id="input-direct"
       title={
-        <span className="text-xs uppercase tracking-wider text-slate-300">
+        <span className="text-[13px] font-semibold text-slate-200">
           1. Exchange-Traded Shares &amp; Listed ETFs (NZX / ASX)
         </span>
       }
@@ -778,6 +778,9 @@ export const DirectSharesPanel: React.FC<DirectSharesPanelProps> = ({
                       value={safeShares > 0 ? safeShares : ''}
                       placeholder="Shares"
                       onChange={(e) => handleSharesChange(dh.isin, e.target.value)}
+                      onBlur={() => {
+                        if (safeShares <= 0) handleRemoveDirect(dh.isin);
+                      }}
                       className="w-full h-[30px] bg-slate-900 border border-slate-800 rounded-lg px-2 text-right text-xs text-white focus:outline-none focus:border-emerald-500 font-mono"
                     />
                     <span className="text-[9px] text-slate-500 block text-right pr-1 leading-tight mt-0.5">shares</span>
