@@ -61,11 +61,8 @@ jobs:
           npx playwright install --with-deps chromium
           npm run test:e2e
 
-  build-and-deploy:
+  build:
     if: github.event_name != 'pull_request'
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -112,7 +109,14 @@ jobs:
         with:
           path: './dist'
 
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request' && github.event.repository.private == false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        if: github.event.repository.private == false
         uses: actions/deploy-pages@v4
