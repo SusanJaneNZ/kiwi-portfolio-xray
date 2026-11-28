@@ -130,6 +130,7 @@ export const FundAllocationsPanel: React.FC<FundAllocationsPanelProps> = ({
   const heldOnly = isPortfolioEntered ? (userToggledHeldOnly ?? true) : false;
 
   const [showAddForm, setShowAddForm] = useState(false);
+  const [focusedFundCode, setFocusedFundCode] = useState<string | null>(null);
 
   // Form states for adding custom / unlisted fund
   const [selectedPreset, setSelectedPreset] = useState<string>('FISHER_KIWISAVER_GROWTH');
@@ -229,7 +230,7 @@ export const FundAllocationsPanel: React.FC<FundAllocationsPanelProps> = ({
     return combinedFunds
       .filter((f) => {
         const hasBalance = (portfolioState.fundBalances[f.code] || 0) > 0;
-        if (heldOnly && !hasBalance) return false;
+        if (heldOnly && !hasBalance && focusedFundCode !== f.code) return false;
 
         const isKiwi = isKiwiFund(f);
         if (typeFilter === 'kiwisaver' && !isKiwi) return false;
@@ -248,7 +249,7 @@ export const FundAllocationsPanel: React.FC<FundAllocationsPanelProps> = ({
         if (balB !== balA) return balB - balA;
         return a.name.localeCompare(b.name);
       });
-  }, [combinedFunds, filterQuery, typeFilter, heldOnly, portfolioState.fundBalances]);
+  }, [combinedFunds, filterQuery, typeFilter, heldOnly, focusedFundCode, portfolioState.fundBalances]);
 
   const handleFundBalanceChange = (code: string, value: string) => {
     const parsed = parseFloat(value);
@@ -821,7 +822,11 @@ Please add this fund to \`pipeline/fund_catalog.json\` so it is ingested into th
                       step="any"
                       min="0"
                       value={balance > 0 ? balance : ''}
+                      onFocus={() => setFocusedFundCode(fund.code)}
                       onChange={(e) => handleFundBalanceChange(fund.code, e.target.value)}
+                      onBlur={() => {
+                        setFocusedFundCode((prev) => (prev === fund.code ? null : prev));
+                      }}
                       placeholder="0.00"
                       aria-label={`Balance in NZD for ${fund.code}`}
                       className="w-full bg-slate-900 border border-slate-700/80 rounded-lg pl-6 pr-2 py-1 text-xs text-right font-mono text-white focus:outline-none focus:border-indigo-500"
